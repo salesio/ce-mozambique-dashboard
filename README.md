@@ -4,6 +4,20 @@ First dashboard prototype for the church team portal.
 
 **Live demo:** https://salesio.github.io/ce-mozambique-dashboard/
 
+Login with the demo credentials on the page (`admin@ce-mozambique.org` / `demo`).
+
+### Publishing updates
+
+GitHub Pages serves the static site from the `gh-pages` branch (legacy deploy). After changing files on `main`, update the live site:
+
+```bash
+git checkout gh-pages
+git checkout main -- index.html css js manifest.webmanifest .nojekyll
+git commit -am "Update live site"
+git push origin gh-pages
+git checkout main
+```
+
 ## Included in v1 prototype
 
 - Login screen placeholder

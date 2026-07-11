@@ -235,6 +235,17 @@ const TEXT = {
     inactive: "Inactivo",
     transferred: "Transferido",
     rejected: "Rejeitado",
+    viewMode: "Modo de visualização",
+    membersByChurch: "Por Igreja",
+    wantFoundation: "Querem Escola de Fundação",
+    visitScheduled: "Visita Marcada",
+    nextContact: "Próximo Contacto",
+    partiallyConfirmed: "Confirmado Parcialmente",
+    enrolledInCourse: "Alunos Inscritos",
+    readyForExam: "Prontos para Exame",
+    certificatesIssued: "Certificados Emitidos",
+    exportPdf: "Exportar PDF",
+    exportExcel: "Exportar Excel",
     includedReport: "Incluído no Relatório",
     scheduled: "Agendado",
     completed: "Realizado",
@@ -488,6 +499,17 @@ const TEXT = {
     inactive: "Inactive",
     transferred: "Transferred",
     rejected: "Rejected",
+    viewMode: "View mode",
+    membersByChurch: "By Church",
+    wantFoundation: "Want Foundation School",
+    visitScheduled: "Visit Scheduled",
+    nextContact: "Next Contact",
+    partiallyConfirmed: "Partially Confirmed",
+    enrolledInCourse: "Enrolled Students",
+    readyForExam: "Ready for Exam",
+    certificatesIssued: "Certificates Issued",
+    exportPdf: "Export PDF",
+    exportExcel: "Export Excel",
     includedReport: "Included in Report",
     scheduled: "Scheduled",
     completed: "Completed",
@@ -3207,10 +3229,13 @@ function badgeClass(status) {
   const key = statusKey(status);
   if (["active", "verified", "becameMember", "completed", "certificateIssued", "confirmed", "available", "approved", "received", "sent", "reportSubmitted", "validated", "excellent", "good", "growing", "graduated"].includes(key)) return "good";
   if (["contacted", "sentToCell", "enrolledFoundation", "enrolled", "exam", "readyForExam"].includes(key)) return "blue";
-  if (["pending", "pendingVerification", "scheduled", "planned", "inPreparation", "requested", "draft", "submitted", "needsAttention", "toConfirm"].includes(key)) return "warn";
+  if (["pending", "pendingVerification", "scheduled", "planned", "inPreparation", "requested", "draft", "needsAttention", "toConfirm"].includes(key)) return "warn";
+  if (["submitted", "reportSubmitted"].includes(key)) return "cyan";
+  if (["underEvaluation", "forwardValidation"].includes(key)) return "course";
+  if (["partiallyConfirmed"].includes(key)) return "cyan";
   if (["incomplete"].includes(key)) return "danger";
   if (["rejected", "cancelled", "outOfStock", "critical"].includes(key)) return "danger";
-  if (["inProgress", "interested", "inTraining", "underEvaluation", "forwardValidation"].includes(key)) return "course";
+  if (["inProgress", "interested", "inTraining"].includes(key)) return "course";
   if (["inactive", "closed", "transferred", "paused", "discontinued", "returned"].includes(key)) return "muted";
   return "blue";
 }
@@ -3579,6 +3604,14 @@ function toggleModuleNav(key) {
   });
 }
 
+const modulePageState = { members: { view: "table" }, firstTimers: { view: "table" }, followUp: { view: "kanban" } };
+
+function setPageContent(html) {
+  const el = byId("content");
+  if (!el) return;
+  el.innerHTML = typeof PageShell === "function" ? PageShell(html) : html;
+}
+
 function moduleNavShell(key, config, tabsHtml = "", extraHtml = "") {
   const { title, subtitle, modalType = null, icon = "bi-stars" } = config;
   const expanded = isModuleNavExpanded(key);
@@ -3609,52 +3642,68 @@ function moduleNavShell(key, config, tabsHtml = "", extraHtml = "") {
     </div>`;
 }
 
-function sectionHeader(title, subtitle, modalType, icon = "bi-stars", { compact = false, moduleNavKey = null } = {}) {
+function sectionHeader(title, subtitle, modalType, icon = "bi-stars", { compact = false, moduleNavKey = null, actions = "" } = {}) {
+  if (typeof ModuleHeroCard === "function") {
+    return ModuleHeroCard({ title, subtitle, icon, modalType, moduleNavKey: moduleNavKey || undefined, compact, actions });
+  }
   return `
-    <article class="panel section-panel ${compact ? "mb-0" : "mb-4"}">
-      <div class="panel-head mb-0">
-        <div class="d-flex gap-3 align-items-center">
-          <span class="header-icon"><i class="bi ${icon}"></i></span>
-          <div>
-            <span class="eyebrow">${L("titleChurchOps")}</span>
-            <h2 class="panel-title">${title}</h2>
-            <p class="text-secondary mb-0">${subtitle}</p>
-          </div>
-        </div>
-        <div class="module-nav-head-actions">
-          ${moduleNavKey ? `<button type="button" class="module-nav-arrow" data-module-nav-toggle="${moduleNavKey}" aria-expanded="true" aria-label="${L("sidebarCollapse")}"><i class="bi bi-chevron-up" aria-hidden="true"></i></button>` : ""}
-          ${modalType ? `<button class="btn btn-ce-gold" data-open-form="${modalType}"><i class="bi bi-plus-lg me-2"></i>${L("add")}</button>` : ""}
+    <article class="panel section-panel module-hero-card ${compact ? "mb-0 module-hero-card--compact" : "mb-4"}">
+      <div class="panel-head mb-0 module-hero-card-body">
+        <span class="header-icon module-hero-card-icon"><i class="bi ${icon}"></i></span>
+        <div class="module-hero-card-copy">
+          <span class="eyebrow">${L("titleChurchOps")}</span>
+          <h2 class="panel-title module-hero-card-title">${title}</h2>
+          <p class="module-hero-card-subtitle mb-0">${subtitle}</p>
         </div>
       </div>
-    </article>
-  `;
+      <div class="module-hero-card-actions">
+        ${actions}
+        ${moduleNavKey ? `<button type="button" class="module-nav-arrow" data-module-nav-toggle="${moduleNavKey}" aria-expanded="true" aria-label="${L("sidebarCollapse")}"><i class="bi bi-chevron-up" aria-hidden="true"></i></button>` : ""}
+        ${modalType ? `<button type="button" class="btn btn-ce-gold btn-touch" data-open-form="${modalType}"><i class="bi bi-plus-lg me-2"></i>${L("add")}</button>` : ""}
+      </div>
+    </article>`;
 }
 
-function filterBar({ search = true, church = true, month = true, status = true, exportBtn = true } = {}) {
+function filterBar(options = {}) {
+  const opts = typeof options === "object" && options !== null ? options : {};
+  if (typeof FilterToolbar === "function") {
+    return FilterToolbar({
+      search: opts.search !== false,
+      church: opts.church !== false,
+      month: opts.month !== false,
+      status: opts.status !== false,
+      exportBtn: opts.exportBtn !== false,
+      churches: state.churches,
+      statusOptions: opts.statusOptions || [],
+      extraFields: opts.extraFields || "",
+      viewToggle: opts.viewToggle || "",
+      addBtn: opts.addBtn || "",
+      className: opts.className || "mb-3"
+    });
+  }
   return `
-    <div class="filter-bar mb-3">
-      ${search ? `<input class="form-control" placeholder="${L("search")}">` : ""}
-      ${church ? `<select class="form-select"><option>${L("filterChurch")}</option>${state.churches.map((c) => `<option>${c.church_name}</option>`).join("")}</select>` : ""}
-      ${month ? `<input class="form-control" type="month" aria-label="${L("filterMonth")}">` : ""}
-      ${status ? `<select class="form-select"><option>${L("filterStatus")}</option></select>` : ""}
-      ${exportBtn ? `<button class="btn btn-outline-light action-secondary"><i class="bi bi-download me-1"></i>${L("export")}</button>` : ""}
-    </div>
-  `;
+    <div class="filter-toolbar filter-bar mb-3">
+      ${opts.search !== false ? `<div class="filter-toolbar-search"><i class="bi bi-search"></i><input class="form-control" type="search" placeholder="${L("search")}"></div>` : ""}
+      ${opts.church !== false ? `<select class="form-select"><option value="">${L("filterChurch")}</option>${state.churches.map((c) => `<option>${c.church_name}</option>`).join("")}</select>` : ""}
+      ${opts.month !== false ? `<input class="form-control" type="month" aria-label="${L("filterMonth")}">` : ""}
+      ${opts.status !== false ? `<select class="form-select"><option value="">${L("filterStatus")}</option></select>` : ""}
+      ${opts.exportBtn !== false ? `<button type="button" class="btn btn-outline-light action-secondary btn-touch"><i class="bi bi-download me-1"></i>${L("export")}</button>` : ""}
+    </div>`;
 }
 
-function metric(icon, label, value, hint) {
+function metric(icon, label, value, hint = "", options = {}) {
+  if (typeof SummaryCard === "function") return SummaryCard(icon, label, value, hint, options);
   return `
     <div class="col-sm-6 col-xl-4 col-xxl-3">
-      <article class="metric-card">
-        <div class="metric-icon"><i class="bi ${icon}"></i></div>
-        <div>
-          <span>${label}</span>
-          <strong>${value}</strong>
-          <small>${hint}</small>
+      <article class="metric-card summary-card">
+        <div class="metric-icon summary-card-icon"><i class="bi ${icon}"></i></div>
+        <div class="summary-card-body">
+          <span class="summary-card-label">${label}</span>
+          <strong class="summary-card-value">${value}</strong>
+          ${hint ? `<small class="summary-card-hint">${hint}</small>` : ""}
         </div>
       </article>
-    </div>
-  `;
+    </div>`;
 }
 
 function renderDashboard() {
@@ -3664,8 +3713,8 @@ function renderDashboard() {
   const students = scoped(state.foundationStudents);
   const pendingFollowups = firstTimers.filter((p) => statusKey(p.estado_do_seguimento) !== "closed").length;
   const monthlyGiving = finance.filter((f) => f.data?.startsWith("2026-07")).reduce((sum, f) => sum + Number(f.valor || 0), 0);
-  byId("content").innerHTML = `
-    <section class="ops-hero">
+  setPageContent(`
+    <section class="ops-hero module-hero-card" style="display:grid;">
       <div>
         <span class="eyebrow">Christ Embassy Mozambique</span>
         <h2>${L("heroTitle")}</h2>
@@ -3697,25 +3746,19 @@ function renderDashboard() {
       <div class="col-xl-6">${chartCard(L("cellGrowth"), cells.map((c) => [c.nome_da_celula, c.presencas[0]?.total || 0]))}</div>
       <div class="col-xl-6">${summaryTiles(L("sacramentsSummary"), [[L("baptismTab"), state.sacraments.baptisms.length], [L("marriageTab"), state.sacraments.marriages.length], [L("babyTab"), state.sacraments.babies.length]])}</div>
     </div>
-  `;
+  `);
 }
 
 function chartCard(title, rows) {
   const max = Math.max(...rows.map((r) => Number(r[1] || 0)), 1);
-  return `
-    <article class="chart-card h-100">
-      <div class="panel-head"><h3 class="panel-title"><i class="bi bi-activity me-2 text-info"></i>${title}</h3></div>
-      <div class="chart-bars">
-        ${rows.length ? rows.map(([label, value]) => `
-          <div class="chart-row">
-            <span>${label}</span>
-            <div class="chart-track"><div class="chart-fill" style="width:${Math.max(5, Math.round((Number(value) / max) * 100))}%"></div></div>
-            <strong>${value}</strong>
-          </div>
-        `).join("") : `<p class="text-secondary mb-0">${L("empty")}</p>`}
-      </div>
-    </article>
-  `;
+  const bars = rows.length ? rows.map(([label, value]) => `
+      <div class="chart-row">
+        <span>${label}</span>
+        <div class="chart-track"><div class="chart-fill" style="width:${Math.max(5, Math.round((Number(value) / max) * 100))}%"></div></div>
+        <strong>${value}</strong>
+      </div>`).join("") : EmptyState({ compact: true, title: L("empty"), icon: "bi-bar-chart" });
+  if (typeof ChartPanel === "function") return ChartPanel(title, `<div class="chart-bars">${bars}</div>`);
+  return `<article class="chart-card glass-panel h-100"><div class="panel-head"><h3 class="panel-title"><i class="bi bi-activity me-2 text-info"></i>${title}</h3></div><div class="chart-bars">${bars}</div></article>`;
 }
 
 function summaryTiles(title, rows) {
@@ -3746,59 +3789,129 @@ function groupSum(records, groupKey, sumKey) {
   return Object.entries(grouped);
 }
 
+function firstTimerActions(id) {
+  return actionButtons([["view", "firstTimer", id, L("view")], ["edit", "firstTimer", id, L("edit")], ["followup", "firstTimer", id, L("updateFollowup")]]);
+}
+
+function renderFirstTimerCard(person) {
+  if (typeof DataCard !== "function") return "";
+  return DataCard({
+    title: fullName(person),
+    subtitle: person.culto || L("service"),
+    badges: [badge(person.estado_do_seguimento)],
+    meta: [
+      [L("phone"), person.telefone, "bi-telephone"],
+      [L("church"), churchName(person.church_id), "bi-building"],
+      [L("service"), person.culto || "-", "bi-calendar-event"]
+    ],
+    pills: [person.nasceu_de_novo ? L("bornAgainHint") : null, person.quer_escola_de_fundacao ? L("foundationSchool") : null].filter(Boolean),
+    actions: firstTimerActions(person.id)
+  });
+}
+
 function renderFirstTimers() {
   const list = scoped(state.firstTimers);
-  byId("content").innerHTML = `
+  const view = modulePageState.firstTimers.view;
+  const tableRows = list.map((p) => [
+    fullName(p), p.telefone, churchName(p.church_id), p.culto, yesNo(p.nasceu_de_novo), yesNo(p.quer_escola_de_fundacao), badge(p.estado_do_seguimento),
+    firstTimerActions(p.id)
+  ]);
+  const cardsHtml = list.map((p) => renderFirstTimerCard(p)).join("");
+  setPageContent(`
     ${sectionHeader(L("firstTimers"), L("firstTimerSubtitle"), "firstTimer", "bi-person-heart")}
-    <div class="row g-3 mb-4">
+    <div class="row g-3 mb-4 summary-cards-row">
       ${metric("bi-person-heart", L("totalFirstTimers"), list.length, L("visitorsCaptured"))}
       ${metric("bi-hourglass-split", L("pending"), list.filter((p) => statusKey(p.estado_do_seguimento) === "pending").length, L("needsAction"))}
       ${metric("bi-check2-circle", L("contacted"), list.filter((p) => statusKey(p.estado_do_seguimento) === "contacted").length, L("followUp"))}
-      ${metric("bi-mortarboard", L("foundationSchool"), list.filter((p) => p.quer_escola_de_fundacao).length, L("pendingEnrolments"))}
+      ${metric("bi-mortarboard", L("wantFoundation"), list.filter((p) => p.quer_escola_de_fundacao).length, L("foundationSchool"))}
+      ${metric("bi-person-check", L("becameMember"), list.filter((p) => statusKey(p.estado_do_seguimento) === "becameMember").length, L("members"))}
     </div>
-    <article class="panel">
-      ${filterBar()}
-      ${dataTable([L("name"), L("phone"), L("church"), L("service"), L("bornAgain"), L("foundation"), L("status"), L("actions")], list.map((p) => [
-        fullName(p), p.telefone, churchName(p.church_id), p.culto, yesNo(p.nasceu_de_novo), yesNo(p.quer_escola_de_fundacao), badge(p.estado_do_seguimento),
-        actionButtons([["view", "firstTimer", p.id, L("view")], ["edit", "firstTimer", p.id, L("edit")], ["followup", "firstTimer", p.id, L("updateFollowup")]])
-      ]))}
+    <article class="panel glass-panel">
+      ${filterBar({ viewToggle: ViewToggle(view), statusOptions: followupStatuses })}
+      ${view === "cards" ? DataCardsGrid(cardsHtml) : dataTable([L("name"), L("phone"), L("church"), L("service"), L("bornAgain"), L("foundation"), L("status"), L("actions")], tableRows)}
     </article>
-  `;
+  `);
+}
+
+function renderFollowUpKanban(list) {
+  const columns = [
+    [L("pending"), ["Pending"], "pending"],
+    [L("contacted"), ["Contacted"], "contacted"],
+    [L("noAnswer"), ["No Answer"], "pending"],
+    [L("visitScheduled"), ["Interested"], "contacted"],
+    [L("sentToCell"), ["Sent to Cell", "Enrolled in Foundation School"], "success"],
+    [L("closed"), ["Became Member", "Closed"], "closed"]
+  ];
+  if (typeof KanbanBoard !== "function") return "";
+  return KanbanBoard(columns.map(([title, statuses, tone]) => {
+    const items = list.filter((p) => statuses.includes(p.estado_do_seguimento));
+    return [title, items.length, items.map((p) => typeof FollowUpCard === "function" ? FollowUpCard(p) : renderFirstTimerCard(p)).join(""), tone];
+  }));
 }
 
 function renderFollowUp() {
   const list = scoped(state.firstTimers);
-  const workflow = followupStatuses.map((s) => [statusText(s), list.filter((p) => p.estado_do_seguimento === s).length]);
-  byId("content").innerHTML = `
+  const view = modulePageState.followUp.view;
+  setPageContent(`
     ${sectionHeader(L("followUp"), L("followupSubtitle"), null, "bi-telephone-outbound")}
-    <div class="mb-4">${summaryTiles(L("followUp"), workflow)}</div>
-    <article class="panel">
-      ${filterBar({ month: false })}
-      ${dataTable([L("name"), L("phone"), L("counselor"), L("cellInterest"), L("counseling"), L("status"), L("actions")], list.map((p) => [
+    <div class="row g-3 mb-4 summary-cards-row">
+      ${metric("bi-hourglass-split", L("pending"), list.filter((p) => statusKey(p.estado_do_seguimento) === "pending").length, L("needsAction"))}
+      ${metric("bi-check2-circle", L("contacted"), list.filter((p) => statusKey(p.estado_do_seguimento) === "contacted").length, L("followUp"))}
+      ${metric("bi-telephone-x", L("noAnswer"), list.filter((p) => statusKey(p.estado_do_seguimento) === "noAnswer").length, L("followUp"))}
+      ${metric("bi-calendar-check", L("visitScheduled"), list.filter((p) => statusKey(p.estado_do_seguimento) === "interested").length, L("followUp"))}
+      ${metric("bi-person-check", L("becameMember"), list.filter((p) => statusKey(p.estado_do_seguimento) === "becameMember").length, L("members"))}
+    </div>
+    <article class="panel glass-panel">
+      ${filterBar({ month: false, viewToggle: `<div class="view-toggle" role="group"><button type="button" class="view-toggle-btn ${view === "kanban" ? "active" : ""}" data-followup-view="kanban"><i class="bi bi-kanban"></i><span>Kanban</span></button><button type="button" class="view-toggle-btn ${view === "table" ? "active" : ""}" data-followup-view="table"><i class="bi bi-table"></i><span>${L("tableView")}</span></button></div>` })}
+      ${view === "kanban" ? renderFollowUpKanban(list) : dataTable([L("name"), L("phone"), L("counselor"), L("cellInterest"), L("counseling"), L("status"), L("actions")], list.map((p) => [
         fullName(p), p.telefone, p.conselheiro_responsavel, yesNo(p.interesse_em_celula), yesNo(p.quer_aconselhamento), badge(p.estado_do_seguimento),
         actionButtons([["view", "firstTimer", p.id, L("view")], ["followup", "firstTimer", p.id, L("updateFollowup")]])
       ]))}
     </article>
-  `;
+  `);
+}
+
+function memberActions(id) {
+  return actionButtons([["view", "member", id, L("viewProfile")], ["edit", "member", id, L("edit")], ["moveChurch", "member", id, L("moveChurch")], ["status", "member", id, L("updateStatus")]]);
+}
+
+function renderMemberCard(member) {
+  if (typeof DataCard !== "function") return "";
+  return DataCard({
+    title: fullName(member),
+    subtitle: member.departamento || L("department"),
+    badges: [badge(member.estado)],
+    meta: [
+      [L("phone"), member.telefone, "bi-telephone"],
+      [L("church"), churchName(member.church_id), "bi-building"],
+      [L("cell"), member.celula || "-", "bi-diagram-3"]
+    ],
+    pills: [member.origem || L("origin")],
+    actions: memberActions(member.id)
+  });
 }
 
 function renderMembers() {
   const list = scoped(state.members);
-  byId("content").innerHTML = `
+  const view = modulePageState.members.view;
+  const churchesCount = new Set(list.map((m) => m.church_id).filter(Boolean)).size;
+  const tableRows = list.map((m) => [
+    fullName(m), m.telefone, churchName(m.church_id), m.celula, m.departamento, badge(m.estado), memberActions(m.id)
+  ]);
+  setPageContent(`
     ${sectionHeader(L("members"), L("membersSubtitle"), "member", "bi-people")}
-    <div class="row g-3 mb-4">
+    <div class="row g-3 mb-4 summary-cards-row">
       ${metric("bi-people", L("total"), list.length, L("members"))}
       ${metric("bi-check-circle", L("active"), list.filter((m) => statusKey(m.estado) === "active").length, L("status"))}
       ${metric("bi-hourglass", L("inProgress"), list.filter((m) => statusKey(m.estado) === "inProgress").length, L("followUp"))}
+      ${metric("bi-arrow-left-right", L("transferred"), list.filter((m) => statusKey(m.estado) === "transferred").length, L("status"))}
+      ${metric("bi-building", L("membersByChurch"), churchesCount, L("churches"))}
     </div>
-    <article class="panel">
-      ${filterBar()}
-      ${dataTable([L("name"), L("phone"), L("church"), L("cell"), L("department"), L("status"), L("actions")], list.map((m) => [
-        fullName(m), m.telefone, churchName(m.church_id), m.celula, m.departamento, badge(m.estado),
-        actionButtons([["view", "member", m.id, L("viewProfile")], ["edit", "member", m.id, L("edit")], ["moveChurch", "member", m.id, L("moveChurch")], ["status", "member", m.id, L("updateStatus")]])
-      ]))}
+    <article class="panel glass-panel">
+      ${filterBar({ viewToggle: ViewToggle(view) })}
+      ${view === "cards" ? DataCardsGrid(list.map((m) => renderMemberCard(m)).join("")) : dataTable([L("name"), L("phone"), L("church"), L("cell"), L("department"), L("status"), L("actions")], tableRows)}
     </article>
-  `;
+  `);
 }
 
 function defaultFoundationAttendance() {
@@ -4101,7 +4214,7 @@ function submitFoundationScore(form) {
 function renderFoundation() {
   const pending = foundationPending();
   const students = scoped(state.foundationStudents).map((student) => migrateFoundationStudent(student));
-  byId("content").innerHTML = `
+  setPageContent(`
     ${moduleNavShell("foundationSchool", { title: L("foundationSchool"), subtitle: L("foundationSubtitle"), modalType: "foundationStudent", icon: "bi-mortarboard" },
       `<div class="tab-strip module-tab-strip">${[
         [L("pendingEnrolments"), "panel-foundationPending"],
@@ -4112,6 +4225,14 @@ function renderFoundation() {
         [L("certificates"), "panel-foundationStudents"]
       ].map(([tab, target], index) => `<button type="button" class="${index === 0 ? "active" : ""}" data-scroll="${target}">${tab}</button>`).join("")}</div>`
     )}
+    <div class="row g-3 mb-4 summary-cards-row">
+      ${metric("bi-hourglass-split", L("pendingEnrolments"), pending.length, L("needsAction"))}
+      ${metric("bi-person-plus", L("enrolledInCourse"), students.filter((s) => statusKey(s.estado) === "enrolled").length, L("foundationSchool"))}
+      ${metric("bi-book", L("inProgress"), students.filter((s) => statusKey(s.estado) === "inProgress").length, L("status"))}
+      ${metric("bi-clipboard-check", L("readyForExam"), students.filter((s) => statusKey(s.estado) === "readyForExam").length, L("exams"))}
+      ${metric("bi-award", L("graduations"), students.filter((s) => s.graduado).length, L("graduation"))}
+      ${metric("bi-patch-check", L("certificatesIssued"), students.filter((s) => s.certificado_emitido).length, L("certificates"))}
+    </div>
     <div class="row g-4">
       <div class="col-xl-4">
         <article id="panel-foundationPending" class="panel h-100">
@@ -4131,7 +4252,7 @@ function renderFoundation() {
         </article>
       </div>
     </div>
-  `;
+  `);
 }
 
 function foundationPending() {
@@ -4145,33 +4266,37 @@ function foundationProgress(student) {
 
 function renderFinance() {
   const list = scoped(state.finance).map((record) => migrateFinanceRecord(record));
-  const today = list.filter((f) => f.data === "2026-07-06").reduce((sum, f) => sum + Number(f.valor || 0), 0);
-  const month = list.filter((f) => f.data?.startsWith("2026-07")).reduce((sum, f) => sum + Number(f.valor || 0), 0);
-  byId("content").innerHTML = `
+  const today = list.filter((f) => f.data === new Date().toISOString().slice(0, 10)).reduce((sum, f) => sum + Number(f.valor || 0), 0);
+  const monthKey = new Date().toISOString().slice(0, 7);
+  const month = list.filter((f) => f.data?.startsWith(monthKey)).reduce((sum, f) => sum + Number(f.valor || 0), 0);
+  const categoryFilter = `<select class="form-select" aria-label="${L("category")}"><option value="">${L("category")}</option>${givingCategories.map((c) => `<option>${c}</option>`).join("")}</select>`;
+  const methodFilter = `<select class="form-select" aria-label="${L("method")}"><option value="">${L("method")}</option>${paymentMethods.map((m) => `<option>${m}</option>`).join("")}</select>`;
+  setPageContent(`
     ${sectionHeader(L("finance"), L("financeSubtitle"), "finance", "bi-cash-coin")}
-    <div class="row g-3 mb-4">
+    <div class="row g-3 mb-4 summary-cards-row">
       ${metric("bi-calendar-day", L("totalToday"), money(today), L("finance"))}
       ${metric("bi-calendar3", L("totalThisMonth"), money(month), L("thisMonth"))}
       ${metric("bi-hourglass", L("pendingVerification"), list.filter((f) => statusKey(f.estado) === "pendingVerification").length, L("needsAction"))}
       ${metric("bi-patch-check", L("verified"), list.filter((f) => statusKey(f.estado) === "verified").length, L("status"))}
+      ${metric("bi-x-circle", L("rejected"), list.filter((f) => statusKey(f.estado) === "rejected").length, L("status"))}
     </div>
     <div class="row g-4 mb-4">
       <div class="col-xl-4">${chartCard(L("byCategory"), groupSum(list, "categoria_da_contribuicao", "valor"))}</div>
       <div class="col-xl-4">${chartCard(L("byChurch"), groupSum(list.map((f) => ({ ...f, igreja: churchName(f.church_id) })), "igreja", "valor"))}</div>
       <div class="col-xl-4">${chartCard(L("byPaymentMethod"), groupSum(list, "metodo_de_pagamento", "valor"))}</div>
     </div>
-    <article class="panel">
-      ${filterBar()}
+    <article class="panel glass-panel">
+      ${filterBar({ extraFields: `${categoryFilter}${methodFilter}`, statusOptions: financeStatuses })}
       ${dataTable([L("contributor"), L("category"), L("method"), L("amount"), L("date"), L("church"), L("status"), L("actions")], list.map((f) => [
         fullName(f), f.categoria_da_contribuicao, f.metodo_de_pagamento, money(f.valor), f.data, churchName(f.church_id), badge(f.estado),
         financeActions(f.id, f)
       ]))}
     </article>
-  `;
+  `);
 }
 
 function renderSacraments() {
-  byId("content").innerHTML = `
+  setPageContent( `
     ${moduleNavShell("sacraments", { title: L("sacraments"), subtitle: L("sacramentsSubtitle"), icon: "bi-droplet" },
       `<div class="tab-strip module-tab-strip">
         <button type="button" class="active" data-scroll="panel-baptism">${L("baptismTab")}</button>
@@ -4184,7 +4309,7 @@ function renderSacraments() {
       <div class="col-xl-4">${sacramentPanel("marriage", L("marriageTab"), scoped(state.sacraments.marriages), ["nome_do_noivo", "nome_da_noiva", "data_do_casamento", "estado"])}</div>
       <div class="col-xl-4">${sacramentPanel("baby", L("babyTab"), scoped(state.sacraments.babies), ["nome_da_crianca", "telefone_dos_pais", "data_da_dedicacao", "estado"])}</div>
     </div>
-  `;
+  `);
 }
 
 function sacramentPanel(type, title, records, keys) {
@@ -4208,7 +4333,7 @@ function renderChurchCard(church) {
     ? `<div class="church-card-services">${upcoming.map((record) => `<span class="church-service-chip">${formatServiceTimeShort(record)}</span>`).join("")}</div>`
     : "";
   return `
-    <article class="church-card">
+    <article class="church-card data-card">
       <div class="church-card-head">
         <div>
           <span class="eyebrow">${churchTypeText(church.type)}</span>
@@ -4273,7 +4398,7 @@ function renderChurches() {
     ? `<article class="panel">${renderChurchesTable(churches)}</article>`
     : `<div class="church-card-grid">${churches.length ? churches.map((church) => renderChurchCard(church)).join("") : `<article class="empty-state col-12">${L("empty")}</article>`}</div>`;
 
-  byId("content").innerHTML = `
+  setPageContent( `
     ${sectionHeader(L("churches"), L("churchesSubtitle"), "church", "bi-building")}
     <div class="row g-3 mb-4">
       ${metric("bi-building", L("totalChurches"), allChurches.length, L("churches"))}
@@ -4298,7 +4423,7 @@ function renderChurches() {
       ${churchFilterSelect("information_status", L("filterInfoStatus"), CHURCH_INFO_STATUSES, filters.information_status)}
     </div>
     ${listHtml}
-  `;
+  `);
 }
 
 function openChurchDrawer(mode, id = null) {
@@ -4584,7 +4709,7 @@ function renderCellMinistry(activeTab = "alecOverview") {
     bodyHtml = `<div class="row g-4"><div class="col-12">${(panels[activeTab] || panels.alecRegistration)()}</div></div>`;
   }
 
-  byId("content").innerHTML = navHtml + tabParallaxWrap(bodyHtml, activeRoute);
+  setPageContent(navHtml + tabParallaxWrap(bodyHtml, activeRoute));
   triggerTabParallax();
   requestAnimationFrame(() => scrollContentTo("content", { behavior: "auto" }));
 }
@@ -4617,7 +4742,7 @@ function renderCellGroups() {
         ])
       ]), true)}</div>
     </div>`;
-  byId("content").innerHTML = navHtml + tabParallaxWrap(bodyHtml, activeRoute);
+  setPageContent(navHtml + tabParallaxWrap(bodyHtml, activeRoute));
   triggerTabParallax();
 }
 
@@ -4660,7 +4785,7 @@ function renderCellCellsList() {
         ])
       ]), true)}</div>
     </div>`;
-  byId("content").innerHTML = navHtml + tabParallaxWrap(bodyHtml, activeRoute);
+  setPageContent(navHtml + tabParallaxWrap(bodyHtml, activeRoute));
   triggerTabParallax();
 }
 
@@ -4696,7 +4821,7 @@ function renderPrisonMinistry() {
   const agenda = scopedNested(state.prisonMinistry.weeklyAgenda);
   const reports = scopedNested(state.prisonMinistry.reports);
   const thisWeekServices = services.filter((service) => service.data >= "2026-07-06" && service.data <= "2026-07-12");
-  byId("content").innerHTML = `
+  setPageContent( `
     ${moduleNavShell("prisonMinistry", { title: L("prisonMinistry"), subtitle: L("prisonMinistrySubtitle"), modalType: "prisonService", icon: "bi-shield-lock" },
       `<div class="tab-strip module-tab-strip">${[
         [L("cellOverview"), "content"],
@@ -4722,7 +4847,7 @@ function renderPrisonMinistry() {
       <div class="col-xl-6">${modulePanel("prisonAgenda", L("weeklyAgenda"), "prisonAgenda", [L("weekStart"), L("weekEnd"), L("responsible"), L("thursdayService"), L("fridayService"), L("status"), L("actions")], agenda.map((item) => [item.semana_inicio, item.semana_fim, item.responsavel, yesNo(item.quinta_servico_prisional), yesNo(item.sexta_servico_prisional), badge(item.estado), backendActions("prisonAgenda", item.id)]), false)}</div>
       <div class="col-xl-6">${modulePanel("prisonReport", L("ministryReports"), null, [L("name"), L("category"), L("status"), L("actions")], reports.map((item) => [item.name, item.category, badge(item.estado || item.status), backendActions("prisonReport", item.id)]), false)}</div>
     </div>
-  `;
+  `);
 }
 
 function venueDepartmentTabs(active) {
@@ -4786,7 +4911,7 @@ function venueModulePanel(type, title, modalType, headers, rows, { showFilters =
 
 function renderVenueInventory(activeTab = "overview") {
   if (!canViewVenueModule()) {
-    byId("content").innerHTML = `<article class="empty-state">${L("accessControl")}</article>`;
+    setPageContent(`<article class="empty-state ui-empty-state">${L("accessControl")}</article>`);
     return;
   }
   if (isStaffEquipmentOnly()) activeTab = "staff";
@@ -4846,7 +4971,7 @@ function renderVenueInventory(activeTab = "overview") {
       <div class="col-xl-6">${modulePanel("repairHistoryPanel", L("repairHistory"), null, [L("item"), L("repairCost"), L("sentDate"), L("returnedDate"), L("status")], maintenance.map((item) => [item.item, money(item.custo_da_reparacao), item.data_de_envio, item.data_de_retorno, badge(item.estado)]), false)}</div>
       <div class="col-12">${modulePanel("staffEquipmentReportPanel", L("staffEquipmentReport"), null, [L("staffName"), L("department"), L("device"), L("model"), L("currentCondition"), L("status")], staffEquipment.map((item) => [item.nome_do_funcionario, item.departamento, item.dispositivo, item.modelo, item.estado_actual, badge(item.estado)]), false)}</div>` : ""}
     </div>`;
-  byId("content").innerHTML = navHtml + tabParallaxWrap(bodyHtml, activeRoute);
+  setPageContent(navHtml + tabParallaxWrap(bodyHtml, activeRoute));
   triggerTabParallax();
 }
 
@@ -4858,7 +4983,7 @@ function renderMinistryMaterials() {
   const funds = scopedNested(state.ministryMaterials.freeFunds);
   const reports = scopedNested(state.ministryMaterials.reports);
   const monthSales = sales.filter((item) => item.data?.startsWith("2026-07"));
-  byId("content").innerHTML = `
+  setPageContent( `
     ${moduleNavShell("ministryMaterials", { title: L("ministryMaterials"), subtitle: L("materialsSubtitle"), modalType: "materialSale", icon: "bi-journal-richtext" },
       `<div class="tab-strip module-tab-strip">${[
         [L("cellOverview"), "content"],
@@ -4886,12 +5011,12 @@ function renderMinistryMaterials() {
       <div class="col-xl-5">${modulePanel("materialFund", L("freeDistributionFunds"), "materialFund", [L("campaign"), L("targetAmount"), L("raisedAmount"), L("status"), L("actions")], funds.map((item) => [item.campanha, money(item.valor_alvo), money(item.valor_levantado), badge(item.estado), backendActions("materialFund", item.id)]), false)}</div>
       <div class="col-12">${modulePanel("materialReport", L("ministryReports"), null, [L("name"), L("category"), L("quantitySold"), L("amount"), L("status"), L("actions")], reports.map((item) => [item.name, item.category, item.quantity, money(item.amount), badge(item.status), backendActions("materialReport", item.id)]), false)}</div>
     </div>
-  `;
+  `);
 }
 
 function modulePanel(type, title, modalType, headers, rows, showFilters = false, materialFilters = false) {
   return `
-    <article id="panel-${type}" class="panel h-100">
+    <article id="panel-${type}" class="panel glass-panel h-100">
       <div class="panel-head">
         <h3 class="panel-title">${title}</h3>
         <div class="action-cluster">
@@ -4906,15 +5031,14 @@ function modulePanel(type, title, modalType, headers, rows, showFilters = false,
 }
 
 function advancedFilterBar(materialFilters = false) {
-  return `
-    <div class="filter-bar advanced-filter mb-3">
-      <input class="form-control" placeholder="${L("search")}">
-      <input class="form-control" type="week" aria-label="${L("filterWeek")}">
-      <select class="form-select"><option>${L("filterChurch")}</option>${state.churches.map((c) => `<option>${c.church_name}</option>`).join("")}</select>
-      ${materialFilters ? `<select class="form-select"><option>${L("filterMaterial")}</option>${state.ministryMaterials.catalogue.map((item) => `<option>${item.titulo_do_material}</option>`).join("")}</select><select class="form-select"><option>${L("filterPaymentMethod")}</option>${paymentMethods.map((item) => `<option>${item}</option>`).join("")}</select>` : ""}
-      <select class="form-select"><option>${L("filterStatus")}</option></select>
-    </div>
-  `;
+  const materialFields = materialFilters
+    ? `<select class="form-select"><option value="">${L("filterMaterial")}</option>${state.ministryMaterials.catalogue.map((item) => `<option>${item.titulo_do_material}</option>`).join("")}</select><select class="form-select"><option value="">${L("filterPaymentMethod")}</option>${paymentMethods.map((item) => `<option>${item}</option>`).join("")}</select>`
+    : "";
+  return filterBar({
+    month: false,
+    extraFields: `<input class="form-control" type="week" aria-label="${L("filterWeek")}">${materialFields}`,
+    className: "advanced-filter mb-3"
+  });
 }
 
 function prisonClassCount(student) {
@@ -5012,7 +5136,7 @@ function renderFevo(activeTab = "overview") {
       ${show("noReports") ? `<div class="col-12">${modulePanel("fevoNoReport", L("groupsWithoutReport"), "fevoNoReport", [L("weekStart"), L("team"), L("activityType"), L("groupName"), L("leaderName"), L("reasonNotSubmitted"), L("contacted"), L("status"), L("actions")], noReports.map((item) => [item.semana_inicio, item.team, item.activity_type, item.group_name, item.leader_name, item.reason_not_submitted, yesNo(item.contacted), badge(item.status), backendActions("fevoNoReport", item.id)]), true)}</div><div class="col-12">${summaryTiles(L("groupsWithoutReport"), [[L("groupsNoReportThisWeek"), noReports.length], [L("recurringGroups"), noReports.filter((item) => statusKey(item.status) === "recurrent").length], [L("contacted"), noReports.filter((item) => item.contacted).length], [L("resolved"), noReports.filter((item) => statusKey(item.status) === "resolved").length]])}</div>` : ""}
       ${show("weeklyReports") ? `<div class="col-12">${renderFevoWeeklyReport(weeklyReports[0], reports, noReports)}</div>` : ""}
     </div>`;
-  byId("content").innerHTML = navHtml + tabParallaxWrap(bodyHtml, activeRoute);
+  setPageContent(navHtml + tabParallaxWrap(bodyHtml, activeRoute));
   triggerTabParallax();
 }
 
@@ -5078,45 +5202,48 @@ function fevoActivityPanel(id, title, rows) {
 
 function renderReports() {
   const finance = scoped(state.finance);
-  byId("content").innerHTML = `
-    ${sectionHeader(L("reports"), L("reportsSubtitle"), null, "bi-bar-chart-line")}
+  setPageContent(`
+    ${sectionHeader(L("reports"), L("reportsSubtitle"), null, "bi-bar-chart-line", { actions: `<button type="button" class="btn btn-outline-light btn-touch action-secondary"><i class="bi bi-file-earmark-pdf me-1"></i>${L("exportPdf")}</button><button type="button" class="btn btn-outline-light btn-touch action-secondary"><i class="bi bi-file-earmark-excel me-1"></i>${L("exportExcel")}</button>` })}
+    ${filterBar({ church: true, month: true, status: false })}
     <div class="row g-4">
       <div class="col-xl-6">${chartCard(L("givingByCategory"), groupSum(finance, "categoria_da_contribuicao", "valor"))}</div>
       <div class="col-xl-6">${chartCard(L("firstTimersByMonth"), groupCount(scoped(state.firstTimers), "data_do_culto", true))}</div>
       <div class="col-xl-6">${chartCard(L("cellGrowth"), scoped(state.cells).map((c) => [c.nome_da_celula, c.presencas[0]?.total || 0]))}</div>
       <div class="col-xl-6">${summaryTiles(L("sacramentsSummary"), [[L("baptismTab"), state.sacraments.baptisms.length], [L("marriageTab"), state.sacraments.marriages.length], [L("babyTab"), state.sacraments.babies.length]])}</div>
-    </div>`;
+    </div>`);
 }
 
 function renderUsers() {
-  byId("content").innerHTML = `${sectionHeader(L("usersRoles"), L("accessControl"), "user", "bi-person-lock")}<article class="panel">${dataTable([L("name"), L("email"), L("Role"), L("church"), L("Permissions"), L("actions")], state.users.map((u) => [u.name, u.email, u.role, churchName(u.church_id), u.department_permissions.join(", "), actionButtons([["view", "user", u.id, L("view")], ["edit", "user", u.id, L("edit")]])]))}</article>`;
+  setPageContent(`${sectionHeader(L("usersRoles"), L("accessControl"), "user", "bi-person-lock")}<article class="panel glass-panel">${dataTable([L("name"), L("email"), L("Role"), L("church"), L("Permissions"), L("actions")], state.users.map((u) => [u.name, u.email, u.role, churchName(u.church_id), u.department_permissions.join(", "), actionButtons([["view", "user", u.id, L("view")], ["edit", "user", u.id, L("edit")]])]))}</article>`);
 }
 
 function renderAccess() {
-  byId("content").innerHTML = `${sectionHeader(L("accessControl"), lang === "pt" ? "Base de acesso por igreja e departamento." : "Role-based foundations by church and department.", null, "bi-shield-lock")}<article class="panel">${dataTable([L("Role"), L("Scope"), L("Permissions")], state.users.map((u) => [u.role, u.can_view_all_churches ? L("all") : churchName(u.church_id), u.department_permissions.join(", ")]))}</article>`;
+  setPageContent(`${sectionHeader(L("accessControl"), lang === "pt" ? "Base de acesso por igreja e departamento." : "Role-based foundations by church and department.", null, "bi-shield-lock")}<article class="panel glass-panel">${dataTable([L("Role"), L("Scope"), L("Permissions")], state.users.map((u) => [u.role, u.can_view_all_churches ? L("all") : churchName(u.church_id), u.department_permissions.join(", ")]))}</article>`);
 }
 
 function renderSettings() {
-  byId("content").innerHTML = `${sectionHeader(L("settings"), lang === "pt" ? "Definições futuras para backend, autenticação, notificações e API mobile." : "Backend, authentication, notifications and mobile API settings will live here.", null, "bi-gear")}<div class="module-grid">${["Supabase/Firebase/PostgreSQL", "Authentication", "Mobile API", "Notifications"].map((item) => `<article class="record-card"><span class="eyebrow">${L("settings")}</span><h3>${item}</h3><p class="text-secondary mb-0">${lang === "pt" ? "Espaço reservado do protótipo." : "Frontend placeholder."}</p></article>`).join("")}</div>`;
+  setPageContent(`${sectionHeader(L("settings"), lang === "pt" ? "Definições futuras para backend, autenticação, notificações e API mobile." : "Backend, authentication, notifications and mobile API settings will live here.", null, "bi-gear")}<div class="module-grid">${["Supabase/Firebase/PostgreSQL", "Authentication", "Mobile API", "Notifications"].map((item) => `<article class="record-card data-card"><span class="eyebrow">${L("settings")}</span><h3>${item}</h3><p class="text-secondary mb-0">${lang === "pt" ? "Espaço reservado do protótipo." : "Frontend placeholder."}</p></article>`).join("")}</div>`);
 }
 
 function renderAudit() {
-  byId("content").innerHTML = `${sectionHeader(L("auditLogs"), lang === "pt" ? "Histórico operacional das alterações neste protótipo." : "Operational history for changes in this prototype.", null, "bi-journal-check")}<article class="panel">${dataTable([L("date"), L("Actor"), L("church"), L("Action")], state.auditLogs.slice().reverse().map((log) => [log.date, log.actor, churchName(log.church_id), log.action]))}</article>`;
+  setPageContent(`${sectionHeader(L("auditLogs"), lang === "pt" ? "Histórico operacional das alterações neste protótipo." : "Operational history for changes in this prototype.", null, "bi-journal-check")}<article class="panel glass-panel">${dataTable([L("date"), L("Actor"), L("church"), L("Action")], state.auditLogs.slice().reverse().map((log) => [log.date, log.actor, churchName(log.church_id), log.action]))}</article>`);
 }
 
 function renderSimple(type, title, records) {
-  byId("content").innerHTML = `${sectionHeader(title, title, type, "bi-grid")}<article class="panel">${dataTable([L("name"), L("church"), L("category"), L("status"), L("actions")], scoped(records).map((r) => [r.name, churchName(r.church_id), r.category || r.owner || r.channel || "-", badge(r.status), actionButtons([["view", type, r.id, L("view")], ["edit", type, r.id, L("edit")]])]))}</article>`;
+  setPageContent(`${sectionHeader(title, title, type, "bi-grid")}<article class="panel glass-panel">${dataTable([L("name"), L("church"), L("category"), L("status"), L("actions")], scoped(records).map((r) => [r.name, churchName(r.church_id), r.category || r.owner || r.channel || "-", badge(r.status), actionButtons([["view", type, r.id, L("view")], ["edit", type, r.id, L("edit")]])]))}</article>`);
 }
 
-function dataTable(headers, rows) {
+function dataTable(headers, rows, options = {}) {
+  if (typeof DataTable === "function") return DataTable(headers, rows, options);
   return `
-    <div class="table-responsive data-table">
-      <table class="table align-middle">
-        <thead><tr>${headers.map((h) => `<th>${h}</th>`).join("")}</tr></thead>
-        <tbody>${rows.length ? rows.map((row) => `<tr>${row.map((cell, index) => `<td data-label="${headers[index]}">${cell ?? "-"}</td>`).join("")}</tr>`).join("") : `<tr><td colspan="${headers.length}" class="text-secondary">${L("empty")}</td></tr>`}</tbody>
-      </table>
-    </div>
-  `;
+    <div class="data-table-wrap glass-panel">
+      <div class="table-responsive data-table">
+        <table class="table align-middle data-table-desktop">
+          <thead><tr>${headers.map((h) => `<th scope="col">${h}</th>`).join("")}</tr></thead>
+          <tbody>${rows.length ? rows.map((row) => `<tr>${row.map((cell, index) => `<td data-label="${headers[index]}">${cell ?? "-"}</td>`).join("")}</tr>`).join("") : `<tr><td colspan="${headers.length}">${EmptyState({ compact: true, title: L("empty") })}</td></tr>`}</tbody>
+        </table>
+      </div>
+    </div>`;
 }
 
 function actionButtons(buttons) {
@@ -5662,6 +5789,24 @@ document.addEventListener("click", (event) => {
   if (financeDrawerClose || event.target === byId("financeDrawerBackdrop")) return closeFinanceDrawer();
   const churchDrawerClose = event.target.closest("[data-church-drawer-close]");
   if (churchDrawerClose || event.target === byId("churchDrawerBackdrop")) return closeChurchDrawer();
+  const viewModeBtn = event.target.closest("[data-view-mode]");
+  if (viewModeBtn) {
+    const mode = viewModeBtn.dataset.viewMode;
+    if (activeRoute === "members") {
+      modulePageState.members.view = mode;
+      renderMembers();
+    } else if (activeRoute === "firstTimers" || activeRoute === "counseling") {
+      modulePageState.firstTimers.view = mode;
+      renderFirstTimers();
+    }
+    return;
+  }
+  const followupViewBtn = event.target.closest("[data-followup-view]");
+  if (followupViewBtn) {
+    modulePageState.followUp.view = followupViewBtn.dataset.followupView;
+    if (activeRoute === "followUp") renderFollowUp();
+    return;
+  }
   const churchViewBtn = event.target.closest("[data-church-view]");
   if (churchViewBtn) {
     churchPageState.view = churchViewBtn.dataset.churchView;

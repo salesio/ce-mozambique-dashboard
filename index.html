@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CE Mozambique Ops | Staff Dashboard</title>
+  <meta name="description" content="Christ Embassy Mozambique church operations platform prototype.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="https://embaixada-de-cristo.obiuba.com/assets/web/LoveWorld.png">
+  <link rel="stylesheet" href="css/dashboard.css?v=20260710-finance-lookup">
+</head>
+<body>
+  <main id="loginView" class="login-shell">
+    <section class="login-panel">
+      <div class="login-mark">
+        <img src="https://embaixada-de-cristo.obiuba.com/assets/web/logo-ce.png" alt="Christ Embassy Mozambique">
+      </div>
+      <div class="d-flex align-items-center justify-content-between gap-3 mb-3">
+        <span class="eyebrow" data-i18n="church.operations">Operações da Igreja</span>
+        <div class="dash-lang-switch" role="group" aria-label="Idioma">
+          <button type="button" data-lang="pt" class="active">PT</button>
+          <button type="button" data-lang="en">EN</button>
+        </div>
+      </div>
+      <h1 data-i18n="login.title">Portal da Equipa</h1>
+      <p class="login-lead" data-i18n="login.lead">Acesso interno para acompanhamento espiritual, igrejas, celulas, escola, financas e administracao.</p>
+      <form id="loginForm" class="d-grid gap-3 mt-4">
+        <div>
+          <label class="form-label fw-semibold" for="loginEmail">E-mail</label>
+          <input id="loginEmail" class="form-control" type="email" value="admin@ce-mozambique.org">
+        </div>
+        <div>
+          <label class="form-label fw-semibold" for="loginPassword" data-i18n="login.password">Senha</label>
+          <input id="loginPassword" class="form-control" type="password" value="demo">
+        </div>
+        <button class="btn btn-ce-gold btn-lg" type="submit" data-i18n="login.submit">Entrar no Dashboard</button>
+      </form>
+      <p class="small text-white-50 mt-3 mb-0" data-i18n="login.note">Prototipo frontend-first. Autenticacao real e base de dados entram na proxima fase.</p>
+    </section>
+  </main>
+
+  <div id="appView" class="ops-shell d-none">
+    <aside class="ops-sidebar">
+      <div class="sidebar-head">
+        <a class="ops-brand" href="#dashboard" data-route="dashboard">
+          <img src="https://embaixada-de-cristo.obiuba.com/assets/web/logo-ce.png" alt="Christ Embassy Mozambique">
+          <span id="brandOps">CE MOZAMBIQUE<small>OPERAÇÕES</small></span>
+        </a>
+        <button id="sidebarCollapseToggle" type="button" class="sidebar-collapse-btn d-none d-lg-inline-flex" aria-label="Recolher menu" title="Recolher menu">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+      </div>
+      <div class="side-user">
+        <span class="pulse-dot"></span>
+        <div>
+          <strong id="activeUserName">Admin Principal</strong>
+          <small id="activeUserRole">Super Admin</small>
+        </div>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav" aria-label="Dashboard navigation"></nav>
+    </aside>
+
+    <div class="ops-main">
+      <header class="ops-topbar">
+        <button id="menuToggle" class="icon-btn d-lg-none" type="button" aria-label="Menu">
+          <i class="bi bi-list"></i>
+        </button>
+        <div>
+          <span id="sectionLabel" class="eyebrow">MAIN</span>
+          <h1 id="pageTitle">Dashboard</h1>
+        </div>
+        <div class="topbar-actions">
+          <div class="dash-lang-switch" role="group" aria-label="Idioma">
+            <button type="button" data-lang="pt" class="active">PT</button>
+            <button type="button" data-lang="en">EN</button>
+          </div>
+          <a class="btn btn-sm btn-outline-light" href="https://embaixada-de-cristo.obiuba.com/" target="_blank" rel="noopener" data-i18n="top.site">Ver Site</a>
+          <button id="logoutBtn" class="btn btn-sm btn-ce-gold" type="button" data-i18n="top.logout">Sair</button>
+        </div>
+      </header>
+
+      <section id="content" class="ops-content"></section>
+      <button id="backToTopBtn" type="button" class="back-to-top" aria-label="Voltar ao topo" title="Voltar ao topo">
+        <i class="bi bi-arrow-up" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+
+  <div id="financeDrawerBackdrop" class="church-drawer-backdrop finance-drawer-backdrop d-none" aria-hidden="true"></div>
+  <aside id="financeDrawer" class="church-drawer finance-drawer d-none" aria-hidden="true" aria-labelledby="financeDrawerTitle">
+    <div class="church-drawer-head">
+      <div>
+        <span id="financeDrawerEyebrow" class="eyebrow">Finanças</span>
+        <h2 id="financeDrawerTitle" class="church-drawer-title">Detalhes</h2>
+      </div>
+      <button type="button" class="icon-btn church-drawer-close" data-finance-drawer-close aria-label="Fechar">
+        <i class="bi bi-x-lg" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div id="financeDrawerBody" class="church-drawer-body"></div>
+    <div id="financeDrawerFoot" class="church-drawer-foot"></div>
+  </aside>
+
+  <div id="churchDrawerBackdrop" class="church-drawer-backdrop d-none" aria-hidden="true"></div>
+  <aside id="churchDrawer" class="church-drawer d-none" aria-hidden="true" aria-labelledby="churchDrawerTitle">
+    <div class="church-drawer-head">
+      <div>
+        <span id="churchDrawerEyebrow" class="eyebrow">Igreja</span>
+        <h2 id="churchDrawerTitle" class="church-drawer-title">Detalhes</h2>
+      </div>
+      <button type="button" class="icon-btn church-drawer-close" data-church-drawer-close aria-label="Fechar">
+        <i class="bi bi-x-lg" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div id="churchDrawerBody" class="church-drawer-body"></div>
+    <div id="churchDrawerFoot" class="church-drawer-foot"></div>
+  </aside>
+
+  <div class="modal fade" id="entryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <form id="entryForm" class="modal-content ops-modal">
+        <div class="modal-header">
+          <div>
+            <span id="modalEyebrow" class="eyebrow">Novo registo</span>
+            <h5 id="modalTitle" class="modal-title">Adicionar</h5>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div id="modalFields" class="modal-body row g-3"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal" data-i18n="cancel">Cancelar</button>
+          <button type="submit" class="btn btn-ce-gold" data-i18n="save">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/cell-seed-data.js?v=20260710-cell-nav"></script>
+  <script src="js/dashboard.js?v=20260710-finance-lookup"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "Christ Embassy Mozambique Dashboard",
+  "short_name": "CE Dashboard",
+  "description": "Portal interno para membros, células, aconselhamento e Escola de Fundação.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1b1238",
+  "theme_color": "#1b1238",
+  "icons": [
+    {
+      "src": "https://embaixada-de-cristo.obiuba.com/assets/web/logo-ce.png",
+      "sizes": "420x225",
+      "type": "image/png"
+    }
+  ]
+}

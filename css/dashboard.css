@@ -2427,6 +2427,73 @@ table,
   text-transform: uppercase;
 }
 
+.finance-origin-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.finance-origin-public {
+  background: rgba(34, 211, 238, 0.14);
+  color: #9defff;
+  border: 1px solid rgba(34, 211, 238, 0.28);
+}
+
+.finance-origin-dashboard {
+  background: rgba(212, 175, 55, 0.14);
+  color: #f6df9b;
+  border: 1px solid rgba(212, 175, 55, 0.28);
+}
+
+.finance-origin-imported {
+  background: rgba(148, 163, 184, 0.14);
+  color: #dbe4f0;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+}
+
+.public-submission-lines {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.public-submission-line {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0.85rem 1rem;
+  border-radius: 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.public-submission-line > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.86rem;
+}
+
+.public-submission-line span {
+  color: rgba(248, 251, 255, 0.62);
+}
+
+.public-submission-line-actions {
+  justify-content: flex-end !important;
+}
+
+.public-submission-message {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(248, 251, 255, 0.88);
+  white-space: pre-wrap;
+}
+
 .finance-suggestion-list mark {
   padding: 0;
   color: #9defff;

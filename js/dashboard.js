@@ -200,6 +200,21 @@ const TEXT = {
     sourceContributor: "Contribuinte",
     sourcePartner: "Parceiro",
     sourceType: "Origem",
+    sourcePublicWebsite: "Site Público",
+    sourceDashboard: "Dashboard",
+    sourceImported: "Importado",
+    financeTabAll: "Todos os Registos",
+    financeTabPublic: "Submissões Públicas",
+    viewSubmission: "Ver Submissão",
+    viewProof: "Ver Comprovativo",
+    publicSubmission: "Submissão Pública",
+    submissionGroup: "Grupo de Submissão",
+    transferMessage: "Mensagem da Transferência",
+    transferDate: "Data da Transferência",
+    cellGroup: "Grupo de Célula",
+    otherDescription: "Outras Doações",
+    grandTotal: "Total Geral",
+    contributionLines: "Linhas de Contribuição",
     manual: "Manual",
     followupTimeline: "Linha de Seguimento",
     contactDate: "Data do Contacto",
@@ -496,6 +511,21 @@ const TEXT = {
     sourceContributor: "Contributor",
     sourcePartner: "Partner",
     sourceType: "Source",
+    sourcePublicWebsite: "Public Website",
+    sourceDashboard: "Dashboard",
+    sourceImported: "Imported",
+    financeTabAll: "All Records",
+    financeTabPublic: "Public Submissions",
+    viewSubmission: "View Submission",
+    viewProof: "View Proof",
+    publicSubmission: "Public Submission",
+    submissionGroup: "Submission Group",
+    transferMessage: "Transfer Message",
+    transferDate: "Transfer Date",
+    cellGroup: "Cell Group",
+    otherDescription: "Other Donations",
+    grandTotal: "Grand Total",
+    contributionLines: "Contribution Lines",
     manual: "Manual",
     followupTimeline: "Follow-Up Timeline",
     contactDate: "Contact Date",
@@ -2020,6 +2050,7 @@ const seedData = {
     }
   ],
   contributors: [],
+  publicGivingSubmissions: [],
   finance: [
     { id: "fin-1", source_type: "contributor", contributor_id: "contrib-fin-1", member_id: "", first_timer_id: "", partner_id: "", nome: "Ana", apelido: "Mabunda", telefone: "874520011", whatsapp: "874520011", email: "", endereco: "Maputo", celula: "Cell Central", igreja: "National HQ - Christ Embassy Mozambique", church_id: "church-hq", categoria_da_contribuicao: "Dízimo", metodo_de_pagamento: "M-Pesa", valor: 7500, referencia_da_transaccao: "MP463900298", data: "2026-07-05", imagem_envelope_ou_pop: "", imagem_do_envelope: "", observacoes: "", estado: FINANCE_STATUS_VERIFIED, recebido_por: "Admin Principal", verificado_por: "Admin Principal", verified_at: "2026-07-05T10:30:00.000Z", comentario_verificacao: "Pagamento confirmado no M-Pesa.", motivo_rejeicao: "", created_at: "2026-07-05T09:15:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-05" },
     { id: "fin-2", source_type: "partner", contributor_id: "", member_id: "", first_timer_id: "", partner_id: "part-1", nome: "Carlos", apelido: "Muianga", telefone: "866877389", whatsapp: "866877389", email: "carlos@example.com", endereco: "Online", celula: "Virtual", igreja: "CE Mozambique Online Church", church_id: "church-virtual", categoria_da_contribuicao: "Loveworld SAT", metodo_de_pagamento: "Banco", valor: 4200, referencia_da_transaccao: "BCI-17596091110001", data: "2026-07-02", imagem_envelope_ou_pop: "", imagem_do_envelope: "", observacoes: "Aguardar confirmação bancária.", estado: FINANCE_STATUS_PENDING, recebido_por: "Admin Principal", verificado_por: "", verified_at: "", comentario_verificacao: "", motivo_rejeicao: "", created_at: "2026-07-02T14:20:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-02" }
@@ -2215,6 +2246,7 @@ let churchFormServiceTimes = [];
 let financeDrawerMode = null;
 let financeDrawerRecordId = null;
 let financeContributorUI = { query: "", results: [], activeIndex: -1, open: false, linked: null };
+const financePageState = { tab: "all", sourceFilter: "" };
 const churchPageState = {
   view: localStorage.getItem(CHURCH_VIEW_KEY) || "cards",
   filters: { search: "", province: "", city: "", type: "", status: "", information_status: "" }
@@ -2231,11 +2263,24 @@ function byId(id) {
 function loadState() {
   const saved = localStorage.getItem(STORAGE_KEY);
   if (!saved) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(seedData));
-    return structuredClone(seedData);
+    let initial = structuredClone(seedData);
+    if (typeof importPublicGivingQueue === "function") {
+      const result = importPublicGivingQueue(initial);
+      initial = result.state;
+    }
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(initial));
+    return structuredClone(initial);
   }
   try {
-    return normalizeState(JSON.parse(saved));
+    let normalized = normalizeState(JSON.parse(saved));
+    if (typeof importPublicGivingQueue === "function") {
+      const result = importPublicGivingQueue(normalized);
+      if (result.imported > 0) {
+        normalized = result.state;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(normalized));
+      }
+    }
+    return normalized;
   } catch {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(seedData));
     return structuredClone(seedData);
@@ -2319,6 +2364,7 @@ function normalizeState(saved) {
   });
   merged.finance = savedFinance.length ? savedFinance : seedFinance;
   merged.contributors = Array.isArray(merged.contributors) ? merged.contributors : structuredClone(seedData.contributors || []);
+  merged.publicGivingSubmissions = Array.isArray(merged.publicGivingSubmissions) ? merged.publicGivingSubmissions : structuredClone(seedData.publicGivingSubmissions || []);
   merged.foundationStudents = (merged.foundationStudents || []).map((student) => migrateFoundationStudent(student));
   return merged;
 }
@@ -2544,8 +2590,198 @@ function migrateFinanceRecord(record) {
     partner_id: record.partner_id || "",
     imagem_envelope_ou_pop: record.imagem_envelope_ou_pop || record.imagem_do_envelope || "",
     imagem_do_envelope: record.imagem_do_envelope || record.imagem_envelope_ou_pop || "",
+    source: record.source || (record.source_type === "public_website" ? "public_website" : record.source === "imported" ? "imported" : ""),
+    submission_group_id: record.submission_group_id || "",
+    public_submission_id: record.public_submission_id || "",
+    mensagem_transferencia: record.mensagem_transferencia || "",
+    grupo_de_celula: record.grupo_de_celula || "",
+    data_de_aniversario: record.data_de_aniversario || "",
+    outros_descricao: record.outros_descricao || "",
+    data_da_transferencia: record.data_da_transferencia || record.data || "",
     created_at: record.created_at || record.updated_at || record.data || ""
   };
+}
+
+function financeOriginKey(record) {
+  if (typeof financeSourceKey === "function") return financeSourceKey(record);
+  if (record?.source === "public_website" || record?.source_type === "public_website") return "public_website";
+  if (record?.source === "imported") return "imported";
+  return "dashboard";
+}
+
+function financeOriginLabel(record) {
+  const map = {
+    public_website: L("sourcePublicWebsite"),
+    dashboard: L("sourceDashboard"),
+    imported: L("sourceImported")
+  };
+  return map[financeOriginKey(record)] || map.dashboard;
+}
+
+function financeOriginBadge(record) {
+  const key = financeOriginKey(record);
+  const classMap = {
+    public_website: "finance-origin-public",
+    dashboard: "finance-origin-dashboard",
+    imported: "finance-origin-imported"
+  };
+  return `<span class="finance-origin-badge ${classMap[key] || classMap.dashboard}">${financeOriginLabel(record)}</span>`;
+}
+
+function getScopedPublicSubmissionRows() {
+  const churchIds = activeUser.can_view_all_churches ? state.churches.map((church) => church.id) : [activeUser.church_id];
+  const submissions = (state.publicGivingSubmissions || []).filter((submission) => churchIds.includes(submission.igreja_id));
+  return submissions.map((submission) => {
+    const records = scoped(getSubmissionGroupRecords(state, submission.submission_group_id)).map((record) => migrateFinanceRecord(record));
+    const total = records.reduce((sum, record) => sum + Number(record.valor || 0), 0);
+    const categories = records.map((record) => record.categoria_da_contribuicao).filter(Boolean).join(", ");
+    const status = records.length && records.every((record) => statusKey(record.estado) === "verified")
+      ? FINANCE_STATUS_VERIFIED
+      : records.some((record) => statusKey(record.estado) === "rejected")
+        ? FINANCE_STATUS_REJECTED
+        : FINANCE_STATUS_PENDING;
+    return { submission, records, total, categories, status };
+  }).filter((row) => row.records.length);
+}
+
+function publicSubmissionActions(submissionGroupId, records) {
+  const actions = [["viewSubmission", "finance", submissionGroupId, L("viewSubmission")]];
+  const pending = records.some((record) => statusKey(record.estado) === "pendingVerification");
+  if (pending) {
+    actions.push(["verifyGroup", "finance", submissionGroupId, L("verify")], ["rejectGroup", "finance", submissionGroupId, L("reject")]);
+  }
+  return actionButtons(actions);
+}
+
+function publicSubmissionDetailHtml(submission, records) {
+  const lines = records.map((record) => `
+    <div class="public-submission-line">
+      <div><span>${L("category")}</span><strong>${record.categoria_da_contribuicao}</strong></div>
+      <div><span>${L("amount")}</span><strong>${money(record.valor)}</strong></div>
+      <div class="public-submission-line-actions">${financeActions(record.id, record)}</div>
+    </div>`).join("");
+  const proof = submission?.comprovativo_url || records[0]?.imagem_envelope_ou_pop || "";
+  const proofHtml = proof
+    ? `<div class="mt-3"><a class="btn btn-sm btn-outline-cyan" href="${proof}" target="_blank" rel="noopener"><i class="bi bi-paperclip me-1"></i>${L("viewProof")}</a></div>`
+    : "";
+  return `
+    <section class="finance-detail-section">
+      <h4 class="finance-detail-title">${L("publicSubmission")}</h4>
+      <div class="church-detail-grid">
+        <div><span>${L("name")}</span><strong>${submission?.nome_completo || fullName(records[0] || {})}</strong></div>
+        <div><span>${L("phone")}</span><strong>${submission?.telefone || records[0]?.telefone || "-"}</strong></div>
+        <div><span>${L("email")}</span><strong>${submission?.email || records[0]?.email || "-"}</strong></div>
+        <div><span>${L("church")}</span><strong>${submission?.igreja_nome || churchName(records[0]?.church_id)}</strong></div>
+        <div><span>${L("cellGroup")}</span><strong>${submission?.grupo_de_celula || records[0]?.grupo_de_celula || "-"}</strong></div>
+        <div><span>${L("cell")}</span><strong>${submission?.celula || records[0]?.celula || "-"}</strong></div>
+        <div><span>${L("method")}</span><strong>${submission?.metodo_de_pagamento || records[0]?.metodo_de_pagamento || "-"}</strong></div>
+        <div><span>${L("transactionReference")}</span><strong>${submission?.referencia_da_transaccao || records[0]?.referencia_da_transaccao || "-"}</strong></div>
+        <div><span>${L("transferDate")}</span><strong>${submission?.data_da_transferencia || records[0]?.data_da_transferencia || "-"}</strong></div>
+        <div><span>${L("grandTotal")}</span><strong>${money(submission?.total_geral || records.reduce((sum, record) => sum + Number(record.valor || 0), 0))}</strong></div>
+        <div><span>${L("sourceType")}</span><strong>${financeOriginBadge(records[0] || {})}</strong></div>
+        <div><span>${L("status")}</span><strong>${badge(records[0]?.estado || FINANCE_STATUS_PENDING)}</strong></div>
+      </div>
+      ${proofHtml}
+    </section>
+    <section class="finance-detail-section">
+      <h4 class="finance-detail-title">${L("contributionLines")}</h4>
+      <div class="public-submission-lines">${lines}</div>
+    </section>
+    ${submission?.mensagem_transferencia || records[0]?.mensagem_transferencia ? `
+      <section class="finance-detail-section">
+        <h4 class="finance-detail-title">${L("transferMessage")}</h4>
+        <p class="public-submission-message">${escapeFinanceHtml(submission?.mensagem_transferencia || records[0]?.mensagem_transferencia)}</p>
+      </section>` : ""}
+    ${submission?.observacoes || records[0]?.observacoes ? `
+      <section class="finance-detail-section">
+        <h4 class="finance-detail-title">${L("observations")}</h4>
+        <p class="public-submission-message">${escapeFinanceHtml(submission?.observacoes || records[0]?.observacoes)}</p>
+      </section>` : ""}`;
+}
+
+function openPublicSubmissionDrawer(mode, submissionGroupId) {
+  financeDrawerMode = mode;
+  financeDrawerRecordId = submissionGroupId;
+  const submission = typeof getPublicSubmission === "function" ? getPublicSubmission(state, submissionGroupId) : null;
+  const records = scoped(getSubmissionGroupRecords(state, submissionGroupId)).map((record) => migrateFinanceRecord(record));
+  const drawer = byId("financeDrawer");
+  const backdrop = byId("financeDrawerBackdrop");
+  const body = byId("financeDrawerBody");
+  const foot = byId("financeDrawerFoot");
+  if (!drawer || !backdrop || !body || !foot || !records.length) return;
+
+  if (mode === "viewSubmission") {
+    byId("financeDrawerEyebrow").textContent = L("publicSubmission");
+    byId("financeDrawerTitle").textContent = submission?.nome_completo || fullName(records[0]);
+    body.innerHTML = publicSubmissionDetailHtml(submission, records);
+    const pending = records.some((record) => statusKey(record.estado) === "pendingVerification");
+    foot.innerHTML = `<button type="button" class="btn btn-outline-glass" data-finance-drawer-close>${L("cancel")}</button>
+      ${pending ? `<button type="button" class="btn btn-ce-gold" data-action="verifyGroup" data-type="finance" data-id="${submissionGroupId}">${L("verify")}</button>
+      <button type="button" class="btn btn-outline-danger" data-action="rejectGroup" data-type="finance" data-id="${submissionGroupId}">${L("reject")}</button>` : ""}`;
+  } else if (mode === "verifyGroup") {
+    byId("financeDrawerEyebrow").textContent = L("verifyFinance");
+    byId("financeDrawerTitle").textContent = submission?.nome_completo || fullName(records[0]);
+    body.innerHTML = `${publicSubmissionDetailHtml(submission, records)}
+      <form id="financeDrawerForm" class="row g-3 mt-2">
+        ${fieldControl(["comentario_verificacao", "verificationComment", "textarea-optional"], records[0])}
+      </form>`;
+    foot.innerHTML = `<button type="button" class="btn btn-outline-glass" data-finance-drawer-close>${L("cancel")}</button>
+      <button type="submit" form="financeDrawerForm" class="btn btn-ce-gold">${L("verify")}</button>`;
+  } else if (mode === "rejectGroup") {
+    byId("financeDrawerEyebrow").textContent = L("rejectFinance");
+    byId("financeDrawerTitle").textContent = submission?.nome_completo || fullName(records[0]);
+    body.innerHTML = `${publicSubmissionDetailHtml(submission, records)}
+      <form id="financeDrawerForm" class="row g-3 mt-2">
+        ${fieldControl(["motivo_rejeicao", "rejectionReason", "textarea"], records[0])}
+      </form>`;
+    foot.innerHTML = `<button type="button" class="btn btn-outline-glass" data-finance-drawer-close>${L("cancel")}</button>
+      <button type="submit" form="financeDrawerForm" class="btn btn-outline-danger">${L("reject")}</button>`;
+  }
+
+  drawer.classList.remove("d-none");
+  backdrop.classList.remove("d-none");
+  requestAnimationFrame(() => drawer.classList.add("is-open"));
+  drawer.setAttribute("aria-hidden", "false");
+}
+
+function applyFinanceGroupDecision(submissionGroupId, mode, data) {
+  const records = state.finance.filter((record) => record.submission_group_id === submissionGroupId);
+  if (!records.length) return false;
+  const nowIso = new Date().toISOString();
+  const today = nowIso.slice(0, 10);
+  if (mode === "verifyGroup") {
+    records.forEach((record) => {
+      record.estado = FINANCE_STATUS_VERIFIED;
+      record.verificado_por = activeUser.name;
+      record.verified_at = nowIso;
+      record.comentario_verificacao = data.comentario_verificacao || "";
+      record.updated_by = activeUser.name;
+      record.updated_at = today;
+    });
+    const submission = (state.publicGivingSubmissions || []).find((item) => item.submission_group_id === submissionGroupId);
+    if (submission) submission.status = FINANCE_STATUS_VERIFIED;
+    saveState(`Verified public submission ${submissionGroupId}`);
+    return true;
+  }
+  if (mode === "rejectGroup") {
+    if (!String(data.motivo_rejeicao || "").trim()) {
+      alert(L("rejectionReasonRequired"));
+      return false;
+    }
+    records.forEach((record) => {
+      record.estado = FINANCE_STATUS_REJECTED;
+      record.verificado_por = activeUser.name;
+      record.verified_at = nowIso;
+      record.motivo_rejeicao = data.motivo_rejeicao.trim();
+      record.updated_by = activeUser.name;
+      record.updated_at = today;
+    });
+    const submission = (state.publicGivingSubmissions || []).find((item) => item.submission_group_id === submissionGroupId);
+    if (submission) submission.status = FINANCE_STATUS_REJECTED;
+    saveState(`Rejected public submission ${submissionGroupId}`);
+    return true;
+  }
+  return false;
 }
 
 const CONTRIBUTOR_SOURCE_PRIORITY = { member: 4, first_timer: 3, contributor: 2, partner: 1 };
@@ -2987,11 +3223,13 @@ function financeSummaryHtml(record) {
 
 function financeDetailGrid(record) {
   const finance = migrateFinanceRecord(record);
+  const proof = finance.imagem_envelope_ou_pop || finance.imagem_do_envelope || "";
   const entryRows = [
     ["nome", "name"], ["apelido", "surname"], ["endereco", "address"], ["telefone", "phone"], ["whatsapp", "whatsapp"], ["email", "email"],
-    ["celula", "cell"], ["igreja", "church"], ["church_id", "church"], ["source_type", "sourceType"], ["categoria_da_contribuicao", "category"], ["metodo_de_pagamento", "method"],
-    ["valor", "amount"], ["referencia_da_transaccao", "transactionReference"], ["data", "date"],
-    ["imagem_do_envelope", "envelopeImage"], ["observacoes", "observations"]
+    ["data_de_aniversario", "birthDate"], ["celula", "cell"], ["grupo_de_celula", "cellGroup"], ["igreja", "church"], ["church_id", "church"],
+    ["source", "sourceType"], ["categoria_da_contribuicao", "category"], ["outros_descricao", "otherDescription"], ["metodo_de_pagamento", "method"],
+    ["valor", "amount"], ["referencia_da_transaccao", "transactionReference"], ["data_da_transferencia", "transferDate"], ["data", "date"],
+    ["mensagem_transferencia", "transferMessage"], ["observacoes", "observations"]
   ];
   const verificationRows = [
     ["recebido_por", "receivedBy"], ["verificado_por", "verifiedBy"], ["estado", "status"],
@@ -3001,6 +3239,7 @@ function financeDetailGrid(record) {
   const renderRows = (rows) => rows.map(([key, labelKey]) => {
     let value = finance[key];
     if (key === "church_id") value = churchName(value);
+    else if (key === "source") value = financeOriginBadge(finance);
     else if (key === "source_type") value = contributorSourceLabel(value);
     else if (key === "valor") value = money(value);
     else if (key === "estado") value = badge(value);
@@ -3008,10 +3247,18 @@ function financeDetailGrid(record) {
     else value = value || "-";
     return `<div><span>${L(labelKey)}</span><strong>${value}</strong></div>`;
   }).join("");
+  const proofHtml = proof
+    ? `<div class="mt-3"><a class="btn btn-sm btn-outline-cyan" href="${proof}" target="_blank" rel="noopener"><i class="bi bi-paperclip me-1"></i>${L("viewProof")}</a></div>`
+    : "";
+  const groupLink = finance.submission_group_id
+    ? `<div class="mt-3"><button type="button" class="btn btn-sm btn-outline-cyan" data-action="viewSubmission" data-type="finance" data-id="${finance.submission_group_id}">${L("viewSubmission")}</button></div>`
+    : "";
   return `
     <section class="finance-detail-section">
       <h4 class="finance-detail-title">${L("finance")}</h4>
       <div class="church-detail-grid">${renderRows(entryRows)}</div>
+      ${proofHtml}
+      ${groupLink}
     </section>
     <section class="finance-detail-section">
       <h4 class="finance-detail-title">${L("status")}</h4>
@@ -3027,12 +3274,20 @@ function formatDateTime(value) {
 }
 
 function financeActions(id, record) {
+  const migrated = migrateFinanceRecord(record);
   const actions = [
     ["view", "finance", id, L("view")],
     ["edit", "finance", id, L("edit")]
   ];
-  if (statusKey(migrateFinanceRecord(record).estado) === "pendingVerification") {
-    actions.push(["verify", "finance", id, L("verify")], ["reject", "finance", id, L("reject")]);
+  if (migrated.submission_group_id) {
+    actions.unshift(["viewSubmission", "finance", migrated.submission_group_id, L("viewSubmission")]);
+  }
+  if (statusKey(migrated.estado) === "pendingVerification") {
+    if (migrated.submission_group_id) {
+      actions.push(["verifyGroup", "finance", migrated.submission_group_id, L("verify")], ["rejectGroup", "finance", migrated.submission_group_id, L("reject")]);
+    } else {
+      actions.push(["verify", "finance", id, L("verify")], ["reject", "finance", id, L("reject")]);
+    }
   }
   return actionButtons(actions);
 }
@@ -3104,6 +3359,15 @@ function submitFinanceDrawer(form) {
   const data = Object.fromEntries(new FormData(form).entries());
   const nowIso = new Date().toISOString();
   const today = nowIso.slice(0, 10);
+
+  if (financeDrawerMode === "verifyGroup" || financeDrawerMode === "rejectGroup") {
+    if (applyFinanceGroupDecision(financeDrawerRecordId, financeDrawerMode, data)) {
+      closeFinanceDrawer();
+      if (activeRoute === "finance") renderFinance();
+    }
+    return;
+  }
+
   const record = state.finance.find((item) => item.id === financeDrawerRecordId);
   if (!record) return;
 
@@ -4439,12 +4703,58 @@ function foundationProgress(student) {
 }
 
 function renderFinance() {
-  const list = scoped(state.finance).map((record) => migrateFinanceRecord(record));
+  if (typeof importPublicGivingQueue === "function") {
+    const result = importPublicGivingQueue(state);
+    if (result.imported > 0) {
+      state = result.state;
+      saveState(`Imported ${result.imported} public giving submission(s)`);
+    }
+  }
+
+  let list = scoped(state.finance).map((record) => migrateFinanceRecord(record));
+  if (financePageState.sourceFilter) {
+    list = list.filter((record) => financeOriginKey(record) === financePageState.sourceFilter);
+  }
+
   const today = list.filter((f) => f.data === new Date().toISOString().slice(0, 10)).reduce((sum, f) => sum + Number(f.valor || 0), 0);
   const monthKey = new Date().toISOString().slice(0, 7);
   const month = list.filter((f) => f.data?.startsWith(monthKey)).reduce((sum, f) => sum + Number(f.valor || 0), 0);
   const categoryFilter = `<select class="form-select" aria-label="${L("category")}"><option value="">${L("category")}</option>${givingCategories.map((c) => `<option>${c}</option>`).join("")}</select>`;
   const methodFilter = `<select class="form-select" aria-label="${L("method")}"><option value="">${L("method")}</option>${paymentMethods.map((m) => `<option>${m}</option>`).join("")}</select>`;
+  const sourceFilter = `<select class="form-select" data-finance-source-filter aria-label="${L("sourceType")}">
+    <option value="">${L("all")} — ${L("sourceType")}</option>
+    <option value="public_website" ${financePageState.sourceFilter === "public_website" ? "selected" : ""}>${L("sourcePublicWebsite")}</option>
+    <option value="dashboard" ${financePageState.sourceFilter === "dashboard" ? "selected" : ""}>${L("sourceDashboard")}</option>
+    <option value="imported" ${financePageState.sourceFilter === "imported" ? "selected" : ""}>${L("sourceImported")}</option>
+  </select>`;
+  const financeTabs = `<div class="tab-strip module-tab-strip mb-3">
+    <button type="button" class="${financePageState.tab === "all" ? "active" : ""}" data-finance-tab="all">${L("financeTabAll")}</button>
+    <button type="button" class="${financePageState.tab === "public" ? "active" : ""}" data-finance-tab="public">${L("financeTabPublic")}</button>
+  </div>`;
+  const publicRows = getScopedPublicSubmissionRows();
+  const recordsTable = financePageState.tab === "public"
+    ? dataTable(
+      [L("contributor"), L("category"), L("amount"), L("method"), L("date"), L("church"), L("sourceType"), L("status"), L("actions")],
+      publicRows.map((row) => [
+        row.submission.nome_completo || fullName(row.records[0] || {}),
+        row.categories || "-",
+        money(row.total),
+        row.submission.metodo_de_pagamento || row.records[0]?.metodo_de_pagamento || "-",
+        row.submission.data_da_transferencia || row.records[0]?.data || "-",
+        row.submission.igreja_nome || churchName(row.records[0]?.church_id),
+        financeOriginBadge(row.records[0] || {}),
+        badge(row.status),
+        publicSubmissionActions(row.submission.submission_group_id, row.records)
+      ])
+    )
+    : dataTable(
+      [L("contributor"), L("category"), L("method"), L("amount"), L("date"), L("church"), L("sourceType"), L("status"), L("actions")],
+      list.map((f) => [
+        fullName(f), f.categoria_da_contribuicao, f.metodo_de_pagamento, money(f.valor), f.data, churchName(f.church_id),
+        financeOriginBadge(f), badge(f.estado), financeActions(f.id, f)
+      ])
+    );
+
   setPageContent(`
     ${sectionHeader(L("finance"), L("financeSubtitle"), "finance", "bi-cash-coin")}
     ${moduleSection(L("financeOverviewSection"), L("financeOverviewHint"), "bi-speedometer2", "", `
@@ -4454,6 +4764,7 @@ function renderFinance() {
         ${metric("bi-hourglass", L("pendingVerification"), list.filter((f) => statusKey(f.estado) === "pendingVerification").length, L("needsAction"))}
         ${metric("bi-patch-check", L("verified"), list.filter((f) => statusKey(f.estado) === "verified").length, L("status"))}
         ${metric("bi-x-circle", L("rejected"), list.filter((f) => statusKey(f.estado) === "rejected").length, L("status"))}
+        ${metric("bi-globe2", L("financeTabPublic"), publicRows.filter((row) => statusKey(row.status) === "pendingVerification").length, L("sourcePublicWebsite"))}
       </div>`)}
     ${moduleSection(L("financeAnalyticsSection"), L("financeAnalyticsHint"), "bi-pie-chart", "", `
       <div class="row g-4">
@@ -4463,11 +4774,9 @@ function renderFinance() {
       </div>`)}
     ${moduleSection(L("financeRecordsSection"), L("financeRecordsHint"), "bi-table", "", `
       <article class="panel glass-panel mb-0">
-        ${filterBar({ extraFields: `${categoryFilter}${methodFilter}`, statusOptions: financeStatuses })}
-        ${dataTable([L("contributor"), L("category"), L("method"), L("amount"), L("date"), L("church"), L("status"), L("actions")], list.map((f) => [
-          fullName(f), f.categoria_da_contribuicao, f.metodo_de_pagamento, money(f.valor), f.data, churchName(f.church_id), badge(f.estado),
-          financeActions(f.id, f)
-        ]))}
+        ${financeTabs}
+        ${filterBar({ extraFields: `${sourceFilter}${categoryFilter}${methodFilter}`, statusOptions: financeStatuses })}
+        ${recordsTable}
       </article>`)}
   `);
 }
@@ -5808,6 +6117,9 @@ function quickAction(action, type, id) {
   if (action === "view") return openView(type, id);
   if (action === "status" && type === "church") return openChurchDrawer("status", id);
   if (action === "export" && type === "church") return alert(`${L("exportChurch")}: ${churchName(id)}`);
+  if (action === "viewSubmission" && type === "finance") return openPublicSubmissionDrawer("viewSubmission", id);
+  if (action === "verifyGroup" && type === "finance") return openPublicSubmissionDrawer("verifyGroup", id);
+  if (action === "rejectGroup" && type === "finance") return openPublicSubmissionDrawer("rejectGroup", id);
   if (action === "edit" && type === "finance") return openFinanceDrawer("edit", id);
   if (action === "markClass" && type === "foundationStudent") return openFoundationMarkClass(id);
   if (action === "score" && type === "foundationStudent") return openFoundationScore(id);
@@ -6004,6 +6316,12 @@ document.addEventListener("click", (event) => {
     if (activeRoute === "churches") renderChurches();
     return;
   }
+  const financeTabBtn = event.target.closest("[data-finance-tab]");
+  if (financeTabBtn) {
+    financePageState.tab = financeTabBtn.dataset.financeTab || "all";
+    if (activeRoute === "finance") renderFinance();
+    return;
+  }
   const openButton = event.target.closest("[data-open-form]");
   if (openButton) return openForm(openButton.dataset.openForm);
   const actionButton = event.target.closest("[data-action]");
@@ -6065,6 +6383,11 @@ document.addEventListener("input", (event) => {
       form.elements.igreja.value = churchName(event.target.value);
     }
     checkFinanceManualDuplicates();
+    return;
+  }
+  if (event.target.matches("[data-finance-source-filter]")) {
+    financePageState.sourceFilter = event.target.value || "";
+    if (activeRoute === "finance") renderFinance();
     return;
   }
   const serviceField = event.target.dataset?.serviceField;

@@ -55,7 +55,8 @@
       fevo: () => window.fevoPageState,
       requisitions: () => window.requisitionsPageState,
       venue: () => window.venuePageState,
-      sacraments: () => window.sacramentsPageState
+      sacraments: () => window.sacramentsPageState,
+      reports: () => window.reportsPageState
     };
     return stores[module]?.() || null;
   }
@@ -107,6 +108,14 @@
     if (module === "sacraments") {
       store.panel = "";
       store.filter = {};
+    }
+    if (module === "reports") {
+      store.domain = "";
+      if (window.domainReportFilters) {
+        Object.keys(window.domainReportFilters).forEach((key) => {
+          window.domainReportFilters[key] = { period: "month", dateFrom: "", dateTo: "", churchId: "", department: "", status: "", card_filter: "", search: "" };
+        });
+      }
     }
   }
 
@@ -180,6 +189,10 @@
       } else if (store.cardFilter) {
         Object.entries(store.cardFilter).forEach(([k, v]) => { if (v) chips.push([k, v]); });
       }
+    } else if (module === "reports") {
+      if (store.domain && window.domainReportFilters?.[store.domain]) {
+        Object.entries(window.domainReportFilters[store.domain]).forEach(([k, v]) => { if (v) chips.push([k, v]); });
+      }
     }
     return chips;
   }
@@ -214,7 +227,8 @@
       fevo: "fevo",
       requisitions: "requisitions",
       venue: window.venuePageState?.route || "venueInventory",
-      sacraments: "sacraments"
+      sacraments: "sacraments",
+      reports: "reports"
     }[module];
     if (typeof setRoute === "function" && targetRoute) setRoute(targetRoute);
     else if (typeof renderStaffHr === "function" && module === "staffHr") renderStaffHr();
@@ -348,6 +362,21 @@
     return true;
   }
 
+  function applyReports(payload) {
+    const store = window.reportsPageState;
+    if (!store) return;
+    const filters = payload.filterPayload || {};
+    if (filters.domain) store.domain = filters.domain;
+    if (filters.domain && window.domainReportFilters?.[filters.domain]) {
+      Object.assign(window.domainReportFilters[filters.domain], filters);
+    }
+    if (payload.route && typeof setRoute === "function") {
+      setRoute(payload.route);
+      return false;
+    }
+    return true;
+  }
+
   function applySacraments(payload) {
     const store = window.sacramentsPageState;
     if (!store) return;
@@ -372,7 +401,8 @@
       fevo: applyFevo,
       requisitions: applyRequisitions,
       venue: applyVenue,
-      sacraments: applySacraments
+      sacraments: applySacraments,
+      reports: applyReports
     };
     const handler = handlers[module];
     if (!handler) return;

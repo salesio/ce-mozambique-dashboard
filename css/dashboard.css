@@ -3131,6 +3131,42 @@ table,
   color: #fca5a5;
 }
 
+/* Domain reports framework */
+.domain-reports-panel .panel-title,
+.domain-report-filters .form-label {
+  color: rgba(226, 232, 240, 0.85);
+}
+
+.domain-report-cards .summary-card,
+.domain-report-cards .metric-card {
+  min-height: 5.75rem;
+}
+
+.domain-report-export .btn {
+  min-height: 2.55rem;
+}
+
+@media (max-width: 767.98px) {
+  .domain-report-filters > [class*="col-"] {
+    width: 100%;
+  }
+
+  .domain-report-export {
+    flex-direction: column;
+  }
+
+  .domain-report-export .btn {
+    width: 100%;
+  }
+}
+
+@media print {
+  .domain-report-filters,
+  .domain-report-export {
+    display: none !important;
+  }
+}
+
 /* Requisition reports */
 .requisition-reports-panel .panel-title {
   color: #f8fafc;

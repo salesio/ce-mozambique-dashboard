@@ -222,6 +222,61 @@ const TEXT = {
     reqLastApproved: "Última Aprovação",
     reqPredominantStatus: "Estado Predominante",
     reqCompleted: "Concluídas",
+    rptExecutiveTitle: "Relatórios Executivos",
+    rptExecutiveHint: "Visão consolidada por departamento — clique para ver detalhes e exportar.",
+    rptFinanceExpensesTitle: "Despesas & Liberações",
+    rptFinanceExpensesHint: "Saídas financeiras por requisições aprovadas (não inclui receitas).",
+    rptReqInventoryTitle: "Requisições → Inventário",
+    rptReqInventoryHint: "Acompanhamento de aquisições liberadas e registo no inventário.",
+    rptStaffTitle: "Relatórios de Staff & RH",
+    rptStaffHint: "Headcount, salários pendentes, avaliações e distribuição por igreja.",
+    rptFoundationTitle: "Relatórios Escola de Fundação",
+    rptFoundationHint: "Funil de inscrição, progresso, exames e graduações.",
+    rptFunnelTitle: "Funil de Acompanhamento",
+    rptFunnelHint: "Primeiros visitantes → contacto → célula → fundação → membro.",
+    rptCellTitle: "Relatórios de Células",
+    rptCellHint: "Presenças, primeiros visitantes, novos convertidos e relatórios semanais.",
+    rptFevoTitle: "Relatórios F.E.V.O",
+    rptFevoHint: "Actividades evangelísticas, almas contactadas e equipas.",
+    rptVenueTitle: "Relatórios de Inventário",
+    rptVenueHint: "Activos, estado, valor e equipamentos por departamento.",
+    rptSacramentsTitle: "Relatórios de Sacramentos",
+    rptSacramentsHint: "Batismos, casamentos e apresentação de bebés.",
+    rptPrisonTitle: "Relatórios Ministério Carcerário",
+    rptPrisonHint: "Serviços, presenças e formação na prisão.",
+    rptMaterialsTitle: "Relatórios Materiais Ministeriais",
+    rptMaterialsHint: "Vendas, stock, distribuições e alertas de stock baixo.",
+    rptExpenseDetail: "Detalhe de Despesas",
+    rptInInventory: "No Inventário",
+    rptPendingInventory: "Pendente de Inventário",
+    rptInventoryStatus: "Estado no Inventário",
+    rptReqInventoryDetail: "Requisições e Inventário",
+    rptStaffByStatus: "Staff por Estado",
+    rptStaffByDepartment: "Staff por Departamento",
+    rptStaffByChurch: "Staff por Igreja",
+    rptStaffByEmployment: "Staff por Tipo de Emprego",
+    rptStaffDetail: "Detalhe de Staff",
+    rptFoundationFunnel: "Funil da Escola de Fundação",
+    rptFoundationByChurch: "Alunos por Igreja",
+    rptFoundationProgress: "Progresso por Aluno",
+    rptFoundationDetail: "Detalhe de Alunos",
+    rptFunnelStages: "Etapas do Funil",
+    rptFunnelByChurch: "Visitantes por Igreja",
+    rptFunnelDetail: "Detalhe do Funil",
+    rptCellDetail: "Relatórios de Célula",
+    rptFevoByGroup: "Actividade por Grupo",
+    rptFevoDetail: "Detalhe F.E.V.O",
+    rptInventoryValue: "Valor Total do Inventário",
+    rptVenueDetail: "Detalhe do Inventário",
+    rptCompleted: "Concluídos",
+    rptSacramentsByChurch: "Sacramentos por Igreja",
+    rptSacramentsDetail: "Detalhe de Sacramentos",
+    rptPrisonServices: "Serviços por Estado",
+    rptPrisonByLocation: "Serviços por Prisão",
+    rptInmatesReached: "Presenças Alcançadas",
+    rptPrisonDetail: "Detalhe de Serviços",
+    rptMaterialsDetail: "Detalhe de Vendas",
+    rptViewAll: "Ver Relatório Completo",
     staffTabOverview: "Visão Geral",
     staffTabStaff: "Staff",
     staffTabDepartments: "Departamentos",
@@ -855,6 +910,61 @@ const TEXT = {
     reqLastApproved: "Last Approval",
     reqPredominantStatus: "Predominant Status",
     reqCompleted: "Completed",
+    rptExecutiveTitle: "Executive Reports",
+    rptExecutiveHint: "Consolidated view by department — click to drill down and export.",
+    rptFinanceExpensesTitle: "Expenses & Disbursements",
+    rptFinanceExpensesHint: "Financial outflows from approved requisitions (excludes income).",
+    rptReqInventoryTitle: "Requisitions → Inventory",
+    rptReqInventoryHint: "Track released purchases and inventory registration.",
+    rptStaffTitle: "Staff & HR Reports",
+    rptStaffHint: "Headcount, pending payroll, evaluations and church breakdown.",
+    rptFoundationTitle: "Foundation School Reports",
+    rptFoundationHint: "Enrollment funnel, progress, exams and graduations.",
+    rptFunnelTitle: "Follow-up Funnel",
+    rptFunnelHint: "First timers → contact → cell → foundation → member.",
+    rptCellTitle: "Cell Ministry Reports",
+    rptCellHint: "Attendance, first timers, new converts and weekly reports.",
+    rptFevoTitle: "F.E.V.O Reports",
+    rptFevoHint: "Evangelism activities, souls contacted and teams.",
+    rptVenueTitle: "Inventory Reports",
+    rptVenueHint: "Assets, condition, value and equipment by department.",
+    rptSacramentsTitle: "Sacraments Reports",
+    rptSacramentsHint: "Baptisms, marriages and baby dedications.",
+    rptPrisonTitle: "Prison Ministry Reports",
+    rptPrisonHint: "Services, attendance and foundation in prison.",
+    rptMaterialsTitle: "Ministry Materials Reports",
+    rptMaterialsHint: "Sales, stock, distributions and low-stock alerts.",
+    rptExpenseDetail: "Expense Detail",
+    rptInInventory: "In Inventory",
+    rptPendingInventory: "Pending Inventory",
+    rptInventoryStatus: "Inventory Status",
+    rptReqInventoryDetail: "Requisitions & Inventory",
+    rptStaffByStatus: "Staff by Status",
+    rptStaffByDepartment: "Staff by Department",
+    rptStaffByChurch: "Staff by Church",
+    rptStaffByEmployment: "Staff by Employment Type",
+    rptStaffDetail: "Staff Detail",
+    rptFoundationFunnel: "Foundation School Funnel",
+    rptFoundationByChurch: "Students by Church",
+    rptFoundationProgress: "Progress by Student",
+    rptFoundationDetail: "Student Detail",
+    rptFunnelStages: "Funnel Stages",
+    rptFunnelByChurch: "Visitors by Church",
+    rptFunnelDetail: "Funnel Detail",
+    rptCellDetail: "Cell Reports Detail",
+    rptFevoByGroup: "Activity by Group",
+    rptFevoDetail: "F.E.V.O Detail",
+    rptInventoryValue: "Total Inventory Value",
+    rptVenueDetail: "Inventory Detail",
+    rptCompleted: "Completed",
+    rptSacramentsByChurch: "Sacraments by Church",
+    rptSacramentsDetail: "Sacraments Detail",
+    rptPrisonServices: "Services by Status",
+    rptPrisonByLocation: "Services by Prison",
+    rptInmatesReached: "Attendance Reached",
+    rptPrisonDetail: "Service Detail",
+    rptMaterialsDetail: "Sales Detail",
+    rptViewAll: "View Full Report",
     staffTabOverview: "Overview",
     staffTabStaff: "Staff",
     staffTabDepartments: "Departments",
@@ -3042,6 +3152,20 @@ const followUpPageState = { filter: {} };
 const fevoPageState = { filter: {} };
 const venuePageState = { route: "venueInventory", filter: {} };
 const sacramentsPageState = { panel: "", filter: {} };
+const reportsPageState = { domain: "", filters: { period: "month", dateFrom: "", dateTo: "", churchId: "", department: "", status: "", card_filter: "", search: "" } };
+const domainReportFilters = {
+  staff: { period: "month", churchId: "", department: "", status: "", card_filter: "", search: "" },
+  foundation: { period: "month", churchId: "", status: "", card_filter: "", search: "" },
+  funnel: { period: "month", churchId: "", status: "", card_filter: "", search: "" },
+  financeExpenses: { period: "month", churchId: "", department: "", status: "", card_filter: "", search: "" },
+  reqInventory: { period: "month", churchId: "", department: "", card_filter: "", search: "" },
+  cell: { period: "month", churchId: "", status: "", card_filter: "", search: "" },
+  fevo: { period: "month", churchId: "", status: "", card_filter: "", search: "" },
+  venue: { period: "month", churchId: "", department: "", status: "", card_filter: "", search: "" },
+  sacraments: { period: "month", churchId: "", card_filter: "", search: "" },
+  prison: { period: "month", churchId: "", status: "", search: "" },
+  materials: { period: "month", churchId: "", card_filter: "", search: "" }
+};
 window.staffHrPageState = staffHrPageState;
 window.financePageState = financePageState;
 window.churchPageState = churchPageState;
@@ -3052,6 +3176,39 @@ window.followUpPageState = followUpPageState;
 window.fevoPageState = fevoPageState;
 window.venuePageState = venuePageState;
 window.sacramentsPageState = sacramentsPageState;
+window.reportsPageState = reportsPageState;
+window.domainReportFilters = domainReportFilters;
+
+function renderDomainReportsPanel(domainId, options = {}) {
+  const framework = window.CEReportsFramework;
+  const adapter = framework?.getAdapter(domainId);
+  if (!adapter || !framework) return "";
+  const filters = options.filters || domainReportFilters[domainId] || framework.DEFAULT_FILTERS;
+  return framework.renderPanel(adapter, {
+    state,
+    user: activeUser,
+    filters,
+    module: options.module || "reports",
+    targetTab: options.targetTab || "reports",
+    formAttr: options.formAttr || `data-domain-report-filters-${domainId}`,
+    compact: options.compact,
+    showTitle: options.showTitle !== false,
+    labelFn: L,
+    moneyFn: money,
+    churchNameFn: churchName,
+    smFn: sm,
+    dataTableFn: dataTable,
+    churches: scoped(state.churches)
+  });
+}
+
+function getDomainReportContext(domainId) {
+  const framework = window.CEReportsFramework;
+  const adapter = framework?.getAdapter(domainId);
+  if (!adapter) return { list: [], stats: {} };
+  const filters = domainReportFilters[domainId] || framework.DEFAULT_FILTERS;
+  return framework.getContext(adapter, state, activeUser, filters);
+}
 
 function L(key) {
   return TEXT[lang]?.[key] || TEXT.en[key] || key;
@@ -5906,6 +6063,12 @@ function renderDashboard() {
       ${metric("bi-cash-coin", L("monthlyGiving"), money(monthlyGiving), L("thisMonth"))}
       ${metric("bi-telephone-outbound", L("pendingFollowups"), pendingFollowups, L("needsAction"))}
     </div>
+    <div class="row g-3 mb-4 summary-cards-row">
+      ${sm("bi-bar-chart-line", L("rptExecutiveTitle"), L("rptViewAll"), "reports", { route: "reports" })}
+      ${sm("bi-wallet2", L("rptFinanceExpensesTitle"), money((state.financeDisbursements || []).reduce((s, d) => s + Number(d.released_amount || 0), 0)), "reports", { filterPayload: { domain: "financeExpenses" }, route: "reports" })}
+      ${sm("bi-people-fill", L("rptStaffTitle"), (state.staffProfiles || []).length, "reports", { filterPayload: { domain: "staff" }, route: "reports" })}
+      ${sm("bi-funnel", L("rptFunnelTitle"), firstTimers.length, "reports", { filterPayload: { domain: "funnel" }, route: "reports" })}
+    </div>
     ${dashboardSection(L("dashboardChurchGrowth"), L("dashboardChurchGrowthHint"), "bi-graph-up-arrow", "firstTimers", `
       <div class="row g-4">
         <div class="col-xl-6">${chartCard(L("firstTimersByMonth"), groupCount(firstTimers, "data_do_culto", true))}</div>
@@ -6031,6 +6194,7 @@ function renderFirstTimers() {
           : (filtered.length ? dataTable([L("name"), L("phone"), L("church"), L("service"), L("bornAgain"), L("foundation"), L("status"), L("actions")], fTableRows) : noResultsHtml());
       })()}
     </article>
+    ${moduleSection(L("rptFunnelTitle"), L("rptFunnelHint"), "bi-funnel", "", renderDomainReportsPanel("funnel", { module: "firstTimers", showTitle: false }))}
   `);
 }
 
@@ -6073,6 +6237,7 @@ function renderFollowUp() {
           actionButtons([["view", "firstTimer", p.id, L("view")], ["followup", "firstTimer", p.id, L("updateFollowup")]])
         ])) : noResultsHtml())}
     </article>
+    ${moduleSection(L("rptFunnelTitle"), L("rptFunnelHint"), "bi-funnel", "", renderDomainReportsPanel("funnel", { module: "followUp", showTitle: false }))}
   `);
 }
 
@@ -6439,6 +6604,7 @@ function renderFoundation() {
       ${sm("bi-patch-check", L("certificatesIssued"), students.filter((s) => s.certificado_emitido).length, "foundation", { scrollTo: "panel-foundationStudents", filterPayload: { certificate_issued: true } })}
     </div>
     ${summaryFilterChips("foundation")}
+    ${moduleSection(L("rptFoundationTitle"), L("rptFoundationHint"), "bi-graph-up", "", renderDomainReportsPanel("foundation", { module: "foundation", showTitle: false }))}
     <div class="row g-4">
       <div class="col-xl-4">
         <article id="panel-foundationPending" class="panel h-100">
@@ -6745,7 +6911,9 @@ function renderFinance() {
             </article>
           </div>
         </div>`)}
-      ${moduleSection(L("reqReportsTitle"), L("reqReportsHint"), "bi-clipboard-data", "", renderRequisitionReportsPanel({ showTitle: false, filters: financePageState.requisitionReportFilters, targetTab: "reports" }))}`;
+      ${moduleSection(L("reqReportsTitle"), L("reqReportsHint"), "bi-clipboard-data", "", renderRequisitionReportsPanel({ showTitle: false, filters: financePageState.requisitionReportFilters, targetTab: "reports" }))}
+      ${moduleSection(L("rptFinanceExpensesTitle"), L("rptFinanceExpensesHint"), "bi-wallet2", "", renderDomainReportsPanel("financeExpenses", { module: "finance", targetTab: "reports", showTitle: false }))}
+      ${moduleSection(L("rptReqInventoryTitle"), L("rptReqInventoryHint"), "bi-box-seam", "", renderDomainReportsPanel("reqInventory", { module: "finance", targetTab: "reports", showTitle: false }))}`;
   } else if (financePageState.tab === "partners") {
     tabContent = moduleSection(L("financeFeaturedPartners"), L("financeReportsHint"), "bi-stars", "", `
       ${privacyBanner}
@@ -6826,6 +6994,7 @@ function renderSacraments() {
       <div class="col-xl-4">${sacramentPanel("marriage", L("marriageTab"), applySacramentCardFilters(marriages, sacramentsPageState.filter), ["nome_do_noivo", "nome_da_noiva", "data_do_casamento", "estado"])}</div>
       <div class="col-xl-4">${sacramentPanel("baby", L("babyTab"), applySacramentCardFilters(babies, sacramentsPageState.filter), ["nome_da_crianca", "telefone_dos_pais", "data_da_dedicacao", "estado"])}</div>
     </div>
+    ${moduleSection(L("rptSacramentsTitle"), L("rptSacramentsHint"), "bi-graph-up", "", renderDomainReportsPanel("sacraments", { module: "sacraments", showTitle: false }))}
   `);
 }
 
@@ -7219,7 +7388,8 @@ function renderCellMinistry(activeTab = "alecOverview") {
         <div class="col-xl-6">${chartCard(L("reportsByStatus"), groupCount(allReports, "estado"))}</div>
         <div class="col-xl-6">${chartCard(L("itemsByStatus"), groupCount(groups, "status"))}</div>
         <div class="col-12">${modulePanel("finalValidation", L("consolidation"), "finalValidation", [L("reports"), L("validatedBy"), L("date"), L("decision"), L("finalStatus"), L("actions")], validations.map((item) => [item.report_id, item.validado_por, item.data_validacao, badge(item.decisao), badge(item.estado_final), backendActions("finalValidation", item.id)]), true)}</div>
-      </div>`;
+      </div>
+      ${moduleSection(L("rptCellTitle"), L("rptCellHint"), "bi-graph-up", "", renderDomainReportsPanel("cell", { module: "cell", showTitle: false }))}`;
   } else {
     const panels = {
       alecRegistration: () => modulePanel("alecRegistration", L("alecRegistration"), "alecRegistration", [L("fullName"), L("contact"), L("church"), L("cell"), L("cellLeaderName"), L("didFoundation"), L("isLeader"), L("status"), L("actions")], alecRegistrations.map((item) => [item.nome_completo, item.contacto, churchName(item.igreja), item.celula, item.nome_do_lider_de_celula, yesNo(item.fez_escola_de_fundacao), yesNo(item.e_lider), badge(item.estado), backendActions("alecRegistration", item.id)]), true),
@@ -7373,6 +7543,7 @@ function renderPrisonMinistry() {
       <div class="col-xl-6">${modulePanel("prisonAgenda", L("weeklyAgenda"), "prisonAgenda", [L("weekStart"), L("weekEnd"), L("responsible"), L("thursdayService"), L("fridayService"), L("status"), L("actions")], agenda.map((item) => [item.semana_inicio, item.semana_fim, item.responsavel, yesNo(item.quinta_servico_prisional), yesNo(item.sexta_servico_prisional), badge(item.estado), backendActions("prisonAgenda", item.id)]), false)}</div>
       <div class="col-xl-6">${modulePanel("prisonReport", L("ministryReports"), null, [L("name"), L("category"), L("status"), L("actions")], reports.map((item) => [item.name, item.category, badge(item.estado || item.status), backendActions("prisonReport", item.id)]), false)}</div>
     </div>
+    ${moduleSection(L("rptPrisonTitle"), L("rptPrisonHint"), "bi-graph-up", "", renderDomainReportsPanel("prison", { module: "prison", showTitle: false }))}
   `);
 }
 
@@ -7498,7 +7669,8 @@ function renderVenueInventory(activeTab = "overview") {
       <div class="col-12">${venueModulePanel("venueReport", L("venueReports"), null, [L("name"), L("category"), L("status"), L("actions")], reports.map((item) => [venueReportName(item), item.category, badge(item.status), actionButtons([["view", "venueReport", item.id, L("view")], ["export", "venueReport", item.id, L("exportExcel")], ["export", "venueReport", item.id, L("exportPdf")]])]), { showFilters: false, allowAdd: false })}</div>
       <div class="col-xl-6">${modulePanel("damagedInventory", L("damagedItemsReport"), null, [L("itemName"), L("category"), L("location"), L("status")], damagedItems.map((item) => [item.nome_do_item, item.categoria, item.localizacao, badge(item.estado)]), false)}</div>
       <div class="col-xl-6">${modulePanel("repairHistoryPanel", L("repairHistory"), null, [L("item"), L("repairCost"), L("sentDate"), L("returnedDate"), L("status")], maintenance.map((item) => [item.item, money(item.custo_da_reparacao), item.data_de_envio, item.data_de_retorno, badge(item.estado)]), false)}</div>
-      <div class="col-12">${modulePanel("staffEquipmentReportPanel", L("staffEquipmentReport"), null, [L("staffName"), L("department"), L("device"), L("model"), L("currentCondition"), L("status")], staffEquipment.map((item) => [item.nome_do_funcionario, item.departamento, item.dispositivo, item.modelo, item.estado_actual, badge(item.estado)]), false)}</div>` : ""}
+      <div class="col-12">${modulePanel("staffEquipmentReportPanel", L("staffEquipmentReport"), null, [L("staffName"), L("department"), L("device"), L("model"), L("currentCondition"), L("status")], staffEquipment.map((item) => [item.nome_do_funcionario, item.departamento, item.dispositivo, item.modelo, item.estado_actual, badge(item.estado)]), false)}</div>
+      ${renderDomainReportsPanel("venue", { module: "venue", showTitle: false })}` : ""}
     </div>`;
   setPageContent(navHtml + tabParallaxWrap(bodyHtml, activeRoute));
   triggerTabParallax();
@@ -7540,6 +7712,7 @@ function renderMinistryMaterials() {
       <div class="col-xl-5">${modulePanel("materialFund", L("freeDistributionFunds"), "materialFund", [L("campaign"), L("targetAmount"), L("raisedAmount"), L("status"), L("actions")], funds.map((item) => [item.campanha, money(item.valor_alvo), money(item.valor_levantado), badge(item.estado), backendActions("materialFund", item.id)]), false)}</div>
       <div class="col-12">${modulePanel("materialReport", L("ministryReports"), null, [L("name"), L("category"), L("quantitySold"), L("amount"), L("status"), L("actions")], reports.map((item) => [item.name, item.category, item.quantity, money(item.amount), badge(item.status), backendActions("materialReport", item.id)]), false)}</div>
     </div>
+    ${moduleSection(L("rptMaterialsTitle"), L("rptMaterialsHint"), "bi-graph-up", "", renderDomainReportsPanel("materials", { module: "materials", showTitle: false }))}
   `);
 }
 
@@ -7670,8 +7843,11 @@ function renderFevo(activeTab = "overview") {
       ${show("noReports") ? `<div class="col-12">${modulePanel("fevoNoReport", L("groupsWithoutReport"), "fevoNoReport", [L("weekStart"), L("team"), L("activityType"), L("groupName"), L("leaderName"), L("reasonNotSubmitted"), L("contacted"), L("status"), L("actions")], noReports.map((item) => [item.semana_inicio, item.team, item.activity_type, item.group_name, item.leader_name, item.reason_not_submitted, yesNo(item.contacted), badge(item.status), backendActions("fevoNoReport", item.id)]), true)}</div><div class="col-12">${summaryTiles(L("groupsWithoutReport"), [[L("groupsNoReportThisWeek"), noReports.length], [L("recurringGroups"), noReports.filter((item) => statusKey(item.status) === "recurrent").length], [L("contacted"), noReports.filter((item) => item.contacted).length], [L("resolved"), noReports.filter((item) => statusKey(item.status) === "resolved").length]])}</div>` : ""}
       ${show("weeklyReports") ? `<div class="col-12">${renderFevoWeeklyReport(weeklyReports[0], reports, noReports)}</div>` : ""}
     </div>`;
+  const fevoReportsSection = activeTab === "analysis"
+    ? moduleSection(L("rptFevoTitle"), L("rptFevoHint"), "bi-graph-up", "", renderDomainReportsPanel("fevo", { module: "fevo", showTitle: false }))
+    : "";
   const bodyHtml = activeTab === "overview" || activeTab === "analysis"
-    ? `${overviewSection}${analyticsSection}`
+    ? `${overviewSection}${analyticsSection}${fevoReportsSection}`
     : moduleSection(L("fevoDataSection"), L("fevoDataHint"), "bi-journal-text", "", dataPanels);
   setPageContent(navHtml + tabParallaxWrap(bodyHtml, activeRoute));
   triggerTabParallax();
@@ -7738,16 +7914,47 @@ function fevoActivityPanel(id, title, rows) {
 }
 
 function renderReports() {
-  const finance = scoped(state.finance);
+  const framework = window.CEReportsFramework;
+  const domains = [
+    { id: "funnel", icon: "bi-person-heart", route: "firstTimers" },
+    { id: "foundation", icon: "bi-mortarboard", route: "foundationSchool" },
+    { id: "financeExpenses", icon: "bi-wallet2", route: "finance" },
+    { id: "reqInventory", icon: "bi-box-seam", route: "requisitions" },
+    { id: "staff", icon: "bi-people-fill", route: "staffHr" },
+    { id: "cell", icon: "bi-diagram-3", route: "cellMinistryOverview" },
+    { id: "fevo", icon: "bi-compass", route: "fevo" },
+    { id: "venue", icon: "bi-box-seam", route: "venueInventory" },
+    { id: "sacraments", icon: "bi-droplet", route: "sacraments" },
+    { id: "prison", icon: "bi-shield-lock", route: "prisonMinistry" },
+    { id: "materials", icon: "bi-journal-richtext", route: "ministryMaterials" }
+  ];
+  const visibleDomains = domains.filter((d) => framework?.canViewDomain?.(activeUser, d.id));
+  const executiveCards = visibleDomains.map((d) => {
+    const adapter = framework.getAdapter(d.id);
+    const { stats } = getDomainReportContext(d.id);
+    const title = adapter?.titleKey ? L(adapter.titleKey) : d.id;
+    const primary = stats.total ?? stats.releasedTotal ?? stats.salesValue ?? 0;
+    const display = typeof primary === "number" && primary > 999 ? money(primary) : primary;
+    return sm(d.icon, title, display, "reports", { filterPayload: { domain: d.id }, route: d.route });
+  }).join("");
+  const activeDomain = reportsPageState.domain && framework?.canViewDomain(activeUser, reportsPageState.domain)
+    ? reportsPageState.domain
+    : (visibleDomains[0]?.id || "");
+  if (activeDomain && !reportsPageState.domain) reportsPageState.domain = activeDomain;
+  const domainTabs = visibleDomains.map((d) => {
+    const title = L(framework.getAdapter(d.id)?.titleKey || d.id);
+    return `<button type="button" class="tab-button ${reportsPageState.domain === d.id ? "active" : ""}" data-report-domain-tab="${d.id}">${title}</button>`;
+  }).join("");
+  const activePanel = activeDomain ? renderDomainReportsPanel(activeDomain, { module: "reports", showTitle: false, formAttr: `data-domain-report-filters-${activeDomain}` }) : "";
   setPageContent(`
-    ${sectionHeader(L("reports"), L("reportsSubtitle"), null, "bi-bar-chart-line", { actions: `<button type="button" class="btn btn-outline-cyan btn-touch action-secondary"><i class="bi bi-file-earmark-pdf me-1"></i>${L("exportPdf")}</button><button type="button" class="btn btn-outline-cyan btn-touch action-secondary"><i class="bi bi-file-earmark-excel me-1"></i>${L("exportExcel")}</button>` })}
-    ${filterBar({ church: true, month: true, status: false })}
-    <div class="row g-4">
-      <div class="col-xl-6">${chartCard(L("givingByCategory"), groupSum(finance, "categoria_da_contribuicao", "valor"))}</div>
-      <div class="col-xl-6">${chartCard(L("firstTimersByMonth"), groupCount(scoped(state.firstTimers), "data_do_culto", true))}</div>
-      <div class="col-xl-6">${chartCard(L("cellGrowth"), scoped(state.cells).map((c) => [c.nome_da_celula, c.presencas[0]?.total || 0]))}</div>
-      <div class="col-xl-6">${summaryTiles(L("sacramentsSummary"), [[L("baptismTab"), state.sacraments.baptisms.length], [L("marriageTab"), state.sacraments.marriages.length], [L("babyTab"), state.sacraments.babies.length]])}</div>
-    </div>`);
+    ${sectionHeader(L("rptExecutiveTitle"), L("rptExecutiveHint"), null, "bi-bar-chart-line")}
+    <article class="panel glass-panel module-content-card mb-4">
+      <div class="tab-strip module-tab-strip mb-3">${domainTabs}</div>
+      <div class="row g-3 summary-cards-row mb-4">${executiveCards}</div>
+      ${summaryFilterChips("reports")}
+      <div class="tab-content-panel">${activePanel}</div>
+    </article>
+    `);
 }
 
 function requisitionsModuleTabs() {
@@ -8519,22 +8726,8 @@ function renderStaffHr() {
         const staff = staffList.find((s) => s.id === d.staff_id);
         return [staff?.full_name || "-", d.document_type, d.expiry_date || "-", d.notes || "-"];
       }));
-  } else {
-    const monthBirthdays = lib.sortByUpcomingBirthday(lib.birthdaysThisMonth(visibleBirthdays));
-    tabContent = `
-      <div class="module-grid mb-4">${[
-        [L("staffTotal"), stats.total],
-        [L("staffActive"), stats.active],
-        [L("staffPendingPay"), stats.pendingPay],
-        [L("staffBirthdays"), birthdayStats.birthdays]
-      ].map(([label, val]) => `<article class="record-card data-card light-surface"><span class="eyebrow">${L("staffTabReports")}</span><h3>${label}</h3><p class="mb-0">${val}</p></article>`).join("")}</div>
-      <article class="panel glass-panel staff-birthday-panel light-surface p-3">
-        <div class="d-flex justify-content-between align-items-center gap-2 mb-3">
-          <h5 class="mb-0">${L("staffBirthdays")}</h5>
-          <button type="button" class="btn btn-sm btn-ce-gold" data-staff-tab="birthdays">${L("staffTabBirthdays")}</button>
-        </div>
-        ${renderStaffBirthdayList(monthBirthdays, lib, { compact: true })}
-      </article>`;
+  } else if (staffHrPageState.tab === "reports") {
+    tabContent = renderDomainReportsPanel("staff", { module: "staffHr", targetTab: "reports", showTitle: false });
   }
 
   setPageContent(`
@@ -9377,6 +9570,41 @@ document.addEventListener("click", (event) => {
     }
     return;
   }
+  const domainReportExport = event.target.closest("[data-domain-report-export]");
+  if (domainReportExport) {
+    const domainId = domainReportExport.dataset.reportDomain;
+    const framework = window.CEReportsFramework;
+    const exportLib = window.CEReportsExport;
+    const adapter = framework?.getAdapter(domainId);
+    if (!adapter || !exportLib?.exportDomain || !framework?.canExportDomain(activeUser, domainId)) return;
+    const { list, stats } = getDomainReportContext(domainId);
+    exportLib.exportDomain(adapter, list, stats, domainReportExport.dataset.domainReportExport, { labelFn: L, moneyFn: money, user: activeUser });
+    return;
+  }
+  if (event.target.closest("[data-domain-report-clear]")) {
+    const domainId = event.target.closest("[data-domain-report-clear]")?.dataset.reportDomain;
+    const framework = window.CEReportsFramework;
+    if (domainId && domainReportFilters[domainId]) {
+      domainReportFilters[domainId] = { ...framework.DEFAULT_FILTERS };
+      if (domainId === reportsPageState.domain && activeRoute === "reports") renderReports();
+      else if (activeRoute === "staffHr") renderStaffHr();
+      else if (activeRoute === "foundationSchool") renderFoundation();
+      else if (activeRoute === "firstTimers") renderFirstTimers();
+      else if (activeRoute === "followUp") renderFollowUp();
+      else if (activeRoute === "finance") renderFinance();
+      else if (activeRoute === "sacraments") renderSacraments();
+      else if (activeRoute === "prisonMinistry") renderPrisonMinistry();
+      else if (activeRoute === "ministryMaterials") renderMinistryMaterials();
+      else setRoute(activeRoute);
+    }
+    return;
+  }
+  const reportDomainTab = event.target.closest("[data-report-domain-tab]");
+  if (reportDomainTab) {
+    reportsPageState.domain = reportDomainTab.dataset.reportDomainTab || "";
+    if (activeRoute === "reports") renderReports();
+    return;
+  }
   const requisitionTabBtn = event.target.closest("[data-requisition-tab]");
   if (requisitionTabBtn) {
     requisitionsPageState.tab = requisitionTabBtn.dataset.requisitionTab || "overview";
@@ -9499,6 +9727,17 @@ document.addEventListener("submit", (event) => {
     const data = Object.fromEntries(new FormData(event.target).entries());
     requisitionsPageState.reportFilters = { ...requisitionsPageState.reportFilters, ...data };
     if (activeRoute === "requisitions") renderRequisitions();
+    return;
+  }
+  if (event.target.matches("[data-domain-report-filters]")) {
+    event.preventDefault();
+    const data = Object.fromEntries(new FormData(event.target).entries());
+    const domainId = data.domain || event.target.dataset.reportDomain;
+    if (domainId && domainReportFilters[domainId]) {
+      domainReportFilters[domainId] = { ...domainReportFilters[domainId], ...data };
+      if (activeRoute === "reports") renderReports();
+      else setRoute(activeRoute);
+    }
     return;
   }
   if (event.target.matches("[data-finance-approved-req-filters]")) {

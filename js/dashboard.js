@@ -125,6 +125,49 @@ const TEXT = {
     reqDescription: "Descrição",
     reqSupplier: "Fornecedor",
     reqQuotation: "Nº Cotação",
+    reqReturnForCorrection: "Devolver para Correção",
+    reqPastoralComment: "Comentário Pastoral",
+    reqRejectionReason: "Motivo da Rejeição",
+    reqApprovedAmount: "Valor Aprovado",
+    reqApprovedAwaitingRelease: "Aprovado — Aguardando Liberação de Recursos",
+    reqResourcesReleased: "Recursos Liberados",
+    reqHistory: "Histórico da Requisição",
+    reqDetails: "Detalhes da Requisição",
+    reqSectionData: "Dados da Requisição",
+    reqSectionDescription: "Descrição e Justificativa",
+    reqSectionInternalReview: "Revisão Interna",
+    reqSectionAttachments: "Anexos",
+    reqSectionPastoralDecision: "Decisão Pastoral",
+    reqRequester: "Solicitante",
+    reqCurrentStatus: "Estado Actual",
+    reqReviewedBy: "Revisto por",
+    reqReviewDate: "Data da revisão",
+    reqReviewNotes: "Notas da revisão",
+    reqSentToPastorBy: "Enviado ao Pastor Principal por",
+    reqSentToPastorAt: "Data de envio",
+    reqFinalPriority: "Prioridade Final",
+    reqObservations: "Observações",
+    reqBudget: "Orçamento",
+    reqProforma: "Factura proforma",
+    reqNoAttachments: "Sem anexos",
+    reqApproveSuccess: "Requisição aprovada e enviada para Finanças para liberação de recursos.",
+    reqRejectSuccess: "Requisição rejeitada.",
+    reqReturnSuccess: "Requisição devolvida para correção.",
+    reqRejectionRequired: "Indique o motivo da rejeição.",
+    reqReturnNotesRequired: "Indique o que deve ser corrigido.",
+    reqTimelineCreated: "criada por",
+    reqTimelineSubmitted: "Submetida em",
+    reqTimelineReviewed: "Revista por",
+    reqTimelineSentPastor: "Enviada ao Pastor Principal",
+    reqTimelineApproved: "Aprovada por",
+    reqTimelineRejected: "Rejeitada por",
+    reqTimelineReturned: "Devolvida por",
+    reqTimelineResourcesReleased: "Recursos liberados por",
+    reqTimelineClosed: "Fechada por",
+    reqSentToPastor: "Enviado ao Pastor Principal",
+    reqReturnedForCorrection: "Devolvido para Correção",
+    reqPurchasedExecuted: "Comprado / Executado",
+    reqRegisteredInventory: "Registado no Inventário",
     staffTabOverview: "Visão Geral",
     staffTabStaff: "Staff",
     staffTabDepartments: "Departamentos",
@@ -660,6 +703,49 @@ const TEXT = {
     reqDescription: "Description",
     reqSupplier: "Supplier",
     reqQuotation: "Quotation No.",
+    reqReturnForCorrection: "Return for Correction",
+    reqPastoralComment: "Pastoral Comment",
+    reqRejectionReason: "Rejection Reason",
+    reqApprovedAmount: "Approved Amount",
+    reqApprovedAwaitingRelease: "Approved — Awaiting Resource Release",
+    reqResourcesReleased: "Resources Released",
+    reqHistory: "Requisition History",
+    reqDetails: "Requisition Details",
+    reqSectionData: "Requisition Data",
+    reqSectionDescription: "Description & Justification",
+    reqSectionInternalReview: "Internal Review",
+    reqSectionAttachments: "Attachments",
+    reqSectionPastoralDecision: "Pastoral Decision",
+    reqRequester: "Requester",
+    reqCurrentStatus: "Current Status",
+    reqReviewedBy: "Reviewed by",
+    reqReviewDate: "Review date",
+    reqReviewNotes: "Review notes",
+    reqSentToPastorBy: "Sent to Main Pastor by",
+    reqSentToPastorAt: "Sent date",
+    reqFinalPriority: "Final Priority",
+    reqObservations: "Observations",
+    reqBudget: "Budget",
+    reqProforma: "Proforma invoice",
+    reqNoAttachments: "No attachments",
+    reqApproveSuccess: "Requisition approved and sent to Finance for resource release.",
+    reqRejectSuccess: "Requisition rejected.",
+    reqReturnSuccess: "Requisition returned for correction.",
+    reqRejectionRequired: "Please provide a rejection reason.",
+    reqReturnNotesRequired: "Please explain what needs to be corrected.",
+    reqTimelineCreated: "created by",
+    reqTimelineSubmitted: "Submitted on",
+    reqTimelineReviewed: "Reviewed by",
+    reqTimelineSentPastor: "Sent to Main Pastor",
+    reqTimelineApproved: "Approved by",
+    reqTimelineRejected: "Rejected by",
+    reqTimelineReturned: "Returned by",
+    reqTimelineResourcesReleased: "Resources released by",
+    reqTimelineClosed: "Closed by",
+    reqSentToPastor: "Sent to Main Pastor",
+    reqReturnedForCorrection: "Returned for Correction",
+    reqPurchasedExecuted: "Purchased / Executed",
+    reqRegisteredInventory: "Registered in Inventory",
     staffTabOverview: "Overview",
     staffTabStaff: "Staff",
     staffTabDepartments: "Departments",
@@ -1172,6 +1258,13 @@ Object.assign(STATUS_KEYS, {
   "Passed": "approved",
   "Graduated": "graduated",
   "Pronto para Exame": "readyForExam",
+  "Enviado ao Pastor Principal": "sentToPastor",
+  "Devolvido para Correção": "returnedForCorrection",
+  "Aprovado — Aguardando Liberação de Recursos": "approvedAwaitingRelease",
+  "Recursos Liberados": "resourcesReleased",
+  "Comprado / Executado": "purchasedExecuted",
+  "Registado no Inventário": "registeredInventory",
+  "Comprado": "purchasedExecuted",
   Graduado: "graduated",
   Aprovado: "approved"
 });
@@ -2472,9 +2565,10 @@ const seedData = {
   requisitions: [
     { id: "req-1", request_number: "REQ-2026-0001", requested_by_user_id: "u-12", requested_by_name: "Department Head Demo", department_id: "dept-cell", department_name: "Cell Ministry", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Material de Ministério", title: "Materiais para Escola de Células", description: "Livros, manuais e apostilas para formação de líderes.", justification: "Preparação do trimestre de liderança celular.", estimated_amount: 18500, currency: "MZN", urgency: "Normal", needed_by_date: "2026-08-01", attachments: [], supplier_or_vendor: "Loveworld Books", quotation_number: "QT-2026-014", reviewed_by: "", reviewed_at: "", review_notes: "", sent_to_main_pastor_at: "", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", status: "Submetido", created_at: "2026-07-08T10:00:00.000Z", updated_at: "2026-07-08T10:00:00.000Z" },
     { id: "req-2", request_number: "REQ-2026-0002", requested_by_user_id: "u-13", requested_by_name: "Staff Member Demo", department_id: "dept-finance", department_name: "Finanças", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Apoio Operacional", title: "Material de escritório para Finanças", description: "Papel A4, pastas e toners para impressão de relatórios.", justification: "Reposição de consumíveis do departamento.", estimated_amount: 4200, currency: "MZN", urgency: "Baixa", needed_by_date: "2026-07-20", attachments: [], supplier_or_vendor: "Office Supply Maputo", quotation_number: "", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-09T11:00:00.000Z", review_notes: "Organizado e encaminhado.", sent_to_main_pastor_at: "", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", status: "Em Revisão", created_at: "2026-07-07T09:00:00.000Z", updated_at: "2026-07-09T11:00:00.000Z" },
-    { id: "req-3", request_number: "REQ-2026-0003", requested_by_user_id: "u-5", requested_by_name: "Pastora Flavia", department_id: "dept-cell", department_name: "Ministério de Células", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Transporte", title: "Transporte para visitação celular — Beira", description: "Deslocação da equipa nacional para apoio à rede de Beira.", justification: "Visita pastoral e formação de líderes.", estimated_amount: 28000, currency: "MZN", urgency: "Alta", needed_by_date: "2026-07-25", attachments: [], supplier_or_vendor: "Transporte CE", quotation_number: "QT-2026-021", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-10T08:00:00.000Z", review_notes: "Prioridade confirmada com Pastor Principal.", sent_to_main_pastor_at: "2026-07-10T09:00:00.000Z", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", status: "Enviado ao Pastor Principal", created_at: "2026-07-05T14:00:00.000Z", updated_at: "2026-07-10T09:00:00.000Z" },
-    { id: "req-4", request_number: "REQ-2026-0004", requested_by_user_id: "u-11", requested_by_name: "Marcelo Panguene", department_id: "dept-venue", department_name: "Venue Management", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Nova Aquisição", title: "Microfones sem fio adicionais", description: "Compra de 4 microfones BMK ES600 para cultos simultâneos.", justification: "Expansão do auditório e culto online.", estimated_amount: 74000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-08-10", attachments: [], supplier_or_vendor: "Audio Supplier", quotation_number: "QT-2026-033", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-01T10:00:00.000Z", review_notes: "Aprovado para compra após verificação técnica.", sent_to_main_pastor_at: "2026-07-02T10:00:00.000Z", approved_by: "Pastor Kene Ume", approved_at: "2026-07-03", approval_notes: "Autorizado — prioridade media.", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "Finance Head Demo", resources_released_at: "2026-07-04T15:00:00.000Z", amount_released: 74000, finance_record_id: "fin-req-req-4", inventory_item_id: "", status: "Recursos Liberados", created_at: "2026-06-28T08:00:00.000Z", updated_at: "2026-07-04T15:00:00.000Z" },
-    { id: "req-5", request_number: "REQ-2026-0005", requested_by_user_id: "u-9", requested_by_name: "Sister Cassandra", department_id: "dept-programs", department_name: "Programas", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Evento/Programa", title: "Apoio logístico — Semana F.E.V.O", description: "Material de evangelização, transporte e refeições para equipas.", justification: "Semana intensiva de F.E.V.O nacional.", estimated_amount: 52000, currency: "MZN", urgency: "Urgente", needed_by_date: "2026-07-15", attachments: [], supplier_or_vendor: "", quotation_number: "", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-11T09:00:00.000Z", review_notes: "Encaminhado ao Pastor Principal.", sent_to_main_pastor_at: "2026-07-11T10:00:00.000Z", approved_by: "Pastor Kene Ume", approved_at: "2026-07-12", approval_notes: "Aprovado com limite de 50.000 MZN.", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", status: "Aprovado", created_at: "2026-07-09T12:00:00.000Z", updated_at: "2026-07-12T08:00:00.000Z" },
+    { id: "req-3", request_number: "REQ-2026-0003", requested_by_user_id: "u-5", requested_by_name: "Pastora Flavia", department_id: "dept-cell", department_name: "Ministério de Células", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Transporte", title: "Transporte para visitação celular — Beira", description: "Deslocação da equipa nacional para apoio à rede de Beira.", justification: "Visita pastoral e formação de líderes.", estimated_amount: 28000, currency: "MZN", urgency: "Alta", needed_by_date: "2026-07-25", attachments: [{ type: "budget", name: "Orcamento-Beira.pdf" }, { type: "proforma", name: "Proforma-Transporte.pdf" }], supplier_or_vendor: "Transporte CE", quotation_number: "QT-2026-021", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-10T08:00:00.000Z", review_notes: "Prioridade confirmada com Pastor Principal.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-07-10T09:00:00.000Z", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "", rejected_at: "", rejection_reason: "", returned_by: "", returned_at: "", return_notes: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Enviado ao Pastor Principal", created_at: "2026-07-05T14:00:00.000Z", updated_at: "2026-07-10T09:00:00.000Z" },
+    { id: "req-4", request_number: "REQ-2026-0004", requested_by_user_id: "u-11", requested_by_name: "Marcelo Panguene", department_id: "dept-venue", department_name: "Venue Management", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Nova Aquisição", title: "Microfones sem fio adicionais", description: "Compra de 4 microfones BMK ES600 para cultos simultâneos.", justification: "Expansão do auditório e culto online.", estimated_amount: 74000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-08-10", attachments: [], supplier_or_vendor: "Audio Supplier", quotation_number: "QT-2026-033", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-01T10:00:00.000Z", review_notes: "Aprovado para compra após verificação técnica.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-07-02T10:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-07-03T10:00:00.000Z", approved_amount: 74000, approval_notes: "Autorizado — prioridade media.", final_priority: "Normal", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "Finance Head Demo", resources_released_at: "2026-07-04T15:00:00.000Z", amount_released: 74000, finance_record_id: "fin-req-req-4", inventory_item_id: "", audit_history: [], status: "Recursos Liberados", created_at: "2026-06-28T08:00:00.000Z", updated_at: "2026-07-04T15:00:00.000Z" },
+    { id: "req-5", request_number: "REQ-2026-0005", requested_by_user_id: "u-9", requested_by_name: "Sister Cassandra", department_id: "dept-programs", department_name: "Programas", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Evento/Programa", title: "Apoio logístico — Semana F.E.V.O", description: "Material de evangelização, transporte e refeições para equipas.", justification: "Semana intensiva de F.E.V.O nacional.", estimated_amount: 52000, currency: "MZN", urgency: "Urgente", needed_by_date: "2026-07-15", attachments: [{ type: "budget", name: "Orcamento-FEVO.xlsx" }], supplier_or_vendor: "", quotation_number: "", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-11T09:00:00.000Z", review_notes: "Encaminhado ao Pastor Principal.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-07-11T10:00:00.000Z", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "", rejected_at: "", rejection_reason: "", returned_by: "", returned_at: "", return_notes: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Enviado ao Pastor Principal", created_at: "2026-07-09T12:00:00.000Z", updated_at: "2026-07-11T10:00:00.000Z" },
+    { id: "req-8", request_number: "REQ-2026-0008", requested_by_user_id: "u-12", requested_by_name: "Department Head Demo", department_id: "dept-cell", department_name: "Cell Ministry", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Material de Ministério", title: "Banners e material gráfico para evangelização", description: "Impressão de banners roll-up e flyers para campanha de Julho.", justification: "Campanha de evangelização nas células.", estimated_amount: 16500, currency: "MZN", urgency: "Alta", needed_by_date: "2026-07-18", attachments: [], supplier_or_vendor: "Print House", quotation_number: "QT-2026-040", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-08T10:00:00.000Z", review_notes: "Aprovado internamente.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-07-08T11:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-07-09T14:00:00.000Z", approved_amount: 15000, approval_notes: "Aprovado com limite de 15.000 MZN.", final_priority: "Alta", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Aprovado — Aguardando Liberação de Recursos", created_at: "2026-07-06T08:00:00.000Z", updated_at: "2026-07-09T14:00:00.000Z" },
     { id: "req-6", request_number: "REQ-2026-0006", requested_by_user_id: "u-14", requested_by_name: "Finance Officer Demo", department_id: "dept-finance", department_name: "Finanças", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Pagamento de Serviço", title: "Auditoria externa trimestral", description: "Serviço de revisão de registos financeiros Q2.", justification: "Conformidade e transparência.", estimated_amount: 35000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-07-30", attachments: [], supplier_or_vendor: "Audit Partners Lda", quotation_number: "QT-AUD-02", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-06T10:00:00.000Z", review_notes: "Não prioritário neste momento.", sent_to_main_pastor_at: "2026-07-06T11:00:00.000Z", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "Pastor Kene Ume", rejected_at: "2026-07-07T09:00:00.000Z", rejection_reason: "Adiar para o próximo trimestre.", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", status: "Rejeitado", created_at: "2026-07-04T08:00:00.000Z", updated_at: "2026-07-07T09:00:00.000Z" },
     { id: "req-7", request_number: "REQ-2026-0007", requested_by_user_id: "u-11", requested_by_name: "Marcelo Panguene", department_id: "dept-venue", department_name: "Venue Management", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Equipamento", title: "Laptop para técnico de som", description: "Laptop dedicado para software de som digital.", justification: "Substituição de equipamento antigo.", estimated_amount: 62000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-06-30", attachments: [], supplier_or_vendor: "IT Supplier", quotation_number: "QT-IT-08", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-06-20T10:00:00.000Z", review_notes: "Compra concluída e registada.", sent_to_main_pastor_at: "2026-06-21T10:00:00.000Z", approved_by: "Pastor Kene Ume", approved_at: "2026-06-22", approval_notes: "Aprovado.", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "Finance Head Demo", resources_released_at: "2026-06-23T10:00:00.000Z", amount_released: 62000, finance_record_id: "fin-req-req-7", inventory_item_id: "inv-req-req-7", status: "Fechado", created_at: "2026-06-15T08:00:00.000Z", updated_at: "2026-06-28T10:00:00.000Z" }
   ],
@@ -2754,6 +2848,8 @@ let churchDrawerRecordId = null;
 let churchFormServiceTimes = [];
 let financeDrawerMode = null;
 let financeDrawerRecordId = null;
+let requisitionDrawerRecordId = null;
+let requisitionDrawerPresetDecision = "";
 let financeContributorUI = { query: "", results: [], activeIndex: -1, open: false, linked: null };
 const financePageState = {
   tab: "overview",
@@ -4488,7 +4584,17 @@ function statusText(status) {
   if (status === "Por Confirmar") return L("toConfirm");
   if (status === "Confirmado") return L("confirmed");
   if (status === "Incompleto") return L("incomplete");
-  return L(statusKey(status));
+  const reqStatusLabels = {
+    sentToPastor: "reqSentToPastor",
+    returnedForCorrection: "reqReturnedForCorrection",
+    approvedAwaitingRelease: "reqApprovedAwaitingRelease",
+    resourcesReleased: "reqResourcesReleased",
+    purchasedExecuted: "reqPurchasedExecuted",
+    registeredInventory: "reqRegisteredInventory"
+  };
+  const key = statusKey(status);
+  if (reqStatusLabels[key]) return L(reqStatusLabels[key]);
+  return L(key);
 }
 
 function yesNo(value) {
@@ -4500,7 +4606,15 @@ function badge(status) {
 }
 
 function badgeClass(status) {
+  const reqLib = window.CERequisitions;
+  if (reqLib?.statusBadgeClass) {
+    const reqClass = reqLib.statusBadgeClass(status);
+    if (reqClass) return reqClass;
+  }
   const key = statusKey(status);
+  if (["sentToPastor", "approvedAwaitingRelease"].includes(key)) return "cyan";
+  if (["returnedForCorrection"].includes(key)) return "warn";
+  if (["resourcesReleased", "purchasedExecuted", "registeredInventory"].includes(key)) return "good";
   if (["active", "verified", "becameMember", "completed", "certificateIssued", "confirmed", "available", "approved", "received", "sent", "reportSubmitted", "validated", "excellent", "good", "growing", "graduated"].includes(key)) return "good";
   if (["contacted", "sentToCell", "enrolledFoundation", "enrolled", "exam", "readyForExam"].includes(key)) return "blue";
   if (["pending", "pendingVerification", "scheduled", "planned", "inPreparation", "requested", "draft", "needsAttention", "toConfirm"].includes(key)) return "warn";
@@ -7032,19 +7146,254 @@ function requisitionsModuleTabs() {
 function requisitionActionLabel(action) {
   const map = {
     submit: L("reqSubmit"), review: L("reqReview"), forwardPastor: L("reqForwardPastor"),
-    approve: L("reqApprove"), reject: L("reqReject"), releaseResources: L("reqReleaseResources"),
+    approve: L("reqApprove"), reject: L("reqReject"), returnForCorrection: L("reqReturnForCorrection"),
+    releaseResources: L("reqReleaseResources"),
     markPurchased: L("reqMarkPurchased"), registerInventory: L("reqRegisterInventory"), close: L("reqClose"),
     edit: L("edit"), view: L("view")
   };
   return map[action] || action;
 }
 
+function requisitionActionButtonClass(action) {
+  if (action === "approve") return "action-btn action-btn--approve";
+  if (action === "reject") return "action-btn action-btn--reject";
+  if (action === "returnForCorrection") return "action-btn action-btn--return";
+  return "action-btn";
+}
+
 function requisitionActionButtons(record) {
   const lib = window.CERequisitions;
   if (!lib) return "";
-  const actions = lib.availableActions(activeUser, record).filter((a) => a !== "view");
+  const actions = (lib.tableActions ? lib.tableActions(activeUser, record) : lib.availableActions(activeUser, record))
+    .filter((a) => a !== "view");
   const buttons = [["view", "requisition", record.id, L("view")], ...actions.map((a) => [a, "requisition", record.id, requisitionActionLabel(a)])];
-  return actionButtons(buttons);
+  return `<div class="action-cluster">${buttons.map(([action, type, id, label]) =>
+    `<button type="button" class="${requisitionActionButtonClass(action)}" data-action="${action}" data-type="${type}" data-id="${id}">${label}</button>`
+  ).join("")}</div>`;
+}
+
+function requisitionStatusBadge(status) {
+  return badge(status);
+}
+
+function requisitionDetailRow(label, value) {
+  return `<div><span>${label}</span><strong>${value ?? "-"}</strong></div>`;
+}
+
+function requisitionAttachmentsHtml(record) {
+  const attachments = Array.isArray(record.attachments) ? record.attachments : [];
+  if (!attachments.length) return `<p class="text-secondary mb-0">${L("reqNoAttachments")}</p>`;
+  const typeLabel = { budget: L("reqBudget"), proforma: L("reqProforma"), document: L("staffTabDocuments") };
+  return `<ul class="requisition-attachment-list">${attachments.map((file) => {
+    const label = typeLabel[file.type] || L("documents");
+    return `<li><i class="bi bi-paperclip me-2"></i><span class="text-secondary">${label}:</span> <strong>${file.name || file}</strong></li>`;
+  }).join("")}</ul>`;
+}
+
+function requisitionTimelineLabel(event, record) {
+  const num = record.request_number || "";
+  const date = event.at ? formatDateTime(event.at).split(",")[0] : "";
+  const map = {
+    created: `${num} ${L("reqTimelineCreated")} ${event.by}`,
+    submitted: `${L("reqTimelineSubmitted")} ${date}`,
+    reviewed: `${L("reqTimelineReviewed")} ${event.by}`,
+    sentToPastor: L("reqTimelineSentPastor"),
+    approved: `${L("reqTimelineApproved")} ${event.by}`,
+    rejected: `${L("reqTimelineRejected")} ${event.by}`,
+    returned: `${L("reqTimelineReturned")} ${event.by}`,
+    resourcesReleased: `${L("reqTimelineResourcesReleased")} ${event.by}`,
+    closed: `${L("reqTimelineClosed")} ${event.by}`,
+    purchased: `${event.by}`,
+    registered: `${event.by}`
+  };
+  return map[event.action] || `${event.by}${event.notes ? ` — ${event.notes}` : ""}`;
+}
+
+function requisitionTimelineHtml(record) {
+  const lib = window.CERequisitions;
+  const events = lib?.buildTimeline ? lib.buildTimeline(record) : [];
+  if (!events.length) return `<p class="text-secondary mb-0">${L("empty")}</p>`;
+  return `<ol class="requisition-timeline">${events.map((event, index) =>
+    `<li><span class="requisition-timeline-step">${index + 1}</span><div><strong>${requisitionTimelineLabel(event, record)}</strong>${event.notes && !["rejected", "returned", "approved"].includes(event.action) ? `<p class="mb-0 text-secondary small">${event.notes}</p>` : ""}${event.notes && ["rejected", "returned", "approved"].includes(event.action) ? `<p class="mb-0 text-secondary small">${event.notes}</p>` : ""}</div></li>`
+  ).join("")}</ol>`;
+}
+
+function requisitionPastoralDecisionHtml(record, preset = "") {
+  const lib = window.CERequisitions;
+  if (!lib?.canPastoralDecide(activeUser) || record.status !== lib.STATUSES.SENT_TO_PASTOR) return "";
+  const priorities = lib.FINAL_PRIORITIES || ["Normal", "Alta", "Urgente"];
+  return `
+    <section class="requisition-detail-section requisition-pastoral-section">
+      <h4 class="requisition-detail-title">${L("reqSectionPastoralDecision")}</h4>
+      <form id="requisitionPastoralForm" class="row g-3">
+        <input type="hidden" name="requisition_id" value="${record.id}">
+        <div class="col-12">
+          <label class="form-label">${L("reqSectionPastoralDecision")}</label>
+          <select name="pastoral_decision" class="form-select" required>
+            <option value="">—</option>
+            <option value="approve" ${preset === "approve" ? "selected" : ""}>${L("reqApprove")}</option>
+            <option value="reject" ${preset === "reject" ? "selected" : ""}>${L("reqReject")}</option>
+            <option value="returnForCorrection" ${preset === "returnForCorrection" ? "selected" : ""}>${L("reqReturnForCorrection")}</option>
+          </select>
+        </div>
+        <div class="col-12">
+          <label class="form-label">${L("reqPastoralComment")}</label>
+          <textarea name="pastoral_comment" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">${L("reqApprovedAmount")} <span class="field-optional">(${L("optional")})</span></label>
+          <input type="number" name="approved_amount" class="form-control" value="${record.estimated_amount || ""}" min="0" step="1">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">${L("reqFinalPriority")}</label>
+          <select name="final_priority" class="form-select">
+            ${priorities.map((p) => `<option value="${p}" ${(record.urgency || "Normal") === p ? "selected" : ""}>${p}</option>`).join("")}
+          </select>
+        </div>
+      </form>
+    </section>`;
+}
+
+function requisitionDetailHtml(record, presetDecision = "") {
+  const lib = window.CERequisitions;
+  const showPastoral = lib?.canPastoralDecide(activeUser) && record.status === lib?.STATUSES.SENT_TO_PASTOR;
+  return `
+    <section class="requisition-detail-section">
+      <h4 class="requisition-detail-title">${L("reqSectionData")}</h4>
+      <div class="church-detail-grid">
+        ${requisitionDetailRow(L("reqNumber"), record.request_number)}
+        ${requisitionDetailRow(L("reqTitle"), record.title)}
+        ${requisitionDetailRow(L("reqDepartment"), record.department_name)}
+        ${requisitionDetailRow(L("church"), record.church_name)}
+        ${requisitionDetailRow(L("reqRequester"), record.requested_by_name)}
+        ${requisitionDetailRow(L("reqType"), record.requisition_type)}
+        ${requisitionDetailRow(L("reqUrgency"), record.urgency)}
+        ${requisitionDetailRow(L("reqNeededBy"), record.needed_by_date || "-")}
+        ${requisitionDetailRow(L("reqEstimated"), money(record.estimated_amount))}
+        ${requisitionDetailRow(L("reqCurrentStatus"), requisitionStatusBadge(record.status))}
+      </div>
+    </section>
+    <section class="requisition-detail-section">
+      <h4 class="requisition-detail-title">${L("reqSectionDescription")}</h4>
+      <div class="church-detail-grid">
+        ${requisitionDetailRow(L("reqDescription"), record.description || "-")}
+        ${requisitionDetailRow(L("reqJustification"), record.justification || "-")}
+        ${requisitionDetailRow(L("reqObservations"), record.review_notes || record.approval_notes || "-")}
+      </div>
+    </section>
+    <section class="requisition-detail-section">
+      <h4 class="requisition-detail-title">${L("reqSectionInternalReview")}</h4>
+      <div class="church-detail-grid">
+        ${requisitionDetailRow(L("reqReviewedBy"), record.reviewed_by || "-")}
+        ${requisitionDetailRow(L("reqReviewDate"), formatDateTime(record.reviewed_at))}
+        ${requisitionDetailRow(L("reqReviewNotes"), record.review_notes || "-")}
+        ${requisitionDetailRow(L("reqSentToPastorBy"), record.sent_to_main_pastor_by || "-")}
+        ${requisitionDetailRow(L("reqSentToPastorAt"), formatDateTime(record.sent_to_main_pastor_at))}
+      </div>
+    </section>
+    <section class="requisition-detail-section">
+      <h4 class="requisition-detail-title">${L("reqSectionAttachments")}</h4>
+      ${requisitionAttachmentsHtml(record)}
+    </section>
+    ${requisitionPastoralDecisionHtml(record, presetDecision)}
+    <section class="requisition-detail-section">
+      <h4 class="requisition-detail-title">${L("reqHistory")}</h4>
+      ${requisitionTimelineHtml(record)}
+    </section>
+    ${showPastoral ? "" : ""}`;
+}
+
+function openRequisitionDrawer(id, presetDecision = "") {
+  const record = (state.requisitions || []).find((r) => r.id === id);
+  if (!record) return;
+  requisitionDrawerRecordId = id;
+  requisitionDrawerPresetDecision = presetDecision;
+  const drawer = byId("requisitionDrawer");
+  const backdrop = byId("requisitionDrawerBackdrop");
+  const body = byId("requisitionDrawerBody");
+  const foot = byId("requisitionDrawerFoot");
+  if (!drawer || !backdrop || !body || !foot) return;
+
+  byId("requisitionDrawerEyebrow").textContent = L("reqDetails");
+  byId("requisitionDrawerTitle").textContent = record.request_number || L("requisitions");
+  body.innerHTML = requisitionDetailHtml(record, presetDecision);
+
+  const lib = window.CERequisitions;
+  const showPastoral = lib?.canPastoralDecide(activeUser) && record.status === lib?.STATUSES.SENT_TO_PASTOR;
+  if (showPastoral) {
+    foot.innerHTML = `
+      <button type="button" class="btn btn-outline-glass" data-requisition-drawer-close>${L("cancel")}</button>
+      <button type="button" class="btn btn-outline-warning req-btn-return" data-req-pastoral-action="returnForCorrection">${L("reqReturnForCorrection")}</button>
+      <button type="button" class="btn btn-outline-danger req-btn-reject" data-req-pastoral-action="reject">${L("reqReject")}</button>
+      <button type="button" class="btn btn-ce-gold req-btn-approve" data-req-pastoral-action="approve">${L("reqApprove")}</button>`;
+  } else {
+    foot.innerHTML = `<button type="button" class="btn btn-outline-glass" data-requisition-drawer-close>${L("cancel")}</button>`;
+  }
+
+  drawer.classList.remove("d-none");
+  backdrop.classList.remove("d-none");
+  requestAnimationFrame(() => drawer.classList.add("is-open"));
+  drawer.setAttribute("aria-hidden", "false");
+}
+
+function closeRequisitionDrawer() {
+  const drawer = byId("requisitionDrawer");
+  const backdrop = byId("requisitionDrawerBackdrop");
+  if (!drawer || !backdrop) return;
+  drawer.classList.remove("is-open");
+  drawer.setAttribute("aria-hidden", "true");
+  backdrop.classList.add("d-none");
+  setTimeout(() => {
+    drawer.classList.add("d-none");
+    requisitionDrawerRecordId = null;
+    requisitionDrawerPresetDecision = "";
+  }, 280);
+}
+
+function submitRequisitionPastoralDecision(decision) {
+  const form = byId("requisitionPastoralForm");
+  const lib = window.CERequisitions;
+  const record = (state.requisitions || []).find((r) => r.id === requisitionDrawerRecordId);
+  if (!form || !record || !lib) return;
+
+  const data = Object.fromEntries(new FormData(form).entries());
+  const pastoralDecision = decision || data.pastoral_decision;
+  if (!pastoralDecision) return;
+
+  const payload = {
+    approval_notes: data.pastoral_comment || "",
+    pastoral_comment: data.pastoral_comment || "",
+    approved_amount: data.approved_amount,
+    final_priority: data.final_priority,
+    rejection_reason: data.pastoral_comment || "",
+    return_notes: data.pastoral_comment || ""
+  };
+
+  if (pastoralDecision === "reject" && !String(payload.rejection_reason).trim()) {
+    alert(L("reqRejectionRequired"));
+    return;
+  }
+  if (pastoralDecision === "returnForCorrection" && !String(payload.return_notes).trim()) {
+    alert(L("reqReturnNotesRequired"));
+    return;
+  }
+
+  const actionMap = { approve: "approve", reject: "reject", returnForCorrection: "returnForCorrection" };
+  const action = actionMap[pastoralDecision];
+  if (!action) return;
+
+  const result = lib.applyWorkflowAction(state, activeUser, record.id, action, payload);
+  if (!result.ok) return;
+
+  const messages = {
+    approve: L("reqApproveSuccess"),
+    reject: L("reqRejectSuccess"),
+    returnForCorrection: L("reqReturnSuccess")
+  };
+  saveState(`${action} requisition ${record.request_number}`);
+  closeRequisitionDrawer();
+  alert(messages[action] || L("save"));
+  setRoute(activeRoute);
 }
 
 function renderRequisitions() {
@@ -7069,7 +7418,7 @@ function renderRequisitions() {
       </div>
       ${summaryFilterChips("requisitions")}
       ${dataTable([L("reqNumber"), L("reqTitle"), L("reqDepartment"), L("reqType"), L("reqEstimated"), L("status"), L("actions")],
-        scoped.slice(0, 8).map((r) => [r.request_number, r.title, r.department_name, r.requisition_type, money(r.estimated_amount), badge(r.status), requisitionActionButtons(r)]))}`;
+        scoped.slice(0, 8).map((r) => [r.request_number, r.title, r.department_name, r.requisition_type, money(r.estimated_amount), requisitionStatusBadge(r.status), requisitionActionButtons(r)]))}`;
   } else if (requisitionsPageState.tab === "new") {
     tabContent = access.can_create ? `
       <div class="d-flex justify-content-end mb-3">
@@ -7080,11 +7429,11 @@ function renderRequisitions() {
   } else {
     let filtered = lib.filterByTab(scoped, requisitionsPageState.tab);
     if (requisitionsPageState.cardFilter?.pending_value) {
-      filtered = filtered.filter((r) => ["Submetido", "Em Revisão", "Rascunho"].includes(r.status) && Number(r.estimated_amount || 0) > 0);
+      filtered = filtered.filter((r) => ["Submetido", "Em Revisão", "Rascunho", "Devolvido para Correção"].includes(r.status) && Number(r.estimated_amount || 0) > 0);
     }
     tabContent = `${summaryFilterChips("requisitions")}${filtered.length ? dataTable(
       [L("reqNumber"), L("reqTitle"), L("reqDepartment"), L("reqUrgency"), L("reqNeededBy"), L("reqEstimated"), L("status"), L("actions")],
-      filtered.map((r) => [r.request_number, r.title, r.department_name, r.urgency, r.needed_by_date || "-", money(r.estimated_amount), badge(r.status), requisitionActionButtons(r)])
+      filtered.map((r) => [r.request_number, r.title, r.department_name, r.urgency, r.needed_by_date || "-", money(r.estimated_amount), requisitionStatusBadge(r.status), requisitionActionButtons(r)])
     ) : noResultsHtml()}`;
   }
 
@@ -8060,10 +8409,8 @@ function quickAction(action, type, id) {
   if (type === "requisition" && window.CERequisitions) {
     const record = (state.requisitions || []).find((r) => r.id === id);
     if (!record) return;
-    if (action === "view") {
-      alert(`${record.request_number}\n${record.title}\n${record.status}\n\n${record.description || ""}`);
-      return;
-    }
+    if (action === "view") return openRequisitionDrawer(id);
+    if (action === "approve" || action === "reject") return openRequisitionDrawer(id, action);
     if (action === "edit") return openForm("requisition", id);
     const result = window.CERequisitions.applyWorkflowAction(state, activeUser, id, action, {});
     if (result.ok) {
@@ -8271,6 +8618,13 @@ document.addEventListener("click", (event) => {
   if (financeDrawerClose || event.target === byId("financeDrawerBackdrop")) return closeFinanceDrawer();
   const churchDrawerClose = event.target.closest("[data-church-drawer-close]");
   if (churchDrawerClose || event.target === byId("churchDrawerBackdrop")) return closeChurchDrawer();
+  const requisitionDrawerClose = event.target.closest("[data-requisition-drawer-close]");
+  if (requisitionDrawerClose || event.target === byId("requisitionDrawerBackdrop")) return closeRequisitionDrawer();
+  const reqPastoralBtn = event.target.closest("[data-req-pastoral-action]");
+  if (reqPastoralBtn) {
+    submitRequisitionPastoralDecision(reqPastoralBtn.dataset.reqPastoralAction);
+    return;
+  }
   const viewModeBtn = event.target.closest("[data-view-mode]");
   if (viewModeBtn) {
     const mode = viewModeBtn.dataset.viewMode;

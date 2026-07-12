@@ -258,6 +258,59 @@ const TEXT = {
     financePartnershipArm: "Braço de Parceria",
     financeSelectContributor: "Seleccionar contribuinte",
     financeNoChartData: "Sem dados para o período seleccionado.",
+    financeReportByChurch: "Relatório por Igreja",
+    financeMonthlyEvolution: "Evolução Mensal",
+    financeTopPartners: "Top Parceiros",
+    financeChartLine: "Linha",
+    financeTotalPeriod: "Total no Período",
+    financeCategoriesContributed: "Categorias em que Contribuiu",
+    financeContributionHistory: "Histórico de Contribuições",
+    financeLastContribution: "Última Contribuição",
+    financeFrequency: "Frequência",
+    financeContributionState: "Estado das Contribuições",
+    financeProof: "Comprovativo",
+    financeChurchRanking: "Ranking de Igrejas",
+    financeChurchTotal: "Total por Igreja",
+    financeChurchVerified: "Total Verificado",
+    financeChurchPending: "Total Pendente",
+    financeChurchTopCategories: "Categorias Principais",
+    financeTopPartnerGeneral: "Top Parceiro Geral",
+    financeTopPartnerRhapsody: "Maior Parceiro de Rapsódia",
+    financeTopPartnerHealing: "Maior Parceiro de Escola de Cura",
+    financeTopPartnerLwsat: "Maior Parceiro de Loveworld SAT",
+    financeConsistentPartners: "Parceiros Consistentes",
+    financeNewPartnersMonth: "Novos Parceiros Este Mês",
+    financeSegmentAll: "Todos",
+    financeSegmentTop: "Top Gerais",
+    financeSegmentConsistent: "Consistentes",
+    financeSegmentNew: "Novos",
+    financeSegmentInactive: "Pararam de Contribuir",
+    financeSegmentFollowup: "Pendentes de Follow-up",
+    financeViewFinancialProfile: "Ver Perfil Financeiro",
+    financeViewHistory: "Ver Histórico",
+    financeContactFollowup: "Contactar / Follow-up",
+    financeExportPartner: "Exportar",
+    financeExportPdf: "Exportar PDF",
+    financeExportExcel: "Exportar Excel",
+    financePrintReport: "Imprimir Relatório",
+    financeExportGeneral: "Relatório Geral",
+    financeExportByCategory: "Relatório por Categoria",
+    financeExportByArm: "Relatório por Braço",
+    financeExportByChurch: "Relatório por Igreja",
+    financeExportByIndividual: "Relatório por Indivíduo",
+    financeExportFeaturedPartners: "Parceiros em Destaque",
+    financeMinValue: "Valor mínimo",
+    financeAllFrequencies: "Todas as Frequências",
+    financeFrequencyConsistent: "Consistente",
+    financeFrequencyRegular: "Regular",
+    financeFrequencyOccasional: "Ocasional",
+    financePrivacyNotice: "Dados financeiros sensíveis — visibilidade conforme o seu perfil de acesso.",
+    financeAggregatedOnly: "Apenas totais agregados disponíveis para o seu perfil.",
+    financeAccessOfficer: "Finance Officer",
+    financeAccessHead: "Finance Head",
+    financeAccessPastor: "Church Pastor",
+    financeAccessAdmin: "National Admin",
+    financeAccessViewer: "Viewer",
     viewSubmission: "Ver Submissão",
     viewProof: "Ver Comprovativo",
     publicSubmission: "Submissão Pública",
@@ -622,6 +675,59 @@ const TEXT = {
     financePartnershipArm: "Partnership Arm",
     financeSelectContributor: "Select contributor",
     financeNoChartData: "No data for the selected period.",
+    financeReportByChurch: "Report by Church",
+    financeMonthlyEvolution: "Monthly Evolution",
+    financeTopPartners: "Top Partners",
+    financeChartLine: "Line",
+    financeTotalPeriod: "Total in Period",
+    financeCategoriesContributed: "Categories Contributed",
+    financeContributionHistory: "Contribution History",
+    financeLastContribution: "Last Contribution",
+    financeFrequency: "Frequency",
+    financeContributionState: "Contribution Status",
+    financeProof: "Proof",
+    financeChurchRanking: "Church Ranking",
+    financeChurchTotal: "Total per Church",
+    financeChurchVerified: "Verified Total",
+    financeChurchPending: "Pending Total",
+    financeChurchTopCategories: "Top Categories",
+    financeTopPartnerGeneral: "Top Partner Overall",
+    financeTopPartnerRhapsody: "Top Rhapsody Partner",
+    financeTopPartnerHealing: "Top Healing School Partner",
+    financeTopPartnerLwsat: "Top Loveworld SAT Partner",
+    financeConsistentPartners: "Consistent Partners",
+    financeNewPartnersMonth: "New Partners This Month",
+    financeSegmentAll: "All",
+    financeSegmentTop: "Top Overall",
+    financeSegmentConsistent: "Consistent",
+    financeSegmentNew: "New",
+    financeSegmentInactive: "Stopped Contributing",
+    financeSegmentFollowup: "Pending Follow-up",
+    financeViewFinancialProfile: "View Financial Profile",
+    financeViewHistory: "View History",
+    financeContactFollowup: "Contact / Follow-up",
+    financeExportPartner: "Export",
+    financeExportPdf: "Export PDF",
+    financeExportExcel: "Export Excel",
+    financePrintReport: "Print Report",
+    financeExportGeneral: "General Report",
+    financeExportByCategory: "Report by Category",
+    financeExportByArm: "Report by Partnership Arm",
+    financeExportByChurch: "Report by Church",
+    financeExportByIndividual: "Report by Individual",
+    financeExportFeaturedPartners: "Featured Partners",
+    financeMinValue: "Minimum value",
+    financeAllFrequencies: "All Frequencies",
+    financeFrequencyConsistent: "Consistent",
+    financeFrequencyRegular: "Regular",
+    financeFrequencyOccasional: "Occasional",
+    financePrivacyNotice: "Sensitive financial data — visibility depends on your access profile.",
+    financeAggregatedOnly: "Only aggregated totals are available for your profile.",
+    financeAccessOfficer: "Finance Officer",
+    financeAccessHead: "Finance Head",
+    financeAccessPastor: "Church Pastor",
+    financeAccessAdmin: "National Admin",
+    financeAccessViewer: "Viewer",
     viewSubmission: "View Submission",
     viewProof: "View Proof",
     publicSubmission: "Public Submission",
@@ -2112,7 +2218,10 @@ const seedData = {
     { id: "u-10", name: "F.E.V.O Team Leader", email: "fevo.leader@ce-mozambique.org", role: "F.E.V.O Team Leader", church_id: "church-hq", department_permissions: ["fevoReports"], can_view_all_churches: false, assigned_teams: ["Team A"], assigned_groups: ["Group Central"] },
     { id: "u-11", name: "Marcelo Panguene", email: "marcelo.panguene@ce-mozambique.org", role: "Venue Manager", church_id: "church-hq", department_permissions: ["venueInventory", "inventory", "venues", "maintenance", "checklists"], can_view_all_churches: true },
     { id: "u-12", name: "Department Head Demo", email: "department.head@ce-mozambique.org", role: "Department Head", church_id: "church-hq", department_permissions: ["venueInventoryRequests", "venueInventory"], assigned_department: "Cell Ministry", can_view_all_churches: false },
-    { id: "u-13", name: "Staff Member Demo", email: "staff.member@ce-mozambique.org", role: "Staff Member", church_id: "church-hq", department_permissions: ["assignedEquipment"], assigned_staff_name: "Laiza Teresa Chirindza", can_view_all_churches: false }
+    { id: "u-13", name: "Staff Member Demo", email: "staff.member@ce-mozambique.org", role: "Staff Member", church_id: "church-hq", department_permissions: ["assignedEquipment"], assigned_staff_name: "Laiza Teresa Chirindza", can_view_all_churches: false },
+    { id: "u-14", name: "Finance Officer Demo", email: "finance.officer@ce-mozambique.org", role: "Finance Officer", church_id: "church-hq", department_permissions: ["finance", "financeOfficer"], can_view_all_churches: false },
+    { id: "u-15", name: "Finance Head Demo", email: "finance.head@ce-mozambique.org", role: "Finance Head", church_id: "church-hq", department_permissions: ["finance", "financeHead", "financeVerify", "reports"], can_view_all_churches: true },
+    { id: "u-16", name: "Finance Viewer Demo", email: "finance.viewer@ce-mozambique.org", role: "Viewer", church_id: "church-hq", department_permissions: ["financeViewer", "reports"], can_view_all_churches: true }
   ],
   churches: [
     { id: "church-hq", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", public_name: "Igreja Embaixada de Cristo Maputo / Embaixada de Cristo Moçambique", type: "Sede Nacional", province: "Maputo Cidade", city: "KaMpfumo", district_or_area: "Maputo", address: "Avenida de Angola, ao lado da CETRACO, Maputo", pastor_in_charge: "Pastor Kene Ume", phone_primary: "+258 86 227 0000", phone_secondary: "", email: "info@embaixada-de-cristo.obiuba.com", facebook: "Embaixada de Cristo Moçambique", instagram: "@embaixada_de_cristo_mocambique", youtube: "", service_times: defaultSeedServiceTimes("church-hq", "Sede Nacional"), parent_church_id: "", status: "Activa", information_status: "Por Confirmar", notes: "Dados iniciais importados para o protótipo. Confirmar detalhes com a equipa local.", created_by: "Admin Principal", updated_by: "Admin Principal", created_at: "2024-01-01", updated_at: "2026-07-10", attendance_last_4_weeks: [112, 98, 104, 92] },
@@ -2368,6 +2477,8 @@ const financePageState = {
   sourceFilter: "",
   reportChartMode: "bar",
   selectedContributor: "",
+  partnerSegment: "all",
+  exportReportType: "general",
   reportFilters: {
     period: "month",
     dateFrom: "",
@@ -2381,7 +2492,9 @@ const financePageState = {
     source: "",
     contributor: "",
     cell: "",
-    cellGroup: ""
+    cellGroup: "",
+    minValue: "",
+    frequency: ""
   }
 };
 const churchPageState = {
@@ -2775,8 +2888,205 @@ function getFinanceReportLabels() {
     contributor: L("contributor"),
     contributorPlaceholder: L("financeContributorSearch"),
     cell: L("cell"),
-    cellGroup: L("cellGroup")
+    cellGroup: L("cellGroup"),
+    minValue: L("financeMinValue"),
+    frequency: L("financeFrequency"),
+    allFrequencies: L("financeAllFrequencies"),
+    frequencyConsistent: L("financeFrequencyConsistent"),
+    frequencyRegular: L("financeFrequencyRegular"),
+    frequencyOccasional: L("financeFrequencyOccasional")
   };
+}
+
+function resolveFinanceAccess(user = activeUser) {
+  const role = user?.role || "";
+  const perms = user?.department_permissions || [];
+  const isNationalAdmin = perms.includes("*") || role === "Super Admin" || role === "National Admin";
+  const isFinanceHead = isNationalAdmin || role === "Finance Head" || perms.includes("financeHead") || perms.includes("financeVerify");
+  const isFinanceOfficer = isFinanceHead || role === "Finance Officer" || perms.includes("financeOfficer") || (perms.includes("finance") && !perms.includes("financeViewer"));
+  const isChurchPastor = role === "Church Pastor";
+  const isViewer = role === "Viewer" || perms.includes("financeViewer");
+  const canViewIndividualDetails = isNationalAdmin || isFinanceHead || isChurchPastor;
+  return {
+    isNationalAdmin,
+    isFinanceHead,
+    isFinanceOfficer,
+    isChurchPastor,
+    isViewer,
+    canCreateEntries: isNationalAdmin || isFinanceHead || isFinanceOfficer,
+    canVerifyReject: isNationalAdmin || isFinanceHead,
+    canViewFullReports: isNationalAdmin || isFinanceHead || isChurchPastor || isFinanceOfficer,
+    canViewIndividualDetails,
+    canViewAggregatedOnly: isViewer && !canViewIndividualDetails,
+    canExport: isNationalAdmin || isFinanceHead || isChurchPastor || isFinanceOfficer,
+    scopeChurchOnly: isChurchPastor && !isNationalAdmin && !isFinanceHead
+  };
+}
+
+function financeFrequencyLabel(key) {
+  const map = {
+    consistent: L("financeFrequencyConsistent"),
+    regular: L("financeFrequencyRegular"),
+    occasional: L("financeFrequencyOccasional"),
+    none: "-"
+  };
+  return map[key] || key;
+}
+
+function financeContributorProfileHtml(detail, access = resolveFinanceAccess()) {
+  if (!access.canViewIndividualDetails) {
+    return `<div class="finance-privacy-notice glass-panel p-3"><i class="bi bi-shield-lock me-2"></i>${L("financeAggregatedOnly")}</div>`;
+  }
+  if (!detail) return `<p class="text-secondary">${L("financeSelectContributor")}</p>`;
+  const historyRows = detail.history.map((row) => {
+    const proofBtn = row.proof
+      ? `<button type="button" class="btn btn-sm btn-outline-cyan" data-action="viewProof" data-type="finance" data-id="${row.id}">${L("viewProof")}</button>`
+      : `<span class="text-secondary small">-</span>`;
+    const actions = actionButtons([
+      ["view", "finance", row.id, L("view")],
+      ["edit", "finance", row.id, L("edit")]
+    ]);
+    return [row.date, row.category, row.arm, row.method, money(row.amount), badge(row.status), proofBtn, actions];
+  });
+  const historyTable = dataTable(
+    [L("date"), L("category"), L("financePartnershipArm"), L("method"), L("amount"), L("status"), L("financeProof"), L("actions")],
+    historyRows
+  );
+  return `
+    <article class="finance-contributor-profile glass-panel">
+      <div class="finance-contributor-profile-head">
+        <div>
+          <span class="eyebrow">${L("contributor")}</span>
+          <h3 class="h5 mb-0">${detail.name}</h3>
+        </div>
+        <strong class="finance-contributor-total">${money(detail.total)}</strong>
+      </div>
+      <div class="row g-3 mt-2 finance-contributor-metrics">
+        <div class="col-6 col-md-4"><div class="finance-metric-pill"><span>${L("financeTotalPeriod")}</span><strong>${money(detail.total)}</strong></div></div>
+        <div class="col-6 col-md-4"><div class="finance-metric-pill"><span>${L("financeLastContribution")}</span><strong>${detail.lastContributionDate || "-"}</strong></div></div>
+        <div class="col-6 col-md-4"><div class="finance-metric-pill"><span>${L("financeFrequency")}</span><strong>${financeFrequencyLabel(detail.frequency)}</strong></div></div>
+        <div class="col-6 col-md-4"><div class="finance-metric-pill"><span>${L("financeContributionCount")}</span><strong>${detail.count}</strong></div></div>
+        <div class="col-6 col-md-4"><div class="finance-metric-pill"><span>${L("financeContributionState")}</span><strong>${badge(detail.dominantStatus === "verified" ? FINANCE_STATUS_VERIFIED : detail.dominantStatus === "pending" ? FINANCE_STATUS_PENDING : FINANCE_STATUS_REJECTED)}</strong></div></div>
+        <div class="col-12"><div class="finance-metric-pill"><span>${L("financeCategoriesContributed")}</span><strong>${detail.categories.join(", ") || "-"}</strong></div></div>
+      </div>
+      <div class="mt-3">
+        <span class="eyebrow d-block mb-2">${L("financeContributionHistory")}</span>
+        <div class="table-responsive">${historyTable}</div>
+      </div>
+    </article>`;
+}
+
+function financeChurchReportHtml(churchRows, access = resolveFinanceAccess()) {
+  if (!churchRows.length) return `<p class="finance-chart-empty">${L("financeNoChartData")}</p>`;
+  const tableRows = churchRows.map((row, index) => [
+    index + 1,
+    row.church_name,
+    money(row.total),
+    money(row.verified),
+    money(row.pending),
+    row.topCategories.map((c) => c.name).join(", ") || "-"
+  ]);
+  return `
+    <div class="table-responsive mb-3">${dataTable(
+      ["#", L("church"), L("financeChurchTotal"), L("financeChurchVerified"), L("financeChurchPending"), L("financeChurchTopCategories")],
+      tableRows
+    )}</div>`;
+}
+
+function financePartnerHighlightCards(partnerProfiles) {
+  const top = partnerProfiles[0];
+  const byArm = (arm) => partnerProfiles.find((p) => p.arm === arm || p.records.some((r) => r.partnership_arm === arm || r.contribution_category === arm));
+  const consistentCount = partnerProfiles.filter((p) => p.segment === "consistent").length;
+  const newCount = partnerProfiles.filter((p) => p.segment === "new").length;
+  const cards = [
+    [L("financeTopPartnerGeneral"), top?.name || "-", top ? money(top.total) : "-", "bi-trophy", "gold"],
+    [L("financeTopPartnerRhapsody"), byArm("Rapsódia de Realidades")?.name || "-", byArm("Rapsódia de Realidades") ? money(byArm("Rapsódia de Realidades").total) : "-", "bi-book", "cyan"],
+    [L("financeTopPartnerHealing"), byArm("Escola de Cura")?.name || "-", byArm("Escola de Cura") ? money(byArm("Escola de Cura").total) : "-", "bi-heart-pulse", "green"],
+    [L("financeTopPartnerLwsat"), byArm("Loveworld SAT")?.name || "-", byArm("Loveworld SAT") ? money(byArm("Loveworld SAT").total) : "-", "bi-broadcast", "cyan"],
+    [L("financeConsistentPartners"), String(consistentCount), L("financePartnersPerArm"), "bi-arrow-repeat", "green"],
+    [L("financeNewPartnersMonth"), String(newCount), L("financeSegmentNew"), "bi-person-plus", "amber"]
+  ];
+  return `<div class="row g-3 finance-partner-highlight-cards">${cards.map(([title, value, sub, icon, tone]) => `
+    <div class="col-6 col-md-4 col-xl-2">
+      <article class="finance-highlight-card glass-panel finance-tone-${tone}">
+        <i class="bi ${icon} finance-highlight-icon"></i>
+        <span class="eyebrow">${title}</span>
+        <strong>${value}</strong>
+        <small>${sub}</small>
+      </article>
+    </div>`).join("")}</div>`;
+}
+
+function financePartnerSegmentTabs() {
+  const segments = [
+    ["all", L("financeSegmentAll")],
+    ["top", L("financeSegmentTop")],
+    ["consistent", L("financeSegmentConsistent")],
+    ["new", L("financeSegmentNew")],
+    ["inactive", L("financeSegmentInactive")],
+    ["followup", L("financeSegmentFollowup")]
+  ];
+  return `<div class="finance-segment-tabs view-toggle mb-3" role="group">${segments.map(([key, label]) =>
+    `<button type="button" class="${financePageState.partnerSegment === key ? "active" : ""}" data-finance-partner-segment="${key}">${label}</button>`
+  ).join("")}</div>`;
+}
+
+function financePartnerTable(profiles, access = resolveFinanceAccess()) {
+  if (!access.canViewIndividualDetails) {
+    return `<div class="finance-privacy-notice glass-panel p-3"><i class="bi bi-shield-lock me-2"></i>${L("financeAggregatedOnly")}</div>`;
+  }
+  if (!profiles.length) return `<p class="finance-chart-empty">${L("financeNoChartData")}</p>`;
+  const rows = profiles.map((p) => {
+    const actions = `
+      <div class="finance-partner-actions d-flex flex-wrap gap-1">
+        <button type="button" class="btn btn-sm btn-outline-gold" data-finance-select-contributor="${p.key}" title="${L("financeViewFinancialProfile")}"><i class="bi bi-person-badge"></i></button>
+        <button type="button" class="btn btn-sm btn-outline-cyan" data-finance-select-contributor="${p.key}" data-finance-tab-jump="reports" title="${L("financeViewHistory")}"><i class="bi bi-clock-history"></i></button>
+        <button type="button" class="btn btn-sm btn-outline-cyan" data-finance-partner-action="followup" data-partner-key="${p.key}" data-partner-phone="${p.phone}" title="${L("financeContactFollowup")}"><i class="bi bi-chat-dots"></i></button>
+        <button type="button" class="btn btn-sm btn-outline-gold" data-finance-partner-action="export" data-partner-key="${p.key}" title="${L("financeExportPartner")}"><i class="bi bi-download"></i></button>
+      </div>`;
+    return [p.name, churchName(p.church_id), p.arm, money(p.total), p.count, p.lastDate || "-", financeFrequencyLabel(p.frequency), badge(p.hasPending ? FINANCE_STATUS_PENDING : FINANCE_STATUS_VERIFIED), actions];
+  });
+  return dataTable(
+    [L("name"), L("church"), L("financePartnershipArm"), L("amount"), L("financeContributionCount"), L("financeLastContribution"), L("financeFrequency"), L("status"), L("actions")],
+    rows
+  );
+}
+
+function buildFinanceExportHtml(reportType, list, stats, churchRows, partnerProfiles) {
+  const title = L(`financeExport${reportType.charAt(0).toUpperCase()}${reportType.slice(1)}`.replace(/financeExportGeneral/, "financeExportGeneral").replace(/financeExportBy/, "financeExportBy")) || reportType;
+  const reportTitles = {
+    general: L("financeExportGeneral"),
+    category: L("financeExportByCategory"),
+    arm: L("financeExportByArm"),
+    church: L("financeExportByChurch"),
+    individual: L("financeExportByIndividual"),
+    partners: L("financeExportFeaturedPartners")
+  };
+  const heading = reportTitles[reportType] || L("financeExportGeneral");
+  const summary = `
+    <h1>${heading}</h1>
+    <p class="meta">${new Date().toLocaleString()} · ${activeUser.name} (${activeUser.role})</p>
+    <div class="summary">
+      <div class="card"><span>${L("financeTotalReceived")}</span><strong>${money(stats.totalReceived)}</strong></div>
+      <div class="card"><span>${L("financeTotalVerified")}</span><strong>${money(stats.totalVerified)}</strong></div>
+      <div class="card"><span>${L("financeTotalPending")}</span><strong>${money(stats.totalPending)}</strong></div>
+      <div class="card"><span>${L("financeContributionCount")}</span><strong>${stats.contributionCount}</strong></div>
+    </div>`;
+  let body = "";
+  if (reportType === "church" && churchRows?.length) {
+    body = `<table><thead><tr><th>#</th><th>${L("church")}</th><th>${L("amount")}</th><th>${L("verified")}</th><th>${L("pendingVerification")}</th></tr></thead><tbody>
+      ${churchRows.map((r, i) => `<tr><td>${i + 1}</td><td>${r.church_name}</td><td>${money(r.total)}</td><td>${money(r.verified)}</td><td>${money(r.pending)}</td></tr>`).join("")}
+    </tbody></table>`;
+  } else if (reportType === "partners" && partnerProfiles?.length) {
+    body = `<table><thead><tr><th>${L("name")}</th><th>${L("church")}</th><th>${L("amount")}</th><th>${L("financeContributionCount")}</th></tr></thead><tbody>
+      ${partnerProfiles.map((p) => `<tr><td>${p.name}</td><td>${churchName(p.church_id)}</td><td>${money(p.total)}</td><td>${p.count}</td></tr>`).join("")}
+    </tbody></table>`;
+  } else if (list?.length) {
+    body = `<table><thead><tr><th>${L("date")}</th><th>${L("contributor")}</th><th>${L("category")}</th><th>${L("amount")}</th><th>${L("status")}</th></tr></thead><tbody>
+      ${list.map((r) => `<tr><td>${r.data || r.date}</td><td>${r.contributor_name || "-"}</td><td>${r.contribution_category}</td><td>${money(r.valor || r.amount)}</td><td>${r.estado}</td></tr>`).join("")}
+    </tbody></table>`;
+  }
+  return summary + body;
 }
 
 function financeModuleTabs() {
@@ -2805,31 +3115,6 @@ function financeReportStatsCards(stats) {
       ${metric("bi-people", L("financeUniqueContributors"), stats.uniqueContributors, L("contributor"))}
       ${metric("bi-calculator", L("financeAverageContribution"), money(stats.averageContribution), L("amount"))}
     </div>`;
-}
-
-function financeContributorProfileHtml(profile) {
-  if (!profile) return `<p class="text-secondary">${L("financeSelectContributor")}</p>`;
-  const cats = [...profile.categories].join(", ");
-  const arms = [...profile.arms].join(", ");
-  return `
-    <article class="finance-contributor-profile glass-panel">
-      <div class="finance-contributor-profile-head">
-        <div>
-          <span class="eyebrow">${L("contributor")}</span>
-          <h3 class="h5 mb-0">${profile.name}</h3>
-        </div>
-        <strong class="finance-contributor-total">${money(profile.total)}</strong>
-      </div>
-      <div class="church-detail-grid mt-3">
-        <div><span>${L("phone")}</span><strong>${profile.phone}</strong></div>
-        <div><span>${L("church")}</span><strong>${churchName(profile.church_id)}</strong></div>
-        <div><span>${L("cell")}</span><strong>${profile.celula}</strong></div>
-        <div><span>${L("cellGroup")}</span><strong>${profile.grupo_de_celula}</strong></div>
-        <div><span>${L("financeContributionCount")}</span><strong>${profile.count}</strong></div>
-        <div><span>${L("category")}</span><strong>${cats || "-"}</strong></div>
-        ${arms ? `<div class="col-12"><span>${L("financePartnershipArm")}</span><strong>${arms}</strong></div>` : ""}
-      </div>
-    </article>`;
 }
 
 function financePartnersArmCards(armDetails) {
@@ -3529,21 +3814,25 @@ function formatDateTime(value) {
 
 function financeActions(id, record) {
   const migrated = migrateFinanceRecord(record);
-  const actions = [
-    ["view", "finance", id, L("view")],
-    ["edit", "finance", id, L("edit")]
-  ];
-  if (migrated.submission_group_id) {
+  const access = resolveFinanceAccess();
+  const actions = [];
+  if (access.canViewIndividualDetails || access.canViewFullReports) {
+    actions.push(["view", "finance", id, L("view")]);
+  }
+  if (access.canCreateEntries) {
+    actions.push(["edit", "finance", id, L("edit")]);
+  }
+  if (migrated.submission_group_id && (access.canViewIndividualDetails || access.canViewFullReports)) {
     actions.unshift(["viewSubmission", "finance", migrated.submission_group_id, L("viewSubmission")]);
   }
-  if (statusKey(migrated.estado) === "pendingVerification") {
+  if (access.canVerifyReject && statusKey(migrated.estado) === "pendingVerification") {
     if (migrated.submission_group_id) {
       actions.push(["verifyGroup", "finance", migrated.submission_group_id, L("verify")], ["rejectGroup", "finance", migrated.submission_group_id, L("reject")]);
     } else {
       actions.push(["verify", "finance", id, L("verify")], ["reject", "finance", id, L("reject")]);
     }
   }
-  return actionButtons(actions);
+  return actions.length ? actionButtons(actions) : `<span class="text-secondary small">-</span>`;
 }
 
 function openFinanceDrawer(mode, id = null) {
@@ -4994,9 +5283,16 @@ function renderFinance() {
   const month = allList.filter((f) => f.data?.startsWith(monthKey)).reduce((sum, f) => sum + Number(f.valor || 0), 0);
   const publicRows = getScopedPublicSubmissionRows();
   const pendingList = allList.filter((f) => statusKey(f.estado) === "pendingVerification");
+  const financeAccess = resolveFinanceAccess();
   const contributorProfiles = typeof computeContributorProfiles === "function" ? computeContributorProfiles(list) : [];
-  const selectedProfile = contributorProfiles.find((p) => p.key === financePageState.selectedContributor) || contributorProfiles[0] || null;
-  if (!financePageState.selectedContributor && selectedProfile) financePageState.selectedContributor = selectedProfile.key;
+  if (!financeAccess.canViewIndividualDetails) {
+    financePageState.selectedContributor = "";
+  } else if (!financePageState.selectedContributor && contributorProfiles[0]) {
+    financePageState.selectedContributor = contributorProfiles[0].key;
+  }
+  const selectedDetail = financeAccess.canViewIndividualDetails && typeof computeContributorDetail === "function" && financePageState.selectedContributor
+    ? computeContributorDetail(list, financePageState.selectedContributor)
+    : null;
 
   const categoryRows = typeof groupFinanceByBucket === "function"
     ? groupFinanceByBucket(list, (key) => L(key))
@@ -5005,16 +5301,39 @@ function renderFinance() {
   const armDetails = typeof computePartnershipArmDetails === "function"
     ? computePartnershipArmDetails(list, previousList, (g) => `${g >= 0 ? "+" : ""}${g}%`)
     : [];
+  const monthlyRows = typeof groupFinanceMonthly === "function" ? groupFinanceMonthly(list) : [];
+  const churchRows = typeof groupFinanceByChurch === "function"
+    ? groupFinanceByChurch(list, churchName)
+    : [];
+  const topPartnerRows = contributorProfiles.slice(0, 8).map((p) => [p.name, p.total]);
+  const partnerProfilesRaw = typeof computePartnerProfiles === "function"
+    ? computePartnerProfiles(list, allList, { minValue: financePageState.reportFilters.minValue })
+    : [];
+  const partnerProfiles = typeof filterPartnerProfiles === "function"
+    ? filterPartnerProfiles(partnerProfilesRaw, { ...financePageState.reportFilters, segment: financePageState.partnerSegment })
+    : partnerProfilesRaw;
 
   const categoryChart = financePageState.reportChartMode === "donut" && typeof financeDonutChart === "function"
     ? financeDonutChart(L("financeReportByCategory"), categoryRows, L("financeNoChartData"))
-    : typeof financeBarChart === "function"
-      ? financeBarChart(L("financeReportByCategory"), categoryRows, L("financeNoChartData"))
+    : typeof financeSemanticBarChart === "function"
+      ? financeSemanticBarChart(L("financeReportByCategory"), categoryRows, "cyan", L("financeNoChartData"))
       : chartCard(L("financeReportByCategory"), categoryRows);
 
-  const armChart = typeof financeBarChart === "function"
-    ? financeBarChart(L("financeReportByPartnershipArm"), armRows, L("financeNoChartData"))
+  const armChart = typeof financeSemanticBarChart === "function"
+    ? financeSemanticBarChart(L("financeReportByPartnershipArm"), armRows, "cyan", L("financeNoChartData"))
     : chartCard(L("financeReportByPartnershipArm"), armRows);
+
+  const monthlyChart = typeof financeLineChart === "function"
+    ? financeLineChart(L("financeMonthlyEvolution"), monthlyRows, L("financeNoChartData"))
+    : "";
+
+  const topPartnersChart = typeof financeHBarChart === "function"
+    ? financeHBarChart(L("financeTopPartners"), topPartnerRows, L("financeNoChartData"))
+    : "";
+
+  const churchChart = typeof financeChurchBarChart === "function"
+    ? financeChurchBarChart(L("financeReportByChurch"), churchRows, L("financeNoChartData"))
+    : chartCard(L("financeReportByChurch"), churchRows.map((c) => [c.church_name, c.total]));
 
   const reportFiltersHtml = typeof financeReportFilterBar === "function"
     ? financeReportFilterBar(filters, scoped(state.churches), getFinanceReportLabels())
@@ -5025,10 +5344,11 @@ function renderFinance() {
     <button type="button" class="${financePageState.reportChartMode === "donut" ? "active" : ""}" data-finance-chart-mode="donut"><i class="bi bi-pie-chart"></i> ${L("financeChartDonut")}</button>
   </div>`;
 
+  const maskContributor = (name) => (financeAccess.canViewIndividualDetails ? name : L("financeAggregatedOnly"));
   const entriesTable = dataTable(
     [L("contributor"), L("category"), L("financeContributionType"), L("method"), L("amount"), L("date"), L("church"), L("sourceType"), L("status"), L("actions")],
     list.map((f) => [
-      f.contributor_name || fullName(f),
+      maskContributor(f.contributor_name || fullName(f)),
       f.contribution_category,
       f.contribution_group || "-",
       f.metodo_de_pagamento,
@@ -5070,9 +5390,12 @@ function renderFinance() {
     ])
   );
 
-  const contributorOptions = contributorProfiles.slice(0, 30).map((p) =>
-    `<option value="${p.key}" ${financePageState.selectedContributor === p.key ? "selected" : ""}>${p.name} — ${money(p.total)}</option>`
-  ).join("");
+  const contributorOptions = financeAccess.canViewIndividualDetails
+    ? contributorProfiles.slice(0, 30).map((p) =>
+      `<option value="${p.key}" ${financePageState.selectedContributor === p.key ? "selected" : ""}>${p.name} — ${money(p.total)}</option>`
+    ).join("")
+    : "";
+  const privacyBanner = `<div class="finance-privacy-banner mb-3"><i class="bi bi-shield-lock me-2"></i>${L("financePrivacyNotice")}</div>`;
 
   let tabContent = "";
   if (financePageState.tab === "overview") {
@@ -5103,22 +5426,35 @@ function renderFinance() {
   } else if (financePageState.tab === "reports") {
     tabContent = `
       ${moduleSection(L("financeReportsSection"), L("financeReportsHint"), "bi-graph-up", "", `
+        ${privacyBanner}
         ${reportFiltersHtml}
         ${financeReportStatsCards(stats)}
         <div class="d-flex justify-content-end mb-3">${chartModeToggle}</div>
         <div class="row g-4 mb-4">
           <div class="col-xl-6">${categoryChart}</div>
           <div class="col-xl-6">${armChart}</div>
+          <div class="col-xl-6">${monthlyChart}</div>
+          <div class="col-xl-6">${financeAccess.canViewIndividualDetails ? topPartnersChart : `<article class="chart-card glass-panel finance-chart-card h-100"><div class="panel-head"><h3 class="panel-title">${L("financeTopPartners")}</h3></div><p class="finance-chart-empty">${L("financeAggregatedOnly")}</p></article>`}</div>
+          <div class="col-12">${churchChart}</div>
+        </div>
+        <div class="row g-4 mb-4">
+          <div class="col-12">
+            <article class="panel glass-panel">
+              <div class="panel-head"><h3 class="panel-title"><i class="bi bi-building me-2"></i>${L("financeChurchRanking")}</h3></div>
+              ${financeChurchReportHtml(churchRows, financeAccess)}
+            </article>
+          </div>
         </div>
         <div class="row g-4">
           <div class="col-xl-5">
             <article class="panel glass-panel h-100">
               <div class="panel-head"><h3 class="panel-title">${L("financeReportByIndividual")}</h3></div>
-              <select class="form-select mb-3" data-finance-select-contributor aria-label="${L("financeSelectContributor")}">
-                <option value="">${L("financeSelectContributor")}</option>
-                ${contributorOptions}
-              </select>
-              ${financeContributorProfileHtml(selectedProfile)}
+              ${financeAccess.canViewIndividualDetails ? `
+                <select class="form-select mb-3" data-finance-select-contributor aria-label="${L("financeSelectContributor")}">
+                  <option value="">${L("financeSelectContributor")}</option>
+                  ${contributorOptions}
+                </select>
+                ${financeContributorProfileHtml(selectedDetail, financeAccess)}` : financeContributorProfileHtml(null, financeAccess)}
             </article>
           </div>
           <div class="col-xl-7">
@@ -5130,18 +5466,43 @@ function renderFinance() {
         </div>`)}`;
   } else if (financePageState.tab === "partners") {
     tabContent = moduleSection(L("financeFeaturedPartners"), L("financeReportsHint"), "bi-stars", "", `
+      ${privacyBanner}
       ${reportFiltersHtml}
-      ${financePartnersArmCards(armDetails)}
+      ${financePartnerSegmentTabs()}
+      ${financePartnerHighlightCards(partnerProfilesRaw)}
+      <article class="panel glass-panel mt-4 mb-0">
+        <div class="panel-head"><h3 class="panel-title">${L("financeFeaturedPartners")}</h3></div>
+        <div class="table-responsive">${financePartnerTable(partnerProfiles, financeAccess)}</div>
+      </article>
       <div class="row g-4 mt-1">
-        <div class="col-12">${armChart}</div>
+        <div class="col-xl-6">${armChart}</div>
+        <div class="col-xl-6">${topPartnersChart || armChart}</div>
       </div>`);
   } else if (financePageState.tab === "exports") {
+    const exportTypes = [
+      ["general", L("financeExportGeneral")],
+      ["category", L("financeExportByCategory")],
+      ["arm", L("financeExportByArm")],
+      ["church", L("financeExportByChurch")],
+      ["individual", L("financeExportByIndividual")],
+      ["partners", L("financeExportFeaturedPartners")]
+    ];
     tabContent = moduleSection(L("financeTabExports"), L("financeExportHint"), "bi-download", "", `
       ${reportFiltersHtml}
       ${financeReportStatsCards(stats)}
+      <div class="finance-export-type mb-3">
+        <label class="form-label">${L("financeTabReports")}</label>
+        <select class="form-select" data-finance-export-type>
+          ${exportTypes.map(([key, label]) => `<option value="${key}" ${financePageState.exportReportType === key ? "selected" : ""}>${label}</option>`).join("")}
+        </select>
+      </div>
       <div class="finance-export-actions d-flex flex-wrap gap-3 mt-3">
-        <button type="button" class="btn btn-ce-gold" data-finance-export="csv"><i class="bi bi-filetype-csv me-2"></i>${L("financeExportCsv")}</button>
-        <button type="button" class="btn btn-outline-cyan" data-finance-export="json"><i class="bi bi-braces me-2"></i>${L("financeExportJson")}</button>
+        ${financeAccess.canExport ? `
+          <button type="button" class="btn btn-ce-gold" data-finance-export="pdf"><i class="bi bi-file-earmark-pdf me-2"></i>${L("financeExportPdf")}</button>
+          <button type="button" class="btn btn-outline-cyan" data-finance-export="excel"><i class="bi bi-file-earmark-excel me-2"></i>${L("financeExportExcel")}</button>
+          <button type="button" class="btn btn-outline-glass" data-finance-export="print"><i class="bi bi-printer me-2"></i>${L("financePrintReport")}</button>
+          <button type="button" class="btn btn-outline-cyan" data-finance-export="csv"><i class="bi bi-filetype-csv me-2"></i>${L("financeExportCsv")}</button>
+          <button type="button" class="btn btn-outline-cyan" data-finance-export="json"><i class="bi bi-braces me-2"></i>${L("financeExportJson")}</button>` : `<p class="text-secondary mb-0">${L("financeAggregatedOnly")}</p>`}
       </div>
       <p class="small text-secondary mt-3 mb-0">${list.length} ${L("financeContributionCount").toLowerCase()} · ${money(stats.totalReceived)}</p>`);
   }
@@ -6704,25 +7065,61 @@ document.addEventListener("click", (event) => {
   }
   const financeExportBtn = event.target.closest("[data-finance-export]");
   if (financeExportBtn) {
+    const access = resolveFinanceAccess();
+    if (!access.canExport) return;
     const list = typeof filterFinanceRecords === "function"
       ? filterFinanceRecords(getScopedFinanceList(), financePageState.reportFilters)
       : getScopedFinanceList();
+    const stats = typeof computeFinanceReportStats === "function" ? computeFinanceReportStats(list) : {};
+    const churchRows = typeof groupFinanceByChurch === "function" ? groupFinanceByChurch(list, churchName) : [];
+    const partnerProfiles = typeof computePartnerProfiles === "function"
+      ? computePartnerProfiles(list, getScopedFinanceList(), { minValue: financePageState.reportFilters.minValue })
+      : [];
+    const reportType = financePageState.exportReportType || "general";
+    const stamp = new Date().toISOString().slice(0, 10);
+    const exportList = reportType === "individual" && !access.canViewIndividualDetails ? [] : list;
     if (financeExportBtn.dataset.financeExport === "csv" && typeof exportFinanceCsv === "function") {
-      exportFinanceCsv(list, `ce-finance-${new Date().toISOString().slice(0, 10)}.csv`);
+      exportFinanceCsv(exportList, `ce-finance-${reportType}-${stamp}.csv`);
     } else if (financeExportBtn.dataset.financeExport === "json") {
-      const blob = new Blob([JSON.stringify(list, null, 2)], { type: "application/json" });
+      const blob = new Blob([JSON.stringify(exportList, null, 2)], { type: "application/json" });
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
-      link.download = `ce-finance-${new Date().toISOString().slice(0, 10)}.json`;
+      link.download = `ce-finance-${reportType}-${stamp}.json`;
       link.click();
       URL.revokeObjectURL(link.href);
+    } else if (financeExportBtn.dataset.financeExport === "excel" && typeof exportFinanceExcel === "function") {
+      exportFinanceExcel(exportList, `ce-finance-${reportType}-${stamp}.xls`, `CE Finance ${reportType}`);
+    } else if ((financeExportBtn.dataset.financeExport === "pdf" || financeExportBtn.dataset.financeExport === "print") && typeof exportFinancePrint === "function") {
+      const html = buildFinanceExportHtml(reportType, exportList, stats, churchRows, partnerProfiles);
+      exportFinancePrint(html, `CE Finance ${reportType}`);
+    }
+    return;
+  }
+  const financePartnerSegmentBtn = event.target.closest("[data-finance-partner-segment]");
+  if (financePartnerSegmentBtn) {
+    financePageState.partnerSegment = financePartnerSegmentBtn.dataset.financePartnerSegment || "all";
+    if (activeRoute === "finance") renderFinance();
+    return;
+  }
+  const financePartnerActionBtn = event.target.closest("[data-finance-partner-action]");
+  if (financePartnerActionBtn) {
+    const action = financePartnerActionBtn.dataset.financePartnerAction;
+    const key = financePartnerActionBtn.dataset.partnerKey || "";
+    const phone = financePartnerActionBtn.dataset.partnerPhone || "";
+    if (action === "followup" && phone) {
+      window.open(`https://wa.me/${phone.replace(/\D/g, "")}`, "_blank", "noopener,noreferrer");
+    } else if (action === "export" && key) {
+      financePageState.selectedContributor = key;
+      financePageState.exportReportType = "individual";
+      financePageState.tab = "exports";
+      if (activeRoute === "finance") renderFinance();
     }
     return;
   }
   const financeContributorBtn = event.target.closest("[data-finance-select-contributor]");
   if (financeContributorBtn) {
     financePageState.selectedContributor = financeContributorBtn.dataset.financeSelectContributor || "";
-    financePageState.tab = "reports";
+    financePageState.tab = financeContributorBtn.dataset.financeTabJump || "reports";
     if (activeRoute === "finance") renderFinance();
     return;
   }
@@ -6803,6 +7200,10 @@ document.addEventListener("input", (event) => {
   if (event.target.matches("[data-finance-select-contributor]")) {
     financePageState.selectedContributor = event.target.value || "";
     if (activeRoute === "finance") renderFinance();
+    return;
+  }
+  if (event.target.matches("[data-finance-export-type]")) {
+    financePageState.exportReportType = event.target.value || "general";
     return;
   }
   const serviceField = event.target.dataset?.serviceField;

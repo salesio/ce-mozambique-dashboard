@@ -144,6 +144,11 @@
     const partial = list.filter((r) => r.finance_status === FINANCE_STATUS.PARTIAL).length;
     const approvedTotal = list.reduce((s, r) => s + Number(r.approved_amount || r.estimated_amount || 0), 0);
     const releasedTotal = list.reduce((s, r) => s + Number(r.released_amount || r.amount_released || 0), 0);
+    const pendingTotal = list.reduce((s, r) => {
+      const approved = Number(r.approved_amount || r.estimated_amount || 0);
+      const released = Number(r.released_amount || r.amount_released || 0);
+      return s + Math.max(0, approved - released);
+    }, 0);
     const pendingPayments = list.filter((r) =>
       [FINANCE_STATUS.AWAITING, FINANCE_STATUS.PARTIAL].includes(r.finance_status || FINANCE_STATUS.AWAITING)
     ).length;
@@ -156,7 +161,7 @@
       .filter((r) => String(r.released_at || r.resources_released_at || "").startsWith(ym))
       .reduce((s, r) => s + Number(r.released_amount || r.amount_released || 0), 0);
     return {
-      awaiting, released, partial, approvedTotal, releasedTotal, pendingPayments, releasedThisMonth, releasedValueMonth,
+      awaiting, released, partial, approvedTotal, releasedTotal, pendingTotal, pendingPayments, releasedThisMonth, releasedValueMonth,
       total: list.length
     };
   }

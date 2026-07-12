@@ -71,7 +71,9 @@
     if (module === "finance") {
       Object.keys(store.reportFilters || {}).forEach((key) => { store.reportFilters[key] = ""; });
       Object.keys(store.approvedReqFilters || {}).forEach((key) => { store.approvedReqFilters[key] = ""; });
+      Object.keys(store.requisitionReportFilters || {}).forEach((key) => { store.requisitionReportFilters[key] = ""; });
       store.approvedReqFilters.period = "month";
+      store.requisitionReportFilters.period = "month";
       store.sourceFilter = "";
       return;
     }
@@ -94,6 +96,8 @@
     }
     if (module === "requisitions") {
       store.cardFilter = {};
+      Object.keys(store.reportFilters || {}).forEach((key) => { store.reportFilters[key] = ""; });
+      store.reportFilters.period = "month";
       return;
     }
     if (module === "venue") {
@@ -131,7 +135,14 @@
       souls_contacted: t("soulsContacted", "Souls Contacted"),
       estado_filter: t("estado", "Status"),
       inventory_status: t("status", "Status"),
-      pending_value: t("reqPendingValue", "Pending Value")
+      pending_value: t("reqPendingValue", "Pending Value"),
+      card_filter: t("appliedFilter", "Filter"),
+      finance_status: t("finFinanceStatus", "Finance Status"),
+      requisition_type: t("reqType", "Requisition Type"),
+      requisition_status: t("reqRequisitionStatus", "Requisition Status"),
+      approved_by: t("finApprovedBy", "Approved by"),
+      released_by: t("reqReleasedBy", "Released by"),
+      requester: t("reqRequester", "Requester")
     };
     const label = labels[key] || key.replaceAll("_", " ");
     if (value === true) return `${label}`;
@@ -151,14 +162,24 @@
       if (store.birthdayFilters?.search) chips.push(["search", store.birthdayFilters.search]);
       if (store.birthdayFilters?.upcoming) chips.push(["upcoming", true]);
     } else if (module === "finance") {
-      Object.entries(store.reportFilters || {}).forEach(([k, v]) => { if (v) chips.push([k, v]); });
+      if (store.tab === "reports") {
+        Object.entries(store.requisitionReportFilters || {}).forEach(([k, v]) => { if (v) chips.push([k, v]); });
+      } else if (store.tab === "approvedRequisitions") {
+        Object.entries(store.approvedReqFilters || {}).forEach(([k, v]) => { if (v) chips.push([k, v]); });
+      } else {
+        Object.entries(store.reportFilters || {}).forEach(([k, v]) => { if (v) chips.push([k, v]); });
+      }
       if (store.sourceFilter) chips.push(["source", store.sourceFilter]);
     } else if (module === "churches") {
       Object.entries(store.filters || {}).forEach(([k, v]) => { if (v) chips.push([k, v]); });
     } else if (module === "foundation" || module === "firstTimers" || module === "followUp" || module === "fevo" || module === "venue" || module === "sacraments") {
       Object.entries(store.filter || {}).forEach(([k, v]) => { if (v !== "" && v != null) chips.push([k, v]); });
-    } else if (module === "requisitions" && store.cardFilter) {
-      Object.entries(store.cardFilter).forEach(([k, v]) => { if (v) chips.push([k, v]); });
+    } else if (module === "requisitions") {
+      if (store.tab === "reports") {
+        Object.entries(store.reportFilters || {}).forEach(([k, v]) => { if (v) chips.push([k, v]); });
+      } else if (store.cardFilter) {
+        Object.entries(store.cardFilter).forEach(([k, v]) => { if (v) chips.push([k, v]); });
+      }
     }
     return chips;
   }
@@ -239,7 +260,13 @@
       store.reportFilters.source = filters.source;
       if (payload.targetTab === "public") store.tab = "public";
     }
-    if (payload.targetTab === "approvedRequisitions" || filters.finance_status) {
+    if (payload.targetTab === "reports" || filters.card_filter) {
+      store.tab = payload.targetTab || store.tab || "reports";
+      store.requisitionReportFilters = store.requisitionReportFilters || {};
+      if (filters.period) store.requisitionReportFilters.period = filters.period;
+      Object.assign(store.requisitionReportFilters, filters);
+    }
+    if (payload.targetTab === "approvedRequisitions" || (filters.finance_status && payload.targetTab !== "reports")) {
       store.tab = payload.targetTab || "approvedRequisitions";
       store.approvedReqFilters = store.approvedReqFilters || {};
       if (filters.finance_status) store.approvedReqFilters.finance_status = filters.finance_status;
@@ -300,6 +327,10 @@
     if (!store) return;
     const filters = payload.filterPayload || {};
     if (payload.targetTab) store.tab = payload.targetTab;
+    if (payload.targetTab === "reports" || filters.card_filter) {
+      store.tab = payload.targetTab || store.tab || "reports";
+      store.reportFilters = { ...store.reportFilters, ...filters };
+    }
     if (filters.status_group === "pending" && !payload.targetTab) store.tab = "received";
     store.cardFilter = { ...store.cardFilter, ...filters };
     return true;

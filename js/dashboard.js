@@ -199,6 +199,29 @@ const TEXT = {
     finSentToInventory: "Enviar para Inventário",
     finSentToInventorySuccess: "Rascunho criado no Inventário.",
     reqSendToInventory: "Enviar para Inventário",
+    reqTabReports: "Relatórios de Requisições",
+    reqReportsTitle: "Relatórios de Requisições",
+    reqReportsHint: "Análise do workflow e dos valores aprovados vs liberados.",
+    reqReportWorkflow: "Workflow das Requisições",
+    reqPendingAmount: "Valor Pendente",
+    reqApprovedVsReleased: "Aprovado vs Liberado",
+    reqReportByDepartment: "Relatório por Departamento",
+    reqReportByChurch: "Relatório por Igreja",
+    reqReportByRequester: "Relatório por Solicitante",
+    reqReportByType: "Requisições por Tipo",
+    reqReportMonthly: "Evolução Mensal",
+    reqAvgPerRequisition: "Média por Requisição",
+    reqRemainingPending: "Valor Ainda Pendente",
+    reqExportPdf: "Exportar PDF",
+    reqExportExcel: "Exportar Excel",
+    reqPrintReport: "Imprimir Relatório",
+    reqViewRelease: "Ver Liberação",
+    reqRequisitionStatus: "Estado da Requisição",
+    reqReleasedBy: "Liberado por",
+    reqHighestRequisition: "Maior Requisição",
+    reqLastApproved: "Última Aprovação",
+    reqPredominantStatus: "Estado Predominante",
+    reqCompleted: "Concluídas",
     staffTabOverview: "Visão Geral",
     staffTabStaff: "Staff",
     staffTabDepartments: "Departamentos",
@@ -809,6 +832,29 @@ const TEXT = {
     finSentToInventory: "Send to Inventory",
     finSentToInventorySuccess: "Inventory draft created.",
     reqSendToInventory: "Send to Inventory",
+    reqTabReports: "Requisition Reports",
+    reqReportsTitle: "Requisition Reports",
+    reqReportsHint: "Workflow analysis and approved vs released amounts.",
+    reqReportWorkflow: "Requisition Workflow",
+    reqPendingAmount: "Pending Amount",
+    reqApprovedVsReleased: "Approved vs Released",
+    reqReportByDepartment: "Report by Department",
+    reqReportByChurch: "Report by Church",
+    reqReportByRequester: "Report by Requester",
+    reqReportByType: "Requisitions by Type",
+    reqReportMonthly: "Monthly Evolution",
+    reqAvgPerRequisition: "Average per Requisition",
+    reqRemainingPending: "Remaining Pending Amount",
+    reqExportPdf: "Export PDF",
+    reqExportExcel: "Export Excel",
+    reqPrintReport: "Print Report",
+    reqViewRelease: "View Release",
+    reqRequisitionStatus: "Requisition Status",
+    reqReleasedBy: "Released by",
+    reqHighestRequisition: "Highest Requisition",
+    reqLastApproved: "Last Approval",
+    reqPredominantStatus: "Predominant Status",
+    reqCompleted: "Completed",
     staffTabOverview: "Overview",
     staffTabStaff: "Staff",
     staffTabDepartments: "Departments",
@@ -2634,11 +2680,17 @@ const seedData = {
     { id: "req-5", request_number: "REQ-2026-0005", requested_by_user_id: "u-9", requested_by_name: "Sister Cassandra", department_id: "dept-programs", department_name: "Programas", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Evento/Programa", title: "Apoio logístico — Semana F.E.V.O", description: "Material de evangelização, transporte e refeições para equipas.", justification: "Semana intensiva de F.E.V.O nacional.", estimated_amount: 52000, currency: "MZN", urgency: "Urgente", needed_by_date: "2026-07-15", attachments: [{ type: "budget", name: "Orcamento-FEVO.xlsx" }], supplier_or_vendor: "", quotation_number: "", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-11T09:00:00.000Z", review_notes: "Encaminhado ao Pastor Principal.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-07-11T10:00:00.000Z", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "", rejected_at: "", rejection_reason: "", returned_by: "", returned_at: "", return_notes: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Enviado ao Pastor Principal", created_at: "2026-07-09T12:00:00.000Z", updated_at: "2026-07-11T10:00:00.000Z" },
     { id: "req-8", request_number: "REQ-2026-0008", requested_by_user_id: "u-12", requested_by_name: "Department Head Demo", department_id: "dept-cell", department_name: "Cell Ministry", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Material de Ministério", title: "Banners e material gráfico para evangelização", description: "Impressão de banners roll-up e flyers para campanha de Julho.", justification: "Campanha de evangelização nas células.", estimated_amount: 16500, currency: "MZN", urgency: "Alta", needed_by_date: "2026-07-18", attachments: [], supplier_or_vendor: "Print House", quotation_number: "QT-2026-040", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-08T10:00:00.000Z", review_notes: "Aprovado internamente.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-07-08T11:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-07-09T14:00:00.000Z", approved_amount: 15000, approval_notes: "Aprovado com limite de 15.000 MZN.", final_priority: "Alta", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", released_amount: 0, amount_released: 0, finance_status: "Aguardando Liberação", sent_to_finance: true, sent_to_finance_at: "2026-07-09T14:00:00.000Z", finance_disbursement_id: "disb-req-8", payment_method: "", payment_reference: "", payment_notes: "", finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Aprovado — Aguardando Liberação de Recursos", created_at: "2026-07-06T08:00:00.000Z", updated_at: "2026-07-09T14:00:00.000Z" },
     { id: "req-6", request_number: "REQ-2026-0006", requested_by_user_id: "u-14", requested_by_name: "Finance Officer Demo", department_id: "dept-finance", department_name: "Finanças", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Pagamento de Serviço", title: "Auditoria externa trimestral", description: "Serviço de revisão de registos financeiros Q2.", justification: "Conformidade e transparência.", estimated_amount: 35000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-07-30", attachments: [], supplier_or_vendor: "Audit Partners Lda", quotation_number: "QT-AUD-02", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-06T10:00:00.000Z", review_notes: "Não prioritário neste momento.", sent_to_main_pastor_at: "2026-07-06T11:00:00.000Z", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "Pastor Kene Ume", rejected_at: "2026-07-07T09:00:00.000Z", rejection_reason: "Adiar para o próximo trimestre.", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", status: "Rejeitado", created_at: "2026-07-04T08:00:00.000Z", updated_at: "2026-07-07T09:00:00.000Z" },
+    { id: "req-9", request_number: "REQ-2026-0009", requested_by_user_id: "u-8", requested_by_name: "Pastor da Igreja", department_id: "dept-media", department_name: "Media", church_id: "church-matola", church_name: "Igreja Embaixada de Cristo Matola", requisition_type: "Equipamento", title: "Câmaras adicionais para transmissão", description: "Duas câmaras PTZ para melhorar transmissão dos cultos em Matola.", justification: "Expansão do ministério de media local.", estimated_amount: 48000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-07-28", attachments: [], supplier_or_vendor: "AV Supplier", quotation_number: "QT-AV-12", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-06-25T10:00:00.000Z", review_notes: "Aprovado internamente.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-06-26T10:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-06-27T10:00:00.000Z", approved_amount: 45000, approval_notes: "Aprovado parcialmente até 45.000 MZN.", final_priority: "Normal", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "Finance Head Demo", released_by: "Finance Head Demo", resources_released_at: "2026-07-01T10:00:00.000Z", released_at: "2026-07-01T10:00:00.000Z", released_amount: 25000, amount_released: 25000, finance_status: "Parcialmente Pago", sent_to_finance: true, sent_to_finance_at: "2026-06-27T10:00:00.000Z", finance_disbursement_id: "disb-req-9", payment_method: "Banco", payment_reference: "TRF-AV-01", payment_notes: "Primeira tranche de pagamento.", finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Aprovado — Aguardando Liberação de Recursos", created_at: "2026-06-20T08:00:00.000Z", updated_at: "2026-07-01T10:00:00.000Z" },
+    { id: "req-10", request_number: "REQ-2026-0010", requested_by_user_id: "u-3", requested_by_name: "Sister Janet Marquele", department_id: "dept-programs", department_name: "Programas", church_id: "church-beira", church_name: "Igreja Embaixada de Cristo Beira", requisition_type: "Transporte", title: "Transporte para conferência regional — Beira", description: "Deslocação de equipa de apoio para conferência em Beira.", justification: "Apoio ao evento regional de Julho.", estimated_amount: 22000, currency: "MZN", urgency: "Alta", needed_by_date: "2026-07-22", attachments: [], supplier_or_vendor: "Transporte CE", quotation_number: "QT-BR-03", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-07T10:00:00.000Z", review_notes: "Encaminhado.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-07-07T11:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-07-08T09:00:00.000Z", approved_amount: 20000, approval_notes: "Aprovado com tecto de 20.000 MZN.", final_priority: "Alta", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", released_amount: 0, amount_released: 0, finance_status: "Aguardando Liberação", sent_to_finance: true, sent_to_finance_at: "2026-07-08T09:00:00.000Z", finance_disbursement_id: "disb-req-10", payment_method: "", payment_reference: "", payment_notes: "", finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Aprovado — Aguardando Liberação de Recursos", created_at: "2026-07-04T08:00:00.000Z", updated_at: "2026-07-08T09:00:00.000Z" },
+    { id: "req-11", request_number: "REQ-2026-0011", requested_by_user_id: "u-4", requested_by_name: "Sister Angelica", department_id: "dept-cell", department_name: "Ministério de Células", church_id: "church-nampula", church_name: "Igreja Embaixada de Cristo Nampula", requisition_type: "Material de Ministério", title: "Manuais e apostilas — Escola de Células Nampula", description: "Material impresso para formação de líderes de célula.", justification: "Formação trimestral em Nampula.", estimated_amount: 12000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-08-05", attachments: [], supplier_or_vendor: "Print Nampula", quotation_number: "QT-NPL-07", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-06-15T10:00:00.000Z", review_notes: "OK.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-06-16T10:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-06-17T10:00:00.000Z", approved_amount: 12000, approval_notes: "Aprovado.", final_priority: "Normal", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "Finance Head Demo", released_by: "Finance Head Demo", resources_released_at: "2026-06-18T10:00:00.000Z", released_at: "2026-06-18T10:00:00.000Z", released_amount: 12000, amount_released: 12000, finance_status: "Recursos Liberados", sent_to_finance: true, sent_to_finance_at: "2026-06-17T10:00:00.000Z", finance_disbursement_id: "disb-req-11", payment_method: "M-Pesa", payment_reference: "MP-NPL-07", payment_notes: "", finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Recursos Liberados", created_at: "2026-06-10T08:00:00.000Z", updated_at: "2026-06-18T10:00:00.000Z" },
     { id: "req-7", request_number: "REQ-2026-0007", requested_by_user_id: "u-11", requested_by_name: "Marcelo Panguene", department_id: "dept-venue", department_name: "Venue Management", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Equipamento", title: "Laptop para técnico de som", description: "Laptop dedicado para software de som digital.", justification: "Substituição de equipamento antigo.", estimated_amount: 62000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-06-30", attachments: [], supplier_or_vendor: "IT Supplier", quotation_number: "QT-IT-08", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-06-20T10:00:00.000Z", review_notes: "Compra concluída e registada.", sent_to_main_pastor_at: "2026-06-21T10:00:00.000Z", approved_by: "Pastor Kene Ume", approved_at: "2026-06-22", approval_notes: "Aprovado.", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "Finance Head Demo", released_by: "Finance Head Demo", resources_released_at: "2026-06-23T10:00:00.000Z", released_at: "2026-06-23T10:00:00.000Z", released_amount: 62000, amount_released: 62000, finance_status: "Pago", sent_to_finance: true, sent_to_finance_at: "2026-06-22T10:00:00.000Z", finance_disbursement_id: "disb-req-7", payment_method: "Banco", payment_reference: "TRF-IT-07", finance_record_id: "", inventory_item_id: "inv-req-req-7", status: "Fechado", created_at: "2026-06-15T08:00:00.000Z", updated_at: "2026-06-28T10:00:00.000Z" }
   ],
   financeDisbursements: [
     { id: "disb-req-8", requisition_id: "req-8", request_number: "REQ-2026-0008", title: "Banners e material gráfico para evangelização", department_name: "Cell Ministry", church_name: "National HQ - Christ Embassy Mozambique", requested_by: "Department Head Demo", approved_by: "Pastor Kene Ume", approved_at: "2026-07-09T14:00:00.000Z", approved_amount: 15000, released_amount: 0, status: "Aguardando Liberação", source: "requisition", transaction_type: "expense", created_at: "2026-07-09T14:00:00.000Z", updated_at: "2026-07-09T14:00:00.000Z" },
-    { id: "disb-req-4", requisition_id: "req-4", request_number: "REQ-2026-0004", title: "Microfones sem fio adicionais", department_name: "Venue Management", church_name: "National HQ - Christ Embassy Mozambique", requested_by: "Marcelo Panguene", approved_by: "Pastor Kene Ume", approved_at: "2026-07-03T10:00:00.000Z", approved_amount: 74000, released_amount: 74000, released_by: "Finance Head Demo", released_at: "2026-07-04T15:00:00.000Z", payment_method: "Banco", payment_reference: "TRF-2026-044", status: "Recursos Liberados", source: "requisition", transaction_type: "expense", created_at: "2026-07-03T10:00:00.000Z", updated_at: "2026-07-04T15:00:00.000Z" }
+    { id: "disb-req-4", requisition_id: "req-4", request_number: "REQ-2026-0004", title: "Microfones sem fio adicionais", department_name: "Venue Management", church_name: "National HQ - Christ Embassy Mozambique", requested_by: "Marcelo Panguene", approved_by: "Pastor Kene Ume", approved_at: "2026-07-03T10:00:00.000Z", approved_amount: 74000, released_amount: 74000, released_by: "Finance Head Demo", released_at: "2026-07-04T15:00:00.000Z", payment_method: "Banco", payment_reference: "TRF-2026-044", status: "Recursos Liberados", source: "requisition", transaction_type: "expense", created_at: "2026-07-03T10:00:00.000Z", updated_at: "2026-07-04T15:00:00.000Z" },
+    { id: "disb-req-9", requisition_id: "req-9", request_number: "REQ-2026-0009", title: "Câmaras adicionais para transmissão", department_name: "Media", church_name: "Igreja Embaixada de Cristo Matola", requested_by: "Pastor da Igreja", approved_by: "Pastor Kene Ume", approved_at: "2026-06-27T10:00:00.000Z", approved_amount: 45000, released_amount: 25000, released_by: "Finance Head Demo", released_at: "2026-07-01T10:00:00.000Z", payment_method: "Banco", payment_reference: "TRF-AV-01", status: "Parcialmente Pago", source: "requisition", transaction_type: "expense", created_at: "2026-06-27T10:00:00.000Z", updated_at: "2026-07-01T10:00:00.000Z" },
+    { id: "disb-req-10", requisition_id: "req-10", request_number: "REQ-2026-0010", title: "Transporte para conferência regional — Beira", department_name: "Programas", church_name: "Igreja Embaixada de Cristo Beira", requested_by: "Sister Janet Marquele", approved_by: "Pastor Kene Ume", approved_at: "2026-07-08T09:00:00.000Z", approved_amount: 20000, released_amount: 0, status: "Aguardando Liberação", source: "requisition", transaction_type: "expense", created_at: "2026-07-08T09:00:00.000Z", updated_at: "2026-07-08T09:00:00.000Z" },
+    { id: "disb-req-11", requisition_id: "req-11", request_number: "REQ-2026-0011", title: "Manuais e apostilas — Escola de Células Nampula", department_name: "Ministério de Células", church_name: "Igreja Embaixada de Cristo Nampula", requested_by: "Sister Angelica", approved_by: "Pastor Kene Ume", approved_at: "2026-06-17T10:00:00.000Z", approved_amount: 12000, released_amount: 12000, released_by: "Finance Head Demo", released_at: "2026-06-18T10:00:00.000Z", payment_method: "M-Pesa", payment_reference: "MP-NPL-07", status: "Recursos Liberados", source: "requisition", transaction_type: "expense", created_at: "2026-06-17T10:00:00.000Z", updated_at: "2026-06-18T10:00:00.000Z" }
   ],
   staffProfiles: [
     { id: "staff-1", user_id: "u-5", full_name: "Flavia Moneedi Tivane", title: "Pastora", gender: "Feminino", phone: "860000101", whatsapp: "860000101", email: "flavia@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-cell", department_name: "Ministério de Células", role_title: "Cell Ministry Head", supervisor_user_id: "u-17", supervisor_name: "Pastor Kene Ume", start_date: "2024-01-15", employment_type: "Full-time", salary_or_allowance: 45000, payment_frequency: "Mensal", payment_method: "Banco", bank_name: "BCI", bank_account_number: "****4521", bank_or_mobile_details: "BCI ****4521", marital_status: "Casado/a", address: "Maputo, KaMpfumo", contract_start_date: "2024-01-15", status: "Activo", date_of_birth: "1990-03-14", notes: "", created_at: "2024-01-15", updated_at: "2026-07-10" },
@@ -2938,6 +2990,23 @@ const financePageState = {
     minValue: "",
     maxValue: ""
   },
+  requisitionReportFilters: {
+    period: "month",
+    dateFrom: "",
+    dateTo: "",
+    churchId: "",
+    department: "",
+    requisition_type: "",
+    urgency: "",
+    finance_status: "",
+    requisition_status: "",
+    requester: "",
+    approved_by: "",
+    released_by: "",
+    minValue: "",
+    maxValue: "",
+    card_filter: ""
+  },
   reportFilters: {
     period: "month",
     dateFrom: "",
@@ -2960,7 +3029,7 @@ const churchPageState = {
   view: localStorage.getItem(CHURCH_VIEW_KEY) || "cards",
   filters: { search: "", province: "", city: "", type: "", status: "", information_status: "" }
 };
-const requisitionsPageState = { tab: "overview", cardFilter: {} };
+const requisitionsPageState = { tab: "overview", cardFilter: {}, reportFilters: { period: "month", dateFrom: "", dateTo: "", churchId: "", department: "", requisition_type: "", urgency: "", finance_status: "", requisition_status: "", requester: "", approved_by: "", released_by: "", minValue: "", maxValue: "", card_filter: "" } };
 const staffHrPageState = {
   tab: "overview",
   selectedStaffId: "",
@@ -3839,6 +3908,233 @@ function submitFinanceReleaseDrawer(form) {
   alert(L("finReleaseSuccess"));
   if (activeRoute === "finance") renderFinance();
   else setRoute("finance");
+}
+
+function requisitionReportFilterBar(filters, formAttr = "data-requisition-report-filters") {
+  const rep = window.CERequisitionReports;
+  const disb = window.CEFinanceDisbursements;
+  const statuses = disb?.FINANCE_STATUS || rep?.FINANCE_STATUS || {};
+  const departments = [...new Set((state.requisitions || []).map((r) => r.department_name).filter(Boolean))];
+  const types = window.CERequisitions?.TYPES || [];
+  const reqStatuses = [...new Set((state.requisitions || []).map((r) => r.status).filter(Boolean))];
+  const periodOpts = [
+    ["today", L("financePeriodToday")],
+    ["week", L("financePeriodWeek")],
+    ["month", L("financePeriodMonth")],
+    ["quarter", L("financePeriodQuarter")],
+    ["year", L("financePeriodYear")],
+    ["custom", L("financePeriodCustom")]
+  ];
+  return `<form class="row g-3 requisition-report-filters mb-4" ${formAttr}>
+    <div class="col-md-2"><label class="form-label">${L("financePeriodMonth")}</label>
+      <select name="period" class="form-select">${periodOpts.map(([v, l]) => `<option value="${v}" ${filters.period === v ? "selected" : ""}>${l}</option>`).join("")}</select></div>
+    <div class="col-md-2"><label class="form-label">${L("church")}</label>
+      <select name="churchId" class="form-select"><option value="">${L("all")}</option>${scoped(state.churches).map((c) => `<option value="${c.id}" ${filters.churchId === c.id ? "selected" : ""}>${c.church_name}</option>`).join("")}</select></div>
+    <div class="col-md-2"><label class="form-label">${L("reqDepartment")}</label>
+      <select name="department" class="form-select"><option value="">${L("all")}</option>${departments.map((d) => `<option value="${d}" ${filters.department === d ? "selected" : ""}>${d}</option>`).join("")}</select></div>
+    <div class="col-md-2"><label class="form-label">${L("reqType")}</label>
+      <select name="requisition_type" class="form-select"><option value="">${L("all")}</option>${types.map((t) => `<option value="${t}" ${filters.requisition_type === t ? "selected" : ""}>${t}</option>`).join("")}</select></div>
+    <div class="col-md-2"><label class="form-label">${L("finFinanceStatus")}</label>
+      <select name="finance_status" class="form-select"><option value="">${L("all")}</option>${Object.values(statuses).map((s) => `<option value="${s}" ${filters.finance_status === s ? "selected" : ""}>${s}</option>`).join("")}</select></div>
+    <div class="col-md-2"><label class="form-label">${L("reqRequisitionStatus")}</label>
+      <select name="requisition_status" class="form-select"><option value="">${L("all")}</option>${reqStatuses.map((s) => `<option value="${s}" ${filters.requisition_status === s ? "selected" : ""}>${s}</option>`).join("")}</select></div>
+    <div class="col-md-2"><label class="form-label">${L("reqUrgency")}</label>
+      <select name="urgency" class="form-select"><option value="">${L("all")}</option>${(window.CERequisitions?.URGENCY || []).map((u) => `<option value="${u}" ${filters.urgency === u ? "selected" : ""}>${u}</option>`).join("")}</select></div>
+    <div class="col-md-2"><label class="form-label">${L("reqRequester")}</label><input name="requester" class="form-control" value="${filters.requester || ""}"></div>
+    <div class="col-md-2"><label class="form-label">${L("finApprovedBy")}</label><input name="approved_by" class="form-control" value="${filters.approved_by || ""}"></div>
+    <div class="col-md-2"><label class="form-label">${L("reqReleasedBy")}</label><input name="released_by" class="form-control" value="${filters.released_by || ""}"></div>
+    <div class="col-md-1"><label class="form-label">Min</label><input name="minValue" type="number" class="form-control" value="${filters.minValue || ""}"></div>
+    <div class="col-md-1"><label class="form-label">Max</label><input name="maxValue" type="number" class="form-control" value="${filters.maxValue || ""}"></div>
+    <div class="col-md-4 d-flex align-items-end gap-2">
+      <button type="submit" class="btn btn-ce-gold">${L("save")}</button>
+      <button type="button" class="btn btn-outline-glass" data-requisition-report-clear>${L("clearFilters")}</button>
+    </div>
+  </form>`;
+}
+
+function requisitionReportTableRows(list) {
+  return list.map((r) => [
+    r.request_number,
+    r.title,
+    r.church_name || churchName(r.church_id),
+    r.department_name,
+    r.requested_by_name,
+    r.requisition_type,
+    r.urgency,
+    formatDateTime(r.approved_at).split(",")[0] || "-",
+    r.approved_by || "-",
+    money(r.approved_amount),
+    money(r.released_amount),
+    money(r.pending_amount),
+    financeApprovedReqBadge(r.finance_status || "Aguardando Liberação"),
+    r.released_by || r.resources_released_by || "-",
+    formatDateTime(r.released_at || r.resources_released_at).split(",")[0] || "-",
+    financeApprovedReqActions(r)
+  ]);
+}
+
+function exportRequisitionReportExcel(list) {
+  const rep = window.CERequisitionReports;
+  if (!rep?.exportCsv) return;
+  rep.exportCsv(list,
+    ["Nº", "Título", "Igreja", "Departamento", "Solicitante", "Tipo", "Aprovado", "Liberado", "Pendente", "Estado Financeiro"],
+    (r) => [r.request_number, r.title, r.church_name, r.department_name, r.requested_by_name, r.requisition_type, r.approved_amount, r.released_amount, r.pending_amount, r.finance_status]
+  );
+}
+
+function buildRequisitionReportExportHtml(list, stats) {
+  const rows = list.map((r) => `
+    <tr>
+      <td>${r.request_number || ""}</td>
+      <td>${r.title || ""}</td>
+      <td>${r.church_name || churchName(r.church_id) || ""}</td>
+      <td>${r.department_name || ""}</td>
+      <td>${r.requested_by_name || ""}</td>
+      <td>${money(r.approved_amount)}</td>
+      <td>${money(r.released_amount)}</td>
+      <td>${money(r.pending_amount)}</td>
+      <td>${r.finance_status || ""}</td>
+    </tr>`).join("");
+  return `
+    <h1>${L("reqReportsTitle")}</h1>
+    <p class="meta">${new Date().toLocaleString()} · ${activeUser.name} (${activeUser.role})</p>
+    <div class="summary">
+      <div class="card"><span>${L("finApprovedRequisitions")}</span><strong>${stats.approvedCount || stats.total}</strong></div>
+      <div class="card"><span>${L("reqApprovedValue")}</span><strong>${money(stats.approvedTotal)}</strong></div>
+      <div class="card"><span>${L("finReleasedAmount")}</span><strong>${money(stats.releasedTotal)}</strong></div>
+      <div class="card"><span>${L("reqRemainingPending")}</span><strong>${money(stats.pendingTotal)}</strong></div>
+    </div>
+    <table>
+      <thead><tr>
+        <th>${L("reqNumber")}</th><th>${L("reqTitle")}</th><th>${L("church")}</th><th>${L("reqDepartment")}</th>
+        <th>${L("reqRequester")}</th><th>${L("finApprovedAmount")}</th><th>${L("finReleasedAmount")}</th>
+        <th>${L("reqPendingAmount")}</th><th>${L("finFinanceStatus")}</th>
+      </tr></thead>
+      <tbody>${rows || `<tr><td colspan="9">${L("noResultsFound")}</td></tr>`}</tbody>
+    </table>`;
+}
+
+function getActiveRequisitionReportContext() {
+  const rep = window.CERequisitionReports;
+  if (!rep) return { list: [], stats: {} };
+  const workflowMode = activeRoute === "requisitions" && requisitionsPageState.tab === "reports";
+  const mode = workflowMode ? "workflow" : "finance";
+  const filters = workflowMode ? requisitionsPageState.reportFilters : financePageState.requisitionReportFilters;
+  const rawList = mode === "workflow" ? rep.getWorkflowList(state, activeUser) : rep.getFinanceApprovedList(state, activeUser);
+  const list = rep.filterRecords(rawList, { ...filters, mode });
+  return { list, stats: rep.computeReportStats(list), mode, filters };
+}
+
+function renderRequisitionReportsPanel(options = {}) {
+  const rep = window.CERequisitionReports;
+  if (!rep?.canViewReports(activeUser)) {
+    return `<div class="finance-privacy-banner"><i class="bi bi-shield-lock"></i><span>${L("accessDeniedText")}</span></div>`;
+  }
+  const mode = options.mode || "finance";
+  const compact = Boolean(options.compact);
+  const filters = options.filters || financePageState.requisitionReportFilters;
+  const moduleKey = options.module || "finance";
+  const rawList = mode === "workflow" ? rep.getWorkflowList(state, activeUser) : rep.getFinanceApprovedList(state, activeUser);
+  const list = rep.filterRecords(rawList, { ...filters, mode });
+  const stats = rep.computeReportStats(list);
+  const labelFn = (key) => L(key);
+  const vsChart = typeof financeSemanticBarChart === "function"
+    ? financeSemanticBarChart(L("reqApprovedVsReleased"), rep.chartApprovedVsReleased(stats, labelFn), "gold", L("financeNoChartData"))
+    : "";
+  const statusChart = typeof financeDonutChart === "function"
+    ? financeDonutChart(L("finFinanceStatus"), rep.chartByFinanceStatus(list, labelFn), L("financeNoChartData"))
+    : "";
+  const deptChart = typeof financeHBarChart === "function"
+    ? financeHBarChart(L("reqReportByDepartment"), rep.groupSum(list, "department_name", "approved_amount"), L("financeNoChartData"))
+    : "";
+  const churchChart = typeof financeHBarChart === "function"
+    ? financeHBarChart(L("reqReportByChurch"), rep.groupSum(list, "church_name", "approved_amount"), L("financeNoChartData"))
+    : "";
+  const typeChart = typeof financeSemanticBarChart === "function"
+    ? financeSemanticBarChart(L("reqReportByType"), rep.groupSum(list, "requisition_type", "approved_amount"), "cyan", L("financeNoChartData"))
+    : "";
+  const monthlyRows = rep.chartMonthlyDual(list).map(([m, v]) => [m, v.approved]);
+  const monthlyChart = typeof financeLineChart === "function"
+    ? financeLineChart(L("reqReportMonthly"), monthlyRows, L("financeNoChartData"))
+    : "";
+  const workflowChart = mode === "workflow" && typeof financeDonutChart === "function"
+    ? financeDonutChart(L("reqReportWorkflow"), Object.entries(rep.computeWorkflowStats(list)).map(([s, c]) => [s, c]), L("financeNoChartData"))
+    : "";
+
+  const summaryCards = `
+    <div class="row g-3 summary-cards-row requisition-report-cards mb-4">
+      ${sm("bi-clipboard-check", L("finApprovedRequisitions"), stats.approvedCount || stats.total, moduleKey, { targetTab: options.targetTab || "approvedRequisitions", filterPayload: { card_filter: "approved" } })}
+      ${sm("bi-hourglass-split", L("finAwaitingRelease"), stats.awaiting, moduleKey, { targetTab: options.targetTab || "approvedRequisitions", filterPayload: { card_filter: "awaiting", finance_status: "Aguardando Liberação" } })}
+      ${sm("bi-check-circle", L("finResourcesReleased"), stats.released, moduleKey, { targetTab: options.targetTab || "approvedRequisitions", filterPayload: { card_filter: "released", finance_status: "Recursos Liberados" } })}
+      ${sm("bi-pie-chart", L("finPartialPayment"), stats.partial, moduleKey, { targetTab: options.targetTab || "approvedRequisitions", filterPayload: { card_filter: "partial", finance_status: "Parcialmente Pago" } })}
+      ${sm("bi-cash-coin", L("reqApprovedValue"), money(stats.approvedTotal), moduleKey, { targetTab: options.targetTab || "approvedRequisitions" })}
+      ${sm("bi-wallet2", L("finReleasedAmount"), money(stats.releasedTotal), moduleKey, { targetTab: options.targetTab || "approvedRequisitions", filterPayload: { finance_status: "Recursos Liberados" } })}
+      ${sm("bi-clock-history", L("reqRemainingPending"), money(stats.pendingTotal), moduleKey, { targetTab: options.targetTab || "approvedRequisitions", filterPayload: { card_filter: "awaiting" } })}
+      ${sm("bi-calculator", L("reqAvgPerRequisition"), money(stats.avg), moduleKey, { targetTab: options.targetTab || "approvedRequisitions" })}
+    </div>`;
+
+  const deptGroups = rep.groupByDepartment(list);
+  const churchGroups = rep.groupByChurch(list);
+  const requesterGroups = rep.groupByRequester(list);
+
+  const deptTable = dataTable(
+    [L("reqDepartment"), L("finApprovedRequisitions"), L("finApprovedAmount"), L("finReleasedAmount"), L("reqRemainingPending"), L("finPartialPayment"), L("reqHighestRequisition")],
+    deptGroups.map((g) => [g.department, g.count, money(g.approvedTotal), money(g.releasedTotal), money(g.pendingTotal), g.partialCount, g.maxReq ? `${g.maxReq.request_number} (${money(g.maxReq.approved_amount)})` : "-"])
+  );
+  const churchTable = dataTable(
+    [L("church"), L("finApprovedAmount"), L("finReleasedAmount"), L("reqRemainingPending"), L("finAwaitingRelease"), L("reqCompleted")],
+    churchGroups.map((g) => [g.church, money(g.approvedTotal), money(g.releasedTotal), money(g.pendingTotal), g.awaiting, g.completed])
+  );
+  const requesterTable = dataTable(
+    [L("reqRequester"), L("reqDepartment"), L("church"), L("finApprovedRequisitions"), L("finApprovedAmount"), L("finReleasedAmount"), L("reqPredominantStatus"), L("reqLastApproved")],
+    requesterGroups.map((g) => [g.name, g.department, g.church, g.count, money(g.approvedTotal), money(g.releasedTotal), g.predominantStatus, g.lastReq?.request_number || "-"])
+  );
+
+  const detailTable = dataTable(
+    [L("reqNumber"), L("reqTitle"), L("church"), L("reqDepartment"), L("reqRequester"), L("reqType"), L("reqUrgency"), L("finApprovedAt"), L("finApprovedBy"), L("finApprovedAmount"), L("finReleasedAmount"), L("reqPendingAmount"), L("finFinanceStatus"), L("reqReleasedBy"), L("finReleaseDate"), L("actions")],
+    requisitionReportTableRows(list)
+  );
+
+  const exportBtns = rep.canExportReports(activeUser) ? `
+    <div class="requisition-report-export d-flex flex-wrap gap-2 mb-4">
+      <button type="button" class="btn btn-ce-gold" data-req-report-export="excel"><i class="bi bi-file-earmark-excel me-1"></i>${L("reqExportExcel")}</button>
+      <button type="button" class="btn btn-outline-cyan" data-req-report-export="print"><i class="bi bi-printer me-1"></i>${L("reqPrintReport")}</button>
+      <button type="button" class="btn btn-outline-glass" data-req-report-export="pdf"><i class="bi bi-file-earmark-pdf me-1"></i>${L("reqExportPdf")}</button>
+    </div>` : "";
+
+  if (compact) {
+    return `
+      <div class="row g-4 mb-4 requisition-reports-compact">
+        <div class="col-xl-6">${vsChart}</div>
+        <div class="col-xl-6">${statusChart}</div>
+      </div>`;
+  }
+
+  return `
+    <div class="requisition-reports-panel" data-req-report-list="${list.length}">
+      ${options.showTitle !== false ? `<div class="mb-3"><h3 class="panel-title"><i class="bi bi-graph-up-arrow me-2"></i>${L("reqReportsTitle")}</h3><p class="text-secondary mb-0">${L("reqReportsHint")}</p></div>` : ""}
+      ${requisitionReportFilterBar(filters, options.formAttr || "data-requisition-report-filters")}
+      ${summaryCards}
+      ${exportBtns}
+      ${workflowChart ? `<div class="row g-4 mb-4"><div class="col-xl-6">${workflowChart}</div><div class="col-xl-6">${statusChart}</div></div>` : ""}
+      <div class="row g-4 mb-4">
+        <div class="col-xl-${workflowChart ? "12" : "6"}">${vsChart}</div>
+        ${workflowChart ? "" : `<div class="col-xl-6">${statusChart}</div>`}
+        <div class="col-xl-6">${deptChart}</div>
+        <div class="col-xl-6">${churchChart}</div>
+        <div class="col-xl-6">${typeChart}</div>
+        <div class="col-xl-6">${monthlyChart}</div>
+      </div>
+      <div class="row g-4 mb-4">
+        <div class="col-12"><article class="panel glass-panel"><div class="panel-head"><h3 class="panel-title">${L("reqReportByDepartment")}</h3></div>${deptTable}</article></div>
+        <div class="col-xl-6"><article class="panel glass-panel"><div class="panel-head"><h3 class="panel-title">${L("reqReportByChurch")}</h3></div>${churchTable}</article></div>
+        <div class="col-xl-6"><article class="panel glass-panel"><div class="panel-head"><h3 class="panel-title">${L("reqReportByRequester")}</h3></div>${requesterTable}</article></div>
+      </div>
+      <article class="panel glass-panel mb-0">
+        <div class="panel-head"><h3 class="panel-title">${L("reqReportsTitle")}</h3><span class="text-secondary small">${list.length} ${L("finApprovedRequisitions").toLowerCase()}</span></div>
+        ${detailTable}
+      </article>
+    </div>`;
 }
 
 function financeReportStatsCards(stats) {
@@ -6356,6 +6652,7 @@ function renderFinance() {
           ${sm("bi-hourglass-split", L("finAwaitingRelease"), approvedReqStats.awaiting || 0, "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Aguardando Liberação" } })}
           ${sm("bi-cash-stack", L("finReleasedThisMonth"), approvedReqStats.releasedThisMonth || 0, "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Recursos Liberados", period: "month" } })}
           ${sm("bi-graph-up", L("finTotalReleasedMonth"), money(approvedReqStats.releasedValueMonth || 0), "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Recursos Liberados", period: "month" } })}
+          ${sm("bi-clock-history", L("reqRemainingPending"), money(approvedReqStats.pendingTotal || 0), "finance", { targetTab: "reports", filterPayload: { card_filter: "awaiting" } })}
         </div>`)}
       ${moduleSection(L("financeAnalyticsSection"), L("financeAnalyticsHint"), "bi-pie-chart", "", `
         <div class="row g-4">
@@ -6389,6 +6686,7 @@ function renderFinance() {
           ${sm("bi-pie-chart", L("finPartiallyPaid"), reqStats.partial, "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Parcialmente Pago" } })}
         </div>
         ${financeApprovedReqFilterBar(filters)}
+        ${renderRequisitionReportsPanel({ compact: true, showTitle: false, filters: { ...financePageState.requisitionReportFilters, ...filters } })}
         ${filteredApproved.length ? dataTable(
           [L("reqNumber"), L("reqTitle"), L("reqDepartment"), L("church"), L("reqRequester"), L("finApprovedBy"), L("reqApprovedAmount"), L("finReleasedAmount"), L("finFinanceStatus"), L("actions")],
           filteredApproved.map((r) => [
@@ -6446,7 +6744,8 @@ function renderFinance() {
               ${financePartnersArmCards(armDetails)}
             </article>
           </div>
-        </div>`)}`;
+        </div>`)}
+      ${moduleSection(L("reqReportsTitle"), L("reqReportsHint"), "bi-clipboard-data", "", renderRequisitionReportsPanel({ showTitle: false, filters: financePageState.requisitionReportFilters, targetTab: "reports" }))}`;
   } else if (financePageState.tab === "partners") {
     tabContent = moduleSection(L("financeFeaturedPartners"), L("financeReportsHint"), "bi-stars", "", `
       ${privacyBanner}
@@ -7461,6 +7760,7 @@ function requisitionsModuleTabs() {
     ["approved", L("reqTabApproved")],
     ["rejected", L("reqTabRejected")],
     ["released", L("reqTabReleased")],
+    ["reports", L("reqTabReports")],
     ["history", L("reqTabHistory")]
   ];
   return moduleTabsNav(tabs.map(([key, label]) =>
@@ -7775,6 +8075,14 @@ function renderRequisitions() {
       ${summaryFilterChips("requisitions")}
       ${dataTable([L("reqNumber"), L("reqTitle"), L("reqDepartment"), L("reqType"), L("reqEstimated"), L("status"), L("actions")],
         scoped.slice(0, 8).map((r) => [r.request_number, r.title, r.department_name, r.requisition_type, money(r.estimated_amount), requisitionStatusBadge(r.status), requisitionActionButtons(r)]))}`;
+  } else if (requisitionsPageState.tab === "reports") {
+    tabContent = renderRequisitionReportsPanel({
+      mode: "workflow",
+      module: "requisitions",
+      targetTab: "reports",
+      filters: requisitionsPageState.reportFilters,
+      formAttr: "data-requisition-module-report-filters"
+    });
   } else if (requisitionsPageState.tab === "new") {
     tabContent = access.can_create ? `
       <div class="d-flex justify-content-end mb-3">
@@ -9044,6 +9352,31 @@ document.addEventListener("click", (event) => {
     if (activeRoute === "finance") renderFinance();
     return;
   }
+  if (event.target.closest("[data-requisition-report-clear]")) {
+    const defaultFilters = { period: "month", dateFrom: "", dateTo: "", churchId: "", department: "", requisition_type: "", urgency: "", finance_status: "", requisition_status: "", requester: "", approved_by: "", released_by: "", minValue: "", maxValue: "", card_filter: "" };
+    const moduleForm = event.target.closest("form[data-requisition-module-report-filters]");
+    if (moduleForm) {
+      requisitionsPageState.reportFilters = { ...defaultFilters };
+      if (activeRoute === "requisitions") renderRequisitions();
+    } else {
+      financePageState.requisitionReportFilters = { ...defaultFilters };
+      if (activeRoute === "finance") renderFinance();
+    }
+    return;
+  }
+  const reqReportExport = event.target.closest("[data-req-report-export]");
+  if (reqReportExport) {
+    const rep = window.CERequisitionReports;
+    if (!rep?.canExportReports(activeUser)) return;
+    const { list, stats } = getActiveRequisitionReportContext();
+    const kind = reqReportExport.dataset.reqReportExport;
+    if (kind === "excel") exportRequisitionReportExcel(list);
+    else if (kind === "print") window.print();
+    else if (kind === "pdf" && typeof exportFinancePrint === "function") {
+      exportFinancePrint(buildRequisitionReportExportHtml(list, stats), L("reqReportsTitle"));
+    }
+    return;
+  }
   const requisitionTabBtn = event.target.closest("[data-requisition-tab]");
   if (requisitionTabBtn) {
     requisitionsPageState.tab = requisitionTabBtn.dataset.requisitionTab || "overview";
@@ -9154,6 +9487,20 @@ byId("entryForm")?.addEventListener("submit", (event) => {
 });
 
 document.addEventListener("submit", (event) => {
+  if (event.target.matches("[data-requisition-report-filters]")) {
+    event.preventDefault();
+    const data = Object.fromEntries(new FormData(event.target).entries());
+    financePageState.requisitionReportFilters = { ...financePageState.requisitionReportFilters, ...data };
+    if (activeRoute === "finance") renderFinance();
+    return;
+  }
+  if (event.target.matches("[data-requisition-module-report-filters]")) {
+    event.preventDefault();
+    const data = Object.fromEntries(new FormData(event.target).entries());
+    requisitionsPageState.reportFilters = { ...requisitionsPageState.reportFilters, ...data };
+    if (activeRoute === "requisitions") renderRequisitions();
+    return;
+  }
   if (event.target.matches("[data-finance-approved-req-filters]")) {
     event.preventDefault();
     const data = Object.fromEntries(new FormData(event.target).entries());

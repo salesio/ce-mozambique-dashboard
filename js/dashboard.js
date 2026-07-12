@@ -108,6 +108,18 @@ const TEXT = {
     needsAction: "Precisa de acção",
     activeNetwork: "Rede activa",
     registerFirstTimer: "Registar Primeira Vez",
+    dashboardOverview: "Visão Geral Operacional",
+    dashboardChurchGrowth: "Crescimento da Igreja",
+    dashboardChurchGrowthHint: "Primeira vez, convertidos e escola de fundação.",
+    dashboardPendingSection: "Seguimentos Pendentes",
+    dashboardPendingHint: "Visitantes que precisam de contacto ou próximo passo.",
+    dashboardFinanceSection: "Finanças do Mês",
+    dashboardFinanceHint: "Contribuições por categoria e por igreja.",
+    dashboardCellsSection: "Células & Liderança",
+    dashboardCellsHint: "Presença, crescimento e rede celular activa.",
+    dashboardRecentSection: "Actividade Recente",
+    dashboardRecentHint: "Últimas acções e sacramentos registados.",
+    viewAll: "Ver Tudo",
     firstTimerSubtitle: "Visitantes captados nos cultos e no acompanhamento.",
     followupSubtitle: "Fluxo claro para acompanhar cada visitante até integração.",
     membersSubtitle: "Base de membros por igreja, célula, departamento e estado.",
@@ -372,6 +384,18 @@ const TEXT = {
     needsAction: "Needs action",
     activeNetwork: "Active network",
     registerFirstTimer: "Register First Timer",
+    dashboardOverview: "Operational Overview",
+    dashboardChurchGrowth: "Church Growth",
+    dashboardChurchGrowthHint: "First timers, converts and foundation school.",
+    dashboardPendingSection: "Pending Follow-Ups",
+    dashboardPendingHint: "Visitors needing contact or next step.",
+    dashboardFinanceSection: "Monthly Finance",
+    dashboardFinanceHint: "Giving by category and by church.",
+    dashboardCellsSection: "Cells & Leadership",
+    dashboardCellsHint: "Attendance, growth and active cell network.",
+    dashboardRecentSection: "Recent Activity",
+    dashboardRecentHint: "Latest actions and sacraments recorded.",
+    viewAll: "View All",
     firstTimerSubtitle: "Visitors captured from services and follow-up.",
     followupSubtitle: "Clear workflow to follow up each visitor until integration.",
     membersSubtitle: "Member database by church, cell, department and status.",
@@ -3687,7 +3711,7 @@ function filterBar(options = {}) {
       ${opts.church !== false ? `<select class="form-select"><option value="">${L("filterChurch")}</option>${state.churches.map((c) => `<option>${c.church_name}</option>`).join("")}</select>` : ""}
       ${opts.month !== false ? `<input class="form-control" type="month" aria-label="${L("filterMonth")}">` : ""}
       ${opts.status !== false ? `<select class="form-select"><option value="">${L("filterStatus")}</option></select>` : ""}
-      ${opts.exportBtn !== false ? `<button type="button" class="btn btn-outline-light action-secondary btn-touch"><i class="bi bi-download me-1"></i>${L("export")}</button>` : ""}
+      ${opts.exportBtn !== false ? `<button type="button" class="btn btn-outline-cyan action-secondary btn-touch"><i class="bi bi-download me-1"></i>${L("export")}</button>` : ""}
     </div>`;
 }
 
@@ -3706,6 +3730,82 @@ function metric(icon, label, value, hint = "", options = {}) {
     </div>`;
 }
 
+function dashboardSection(title, subtitle, icon, route, content) {
+  if (typeof DashboardSection === "function") {
+    return DashboardSection({ title, subtitle, icon, linkRoute: route, linkLabel: L("viewAll"), content });
+  }
+  return `
+    <section class="dashboard-section">
+      <header class="dashboard-section-head">
+        <div class="dashboard-section-copy">
+          <span class="dashboard-section-icon"><i class="bi ${icon}"></i></span>
+          <div>
+            <h3 class="dashboard-section-title">${title}</h3>
+            <p class="dashboard-section-subtitle">${subtitle}</p>
+          </div>
+        </div>
+        ${route ? `<a class="btn btn-sm btn-outline-cyan" href="#${route}" data-route="${route}">${L("viewAll")}</a>` : ""}
+      </header>
+      <div class="dashboard-section-body">${content}</div>
+    </section>`;
+}
+
+function renderDashboardPendingList(firstTimers) {
+  const pending = firstTimers
+    .filter((p) => !["closed", "becameMember"].includes(statusKey(p.estado_do_seguimento)))
+    .slice(0, 6);
+  if (!pending.length) {
+    return typeof EmptyState === "function"
+      ? EmptyState({ compact: true, title: L("empty"), icon: "bi-check2-circle" })
+      : `<p class="dashboard-quick-empty">${L("empty")}</p>`;
+  }
+  const items = pending.map((person) => {
+    const itemHtml = typeof DashboardQuickItem === "function"
+      ? DashboardQuickItem({
+          title: fullName(person),
+          meta: `${churchName(person.church_id)} · ${person.culto || L("service")}`,
+          badge: badge(person.estado_do_seguimento),
+          actions: actionButtons([["followup", "firstTimer", person.id, L("updateFollowup")]])
+        })
+      : `
+        <article class="dashboard-quick-item">
+          <div class="dashboard-quick-item-copy">
+            <strong>${fullName(person)}</strong>
+            <span>${churchName(person.church_id)}</span>
+          </div>
+          ${badge(person.estado_do_seguimento)}
+          ${actionButtons([["followup", "firstTimer", person.id, L("updateFollowup")]])}
+        </article>`;
+    return itemHtml;
+  });
+  return typeof DashboardQuickList === "function" ? DashboardQuickList(items) : `<div class="dashboard-quick-list">${items.join("")}</div>`;
+}
+
+function renderDashboardActivityList() {
+  const logs = (state.auditLogs || []).slice().reverse().slice(0, 5);
+  if (!logs.length) {
+    return typeof EmptyState === "function"
+      ? EmptyState({ compact: true, title: L("empty"), icon: "bi-journal-check" })
+      : `<p class="dashboard-quick-empty">${L("empty")}</p>`;
+  }
+  const items = logs.map((log) => {
+    if (typeof DashboardQuickItem === "function") {
+      return DashboardQuickItem({
+        title: log.action,
+        meta: `${log.actor} · ${churchName(log.church_id)} · ${log.date}`
+      });
+    }
+    return `
+      <article class="dashboard-quick-item">
+        <div class="dashboard-quick-item-copy">
+          <strong>${log.action}</strong>
+          <span>${log.actor} · ${churchName(log.church_id)} · ${log.date}</span>
+        </div>
+      </article>`;
+  });
+  return typeof DashboardQuickList === "function" ? DashboardQuickList(items) : `<div class="dashboard-quick-list">${items.join("")}</div>`;
+}
+
 function renderDashboard() {
   const firstTimers = scoped(state.firstTimers);
   const finance = scoped(state.finance);
@@ -3719,7 +3819,7 @@ function renderDashboard() {
         <span class="eyebrow">Christ Embassy Mozambique</span>
         <h2>${L("heroTitle")}</h2>
         <p>${L("heroText")}</p>
-        <button class="btn btn-ce-gold mt-3" data-open-form="firstTimer"><i class="bi bi-person-plus me-2"></i>${L("registerFirstTimer")}</button>
+        <button class="btn btn-ce-gold mt-3 btn-touch" data-open-form="firstTimer"><i class="bi bi-person-plus me-2"></i>${L("registerFirstTimer")}</button>
       </div>
       <aside class="hero-card">
         <span>${L("pendingFollowups")}</span>
@@ -3727,7 +3827,8 @@ function renderDashboard() {
         <small>${state.churches.length} ${L("churches").toLowerCase()}</small>
       </aside>
     </section>
-    <div class="row g-3 mb-4">
+    <div class="dashboard-overview-label"><span class="eyebrow">${L("dashboardOverview")}</span></div>
+    <div class="row g-3 mb-2 dashboard-stats-row">
       ${metric("bi-person-heart", L("totalFirstTimers"), firstTimers.length, L("visitorsCaptured"))}
       ${metric("bi-stars", L("newConverts"), firstTimers.filter((p) => p.nasceu_de_novo).length, L("bornAgainHint"))}
       ${metric("bi-mortarboard", L("foundationEnrolments"), students.length, `${foundationPending().length} ${L("pending").toLowerCase()}`)}
@@ -3736,16 +3837,42 @@ function renderDashboard() {
       ${metric("bi-droplet", L("baptisms"), state.sacraments.baptisms.length, L("sacraments"))}
       ${metric("bi-cash-coin", L("monthlyGiving"), money(monthlyGiving), L("thisMonth"))}
       ${metric("bi-telephone-outbound", L("pendingFollowups"), pendingFollowups, L("needsAction"))}
-      ${metric("bi-building-check", L("churchesReporting"), state.churches.length, L("activeNetwork"))}
     </div>
-    <div class="row g-4">
-      <div class="col-xl-6">${chartCard(L("firstTimersByMonth"), groupCount(firstTimers, "data_do_culto", true))}</div>
-      <div class="col-xl-6">${chartCard(L("givingByCategory"), groupSum(finance, "categoria_da_contribuicao", "valor"))}</div>
-      <div class="col-xl-6">${chartCard(L("givingByChurch"), groupSum(finance.map((f) => ({ ...f, igreja: churchName(f.church_id) })), "igreja", "valor"))}</div>
-      <div class="col-xl-6">${chartCard(L("foundationProgress"), students.map((s) => [fullName(s), foundationProgress(s)]))}</div>
-      <div class="col-xl-6">${chartCard(L("cellGrowth"), cells.map((c) => [c.nome_da_celula, c.presencas[0]?.total || 0]))}</div>
-      <div class="col-xl-6">${summaryTiles(L("sacramentsSummary"), [[L("baptismTab"), state.sacraments.baptisms.length], [L("marriageTab"), state.sacraments.marriages.length], [L("babyTab"), state.sacraments.babies.length]])}</div>
-    </div>
+    ${dashboardSection(L("dashboardChurchGrowth"), L("dashboardChurchGrowthHint"), "bi-graph-up-arrow", "firstTimers", `
+      <div class="row g-4">
+        <div class="col-xl-6">${chartCard(L("firstTimersByMonth"), groupCount(firstTimers, "data_do_culto", true))}</div>
+        <div class="col-xl-6">${chartCard(L("foundationProgress"), students.map((s) => [fullName(s), foundationProgress(s)]))}</div>
+      </div>`)}
+    ${dashboardSection(L("dashboardPendingSection"), L("dashboardPendingHint"), "bi-telephone-outbound", "followUp", `
+      <div class="row g-4 align-items-stretch">
+        <div class="col-xl-7">${renderDashboardPendingList(firstTimers)}</div>
+        <div class="col-xl-5">
+          <article class="chart-card glass-panel h-100 dashboard-side-card">
+            <div class="panel-head"><h3 class="panel-title"><i class="bi bi-lightning-charge me-2 text-info"></i>${L("needsAction")}</h3></div>
+            <div class="dashboard-side-metrics">
+              <div><span>${L("pending")}</span><strong>${firstTimers.filter((p) => statusKey(p.estado_do_seguimento) === "pending").length}</strong></div>
+              <div><span>${L("contacted")}</span><strong>${firstTimers.filter((p) => statusKey(p.estado_do_seguimento) === "contacted").length}</strong></div>
+              <div><span>${L("sentToCell")}</span><strong>${firstTimers.filter((p) => statusKey(p.estado_do_seguimento) === "sentToCell").length}</strong></div>
+              <div><span>${L("becameMember")}</span><strong>${firstTimers.filter((p) => statusKey(p.estado_do_seguimento) === "becameMember").length}</strong></div>
+            </div>
+          </article>
+        </div>
+      </div>`)}
+    ${dashboardSection(L("dashboardFinanceSection"), L("dashboardFinanceHint"), "bi-cash-stack", "finance", `
+      <div class="row g-4">
+        <div class="col-xl-6">${chartCard(L("givingByCategory"), groupSum(finance, "categoria_da_contribuicao", "valor"))}</div>
+        <div class="col-xl-6">${chartCard(L("givingByChurch"), groupSum(finance.map((f) => ({ ...f, igreja: churchName(f.church_id) })), "igreja", "valor"))}</div>
+      </div>`)}
+    ${dashboardSection(L("dashboardCellsSection"), L("dashboardCellsHint"), "bi-diagram-3", "cellMinistryOverview", `
+      <div class="row g-4">
+        <div class="col-xl-8">${chartCard(L("cellGrowth"), cells.map((c) => [c.nome_da_celula, c.presencas[0]?.total || 0]))}</div>
+        <div class="col-xl-4">${summaryTiles(L("activeCells"), cells.slice(0, 4).map((c) => [c.nome_da_celula, c.presencas[0]?.total || 0]))}</div>
+      </div>`)}
+    ${dashboardSection(L("dashboardRecentSection"), L("dashboardRecentHint"), "bi-journal-text", "audit", `
+      <div class="row g-4">
+        <div class="col-xl-7">${renderDashboardActivityList()}</div>
+        <div class="col-xl-5">${summaryTiles(L("sacramentsSummary"), [[L("baptismTab"), state.sacraments.baptisms.length], [L("marriageTab"), state.sacraments.marriages.length], [L("babyTab"), state.sacraments.babies.length]])}</div>
+      </div>`)}
   `);
 }
 
@@ -3763,8 +3890,8 @@ function chartCard(title, rows) {
 
 function summaryTiles(title, rows) {
   return `
-    <article class="chart-card h-100">
-      <h3 class="panel-title mb-3"><i class="bi bi-grid-1x2 me-2 text-info"></i>${title}</h3>
+    <article class="chart-card glass-panel h-100">
+      <div class="panel-head"><h3 class="panel-title"><i class="bi bi-grid-1x2 me-2 text-info"></i>${title}</h3></div>
       <div class="donut-grid">${rows.map(([label, value]) => `<div class="donut-item"><span>${label}</span><strong>${value}</strong></div>`).join("")}</div>
     </article>
   `;
@@ -4899,8 +5026,8 @@ function venueModulePanel(type, title, modalType, headers, rows, { showFilters =
         <h3 class="panel-title">${title}</h3>
         <div class="action-cluster">
           ${canAdd ? `<button class="btn btn-sm btn-ce-gold" data-open-form="${modalType}"><i class="bi bi-plus-lg me-1"></i>${modalType === "venueMovement" && !canManageVenue() ? L("requestEquipment") : L("add")}</button>` : ""}
-          <button type="button" class="btn btn-sm btn-outline-light action-secondary" data-action="export" data-type="${type}" data-id="${type}"><i class="bi bi-file-earmark-excel me-1"></i>${L("exportExcel")}</button>
-          <button type="button" class="btn btn-sm btn-outline-light action-secondary" data-action="export" data-type="${type}" data-id="${type}"><i class="bi bi-file-earmark-pdf me-1"></i>${L("exportPdf")}</button>
+          <button type="button" class="btn btn-sm btn-outline-cyan action-secondary" data-action="export" data-type="${type}" data-id="${type}"><i class="bi bi-file-earmark-excel me-1"></i>${L("exportExcel")}</button>
+          <button type="button" class="btn btn-sm btn-outline-cyan action-secondary" data-action="export" data-type="${type}" data-id="${type}"><i class="bi bi-file-earmark-pdf me-1"></i>${L("exportPdf")}</button>
         </div>
       </div>
       ${showFilters ? venueFilterBar() : ""}
@@ -5021,7 +5148,7 @@ function modulePanel(type, title, modalType, headers, rows, showFilters = false,
         <h3 class="panel-title">${title}</h3>
         <div class="action-cluster">
           ${modalType ? `<button class="btn btn-sm btn-ce-gold" data-open-form="${modalType}"><i class="bi bi-plus-lg me-1"></i>${L("add")}</button>` : ""}
-          <button type="button" class="btn btn-sm btn-outline-light action-secondary" data-action="export" data-type="${type}" data-id="${type}"><i class="bi bi-download me-1"></i>${L("export")}</button>
+          <button type="button" class="btn btn-sm btn-outline-cyan action-secondary" data-action="export" data-type="${type}" data-id="${type}"><i class="bi bi-download me-1"></i>${L("export")}</button>
         </div>
       </div>
       ${showFilters ? advancedFilterBar(materialFilters) : ""}
@@ -5152,7 +5279,7 @@ function renderFevoWeeklyReport(report, reports, noReports) {
         </div>
         <div class="action-cluster">
           <button class="btn btn-sm btn-ce-gold" data-action="export" data-type="fevoWeeklyReport" data-id="${report?.id || "fevo"}">${L("exportPdf")}</button>
-          <button class="btn btn-sm btn-outline-light action-secondary" data-action="export" data-type="fevoWeeklyReport" data-id="${report?.id || "fevo"}">${L("exportExcel")}</button>
+          <button class="btn btn-sm btn-outline-cyan action-secondary" data-action="export" data-type="fevoWeeklyReport" data-id="${report?.id || "fevo"}">${L("exportExcel")}</button>
         </div>
       </div>
       <div class="row g-3">
@@ -5203,7 +5330,7 @@ function fevoActivityPanel(id, title, rows) {
 function renderReports() {
   const finance = scoped(state.finance);
   setPageContent(`
-    ${sectionHeader(L("reports"), L("reportsSubtitle"), null, "bi-bar-chart-line", { actions: `<button type="button" class="btn btn-outline-light btn-touch action-secondary"><i class="bi bi-file-earmark-pdf me-1"></i>${L("exportPdf")}</button><button type="button" class="btn btn-outline-light btn-touch action-secondary"><i class="bi bi-file-earmark-excel me-1"></i>${L("exportExcel")}</button>` })}
+    ${sectionHeader(L("reports"), L("reportsSubtitle"), null, "bi-bar-chart-line", { actions: `<button type="button" class="btn btn-outline-cyan btn-touch action-secondary"><i class="bi bi-file-earmark-pdf me-1"></i>${L("exportPdf")}</button><button type="button" class="btn btn-outline-cyan btn-touch action-secondary"><i class="bi bi-file-earmark-excel me-1"></i>${L("exportExcel")}</button>` })}
     ${filterBar({ church: true, month: true, status: false })}
     <div class="row g-4">
       <div class="col-xl-6">${chartCard(L("givingByCategory"), groupSum(finance, "categoria_da_contribuicao", "valor"))}</div>

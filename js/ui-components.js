@@ -209,6 +209,45 @@ function ChartPanel(title, content) {
     </article>`;
 }
 
+function DashboardSection({ title, subtitle = "", icon = "bi-grid", linkRoute = "", linkLabel = "", content = "" } = {}) {
+  const link = linkRoute
+    ? `<a class="btn btn-sm btn-outline-cyan btn-touch dashboard-section-link" href="#${linkRoute}" data-route="${linkRoute}">${linkLabel || uiT("viewAll", "Ver Tudo")}<i class="bi bi-arrow-right-short ms-1"></i></a>`
+    : "";
+  return `
+    <section class="dashboard-section">
+      <header class="dashboard-section-head">
+        <div class="dashboard-section-copy">
+          <span class="dashboard-section-icon" aria-hidden="true"><i class="bi ${icon}"></i></span>
+          <div>
+            <h3 class="dashboard-section-title">${title}</h3>
+            ${subtitle ? `<p class="dashboard-section-subtitle">${subtitle}</p>` : ""}
+          </div>
+        </div>
+        ${link}
+      </header>
+      <div class="dashboard-section-body">${content}</div>
+    </section>`;
+}
+
+function DashboardQuickList(items = []) {
+  if (!items.length) {
+    return EmptyState({ compact: true, title: uiT("empty", "Sem registos"), icon: "bi-inbox" });
+  }
+  return `<div class="dashboard-quick-list">${items.join("")}</div>`;
+}
+
+function DashboardQuickItem({ title, meta = "", badge = "", actions = "" } = {}) {
+  return `
+    <article class="dashboard-quick-item">
+      <div class="dashboard-quick-item-copy">
+        <strong class="dashboard-quick-item-title">${title}</strong>
+        ${meta ? `<span class="dashboard-quick-item-meta">${meta}</span>` : ""}
+      </div>
+      ${badge ? `<div class="dashboard-quick-item-badge">${badge}</div>` : ""}
+      ${actions ? `<div class="dashboard-quick-item-actions">${actions}</div>` : ""}
+    </article>`;
+}
+
 function KanbanBoard(columns = []) {
   return `
     <div class="kanban-board">

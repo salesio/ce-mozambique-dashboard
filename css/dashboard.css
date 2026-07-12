@@ -3581,6 +3581,200 @@ section.ops-hero {
   color: var(--text-dark);
 }
 
+/* ============================================================
+   Dashboard Command Center v2
+   ============================================================ */
+
+.dashboard-overview-label {
+  margin: 0.15rem 0 0.85rem;
+}
+
+.dashboard-overview-label .eyebrow {
+  color: var(--gold);
+}
+
+.dashboard-stats-row {
+  margin-bottom: 0.35rem;
+}
+
+.dashboard-section {
+  margin-bottom: var(--section-gap);
+  padding: var(--card-pad);
+  border: 1px solid rgba(34, 211, 238, 0.14);
+  border-radius: 1.25rem;
+  background: linear-gradient(145deg, rgba(7, 19, 38, 0.42), rgba(9, 32, 60, 0.28));
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.22);
+}
+
+.dashboard-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(34, 211, 238, 0.16);
+}
+
+.dashboard-section-copy {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.dashboard-section-icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  flex: 0 0 46px;
+  place-items: center;
+  border-radius: 1rem;
+  color: #fff;
+  font-size: 1.15rem;
+  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.28);
+}
+
+.dashboard-section-title {
+  margin: 0;
+  color: var(--text-main);
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+  line-height: 1.15;
+}
+
+.dashboard-section-subtitle {
+  margin: 0.3rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  max-width: 52ch;
+}
+
+.dashboard-section-link {
+  white-space: nowrap;
+}
+
+.dashboard-quick-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.dashboard-quick-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(34, 211, 238, 0.16);
+  border-radius: 1rem;
+  background: linear-gradient(145deg, #F8FBFD 0%, #E7F3F9 100%);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.dashboard-quick-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(34, 211, 238, 0.34);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.14);
+}
+
+.dashboard-quick-item-title {
+  display: block;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.dashboard-quick-item-meta {
+  display: block;
+  margin-top: 0.18rem;
+  color: var(--text-dark-muted);
+  font-size: 0.78rem;
+}
+
+.dashboard-quick-item-badge {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dashboard-quick-item-actions .action-cluster {
+  justify-content: flex-end;
+}
+
+.dashboard-side-card {
+  padding: 1rem 1.1rem;
+}
+
+.dashboard-side-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.dashboard-side-metrics > div {
+  padding: 0.85rem 0.95rem;
+  border: 1px solid rgba(34, 211, 238, 0.16);
+  border-radius: 0.95rem;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.dashboard-side-metrics span {
+  display: block;
+  color: var(--text-dark-muted);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dashboard-side-metrics strong {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--text-dark);
+  font-size: 1.55rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.donut-item {
+  border: 1px solid rgba(34, 211, 238, 0.14);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(231, 243, 249, 0.88));
+}
+
+.donut-item span {
+  display: block;
+  color: var(--text-dark-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.donut-item strong {
+  color: var(--text-dark);
+}
+
+@media (max-width: 767.98px) {
+  .dashboard-quick-item {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-quick-item-badge,
+  .dashboard-quick-item-actions {
+    justify-content: flex-start;
+  }
+
+  .dashboard-section-head {
+    align-items: flex-start;
+  }
+
+  .dashboard-section-link {
+    width: 100%;
+  }
+}
+
 /* View toggle on light toolbar */
 .view-toggle {
   background: rgba(255, 255, 255, 0.85);

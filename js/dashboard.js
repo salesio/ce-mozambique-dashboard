@@ -168,6 +168,37 @@ const TEXT = {
     reqReturnedForCorrection: "Devolvido para Correção",
     reqPurchasedExecuted: "Comprado / Executado",
     reqRegisteredInventory: "Registado no Inventário",
+    finAwaitingRelease: "Aguardando Liberação",
+    finResourcesReleased: "Recursos Liberados",
+    finApprovedAmount: "Valor Aprovado",
+    finReleasedAmount: "Valor Liberado",
+    finPartialPayment: "Pagamento Parcial",
+    finMarkPaid: "Marcar como Pago",
+    finPendingInFinance: "Pendente em Finanças",
+    finSentToFinance: "Enviado para Finanças",
+    finResourceDisbursement: "Saída de Recursos",
+    finPaymentProof: "Comprovativo de Pagamento",
+    finApprovedRequisitions: "Requisições Aprovadas",
+    finReleasedThisMonth: "Recursos Liberados Este Mês",
+    finTotalReleasedMonth: "Total Liberado Este Mês",
+    finPendingPayments: "Pagamentos Pendentes",
+    finPartiallyPaid: "Requisições Parcialmente Pagas",
+    finFinanceStatus: "Estado Financeiro",
+    finReleaseDate: "Data de Liberação",
+    finAmountToRelease: "Valor a Liberar",
+    finPaymentReference: "Referência de Pagamento",
+    finApprovedBy: "Aprovado por",
+    finApprovedAt: "Data de aprovação",
+    finApprovedReqHint: "Requisições aprovadas pelo Pastor Principal — liberação de recursos e pagamentos.",
+    finReleaseDrawerTitle: "Liberar Recursos",
+    finExceedsApproved: "O valor a liberar não pode exceder o valor aprovado.",
+    finPaymentMethodRequired: "Seleccione o método de pagamento.",
+    finReleaseDateRequired: "Indique a data de liberação.",
+    finReleaseSuccess: "Recursos liberados com sucesso.",
+    finMarkPaidSuccess: "Requisição marcada como paga.",
+    finSentToInventory: "Enviar para Inventário",
+    finSentToInventorySuccess: "Rascunho criado no Inventário.",
+    reqSendToInventory: "Enviar para Inventário",
     staffTabOverview: "Visão Geral",
     staffTabStaff: "Staff",
     staffTabDepartments: "Departamentos",
@@ -367,6 +398,7 @@ const TEXT = {
     financeTabEntries: "Lançamentos",
     financeTabPublic: "Submissões Públicas",
     financeTabVerification: "Verificação",
+    financeTabApprovedReq: "Requisições Aprovadas",
     financeTabReports: "Relatórios",
     financeTabPartners: "Parceiros em Destaque",
     financeTabExports: "Exportações",
@@ -746,6 +778,37 @@ const TEXT = {
     reqReturnedForCorrection: "Returned for Correction",
     reqPurchasedExecuted: "Purchased / Executed",
     reqRegisteredInventory: "Registered in Inventory",
+    finAwaitingRelease: "Awaiting Resource Release",
+    finResourcesReleased: "Resources Released",
+    finApprovedAmount: "Approved Amount",
+    finReleasedAmount: "Released Amount",
+    finPartialPayment: "Partial Payment",
+    finMarkPaid: "Mark as Paid",
+    finPendingInFinance: "Pending in Finance",
+    finSentToFinance: "Sent to Finance",
+    finResourceDisbursement: "Resource Disbursement",
+    finPaymentProof: "Payment Proof",
+    finApprovedRequisitions: "Approved Requisitions",
+    finReleasedThisMonth: "Resources Released This Month",
+    finTotalReleasedMonth: "Total Released This Month",
+    finPendingPayments: "Pending Payments",
+    finPartiallyPaid: "Partially Paid Requisitions",
+    finFinanceStatus: "Financial Status",
+    finReleaseDate: "Release Date",
+    finAmountToRelease: "Amount to Release",
+    finPaymentReference: "Payment Reference",
+    finApprovedBy: "Approved by",
+    finApprovedAt: "Approval date",
+    finApprovedReqHint: "Requisitions approved by Main Pastor — resource release and payments.",
+    finReleaseDrawerTitle: "Release Resources",
+    finExceedsApproved: "Release amount cannot exceed approved amount.",
+    finPaymentMethodRequired: "Please select a payment method.",
+    finReleaseDateRequired: "Please provide the release date.",
+    finReleaseSuccess: "Resources released successfully.",
+    finMarkPaidSuccess: "Requisition marked as paid.",
+    finSentToInventory: "Send to Inventory",
+    finSentToInventorySuccess: "Inventory draft created.",
+    reqSendToInventory: "Send to Inventory",
     staffTabOverview: "Overview",
     staffTabStaff: "Staff",
     staffTabDepartments: "Departments",
@@ -945,6 +1008,7 @@ const TEXT = {
     financeTabEntries: "Entries",
     financeTabPublic: "Public Submissions",
     financeTabVerification: "Verification",
+    financeTabApprovedReq: "Approved Requisitions",
     financeTabReports: "Reports",
     financeTabPartners: "Featured Partners",
     financeTabExports: "Exports",
@@ -2566,11 +2630,15 @@ const seedData = {
     { id: "req-1", request_number: "REQ-2026-0001", requested_by_user_id: "u-12", requested_by_name: "Department Head Demo", department_id: "dept-cell", department_name: "Cell Ministry", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Material de Ministério", title: "Materiais para Escola de Células", description: "Livros, manuais e apostilas para formação de líderes.", justification: "Preparação do trimestre de liderança celular.", estimated_amount: 18500, currency: "MZN", urgency: "Normal", needed_by_date: "2026-08-01", attachments: [], supplier_or_vendor: "Loveworld Books", quotation_number: "QT-2026-014", reviewed_by: "", reviewed_at: "", review_notes: "", sent_to_main_pastor_at: "", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", status: "Submetido", created_at: "2026-07-08T10:00:00.000Z", updated_at: "2026-07-08T10:00:00.000Z" },
     { id: "req-2", request_number: "REQ-2026-0002", requested_by_user_id: "u-13", requested_by_name: "Staff Member Demo", department_id: "dept-finance", department_name: "Finanças", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Apoio Operacional", title: "Material de escritório para Finanças", description: "Papel A4, pastas e toners para impressão de relatórios.", justification: "Reposição de consumíveis do departamento.", estimated_amount: 4200, currency: "MZN", urgency: "Baixa", needed_by_date: "2026-07-20", attachments: [], supplier_or_vendor: "Office Supply Maputo", quotation_number: "", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-09T11:00:00.000Z", review_notes: "Organizado e encaminhado.", sent_to_main_pastor_at: "", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", status: "Em Revisão", created_at: "2026-07-07T09:00:00.000Z", updated_at: "2026-07-09T11:00:00.000Z" },
     { id: "req-3", request_number: "REQ-2026-0003", requested_by_user_id: "u-5", requested_by_name: "Pastora Flavia", department_id: "dept-cell", department_name: "Ministério de Células", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Transporte", title: "Transporte para visitação celular — Beira", description: "Deslocação da equipa nacional para apoio à rede de Beira.", justification: "Visita pastoral e formação de líderes.", estimated_amount: 28000, currency: "MZN", urgency: "Alta", needed_by_date: "2026-07-25", attachments: [{ type: "budget", name: "Orcamento-Beira.pdf" }, { type: "proforma", name: "Proforma-Transporte.pdf" }], supplier_or_vendor: "Transporte CE", quotation_number: "QT-2026-021", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-10T08:00:00.000Z", review_notes: "Prioridade confirmada com Pastor Principal.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-07-10T09:00:00.000Z", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "", rejected_at: "", rejection_reason: "", returned_by: "", returned_at: "", return_notes: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Enviado ao Pastor Principal", created_at: "2026-07-05T14:00:00.000Z", updated_at: "2026-07-10T09:00:00.000Z" },
-    { id: "req-4", request_number: "REQ-2026-0004", requested_by_user_id: "u-11", requested_by_name: "Marcelo Panguene", department_id: "dept-venue", department_name: "Venue Management", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Nova Aquisição", title: "Microfones sem fio adicionais", description: "Compra de 4 microfones BMK ES600 para cultos simultâneos.", justification: "Expansão do auditório e culto online.", estimated_amount: 74000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-08-10", attachments: [], supplier_or_vendor: "Audio Supplier", quotation_number: "QT-2026-033", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-01T10:00:00.000Z", review_notes: "Aprovado para compra após verificação técnica.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-07-02T10:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-07-03T10:00:00.000Z", approved_amount: 74000, approval_notes: "Autorizado — prioridade media.", final_priority: "Normal", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "Finance Head Demo", resources_released_at: "2026-07-04T15:00:00.000Z", amount_released: 74000, finance_record_id: "fin-req-req-4", inventory_item_id: "", audit_history: [], status: "Recursos Liberados", created_at: "2026-06-28T08:00:00.000Z", updated_at: "2026-07-04T15:00:00.000Z" },
+    { id: "req-4", request_number: "REQ-2026-0004", requested_by_user_id: "u-11", requested_by_name: "Marcelo Panguene", department_id: "dept-venue", department_name: "Venue Management", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Nova Aquisição", title: "Microfones sem fio adicionais", description: "Compra de 4 microfones BMK ES600 para cultos simultâneos.", justification: "Expansão do auditório e culto online.", estimated_amount: 74000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-08-10", attachments: [], supplier_or_vendor: "Audio Supplier", quotation_number: "QT-2026-033", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-01T10:00:00.000Z", review_notes: "Aprovado para compra após verificação técnica.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-07-02T10:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-07-03T10:00:00.000Z", approved_amount: 74000, approval_notes: "Autorizado — prioridade media.", final_priority: "Normal", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "Finance Head Demo", released_by: "Finance Head Demo", resources_released_at: "2026-07-04T15:00:00.000Z", released_at: "2026-07-04T15:00:00.000Z", released_amount: 74000, amount_released: 74000, finance_status: "Recursos Liberados", sent_to_finance: true, sent_to_finance_at: "2026-07-03T10:00:00.000Z", finance_disbursement_id: "disb-req-4", payment_method: "Banco", payment_reference: "TRF-2026-044", payment_notes: "Transferência bancária aprovada.", finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Recursos Liberados", created_at: "2026-06-28T08:00:00.000Z", updated_at: "2026-07-04T15:00:00.000Z" },
     { id: "req-5", request_number: "REQ-2026-0005", requested_by_user_id: "u-9", requested_by_name: "Sister Cassandra", department_id: "dept-programs", department_name: "Programas", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Evento/Programa", title: "Apoio logístico — Semana F.E.V.O", description: "Material de evangelização, transporte e refeições para equipas.", justification: "Semana intensiva de F.E.V.O nacional.", estimated_amount: 52000, currency: "MZN", urgency: "Urgente", needed_by_date: "2026-07-15", attachments: [{ type: "budget", name: "Orcamento-FEVO.xlsx" }], supplier_or_vendor: "", quotation_number: "", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-11T09:00:00.000Z", review_notes: "Encaminhado ao Pastor Principal.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-07-11T10:00:00.000Z", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "", rejected_at: "", rejection_reason: "", returned_by: "", returned_at: "", return_notes: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Enviado ao Pastor Principal", created_at: "2026-07-09T12:00:00.000Z", updated_at: "2026-07-11T10:00:00.000Z" },
-    { id: "req-8", request_number: "REQ-2026-0008", requested_by_user_id: "u-12", requested_by_name: "Department Head Demo", department_id: "dept-cell", department_name: "Cell Ministry", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Material de Ministério", title: "Banners e material gráfico para evangelização", description: "Impressão de banners roll-up e flyers para campanha de Julho.", justification: "Campanha de evangelização nas células.", estimated_amount: 16500, currency: "MZN", urgency: "Alta", needed_by_date: "2026-07-18", attachments: [], supplier_or_vendor: "Print House", quotation_number: "QT-2026-040", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-08T10:00:00.000Z", review_notes: "Aprovado internamente.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-07-08T11:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-07-09T14:00:00.000Z", approved_amount: 15000, approval_notes: "Aprovado com limite de 15.000 MZN.", final_priority: "Alta", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Aprovado — Aguardando Liberação de Recursos", created_at: "2026-07-06T08:00:00.000Z", updated_at: "2026-07-09T14:00:00.000Z" },
+    { id: "req-8", request_number: "REQ-2026-0008", requested_by_user_id: "u-12", requested_by_name: "Department Head Demo", department_id: "dept-cell", department_name: "Cell Ministry", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Material de Ministério", title: "Banners e material gráfico para evangelização", description: "Impressão de banners roll-up e flyers para campanha de Julho.", justification: "Campanha de evangelização nas células.", estimated_amount: 16500, currency: "MZN", urgency: "Alta", needed_by_date: "2026-07-18", attachments: [], supplier_or_vendor: "Print House", quotation_number: "QT-2026-040", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-08T10:00:00.000Z", review_notes: "Aprovado internamente.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-07-08T11:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-07-09T14:00:00.000Z", approved_amount: 15000, approval_notes: "Aprovado com limite de 15.000 MZN.", final_priority: "Alta", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", released_amount: 0, amount_released: 0, finance_status: "Aguardando Liberação", sent_to_finance: true, sent_to_finance_at: "2026-07-09T14:00:00.000Z", finance_disbursement_id: "disb-req-8", payment_method: "", payment_reference: "", payment_notes: "", finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Aprovado — Aguardando Liberação de Recursos", created_at: "2026-07-06T08:00:00.000Z", updated_at: "2026-07-09T14:00:00.000Z" },
     { id: "req-6", request_number: "REQ-2026-0006", requested_by_user_id: "u-14", requested_by_name: "Finance Officer Demo", department_id: "dept-finance", department_name: "Finanças", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Pagamento de Serviço", title: "Auditoria externa trimestral", description: "Serviço de revisão de registos financeiros Q2.", justification: "Conformidade e transparência.", estimated_amount: 35000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-07-30", attachments: [], supplier_or_vendor: "Audit Partners Lda", quotation_number: "QT-AUD-02", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-06T10:00:00.000Z", review_notes: "Não prioritário neste momento.", sent_to_main_pastor_at: "2026-07-06T11:00:00.000Z", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "Pastor Kene Ume", rejected_at: "2026-07-07T09:00:00.000Z", rejection_reason: "Adiar para o próximo trimestre.", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", status: "Rejeitado", created_at: "2026-07-04T08:00:00.000Z", updated_at: "2026-07-07T09:00:00.000Z" },
-    { id: "req-7", request_number: "REQ-2026-0007", requested_by_user_id: "u-11", requested_by_name: "Marcelo Panguene", department_id: "dept-venue", department_name: "Venue Management", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Equipamento", title: "Laptop para técnico de som", description: "Laptop dedicado para software de som digital.", justification: "Substituição de equipamento antigo.", estimated_amount: 62000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-06-30", attachments: [], supplier_or_vendor: "IT Supplier", quotation_number: "QT-IT-08", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-06-20T10:00:00.000Z", review_notes: "Compra concluída e registada.", sent_to_main_pastor_at: "2026-06-21T10:00:00.000Z", approved_by: "Pastor Kene Ume", approved_at: "2026-06-22", approval_notes: "Aprovado.", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "Finance Head Demo", resources_released_at: "2026-06-23T10:00:00.000Z", amount_released: 62000, finance_record_id: "fin-req-req-7", inventory_item_id: "inv-req-req-7", status: "Fechado", created_at: "2026-06-15T08:00:00.000Z", updated_at: "2026-06-28T10:00:00.000Z" }
+    { id: "req-7", request_number: "REQ-2026-0007", requested_by_user_id: "u-11", requested_by_name: "Marcelo Panguene", department_id: "dept-venue", department_name: "Venue Management", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Equipamento", title: "Laptop para técnico de som", description: "Laptop dedicado para software de som digital.", justification: "Substituição de equipamento antigo.", estimated_amount: 62000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-06-30", attachments: [], supplier_or_vendor: "IT Supplier", quotation_number: "QT-IT-08", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-06-20T10:00:00.000Z", review_notes: "Compra concluída e registada.", sent_to_main_pastor_at: "2026-06-21T10:00:00.000Z", approved_by: "Pastor Kene Ume", approved_at: "2026-06-22", approval_notes: "Aprovado.", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "Finance Head Demo", released_by: "Finance Head Demo", resources_released_at: "2026-06-23T10:00:00.000Z", released_at: "2026-06-23T10:00:00.000Z", released_amount: 62000, amount_released: 62000, finance_status: "Pago", sent_to_finance: true, sent_to_finance_at: "2026-06-22T10:00:00.000Z", finance_disbursement_id: "disb-req-7", payment_method: "Banco", payment_reference: "TRF-IT-07", finance_record_id: "", inventory_item_id: "inv-req-req-7", status: "Fechado", created_at: "2026-06-15T08:00:00.000Z", updated_at: "2026-06-28T10:00:00.000Z" }
+  ],
+  financeDisbursements: [
+    { id: "disb-req-8", requisition_id: "req-8", request_number: "REQ-2026-0008", title: "Banners e material gráfico para evangelização", department_name: "Cell Ministry", church_name: "National HQ - Christ Embassy Mozambique", requested_by: "Department Head Demo", approved_by: "Pastor Kene Ume", approved_at: "2026-07-09T14:00:00.000Z", approved_amount: 15000, released_amount: 0, status: "Aguardando Liberação", source: "requisition", transaction_type: "expense", created_at: "2026-07-09T14:00:00.000Z", updated_at: "2026-07-09T14:00:00.000Z" },
+    { id: "disb-req-4", requisition_id: "req-4", request_number: "REQ-2026-0004", title: "Microfones sem fio adicionais", department_name: "Venue Management", church_name: "National HQ - Christ Embassy Mozambique", requested_by: "Marcelo Panguene", approved_by: "Pastor Kene Ume", approved_at: "2026-07-03T10:00:00.000Z", approved_amount: 74000, released_amount: 74000, released_by: "Finance Head Demo", released_at: "2026-07-04T15:00:00.000Z", payment_method: "Banco", payment_reference: "TRF-2026-044", status: "Recursos Liberados", source: "requisition", transaction_type: "expense", created_at: "2026-07-03T10:00:00.000Z", updated_at: "2026-07-04T15:00:00.000Z" }
   ],
   staffProfiles: [
     { id: "staff-1", user_id: "u-5", full_name: "Flavia Moneedi Tivane", title: "Pastora", gender: "Feminino", phone: "860000101", whatsapp: "860000101", email: "flavia@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-cell", department_name: "Ministério de Células", role_title: "Cell Ministry Head", supervisor_user_id: "u-17", supervisor_name: "Pastor Kene Ume", start_date: "2024-01-15", employment_type: "Full-time", salary_or_allowance: 45000, payment_frequency: "Mensal", payment_method: "Banco", bank_name: "BCI", bank_account_number: "****4521", bank_or_mobile_details: "BCI ****4521", marital_status: "Casado/a", address: "Maputo, KaMpfumo", contract_start_date: "2024-01-15", status: "Activo", date_of_birth: "1990-03-14", notes: "", created_at: "2024-01-15", updated_at: "2026-07-10" },
@@ -2858,6 +2926,18 @@ const financePageState = {
   selectedContributor: "",
   partnerSegment: "all",
   exportReportType: "general",
+  approvedReqFilters: {
+    period: "month",
+    dateFrom: "",
+    dateTo: "",
+    churchId: "",
+    department: "",
+    finance_status: "",
+    urgency: "",
+    requester: "",
+    minValue: "",
+    maxValue: ""
+  },
   reportFilters: {
     period: "month",
     dateFrom: "",
@@ -3555,6 +3635,7 @@ function financeModuleTabs() {
     ["entries", L("financeTabEntries")],
     ["public", L("financeTabPublic")],
     ["verification", L("financeTabVerification")],
+    ["approvedRequisitions", L("financeTabApprovedReq")],
     ["reports", L("financeTabReports")],
     ["partners", L("financeTabPartners")],
     ["exports", L("financeTabExports")]
@@ -3562,6 +3643,202 @@ function financeModuleTabs() {
   return moduleTabsNav(tabs.map(([key, label]) =>
     moduleTabButton(label, { active: financePageState.tab === key, attrs: `data-finance-tab="${key}"` })
   ).join(""), "finance-module-tabs");
+}
+
+function migrateRequisitionsFinanceState() {
+  const disb = window.CEFinanceDisbursements;
+  if (!disb) return;
+  const approvedStatuses = ["Aprovado — Aguardando Liberação de Recursos", "Aprovado", "Recursos Liberados", "Comprado / Executado", "Registado no Inventário", "Fechado"];
+  (state.requisitions || []).forEach((r) => {
+    disb.migrateRequisitionFinanceFields(r);
+    if (approvedStatuses.includes(r.status) || r.finance_status) {
+      disb.syncDisbursement(state, r);
+    }
+  });
+}
+
+function financeApprovedReqBadge(financeStatus) {
+  const disb = window.CEFinanceDisbursements;
+  const cls = disb?.financeStatusBadgeClass?.(financeStatus) || "warn";
+  const labels = {
+    "Aguardando Liberação": "finAwaitingRelease",
+    "Recursos Liberados": "finResourcesReleased",
+    "Pago": "finMarkPaid",
+    "Parcialmente Pago": "finPartialPayment",
+    "Cancelado": "rejected"
+  };
+  const key = labels[financeStatus] || "finFinanceStatus";
+  return `<span class="status-pill status-${cls}"><i class="bi bi-circle-fill"></i>${L(key)}</span>`;
+}
+
+function financeApprovedReqFilterBar(filters) {
+  const disb = window.CEFinanceDisbursements;
+  const statuses = disb?.FINANCE_STATUS || {};
+  const departments = [...new Set((state.requisitions || []).map((r) => r.department_name).filter(Boolean))];
+  const periodOpts = [
+    ["month", L("financePeriodMonth")],
+    ["quarter", L("financePeriodQuarter")],
+    ["year", L("financePeriodYear")],
+    ["custom", L("financePeriodCustom")]
+  ];
+  return `<form class="row g-3 finance-approved-req-filters mb-4" data-finance-approved-req-filters>
+    <div class="col-md-3">
+      <label class="form-label">${L("financePeriodMonth")}</label>
+      <select name="period" class="form-select">${periodOpts.map(([v, l]) => `<option value="${v}" ${filters.period === v ? "selected" : ""}>${l}</option>`).join("")}</select>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">${L("church")}</label>
+      <select name="churchId" class="form-select"><option value="">${L("financeAllChurches")}</option>${scoped(state.churches).map((c) => `<option value="${c.id}" ${filters.churchId === c.id ? "selected" : ""}>${c.church_name}</option>`).join("")}</select>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">${L("reqDepartment")}</label>
+      <select name="department" class="form-select"><option value="">${L("all")}</option>${departments.map((d) => `<option value="${d}" ${filters.department === d ? "selected" : ""}>${d}</option>`).join("")}</select>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">${L("finFinanceStatus")}</label>
+      <select name="finance_status" class="form-select"><option value="">${L("all")}</option>${Object.values(statuses).map((s) => {
+        const map = { "Aguardando Liberação": "finAwaitingRelease", "Recursos Liberados": "finResourcesReleased", "Pago": "finMarkPaid", "Parcialmente Pago": "finPartialPayment", "Cancelado": "rejected" };
+        return `<option value="${s}" ${filters.finance_status === s ? "selected" : ""}>${L(map[s] || "finFinanceStatus")}</option>`;
+      }).join("")}</select>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label">${L("reqUrgency")}</label>
+      <select name="urgency" class="form-select"><option value="">${L("all")}</option>${(window.CERequisitions?.URGENCY || []).map((u) => `<option value="${u}" ${filters.urgency === u ? "selected" : ""}>${u}</option>`).join("")}</select>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label">${L("reqRequester")}</label>
+      <input name="requester" class="form-control" value="${filters.requester || ""}">
+    </div>
+    <div class="col-md-2">
+      <label class="form-label">${L("finApprovedAmount")} min</label>
+      <input name="minValue" type="number" class="form-control" value="${filters.minValue || ""}">
+    </div>
+    <div class="col-md-2">
+      <label class="form-label">${L("finApprovedAmount")} max</label>
+      <input name="maxValue" type="number" class="form-control" value="${filters.maxValue || ""}">
+    </div>
+    <div class="col-md-4 d-flex align-items-end gap-2">
+      <button type="submit" class="btn btn-ce-gold">${L("save")}</button>
+      <button type="button" class="btn btn-outline-glass" data-finance-approved-req-clear>${L("clearFilters")}</button>
+    </div>
+  </form>`;
+}
+
+function financeApprovedReqActions(record) {
+  const disb = window.CEFinanceDisbursements;
+  const canRelease = disb?.canReleaseResources?.(activeUser);
+  const finStatus = record.finance_status || "Aguardando Liberação";
+  const buttons = [["view", "financeApprovedReq", record.id, L("view")]];
+  if (canRelease && finStatus === "Aguardando Liberação") {
+    buttons.push(["releaseResources", "financeApprovedReq", record.id, L("reqReleaseResources")]);
+  }
+  if (canRelease && ["Recursos Liberados", "Parcialmente Pago"].includes(finStatus)) {
+    buttons.push(["markPaid", "financeApprovedReq", record.id, L("finMarkPaid")]);
+    if (finStatus === "Recursos Liberados" || finStatus === "Parcialmente Pago") {
+      buttons.push(["partialPayment", "financeApprovedReq", record.id, L("finPartialPayment")]);
+    }
+  }
+  const invTypes = new Set(["Nova Aquisição", "Equipamento", "Material de Ministério", "Reparação"]);
+  if (canRelease && invTypes.has(record.requisition_type) && record.finance_status === "Recursos Liberados" && !record.inventory_item_id) {
+    buttons.push(["sendToInventory", "financeApprovedReq", record.id, L("finSentToInventory")]);
+  }
+  return `<div class="action-cluster">${buttons.map(([action, type, id, label]) => {
+    const cls = action === "releaseResources" ? "action-btn action-btn--approve" : action === "markPaid" ? "action-btn action-btn--approve" : "action-btn";
+    return `<button type="button" class="${cls}" data-action="${action}" data-type="${type}" data-id="${id}">${label}</button>`;
+  }).join("")}</div>`;
+}
+
+function openFinanceReleaseDrawer(requisitionId, mode = "release") {
+  const record = (state.requisitions || []).find((r) => r.id === requisitionId);
+  const disb = window.CEFinanceDisbursements;
+  if (!record || !disb?.canReleaseResources(activeUser)) return;
+  financeDrawerMode = mode === "partial" ? "partialRelease" : "releaseRequisition";
+  financeDrawerRecordId = requisitionId;
+  const drawer = byId("financeDrawer");
+  const backdrop = byId("financeDrawerBackdrop");
+  const body = byId("financeDrawerBody");
+  const foot = byId("financeDrawerFoot");
+  if (!drawer || !backdrop || !body || !foot) return;
+  const approved = Number(record.approved_amount || record.estimated_amount || 0);
+  const already = Number(record.released_amount || record.amount_released || 0);
+  const remaining = Math.max(0, approved - already);
+  const today = new Date().toISOString().slice(0, 10);
+  const methods = disb.PAYMENT_METHODS || ["Banco", "M-Pesa"];
+  byId("financeDrawerEyebrow").textContent = L("finResourceDisbursement");
+  byId("financeDrawerTitle").textContent = mode === "partial" ? L("finPartialPayment") : L("finReleaseDrawerTitle");
+  body.innerHTML = `
+    <section class="finance-detail-section">
+      <div class="church-detail-grid">
+        <div><span>${L("reqNumber")}</span><strong>${record.request_number}</strong></div>
+        <div><span>${L("reqTitle")}</span><strong>${record.title}</strong></div>
+        <div><span>${L("finApprovedAmount")}</span><strong>${money(approved)}</strong></div>
+        ${already ? `<div><span>${L("finReleasedAmount")}</span><strong>${money(already)}</strong></div>` : ""}
+      </div>
+    </section>
+    <form id="financeDrawerForm" class="row g-3 mt-2">
+      <input type="hidden" name="requisition_id" value="${record.id}">
+      <div class="col-md-6">
+        <label class="form-label">${L("finAmountToRelease")}</label>
+        <input name="released_amount" type="number" class="form-control" value="${mode === "partial" ? "" : remaining}" max="${approved}" min="1" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">${L("method")}</label>
+        <select name="payment_method" class="form-select" required><option value="">—</option>${methods.map((m) => `<option value="${m}">${m}</option>`).join("")}</select>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">${L("finPaymentReference")}</label>
+        <input name="payment_reference" class="form-control">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">${L("finReleaseDate")}</label>
+        <input name="release_date" type="date" class="form-control" value="${today}" required>
+      </div>
+      <div class="col-12">
+        <label class="form-label">${L("observations")}</label>
+        <textarea name="payment_notes" class="form-control" rows="3"></textarea>
+      </div>
+      <div class="col-12">
+        <label class="form-label">${L("finPaymentProof")} <span class="field-optional">(${L("optional")})</span></label>
+        <input name="payment_proof" type="file" class="form-control" accept="image/*,.pdf">
+      </div>
+    </form>`;
+  foot.innerHTML = `<button type="button" class="btn btn-outline-glass" data-finance-drawer-close>${L("cancel")}</button>
+    <button type="submit" form="financeDrawerForm" class="btn btn-ce-gold">${L("reqReleaseResources")}</button>`;
+  drawer.classList.remove("d-none");
+  backdrop.classList.remove("d-none");
+  requestAnimationFrame(() => drawer.classList.add("is-open"));
+  drawer.setAttribute("aria-hidden", "false");
+}
+
+function submitFinanceReleaseDrawer(form) {
+  const disb = window.CEFinanceDisbursements;
+  const data = Object.fromEntries(new FormData(form).entries());
+  const recordId = financeDrawerRecordId || data.requisition_id;
+  if (!disb || !recordId) return;
+  const result = disb.applyRelease(state, activeUser, recordId, {
+    released_amount: data.released_amount,
+    amount_released: data.released_amount,
+    payment_method: data.payment_method,
+    payment_reference: data.payment_reference,
+    payment_notes: data.payment_notes,
+    release_date: data.release_date,
+    released_at: data.release_date
+  });
+  if (!result.ok) {
+    const errors = {
+      exceeds_approved: L("finExceedsApproved"),
+      payment_method_required: L("finPaymentMethodRequired"),
+      date_required: L("finReleaseDateRequired"),
+      invalid_amount: L("finExceedsApproved")
+    };
+    alert(errors[result.error] || L("accessDeniedText"));
+    return;
+  }
+  saveState(`Released resources ${recordId}`);
+  closeFinanceDrawer();
+  alert(L("finReleaseSuccess"));
+  if (activeRoute === "finance") renderFinance();
+  else setRoute("finance");
 }
 
 function financeReportStatsCards(stats) {
@@ -4378,6 +4655,9 @@ function closeFinanceDrawer() {
 }
 
 function submitFinanceDrawer(form) {
+  if (financeDrawerMode === "releaseRequisition" || financeDrawerMode === "partialRelease") {
+    return submitFinanceReleaseDrawer(form);
+  }
   const data = Object.fromEntries(new FormData(form).entries());
   const nowIso = new Date().toISOString();
   const today = nowIso.slice(0, 10);
@@ -5912,6 +6192,11 @@ function renderFinance() {
 
   window.paymentMethods = paymentMethods;
   window.financeStatuses = financeStatuses;
+  migrateRequisitionsFinanceState();
+
+  const disbLib = window.CEFinanceDisbursements;
+  const approvedReqAll = disbLib?.getApprovedRequisitions?.(state, activeUser) || [];
+  const approvedReqStats = disbLib?.computeStats?.(approvedReqAll) || {};
 
   const allList = getScopedFinanceList();
   const filters = financePageState.reportFilters;
@@ -6065,6 +6350,12 @@ function renderFinance() {
           ${sm("bi-patch-check", L("verified"), allList.filter((f) => statusKey(f.estado) === "verified").length, "finance", { targetTab: "entries", filterPayload: { status: FINANCE_STATUS_VERIFIED } })}
           ${sm("bi-globe2", L("financeTabPublic"), publicRows.filter((row) => statusKey(row.status) === "pendingVerification").length, "finance", { targetTab: "public", filterPayload: { source: "public_website" } })}
           ${sm("bi-x-circle", L("financeTotalRejected"), allList.filter((f) => statusKey(f.estado) === "rejected").length, "finance", { targetTab: "entries", filterPayload: { status: FINANCE_STATUS_REJECTED } })}
+        </div>
+        <div class="row g-3 summary-cards-row mt-2">
+          ${sm("bi-clipboard-check", L("finApprovedRequisitions"), approvedReqStats.total || 0, "finance", { targetTab: "approvedRequisitions" })}
+          ${sm("bi-hourglass-split", L("finAwaitingRelease"), approvedReqStats.awaiting || 0, "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Aguardando Liberação" } })}
+          ${sm("bi-cash-stack", L("finReleasedThisMonth"), approvedReqStats.releasedThisMonth || 0, "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Recursos Liberados", period: "month" } })}
+          ${sm("bi-graph-up", L("finTotalReleasedMonth"), money(approvedReqStats.releasedValueMonth || 0), "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Recursos Liberados", period: "month" } })}
         </div>`)}
       ${moduleSection(L("financeAnalyticsSection"), L("financeAnalyticsHint"), "bi-pie-chart", "", `
         <div class="row g-4">
@@ -6081,6 +6372,40 @@ function renderFinance() {
   } else if (financePageState.tab === "verification") {
     tabContent = moduleSection(L("financeVerificationQueue"), L("financeVerificationHint"), "bi-shield-check", "", `
       ${financeChips}<article class="panel glass-panel mb-0">${verificationTable}</article>`);
+  } else if (financePageState.tab === "approvedRequisitions") {
+    if (!disbLib?.canViewApprovedRequisitions?.(activeUser)) {
+      tabContent = `<div class="finance-privacy-banner"><i class="bi bi-shield-lock"></i><span>${L("accessDeniedText")}</span></div>`;
+    } else {
+      const filters = financePageState.approvedReqFilters;
+      const filteredApproved = disbLib.filterList(approvedReqAll, filters);
+      const reqStats = disbLib.computeStats(filteredApproved);
+      tabContent = moduleSection(L("financeTabApprovedReq"), L("finApprovedReqHint"), "bi-clipboard-check", "", `
+        <div class="row g-3 summary-cards-row mb-4">
+          ${sm("bi-hourglass-split", L("finAwaitingRelease"), reqStats.awaiting, "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Aguardando Liberação" } })}
+          ${sm("bi-check-circle", L("finResourcesReleased"), reqStats.released, "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Recursos Liberados" } })}
+          ${sm("bi-cash-coin", L("finApprovedAmount"), money(reqStats.approvedTotal), "finance", { targetTab: "approvedRequisitions" })}
+          ${sm("bi-wallet2", L("finReleasedAmount"), money(reqStats.releasedTotal), "finance", { targetTab: "approvedRequisitions" })}
+          ${sm("bi-clock-history", L("finPendingPayments"), reqStats.pendingPayments, "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Aguardando Liberação" } })}
+          ${sm("bi-pie-chart", L("finPartiallyPaid"), reqStats.partial, "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Parcialmente Pago" } })}
+        </div>
+        ${financeApprovedReqFilterBar(filters)}
+        ${filteredApproved.length ? dataTable(
+          [L("reqNumber"), L("reqTitle"), L("reqDepartment"), L("church"), L("reqRequester"), L("finApprovedBy"), L("reqApprovedAmount"), L("finReleasedAmount"), L("finFinanceStatus"), L("actions")],
+          filteredApproved.map((r) => [
+            r.request_number,
+            r.title,
+            r.department_name,
+            r.church_name || churchName(r.church_id),
+            r.requested_by_name,
+            r.approved_by || "-",
+            money(r.approved_amount || r.estimated_amount),
+            money(r.released_amount || r.amount_released || 0),
+            financeApprovedReqBadge(r.finance_status || "Aguardando Liberação"),
+            financeApprovedReqActions(r)
+          ])
+        ) : noResultsHtml()}`
+      );
+    }
   } else if (financePageState.tab === "reports") {
     tabContent = `
       ${moduleSection(L("financeReportsSection"), L("financeReportsHint"), "bi-graph-up", "", `
@@ -7148,7 +7473,8 @@ function requisitionActionLabel(action) {
     submit: L("reqSubmit"), review: L("reqReview"), forwardPastor: L("reqForwardPastor"),
     approve: L("reqApprove"), reject: L("reqReject"), returnForCorrection: L("reqReturnForCorrection"),
     releaseResources: L("reqReleaseResources"),
-    markPurchased: L("reqMarkPurchased"), registerInventory: L("reqRegisterInventory"), close: L("reqClose"),
+    markPurchased: L("reqMarkPurchased"), registerInventory: L("reqRegisterInventory"),
+    sendToInventory: L("reqSendToInventory"), close: L("reqClose"),
     edit: L("edit"), view: L("view")
   };
   return map[action] || action;
@@ -7198,6 +7524,7 @@ function requisitionTimelineLabel(event, record) {
     submitted: `${L("reqTimelineSubmitted")} ${date}`,
     reviewed: `${L("reqTimelineReviewed")} ${event.by}`,
     sentToPastor: L("reqTimelineSentPastor"),
+    sentToFinance: L("finSentToFinance"),
     approved: `${L("reqTimelineApproved")} ${event.by}`,
     rejected: `${L("reqTimelineRejected")} ${event.by}`,
     returned: `${L("reqTimelineReturned")} ${event.by}`,
@@ -7216,6 +7543,34 @@ function requisitionTimelineHtml(record) {
   return `<ol class="requisition-timeline">${events.map((event, index) =>
     `<li><span class="requisition-timeline-step">${index + 1}</span><div><strong>${requisitionTimelineLabel(event, record)}</strong>${event.notes && !["rejected", "returned", "approved"].includes(event.action) ? `<p class="mb-0 text-secondary small">${event.notes}</p>` : ""}${event.notes && ["rejected", "returned", "approved"].includes(event.action) ? `<p class="mb-0 text-secondary small">${event.notes}</p>` : ""}</div></li>`
   ).join("")}</ol>`;
+}
+
+function requisitionFinanceSectionHtml(record) {
+  const lib = window.CERequisitions;
+  const approvedStatuses = [lib?.STATUSES?.APPROVED_AWAITING_RELEASE, lib?.STATUSES?.APPROVED, lib?.STATUSES?.RESOURCES_RELEASED, lib?.STATUSES?.PURCHASED, "Aprovado", "Aprovado — Aguardando Liberação de Recursos", "Recursos Liberados"];
+  if (!approvedStatuses.includes(record.status) && !record.finance_status && !record.sent_to_finance) return "";
+  const finStatus = record.finance_status || "Aguardando Liberação";
+  const pendingBadge = finStatus === "Aguardando Liberação"
+    ? `<span class="status-pill status-warn ms-2"><i class="bi bi-circle-fill"></i>${L("finPendingInFinance")}</span>`
+    : finStatus === "Recursos Liberados" || finStatus === "Pago"
+      ? `<span class="status-pill status-good ms-2"><i class="bi bi-circle-fill"></i>${L("finResourcesReleased")}</span>`
+      : financeApprovedReqBadge(finStatus);
+  return `
+    <section class="requisition-detail-section requisition-finance-section">
+      <h4 class="requisition-detail-title">${L("finance")} — ${L("finResourceDisbursement")}</h4>
+      <div class="church-detail-grid">
+        ${requisitionDetailRow(L("finSentToFinance"), record.sent_to_finance ? L("yes") : L("no"))}
+        ${requisitionDetailRow(L("finFinanceStatus"), pendingBadge)}
+        ${requisitionDetailRow(L("finApprovedAmount"), money(record.approved_amount || record.estimated_amount))}
+        ${requisitionDetailRow(L("finReleasedAmount"), money(record.released_amount || record.amount_released || 0))}
+        ${requisitionDetailRow(L("finApprovedBy"), record.approved_by || "-")}
+        ${requisitionDetailRow(L("finApprovedAt"), formatDateTime(record.approved_at))}
+        ${requisitionDetailRow(L("reqReleaseResources"), record.released_by || record.resources_released_by || "-")}
+        ${requisitionDetailRow(L("finReleaseDate"), formatDateTime(record.released_at || record.resources_released_at))}
+        ${requisitionDetailRow(L("method"), record.payment_method || "-")}
+        ${requisitionDetailRow(L("finPaymentReference"), record.payment_reference || "-")}
+      </div>
+    </section>`;
 }
 
 function requisitionPastoralDecisionHtml(record, preset = "") {
@@ -7295,6 +7650,7 @@ function requisitionDetailHtml(record, presetDecision = "") {
       <h4 class="requisition-detail-title">${L("reqSectionAttachments")}</h4>
       ${requisitionAttachmentsHtml(record)}
     </section>
+    ${requisitionFinanceSectionHtml(record)}
     ${requisitionPastoralDecisionHtml(record, presetDecision)}
     <section class="requisition-detail-section">
       <h4 class="requisition-detail-title">${L("reqHistory")}</h4>
@@ -8406,12 +8762,39 @@ function submitFollowup(form) {
 }
 
 function quickAction(action, type, id) {
+  if (type === "financeApprovedReq") {
+    const disb = window.CEFinanceDisbursements;
+    const record = (state.requisitions || []).find((r) => r.id === id);
+    if (!record) return;
+    if (action === "view") return openRequisitionDrawer(id);
+    if (action === "releaseResources") return openFinanceReleaseDrawer(id, "release");
+    if (action === "partialPayment") return openFinanceReleaseDrawer(id, "partial");
+    if (action === "markPaid" && disb?.applyMarkPaid) {
+      const result = disb.applyMarkPaid(state, activeUser, id, {});
+      if (result.ok) {
+        saveState(`Mark paid ${record.request_number}`);
+        alert(L("finMarkPaidSuccess"));
+        return setRoute(activeRoute);
+      }
+      return;
+    }
+    if (action === "sendToInventory" && window.CERequisitions) {
+      const result = window.CERequisitions.applyWorkflowAction(state, activeUser, id, "sendToInventory", {});
+      if (result.ok) {
+        saveState(`Send to inventory ${record.request_number}`);
+        alert(L("finSentToInventorySuccess"));
+        return setRoute(activeRoute);
+      }
+    }
+    return;
+  }
   if (type === "requisition" && window.CERequisitions) {
     const record = (state.requisitions || []).find((r) => r.id === id);
     if (!record) return;
     if (action === "view") return openRequisitionDrawer(id);
     if (action === "approve" || action === "reject") return openRequisitionDrawer(id, action);
     if (action === "edit") return openForm("requisition", id);
+    if (action === "releaseResources") return openFinanceReleaseDrawer(id, "release");
     const result = window.CERequisitions.applyWorkflowAction(state, activeUser, id, action, {});
     if (result.ok) {
       saveState(`${action} requisition ${record.request_number}`);
@@ -8656,6 +9039,11 @@ document.addEventListener("click", (event) => {
     if (activeRoute === "finance") renderFinance();
     return;
   }
+  if (event.target.closest("[data-finance-approved-req-clear]")) {
+    financePageState.approvedReqFilters = { period: "month", dateFrom: "", dateTo: "", churchId: "", department: "", finance_status: "", urgency: "", requester: "", minValue: "", maxValue: "" };
+    if (activeRoute === "finance") renderFinance();
+    return;
+  }
   const requisitionTabBtn = event.target.closest("[data-requisition-tab]");
   if (requisitionTabBtn) {
     requisitionsPageState.tab = requisitionTabBtn.dataset.requisitionTab || "overview";
@@ -8766,6 +9154,13 @@ byId("entryForm")?.addEventListener("submit", (event) => {
 });
 
 document.addEventListener("submit", (event) => {
+  if (event.target.matches("[data-finance-approved-req-filters]")) {
+    event.preventDefault();
+    const data = Object.fromEntries(new FormData(event.target).entries());
+    financePageState.approvedReqFilters = { ...financePageState.approvedReqFilters, ...data };
+    if (activeRoute === "finance") renderFinance();
+    return;
+  }
   if (event.target.id === "financeDrawerForm") {
     event.preventDefault();
     submitFinanceDrawer(event.target);

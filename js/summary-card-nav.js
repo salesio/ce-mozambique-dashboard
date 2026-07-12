@@ -70,6 +70,8 @@
     }
     if (module === "finance") {
       Object.keys(store.reportFilters || {}).forEach((key) => { store.reportFilters[key] = ""; });
+      Object.keys(store.approvedReqFilters || {}).forEach((key) => { store.approvedReqFilters[key] = ""; });
+      store.approvedReqFilters.period = "month";
       store.sourceFilter = "";
       return;
     }
@@ -236,6 +238,13 @@
       store.sourceFilter = filters.source;
       store.reportFilters.source = filters.source;
       if (payload.targetTab === "public") store.tab = "public";
+    }
+    if (payload.targetTab === "approvedRequisitions" || filters.finance_status) {
+      store.tab = payload.targetTab || "approvedRequisitions";
+      store.approvedReqFilters = store.approvedReqFilters || {};
+      if (filters.finance_status) store.approvedReqFilters.finance_status = filters.finance_status;
+      if (filters.period) store.approvedReqFilters.period = filters.period;
+      Object.assign(store.approvedReqFilters, filters);
     }
     Object.assign(store.reportFilters, filters);
     return true;

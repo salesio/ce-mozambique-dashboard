@@ -40,7 +40,7 @@
     history: [STATUSES.CLOSED]
   };
 
-  const INVENTORY_TYPES = new Set(["Nova Aquisição", "Equipamento"]);
+  const INVENTORY_TYPES = new Set(["Nova Aquisição", "Equipamento", "Material de Ministério", "Reparação"]);
 
   const PASTORAL_DECISION_ROLES = new Set(["Main Pastor", "Super Admin"]);
 
@@ -127,6 +127,7 @@
     push("submitted", record.submitted_by || record.requested_by_name, record.submitted_at);
     push("reviewed", record.reviewed_by, record.reviewed_at, record.review_notes);
     push("sentToPastor", record.sent_to_main_pastor_by, record.sent_to_main_pastor_at);
+    push("sentToFinance", record.sent_to_finance ? (record.approved_by || "Finanças") : "", record.sent_to_finance_at);
     push("approved", record.approved_by, record.approved_at, record.approval_notes);
     push("rejected", record.rejected_by, record.rejected_at, record.rejection_reason);
     push("returned", record.returned_by, record.returned_at, record.return_notes);
@@ -167,9 +168,12 @@
       case "markPurchased":
         return (access.can_edit || role === "Finance Head" || role === "Requisition Officer")
           && record.status === STATUSES.RESOURCES_RELEASED;
+      case "sendToInventory":
       case "registerInventory":
-        return (access.can_register_inventory || role === "Venue Manager")
-          && record.status === STATUSES.PURCHASED && INVENTORY_TYPES.has(record.requisition_type);
+        return (access.can_register_inventory || role === "Venue Manager" || role === "Finance Head" || role === "Super Admin")
+          && [STATUSES.RESOURCES_RELEASED, STATUSES.PURCHASED].includes(record.status)
+          && INVENTORY_TYPES.has(record.requisition_type)
+          && !record.inventory_item_id;
       case "close":
         return access.can_edit && [STATUSES.REGISTERED, STATUSES.PURCHASED, STATUSES.REJECTED].includes(record.status);
       default:
@@ -188,7 +192,7 @@
     if (canAct(user, "returnForCorrection", record)) actions.push("returnForCorrection");
     if (canAct(user, "releaseResources", record)) actions.push("releaseResources");
     if (canAct(user, "markPurchased", record)) actions.push("markPurchased");
-    if (canAct(user, "registerInventory", record)) actions.push("registerInventory");
+    if (canAct(user, "registerInventory", record)) actions.push("sendToInventory");
     if (canAct(user, "close", record)) actions.push("close");
     return actions;
   }
@@ -245,6 +249,13 @@
           at: now,
           notes: record.approval_notes
         });
+        if (window.CEFinanceDisbursements?.onRequisitionApproved) {
+          window.CEFinanceDisbursements.onRequisitionApproved(state, record, user);
+        } else {
+          record.finance_status = "Aguardando Liberação";
+          record.sent_to_finance_at = now;
+          record.sent_to_finance = true;
+        }
         break;
       case "reject":
         record.status = STATUSES.REJECTED;
@@ -275,48 +286,35 @@
         });
         break;
       case "releaseResources": {
-        record.status = STATUSES.RESOURCES_RELEASED;
-        record.resources_released_by = user.name;
-        record.resources_released_at = now;
-        record.amount_released = Number(payload.amount_released || record.approved_amount || record.estimated_amount || 0);
-        appendAuditLog(record, { action: "resourcesReleased", by: user.name, by_user_id: user.id, at: now });
-        const finId = `fin-req-${record.id}`;
-        state.finance = Array.isArray(state.finance) ? state.finance : [];
-        if (!state.finance.some((f) => f.id === finId)) {
-          state.finance.push({
-            id: finId,
-            source: "requisition",
-            source_type: "requisition",
-            requisition_id: record.id,
-            nome: record.department_name || "Requisição",
-            apelido: record.request_number || "",
-            telefone: "",
-            church_id: record.church_id,
-            igreja: record.church_name,
-            categoria_da_contribuicao: "Apoio Operacional",
-            metodo_de_pagamento: "Banco",
-            valor: record.amount_released,
-            data: today,
-            estado: "Recursos Liberados",
-            recebido_por: user.name,
-            verificado_por: user.name,
-            verified_at: now,
-            observacoes: `Liberação de recursos — ${record.title}`,
-            created_at: now,
-            created_by: user.name,
-            updated_by: user.name,
-            updated_at: today
+        if (window.CEFinanceDisbursements?.applyRelease) {
+          const result = window.CEFinanceDisbursements.applyRelease(state, user, recordId, {
+            released_amount: payload.amount_released || payload.released_amount,
+            payment_method: payload.payment_method || "Banco",
+            payment_reference: payload.payment_reference || "",
+            payment_notes: payload.payment_notes || payload.observacoes || "",
+            released_at: payload.released_at || payload.release_date || today
           });
+          if (!result.ok) return result;
+          return { ok: true, record: result.record };
         }
-        record.finance_record_id = finId;
+        record.status = STATUSES.RESOURCES_RELEASED;
+        record.finance_status = "Recursos Liberados";
+        record.resources_released_by = user.name;
+        record.released_by = user.name;
+        record.resources_released_at = now;
+        record.released_at = now;
+        record.amount_released = Number(payload.amount_released || record.approved_amount || record.estimated_amount || 0);
+        record.released_amount = record.amount_released;
+        appendAuditLog(record, { action: "resourcesReleased", by: user.name, by_user_id: user.id, at: now });
+        window.CEFinanceDisbursements?.syncDisbursement?.(state, record);
         break;
       }
       case "markPurchased":
         record.status = STATUSES.PURCHASED;
         appendAuditLog(record, { action: "purchased", by: user.name, by_user_id: user.id, at: now });
         break;
+      case "sendToInventory":
       case "registerInventory": {
-        record.status = STATUSES.REGISTERED;
         state.venueInventory = state.venueInventory || {};
         state.venueInventory.inventory = Array.isArray(state.venueInventory.inventory) ? state.venueInventory.inventory : [];
         const invId = `inv-req-${record.id}`;
@@ -328,25 +326,26 @@
             updated_by: user.name,
             created_at: today,
             updated_at: today,
-            status: "Bom",
+            status: "Pendente de Registo",
             nome_do_item: record.title,
             categoria: record.requisition_type === "Equipamento" ? "Informática" : "Outros",
             quantidade: 1,
-            estado: "Bom",
+            estado: "Pendente de Registo",
             localizacao: "A definir",
             departamento_responsavel: record.department_name,
             igreja: record.church_id,
             data_de_entrada: today,
-            valor_unitario: record.amount_released || record.approved_amount || record.estimated_amount || 0,
-            valor_total: record.amount_released || record.approved_amount || record.estimated_amount || 0,
+            valor_unitario: record.released_amount || record.amount_released || record.approved_amount || record.estimated_amount || 0,
+            valor_total: record.released_amount || record.amount_released || record.approved_amount || record.estimated_amount || 0,
             serial_number: "",
-            observacoes: `Rascunho via requisição ${record.request_number}`,
+            observacoes: record.description || `Rascunho via requisição ${record.request_number}`,
             requisition_id: record.id,
             draft_from_requisition: true
           });
         }
         record.inventory_item_id = invId;
-        appendAuditLog(record, { action: "registered", by: user.name, by_user_id: user.id, at: now });
+        record.sent_to_inventory_at = now;
+        appendAuditLog(record, { action: "sentToInventory", by: user.name, by_user_id: user.id, at: now });
         break;
       }
       case "close":

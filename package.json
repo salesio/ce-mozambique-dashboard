@@ -1,0 +1,17 @@
+{
+  "name": "ce-mozambique-dashboard",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "scripts": {
+    "build:supabase": "vite build",
+    "dev:supabase": "vite build --watch"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.8"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  }
+}

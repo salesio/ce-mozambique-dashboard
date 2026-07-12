@@ -3283,6 +3283,19 @@ function openPublicSubmissionDrawer(mode, submissionGroupId) {
   drawer.setAttribute("aria-hidden", "false");
 }
 
+async function syncFinanceFromSupabaseIfEnabled() {
+  if (!window.CESupabaseBridge?.isEnabled?.()) return false;
+  const churchIds = activeUser.can_view_all_churches
+    ? state.churches.map((church) => church.id)
+    : [activeUser.church_id];
+  const result = await window.CESupabaseBridge.syncFinanceIntoState(state, churchIds);
+  if (result.synced) {
+    state = result.state;
+    return true;
+  }
+  return false;
+}
+
 function applyFinanceGroupDecision(submissionGroupId, mode, data) {
   const records = state.finance.filter((record) => record.submission_group_id === submissionGroupId);
   if (!records.length) return false;
@@ -3300,6 +3313,9 @@ function applyFinanceGroupDecision(submissionGroupId, mode, data) {
     const submission = (state.publicGivingSubmissions || []).find((item) => item.submission_group_id === submissionGroupId);
     if (submission) submission.status = FINANCE_STATUS_VERIFIED;
     saveState(`Verified public submission ${submissionGroupId}`);
+    if (window.CESupabaseBridge?.persistGroupDecision) {
+      window.CESupabaseBridge.persistGroupDecision(submissionGroupId, mode, data, activeUser.name);
+    }
     return true;
   }
   if (mode === "rejectGroup") {
@@ -3318,6 +3334,9 @@ function applyFinanceGroupDecision(submissionGroupId, mode, data) {
     const submission = (state.publicGivingSubmissions || []).find((item) => item.submission_group_id === submissionGroupId);
     if (submission) submission.status = FINANCE_STATUS_REJECTED;
     saveState(`Rejected public submission ${submissionGroupId}`);
+    if (window.CESupabaseBridge?.persistGroupDecision) {
+      window.CESupabaseBridge.persistGroupDecision(submissionGroupId, mode, data, activeUser.name);
+    }
     return true;
   }
   return false;
@@ -3922,6 +3941,16 @@ function submitFinanceDrawer(form) {
     record.updated_by = activeUser.name;
     record.updated_at = today;
     saveState(`Verified finance record ${fullName(record)}`);
+    if (window.CESupabaseBridge?.persistRecordDecision) {
+      window.CESupabaseBridge.persistRecordDecision(record, {
+        estado: FINANCE_STATUS_VERIFIED,
+        verificado_por: activeUser.name,
+        verified_at: nowIso,
+        comentario_verificacao: data.comentario_verificacao || "",
+        updated_by: activeUser.name,
+        updated_at: today
+      });
+    }
   } else if (financeDrawerMode === "reject") {
     if (!String(data.motivo_rejeicao || "").trim()) {
       alert(L("rejectionReasonRequired"));
@@ -3934,6 +3963,16 @@ function submitFinanceDrawer(form) {
     record.updated_by = activeUser.name;
     record.updated_at = today;
     saveState(`Rejected finance record ${fullName(record)}`);
+    if (window.CESupabaseBridge?.persistRecordDecision) {
+      window.CESupabaseBridge.persistRecordDecision(record, {
+        estado: FINANCE_STATUS_REJECTED,
+        verificado_por: activeUser.name,
+        verified_at: nowIso,
+        motivo_rejeicao: data.motivo_rejeicao.trim(),
+        updated_by: activeUser.name,
+        updated_at: today
+      });
+    }
   } else if (financeDrawerMode === "edit") {
     const payload = { ...data, updated_by: activeUser.name, updated_at: today };
     Object.assign(record, migrateFinanceRecord({ ...record, ...payload }));
@@ -5245,7 +5284,14 @@ function foundationProgress(student) {
   return migrateFoundationStudent(student).class_progress_percent;
 }
 
+let financeSupabaseSyncToken = 0;
+
 function renderFinance() {
+  const syncToken = ++financeSupabaseSyncToken;
+  syncFinanceFromSupabaseIfEnabled().then((changed) => {
+    if (changed && syncToken === financeSupabaseSyncToken && activeRoute === "finance") renderFinance();
+  });
+
   if (typeof importPublicGivingQueue === "function") {
     const result = importPublicGivingQueue(state);
     if (result.imported > 0) {
@@ -7282,8 +7328,14 @@ byId("content")?.addEventListener("scroll", updateBackToTopVisibility, { passive
 
 byId("backToTopBtn")?.addEventListener("click", () => scrollContentTo("content"));
 
-byId("loginForm").addEventListener("submit", (event) => {
+byId("loginForm").addEventListener("submit", async (event) => {
   event.preventDefault();
+  const email = byId("loginEmail")?.value || "";
+  const password = byId("loginPassword")?.value || "";
+  if (window.CESupabaseBridge?.trySupabaseLogin) {
+    await window.CESupabaseBridge.trySupabaseLogin(email, password);
+  }
+  await syncFinanceFromSupabaseIfEnabled();
   byId("loginView").classList.add("d-none");
   byId("appView").classList.remove("d-none");
   renderShell();

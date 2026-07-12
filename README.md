@@ -6,6 +6,23 @@ First dashboard prototype for the church team portal.
 
 Login with the demo credentials on the page (`admin@ce-mozambique.org` / `demo`).
 
+### Supabase (database backend)
+
+PostgreSQL, auth, and file storage run on **Supabase** — not on GitHub Pages.
+
+See **[SUPABASE_SETUP.md](SUPABASE_SETUP.md)** for project creation, schema, RLS, storage, and env variables.
+
+Quick start:
+
+```bash
+cp .env.example .env
+# fill VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY
+npm install
+npm run build:supabase
+```
+
+Without env variables, the dashboard keeps using **localStorage mock data**.
+
 ### Publishing updates
 
 GitHub Pages serves the static site from the `gh-pages` branch (legacy deploy). After changing files on `main`, update the live site:

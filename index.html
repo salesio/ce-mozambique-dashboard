@@ -11,7 +11,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" type="image/png" href="https://embaixada-de-cristo.obiuba.com/assets/web/LoveWorld.png">
-  <link rel="stylesheet" href="css/dashboard.css?v=20260712-reports-hub-v1">
+  <link rel="stylesheet" href="css/dashboard.css?v=20260714-notifications-v1">
 </head>
 <body>
   <main id="loginView" class="login-shell">
@@ -77,6 +77,29 @@
           <div class="dash-lang-switch" role="group" aria-label="Idioma">
             <button type="button" data-lang="pt" class="active">PT</button>
             <button type="button" data-lang="en">EN</button>
+          </div>
+          <div class="notification-wrap">
+            <button id="notificationBell" class="icon-btn notification-bell" type="button" aria-label="Notificações" aria-expanded="false">
+              <i class="bi bi-bell"></i>
+              <span id="notificationBadge" class="notification-badge d-none">0</span>
+            </button>
+            <section id="notificationPanel" class="notification-panel d-none" aria-label="Notificações">
+              <div class="notification-panel-head">
+                <div>
+                  <span class="eyebrow" data-i18n="notifications">Notificações</span>
+                  <h2 data-i18n="recentNotifications">Recentes</h2>
+                </div>
+                <button type="button" class="icon-btn notification-close" data-notification-close aria-label="Fechar">
+                  <i class="bi bi-x-lg"></i>
+                </button>
+              </div>
+              <div id="notificationPanelFilters" class="notification-filter-row"></div>
+              <div id="notificationPanelList" class="notification-list"></div>
+              <div class="notification-panel-actions">
+                <button type="button" class="btn btn-sm btn-outline-light action-secondary" data-notification-mark-all data-i18n="markAllRead">Marcar todas como lidas</button>
+                <button type="button" class="btn btn-sm btn-ce-gold" data-route="notifications" data-i18n="viewAll">Ver todas</button>
+              </div>
+            </section>
           </div>
           <a class="btn btn-sm btn-outline-light" href="https://salesio.github.io/ce-mozambique/" target="_blank" rel="noopener" data-i18n="top.site">Ver Site</a>
           <button id="logoutBtn" class="btn btn-sm btn-ce-gold" type="button" data-i18n="top.logout">Sair</button>
@@ -163,7 +186,7 @@
   <script src="js/summary-card-nav.js?v=20260712-reports-hub-v1"></script>
   <script src="js/cell-seed-data.js?v=20260710-cell-nav"></script>
   <script src="js/public-giving-bridge.js?v=20260712-login-fix2"></script>
-  <script src="js/access-control.js?v=20260712-reports-hub-v1"></script>
+  <script src="js/access-control.js?v=20260714-notifications-v1"></script>
   <script src="js/finance-disbursements-module.js?v=20260712-req-reports-v1"></script>
   <script src="js/requisition-reports-module.js?v=20260712-reports-hub-v1"></script>
   <script src="js/reports-export-module.js?v=20260712-reports-hub-v1"></script>
@@ -172,7 +195,7 @@
   <script src="js/requisitions-module.js?v=20260712-reports-v2"></script>
   <script src="js/staff-hr-module.js?v=20260712-staff-birthdays-v3"></script>
   <script src="js/finance-module.js?v=20260712-contrast-v5"></script>
-  <script src="js/dashboard.js?v=20260712-reports-hub-v1"></script>
+  <script src="js/dashboard.js?v=20260714-notifications-v1"></script>
   <script>window.__CE_ENV__ = window.__CE_ENV__ || {};</script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-config.js?v=20260712-supabase"></script>

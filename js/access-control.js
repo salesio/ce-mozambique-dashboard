@@ -80,7 +80,7 @@
 
   const ALL_MODULES = [
     "dashboard", "churches", "members", "firstTimers", "followUp", "reports", "counseling",
-    "foundation", "finance", "fevo", "venueInventory", "sacraments", "prisonMinistry",
+    "foundation", "finance", "notifications", "fevo", "venueInventory", "sacraments", "prisonMinistry",
     "ministryMaterials", "programs", "partnership", "media", "cell", "requisitions",
     "staffHr", "usersRoles", "accessControl", "settings", "auditLogs"
   ];
@@ -331,6 +331,10 @@
   function resolveModuleAccess(user, module) {
     if (!user || !module) return emptyAccess();
     const base = { module, ...NO_ACCESS };
+
+    if (module === "notifications") {
+      return { module, ...VIEW_ONLY, scope: user.can_view_all_churches ? "all" : user.assigned_department ? "department" : "church" };
+    }
 
     if ((user.department_permissions || []).includes("*") || user.role === "Super Admin") {
       return { module, ...FULL_ACCESS, can_view_salary: true, can_review: true, can_forward: true, can_register_inventory: true };

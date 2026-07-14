@@ -1403,6 +1403,90 @@ const TEXT = {
   }
 };
 
+Object.assign(TEXT.pt, {
+  notifications: "Notificações",
+  recentNotifications: "Recentes",
+  markRead: "Marcar como lida",
+  markAllRead: "Marcar todas como lidas",
+  unread: "Não lidas",
+  urgentPlural: "Urgentes",
+  actionRequiredPlural: "Acções necessárias",
+  viewAll: "Ver todas",
+  allNotifications: "Todas",
+  read: "Lida",
+  unreadState: "Não lida",
+  notificationType: "Tipo",
+  priority: "Prioridade",
+  module: "Módulo",
+  actionRequired: "Acção necessária",
+  approvalRequired: "Aprovação necessária",
+  reminder: "Lembrete",
+  info: "Informativa",
+  success: "Sucesso",
+  warning: "Aviso",
+  urgent: "Urgente",
+  low: "Baixa",
+  normal: "Normal",
+  high: "Alta",
+  notificationInboxSubtitle: "Notificações internas filtradas por utilizador, função, departamento, igreja e permissões.",
+  newRequisitionSubmitted: "Nova requisição submetida",
+  requisitionPastoralApproval: "Requisição aguarda aprovação pastoral",
+  requisitionApproved: "Requisição aprovada",
+  requisitionRejected: "Requisição rejeitada",
+  requisitionReturned: "Requisição devolvida para correção",
+  resourcesReleased: "Recursos liberados",
+  publicGivingSubmission: "Nova submissão pública de contribuição",
+  verifySubmission: "Verificar Submissão",
+  releaseResources: "Liberar Recursos",
+  approveReject: "Aprovar ou Rejeitar",
+  reviewRequisition: "Rever Requisição",
+  correctRequisition: "Corrigir Requisição",
+  viewRelease: "Ver Liberação",
+  viewDetails: "Ver Detalhes"
+});
+
+Object.assign(TEXT.en, {
+  notifications: "Notifications",
+  recentNotifications: "Recent",
+  markRead: "Mark as read",
+  markAllRead: "Mark all as read",
+  unread: "Unread",
+  urgentPlural: "Urgent",
+  actionRequiredPlural: "Action required",
+  viewAll: "View all",
+  allNotifications: "All",
+  read: "Read",
+  unreadState: "Unread",
+  notificationType: "Type",
+  priority: "Priority",
+  module: "Module",
+  actionRequired: "Action required",
+  approvalRequired: "Approval required",
+  reminder: "Reminder",
+  info: "Info",
+  success: "Success",
+  warning: "Warning",
+  urgent: "Urgent",
+  low: "Low",
+  normal: "Normal",
+  high: "High",
+  notificationInboxSubtitle: "Internal notifications filtered by user, role, department, church and permissions.",
+  newRequisitionSubmitted: "New requisition submitted",
+  requisitionPastoralApproval: "Requisition awaiting pastoral approval",
+  requisitionApproved: "Requisition approved",
+  requisitionRejected: "Requisition rejected",
+  requisitionReturned: "Requisition returned for correction",
+  resourcesReleased: "Resources released",
+  publicGivingSubmission: "New public giving submission",
+  verifySubmission: "Verify Submission",
+  releaseResources: "Release Resources",
+  approveReject: "Approve or Reject",
+  reviewRequisition: "Review Requisition",
+  correctRequisition: "Correct Requisition",
+  viewRelease: "View Release",
+  viewDetails: "View Details"
+});
+
 const STATUS_KEYS = {
   Pending: "pending",
   Pendente: "pending",
@@ -2764,6 +2848,12 @@ const movementStatuses = ["Solicitado", "Aprovado", "Em Uso", "Devolvido", "Atra
 const venueTypes = ["Auditório", "Sala", "Escritório", "Estúdio", "Armazém", "Outro"];
 const venueStatuses = ["Activo", "Indisponível", "Em Manutenção"];
 const checklistStatuses = ["Pendente", "Parcial", "Pronto"];
+const notificationTypes = ["info", "success", "warning", "urgent", "approval_required", "action_required", "reminder"];
+const notificationModules = ["requisitions", "finance", "foundation_school", "follow_up", "fevo", "cell_ministry", "inventory", "staff_hr", "sacraments", "system"];
+const notificationPriorities = ["low", "normal", "high", "urgent"];
+const notificationScopes = ["user", "role", "department", "church", "national"];
+let notificationPanelFilter = "all";
+let notificationPageFilter = "all";
 
 const __cellSeed = typeof buildCellGroupsSeed === "function" ? buildCellGroupsSeed() : { cellGroups: [], cellRegistry: [] };
 
@@ -2795,6 +2885,18 @@ const seedData = {
     { id: "dept-media", church_id: "church-hq", name: "Media", lead_name: "Media Team" },
     { id: "dept-venue", church_id: "church-hq", name: "Venue Management", lead_name: "Marcelo Panguene" },
     { id: "dept-programs", church_id: "church-hq", name: "Programas", lead_name: "Programs Team" }
+  ],
+  notifications: [
+    { id: "not-1", title: "Nova requisição submetida", message: "Uma nova requisição foi submetida e aguarda revisão.", type: "action_required", module: "requisitions", entity_type: "requisition", entity_id: "req-1", priority: "high", recipient_user_id: "", recipient_role: "Requisition Officer", recipient_department_id: "", recipient_church_id: "church-hq", scope: "role", action_url: "requisitions", action_label: "Rever Requisição", is_read: false, read_at: "", created_at: "2026-07-14T08:20:00.000Z", expires_at: "", metadata: { request_number: "REQ-2026-0001" } },
+    { id: "not-2", title: "Requisição aguarda aprovação pastoral", message: "A requisição REQ-2026-0005 foi revista e enviada para sua aprovação.", type: "approval_required", module: "requisitions", entity_type: "requisition", entity_id: "req-5", priority: "urgent", recipient_user_id: "", recipient_role: "Main Pastor", recipient_department_id: "", recipient_church_id: "church-hq", scope: "role", action_url: "requisitions", action_label: "Aprovar ou Rejeitar", is_read: false, read_at: "", created_at: "2026-07-14T08:30:00.000Z", expires_at: "", metadata: { request_number: "REQ-2026-0005" } },
+    { id: "not-3", title: "Requisição aprovada aguardando liberação", message: "A requisição REQ-2026-0008 foi aprovada e aguarda liberação de recursos.", type: "action_required", module: "finance", entity_type: "requisition", entity_id: "req-8", priority: "high", recipient_user_id: "", recipient_role: "Finance Head", recipient_department_id: "dept-finance", recipient_church_id: "church-hq", scope: "role", action_url: "finance", action_label: "Liberar Recursos", is_read: false, read_at: "", created_at: "2026-07-14T08:40:00.000Z", expires_at: "", metadata: { request_number: "REQ-2026-0008" } },
+    { id: "not-4", title: "Requisição aprovada", message: "A sua requisição foi aprovada e enviada para Finanças.", type: "success", module: "requisitions", entity_type: "requisition", entity_id: "req-8", priority: "normal", recipient_user_id: "u-12", recipient_role: "", recipient_department_id: "", recipient_church_id: "church-hq", scope: "user", action_url: "requisitions", action_label: "Ver Detalhes", is_read: false, read_at: "", created_at: "2026-07-14T08:41:00.000Z", expires_at: "", metadata: { request_number: "REQ-2026-0008" } },
+    { id: "not-5", title: "Nova submissão pública de contribuição", message: "Foi recebido um novo relatório de oferta/dízimo/parceria aguardando verificação.", type: "action_required", module: "finance", entity_type: "finance_record", entity_id: "fin-2", priority: "high", recipient_user_id: "", recipient_role: "Finance Officer", recipient_department_id: "dept-finance", recipient_church_id: "church-hq", scope: "role", action_url: "finance", action_label: "Verificar Submissão", is_read: false, read_at: "", created_at: "2026-07-14T09:00:00.000Z", expires_at: "", metadata: {} },
+    { id: "not-6", title: "Grupo sem relatório", message: "Grupo Choupal está sem relatório F.E.V.O e precisa de seguimento.", type: "warning", module: "fevo", entity_type: "fevo_report", entity_id: "fevo-nr-2", priority: "high", recipient_user_id: "", recipient_role: "F.E.V.O Coordinator", recipient_department_id: "", recipient_church_id: "church-hq", scope: "role", action_url: "fevoNoReportsRoute", action_label: "Ver Pendentes", is_read: false, read_at: "", created_at: "2026-07-14T09:10:00.000Z", expires_at: "", metadata: {} },
+    { id: "not-7", title: "Relatório pendente de validação", message: "Há relatório de célula encaminhado para validação final.", type: "action_required", module: "cell_ministry", entity_type: "fevo_report", entity_id: "eval-1", priority: "high", recipient_user_id: "", recipient_role: "Final Coordinator", recipient_department_id: "dept-cell", recipient_church_id: "church-hq", scope: "role", action_url: "cellFinalValidation", action_label: "Ver Validação", is_read: false, read_at: "", created_at: "2026-07-14T09:20:00.000Z", expires_at: "", metadata: {} },
+    { id: "not-8", title: "Equipamento danificado reportado", message: "Microphone FM Wireless está marcado como em reparação.", type: "warning", module: "inventory", entity_type: "inventory_item", entity_id: "inv-3", priority: "normal", recipient_user_id: "", recipient_role: "Venue Manager", recipient_department_id: "dept-venue", recipient_church_id: "church-hq", scope: "role", action_url: "venueInventoryMaintenance", action_label: "Ver Reparação", is_read: false, read_at: "", created_at: "2026-07-14T09:30:00.000Z", expires_at: "", metadata: {} },
+    { id: "not-9", title: "Certificado pendente", message: "Aluno pronto para emissão de certificado na Escola de Fundação.", type: "reminder", module: "foundation_school", entity_type: "foundation_student", entity_id: "fs-1", priority: "normal", recipient_user_id: "", recipient_role: "Church Pastor", recipient_department_id: "", recipient_church_id: "church-hq", scope: "role", action_url: "foundation", action_label: "Ver Aluno", is_read: true, read_at: "2026-07-14T10:00:00.000Z", created_at: "2026-07-14T09:40:00.000Z", expires_at: "", metadata: {} },
+    { id: "not-10", title: "Avaliação pendente", message: "Existe avaliação de staff pendente para revisão do departamento.", type: "reminder", module: "staff_hr", entity_type: "staff_member", entity_id: "staff-1", priority: "normal", recipient_user_id: "", recipient_role: "HR Manager", recipient_department_id: "", recipient_church_id: "church-hq", scope: "role", action_url: "staffHr", action_label: "Ver RH", is_read: false, read_at: "", created_at: "2026-07-14T09:50:00.000Z", expires_at: "", metadata: {} }
   ],
   requisitions: [
     { id: "req-1", request_number: "REQ-2026-0001", requested_by_user_id: "u-12", requested_by_name: "Department Head Demo", department_id: "dept-cell", department_name: "Cell Ministry", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Material de Ministério", title: "Materiais para Escola de Células", description: "Livros, manuais e apostilas para formação de líderes.", justification: "Preparação do trimestre de liderança celular.", estimated_amount: 18500, currency: "MZN", urgency: "Normal", needed_by_date: "2026-08-01", attachments: [], supplier_or_vendor: "Loveworld Books", quotation_number: "QT-2026-014", reviewed_by: "", reviewed_at: "", review_notes: "", sent_to_main_pastor_at: "", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", status: "Submetido", created_at: "2026-07-08T10:00:00.000Z", updated_at: "2026-07-08T10:00:00.000Z" },
@@ -3326,6 +3428,11 @@ function normalizeState(saved) {
     ...structuredClone(seedData.venueInventory),
     ...(saved.venueInventory || {})
   };
+  merged.notifications = Array.isArray(merged.notifications) ? merged.notifications : [];
+  const savedNotificationIds = new Set(merged.notifications.map((item) => item.id));
+  (seedData.notifications || []).forEach((item) => {
+    if (!savedNotificationIds.has(item.id)) merged.notifications.push(structuredClone(item));
+  });
   ["inventory", "acquisitions", "staffEquipment", "maintenance", "movements", "venues", "checklists", "reports"].forEach((key) => {
     const seedItems = seedData.venueInventory[key] || [];
     const savedItems = merged.venueInventory[key] || [];
@@ -5528,6 +5635,7 @@ function renderShell() {
   byId("activeUserName").textContent = activeUser.name;
   byId("activeUserRole").textContent = activeUser.role;
   applySidebarCollapse();
+  updateNotificationCenter();
 }
 
 function applyLanguage(next = lang) {
@@ -5656,7 +5764,8 @@ function setRoute(route) {
     venueInventoryMovements: ["departments", "loansMovements"],
     venueInventorySpaces: ["departments", "venuesRooms"],
     venueInventoryChecklist: ["departments", "serviceChecklist"],
-    venueInventoryReports: ["departments", "venueReports"]
+    venueInventoryReports: ["departments", "venueReports"],
+    notifications: ["main", "notifications"]
   };
   byId("pageTitle").textContent = found ? L(found.item[2]) : isCellRoute(activeRoute) ? cellRouteLabel(activeRoute) : childRoutes[activeRoute] ? L(childRoutes[activeRoute][1]) : L("dashboard");
   byId("sectionLabel").textContent = found ? L(found.group.key) : isCellRoute(activeRoute) || childRoutes[activeRoute] ? L("departments") : L("main");
@@ -5682,6 +5791,7 @@ function setRoute(route) {
     firstTimers: renderFirstTimers,
     followUp: renderFollowUp,
     reports: renderReports,
+    notifications: renderNotifications,
     counseling: renderFirstTimers,
     foundation: renderFoundation,
     finance: renderFinance,
@@ -8823,6 +8933,262 @@ function actionButtons(buttons) {
   return `<div class="action-cluster">${buttons.map(([action, type, id, label]) => `<button type="button" class="action-btn" data-action="${action}" data-type="${type}" data-id="${id}">${label}</button>`).join("")}</div>`;
 }
 
+function notificationSafe(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  }[char]));
+}
+
+function notificationLabel(kind, value) {
+  const labels = {
+    info: L("info"),
+    success: L("success"),
+    warning: L("warning"),
+    urgent: L("urgent"),
+    approval_required: L("approvalRequired"),
+    action_required: L("actionRequired"),
+    reminder: L("reminder"),
+    low: L("low"),
+    normal: L("normal"),
+    high: L("high"),
+    requisitions: L("requisitions"),
+    finance: L("finance"),
+    foundation_school: L("foundation"),
+    follow_up: L("followUp"),
+    fevo: "F.E.V.O",
+    cell_ministry: L("cellLeadership"),
+    inventory: L("venueInventory"),
+    staff_hr: L("staffHr"),
+    sacraments: L("sacraments"),
+    system: L("settings")
+  };
+  return labels[value] || notificationSafe(value).replaceAll("_", " ");
+}
+
+function notificationModuleAccess(module) {
+  const routeMap = {
+    requisitions: "requisitions",
+    finance: "finance",
+    foundation_school: "foundation",
+    follow_up: "followUp",
+    fevo: "fevo",
+    cell_ministry: "cell",
+    inventory: "venueInventory",
+    staff_hr: "staffHr",
+    sacraments: "sacraments",
+    system: "dashboard"
+  };
+  const route = routeMap[module] || module;
+  return window.CEAccessControl?.resolveModuleAccess?.(activeUser, window.CEAccessControl.routeToModule?.(route) || route)?.can_view ?? true;
+}
+
+function notificationMatchesUser(notification, user = activeUser) {
+  if (!notification || !user) return false;
+  if (notification.expires_at && new Date(notification.expires_at) < new Date()) return false;
+  if (!notificationModuleAccess(notification.module)) return false;
+  const scope = notification.scope || "national";
+  const userDepartments = [user.assigned_department, ...(user.department_permissions || [])].filter(Boolean);
+  const sameChurch = !notification.recipient_church_id || notification.recipient_church_id === user.church_id || user.can_view_all_churches;
+  if ((user.department_permissions || []).includes("*") || user.role === "Super Admin") return true;
+  if (scope === "national") return true;
+  if (scope === "user") return notification.recipient_user_id === user.id;
+  if (scope === "role") return notification.recipient_role === user.role && sameChurch;
+  if (scope === "department") return userDepartments.includes(notification.recipient_department_id) && sameChurch;
+  if (scope === "church") return sameChurch;
+  return sameChurch;
+}
+
+function scopedNotifications() {
+  return (state.notifications || [])
+    .filter((notification) => notificationMatchesUser(notification))
+    .sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+}
+
+function filterNotifications(list, filter = "all") {
+  if (filter === "unread") return list.filter((item) => !item.is_read);
+  if (filter === "urgent") return list.filter((item) => item.priority === "urgent" || item.type === "urgent");
+  if (filter === "action") return list.filter((item) => ["approval_required", "action_required"].includes(item.type));
+  if (notificationModules.includes(filter)) return list.filter((item) => item.module === filter);
+  return list;
+}
+
+function createNotification(payload = {}) {
+  const now = new Date().toISOString();
+  const recipients = payload.recipients?.length ? payload.recipients : [{
+    scope: payload.scope || "national",
+    recipient_user_id: payload.recipient_user_id || "",
+    recipient_role: payload.recipient_role || "",
+    recipient_department_id: payload.recipient_department_id || "",
+    recipient_church_id: payload.recipient_church_id || ""
+  }];
+  const created = recipients.map((recipient, index) => ({
+    id: payload.id || `not-${Date.now()}-${index}`,
+    title: payload.title || L("notifications"),
+    message: payload.message || "",
+    type: payload.type || "info",
+    module: payload.module || "system",
+    entity_type: payload.entity_type || "",
+    entity_id: payload.entity_id || "",
+    priority: payload.priority || "normal",
+    recipient_user_id: recipient.recipient_user_id || "",
+    recipient_role: recipient.recipient_role || "",
+    recipient_department_id: recipient.recipient_department_id || "",
+    recipient_church_id: recipient.recipient_church_id || activeUser?.church_id || "",
+    scope: recipient.scope || payload.scope || "national",
+    action_url: payload.action_url || "",
+    action_label: payload.action_label || L("viewDetails"),
+    is_read: false,
+    read_at: "",
+    created_at: payload.created_at || now,
+    expires_at: payload.expires_at || "",
+    metadata: payload.metadata || {}
+  }));
+  state.notifications = [...created, ...(state.notifications || [])];
+  saveState("Created notification");
+  updateNotificationCenter();
+  return created;
+}
+
+function notifyRole(role, payload) {
+  return createNotification({ ...payload, recipients: [{ scope: "role", recipient_role: role, recipient_church_id: payload?.recipient_church_id || "" }] });
+}
+
+function notifyUser(userId, payload) {
+  return createNotification({ ...payload, recipients: [{ scope: "user", recipient_user_id: userId, recipient_church_id: payload?.recipient_church_id || "" }] });
+}
+
+function notifyDepartment(departmentId, payload) {
+  return createNotification({ ...payload, recipients: [{ scope: "department", recipient_department_id: departmentId, recipient_church_id: payload?.recipient_church_id || "" }] });
+}
+
+function notifyChurch(churchId, payload) {
+  return createNotification({ ...payload, recipients: [{ scope: "church", recipient_church_id: churchId }] });
+}
+
+function notificationFilters(activeFilter, target = "panel") {
+  const baseFilters = [
+    ["all", L("all")],
+    ["unread", L("unread")],
+    ["urgent", L("urgentPlural")],
+    ["action", L("actionRequiredPlural")]
+  ];
+  const moduleFilters = target === "page"
+    ? notificationModules.map((module) => [module, notificationLabel("module", module)])
+    : [];
+  return [...baseFilters, ...moduleFilters].map(([key, label]) => `
+    <button type="button" class="notification-filter ${activeFilter === key ? "active" : ""}" data-notification-filter="${key}" data-notification-target="${target}">
+      ${label}
+    </button>
+  `).join("");
+}
+
+function notificationItem(notification, { compact = false } = {}) {
+  const unreadClass = notification.is_read ? "" : "unread";
+  const action = notification.action_url
+    ? `<button type="button" class="notification-action" data-notification-action="${notification.id}" data-route="${notification.action_url}">${notificationSafe(notification.action_label || L("viewDetails"))}</button>`
+    : "";
+  return `
+    <article class="notification-item ${unreadClass} priority-${notification.priority || "normal"}">
+      <div class="notification-item-icon"><i class="bi ${notification.type === "urgent" ? "bi-exclamation-triangle" : notification.type === "success" ? "bi-check2-circle" : "bi-bell"}"></i></div>
+      <div class="notification-item-body">
+        <div class="notification-item-top">
+          <strong>${notificationSafe(notification.title)}</strong>
+          <span>${formatDateTime(notification.created_at)}</span>
+        </div>
+        <p>${notificationSafe(notification.message)}</p>
+        <div class="notification-item-meta">
+          <span>${notificationLabel("module", notification.module)}</span>
+          <span>${notificationLabel("type", notification.type)}</span>
+          <span>${notificationLabel("priority", notification.priority)}</span>
+          ${notification.is_read ? `<span>${L("read")}</span>` : `<span>${L("unreadState")}</span>`}
+        </div>
+        ${compact ? "" : `<div class="notification-item-actions">${action}<button type="button" class="notification-mark" data-notification-read="${notification.id}">${L("markRead")}</button></div>`}
+      </div>
+      ${compact ? `<button type="button" class="notification-item-open" data-notification-action="${notification.id}" ${notification.action_url ? `data-route="${notification.action_url}"` : ""} aria-label="${L("viewDetails")}"><i class="bi bi-arrow-right"></i></button>` : ""}
+    </article>`;
+}
+
+function updateNotificationCenter() {
+  const list = scopedNotifications();
+  const unread = list.filter((item) => !item.is_read);
+  const badgeEl = byId("notificationBadge");
+  if (badgeEl) {
+    badgeEl.textContent = unread.length > 99 ? "99+" : String(unread.length);
+    badgeEl.classList.toggle("d-none", unread.length === 0);
+    badgeEl.classList.toggle("is-urgent", unread.some((item) => item.priority === "urgent" || item.type === "urgent"));
+  }
+  const filtersEl = byId("notificationPanelFilters");
+  if (filtersEl) filtersEl.innerHTML = notificationFilters(notificationPanelFilter, "panel");
+  const panelList = byId("notificationPanelList");
+  if (panelList) {
+    const visible = filterNotifications(list, notificationPanelFilter).slice(0, 7);
+    panelList.innerHTML = visible.length ? visible.map((item) => notificationItem(item, { compact: true })).join("") : EmptyState({ compact: true, title: L("empty"), icon: "bi-bell" });
+  }
+}
+
+function toggleNotificationPanel(force) {
+  const panel = byId("notificationPanel");
+  const bell = byId("notificationBell");
+  if (!panel || !bell) return;
+  const shouldOpen = typeof force === "boolean" ? force : panel.classList.contains("d-none");
+  panel.classList.toggle("d-none", !shouldOpen);
+  bell.setAttribute("aria-expanded", String(shouldOpen));
+  if (shouldOpen) updateNotificationCenter();
+}
+
+function markNotificationRead(id) {
+  const item = (state.notifications || []).find((notification) => notification.id === id);
+  if (!item) return;
+  item.is_read = true;
+  item.read_at = new Date().toISOString();
+  saveState("Marked notification read");
+  updateNotificationCenter();
+  if (activeRoute === "notifications") renderNotifications();
+}
+
+function markAllNotificationsRead() {
+  const ids = new Set(scopedNotifications().map((item) => item.id));
+  (state.notifications || []).forEach((item) => {
+    if (ids.has(item.id)) {
+      item.is_read = true;
+      item.read_at = item.read_at || new Date().toISOString();
+    }
+  });
+  saveState("Marked all notifications read");
+  updateNotificationCenter();
+  if (activeRoute === "notifications") renderNotifications();
+}
+
+function renderNotifications() {
+  const list = scopedNotifications();
+  const filtered = filterNotifications(list, notificationPageFilter);
+  const unread = list.filter((item) => !item.is_read);
+  const urgent = list.filter((item) => item.priority === "urgent" || item.type === "urgent");
+  const actionRequired = list.filter((item) => ["approval_required", "action_required"].includes(item.type));
+  setPageContent(`
+    ${sectionHeader(L("notifications"), L("notificationInboxSubtitle"), null, "bi-bell")}
+    <div class="row g-3 mb-4">
+      ${metric("bi-bell", L("allNotifications"), list.length, L("notifications"))}
+      ${metric("bi-envelope-exclamation", L("unread"), unread.length, L("markAllRead"))}
+      ${metric("bi-exclamation-triangle", L("urgentPlural"), urgent.length, L("priority"))}
+      ${metric("bi-check2-square", L("actionRequiredPlural"), actionRequired.length, L("actionRequired"))}
+    </div>
+    <article class="panel glass-panel notification-inbox">
+      <div class="notification-page-toolbar">
+        <div class="notification-filter-row">${notificationFilters(notificationPageFilter, "page")}</div>
+        <button type="button" class="btn btn-sm btn-outline-light action-secondary" data-notification-mark-all>${L("markAllRead")}</button>
+      </div>
+      <div class="notification-page-list">
+        ${filtered.length ? filtered.map((item) => notificationItem(item)).join("") : EmptyState({ compact: true, title: L("empty"), icon: "bi-bell" })}
+      </div>
+    </article>
+  `);
+}
+
 function labelFor(key) {
   const map = {
     nome: L("name"), apelido: L("surname"), telefone: L("phone"), data_do_baptismo: L("date"), estado: L("status"),
@@ -9462,8 +9828,37 @@ document.addEventListener("click", (event) => {
     if (key) toggleModuleNav(key);
     return;
   }
+  const notificationBell = event.target.closest("#notificationBell");
+  if (notificationBell) return toggleNotificationPanel();
+  const notificationClose = event.target.closest("[data-notification-close]");
+  if (notificationClose) return toggleNotificationPanel(false);
+  const notificationMarkAll = event.target.closest("[data-notification-mark-all]");
+  if (notificationMarkAll) return markAllNotificationsRead();
+  const notificationFilter = event.target.closest("[data-notification-filter]");
+  if (notificationFilter) {
+    if (notificationFilter.dataset.notificationTarget === "page") {
+      notificationPageFilter = notificationFilter.dataset.notificationFilter || "all";
+      renderNotifications();
+    } else {
+      notificationPanelFilter = notificationFilter.dataset.notificationFilter || "all";
+      updateNotificationCenter();
+    }
+    return;
+  }
+  const notificationRead = event.target.closest("[data-notification-read]");
+  if (notificationRead) return markNotificationRead(notificationRead.dataset.notificationRead);
+  const notificationAction = event.target.closest("[data-notification-action]");
+  if (notificationAction) {
+    markNotificationRead(notificationAction.dataset.notificationAction);
+    toggleNotificationPanel(false);
+    if (notificationAction.dataset.route) return setRoute(notificationAction.dataset.route);
+    return;
+  }
   const routeButton = event.target.closest("[data-route]");
-  if (routeButton) return setRoute(routeButton.dataset.route);
+  if (routeButton) {
+    toggleNotificationPanel(false);
+    return setRoute(routeButton.dataset.route);
+  }
   const lockedRoute = event.target.closest("[data-locked-route]");
   if (lockedRoute) return;
   const scrollButton = event.target.closest("[data-scroll]");
@@ -9993,6 +10388,15 @@ byId("menuToggle")?.addEventListener("click", () => {
 byId("sidebarCollapseToggle")?.addEventListener("click", () => {
   applySidebarCollapse(!document.querySelector(".ops-shell")?.classList.contains("is-sidebar-collapsed"));
 });
+
+window.CENotifications = {
+  createNotification,
+  notifyRole,
+  notifyUser,
+  notifyDepartment,
+  notifyChurch,
+  updateNotificationCenter
+};
 
 applyLanguage(lang);
 applySidebarCollapse();

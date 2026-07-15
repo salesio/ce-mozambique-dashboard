@@ -18,18 +18,18 @@
     { name: "Agathos Main", total_cells: 7 },
     { name: "Phronesis Business Main", total_cells: 9 },
     { name: "Pais de Fe", total_cells: 7 },
-    { name: "Estrelas de Sião", total_cells: 8, needs_review: true },
+    { name: "Estrelas de Si�o", total_cells: 8, needs_review: true },
     { name: "Vanguard Main", total_cells: 7 },
     { name: "Mighty Women of Valor Main", total_cells: 10 },
-    { name: "Luzes de Sião", total_cells: 5, needs_review: true },
-    { name: "Geração Eleita Main", total_cells: 5 },
-    { name: "Geração Eleita Supreme", total_cells: 4, needs_review: true },
+    { name: "Luzes de Si�o", total_cells: 5, needs_review: true },
+    { name: "Gera��o Eleita Main", total_cells: 5 },
+    { name: "Gera��o Eleita Supreme", total_cells: 4, needs_review: true },
     { name: "Pioneiros Substance", total_cells: 14 },
     { name: "Pioneiros Charis", total_cells: 4 },
     { name: "Realeza Central", total_cells: 17 },
     { name: "Realeza Valentes", total_cells: 4 },
     { name: "Realeza Brilhante", total_cells: 14 },
-    { name: "Realeza Geração Esperança", total_cells: 7, needs_review: true },
+    { name: "Realeza Gera��o Esperan�a", total_cells: 7, needs_review: true },
     { name: "Royal Sisters Main", total_cells: 19 },
     { name: "Royal Sisters Shine Main", total_cells: 6 },
     { name: "Royal Sisters Dominion", total_cells: 6 },
@@ -39,7 +39,7 @@
     { name: "Blossom Main", total_cells: 3 },
     { name: "Blossom Perfection Main", total_cells: 7 },
     { name: "Blossom Diamante Main", total_cells: 5 },
-    { name: "Nação Santa", total_cells: 11 },
+    { name: "Na��o Santa", total_cells: 11 },
     { name: "Men of Vision", total_cells: 14 },
     { name: "Men of Vision Giants", total_cells: 4, needs_review: true },
     { name: "Elevadas Main", total_cells: 28, needs_review: true },
@@ -49,8 +49,8 @@
     { name: "Ambassadors Main", total_cells: 16 }
   ];
 
-  const GROUP_STATUSES = ["Activo", "Em Crescimento", "Precisa de Atenção", "Inactivo"];
-  const LEADER_TITLES = ["Irmão", "Irmã", "Pastor", "Diácono"];
+  const GROUP_STATUSES = ["Activo", "Em Crescimento", "Precisa de Aten��o", "Inactivo"];
+  const LEADER_TITLES = ["Irm�o", "Irm�", "Pastor", "Di�cono"];
 
   function buildCellGroupsSeed() {
     const cellGroups = [];
@@ -62,7 +62,7 @@
       const status = index % 11 === 0
         ? "Inactivo"
         : index % 7 === 0
-          ? "Precisa de Atenção"
+          ? "Precisa de Aten��o"
           : index % 4 === 0
             ? "Em Crescimento"
             : "Activo";
@@ -92,8 +92,8 @@
         const newConverts = seed % 3;
         const offering = 350 + attendance * 90 + firstTimers * 110;
         const rs = Math.max(1, Math.floor(attendance / 5));
-        const cellStatus = status === "Precisa de Atenção" && i % 2 === 0
-          ? "Precisa de Atenção"
+        const cellStatus = status === "Precisa de Aten��o" && i % 2 === 0
+          ? "Precisa de Aten��o"
           : status === "Inactivo"
             ? "Inactivo"
             : "Activo";
@@ -111,7 +111,7 @@
           new_converts: newConverts,
           offering,
           rs,
-          observation: firstTimers + newConverts >= 4 ? "EXPLOSAO - pronta para multiplicação." : "",
+          observation: firstTimers + newConverts >= 4 ? "EXPLOSAO - pronta para multiplica��o." : "",
           status: cellStatus,
           report_week: "Julho Semana 1",
           created_by: "Sister Eduarda",

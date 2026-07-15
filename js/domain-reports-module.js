@@ -53,7 +53,7 @@
     filterRecords(list, filters) {
       let out = fw().applyPeriodFilter(list, filters, "released_at");
       out = fw().applyCommonFilters(out, filters, { churchId: "church_id", department: "department_name", status: "status" });
-      if (filters.card_filter === "awaiting") out = out.filter((r) => r.status === "Aguardando Liberação");
+      if (filters.card_filter === "awaiting") out = out.filter((r) => r.status === "Aguardando Libera��o");
       if (filters.card_filter === "released") out = out.filter((r) => ["Recursos Liberados", "Pago"].includes(r.status));
       if (filters.card_filter === "partial") out = out.filter((r) => r.status === "Parcialmente Pago");
       return out;
@@ -63,7 +63,7 @@
       const approved = list.reduce((s, r) => s + Number(r.approved_amount || 0), 0);
       return {
         total: list.length,
-        awaiting: list.filter((r) => r.status === "Aguardando Liberação").length,
+        awaiting: list.filter((r) => r.status === "Aguardando Libera��o").length,
         released: list.filter((r) => ["Recursos Liberados", "Pago"].includes(r.status)).length,
         partial: list.filter((r) => r.status === "Parcialmente Pago").length,
         releasedTotal: released,
@@ -405,7 +405,7 @@
       return [{
         title: L("rptFunnelDetail"),
         headers: [L("name"), L("church"), L("followupState"), L("wantFoundation"), L("cellInterest"), L("bornAgain")],
-        rows: list.map((p) => [p.person_name, p.church_label, p.funnel_stage, p.quer_escola_de_fundacao ? "Sim" : "Não", p.interesse_em_celula ? "Sim" : "Não", p.nasceu_de_novo ? "Sim" : "Não"])
+        rows: list.map((p) => [p.person_name, p.church_label, p.funnel_stage, p.quer_escola_de_fundacao ? "Sim" : "N�o", p.interesse_em_celula ? "Sim" : "N�o", p.nasceu_de_novo ? "Sim" : "N�o"])
       }];
     },
     exportHeaders(L) { return [L("name"), L("church"), L("followupState")]; },
@@ -429,14 +429,14 @@
     filterRecords(list, filters) {
       let out = fw().applyCommonFilters(list, filters, { status: "estado" });
       if (filters.card_filter === "submitted") out = out.filter((r) => r.estado !== "Rascunho");
-      if (filters.card_filter === "pending") out = out.filter((r) => ["Rascunho", "Submetido", "Em Avaliação"].includes(r.estado));
+      if (filters.card_filter === "pending") out = out.filter((r) => ["Rascunho", "Submetido", "Em Avalia��o"].includes(r.estado));
       return out;
     },
     computeStats(list) {
       return {
         total: list.length,
         submitted: list.filter((r) => r.estado !== "Rascunho").length,
-        pending: list.filter((r) => ["Rascunho", "Submetido", "Em Avaliação"].includes(r.estado)).length,
+        pending: list.filter((r) => ["Rascunho", "Submetido", "Em Avalia��o"].includes(r.estado)).length,
         totalAtt: list.reduce((s, r) => s + Number(r.att || 0), 0),
         totalFt: list.reduce((s, r) => s + Number(r.ft || 0), 0),
         totalNc: list.reduce((s, r) => s + Number(r.nc || 0), 0)
@@ -545,7 +545,7 @@
     },
     filterRecords(list, filters) {
       let out = fw().applyCommonFilters(list, filters, { status: "estado" });
-      if (filters.card_filter === "damaged") out = out.filter((i) => ["Mau", "Em Reparação"].includes(i.estado));
+      if (filters.card_filter === "damaged") out = out.filter((i) => ["Mau", "Em Repara��o"].includes(i.estado));
       if (filters.card_filter === "good") out = out.filter((i) => i.estado === "Bom");
       return out;
     },
@@ -554,7 +554,7 @@
       return {
         total: list.length,
         good: list.filter((i) => i.estado === "Bom").length,
-        damaged: list.filter((i) => ["Mau", "Em Reparação"].includes(i.estado)).length,
+        damaged: list.filter((i) => ["Mau", "Em Repara��o"].includes(i.estado)).length,
         totalValue: list.reduce((s, i) => s + Number(i.valor_total || 0), 0),
         repairs: maintenance.length
       };
@@ -598,7 +598,7 @@
       const sac = state.sacraments || {};
       const baptisms = (sac.baptisms || []).map((r) => ({ ...r, sacrament_type: "Baptism", type_label: "Batismo" }));
       const marriages = (sac.marriages || []).map((r) => ({ ...r, sacrament_type: "Marriage", type_label: "Casamento" }));
-      const babies = (sac.babies || []).map((r) => ({ ...r, sacrament_type: "Baby", type_label: "Apresentação" }));
+      const babies = (sac.babies || []).map((r) => ({ ...r, sacrament_type: "Baby", type_label: "Apresenta��o" }));
       return [...baptisms, ...marriages, ...babies];
     },
     filterRecords(list, filters) {

@@ -3,7 +3,7 @@
  * Requires js/supabase-bundle.js (built via npm run build:supabase) or CDN is not used here.
  */
 (function () {
-  const FINANCE_STATUS_PENDING = "Pendente de Verificação";
+  const FINANCE_STATUS_PENDING = "Pendente de Verifica��o";
   const FINANCE_STATUS_VERIFIED = "Verificado";
   const FINANCE_STATUS_REJECTED = "Rejeitado";
 

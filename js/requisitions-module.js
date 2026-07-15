@@ -7,10 +7,10 @@
   const STATUSES = {
     DRAFT: "Rascunho",
     SUBMITTED: "Submetido",
-    UNDER_REVIEW: "Em Revisão",
+    UNDER_REVIEW: "Em Revis�o",
     SENT_TO_PASTOR: "Enviado ao Pastor Principal",
-    RETURNED_FOR_CORRECTION: "Devolvido para Correção",
-    APPROVED_AWAITING_RELEASE: "Aprovado — Aguardando Liberação de Recursos",
+    RETURNED_FOR_CORRECTION: "Devolvido para Corre��o",
+    APPROVED_AWAITING_RELEASE: "Aprovado � Aguardando Libera��o de Recursos",
     APPROVED: "Aprovado",
     REJECTED: "Rejeitado",
     RESOURCES_RELEASED: "Recursos Liberados",
@@ -20,7 +20,7 @@
   };
 
   const TYPES = [
-    "Nova Aquisição", "Reparação", "Material de Ministério", "Transporte",
+    "Nova Aquisi��o", "Repara��o", "Material de Minist�rio", "Transporte",
     "Evento/Programa", "Equipamento", "Pagamento de Serviço", "Apoio Operacional", "Outro"
   ];
 
@@ -40,7 +40,7 @@
     history: [STATUSES.CLOSED]
   };
 
-  const INVENTORY_TYPES = new Set(["Nova Aquisição", "Equipamento", "Material de Ministério", "Reparação"]);
+  const INVENTORY_TYPES = new Set(["Nova Aquisi��o", "Equipamento", "Material de Minist�rio", "Repara��o"]);
 
   const PASTORAL_DECISION_ROLES = new Set(["Main Pastor", "Super Admin"]);
 
@@ -252,7 +252,7 @@
         if (window.CEFinanceDisbursements?.onRequisitionApproved) {
           window.CEFinanceDisbursements.onRequisitionApproved(state, record, user);
         } else {
-          record.finance_status = "Aguardando Liberação";
+          record.finance_status = "Aguardando Libera��o";
           record.sent_to_finance_at = now;
           record.sent_to_finance = true;
         }
@@ -338,7 +338,7 @@
             valor_unitario: record.released_amount || record.amount_released || record.approved_amount || record.estimated_amount || 0,
             valor_total: record.released_amount || record.amount_released || record.approved_amount || record.estimated_amount || 0,
             serial_number: "",
-            observacoes: record.description || `Rascunho via requisição ${record.request_number}`,
+            observacoes: record.description || `Rascunho via requisi��o ${record.request_number}`,
             requisition_id: record.id,
             draft_from_requisition: true
           });

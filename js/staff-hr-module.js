@@ -4,7 +4,7 @@
 (function () {
   "use strict";
 
-  const EMPLOYMENT_TYPES = ["Full-time", "Part-time", "Voluntário", "Contratado", "Prestação de Serviço"];
+  const EMPLOYMENT_TYPES = ["Full-time", "Part-time", "Volunt�rio", "Contratado", "Presta��o de Servi�o"];
   const PAYMENT_FREQUENCIES = ["Mensal", "Semanal", "Por Serviço", "Nenhum"];
   const PAYMENT_METHODS = ["M-Pesa", "E-Mola", "Banco", "Dinheiro"];
   const STAFF_STATUSES = ["Activo", "Inactivo", "Suspenso", "Transferido"];
@@ -261,7 +261,7 @@
         titleKey: "staffSectionPersonal",
         fields: [
           ["full_name", "staffFullName"],
-          ["title", "treatment", "select", ["Sr.", "Sra.", "Irmão", "Irmã", "Pastor", "Pastora", "Diácono", "Diaconisa"]],
+          ["title", "treatment", "select", ["Sr.", "Sra.", "Irm�o", "Irm�", "Pastor", "Pastora", "Di�cono", "Diaconisa"]],
           ["gender", "gender", "select", ["Feminino", "Masculino"]],
           ["date_of_birth", "dateOfBirth", "date"],
           ["phone", "phone"],

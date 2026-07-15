@@ -153,7 +153,7 @@
         <select name="status" class="form-select"><option value="">${labelFn("all")}</option>${statuses.map((s) => `<option value="${s}" ${filters.status === s ? "selected" : ""}>${s}</option>`).join("")}</select></div>
       <div class="col-md-2"><label class="form-label">${labelFn("search")}</label><input name="search" class="form-control" value="${filters.search || ""}" placeholder="${labelFn("search")}"></div>
       <div class="col-md-4 d-flex align-items-end gap-2 flex-wrap">
-        <button type="submit" class="btn btn-ce-gold">${labelFn("save")}</button>
+        <button type="submit" class="btn btn-ce-gold"><i class="bi bi-search me-1"></i>${labelFn("search")}</button>
         <button type="button" class="btn btn-outline-glass" data-domain-report-clear data-report-domain="${domain}">${labelFn("clearFilters")}</button>
       </div>
     </form>`;

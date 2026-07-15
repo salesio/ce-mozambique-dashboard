@@ -4,7 +4,7 @@
  */
 (function () {
   const PUBLIC_GIVING_QUEUE_KEY = "ce-public-giving-queue";
-  const FINANCE_STATUS_PENDING = "Pendente de Verificação";
+  const FINANCE_STATUS_PENDING = "Pendente de Verifica��o";
 
   function splitPublicFullName(fullName) {
     const parts = String(fullName || "").trim().split(/\s+/).filter(Boolean);
@@ -32,6 +32,10 @@
       endereco: "",
       celula: submission.celula || "",
       grupo_de_celula: submission.grupo_de_celula || "",
+      cell_id: submission.cell_id || "",
+      cell_name: submission.cell_name || submission.celula || "",
+      cell_group_id: submission.cell_group_id || "",
+      cell_group_name: submission.cell_group_name || submission.grupo_de_celula || "",
       data_de_aniversario: submission.data_de_aniversario || "",
       church_id: submission.igreja_id,
       igreja: submission.igreja_nome,

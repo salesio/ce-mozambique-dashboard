@@ -13,10 +13,10 @@ const MODULE_NAV_KEY = "ce-dashboard-module-nav";
 const TEXT = {
   pt: {
     loginTitle: "Portal da Equipa",
-    loginLead: "Acesso interno para acompanhamento espiritual, igrejas, células, escola, finanças e administração.",
+    loginLead: "Acesso interno para acompanhamento espiritual, igrejas, c�lulas, escola, finan�as e administra��o.",
     loginPassword: "Senha",
     loginSubmit: "Entrar no Painel",
-    loginNote: "Protótipo frontend-first. Autenticação real e base de dados entram na próxima fase.",
+    loginNote: "Prot�tipo frontend-first. Autentica��o real e base de dados entram na pr�xima fase.",
     viewSite: "Ver Site",
     logout: "Sair",
     add: "Adicionar",
@@ -34,7 +34,7 @@ const TEXT = {
     to: "Até",
     all: "Todos",
     yes: "Sim",
-    no: "Não",
+    no: "N�o",
     church: "Igreja",
     name: "Nome",
     surname: "Apelido",
@@ -50,7 +50,7 @@ const TEXT = {
     contributor: "Contribuinte",
     service: "Culto",
     bornAgain: "Nasceu de Novo",
-    foundation: "Fundação",
+    foundation: "Funda��o",
     counselor: "Conselheiro",
     cellInterest: "Interesse em Célula",
     practical: "Prática",
@@ -62,50 +62,51 @@ const TEXT = {
     filterMonth: "Filtrar por Mês",
     filterCell: "Filtrar por Célula",
     filterStatus: "Filtrar por Estado",
-    empty: "Ainda não existem registos para este módulo.",
+    empty: "Ainda n�o existem registos para este m�dulo.",
     main: "MAIN",
+    pastoralCare: "CUIDADOS PASTORAIS",
     departments: "DEPARTAMENTOS",
     admin: "ADMIN",
     dashboard: "Painel",
     churches: "Igrejas",
     members: "Membros",
     firstTimers: "Primeira Vez",
-    followUp: "Seguimento",
+    followUp: "Acompanhamento",
     reports: "Relatórios",
     counseling: "Aconselhamento",
-    foundationSchool: "Escola de Fundação",
+    foundationSchool: "Escola de Funda��o",
     finance: "Finanças",
     cellMinistry: "Ministério de Células",
     sacraments: "Sacramentos",
     programs: "Programas",
     partnership: "Parceria",
-    media: "Media / Loveworld SAT",
+    media: "Mídia",
     usersRoles: "Utilizadores e Funções",
     accessControl: "Controlo de Acesso",
     settings: "Definições",
     auditLogs: "Registos de Auditoria",
     requisitions: "Requisições & Aprovações",
-    requisitionsSubtitle: "Fluxo de requisições departamentais — revisão, aprovação pastoral e liberação de recursos.",
+    requisitionsSubtitle: "Fluxo de requisi��es departamentais � revis�o, aprova��o pastoral e libera��o de recursos.",
     staffHr: "Staff & Recursos Humanos",
     staffHrSubtitle: "Registo de equipa, funções, salários, desempenho, presenças e equipamentos atribuídos.",
-    reqTabOverview: "Visão Geral",
-    reqTabNew: "Nova Requisição",
+    reqTabOverview: "Vis�o Geral",
+    reqTabNew: "Nova Requisi��o",
     reqTabReceived: "Requisições Recebidas",
-    reqTabReview: "Em Aprovação Pastoral",
+    reqTabReview: "Em Aprova��o Pastoral",
     reqTabPastoral: "Aguardando Pastor Principal",
     reqTabApproved: "Aprovadas",
     reqTabRejected: "Rejeitadas",
     reqTabReleased: "Recursos Liberados",
     reqTabHistory: "Histórico",
     reqPending: "Requisições Pendentes",
-    reqInReview: "Em Revisão",
+    reqInReview: "Em Revis�o",
     reqAwaitingPastor: "Aguardando Pastor Principal",
     reqApprovedMonth: "Aprovadas Este Mês",
     reqRejected: "Rejeitadas",
     reqReleased: "Recursos Liberados",
     reqApprovedValue: "Valor Total Aprovado",
     reqPendingValue: "Valor Pendente",
-    reqNumber: "Nº Requisição",
+    reqNumber: "N� Requisi��o",
     reqType: "Tipo",
     reqTitle: "Título",
     reqDepartment: "Departamento",
@@ -121,28 +122,28 @@ const TEXT = {
     reqMarkPurchased: "Marcar como Comprado",
     reqRegisterInventory: "Registar no Inventário",
     reqClose: "Fechar",
-    reqJustification: "Justificação",
-    reqDescription: "Descrição",
+    reqJustification: "Justifica��o",
+    reqDescription: "Descri��o",
     reqSupplier: "Fornecedor",
-    reqQuotation: "Nº Cotação",
-    reqReturnForCorrection: "Devolver para Correção",
+    reqQuotation: "N� Cota��o",
+    reqReturnForCorrection: "Devolver para Corre��o",
     reqPastoralComment: "Comentário Pastoral",
-    reqRejectionReason: "Motivo da Rejeição",
+    reqRejectionReason: "Motivo da Rejei��o",
     reqApprovedAmount: "Valor Aprovado",
-    reqApprovedAwaitingRelease: "Aprovado — Aguardando Liberação de Recursos",
+    reqApprovedAwaitingRelease: "Aprovado � Aguardando Libera��o de Recursos",
     reqResourcesReleased: "Recursos Liberados",
-    reqHistory: "Histórico da Requisição",
-    reqDetails: "Detalhes da Requisição",
-    reqSectionData: "Dados da Requisição",
-    reqSectionDescription: "Descrição e Justificativa",
-    reqSectionInternalReview: "Revisão Interna",
+    reqHistory: "Hist�rico da Requisi��o",
+    reqDetails: "Detalhes da Requisi��o",
+    reqSectionData: "Dados da Requisi��o",
+    reqSectionDescription: "Descri��o e Justificativa",
+    reqSectionInternalReview: "Revis�o Interna",
     reqSectionAttachments: "Anexos",
-    reqSectionPastoralDecision: "Decisão Pastoral",
+    reqSectionPastoralDecision: "Decis�o Pastoral",
     reqRequester: "Solicitante",
     reqCurrentStatus: "Estado Actual",
     reqReviewedBy: "Revisto por",
-    reqReviewDate: "Data da revisão",
-    reqReviewNotes: "Notas da revisão",
+    reqReviewDate: "Data da revis�o",
+    reqReviewNotes: "Notas da revis�o",
     reqSentToPastorBy: "Enviado ao Pastor Principal por",
     reqSentToPastorAt: "Data de envio",
     reqFinalPriority: "Prioridade Final",
@@ -150,10 +151,10 @@ const TEXT = {
     reqBudget: "Orçamento",
     reqProforma: "Factura proforma",
     reqNoAttachments: "Sem anexos",
-    reqApproveSuccess: "Requisição aprovada e enviada para Finanças para liberação de recursos.",
-    reqRejectSuccess: "Requisição rejeitada.",
-    reqReturnSuccess: "Requisição devolvida para correção.",
-    reqRejectionRequired: "Indique o motivo da rejeição.",
+    reqApproveSuccess: "Requisi��o aprovada e enviada para Finan�as para libera��o de recursos.",
+    reqRejectSuccess: "Requisi��o rejeitada.",
+    reqReturnSuccess: "Requisi��o devolvida para corre��o.",
+    reqRejectionRequired: "Indique o motivo da rejei��o.",
     reqReturnNotesRequired: "Indique o que deve ser corrigido.",
     reqTimelineCreated: "criada por",
     reqTimelineSubmitted: "Submetida em",
@@ -165,10 +166,10 @@ const TEXT = {
     reqTimelineResourcesReleased: "Recursos liberados por",
     reqTimelineClosed: "Fechada por",
     reqSentToPastor: "Enviado ao Pastor Principal",
-    reqReturnedForCorrection: "Devolvido para Correção",
+    reqReturnedForCorrection: "Devolvido para Corre��o",
     reqPurchasedExecuted: "Comprado / Executado",
     reqRegisteredInventory: "Registado no Inventário",
-    finAwaitingRelease: "Aguardando Liberação",
+    finAwaitingRelease: "Aguardando Libera��o",
     finResourcesReleased: "Recursos Liberados",
     finApprovedAmount: "Valor Aprovado",
     finReleasedAmount: "Valor Liberado",
@@ -184,18 +185,18 @@ const TEXT = {
     finPendingPayments: "Pagamentos Pendentes",
     finPartiallyPaid: "Requisições Parcialmente Pagas",
     finFinanceStatus: "Estado Financeiro",
-    finReleaseDate: "Data de Liberação",
+    finReleaseDate: "Data de Libera��o",
     finAmountToRelease: "Valor a Liberar",
     finPaymentReference: "Referência de Pagamento",
     finApprovedBy: "Aprovado por",
-    finApprovedAt: "Data de aprovação",
-    finApprovedReqHint: "Requisições aprovadas pelo Pastor Principal — liberação de recursos e pagamentos.",
+    finApprovedAt: "Data de aprova��o",
+    finApprovedReqHint: "Requisi��es aprovadas pelo Pastor Principal � libera��o de recursos e pagamentos.",
     finReleaseDrawerTitle: "Liberar Recursos",
-    finExceedsApproved: "O valor a liberar não pode exceder o valor aprovado.",
+    finExceedsApproved: "O valor a liberar n�o pode exceder o valor aprovado.",
     finPaymentMethodRequired: "Seleccione o método de pagamento.",
-    finReleaseDateRequired: "Indique a data de liberação.",
+    finReleaseDateRequired: "Indique a data de libera��o.",
     finReleaseSuccess: "Recursos liberados com sucesso.",
-    finMarkPaidSuccess: "Requisição marcada como paga.",
+    finMarkPaidSuccess: "Requisi��o marcada como paga.",
     finSentToInventory: "Enviar para Inventário",
     finSentToInventorySuccess: "Rascunho criado no Inventário.",
     reqSendToInventory: "Enviar para Inventário",
@@ -209,38 +210,38 @@ const TEXT = {
     reqReportByChurch: "Relatório por Igreja",
     reqReportByRequester: "Relatório por Solicitante",
     reqReportByType: "Requisições por Tipo",
-    reqReportMonthly: "Evolução Mensal",
-    reqAvgPerRequisition: "Média por Requisição",
+    reqReportMonthly: "Evolu��o Mensal",
+    reqAvgPerRequisition: "M�dia por Requisi��o",
     reqRemainingPending: "Valor Ainda Pendente",
     reqExportPdf: "Exportar PDF",
     reqExportExcel: "Exportar Excel",
     reqExportCsv: "Exportar CSV",
-    rptInventoryAwaiting: "Aguardando Liberação",
+    rptInventoryAwaiting: "Aguardando Libera��o",
     rptInventoryRegistered: "Registado",
     rptInventoryCompleted: "Concluído",
     rptInventoryItemId: "ID Inventário",
     dateFrom: "Data inicial",
     dateTo: "Data final",
     reqPrintReport: "Imprimir Relatório",
-    reqViewRelease: "Ver Liberação",
-    reqRequisitionStatus: "Estado da Requisição",
+    reqViewRelease: "Ver Libera��o",
+    reqRequisitionStatus: "Estado da Requisi��o",
     reqReleasedBy: "Liberado por",
-    reqHighestRequisition: "Maior Requisição",
-    reqLastApproved: "Última Aprovação",
+    reqHighestRequisition: "Maior Requisi��o",
+    reqLastApproved: "�ltima Aprova��o",
     reqPredominantStatus: "Estado Predominante",
     reqCompleted: "Concluídas",
     rptExecutiveTitle: "Relatórios Executivos",
-    rptExecutiveHint: "Visão consolidada por departamento — clique para ver detalhes e exportar.",
+    rptExecutiveHint: "Vis�o consolidada por departamento � clique para ver detalhes e exportar.",
     rptFinanceExpensesTitle: "Despesas & Liberações",
-    rptFinanceExpensesHint: "Saídas financeiras por requisições aprovadas (não inclui receitas).",
+    rptFinanceExpensesHint: "Sa�das financeiras por requisi��es aprovadas (n�o inclui receitas).",
     rptReqInventoryTitle: "Requisições → Inventário",
     rptReqInventoryHint: "Acompanhamento de aquisições liberadas e registo no inventário.",
     rptStaffTitle: "Relatórios de Staff & RH",
-    rptStaffHint: "Headcount, salários pendentes, avaliações e distribuição por igreja.",
-    rptFoundationTitle: "Relatórios Escola de Fundação",
-    rptFoundationHint: "Funil de inscrição, progresso, exames e graduações.",
+    rptStaffHint: "Headcount, sal�rios pendentes, avalia��es e distribui��o por igreja.",
+    rptFoundationTitle: "Relat�rios Escola de Funda��o",
+    rptFoundationHint: "Funil de inscri��o, progresso, exames e gradua��es.",
     rptFunnelTitle: "Funil de Acompanhamento",
-    rptFunnelHint: "Primeiros visitantes → contacto → célula → fundação → membro.",
+    rptFunnelHint: "Primeiros visitantes ? contacto ? c�lula ? funda��o ? membro.",
     rptCellTitle: "Relatórios de Células",
     rptCellHint: "Presenças, primeiros visitantes, novos convertidos e relatórios semanais.",
     rptFevoTitle: "Relatórios F.E.V.O",
@@ -248,9 +249,9 @@ const TEXT = {
     rptVenueTitle: "Relatórios de Inventário",
     rptVenueHint: "Activos, estado, valor e equipamentos por departamento.",
     rptSacramentsTitle: "Relatórios de Sacramentos",
-    rptSacramentsHint: "Batismos, casamentos e apresentação de bebés.",
+    rptSacramentsHint: "Batismos, casamentos e apresenta��o de beb�s.",
     rptPrisonTitle: "Relatórios Ministério Carcerário",
-    rptPrisonHint: "Serviços, presenças e formação na prisão.",
+    rptPrisonHint: "Servi�os, presen�as e forma��o na pris�o.",
     rptMaterialsTitle: "Relatórios Materiais Ministeriais",
     rptMaterialsHint: "Vendas, stock, distribuições e alertas de stock baixo.",
     rptExpenseDetail: "Detalhe de Despesas",
@@ -263,7 +264,7 @@ const TEXT = {
     rptStaffByChurch: "Staff por Igreja",
     rptStaffByEmployment: "Staff por Tipo de Emprego",
     rptStaffDetail: "Detalhe de Staff",
-    rptFoundationFunnel: "Funil da Escola de Fundação",
+    rptFoundationFunnel: "Funil da Escola de Funda��o",
     rptFoundationByChurch: "Alunos por Igreja",
     rptFoundationProgress: "Progresso por Aluno",
     rptFoundationDetail: "Detalhe de Alunos",
@@ -279,12 +280,12 @@ const TEXT = {
     rptSacramentsByChurch: "Sacramentos por Igreja",
     rptSacramentsDetail: "Detalhe de Sacramentos",
     rptPrisonServices: "Serviços por Estado",
-    rptPrisonByLocation: "Serviços por Prisão",
+    rptPrisonByLocation: "Servi�os por Pris�o",
     rptInmatesReached: "Presenças Alcançadas",
     rptPrisonDetail: "Detalhe de Serviços",
     rptMaterialsDetail: "Detalhe de Vendas",
     rptViewAll: "Ver Relatório Completo",
-    staffTabOverview: "Visão Geral",
+    staffTabOverview: "Vis�o Geral",
     staffTabStaff: "Staff",
     staffTabDepartments: "Departamentos",
     staffTabRoles: "Funções",
@@ -335,23 +336,23 @@ const TEXT = {
     staffWithSalary: "Staff com Salário/Subsídio",
     staffPendingEval: "Avaliações Pendentes",
     evaluate: "Avaliar",
-    evaluationPeriod: "Período de Avaliação",
+    evaluationPeriod: "Per�odo de Avalia��o",
     punctualityScore: "Pontualidade",
-    taskCompletionScore: "Conclusão de Tarefas",
+    taskCompletionScore: "Conclus�o de Tarefas",
     reportSubmissionScore: "Entrega de Relatórios",
     teamworkScore: "Trabalho em Equipa",
-    supervisorRating: "Avaliação do Supervisor",
-    overallScore: "Pontuação Geral",
+    supervisorRating: "Avalia��o do Supervisor",
+    overallScore: "Pontua��o Geral",
     strengths: "Pontos Fortes",
     areasToImprove: "Áreas a Melhorar",
-    actionPlan: "Plano de Acção",
+    actionPlan: "Plano de Ac��o",
     evaluatedBy: "Avaliado Por",
-    evaluatedAt: "Data da Avaliação",
+    evaluatedAt: "Data da Avalia��o",
     staffPendingPay: "Pagamentos Pendentes",
     staffAssignedEq: "Equipamentos Atribuídos",
     staffBirthdays: "Aniversariantes do Mês",
     staffFullName: "Nome Completo",
-    staffRoleTitle: "Função",
+    staffRoleTitle: "Fun��o",
     staffEmploymentType: "Tipo de Vínculo",
     staffStartDate: "Data de Início",
     staffSalary: "Salário/Subsídio",
@@ -361,24 +362,29 @@ const TEXT = {
     staffEvaluate: "Avaliar Desempenho",
     staffRegisterAttendance: "Registar Presença",
     staffViewEquipment: "Ver Equipamentos",
-    staffPrivacyBanner: "Informação salarial restrita. Apenas perfis autorizados podem ver valores.",
+    staffPrivacyBanner: "Informa��o salarial restrita. Apenas perfis autorizados podem ver valores.",
     staffSalaryHidden: "Valor confidencial",
     accessDeniedTitle: "Acesso Restrito",
-    accessDeniedText: "Não tem permissão para aceder a esta área. Contacte o administrador se precisar de acesso.",
+    accessDeniedText: "N�o tem permiss�o para aceder a esta �rea. Contacte o administrador se precisar de acesso.",
     accessDeniedBack: "Voltar ao Painel",
-    navLockedTooltip: "Sem permissão para aceder a este módulo",
+    navLockedTooltip: "Sem permiss�o para aceder a este m�dulo",
+    noPermission: "Sem permiss�o",
+    noPermissionArea: "N�o tem permiss�o para aceder a esta �rea.",
+    locked: "Bloqueado",
+    availableForDepartment: "Disponível para o seu departamento",
+    availableForChurch: "Disponível para a sua igreja",
     accessMatrixModule: "Módulo",
     accessMatrixView: "Ver",
     accessMatrixCreate: "Criar",
     accessMatrixEdit: "Editar",
     accessMatrixApprove: "Aprovar",
-    accessMatrixScope: "Âmbito",
-    heroTitle: "Uma plataforma viva para cuidar da igreja, das almas e da visão.",
+    accessMatrixScope: "�mbito",
+    heroTitle: "Uma plataforma viva para cuidar da igreja, das almas e da vis�o.",
     heroText: "Operações da Christ Embassy Mozambique com acompanhamento pastoral, crescimento celular, escola, finanças, sacramentos e relatórios por igreja.",
-    pendingFollowups: "Seguimentos Pendentes",
+    pendingFollowups: "Acompanhamentos Pendentes",
     totalFirstTimers: "Total de Primeira Vez",
     newConverts: "Novos Convertidos",
-    foundationEnrolments: "Inscrições na Escola de Fundação",
+    foundationEnrolments: "Inscri��es na Escola de Funda��o",
     graduations: "Graduações",
     activeCells: "Células Activas",
     baptisms: "Baptismos",
@@ -388,19 +394,19 @@ const TEXT = {
     givingByCategory: "Contribuições por Categoria",
     givingByChurch: "Contribuições por Igreja",
     sacramentsSummary: "Resumo de Sacramentos",
-    foundationProgress: "Progresso da Escola de Fundação",
+    foundationProgress: "Progresso da Escola de Funda��o",
     cellGrowth: "Crescimento de Células",
     visitorsCaptured: "Visitantes registados",
     bornAgainHint: "Nasceram de novo",
     thisCycle: "Neste ciclo",
     thisMonth: "Este mês",
-    needsAction: "Precisa de acção",
+    needsAction: "Precisa de ac��o",
     activeNetwork: "Rede activa",
     registerFirstTimer: "Registar Primeira Vez",
-    dashboardOverview: "Visão Geral Operacional",
+    dashboardOverview: "Vis�o Geral Operacional",
     dashboardChurchGrowth: "Crescimento da Igreja",
-    dashboardChurchGrowthHint: "Primeira vez, convertidos e escola de fundação.",
-    dashboardPendingSection: "Seguimentos Pendentes",
+    dashboardChurchGrowthHint: "Primeira vez, convertidos e escola de funda��o.",
+    dashboardPendingSection: "Acompanhamentos Pendentes",
     dashboardPendingHint: "Visitantes que precisam de contacto ou próximo passo.",
     dashboardFinanceSection: "Finanças do Mês",
     dashboardFinanceHint: "Contribuições por categoria e por igreja.",
@@ -410,13 +416,13 @@ const TEXT = {
     dashboardRecentHint: "Últimas acções e sacramentos registados.",
     viewAll: "Ver Tudo",
     financeOverviewSection: "Resumo Financeiro",
-    financeOverviewHint: "Totais do dia, do mês e estado de verificação.",
+    financeOverviewHint: "Totais do dia, do m�s e estado de verifica��o.",
     financeAnalyticsSection: "Análise de Contribuições",
-    financeAnalyticsHint: "Distribuição por categoria, igreja e método de pagamento.",
+    financeAnalyticsHint: "Distribui��o por categoria, igreja e m�todo de pagamento.",
     financeRecordsSection: "Registos de Contribuições",
-    financeRecordsHint: "Pesquisa, filtros e acções sobre cada contribuição.",
-    cellAlecSection: "Formação ALEC",
-    cellAlecHint: "Inscrições, progresso e certificação de líderes.",
+    financeRecordsHint: "Pesquisa, filtros e ac��es sobre cada contribui��o.",
+    cellAlecSection: "Forma��o ALEC",
+    cellAlecHint: "Inscri��es, progresso e certifica��o de l�deres.",
     cellNetworkSection: "Rede Celular",
     cellNetworkHint: "Grupos, células activas e indicadores da rede.",
     cellGrowthSection: "Crescimento e Desempenho",
@@ -424,22 +430,22 @@ const TEXT = {
     cellDataSection: "Dados Operacionais",
     cellDataHint: "Tabelas, relatórios e acções do módulo.",
     fevoOverviewSection: "Panorama F.E.V.O",
-    fevoOverviewHint: "Métricas consolidadas de evangelismo, visitação e oração.",
+    fevoOverviewHint: "M�tricas consolidadas de evangelismo, visita��o e ora��o.",
     fevoAnalyticsSection: "Análise por Equipa",
     fevoAnalyticsHint: "Actividades, contactos e grupos sem relatório.",
     fevoDataSection: "Registos da Semana",
-    fevoDataHint: "Configurações, relatórios e follow-up por equipa.",
+    fevoDataHint: "Configurações, relatórios e acompanhamento por equipa.",
     firstTimerSubtitle: "Visitantes captados nos cultos e no acompanhamento.",
-    followupSubtitle: "Fluxo claro para acompanhar cada visitante até integração.",
+    followupSubtitle: "Fluxo claro para acompanhar cada visitante at� integra��o.",
     membersSubtitle: "Base de membros por igreja, célula, departamento e estado.",
     foundationSubtitle: "Inscrições pendentes, 7 aulas, notas, exame, prática e certificados.",
     financeSubtitle: "Envelope digital para dízimos, ofertas, parcerias e projectos.",
     churchesSubtitle: "Hierarquia de Sede Nacional, províncias, igrejas e igrejas virtuais.",
-    sacramentsSubtitle: "Baptismos, casamentos e dedicação de bebés.",
+    sacramentsSubtitle: "Baptismos, casamentos e dedica��o de beb�s.",
     reportsSubtitle: "Relatórios visuais com base nos dados actuais.",
     totalToday: "Total Hoje",
     totalThisMonth: "Total Este Mês",
-    pendingVerification: "Pendente de Verificação",
+    pendingVerification: "Pendente de Verifica��o",
     verified: "Verificado",
     byCategory: "Por Categoria",
     byChurch: "Por Igreja",
@@ -448,7 +454,7 @@ const TEXT = {
     enrolledStudents: "Alunos Inscritos",
     classesAttendance: "Aulas e Presenças",
     exams: "Exames",
-    graduation: "Graduação",
+    graduation: "Gradua��o",
     certificates: "Certificados",
     enrolStudent: "Inscrever Aluno",
     markClass: "Marcar Aula",
@@ -457,23 +463,23 @@ const TEXT = {
     graduate: "Graduar",
     viewProfile: "Ver Perfil",
     moveChurch: "Mover Igreja",
-    updateFollowup: "Actualizar Seguimento",
+    updateFollowup: "Actualizar Acompanhamento",
     exportReceipt: "Exportar Recibo/Relatório",
     verify: "Verificar",
     reject: "Rejeitar",
     addFinance: "Adicionar Finanças",
-    financeDetails: "Detalhes da Contribuição",
-    verifyFinance: "Verificar Contribuição",
-    rejectFinance: "Rejeitar Contribuição",
+    financeDetails: "Detalhes da Contribui��o",
+    verifyFinance: "Verificar Contribui��o",
+    rejectFinance: "Rejeitar Contribui��o",
     verifiedBy: "Verificado Por",
-    verificationComment: "Comentário de Verificação",
-    rejectionReason: "Motivo da Rejeição",
-    verifiedAt: "Data de Verificação",
-    transactionReference: "Referência da Transacção",
+    verificationComment: "Coment�rio de Verifica��o",
+    rejectionReason: "Motivo da Rejei��o",
+    verifiedAt: "Data de Verifica��o",
+    transactionReference: "Refer�ncia da Transac��o",
     envelopeImage: "Imagem do Envelope / POP",
     optional: "Opcional",
     createdAt: "Criado Em",
-    rejectionReasonRequired: "Indique o motivo da rejeição.",
+    rejectionReasonRequired: "Indique o motivo da rejei��o.",
     searchMemberContributor: "Pesquisar membro / contribuinte",
     searchMemberContributorPlaceholder: "Digite nome, apelido ou telefone...",
     linkedToProfile: "Ligado ao perfil existente",
@@ -483,7 +489,7 @@ const TEXT = {
     selectThisProfile: "Seleccionar este perfil",
     noSearchResults: "Nenhum resultado encontrado",
     contributorSection: "Contribuinte",
-    contributionSection: "Contribuição",
+    contributionSection: "Contribui��o",
     sourceMember: "Membro",
     sourceFirstTimer: "Primeira Vez",
     sourceContributor: "Contribuinte",
@@ -492,10 +498,10 @@ const TEXT = {
     sourcePublicWebsite: "Site Público",
     sourceDashboard: "Dashboard",
     sourceImported: "Importado",
-    financeTabOverview: "Visão Geral",
+    financeTabOverview: "Vis�o Geral",
     financeTabEntries: "Lançamentos",
     financeTabPublic: "Submissões Públicas",
-    financeTabVerification: "Verificação",
+    financeTabVerification: "Verifica��o",
     financeTabApprovedReq: "Requisições Aprovadas",
     financeTabReports: "Relatórios",
     financeTabPartners: "Parceiros em Destaque",
@@ -509,7 +515,7 @@ const TEXT = {
     financeTotalRejected: "Total Rejeitado",
     financeContributionCount: "Nº de Contribuições",
     financeUniqueContributors: "Contribuintes Únicos",
-    financeAverageContribution: "Média por Contribuição",
+    financeAverageContribution: "M�dia por Contribui��o",
     financeReportByCategory: "Relatório por Categoria",
     financeReportByPartnershipArm: "Relatório por Braço de Parceria",
     financeReportByIndividual: "Relatório por Indivíduo",
@@ -528,8 +534,8 @@ const TEXT = {
     financeExportCsv: "Exportar CSV",
     financeExportJson: "Exportar JSON",
     financeExportHint: "Exportar os dados filtrados do período seleccionado.",
-    financeVerificationQueue: "Fila de Verificação",
-    financeVerificationHint: "Contribuições pendentes de verificação pela equipa de Finanças.",
+    financeVerificationQueue: "Fila de Verifica��o",
+    financeVerificationHint: "Contribui��es pendentes de verifica��o pela equipa de Finan�as.",
     financePeriodToday: "Hoje",
     financePeriodWeek: "Esta Semana",
     financePeriodMonth: "Este Mês",
@@ -544,18 +550,18 @@ const TEXT = {
     financeAllStatuses: "Todos os Estados",
     financeAllSources: "Todas as Origens",
     financeContributorSearch: "Contribuinte / telefone",
-    financeContributionType: "Tipo de Contribuição",
+    financeContributionType: "Tipo de Contribui��o",
     financePartnershipArm: "Braço de Parceria",
     financeSelectContributor: "Seleccionar contribuinte",
     financeNoChartData: "Sem dados para o período seleccionado.",
     financeReportByChurch: "Relatório por Igreja",
-    financeMonthlyEvolution: "Evolução Mensal",
+    financeMonthlyEvolution: "Evolu��o Mensal",
     financeTopPartners: "Top Parceiros",
     financeChartLine: "Linha",
     financeTotalPeriod: "Total no Período",
     financeCategoriesContributed: "Categorias em que Contribuiu",
     financeContributionHistory: "Histórico de Contribuições",
-    financeLastContribution: "Última Contribuição",
+    financeLastContribution: "�ltima Contribui��o",
     financeFrequency: "Frequência",
     financeContributionState: "Estado das Contribuições",
     financeProof: "Comprovativo",
@@ -575,10 +581,10 @@ const TEXT = {
     financeSegmentConsistent: "Consistentes",
     financeSegmentNew: "Novos",
     financeSegmentInactive: "Pararam de Contribuir",
-    financeSegmentFollowup: "Pendentes de Follow-up",
+    financeSegmentFollowup: "Pendentes de Acompanhamento",
     financeViewFinancialProfile: "Ver Perfil Financeiro",
     financeViewHistory: "Ver Histórico",
-    financeContactFollowup: "Contactar / Follow-up",
+    financeContactFollowup: "Contactar / Acompanhamento",
     financeExportPartner: "Exportar",
     financeExportPdf: "Exportar PDF",
     financeExportExcel: "Exportar Excel",
@@ -601,18 +607,18 @@ const TEXT = {
     financeAccessPastor: "Church Pastor",
     financeAccessAdmin: "National Admin",
     financeAccessViewer: "Viewer",
-    viewSubmission: "Ver Submissão",
+    viewSubmission: "Ver Submiss�o",
     viewProof: "Ver Comprovativo",
-    publicSubmission: "Submissão Pública",
-    submissionGroup: "Grupo de Submissão",
+    publicSubmission: "Submiss�o P�blica",
+    submissionGroup: "Grupo de Submiss�o",
     transferMessage: "Mensagem da Transferência",
     transferDate: "Data da Transferência",
     cellGroup: "Grupo de Célula",
     otherDescription: "Outras Doações",
     grandTotal: "Total Geral",
-    contributionLines: "Linhas de Contribuição",
+    contributionLines: "Linhas de Contribui��o",
     manual: "Manual",
-    followupTimeline: "Linha de Seguimento",
+    followupTimeline: "Histórico de Acompanhamento",
     contactDate: "Data do Contacto",
     contactMethod: "Método",
     result: "Resultado",
@@ -624,7 +630,7 @@ const TEXT = {
     birthDate: "Data de Nascimento",
     preferredCell: "Célula Preferida",
     responsibleCounselor: "Conselheiro Responsável",
-    followupState: "Estado do Seguimento",
+    followupState: "Estado do Acompanhamento",
     entryDate: "Data de Entrada",
     origin: "Origem",
     cell: "Célula",
@@ -636,7 +642,7 @@ const TEXT = {
     Pastor: "Pastor",
     Leader: "Líder",
     "Cell growth": "Crescimento de Células",
-    Role: "Função",
+    Role: "Fun��o",
     Departments: "Departamentos",
     Age: "Idade",
     Local: "Local",
@@ -645,32 +651,32 @@ const TEXT = {
     Groom: "Noivo",
     Bride: "Noiva",
     Father: "Pai",
-    Mother: "Mãe",
+    Mother: "M�e",
     Passed: "Aprovado",
-    "Transaction reference": "Referência da Transacção",
+    "Transaction reference": "Refer�ncia da Transac��o",
     "Received by": "Recebido Por",
     "Verified by": "Verificado Por",
     "Envelope image": "Imagem do Envelope",
     "Souls won": "Almas Ganhas",
-    Split: "Divisão",
+    Split: "Divis�o",
     "church.operations": "Operações da Igreja",
-    Scope: "Âmbito",
+    Scope: "�mbito",
     Permissions: "Permissões",
     Actor: "Autor",
-    Action: "Acção",
+    Action: "Ac��o",
     "National HQ": "Sede Nacional",
     "Virtual Church": "Igreja Virtual",
     titleChurchOps: "Christ Embassy Operations",
     baptismTab: "Baptismos",
     marriageTab: "Casamentos",
-    babyTab: "Dedicação de Bebés",
+    babyTab: "Dedica��o de Beb�s",
     total: "Total",
     pending: "Pendente",
     contacted: "Contactado",
     noAnswer: "Sem Resposta",
     interested: "Interessado",
     sentToCell: "Encaminhado para Célula",
-    enrolledFoundation: "Inscrito na Escola de Fundação",
+    enrolledFoundation: "Inscrito na Escola de Funda��o",
     becameMember: "Tornou-se Membro",
     closed: "Fechado",
     inProgress: "Em Curso",
@@ -678,10 +684,10 @@ const TEXT = {
     inactive: "Inactivo",
     transferred: "Transferido",
     rejected: "Rejeitado",
-    viewMode: "Modo de visualização",
-    moduleNavigation: "Navegação do módulo",
+    viewMode: "Modo de visualiza��o",
+    moduleNavigation: "Navega��o do m�dulo",
     membersByChurch: "Por Igreja",
-    wantFoundation: "Querem Escola de Fundação",
+    wantFoundation: "Querem Escola de Funda��o",
     visitScheduled: "Visita Marcada",
     nextContact: "Próximo Contacto",
     partiallyConfirmed: "Confirmado Parcialmente",
@@ -711,8 +717,8 @@ const TEXT = {
     approved: "Aprovado",
     graduated: "Graduado",
     studentData: "Dados do Aluno",
-    evaluation: "Avaliação",
-    finalization: "Finalização",
+    evaluation: "Avalia��o",
+    finalization: "Finaliza��o",
     examScore: "Nota do Exame",
     markClassTitle: "Marcar Aula",
     launchScoreTitle: "Lançar Nota",
@@ -772,6 +778,7 @@ const TEXT = {
     filterStatus: "Filter by Status",
     empty: "There are no records for this module yet.",
     main: "MAIN",
+    pastoralCare: "PASTORAL CARE",
     departments: "DEPARTMENTS",
     admin: "ADMIN",
     dashboard: "Dashboard",
@@ -787,7 +794,7 @@ const TEXT = {
     sacraments: "Sacraments",
     programs: "Programs",
     partnership: "Partnership",
-    media: "Media / Loveworld SAT",
+    media: "Media",
     usersRoles: "Users & Roles",
     accessControl: "Access Control",
     settings: "Settings",
@@ -1075,6 +1082,11 @@ const TEXT = {
     accessDeniedText: "You do not have permission to access this area. Contact the administrator if you need access.",
     accessDeniedBack: "Back to Dashboard",
     navLockedTooltip: "You do not have permission to access this module",
+    noPermission: "No permission",
+    noPermissionArea: "You do not have permission to access this area.",
+    locked: "Locked",
+    availableForDepartment: "Available for your department",
+    availableForChurch: "Available for your church",
     accessMatrixModule: "Module",
     accessMatrixView: "View",
     accessMatrixCreate: "Create",
@@ -1434,18 +1446,18 @@ Object.assign(TEXT.pt, {
   recentNotifications: "Recentes",
   markRead: "Marcar como lida",
   markAllRead: "Marcar todas como lidas",
-  unread: "Não lidas",
+  unread: "N�o lidas",
   urgentPlural: "Urgentes",
   actionRequiredPlural: "Acções necessárias",
   viewAll: "Ver todas",
   allNotifications: "Todas",
   read: "Lida",
-  unreadState: "Não lida",
+  unreadState: "N�o lida",
   notificationType: "Tipo",
   priority: "Prioridade",
   module: "Módulo",
-  actionRequired: "Acção necessária",
-  approvalRequired: "Aprovação necessária",
+  actionRequired: "Ac��o necess�ria",
+  approvalRequired: "Aprova��o necess�ria",
   reminder: "Lembrete",
   info: "Informativa",
   success: "Sucesso",
@@ -1454,20 +1466,20 @@ Object.assign(TEXT.pt, {
   low: "Baixa",
   normal: "Normal",
   high: "Alta",
-  notificationInboxSubtitle: "Notificações internas filtradas por utilizador, função, departamento, igreja e permissões.",
-  newRequisitionSubmitted: "Nova requisição submetida",
-  requisitionPastoralApproval: "Requisição aguarda aprovação pastoral",
-  requisitionApproved: "Requisição aprovada",
-  requisitionRejected: "Requisição rejeitada",
-  requisitionReturned: "Requisição devolvida para correção",
+  notificationInboxSubtitle: "Notifica��es internas filtradas por utilizador, fun��o, departamento, igreja e permiss�es.",
+  newRequisitionSubmitted: "Nova requisi��o submetida",
+  requisitionPastoralApproval: "Requisi��o aguarda aprova��o pastoral",
+  requisitionApproved: "Requisi��o aprovada",
+  requisitionRejected: "Requisi��o rejeitada",
+  requisitionReturned: "Requisi��o devolvida para corre��o",
   resourcesReleased: "Recursos liberados",
-  publicGivingSubmission: "Nova submissão pública de contribuição",
-  verifySubmission: "Verificar Submissão",
+  publicGivingSubmission: "Nova submiss�o p�blica de contribui��o",
+  verifySubmission: "Verificar Submiss�o",
   releaseResources: "Liberar Recursos",
   approveReject: "Aprovar ou Rejeitar",
-  reviewRequisition: "Rever Requisição",
-  correctRequisition: "Corrigir Requisição",
-  viewRelease: "Ver Liberação",
+  reviewRequisition: "Rever Requisi��o",
+  correctRequisition: "Corrigir Requisi��o",
+  viewRelease: "Ver Libera��o",
   viewDetails: "Ver Detalhes"
 });
 
@@ -1513,6 +1525,256 @@ Object.assign(TEXT.en, {
   viewDetails: "View Details"
 });
 
+Object.assign(TEXT.pt, {
+  mediaSubtitle: "Gest�o da equipa t�cnica, transmiss�es, escalas por culto, canais, avalia��es e premia��es.",
+  mediaOverview: "Vis�o Geral",
+  mediaTechnicalTeam: "Equipa Técnica",
+  mediaRolesFunctions: "Papéis & Funções",
+  mediaSchedules: "Escalas",
+  mediaServicesPrograms: "Cultos & Programas",
+  mediaStreamingChannels: "Canais de Transmiss�o",
+  mediaPerformanceEvaluation: "Avalia��o de Performance",
+  mediaReports: "Relatórios",
+  mediaAwards: "Premiações",
+  mediaTotalTechnicians: "Total de Técnicos",
+  mediaActiveTechnicians: "Técnicos Activos",
+  mediaSchedulesThisWeek: "Escalas Esta Semana",
+  mediaCompleteTeams: "Cultos com Equipa Completa",
+  mediaIncompleteTeams: "Cultos com Falta de Técnicos",
+  mediaNextService: "Próximo Culto",
+  mediaPendingEvaluations: "Avaliações Pendentes",
+  mediaMonthlyHighlights: "Destaques do Mês",
+  mediaGenerateSchedule: "Gerar Escala",
+  mediaOpenChannel: "Abrir Canal",
+  mediaNominate: "Nomear",
+  mediaAssignAward: "Atribuir Prémio",
+  mediaExportCertificate: "Exportar Certificado",
+  mediaInventoryPlaceholder: "Equipamentos de m�dia ser�o ligados ao m�dulo Espa�os & Invent�rio.",
+  cameraOperator: "Operador de C�mara",
+  photographer: "Fotógrafo",
+  soundTechnician: "Técnico de Som",
+  videoMixerOperator: "Operador de Video Mixer",
+  streamingTechnician: "T�cnico de Transmiss�o",
+  scriptureOperator: "Lançador de Escrituras",
+  mediaSupervisor: "Supervisor de Mídia",
+  mediaDirector: "Director de Mídia",
+  wednesdayService: "Culto de Quarta-feira",
+  sundayFirstService: "Domingo 1º Culto",
+  sundaySecondService: "Domingo 2º Culto",
+  prayers: "Orações",
+  masterClass: "Master Class",
+  specialProgram: "Programa Especial",
+  technicianScheduled: "Técnico escalado",
+  schedulePublished: "Escala publicada",
+  pendingEvaluation: "Avalia��o pendente",
+  technicianOfYear: "Técnico do Ano",
+  mostPunctual: "Mais Pontual",
+  bestTeamSpirit: "Melhor Espírito de Equipa",
+  breakthroughOfYear: "Revela��o do Ano",
+  mostImproved: "Mais Melhorado",
+  selectCellGroup: "Seleccione o grupo de célula",
+  selectCell: "Seleccione a célula",
+  noCellsInGroup: "Nenhuma célula registada neste grupo.",
+  viewCells: "Ver Células",
+  expandAll: "Expandir Tudo",
+  collapseAll: "Recolher Tudo",
+  needsReview: "Precisa de Revis�o",
+  totalCells: "Total de Células",
+  period: "Período",
+  thisWeek: "Esta Semana",
+  thisYear: "Este Ano",
+  thisQuarter: "Este Trimestre",
+  currentQuarter: "Trimestre Actual",
+  lastQuarter: "Trimestre Passado",
+  quarter: "Trimestre",
+  custom: "Personalizado",
+  now: "Agora",
+  currentReport: "Relatório Actual",
+  dashboardRoleScope: "Vis�o personalizada",
+  nationalScope: "Escopo nacional",
+  activeEnrolments: "Inscrições activas",
+  completedGraduations: "Graduações concluídas",
+  verifiedIncome: "Entradas verificadas",
+  approvedRequisitions: "Requisições Aprovadas",
+  publicSubmissions: "Submissões públicas",
+  hrPendingHero: "Aniversários e avaliações pendentes",
+  reqForReview: "Requisi��es para revis�o",
+  myPendingNotifications: "Minhas notificações pendentes",
+  submittedRequisitions: "Requisições Submetidas",
+  departmentRequisitions: "Requisições do Departamento",
+  myRequisitions: "Minhas Requisições",
+  myEquipment: "Meus Equipamentos",
+  myScope: "Meu escopo",
+  pendingEvaluations: "Avaliações Pendentes",
+  birthdaysThisMonth: "Aniversários Este Mês"
+});
+
+Object.assign(TEXT.en, {
+  mediaSubtitle: "Manage the technical team, live streams, service schedules, channels, evaluations and awards.",
+  mediaOverview: "Overview",
+  mediaTechnicalTeam: "Technical Team",
+  mediaRolesFunctions: "Roles & Functions",
+  mediaSchedules: "Schedules",
+  mediaServicesPrograms: "Services & Programs",
+  mediaStreamingChannels: "Streaming Channels",
+  mediaPerformanceEvaluation: "Performance Evaluation",
+  mediaReports: "Reports",
+  mediaAwards: "Awards",
+  mediaTotalTechnicians: "Total Technicians",
+  mediaActiveTechnicians: "Active Technicians",
+  mediaSchedulesThisWeek: "Schedules This Week",
+  mediaCompleteTeams: "Services With Full Team",
+  mediaIncompleteTeams: "Services Missing Technicians",
+  mediaNextService: "Next Service",
+  mediaPendingEvaluations: "Pending Evaluations",
+  mediaMonthlyHighlights: "Monthly Highlights",
+  mediaGenerateSchedule: "Generate Schedule",
+  mediaOpenChannel: "Open Channel",
+  mediaNominate: "Nominate",
+  mediaAssignAward: "Assign Award",
+  mediaExportCertificate: "Export Certificate",
+  mediaInventoryPlaceholder: "Media equipment will connect to the Spaces & Inventory module.",
+  cameraOperator: "Camera Operator",
+  photographer: "Photographer",
+  soundTechnician: "Sound Technician",
+  videoMixerOperator: "Video Mixer Operator",
+  streamingTechnician: "Streaming Technician",
+  scriptureOperator: "Scripture Operator",
+  mediaSupervisor: "Media Supervisor",
+  mediaDirector: "Media Director",
+  wednesdayService: "Wednesday Service",
+  sundayFirstService: "Sunday 1st Service",
+  sundaySecondService: "Sunday 2nd Service",
+  prayers: "Prayers",
+  masterClass: "Master Class",
+  specialProgram: "Special Program",
+  technicianScheduled: "Technician scheduled",
+  schedulePublished: "Schedule published",
+  pendingEvaluation: "Pending evaluation",
+  technicianOfYear: "Technician of the Year",
+  mostPunctual: "Most Punctual",
+  bestTeamSpirit: "Best Team Spirit",
+  breakthroughOfYear: "Breakthrough of the Year",
+  mostImproved: "Most Improved",
+  selectCellGroup: "Select cell group",
+  selectCell: "Select cell",
+  noCellsInGroup: "No cells registered under this group.",
+  viewCells: "View Cells",
+  expandAll: "Expand All",
+  collapseAll: "Collapse All",
+  needsReview: "Needs Review",
+  totalCells: "Total Cells",
+  period: "Period",
+  thisWeek: "This Week",
+  thisYear: "This Year",
+  thisQuarter: "This Quarter",
+  currentQuarter: "Current Quarter",
+  lastQuarter: "Last Quarter",
+  quarter: "Quarter",
+  custom: "Custom",
+  now: "Now",
+  currentReport: "Current Report",
+  dashboardRoleScope: "Personalized view",
+  nationalScope: "National scope",
+  activeEnrolments: "Active enrolments",
+  completedGraduations: "Completed graduations",
+  verifiedIncome: "Verified income",
+  approvedRequisitions: "Approved Requisitions",
+  publicSubmissions: "Public submissions",
+  hrPendingHero: "Birthdays and pending evaluations",
+  reqForReview: "Requisitions for review",
+  myPendingNotifications: "My pending notifications",
+  submittedRequisitions: "Submitted Requisitions",
+  departmentRequisitions: "Department Requisitions",
+  myRequisitions: "My Requisitions",
+  myEquipment: "My Equipment",
+  myScope: "My scope",
+  pendingEvaluations: "Pending Evaluations",
+  birthdaysThisMonth: "Birthdays This Month"
+});
+
+Object.assign(TEXT.pt, {
+  counselingSubtitle: "Gest�o pastoral de pedidos, agendamentos, conselheiros, encaminhamentos, feedback e hist�rico sens�vel.",
+  counselingOverview: "Vis�o Geral",
+  counselingRequests: "Pedidos",
+  counselingAppointments: "Agendamentos",
+  counselingActiveCases: "Casos em Curso",
+  counselingCounselors: "Conselheiros",
+  counselingReferrals: "Encaminhamentos",
+  counselingFeedbackReports: "Feedback & Relatórios",
+  counselingHistory: "Histórico",
+  counselingReports: "Relatórios",
+  newCounselingRequest: "Novo Pedido de Aconselhamento",
+  counselingRequest: "Pedido de Aconselhamento",
+  pendingCounselingRequests: "Pedidos Pendentes",
+  appointmentsToday: "Agendamentos Hoje",
+  appointmentsThisWeek: "Agendamentos Esta Semana",
+  referredChurchPastor: "Encaminhados ao Pastor da Igreja",
+  referredMainPastor: "Encaminhados ao Pastor Principal",
+  pendingFeedbacks: "Feedbacks Pendentes",
+  casesNeedFollowUp: "Casos que Precisam de Acompanhamento",
+  completedThisMonth: "Concluídos Este Mês",
+  createFollowUp: "Criar Acompanhamento",
+  confidentiality: "Confidencialidade",
+  sensitive: "Sensível",
+  strictlyConfidential: "Estritamente Confidencial",
+  personType: "Tipo de Pessoa",
+  counselingCategory: "Categoria",
+  counselingSubject: "Assunto",
+  issueSummary: "Resumo do Caso",
+  urgency: "Urgência",
+  preferredDate: "Data Preferida",
+  preferredTime: "Hora Preferida",
+  assignedCounselor: "Conselheiro Responsável",
+  referralDestination: "Destino",
+  nextStep: "Próximo Passo",
+  outcome: "Resultado",
+  pastorReview: "Revis�o Pastoral",
+  followUpResponsible: "Responsável pelo Acompanhamento",
+  noFollowUp: "Sem Acompanhamento"
+});
+
+Object.assign(TEXT.en, {
+  counselingSubtitle: "Pastoral management for requests, appointments, counselors, referrals, feedback and sensitive history.",
+  counselingOverview: "Overview",
+  counselingRequests: "Requests",
+  counselingAppointments: "Appointments",
+  counselingActiveCases: "Active Cases",
+  counselingCounselors: "Counselors",
+  counselingReferrals: "Referrals",
+  counselingFeedbackReports: "Feedback & Reports",
+  counselingHistory: "History",
+  counselingReports: "Reports",
+  newCounselingRequest: "New Counseling Request",
+  counselingRequest: "Counseling Request",
+  pendingCounselingRequests: "Pending Requests",
+  appointmentsToday: "Appointments Today",
+  appointmentsThisWeek: "Appointments This Week",
+  referredChurchPastor: "Referred to Church Pastor",
+  referredMainPastor: "Referred to Main Pastor",
+  pendingFeedbacks: "Pending Feedback",
+  casesNeedFollowUp: "Cases Needing Follow-Up",
+  completedThisMonth: "Completed This Month",
+  createFollowUp: "Create Follow-Up",
+  confidentiality: "Confidentiality",
+  sensitive: "Sensitive",
+  strictlyConfidential: "Strictly Confidential",
+  personType: "Person Type",
+  counselingCategory: "Category",
+  counselingSubject: "Subject",
+  issueSummary: "Case Summary",
+  urgency: "Urgency",
+  preferredDate: "Preferred Date",
+  preferredTime: "Preferred Time",
+  assignedCounselor: "Assigned Counselor",
+  referralDestination: "Destination",
+  nextStep: "Next Step",
+  outcome: "Outcome",
+  pastorReview: "Pastoral Review",
+  followUpResponsible: "Follow-Up Responsible",
+  noFollowUp: "No Follow-Up"
+});
+
 const STATUS_KEYS = {
   Pending: "pending",
   Pendente: "pending",
@@ -1525,7 +1787,7 @@ const STATUS_KEYS = {
   "Sent to Cell": "sentToCell",
   "Encaminhado para Célula": "sentToCell",
   "Enrolled in Foundation School": "enrolledFoundation",
-  "Inscrito na Escola de Fundação": "enrolledFoundation",
+  "Inscrito na Escola de Funda��o": "enrolledFoundation",
   "Became Member": "becameMember",
   "Tornou-se Membro": "becameMember",
   Closed: "closed",
@@ -1540,7 +1802,7 @@ const STATUS_KEYS = {
   "In Progress": "inProgress",
   "Em Curso": "inProgress",
   "Pending Verification": "pendingVerification",
-  "Pendente de Verificação": "pendingVerification",
+  "Pendente de Verifica��o": "pendingVerification",
   Verified: "verified",
   Verificado: "verified",
   Rejected: "rejected",
@@ -1558,7 +1820,7 @@ const STATUS_KEYS = {
   "Relatório Submetido": "reportSubmitted",
   "Inscrito": "enrolled",
   "Exame": "exam",
-  "Em Preparação": "inPreparation",
+  "Em Prepara��o": "inPreparation",
   "Confirmado": "confirmed",
   "Concluído": "completed",
   "Disponível": "available",
@@ -1572,28 +1834,28 @@ const STATUS_KEYS = {
 };
 
 Object.assign(STATUS_KEYS, {
-  "Em Formação": "inTraining",
+  "Em Forma��o": "inTraining",
   "Terminou": "completed",
   "Pendente de Pagamento": "pendingVerification",
   "Rascunho": "draft",
   "Submetido": "submitted",
-  "Em Avaliação": "underEvaluation",
+  "Em Avalia��o": "underEvaluation",
   "Aprovado": "approved",
   "Validado": "validated",
-  "Devolver para Correção": "returned",
+  "Devolver para Corre��o": "returned",
   "Devolvido": "returned",
   "Crítico": "critical",
-  "Precisa de Atenção": "needsAttention",
-  "Encaminhado para Validação": "forwardValidation",
+  "Precisa de Aten��o": "needsAttention",
+  "Encaminhado para Valida��o": "forwardValidation",
   "Excelente": "excellent",
   "Bom": "good",
   "Fechado": "closed",
-  "Em Revisão": "review",
+  "Em Revis�o": "review",
   "Resolvido": "resolved",
   "Reincidente": "recurrent",
   "Em Crescimento": "growing",
   "Inactivo": "inactive",
-  "Em Revisão": "review",
+  "Em Revis�o": "review",
   "Por Confirmar": "toConfirm",
   "Incompleto": "incomplete",
   "Pending Enrolment": "enrolled",
@@ -1603,8 +1865,8 @@ Object.assign(STATUS_KEYS, {
   "Graduated": "graduated",
   "Pronto para Exame": "readyForExam",
   "Enviado ao Pastor Principal": "sentToPastor",
-  "Devolvido para Correção": "returnedForCorrection",
-  "Aprovado — Aguardando Liberação de Recursos": "approvedAwaitingRelease",
+  "Devolvido para Corre��o": "returnedForCorrection",
+  "Aprovado � Aguardando Libera��o de Recursos": "approvedAwaitingRelease",
   "Recursos Liberados": "resourcesReleased",
   "Comprado / Executado": "purchasedExecuted",
   "Registado no Inventário": "registeredInventory",
@@ -1613,8 +1875,8 @@ Object.assign(STATUS_KEYS, {
   Aprovado: "approved"
 });
 
-const CHURCH_TYPES = ["Sede Nacional", "Igreja Local", "Igreja Online", "Igreja Virtual", "Grupo / Missão"];
-const CHURCH_STATUSES = ["Activa", "Inactiva", "Em Preparação"];
+const CHURCH_TYPES = ["Sede Nacional", "Igreja Local", "Igreja Online", "Igreja Virtual", "Grupo / Miss�o"];
+const CHURCH_STATUSES = ["Activa", "Inactiva", "Em Prepara��o"];
 const CHURCH_INFO_STATUSES = ["Confirmado", "Por Confirmar", "Incompleto"];
 const CHURCH_VIEW_KEY = "ce-dashboard-church-view";
 const ONLINE_CHURCH_TYPES = new Set(["Igreja Online", "Igreja Virtual"]);
@@ -1624,7 +1886,7 @@ const CHURCH_TYPE_LABELS = {
   "Igreja Local": "churchTypeLocal",
   "Igreja Online": "churchTypeOnline",
   "Igreja Virtual": "churchTypeVirtual",
-  "Grupo / Missão": "churchTypeMission"
+  "Grupo / Miss�o": "churchTypeMission"
 };
 
 const DAYS_OF_WEEK = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
@@ -1633,7 +1895,7 @@ const SERVICE_TYPES = ["Presencial", "Online", "Híbrido"];
 const SERVICE_TYPE_LABELS = {
   Presencial: "serviceTypeInPerson",
   Online: "serviceTypeOnline",
-  Híbrido: "serviceTypeHybrid"
+  "Híbrido": "serviceTypeHybrid"
 };
 
 function makeServiceTimeId() {
@@ -1702,7 +1964,7 @@ function normalizeServiceTimeRecord(record, churchId, index) {
     service_name: record.service_name || "",
     time: /^\d{2}:\d{2}$/.test(record.time || "") ? record.time : "09:00",
     service_type: SERVICE_TYPES.includes(record.service_type) ? record.service_type : "Presencial",
-    is_active: !(isActive === false || isActive === "Não" || isActive === "No"),
+    is_active: !(isActive === false || isActive === "N�o" || isActive === "No"),
     notes: record.notes || ""
   };
 }
@@ -1763,40 +2025,40 @@ function formatServiceTimeDetail(record) {
 
 Object.assign(TEXT.pt, {
   cellLeadership: "Células & Liderança",
-  cellOverview: "Visão Geral",
+  cellOverview: "Vis�o Geral",
   cellCells: "Células",
   cellLeaders: "Líderes",
   cellReports: "Relatórios de Células",
   alec: "ALEC",
   prisonMinistry: "Ministério Prisional",
   ministryMaterials: "Materiais do Ministério",
-  prisonMinistrySubtitle: "Serviços prisionais, acompanhamento de internos e Escola de Fundação dentro dos locais de missão.",
-  materialsSubtitle: "Catálogo, vendas, distribuição, stock semanal e fundos para distribuição gratuita.",
+  prisonMinistrySubtitle: "Servi�os prisionais, acompanhamento de internos e Escola de Funda��o dentro dos locais de miss�o.",
+  materialsSubtitle: "Cat�logo, vendas, distribui��o, stock semanal e fundos para distribui��o gratuita.",
   activePrisons: "Prisões Activas",
   activeStudents: "Alunos Activos",
   servicesThisWeek: "Serviços Esta Semana",
   inmatesReached: "Internos Alcançados",
   prisonNewConverts: "Novos Convertidos",
-  prisonFoundationStudents: "Alunos em Escola de Fundação",
+  prisonFoundationStudents: "Alunos em Escola de Funda��o",
   pendingReports: "Relatórios Pendentes",
   prisonsLocations: "Prisões / Locais",
   prisonServices: "Serviços Prisionais",
   weeklyAgenda: "Agenda Semanal",
   ministryReports: "Relatórios",
-  prisonName: "Nome da Prisão",
+  prisonName: "Nome da Pris�o",
   province: "Província",
   city: "Cidade",
   responsibleChurch: "Igreja Responsável",
-  prisonRepresentative: "Representante da Prisão",
+  prisonRepresentative: "Representante da Pris�o",
   representativeContact: "Contacto do Representante",
   observations: "Observações",
   weekday: "Dia da Semana",
-  prison: "Prisão",
+  prison: "Pris�o",
   responsibleLeader: "Líder Responsável",
   membersWent: "Membros que Foram",
   inmatesPresent: "Internos Presentes",
-  interestedFoundation: "Interessados na Escola de Fundação",
-  foundationClassGiven: "Aula de Fundação Dada",
+  interestedFoundation: "Interessados na Escola de Funda��o",
+  foundationClassGiven: "Aula de Funda��o Dada",
   topicMessage: "Tema ou Mensagem",
   participantName: "Nome do Participante",
   evangelismPractice: "Prática de Evangelismo",
@@ -1805,8 +2067,8 @@ Object.assign(TEXT.pt, {
   weekStart: "Início da Semana",
   weekEnd: "Fim da Semana",
   mondayAgenda: "Segunda: Preparar Relatórios e Agenda",
-  tuesdayPrayer: "Terça: Reunião de Oração",
-  wednesdayFollowup: "Quarta: Follow-up com Representante",
+  tuesdayPrayer: "Ter�a: Reuni�o de Ora��o",
+  wednesdayFollowup: "Quarta: Acompanhamento com Representante",
   thursdayService: "Quinta: Serviço Prisional",
   fridayService: "Sexta: Serviço Prisional",
   weekendFollowup: "Sábado/Domingo: Acompanhamento",
@@ -1819,9 +2081,9 @@ Object.assign(TEXT.pt, {
   fundsRaised: "Fundos Levantados",
   catalogue: "Catálogo",
   sales: "Vendas",
-  churchDistribution: "Distribuição para Igrejas",
+  churchDistribution: "Distribui��o para Igrejas",
   weeklyStock: "Stock Semanal",
-  freeDistributionFunds: "Fundos para Distribuição Gratuita",
+  freeDistributionFunds: "Fundos para Distribui��o Gratuita",
   materialTitle: "Título do Material",
   materialType: "Tipo",
   authorOrigin: "Autor / Origem",
@@ -1834,7 +2096,7 @@ Object.assign(TEXT.pt, {
   paymentProof: "POP / Prova de Pagamento",
   receivedBy: "Recebido Por",
   destinationChurch: "Igreja Destinatária",
-  distributionType: "Tipo de Distribuição",
+  distributionType: "Tipo de Distribui��o",
   sentBy: "Responsável pelo Envio",
   openingStock: "Stock Inicial",
   entries: "Entradas",
@@ -1853,7 +2115,7 @@ Object.assign(TEXT.pt, {
   planned: "Planeado",
   reportSubmitted: "Relatório Submetido",
   enrolled: "Inscrito",
-  inPreparation: "Em Preparação",
+  inPreparation: "Em Prepara��o",
   confirmed: "Confirmado",
   available: "Disponível",
   outOfStock: "Esgotado",
@@ -1871,12 +2133,12 @@ Object.assign(TEXT.pt, {
   alecScores: "Pauta ALEC",
   churchReports: "Relatórios de Igreja",
   cellReports: "Relatórios de Células",
-  cellEvaluation: "Avaliação",
-  finalValidation: "Validação Final",
+  cellEvaluation: "Avalia��o",
+  finalValidation: "Valida��o Final",
   totalAlecRegistered: "Total Inscritos ALEC",
-  alreadyLeaders: "Já são Líderes",
-  didFoundationSchool: "Fizeram Escola de Fundação",
-  inTraining: "Em Formação",
+  alreadyLeaders: "J� s�o L�deres",
+  didFoundationSchool: "Fizeram Escola de Funda��o",
+  inTraining: "Em Forma��o",
   alecCompleted: "ALEC Concluídos",
   submittedReports: "Relatórios Submetidos",
   pendingReportsShort: "Relatórios Pendentes",
@@ -1884,8 +2146,8 @@ Object.assign(TEXT.pt, {
   totalFirstTime: "Primeira Vez Total",
   totalNewConverts: "Novos Convertidos",
   totalOffering: "Oferta Total",
-  explosionCells: "Células em Explosão",
-  attentionCells: "Células que Precisam de Atenção",
+  explosionCells: "C�lulas em Explos�o",
+  attentionCells: "C�lulas que Precisam de Aten��o",
   attendanceByWeek: "Assistência por Semana",
   firstTimersByCell: "Primeira Vez por Célula",
   newConvertsByCell: "Novos Convertidos por Célula",
@@ -1896,7 +2158,7 @@ Object.assign(TEXT.pt, {
   fullName: "Nome Completo",
   contact: "Contacto",
   cellLeaderName: "Nome do Líder de Célula",
-  didFoundation: "Fez Escola de Fundação",
+  didFoundation: "Fez Escola de Funda��o",
   isLeader: "É Líder",
   alecReason: "Motivo de Fazer ALEC",
   phase1: "Fase 1",
@@ -1925,25 +2187,25 @@ Object.assign(TEXT.pt, {
   alecFinished: "ALEC Concluído",
   supervisor: "Supervisor",
   evaluator: "Avaliador",
-  evaluationDate: "Data da Avaliação",
-  classification: "Classificação",
+  evaluationDate: "Data da Avalia��o",
+  classification: "Classifica��o",
   strengths: "Pontos Fortes",
   improvements: "Pontos a Melhorar",
-  recommendedAction: "Acção Recomendada",
-  needsFollowup: "Precisa de Follow-up",
-  decision: "Decisão",
+  recommendedAction: "Ac��o Recomendada",
+  needsFollowup: "Precisa de Acompanhamento",
+  decision: "Decis�o",
   finalComment: "Comentário Final",
   finalStatus: "Estado Final",
   excellent: "Excelente",
   good: "Bom",
-  needsAttention: "Precisa de Atenção",
+  needsAttention: "Precisa de Aten��o",
   critical: "Crítico",
   draft: "Rascunho",
   submitted: "Submetido",
-  underEvaluation: "Em Avaliação",
+  underEvaluation: "Em Avalia��o",
   validated: "Validado",
   returned: "Devolvido",
-  forwardValidation: "Encaminhado para Validação",
+  forwardValidation: "Encaminhado para Valida��o",
   noReport: "Sem relatório",
   readyToSplit: "Pronta para dividir",
   leaderSupport: "Líder precisa de apoio"
@@ -1951,12 +2213,12 @@ Object.assign(TEXT.pt, {
 
 Object.assign(TEXT.pt, {
   fevo: "F.E.V.O",
-  fevoFull: "Follow-Up, Evangelização, Visitação e Oração",
-  fevoSubtitle: "Equipas semanais rotativas para seguimento, evangelização, visitação e oração, coordenadas por Sister Cassandra.",
-  weeklyConfiguration: "Configuração Semanal",
-  evangelism: "Evangelização",
-  visitation: "Visitação",
-  prayer: "Oração",
+  fevoFull: "Acompanhamento, Evangeliza��o, Visita��o e Ora��o",
+  fevoSubtitle: "Equipas semanais rotativas para acompanhamento, evangeliza��o, visita��o e ora��o, coordenadas por Sister Cassandra.",
+  weeklyConfiguration: "Configura��o Semanal",
+  evangelism: "Evangeliza��o",
+  visitation: "Visita��o",
+  prayer: "Ora��o",
   groupsWithoutReport: "Grupos sem Relatório",
   weeklyReports: "Relatórios Semanais",
   analysis: "Análise",
@@ -1981,21 +2243,21 @@ Object.assign(TEXT.pt, {
   submittedAt: "Submetido Em",
   soulsContacted: "Almas Contactadas",
   feedbackCount: "Quantidade de Feedback",
-  followupResult: "Resultado do Follow-Up",
-  nextAction: "Próxima Acção",
+  followupResult: "Resultado do Acompanhamento",
+  nextAction: "Pr�xima Ac��o",
   soulsEvangelized: "Almas Evangelizadas",
   materialsDistributed: "Materiais Distribuídos",
-  evangelismLocation: "Local de Evangelização",
+  evangelismLocation: "Local de Evangeliza��o",
   soulsVisited: "Almas Visitadas",
   familyMembersReached: "Familiares Alcançados",
-  visitLocation: "Local da Visitação",
-  visitResult: "Resultado da Visitação",
+  visitLocation: "Local da Visita��o",
+  visitResult: "Resultado da Visita��o",
   averageMembersPresent: "Média de Membros Presentes",
-  daysOfPrayer: "Dias de Oração",
-  prayerFocus: "Foco de Oração",
-  prayerTestimonies: "Testemunhos de Oração",
-  reasonNotSubmitted: "Motivo de Não Submissão",
-  followupAction: "Acção de Seguimento",
+  daysOfPrayer: "Dias de Ora��o",
+  prayerFocus: "Foco de Ora��o",
+  prayerTestimonies: "Testemunhos de Ora��o",
+  reasonNotSubmitted: "Motivo de N�o Submiss�o",
+  followupAction: "Ac��o de Acompanhamento",
   contactedBy: "Contactado Por",
   totalGroups: "Total de Grupos",
   totalCells: "Total de Células",
@@ -2006,43 +2268,43 @@ Object.assign(TEXT.pt, {
   activitiesByWeek: "Actividades por Semana",
   contactedByGroup: "Almas Contactadas por Grupo",
   evangelizedByGroup: "Almas Evangelizadas por Grupo",
-  visitedByGroup: "Visitação por Grupo",
-  prayerDaysByTeam: "Dias de Oração por Equipa",
+  visitedByGroup: "Visita��o por Grupo",
+  prayerDaysByTeam: "Dias de Ora��o por Equipa",
   noReportByWeek: "Grupos sem Relatório por Semana",
   firstTimersByWeek: "Primeira Vez por Semana",
   exportPdf: "Exportar PDF",
   exportExcel: "Exportar Excel",
   submit: "Submeter",
   approve: "Aprovar",
-  review: "Em Revisão",
+  review: "Em Revis�o",
   recurrent: "Reincidente",
   sidebarCollapse: "Recolher menu",
   sidebarExpand: "Expandir menu",
-  navGroupToggle: "Alternar secção",
+  navGroupToggle: "Alternar sec��o",
   moduleNavToggle: "Alternar menu do módulo",
   backToTop: "Voltar ao topo",
   cellAlecArea: "ALEC / Sister Angelica",
   cellMinistryArea: "Cell Ministry / Pastora Flavia",
   cellReportsArea: "Relatórios de Células / Sister Eduarda",
-  cellAlecOverview: "Visão Geral ALEC",
-  cellMinistryOverview: "Visão Geral",
+  cellAlecOverview: "Vis�o Geral ALEC",
+  cellMinistryOverview: "Vis�o Geral",
   receivedReports: "Relatórios Recebidos",
   cellPerformance: "Desempenho das Células",
-  leadersAttention: "Líderes em Atenção",
-  actionPlan: "Plano de Acção",
+  leadersAttention: "L�deres em Aten��o",
+  actionPlan: "Plano de Ac��o",
   weeklyCellReport: "Relatório Semanal",
   cellGroups: "Grupos de Células",
   cellCellsList: "Células",
-  consolidation: "Consolidação",
+  consolidation: "Consolida��o",
   totalGroupCells: "Total de Grupos de Células",
   viewCells: "Ver Células",
   updateCellReport: "Actualizar Relatório",
-  needsReview: "Revisão Pendente",
+  needsReview: "Revis�o Pendente",
   importReview: "Nomes importados",
   growing: "Em Crescimento",
   inactive: "Inactivo",
   cellName: "Nome da Célula",
-  observation: "Observação",
+  observation: "Observa��o",
   reportWeek: "Julho Semana 1",
   responsibleArea: "Área Responsável",
   clearFilter: "Limpar filtro",
@@ -2068,8 +2330,8 @@ Object.assign(TEXT.pt, {
   phonePrimary: "Telefone Principal",
   phoneSecondary: "Telefone Secundário",
   serviceTimes: "Horários de Culto",
-  parentChurch: "Igreja Mãe",
-  informationStatus: "Estado da Informação",
+  parentChurch: "Igreja M�e",
+  informationStatus: "Estado da Informa��o",
   socialNetworks: "Redes Sociais",
   cardsView: "Cartões",
   tableView: "Tabela",
@@ -2077,14 +2339,14 @@ Object.assign(TEXT.pt, {
   churchTypeLocal: "Igreja Local",
   churchTypeOnline: "Igreja Online",
   churchTypeVirtual: "Igreja Virtual",
-  churchTypeMission: "Grupo / Missão",
+  churchTypeMission: "Grupo / Miss�o",
   toConfirm: "Por Confirmar",
   incomplete: "Incompleto",
-  inPreparation: "Em Preparação",
+  inPreparation: "Em Prepara��o",
   filterProvince: "Filtrar por Província",
   filterCity: "Filtrar por Cidade",
   filterType: "Filtrar por Tipo",
-  filterInfoStatus: "Filtrar por Estado da Informação",
+  filterInfoStatus: "Filtrar por Estado da Informa��o",
   churchDetails: "Detalhes da Igreja",
   addChurch: "Adicionar Igreja",
   editChurch: "Editar Igreja",
@@ -2094,8 +2356,8 @@ Object.assign(TEXT.pt, {
   facebook: "Facebook",
   instagram: "Instagram",
   youtube: "YouTube",
-  applyGeneralDefault: "Aplicar Padrão Geral",
-  applyHqDefault: "Aplicar Padrão HQ",
+  applyGeneralDefault: "Aplicar Padr�o Geral",
+  applyHqDefault: "Aplicar Padr�o HQ",
   addServiceTime: "Adicionar Horário",
   dayOfWeek: "Dia da Semana",
   serviceName: "Nome do Culto",
@@ -2108,20 +2370,20 @@ Object.assign(TEXT.pt, {
 });
 
 Object.assign(TEXT.pt, {
-  venueInventory: "Gestão de Espaços & Inventário",
+  venueInventory: "Gest�o de Espa�os & Invent�rio",
   venueInventoryShort: "Espaços & Inventário",
-  venueInventorySubtitle: "Inventário, equipamentos do staff, manutenção, movimentações, espaços e checklists de culto sob responsabilidade de Marcelo Panguene.",
+  venueInventorySubtitle: "Invent�rio, equipamentos do staff, manuten��o, movimenta��es, espa�os e checklists de culto sob responsabilidade de Marcelo Panguene.",
   generalInventory: "Inventário Geral",
   newAcquisitions: "Novas Aquisições",
   staffEquipment: "Equipamentos do Staff",
-  maintenanceRepairs: "Manutenção & Reparações",
+  maintenanceRepairs: "Manuten��o & Repara��es",
   loansMovements: "Empréstimos / Movimentações",
   venuesRooms: "Espaços & Salas",
   serviceChecklist: "Checklist de Culto",
   totalItems: "Total de Itens",
   goodEquipment: "Equipamentos Bons",
   damagedEquipment: "Equipamentos Danificados",
-  inRepair: "Em Reparação",
+  inRepair: "Em Repara��o",
   assignedStaffEquipment: "Equipamentos Atribuídos ao Staff",
   acquisitions2026: "Novas Aquisições 2026",
   pendingMovements: "Movimentações Pendentes",
@@ -2134,14 +2396,14 @@ Object.assign(TEXT.pt, {
   acquisitionsByMonth: "Valor de Aquisições por Mês",
   itemName: "Nome do Item",
   quantity: "Quantidade",
-  location: "Localização",
+  location: "Localiza��o",
   responsibleDepartment: "Departamento Responsável",
   entryDate: "Data de Entrada",
   unitValue: "Valor Unitário",
   totalValue: "Valor Total",
   serialNumber: "Número de Série",
   itemCode: "Código do Item",
-  description: "Descrição",
+  description: "Descri��o",
   purchaseEntryDate: "Data de Compra ou Entrada",
   supplier: "Fornecedor",
   invoiceProof: "Comprovativo ou Factura",
@@ -2156,12 +2418,12 @@ Object.assign(TEXT.pt, {
   currentCondition: "Estado Actual",
   deliveredBy: "Responsável pela Entrega",
   signatureConfirmed: "Assinatura Confirmada",
-  returnDate: "Data de Devolução",
+  returnDate: "Data de Devolu��o",
   item: "Item",
   reportedProblem: "Problema Reportado",
   conditionBefore: "Estado Antes",
   conditionAfter: "Estado Depois",
-  repairCost: "Custo da Reparação",
+  repairCost: "Custo da Repara��o",
   technicianResponsible: "Técnico ou Responsável",
   sentDate: "Data de Envio",
   returnedDate: "Data de Retorno",
@@ -2187,7 +2449,7 @@ Object.assign(TEXT.pt, {
   projectorChecked: "Projector Verificado",
   chairsOrganized: "Cadeiras Organizadas",
   pulpitReady: "Púlpito Pronto",
-  camerasReady: "Câmaras Prontas",
+  camerasReady: "C�maras Prontas",
   microphonesReady: "Microfones Prontos",
   cleaningDone: "Limpeza Feita",
   inventoryByCategory: "Inventário por Categoria",
@@ -2723,7 +2985,7 @@ const CELL_ROUTE_ALIASES = {
   cellWorkflowReports: "cellConsolidation"
 };
 
-let cellRegistryFilter = { groupId: null };
+let cellRegistryFilter = { groupId: null, search: "", churchId: "", status: "" };
 
 const FEVO_TAB_ROUTES = new Set([
   "fevo", "fevoConfigRoute", "fevoFollowUpRoute", "fevoEvangelismRoute",
@@ -2811,14 +3073,15 @@ function isModuleTabRoute(route) {
 }
 
 const NAV_GROUPS = [
-  { key: "main", items: [["dashboard", "bi-speedometer2", "dashboard"], ["churches", "bi-building", "churches"], ["members", "bi-people", "members"], ["firstTimers", "bi-person-heart", "firstTimers"], ["followUp", "bi-telephone-outbound", "followUp"], ["reports", "bi-bar-chart-line", "reports"]] },
-  { key: "departments", items: [["counseling", "bi-chat-heart", "counseling"], ["foundation", "bi-mortarboard", "foundationSchool"], ["finance", "bi-cash-coin", "finance"], ["requisitions", "bi-clipboard-check", "requisitions"], ["fevo", "bi-compass", "fevo"], ["venueInventory", "bi-box-seam", "venueInventoryShort"], ["sacraments", "bi-droplet", "sacraments"], ["cellPrison", "bi-shield-lock", "prisonMinistry"], ["cellMaterials", "bi-journal-richtext", "ministryMaterials"], ["programs", "bi-calendar-event", "programs"], ["partnership", "bi-stars", "partnership"], ["media", "bi-broadcast", "media"]] },
+  { key: "main", items: [["dashboard", "bi-speedometer2", "dashboard"], ["churches", "bi-building", "churches"], ["members", "bi-people", "members"], ["reports", "bi-bar-chart-line", "reports"]] },
+  { key: "pastoralCare", items: [["firstTimers", "bi-person-heart", "firstTimers"], ["followUp", "bi-telephone-outbound", "followUp"], ["foundation", "bi-mortarboard", "foundationSchool"], ["sacraments", "bi-droplet", "sacraments"], ["counseling", "bi-chat-heart", "counseling"]] },
+  { key: "departments", items: [["fevo", "bi-compass", "fevo"], ["finance", "bi-cash-coin", "finance"], ["partnership", "bi-stars", "partnership"], ["programs", "bi-calendar-event", "programs"], ["media", "bi-camera-reels", "media"], ["requisitions", "bi-clipboard-check", "requisitions"], ["venueInventory", "bi-box-seam", "venueInventoryShort"], ["cellPrison", "bi-shield-lock", "prisonMinistry"], ["cellMaterials", "bi-journal-richtext", "ministryMaterials"]] },
   { key: "admin", items: [["staffHr", "bi-people-fill", "staffHr"], ["users", "bi-person-lock", "usersRoles"], ["access", "bi-shield-lock", "accessControl"], ["settings", "bi-gear", "settings"], ["audit", "bi-journal-check", "auditLogs"]] }
 ];
 
 const followupStatuses = ["Pending", "Contacted", "No Answer", "Interested", "Sent to Cell", "Enrolled in Foundation School", "Became Member", "Closed"];
 const memberStatuses = ["Active", "Inactive", "In Progress", "Transferred"];
-const FINANCE_STATUS_PENDING = "Pendente de Verificação";
+const FINANCE_STATUS_PENDING = "Pendente de Verifica��o";
 const FINANCE_STATUS_VERIFIED = "Verificado";
 const FINANCE_STATUS_REJECTED = "Rejeitado";
 const FINANCE_STATUS_INCLUDED = "Incluído no Relatório";
@@ -2834,48 +3097,48 @@ const FOUNDATION_STATUS_MAP = {
   "Certificate Issued": "Certificado Emitido"
 };
 const givingCategories = [
-  "Dízimo", "Ofertas", "Acção de Graças", "Primícias", "Semente de Fé", "Ofertas Especiais", "Outros",
-  "Escola de Cura", "Rapsódia de Realidades", "Loveworld SAT", "Construtores de Visão",
+  "D�zimo", "Ofertas", "Ac��o de Gra�as", "Prim�cias", "Semente de F�", "Ofertas Especiais", "Outros",
+  "Escola de Cura", "Raps�dia de Realidades", "Loveworld SAT", "Construtores de Vis�o",
   "Missões de Cidades do Interior", "Alcançar Moçambique", "Projecto da Igreja",
-  "Projecto de Construção de Igreja", "Rapsódias das Crianças", "Mandato de Célula", "Outros Braços"
+  "Projecto de Constru��o de Igreja", "Raps�dias das Crian�as", "Mandato de C�lula", "Outros Bra�os"
 ];
 const paymentMethods = ["Dinheiro", "Cheque", "M-Pesa", "E-Mola", "Banco"];
-const serviceOptions = ["Domingo Manhã", "Domingo Tarde", "Quarta-Feira", "Sexta-Feira", "Programa Especial"];
-const treatmentOptions = ["Sr.", "Sra.", "Irmão", "Irmã", "Pastor", "Pastora", "Diácono", "Diaconisa"];
+const serviceOptions = ["Domingo Manh�", "Domingo Tarde", "Quarta-Feira", "Sexta-Feira", "Programa Especial"];
+const treatmentOptions = ["Sr.", "Sra.", "Irm�o", "Irm�", "Pastor", "Pastora", "Di�cono", "Diaconisa"];
 
 const prisonStatusOptions = ["Activo", "Inactivo"];
 const prisonServiceStatuses = ["Planeado", "Realizado", "Cancelado", "Relatório Submetido"];
 const prisonFoundationStatuses = ["Inscrito", "Em Curso", "Exame", "Graduado", "Certificado Emitido"];
-const prisonAgendaStatuses = ["Em Preparação", "Confirmado", "Concluído"];
+const prisonAgendaStatuses = ["Em Prepara��o", "Confirmado", "Conclu�do"];
 const materialStatuses = ["Disponível", "Esgotado", "Descontinuado"];
 const materialSalesStatuses = ["Pendente", "Confirmado", "Rejeitado"];
 const distributionStatuses = ["Solicitado", "Aprovado", "Enviado", "Recebido"];
 const fundStatuses = ["Activa", "Concluída", "Pausada"];
 const materialTypes = ["Livro", "Rapsódia", "Áudio", "Vídeo", "Manual", "Outro"];
 const materialFormats = ["Físico", "Digital"];
-const distributionTypes = ["Venda", "Distribuição Gratuita", "Missões"];
-const alecRegistrationStatuses = ["Activo", "Em Formação", "Concluído", "Inactivo"];
+const distributionTypes = ["Venda", "Distribui��o Gratuita", "Miss�es"];
+const alecRegistrationStatuses = ["Activo", "Em Forma��o", "Conclu�do", "Inactivo"];
 const alecScoreStatuses = ["Em Curso", "Terminou", "Pendente de Pagamento", "Certificado Emitido"];
-const churchReportStatuses = ["Rascunho", "Submetido", "Em Avaliação", "Aprovado", "Rejeitado"];
-const cellReportStatuses = ["Rascunho", "Submetido", "Em Avaliação", "Aprovado", "Rejeitado", "Validado"];
+const churchReportStatuses = ["Rascunho", "Submetido", "Em Avalia��o", "Aprovado", "Rejeitado"];
+const cellReportStatuses = ["Rascunho", "Submetido", "Em Avalia��o", "Aprovado", "Rejeitado", "Validado"];
 const cellLeaderStatuses = ["Activo", "Em Treinamento", "Pendente", "Inactivo"];
-const evaluationStatuses = ["Em Avaliação", "Aprovado", "Rejeitado", "Encaminhado para Validação"];
+const evaluationStatuses = ["Em Avalia��o", "Aprovado", "Rejeitado", "Encaminhado para Valida��o"];
 const validationStatuses = ["Validado", "Pendente", "Devolvido", "Rejeitado"];
-const classifications = ["Excelente", "Bom", "Precisa de Atenção", "Crítico"];
-const fevoActivities = ["Follow-Up", "Evangelização", "Visitação", "Oração"];
+const classifications = ["Excelente", "Bom", "Precisa de Aten��o", "Cr�tico"];
+const fevoActivities = ["Acompanhamento", "Evangeliza��o", "Visita��o", "Ora��o"];
 const fevoTeams = ["Team A", "Team B", "Team C", "Team D"];
 const fevoConfigStatuses = ["Rascunho", "Activo", "Fechado"];
-const fevoReportStatuses = ["Rascunho", "Submetido", "Em Revisão", "Aprovado", "Rejeitado"];
+const fevoReportStatuses = ["Rascunho", "Submetido", "Em Revis�o", "Aprovado", "Rejeitado"];
 const fevoNoReportStatuses = ["Pendente", "Contactado", "Resolvido", "Reincidente"];
-const inventoryCategories = ["Som", "Media", "Luzes", "Instrumentos", "AC / Climatização", "Energia", "Mobiliário", "Decoração", "Escritório", "Informática", "Limpeza", "Outros"];
-const inventoryStatuses = ["Bom", "Mau", "Em Reparação", "Perdido", "Descontinuado"];
-const repairStatuses = ["Pendente", "Em Reparação", "Reparado", "Irrecuperável"];
+const inventoryCategories = ["Som", "Media", "Luzes", "Instrumentos", "AC / Climatiza��o", "Energia", "Mobili�rio", "Decora��o", "Escrit�rio", "Inform�tica", "Limpeza", "Outros"];
+const inventoryStatuses = ["Bom", "Mau", "Em Repara��o", "Perdido", "Descontinuado"];
+const repairStatuses = ["Pendente", "Em Repara��o", "Reparado", "Irrecuper�vel"];
 const movementStatuses = ["Solicitado", "Aprovado", "Em Uso", "Devolvido", "Atrasado", "Recusado"];
 const venueTypes = ["Auditório", "Sala", "Escritório", "Estúdio", "Armazém", "Outro"];
-const venueStatuses = ["Activo", "Indisponível", "Em Manutenção"];
+const venueStatuses = ["Activo", "Indispon�vel", "Em Manuten��o"];
 const checklistStatuses = ["Pendente", "Parcial", "Pronto"];
 const notificationTypes = ["info", "success", "warning", "urgent", "approval_required", "action_required", "reminder"];
-const notificationModules = ["requisitions", "finance", "foundation_school", "follow_up", "fevo", "cell_ministry", "inventory", "staff_hr", "sacraments", "system"];
+const notificationModules = ["requisitions", "finance", "foundation_school", "follow_up", "counseling", "fevo", "cell_ministry", "inventory", "staff_hr", "sacraments", "system"];
 const notificationPriorities = ["low", "normal", "high", "urgent"];
 const notificationScopes = ["user", "role", "department", "church", "national"];
 let notificationPanelFilter = "all";
@@ -2903,7 +3166,11 @@ const seedData = {
     { id: "u-16", name: "Finance Viewer Demo", email: "finance.viewer@ce-mozambique.org", role: "Viewer", church_id: "church-hq", department_permissions: ["financeViewer", "reports"], can_view_all_churches: true },
     { id: "u-17", name: "Pastor Kene Ume", email: "pastor.kene@ce-mozambique.org", role: "Main Pastor", church_id: "church-hq", department_permissions: ["reports", "requisitions", "staffHr", "finance"], can_view_all_churches: true },
     { id: "u-18", name: "Pastora Responsável Requisições", email: "requisitions@ce-mozambique.org", role: "Requisition Officer", church_id: "church-hq", department_permissions: ["requisitions"], can_view_all_churches: true },
-    { id: "u-19", name: "Gestora de RH", email: "hr@ce-mozambique.org", role: "HR Manager", church_id: "church-hq", department_permissions: ["staffHr"], can_view_all_churches: true }
+    { id: "u-19", name: "Gestora de RH", email: "hr@ce-mozambique.org", role: "HR Manager", church_id: "church-hq", department_permissions: ["staffHr"], can_view_all_churches: true },
+    { id: "u-20", name: "Marcelo Panguene", email: "media.director@ce-mozambique.org", role: "Media Director", church_id: "church-hq", department_permissions: ["media"], assigned_department: "Mídia", assigned_staff_name: "Marcelo Panguene", can_view_all_churches: true },
+    { id: "u-21", name: "Media Supervisor Demo", email: "media.supervisor@ce-mozambique.org", role: "Media Supervisor", church_id: "church-hq", department_permissions: ["media"], assigned_department: "Mídia", can_view_all_churches: true },
+    { id: "u-22", name: "Técnico A", email: "media.member@ce-mozambique.org", role: "Media Team Member", church_id: "church-hq", department_permissions: ["mediaTeam"], assigned_department: "Mídia", assigned_staff_name: "Técnico A", can_view_all_churches: false },
+    { id: "u-23", name: "Head de Aconselhamento", email: "counseling.head@ce-mozambique.org", role: "Counseling Head", church_id: "church-hq", department_permissions: ["counseling", "followUp", "firstTimers", "reports"], can_view_all_churches: true }
   ],
   departments: [
     { id: "dept-finance", church_id: "church-hq", name: "Finanças", lead_name: "Finance Head Demo" },
@@ -2913,60 +3180,68 @@ const seedData = {
     { id: "dept-programs", church_id: "church-hq", name: "Programas", lead_name: "Programs Team" }
   ],
   notifications: [
-    { id: "not-1", title: "Nova requisição submetida", message: "Uma nova requisição foi submetida e aguarda revisão.", type: "action_required", module: "requisitions", entity_type: "requisition", entity_id: "req-1", priority: "high", recipient_user_id: "", recipient_role: "Requisition Officer", recipient_department_id: "", recipient_church_id: "church-hq", scope: "role", action_url: "requisitions", action_label: "Rever Requisição", is_read: false, read_at: "", created_at: "2026-07-14T08:20:00.000Z", expires_at: "", metadata: { request_number: "REQ-2026-0001" } },
-    { id: "not-2", title: "Requisição aguarda aprovação pastoral", message: "A requisição REQ-2026-0005 foi revista e enviada para sua aprovação.", type: "approval_required", module: "requisitions", entity_type: "requisition", entity_id: "req-5", priority: "urgent", recipient_user_id: "", recipient_role: "Main Pastor", recipient_department_id: "", recipient_church_id: "church-hq", scope: "role", action_url: "requisitions", action_label: "Aprovar ou Rejeitar", is_read: false, read_at: "", created_at: "2026-07-14T08:30:00.000Z", expires_at: "", metadata: { request_number: "REQ-2026-0005" } },
-    { id: "not-3", title: "Requisição aprovada aguardando liberação", message: "A requisição REQ-2026-0008 foi aprovada e aguarda liberação de recursos.", type: "action_required", module: "finance", entity_type: "requisition", entity_id: "req-8", priority: "high", recipient_user_id: "", recipient_role: "Finance Head", recipient_department_id: "dept-finance", recipient_church_id: "church-hq", scope: "role", action_url: "finance", action_label: "Liberar Recursos", is_read: false, read_at: "", created_at: "2026-07-14T08:40:00.000Z", expires_at: "", metadata: { request_number: "REQ-2026-0008" } },
-    { id: "not-4", title: "Requisição aprovada", message: "A sua requisição foi aprovada e enviada para Finanças.", type: "success", module: "requisitions", entity_type: "requisition", entity_id: "req-8", priority: "normal", recipient_user_id: "u-12", recipient_role: "", recipient_department_id: "", recipient_church_id: "church-hq", scope: "user", action_url: "requisitions", action_label: "Ver Detalhes", is_read: false, read_at: "", created_at: "2026-07-14T08:41:00.000Z", expires_at: "", metadata: { request_number: "REQ-2026-0008" } },
-    { id: "not-5", title: "Nova submissão pública de contribuição", message: "Foi recebido um novo relatório de oferta/dízimo/parceria aguardando verificação.", type: "action_required", module: "finance", entity_type: "finance_record", entity_id: "fin-2", priority: "high", recipient_user_id: "", recipient_role: "Finance Officer", recipient_department_id: "dept-finance", recipient_church_id: "church-hq", scope: "role", action_url: "finance", action_label: "Verificar Submissão", is_read: false, read_at: "", created_at: "2026-07-14T09:00:00.000Z", expires_at: "", metadata: {} },
-    { id: "not-6", title: "Grupo sem relatório", message: "Grupo Choupal está sem relatório F.E.V.O e precisa de seguimento.", type: "warning", module: "fevo", entity_type: "fevo_report", entity_id: "fevo-nr-2", priority: "high", recipient_user_id: "", recipient_role: "F.E.V.O Coordinator", recipient_department_id: "", recipient_church_id: "church-hq", scope: "role", action_url: "fevoNoReportsRoute", action_label: "Ver Pendentes", is_read: false, read_at: "", created_at: "2026-07-14T09:10:00.000Z", expires_at: "", metadata: {} },
-    { id: "not-7", title: "Relatório pendente de validação", message: "Há relatório de célula encaminhado para validação final.", type: "action_required", module: "cell_ministry", entity_type: "fevo_report", entity_id: "eval-1", priority: "high", recipient_user_id: "", recipient_role: "Final Coordinator", recipient_department_id: "dept-cell", recipient_church_id: "church-hq", scope: "role", action_url: "cellFinalValidation", action_label: "Ver Validação", is_read: false, read_at: "", created_at: "2026-07-14T09:20:00.000Z", expires_at: "", metadata: {} },
-    { id: "not-8", title: "Equipamento danificado reportado", message: "Microphone FM Wireless está marcado como em reparação.", type: "warning", module: "inventory", entity_type: "inventory_item", entity_id: "inv-3", priority: "normal", recipient_user_id: "", recipient_role: "Venue Manager", recipient_department_id: "dept-venue", recipient_church_id: "church-hq", scope: "role", action_url: "venueInventoryMaintenance", action_label: "Ver Reparação", is_read: false, read_at: "", created_at: "2026-07-14T09:30:00.000Z", expires_at: "", metadata: {} },
-    { id: "not-9", title: "Certificado pendente", message: "Aluno pronto para emissão de certificado na Escola de Fundação.", type: "reminder", module: "foundation_school", entity_type: "foundation_student", entity_id: "fs-1", priority: "normal", recipient_user_id: "", recipient_role: "Church Pastor", recipient_department_id: "", recipient_church_id: "church-hq", scope: "role", action_url: "foundation", action_label: "Ver Aluno", is_read: true, read_at: "2026-07-14T10:00:00.000Z", created_at: "2026-07-14T09:40:00.000Z", expires_at: "", metadata: {} },
-    { id: "not-10", title: "Avaliação pendente", message: "Existe avaliação de staff pendente para revisão do departamento.", type: "reminder", module: "staff_hr", entity_type: "staff_member", entity_id: "staff-1", priority: "normal", recipient_user_id: "", recipient_role: "HR Manager", recipient_department_id: "", recipient_church_id: "church-hq", scope: "role", action_url: "staffHr", action_label: "Ver RH", is_read: false, read_at: "", created_at: "2026-07-14T09:50:00.000Z", expires_at: "", metadata: {} }
+    { id: "not-1", title: "Nova requisi��o submetida", message: "Uma nova requisi��o foi submetida e aguarda revis�o.", type: "action_required", module: "requisitions", entity_type: "requisition", entity_id: "req-1", priority: "high", recipient_user_id: "", recipient_role: "Requisition Officer", recipient_department_id: "", recipient_church_id: "church-hq", scope: "role", action_url: "requisitions", action_label: "Rever Requisi��o", is_read: false, read_at: "", created_at: "2026-07-14T08:20:00.000Z", expires_at: "", metadata: { request_number: "REQ-2026-0001" } },
+    { id: "not-2", title: "Requisi��o aguarda aprova��o pastoral", message: "A requisi��o REQ-2026-0005 foi revista e enviada para sua aprova��o.", type: "approval_required", module: "requisitions", entity_type: "requisition", entity_id: "req-5", priority: "urgent", recipient_user_id: "", recipient_role: "Main Pastor", recipient_department_id: "", recipient_church_id: "church-hq", scope: "role", action_url: "requisitions", action_label: "Aprovar ou Rejeitar", is_read: false, read_at: "", created_at: "2026-07-14T08:30:00.000Z", expires_at: "", metadata: { request_number: "REQ-2026-0005" } },
+    { id: "not-3", title: "Requisi��o aprovada aguardando libera��o", message: "A requisi��o REQ-2026-0008 foi aprovada e aguarda libera��o de recursos.", type: "action_required", module: "finance", entity_type: "requisition", entity_id: "req-8", priority: "high", recipient_user_id: "", recipient_role: "Finance Head", recipient_department_id: "dept-finance", recipient_church_id: "church-hq", scope: "role", action_url: "finance", action_label: "Liberar Recursos", is_read: false, read_at: "", created_at: "2026-07-14T08:40:00.000Z", expires_at: "", metadata: { request_number: "REQ-2026-0008" } },
+    { id: "not-4", title: "Requisi��o aprovada", message: "A sua requisi��o foi aprovada e enviada para Finan�as.", type: "success", module: "requisitions", entity_type: "requisition", entity_id: "req-8", priority: "normal", recipient_user_id: "u-12", recipient_role: "", recipient_department_id: "", recipient_church_id: "church-hq", scope: "user", action_url: "requisitions", action_label: "Ver Detalhes", is_read: false, read_at: "", created_at: "2026-07-14T08:41:00.000Z", expires_at: "", metadata: { request_number: "REQ-2026-0008" } },
+    { id: "not-5", title: "Nova submiss�o p�blica de contribui��o", message: "Foi recebido um novo relat�rio de oferta/d�zimo/parceria aguardando verifica��o.", type: "action_required", module: "finance", entity_type: "finance_record", entity_id: "fin-2", priority: "high", recipient_user_id: "", recipient_role: "Finance Officer", recipient_department_id: "dept-finance", recipient_church_id: "church-hq", scope: "role", action_url: "finance", action_label: "Verificar Submiss�o", is_read: false, read_at: "", created_at: "2026-07-14T09:00:00.000Z", expires_at: "", metadata: {} },
+    { id: "not-6", title: "Grupo sem relatório", message: "Grupo Choupal está sem relatório F.E.V.O e precisa de acompanhamento.", type: "warning", module: "fevo", entity_type: "fevo_report", entity_id: "fevo-nr-2", priority: "high", recipient_user_id: "", recipient_role: "F.E.V.O Coordinator", recipient_department_id: "", recipient_church_id: "church-hq", scope: "role", action_url: "fevoNoReportsRoute", action_label: "Ver Pendentes", is_read: false, read_at: "", created_at: "2026-07-14T09:10:00.000Z", expires_at: "", metadata: {} },
+    { id: "not-7", title: "Relat�rio pendente de valida��o", message: "H� relat�rio de c�lula encaminhado para valida��o final.", type: "action_required", module: "cell_ministry", entity_type: "fevo_report", entity_id: "eval-1", priority: "high", recipient_user_id: "", recipient_role: "Final Coordinator", recipient_department_id: "dept-cell", recipient_church_id: "church-hq", scope: "role", action_url: "cellFinalValidation", action_label: "Ver Valida��o", is_read: false, read_at: "", created_at: "2026-07-14T09:20:00.000Z", expires_at: "", metadata: {} },
+    { id: "not-8", title: "Equipamento danificado reportado", message: "Microphone FM Wireless est� marcado como em repara��o.", type: "warning", module: "inventory", entity_type: "inventory_item", entity_id: "inv-3", priority: "normal", recipient_user_id: "", recipient_role: "Venue Manager", recipient_department_id: "dept-venue", recipient_church_id: "church-hq", scope: "role", action_url: "venueInventoryMaintenance", action_label: "Ver Repara��o", is_read: false, read_at: "", created_at: "2026-07-14T09:30:00.000Z", expires_at: "", metadata: {} },
+    { id: "not-9", title: "Certificado pendente", message: "Aluno pronto para emiss�o de certificado na Escola de Funda��o.", type: "reminder", module: "foundation_school", entity_type: "foundation_student", entity_id: "fs-1", priority: "normal", recipient_user_id: "", recipient_role: "Church Pastor", recipient_department_id: "", recipient_church_id: "church-hq", scope: "role", action_url: "foundation", action_label: "Ver Aluno", is_read: true, read_at: "2026-07-14T10:00:00.000Z", created_at: "2026-07-14T09:40:00.000Z", expires_at: "", metadata: {} },
+    { id: "not-10", title: "Avalia��o pendente", message: "Existe avalia��o de staff pendente para revis�o do departamento.", type: "reminder", module: "staff_hr", entity_type: "staff_member", entity_id: "staff-1", priority: "normal", recipient_user_id: "", recipient_role: "HR Manager", recipient_department_id: "", recipient_church_id: "church-hq", scope: "role", action_url: "staffHr", action_label: "Ver RH", is_read: false, read_at: "", created_at: "2026-07-14T09:50:00.000Z", expires_at: "", metadata: {} },
+    { id: "not-11", title: "Escala de M�dia publicada", message: "Voc� foi escalado para operar c�mara no 1� culto de domingo.", type: "reminder", module: "media", entity_type: "media_schedule", entity_id: "sch-1", priority: "normal", recipient_user_id: "u-22", recipient_role: "", recipient_department_id: "dept-media", recipient_church_id: "church-hq", scope: "user", action_url: "media", action_label: "Ver Escala", is_read: false, read_at: "", created_at: "2026-07-15T07:10:00.000Z", expires_at: "", metadata: {} },
+    { id: "not-12", title: "Equipa de mídia incompleta", message: "A escala do culto de quarta-feira ainda precisa de operador de vídeo.", type: "action_required", module: "media", entity_type: "media_schedule", entity_id: "sch-2", priority: "high", recipient_user_id: "", recipient_role: "Media Supervisor", recipient_department_id: "dept-media", recipient_church_id: "church-hq", scope: "role", action_url: "media", action_label: "Actualizar Escala", is_read: false, read_at: "", created_at: "2026-07-15T07:20:00.000Z", expires_at: "", metadata: {} },
+    { id: "not-13", title: "Avalia��o t�cnica pendente", message: "H� t�cnicos de m�dia com avalia��o de desempenho por concluir.", type: "reminder", module: "media", entity_type: "media_evaluation", entity_id: "mev-1", priority: "normal", recipient_user_id: "", recipient_role: "Media Supervisor", recipient_department_id: "dept-media", recipient_church_id: "church-hq", scope: "role", action_url: "media", action_label: "Avaliar T�cnico", is_read: false, read_at: "", created_at: "2026-07-15T07:30:00.000Z", expires_at: "", metadata: {} },
+    { id: "not-14", title: "Programa especial requer m�dia", message: "Pray-a-thon precisa de confirma��o de transmiss�o e equipa t�cnica.", type: "approval_required", module: "media", entity_type: "media_service", entity_id: "ms-6", priority: "high", recipient_user_id: "", recipient_role: "Media Director", recipient_department_id: "dept-media", recipient_church_id: "church-hq", scope: "role", action_url: "media", action_label: "Confirmar Equipa", is_read: false, read_at: "", created_at: "2026-07-15T07:40:00.000Z", expires_at: "", metadata: {} },
+    { id: "not-15", title: "Substitui��o t�cnica necess�ria", message: "Um t�cnico informou indisponibilidade para o pr�ximo culto.", type: "warning", module: "media", entity_type: "media_schedule", entity_id: "sch-1", priority: "high", recipient_user_id: "", recipient_role: "Media Supervisor", recipient_department_id: "dept-media", recipient_church_id: "church-hq", scope: "role", action_url: "media", action_label: "Rever Escala", is_read: false, read_at: "", created_at: "2026-07-15T07:50:00.000Z", expires_at: "", metadata: {} },
+    { id: "not-16", title: "Novo pedido de aconselhamento", message: "Existe um novo pedido de aconselhamento aguardando triagem.", type: "action_required", module: "counseling", entity_type: "counseling_request", entity_id: "cr-3", priority: "high", recipient_user_id: "", recipient_role: "Counseling Head", recipient_department_id: "", recipient_church_id: "church-hq", scope: "role", action_url: "counseling", action_label: "Ver Pedido", is_read: false, read_at: "", created_at: "2026-07-15T08:00:00.000Z", expires_at: "", metadata: {} },
+    { id: "not-17", title: "Aconselhamento agendado", message: "Aminata Chivinda tem sess�o de aconselhamento confirmada.", type: "reminder", module: "counseling", entity_type: "counseling_appointment", entity_id: "ca-1", priority: "normal", recipient_user_id: "u-2", recipient_role: "", recipient_department_id: "", recipient_church_id: "church-hq", scope: "user", action_url: "counseling", action_label: "Ver Agenda", is_read: false, read_at: "", created_at: "2026-07-15T08:10:00.000Z", expires_at: "", metadata: {} },
+    { id: "not-18", title: "Acompanhamento necessário", message: "Um caso de aconselhamento precisa de acompanhamento pastoral.", type: "action_required", module: "counseling", entity_type: "counseling_feedback", entity_id: "cfb-1", priority: "high", recipient_user_id: "", recipient_role: "Follow-Up Coordinator", recipient_department_id: "", recipient_church_id: "church-hq", scope: "role", action_url: "counseling", action_label: "Criar Acompanhamento", is_read: false, read_at: "", created_at: "2026-07-15T08:20:00.000Z", expires_at: "", metadata: {} }
   ],
   requisitions: [
-    { id: "req-1", request_number: "REQ-2026-0001", requested_by_user_id: "u-12", requested_by_name: "Department Head Demo", department_id: "dept-cell", department_name: "Cell Ministry", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Material de Ministério", title: "Materiais para Escola de Células", description: "Livros, manuais e apostilas para formação de líderes.", justification: "Preparação do trimestre de liderança celular.", estimated_amount: 18500, currency: "MZN", urgency: "Normal", needed_by_date: "2026-08-01", attachments: [], supplier_or_vendor: "Loveworld Books", quotation_number: "QT-2026-014", reviewed_by: "", reviewed_at: "", review_notes: "", sent_to_main_pastor_at: "", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", status: "Submetido", created_at: "2026-07-08T10:00:00.000Z", updated_at: "2026-07-08T10:00:00.000Z" },
-    { id: "req-2", request_number: "REQ-2026-0002", requested_by_user_id: "u-13", requested_by_name: "Staff Member Demo", department_id: "dept-finance", department_name: "Finanças", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Apoio Operacional", title: "Material de escritório para Finanças", description: "Papel A4, pastas e toners para impressão de relatórios.", justification: "Reposição de consumíveis do departamento.", estimated_amount: 4200, currency: "MZN", urgency: "Baixa", needed_by_date: "2026-07-20", attachments: [], supplier_or_vendor: "Office Supply Maputo", quotation_number: "", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-09T11:00:00.000Z", review_notes: "Organizado e encaminhado.", sent_to_main_pastor_at: "", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", status: "Em Revisão", created_at: "2026-07-07T09:00:00.000Z", updated_at: "2026-07-09T11:00:00.000Z" },
-    { id: "req-3", request_number: "REQ-2026-0003", requested_by_user_id: "u-5", requested_by_name: "Pastora Flavia", department_id: "dept-cell", department_name: "Ministério de Células", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Transporte", title: "Transporte para visitação celular — Beira", description: "Deslocação da equipa nacional para apoio à rede de Beira.", justification: "Visita pastoral e formação de líderes.", estimated_amount: 28000, currency: "MZN", urgency: "Alta", needed_by_date: "2026-07-25", attachments: [{ type: "budget", name: "Orcamento-Beira.pdf" }, { type: "proforma", name: "Proforma-Transporte.pdf" }], supplier_or_vendor: "Transporte CE", quotation_number: "QT-2026-021", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-10T08:00:00.000Z", review_notes: "Prioridade confirmada com Pastor Principal.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-07-10T09:00:00.000Z", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "", rejected_at: "", rejection_reason: "", returned_by: "", returned_at: "", return_notes: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Enviado ao Pastor Principal", created_at: "2026-07-05T14:00:00.000Z", updated_at: "2026-07-10T09:00:00.000Z" },
-    { id: "req-4", request_number: "REQ-2026-0004", requested_by_user_id: "u-11", requested_by_name: "Marcelo Panguene", department_id: "dept-venue", department_name: "Venue Management", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Nova Aquisição", title: "Microfones sem fio adicionais", description: "Compra de 4 microfones BMK ES600 para cultos simultâneos.", justification: "Expansão do auditório e culto online.", estimated_amount: 74000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-08-10", attachments: [], supplier_or_vendor: "Audio Supplier", quotation_number: "QT-2026-033", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-01T10:00:00.000Z", review_notes: "Aprovado para compra após verificação técnica.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-07-02T10:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-07-03T10:00:00.000Z", approved_amount: 74000, approval_notes: "Autorizado — prioridade media.", final_priority: "Normal", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "Finance Head Demo", released_by: "Finance Head Demo", resources_released_at: "2026-07-04T15:00:00.000Z", released_at: "2026-07-04T15:00:00.000Z", released_amount: 74000, amount_released: 74000, finance_status: "Recursos Liberados", sent_to_finance: true, sent_to_finance_at: "2026-07-03T10:00:00.000Z", finance_disbursement_id: "disb-req-4", payment_method: "Banco", payment_reference: "TRF-2026-044", payment_notes: "Transferência bancária aprovada.", finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Recursos Liberados", created_at: "2026-06-28T08:00:00.000Z", updated_at: "2026-07-04T15:00:00.000Z" },
-    { id: "req-5", request_number: "REQ-2026-0005", requested_by_user_id: "u-9", requested_by_name: "Sister Cassandra", department_id: "dept-programs", department_name: "Programas", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Evento/Programa", title: "Apoio logístico — Semana F.E.V.O", description: "Material de evangelização, transporte e refeições para equipas.", justification: "Semana intensiva de F.E.V.O nacional.", estimated_amount: 52000, currency: "MZN", urgency: "Urgente", needed_by_date: "2026-07-15", attachments: [{ type: "budget", name: "Orcamento-FEVO.xlsx" }], supplier_or_vendor: "", quotation_number: "", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-11T09:00:00.000Z", review_notes: "Encaminhado ao Pastor Principal.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-07-11T10:00:00.000Z", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "", rejected_at: "", rejection_reason: "", returned_by: "", returned_at: "", return_notes: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Enviado ao Pastor Principal", created_at: "2026-07-09T12:00:00.000Z", updated_at: "2026-07-11T10:00:00.000Z" },
-    { id: "req-8", request_number: "REQ-2026-0008", requested_by_user_id: "u-12", requested_by_name: "Department Head Demo", department_id: "dept-cell", department_name: "Cell Ministry", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Material de Ministério", title: "Banners e material gráfico para evangelização", description: "Impressão de banners roll-up e flyers para campanha de Julho.", justification: "Campanha de evangelização nas células.", estimated_amount: 16500, currency: "MZN", urgency: "Alta", needed_by_date: "2026-07-18", attachments: [], supplier_or_vendor: "Print House", quotation_number: "QT-2026-040", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-08T10:00:00.000Z", review_notes: "Aprovado internamente.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-07-08T11:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-07-09T14:00:00.000Z", approved_amount: 15000, approval_notes: "Aprovado com limite de 15.000 MZN.", final_priority: "Alta", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", released_amount: 0, amount_released: 0, finance_status: "Aguardando Liberação", sent_to_finance: true, sent_to_finance_at: "2026-07-09T14:00:00.000Z", finance_disbursement_id: "disb-req-8", payment_method: "", payment_reference: "", payment_notes: "", finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Aprovado — Aguardando Liberação de Recursos", created_at: "2026-07-06T08:00:00.000Z", updated_at: "2026-07-09T14:00:00.000Z" },
-    { id: "req-6", request_number: "REQ-2026-0006", requested_by_user_id: "u-14", requested_by_name: "Finance Officer Demo", department_id: "dept-finance", department_name: "Finanças", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Pagamento de Serviço", title: "Auditoria externa trimestral", description: "Serviço de revisão de registos financeiros Q2.", justification: "Conformidade e transparência.", estimated_amount: 35000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-07-30", attachments: [], supplier_or_vendor: "Audit Partners Lda", quotation_number: "QT-AUD-02", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-06T10:00:00.000Z", review_notes: "Não prioritário neste momento.", sent_to_main_pastor_at: "2026-07-06T11:00:00.000Z", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "Pastor Kene Ume", rejected_at: "2026-07-07T09:00:00.000Z", rejection_reason: "Adiar para o próximo trimestre.", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", status: "Rejeitado", created_at: "2026-07-04T08:00:00.000Z", updated_at: "2026-07-07T09:00:00.000Z" },
-    { id: "req-9", request_number: "REQ-2026-0009", requested_by_user_id: "u-8", requested_by_name: "Pastor da Igreja", department_id: "dept-media", department_name: "Media", church_id: "church-matola", church_name: "Igreja Embaixada de Cristo Matola", requisition_type: "Equipamento", title: "Câmaras adicionais para transmissão", description: "Duas câmaras PTZ para melhorar transmissão dos cultos em Matola.", justification: "Expansão do ministério de media local.", estimated_amount: 48000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-07-28", attachments: [], supplier_or_vendor: "AV Supplier", quotation_number: "QT-AV-12", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-06-25T10:00:00.000Z", review_notes: "Aprovado internamente.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-06-26T10:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-06-27T10:00:00.000Z", approved_amount: 45000, approval_notes: "Aprovado parcialmente até 45.000 MZN.", final_priority: "Normal", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "Finance Head Demo", released_by: "Finance Head Demo", resources_released_at: "2026-07-01T10:00:00.000Z", released_at: "2026-07-01T10:00:00.000Z", released_amount: 25000, amount_released: 25000, finance_status: "Parcialmente Pago", sent_to_finance: true, sent_to_finance_at: "2026-06-27T10:00:00.000Z", finance_disbursement_id: "disb-req-9", payment_method: "Banco", payment_reference: "TRF-AV-01", payment_notes: "Primeira tranche de pagamento.", finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Aprovado — Aguardando Liberação de Recursos", created_at: "2026-06-20T08:00:00.000Z", updated_at: "2026-07-01T10:00:00.000Z" },
-    { id: "req-10", request_number: "REQ-2026-0010", requested_by_user_id: "u-3", requested_by_name: "Sister Janet Marquele", department_id: "dept-programs", department_name: "Programas", church_id: "church-beira", church_name: "Igreja Embaixada de Cristo Beira", requisition_type: "Transporte", title: "Transporte para conferência regional — Beira", description: "Deslocação de equipa de apoio para conferência em Beira.", justification: "Apoio ao evento regional de Julho.", estimated_amount: 22000, currency: "MZN", urgency: "Alta", needed_by_date: "2026-07-22", attachments: [], supplier_or_vendor: "Transporte CE", quotation_number: "QT-BR-03", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-07-07T10:00:00.000Z", review_notes: "Encaminhado.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-07-07T11:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-07-08T09:00:00.000Z", approved_amount: 20000, approval_notes: "Aprovado com tecto de 20.000 MZN.", final_priority: "Alta", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", released_amount: 0, amount_released: 0, finance_status: "Aguardando Liberação", sent_to_finance: true, sent_to_finance_at: "2026-07-08T09:00:00.000Z", finance_disbursement_id: "disb-req-10", payment_method: "", payment_reference: "", payment_notes: "", finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Aprovado — Aguardando Liberação de Recursos", created_at: "2026-07-04T08:00:00.000Z", updated_at: "2026-07-08T09:00:00.000Z" },
-    { id: "req-11", request_number: "REQ-2026-0011", requested_by_user_id: "u-4", requested_by_name: "Sister Angelica", department_id: "dept-cell", department_name: "Ministério de Células", church_id: "church-nampula", church_name: "Igreja Embaixada de Cristo Nampula", requisition_type: "Material de Ministério", title: "Manuais e apostilas — Escola de Células Nampula", description: "Material impresso para formação de líderes de célula.", justification: "Formação trimestral em Nampula.", estimated_amount: 12000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-08-05", attachments: [], supplier_or_vendor: "Print Nampula", quotation_number: "QT-NPL-07", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-06-15T10:00:00.000Z", review_notes: "OK.", sent_to_main_pastor_by: "Pastora Responsável Requisições", sent_to_main_pastor_at: "2026-06-16T10:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-06-17T10:00:00.000Z", approved_amount: 12000, approval_notes: "Aprovado.", final_priority: "Normal", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "Finance Head Demo", released_by: "Finance Head Demo", resources_released_at: "2026-06-18T10:00:00.000Z", released_at: "2026-06-18T10:00:00.000Z", released_amount: 12000, amount_released: 12000, finance_status: "Recursos Liberados", sent_to_finance: true, sent_to_finance_at: "2026-06-17T10:00:00.000Z", finance_disbursement_id: "disb-req-11", payment_method: "M-Pesa", payment_reference: "MP-NPL-07", payment_notes: "", finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Recursos Liberados", created_at: "2026-06-10T08:00:00.000Z", updated_at: "2026-06-18T10:00:00.000Z" },
-    { id: "req-7", request_number: "REQ-2026-0007", requested_by_user_id: "u-11", requested_by_name: "Marcelo Panguene", department_id: "dept-venue", department_name: "Venue Management", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Equipamento", title: "Laptop para técnico de som", description: "Laptop dedicado para software de som digital.", justification: "Substituição de equipamento antigo.", estimated_amount: 62000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-06-30", attachments: [], supplier_or_vendor: "IT Supplier", quotation_number: "QT-IT-08", reviewed_by: "Pastora Responsável Requisições", reviewed_at: "2026-06-20T10:00:00.000Z", review_notes: "Compra concluída e registada.", sent_to_main_pastor_at: "2026-06-21T10:00:00.000Z", approved_by: "Pastor Kene Ume", approved_at: "2026-06-22", approval_notes: "Aprovado.", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "Finance Head Demo", released_by: "Finance Head Demo", resources_released_at: "2026-06-23T10:00:00.000Z", released_at: "2026-06-23T10:00:00.000Z", released_amount: 62000, amount_released: 62000, finance_status: "Pago", sent_to_finance: true, sent_to_finance_at: "2026-06-22T10:00:00.000Z", finance_disbursement_id: "disb-req-7", payment_method: "Banco", payment_reference: "TRF-IT-07", finance_record_id: "", inventory_item_id: "inv-req-req-7", status: "Fechado", created_at: "2026-06-15T08:00:00.000Z", updated_at: "2026-06-28T10:00:00.000Z" }
+    { id: "req-1", request_number: "REQ-2026-0001", requested_by_user_id: "u-12", requested_by_name: "Department Head Demo", department_id: "dept-cell", department_name: "Cell Ministry", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Material de Minist�rio", title: "Materiais para Escola de C�lulas", description: "Livros, manuais e apostilas para forma��o de l�deres.", justification: "Prepara��o do trimestre de lideran�a celular.", estimated_amount: 18500, currency: "MZN", urgency: "Normal", needed_by_date: "2026-08-01", attachments: [], supplier_or_vendor: "Loveworld Books", quotation_number: "QT-2026-014", reviewed_by: "", reviewed_at: "", review_notes: "", sent_to_main_pastor_at: "", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", status: "Submetido", created_at: "2026-07-08T10:00:00.000Z", updated_at: "2026-07-08T10:00:00.000Z" },
+    { id: "req-2", request_number: "REQ-2026-0002", requested_by_user_id: "u-13", requested_by_name: "Staff Member Demo", department_id: "dept-finance", department_name: "Finan�as", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Apoio Operacional", title: "Material de escrit�rio para Finan�as", description: "Papel A4, pastas e toners para impress�o de relat�rios.", justification: "Reposi��o de consum�veis do departamento.", estimated_amount: 4200, currency: "MZN", urgency: "Baixa", needed_by_date: "2026-07-20", attachments: [], supplier_or_vendor: "Office Supply Maputo", quotation_number: "", reviewed_by: "Pastora Respons�vel Requisi��es", reviewed_at: "2026-07-09T11:00:00.000Z", review_notes: "Organizado e encaminhado.", sent_to_main_pastor_at: "", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", status: "Em Revis�o", created_at: "2026-07-07T09:00:00.000Z", updated_at: "2026-07-09T11:00:00.000Z" },
+    { id: "req-3", request_number: "REQ-2026-0003", requested_by_user_id: "u-5", requested_by_name: "Pastora Flavia", department_id: "dept-cell", department_name: "Minist�rio de C�lulas", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Transporte", title: "Transporte para visita��o celular � Beira", description: "Desloca��o da equipa nacional para apoio � rede de Beira.", justification: "Visita pastoral e forma��o de l�deres.", estimated_amount: 28000, currency: "MZN", urgency: "Alta", needed_by_date: "2026-07-25", attachments: [{ type: "budget", name: "Orcamento-Beira.pdf" }, { type: "proforma", name: "Proforma-Transporte.pdf" }], supplier_or_vendor: "Transporte CE", quotation_number: "QT-2026-021", reviewed_by: "Pastora Respons�vel Requisi��es", reviewed_at: "2026-07-10T08:00:00.000Z", review_notes: "Prioridade confirmada com Pastor Principal.", sent_to_main_pastor_by: "Pastora Respons�vel Requisi��es", sent_to_main_pastor_at: "2026-07-10T09:00:00.000Z", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "", rejected_at: "", rejection_reason: "", returned_by: "", returned_at: "", return_notes: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Enviado ao Pastor Principal", created_at: "2026-07-05T14:00:00.000Z", updated_at: "2026-07-10T09:00:00.000Z" },
+    { id: "req-4", request_number: "REQ-2026-0004", requested_by_user_id: "u-11", requested_by_name: "Marcelo Panguene", department_id: "dept-venue", department_name: "Venue Management", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Nova Aquisi��o", title: "Microfones sem fio adicionais", description: "Compra de 4 microfones BMK ES600 para cultos simult�neos.", justification: "Expans�o do audit�rio e culto online.", estimated_amount: 74000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-08-10", attachments: [], supplier_or_vendor: "Audio Supplier", quotation_number: "QT-2026-033", reviewed_by: "Pastora Respons�vel Requisi��es", reviewed_at: "2026-07-01T10:00:00.000Z", review_notes: "Aprovado para compra ap�s verifica��o t�cnica.", sent_to_main_pastor_by: "Pastora Respons�vel Requisi��es", sent_to_main_pastor_at: "2026-07-02T10:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-07-03T10:00:00.000Z", approved_amount: 74000, approval_notes: "Autorizado � prioridade media.", final_priority: "Normal", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "Finance Head Demo", released_by: "Finance Head Demo", resources_released_at: "2026-07-04T15:00:00.000Z", released_at: "2026-07-04T15:00:00.000Z", released_amount: 74000, amount_released: 74000, finance_status: "Recursos Liberados", sent_to_finance: true, sent_to_finance_at: "2026-07-03T10:00:00.000Z", finance_disbursement_id: "disb-req-4", payment_method: "Banco", payment_reference: "TRF-2026-044", payment_notes: "Transfer�ncia banc�ria aprovada.", finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Recursos Liberados", created_at: "2026-06-28T08:00:00.000Z", updated_at: "2026-07-04T15:00:00.000Z" },
+    { id: "req-5", request_number: "REQ-2026-0005", requested_by_user_id: "u-9", requested_by_name: "Sister Cassandra", department_id: "dept-programs", department_name: "Programas", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Evento/Programa", title: "Apoio log�stico � Semana F.E.V.O", description: "Material de evangeliza��o, transporte e refei��es para equipas.", justification: "Semana intensiva de F.E.V.O nacional.", estimated_amount: 52000, currency: "MZN", urgency: "Urgente", needed_by_date: "2026-07-15", attachments: [{ type: "budget", name: "Orcamento-FEVO.xlsx" }], supplier_or_vendor: "", quotation_number: "", reviewed_by: "Pastora Respons�vel Requisi��es", reviewed_at: "2026-07-11T09:00:00.000Z", review_notes: "Encaminhado ao Pastor Principal.", sent_to_main_pastor_by: "Pastora Respons�vel Requisi��es", sent_to_main_pastor_at: "2026-07-11T10:00:00.000Z", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "", rejected_at: "", rejection_reason: "", returned_by: "", returned_at: "", return_notes: "", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Enviado ao Pastor Principal", created_at: "2026-07-09T12:00:00.000Z", updated_at: "2026-07-11T10:00:00.000Z" },
+    { id: "req-8", request_number: "REQ-2026-0008", requested_by_user_id: "u-12", requested_by_name: "Department Head Demo", department_id: "dept-cell", department_name: "Cell Ministry", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Material de Minist�rio", title: "Banners e material gr�fico para evangeliza��o", description: "Impress�o de banners roll-up e flyers para campanha de Julho.", justification: "Campanha de evangeliza��o nas c�lulas.", estimated_amount: 16500, currency: "MZN", urgency: "Alta", needed_by_date: "2026-07-18", attachments: [], supplier_or_vendor: "Print House", quotation_number: "QT-2026-040", reviewed_by: "Pastora Respons�vel Requisi��es", reviewed_at: "2026-07-08T10:00:00.000Z", review_notes: "Aprovado internamente.", sent_to_main_pastor_by: "Pastora Respons�vel Requisi��es", sent_to_main_pastor_at: "2026-07-08T11:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-07-09T14:00:00.000Z", approved_amount: 15000, approval_notes: "Aprovado com limite de 15.000 MZN.", final_priority: "Alta", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", released_amount: 0, amount_released: 0, finance_status: "Aguardando Libera��o", sent_to_finance: true, sent_to_finance_at: "2026-07-09T14:00:00.000Z", finance_disbursement_id: "disb-req-8", payment_method: "", payment_reference: "", payment_notes: "", finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Aprovado � Aguardando Libera��o de Recursos", created_at: "2026-07-06T08:00:00.000Z", updated_at: "2026-07-09T14:00:00.000Z" },
+    { id: "req-6", request_number: "REQ-2026-0006", requested_by_user_id: "u-14", requested_by_name: "Finance Officer Demo", department_id: "dept-finance", department_name: "Finan�as", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Pagamento de Servi�o", title: "Auditoria externa trimestral", description: "Servi�o de revis�o de registos financeiros Q2.", justification: "Conformidade e transpar�ncia.", estimated_amount: 35000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-07-30", attachments: [], supplier_or_vendor: "Audit Partners Lda", quotation_number: "QT-AUD-02", reviewed_by: "Pastora Respons�vel Requisi��es", reviewed_at: "2026-07-06T10:00:00.000Z", review_notes: "N�o priorit�rio neste momento.", sent_to_main_pastor_at: "2026-07-06T11:00:00.000Z", approved_by: "", approved_at: "", approval_notes: "", rejected_by: "Pastor Kene Ume", rejected_at: "2026-07-07T09:00:00.000Z", rejection_reason: "Adiar para o pr�ximo trimestre.", resources_released_by: "", resources_released_at: "", amount_released: 0, finance_record_id: "", inventory_item_id: "", status: "Rejeitado", created_at: "2026-07-04T08:00:00.000Z", updated_at: "2026-07-07T09:00:00.000Z" },
+    { id: "req-9", request_number: "REQ-2026-0009", requested_by_user_id: "u-8", requested_by_name: "Pastor da Igreja", department_id: "dept-media", department_name: "Media", church_id: "church-matola", church_name: "Igreja Embaixada de Cristo Matola", requisition_type: "Equipamento", title: "C�maras adicionais para transmiss�o", description: "Duas c�maras PTZ para melhorar transmiss�o dos cultos em Matola.", justification: "Expans�o do minist�rio de media local.", estimated_amount: 48000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-07-28", attachments: [], supplier_or_vendor: "AV Supplier", quotation_number: "QT-AV-12", reviewed_by: "Pastora Respons�vel Requisi��es", reviewed_at: "2026-06-25T10:00:00.000Z", review_notes: "Aprovado internamente.", sent_to_main_pastor_by: "Pastora Respons�vel Requisi��es", sent_to_main_pastor_at: "2026-06-26T10:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-06-27T10:00:00.000Z", approved_amount: 45000, approval_notes: "Aprovado parcialmente at� 45.000 MZN.", final_priority: "Normal", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "Finance Head Demo", released_by: "Finance Head Demo", resources_released_at: "2026-07-01T10:00:00.000Z", released_at: "2026-07-01T10:00:00.000Z", released_amount: 25000, amount_released: 25000, finance_status: "Parcialmente Pago", sent_to_finance: true, sent_to_finance_at: "2026-06-27T10:00:00.000Z", finance_disbursement_id: "disb-req-9", payment_method: "Banco", payment_reference: "TRF-AV-01", payment_notes: "Primeira tranche de pagamento.", finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Aprovado � Aguardando Libera��o de Recursos", created_at: "2026-06-20T08:00:00.000Z", updated_at: "2026-07-01T10:00:00.000Z" },
+    { id: "req-10", request_number: "REQ-2026-0010", requested_by_user_id: "u-3", requested_by_name: "Sister Janet Marquele", department_id: "dept-programs", department_name: "Programas", church_id: "church-beira", church_name: "Igreja Embaixada de Cristo Beira", requisition_type: "Transporte", title: "Transporte para confer�ncia regional � Beira", description: "Desloca��o de equipa de apoio para confer�ncia em Beira.", justification: "Apoio ao evento regional de Julho.", estimated_amount: 22000, currency: "MZN", urgency: "Alta", needed_by_date: "2026-07-22", attachments: [], supplier_or_vendor: "Transporte CE", quotation_number: "QT-BR-03", reviewed_by: "Pastora Respons�vel Requisi��es", reviewed_at: "2026-07-07T10:00:00.000Z", review_notes: "Encaminhado.", sent_to_main_pastor_by: "Pastora Respons�vel Requisi��es", sent_to_main_pastor_at: "2026-07-07T11:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-07-08T09:00:00.000Z", approved_amount: 20000, approval_notes: "Aprovado com tecto de 20.000 MZN.", final_priority: "Alta", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "", resources_released_at: "", released_amount: 0, amount_released: 0, finance_status: "Aguardando Libera��o", sent_to_finance: true, sent_to_finance_at: "2026-07-08T09:00:00.000Z", finance_disbursement_id: "disb-req-10", payment_method: "", payment_reference: "", payment_notes: "", finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Aprovado � Aguardando Libera��o de Recursos", created_at: "2026-07-04T08:00:00.000Z", updated_at: "2026-07-08T09:00:00.000Z" },
+    { id: "req-11", request_number: "REQ-2026-0011", requested_by_user_id: "u-4", requested_by_name: "Sister Angelica", department_id: "dept-cell", department_name: "Minist�rio de C�lulas", church_id: "church-nampula", church_name: "Igreja Embaixada de Cristo Nampula", requisition_type: "Material de Minist�rio", title: "Manuais e apostilas � Escola de C�lulas Nampula", description: "Material impresso para forma��o de l�deres de c�lula.", justification: "Forma��o trimestral em Nampula.", estimated_amount: 12000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-08-05", attachments: [], supplier_or_vendor: "Print Nampula", quotation_number: "QT-NPL-07", reviewed_by: "Pastora Respons�vel Requisi��es", reviewed_at: "2026-06-15T10:00:00.000Z", review_notes: "OK.", sent_to_main_pastor_by: "Pastora Respons�vel Requisi��es", sent_to_main_pastor_at: "2026-06-16T10:00:00.000Z", approved_by: "Pastor Kene Ume", approved_by_user_id: "u-17", approved_at: "2026-06-17T10:00:00.000Z", approved_amount: 12000, approval_notes: "Aprovado.", final_priority: "Normal", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "Finance Head Demo", released_by: "Finance Head Demo", resources_released_at: "2026-06-18T10:00:00.000Z", released_at: "2026-06-18T10:00:00.000Z", released_amount: 12000, amount_released: 12000, finance_status: "Recursos Liberados", sent_to_finance: true, sent_to_finance_at: "2026-06-17T10:00:00.000Z", finance_disbursement_id: "disb-req-11", payment_method: "M-Pesa", payment_reference: "MP-NPL-07", payment_notes: "", finance_record_id: "", inventory_item_id: "", audit_history: [], status: "Recursos Liberados", created_at: "2026-06-10T08:00:00.000Z", updated_at: "2026-06-18T10:00:00.000Z" },
+    { id: "req-7", request_number: "REQ-2026-0007", requested_by_user_id: "u-11", requested_by_name: "Marcelo Panguene", department_id: "dept-venue", department_name: "Venue Management", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", requisition_type: "Equipamento", title: "Laptop para t�cnico de som", description: "Laptop dedicado para software de som digital.", justification: "Substitui��o de equipamento antigo.", estimated_amount: 62000, currency: "MZN", urgency: "Normal", needed_by_date: "2026-06-30", attachments: [], supplier_or_vendor: "IT Supplier", quotation_number: "QT-IT-08", reviewed_by: "Pastora Respons�vel Requisi��es", reviewed_at: "2026-06-20T10:00:00.000Z", review_notes: "Compra conclu�da e registada.", sent_to_main_pastor_at: "2026-06-21T10:00:00.000Z", approved_by: "Pastor Kene Ume", approved_at: "2026-06-22", approval_notes: "Aprovado.", rejected_by: "", rejected_at: "", rejection_reason: "", resources_released_by: "Finance Head Demo", released_by: "Finance Head Demo", resources_released_at: "2026-06-23T10:00:00.000Z", released_at: "2026-06-23T10:00:00.000Z", released_amount: 62000, amount_released: 62000, finance_status: "Pago", sent_to_finance: true, sent_to_finance_at: "2026-06-22T10:00:00.000Z", finance_disbursement_id: "disb-req-7", payment_method: "Banco", payment_reference: "TRF-IT-07", finance_record_id: "", inventory_item_id: "inv-req-req-7", status: "Fechado", created_at: "2026-06-15T08:00:00.000Z", updated_at: "2026-06-28T10:00:00.000Z" }
   ],
   financeDisbursements: [
-    { id: "disb-req-8", requisition_id: "req-8", request_number: "REQ-2026-0008", title: "Banners e material gráfico para evangelização", department_name: "Cell Ministry", church_name: "National HQ - Christ Embassy Mozambique", requested_by: "Department Head Demo", approved_by: "Pastor Kene Ume", approved_at: "2026-07-09T14:00:00.000Z", approved_amount: 15000, released_amount: 0, status: "Aguardando Liberação", source: "requisition", transaction_type: "expense", created_at: "2026-07-09T14:00:00.000Z", updated_at: "2026-07-09T14:00:00.000Z" },
+    { id: "disb-req-8", requisition_id: "req-8", request_number: "REQ-2026-0008", title: "Banners e material gr�fico para evangeliza��o", department_name: "Cell Ministry", church_name: "National HQ - Christ Embassy Mozambique", requested_by: "Department Head Demo", approved_by: "Pastor Kene Ume", approved_at: "2026-07-09T14:00:00.000Z", approved_amount: 15000, released_amount: 0, status: "Aguardando Libera��o", source: "requisition", transaction_type: "expense", created_at: "2026-07-09T14:00:00.000Z", updated_at: "2026-07-09T14:00:00.000Z" },
     { id: "disb-req-4", requisition_id: "req-4", request_number: "REQ-2026-0004", title: "Microfones sem fio adicionais", department_name: "Venue Management", church_name: "National HQ - Christ Embassy Mozambique", requested_by: "Marcelo Panguene", approved_by: "Pastor Kene Ume", approved_at: "2026-07-03T10:00:00.000Z", approved_amount: 74000, released_amount: 74000, released_by: "Finance Head Demo", released_at: "2026-07-04T15:00:00.000Z", payment_method: "Banco", payment_reference: "TRF-2026-044", status: "Recursos Liberados", source: "requisition", transaction_type: "expense", created_at: "2026-07-03T10:00:00.000Z", updated_at: "2026-07-04T15:00:00.000Z" },
-    { id: "disb-req-9", requisition_id: "req-9", request_number: "REQ-2026-0009", title: "Câmaras adicionais para transmissão", department_name: "Media", church_name: "Igreja Embaixada de Cristo Matola", requested_by: "Pastor da Igreja", approved_by: "Pastor Kene Ume", approved_at: "2026-06-27T10:00:00.000Z", approved_amount: 45000, released_amount: 25000, released_by: "Finance Head Demo", released_at: "2026-07-01T10:00:00.000Z", payment_method: "Banco", payment_reference: "TRF-AV-01", status: "Parcialmente Pago", source: "requisition", transaction_type: "expense", created_at: "2026-06-27T10:00:00.000Z", updated_at: "2026-07-01T10:00:00.000Z" },
-    { id: "disb-req-10", requisition_id: "req-10", request_number: "REQ-2026-0010", title: "Transporte para conferência regional — Beira", department_name: "Programas", church_name: "Igreja Embaixada de Cristo Beira", requested_by: "Sister Janet Marquele", approved_by: "Pastor Kene Ume", approved_at: "2026-07-08T09:00:00.000Z", approved_amount: 20000, released_amount: 0, status: "Aguardando Liberação", source: "requisition", transaction_type: "expense", created_at: "2026-07-08T09:00:00.000Z", updated_at: "2026-07-08T09:00:00.000Z" },
+    { id: "disb-req-9", requisition_id: "req-9", request_number: "REQ-2026-0009", title: "C�maras adicionais para transmiss�o", department_name: "Media", church_name: "Igreja Embaixada de Cristo Matola", requested_by: "Pastor da Igreja", approved_by: "Pastor Kene Ume", approved_at: "2026-06-27T10:00:00.000Z", approved_amount: 45000, released_amount: 25000, released_by: "Finance Head Demo", released_at: "2026-07-01T10:00:00.000Z", payment_method: "Banco", payment_reference: "TRF-AV-01", status: "Parcialmente Pago", source: "requisition", transaction_type: "expense", created_at: "2026-06-27T10:00:00.000Z", updated_at: "2026-07-01T10:00:00.000Z" },
+    { id: "disb-req-10", requisition_id: "req-10", request_number: "REQ-2026-0010", title: "Transporte para confer�ncia regional � Beira", department_name: "Programas", church_name: "Igreja Embaixada de Cristo Beira", requested_by: "Sister Janet Marquele", approved_by: "Pastor Kene Ume", approved_at: "2026-07-08T09:00:00.000Z", approved_amount: 20000, released_amount: 0, status: "Aguardando Libera��o", source: "requisition", transaction_type: "expense", created_at: "2026-07-08T09:00:00.000Z", updated_at: "2026-07-08T09:00:00.000Z" },
     { id: "disb-req-11", requisition_id: "req-11", request_number: "REQ-2026-0011", title: "Manuais e apostilas — Escola de Células Nampula", department_name: "Ministério de Células", church_name: "Igreja Embaixada de Cristo Nampula", requested_by: "Sister Angelica", approved_by: "Pastor Kene Ume", approved_at: "2026-06-17T10:00:00.000Z", approved_amount: 12000, released_amount: 12000, released_by: "Finance Head Demo", released_at: "2026-06-18T10:00:00.000Z", payment_method: "M-Pesa", payment_reference: "MP-NPL-07", status: "Recursos Liberados", source: "requisition", transaction_type: "expense", created_at: "2026-06-17T10:00:00.000Z", updated_at: "2026-06-18T10:00:00.000Z" }
   ],
   staffProfiles: [
     { id: "staff-1", user_id: "u-5", full_name: "Flavia Moneedi Tivane", title: "Pastora", gender: "Feminino", phone: "860000101", whatsapp: "860000101", email: "flavia@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-cell", department_name: "Ministério de Células", role_title: "Cell Ministry Head", supervisor_user_id: "u-17", supervisor_name: "Pastor Kene Ume", start_date: "2024-01-15", employment_type: "Full-time", salary_or_allowance: 45000, payment_frequency: "Mensal", payment_method: "Banco", bank_name: "BCI", bank_account_number: "****4521", bank_or_mobile_details: "BCI ****4521", marital_status: "Casado/a", address: "Maputo, KaMpfumo", contract_start_date: "2024-01-15", status: "Activo", date_of_birth: "1990-03-14", notes: "", created_at: "2024-01-15", updated_at: "2026-07-10" },
-    { id: "staff-2", user_id: "u-4", full_name: "Angelica Amilcar Macuacua", title: "Irmã", gender: "Feminino", phone: "860000102", whatsapp: "860000102", email: "angelica@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-cell", department_name: "Ministério de Células", role_title: "ALEC Coordinator", supervisor_user_id: "u-5", supervisor_name: "Pastora Flavia", start_date: "2023-06-01", employment_type: "Full-time", salary_or_allowance: 38000, payment_frequency: "Mensal", payment_method: "M-Pesa", mobile_money_number: "860000102", bank_or_mobile_details: "86XXXXXXX", marital_status: "Solteiro/a", address: "Matola, Moçambique", status: "Activo", date_of_birth: "1992-07-22", notes: "", created_at: "2023-06-01", updated_at: "2026-07-10" },
-    { id: "staff-3", user_id: "u-11", full_name: "Marcelo Moises Panguene", title: "Irmão", gender: "Masculino", phone: "860000103", whatsapp: "860000103", email: "marcelo.panguene@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-venue", department_name: "Venue Management", role_title: "Venue Manager", supervisor_user_id: "u-17", supervisor_name: "Pastor Kene Ume", start_date: "2022-11-01", employment_type: "Full-time", salary_or_allowance: 52000, payment_frequency: "Mensal", payment_method: "Banco", bank_name: "BCI", bank_account_number: "****8832", bank_or_mobile_details: "BCI ****8832", marital_status: "Casado/a", address: "Maputo, Moçambique", emergency_contact_name: "Maria Panguene", emergency_contact_phone: "860000203", status: "Activo", date_of_birth: "1988-11-05", notes: "", created_at: "2022-11-01", updated_at: "2026-07-10" },
-    { id: "staff-4", user_id: "", full_name: "Laiza Teresa Chirindza", title: "Irmã", gender: "Feminino", phone: "860000104", whatsapp: "860000104", email: "laiza@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-finance", department_name: "Finanças", role_title: "Finance Officer", supervisor_user_id: "u-15", supervisor_name: "Finance Head Demo", start_date: "2024-03-01", employment_type: "Full-time", salary_or_allowance: 40000, payment_frequency: "Mensal", payment_method: "E-Mola", bank_or_mobile_details: "87XXXXXXX", status: "Activo", date_of_birth: "1995-01-18", notes: "", created_at: "2024-03-01", updated_at: "2026-07-10" },
-    { id: "staff-5", user_id: "u-6", full_name: "Eduarda Paula Mnganhela", title: "Irmã", gender: "Feminino", phone: "860000105", whatsapp: "860000105", email: "eduarda@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-cell", department_name: "Ministério de Células", role_title: "Final Coordinator", supervisor_user_id: "u-5", supervisor_name: "Pastora Flavia", start_date: "2023-09-01", employment_type: "Part-time", salary_or_allowance: 25000, payment_frequency: "Mensal", payment_method: "M-Pesa", bank_or_mobile_details: "86XXXXXXX", bank_name: "M-Pesa", mobile_money_number: "860000105", marital_status: "Solteiro/a", address: "Maputo, Moçambique", emergency_contact_name: "Paula Mnganhela", emergency_contact_phone: "860000199", national_id_number: "BI-****5521", nuit: "NUIT-****882", contract_start_date: "2023-09-01", contract_end_date: "", probation_end_date: "2023-12-01", status: "Activo", date_of_birth: "1993-07-15", notes: "", created_at: "2023-09-01", updated_at: "2026-07-10" },
-    { id: "staff-6", user_id: "u-3", full_name: "Janet Baptista Ngoca", title: "Irmã", gender: "Feminino", phone: "860000106", whatsapp: "860000106", email: "janet.marquele@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-programs", department_name: "Programas", role_title: "Ministry Coordinator", supervisor_user_id: "u-17", supervisor_name: "Pastor Kene Ume", start_date: "2022-05-01", employment_type: "Full-time", salary_or_allowance: 42000, payment_frequency: "Mensal", payment_method: "Banco", bank_or_mobile_details: "", status: "Activo", date_of_birth: "1987-12-02", notes: "", created_at: "2022-05-01", updated_at: "2026-07-10" },
+    { id: "staff-2", user_id: "u-4", full_name: "Angelica Amilcar Macuacua", title: "Irm�", gender: "Feminino", phone: "860000102", whatsapp: "860000102", email: "angelica@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-cell", department_name: "Minist�rio de C�lulas", role_title: "ALEC Coordinator", supervisor_user_id: "u-5", supervisor_name: "Pastora Flavia", start_date: "2023-06-01", employment_type: "Full-time", salary_or_allowance: 38000, payment_frequency: "Mensal", payment_method: "M-Pesa", mobile_money_number: "860000102", bank_or_mobile_details: "86XXXXXXX", marital_status: "Solteiro/a", address: "Matola, Mo�ambique", status: "Activo", date_of_birth: "1992-07-22", notes: "", created_at: "2023-06-01", updated_at: "2026-07-10" },
+    { id: "staff-3", user_id: "u-11", full_name: "Marcelo Moises Panguene", title: "Irm�o", gender: "Masculino", phone: "860000103", whatsapp: "860000103", email: "marcelo.panguene@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-venue", department_name: "Venue Management", role_title: "Venue Manager", supervisor_user_id: "u-17", supervisor_name: "Pastor Kene Ume", start_date: "2022-11-01", employment_type: "Full-time", salary_or_allowance: 52000, payment_frequency: "Mensal", payment_method: "Banco", bank_name: "BCI", bank_account_number: "****8832", bank_or_mobile_details: "BCI ****8832", marital_status: "Casado/a", address: "Maputo, Mo�ambique", emergency_contact_name: "Maria Panguene", emergency_contact_phone: "860000203", status: "Activo", date_of_birth: "1988-11-05", notes: "", created_at: "2022-11-01", updated_at: "2026-07-10" },
+    { id: "staff-4", user_id: "", full_name: "Laiza Teresa Chirindza", title: "Irm�", gender: "Feminino", phone: "860000104", whatsapp: "860000104", email: "laiza@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-finance", department_name: "Finan�as", role_title: "Finance Officer", supervisor_user_id: "u-15", supervisor_name: "Finance Head Demo", start_date: "2024-03-01", employment_type: "Full-time", salary_or_allowance: 40000, payment_frequency: "Mensal", payment_method: "E-Mola", bank_or_mobile_details: "87XXXXXXX", status: "Activo", date_of_birth: "1995-01-18", notes: "", created_at: "2024-03-01", updated_at: "2026-07-10" },
+    { id: "staff-5", user_id: "u-6", full_name: "Eduarda Paula Mnganhela", title: "Irm�", gender: "Feminino", phone: "860000105", whatsapp: "860000105", email: "eduarda@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-cell", department_name: "Minist�rio de C�lulas", role_title: "Final Coordinator", supervisor_user_id: "u-5", supervisor_name: "Pastora Flavia", start_date: "2023-09-01", employment_type: "Part-time", salary_or_allowance: 25000, payment_frequency: "Mensal", payment_method: "M-Pesa", bank_or_mobile_details: "86XXXXXXX", bank_name: "M-Pesa", mobile_money_number: "860000105", marital_status: "Solteiro/a", address: "Maputo, Mo�ambique", emergency_contact_name: "Paula Mnganhela", emergency_contact_phone: "860000199", national_id_number: "BI-****5521", nuit: "NUIT-****882", contract_start_date: "2023-09-01", contract_end_date: "", probation_end_date: "2023-12-01", status: "Activo", date_of_birth: "1993-07-15", notes: "", created_at: "2023-09-01", updated_at: "2026-07-10" },
+    { id: "staff-6", user_id: "u-3", full_name: "Janet Baptista Ngoca", title: "Irm�", gender: "Feminino", phone: "860000106", whatsapp: "860000106", email: "janet.marquele@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-programs", department_name: "Programas", role_title: "Ministry Coordinator", supervisor_user_id: "u-17", supervisor_name: "Pastor Kene Ume", start_date: "2022-05-01", employment_type: "Full-time", salary_or_allowance: 42000, payment_frequency: "Mensal", payment_method: "Banco", bank_or_mobile_details: "", status: "Activo", date_of_birth: "1987-12-02", notes: "", created_at: "2022-05-01", updated_at: "2026-07-10" },
     { id: "staff-7", user_id: "u-18", full_name: "Pastora Responsável Requisições", title: "Pastora", gender: "Feminino", phone: "860000107", whatsapp: "860000107", email: "requisitions@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-programs", department_name: "Programas", role_title: "Requisition Officer", supervisor_user_id: "u-17", supervisor_name: "Pastor Kene Ume", start_date: "2024-06-01", employment_type: "Full-time", salary_or_allowance: 36000, payment_frequency: "Mensal", payment_method: "Banco", bank_or_mobile_details: "", status: "Activo", date_of_birth: "1991-05-20", notes: "Responsável por organizar requisições.", created_at: "2024-06-01", updated_at: "2026-07-10" },
-    { id: "staff-8", user_id: "u-7", full_name: "Cell Leader Demo", title: "Irmão", gender: "Masculino", phone: "860000108", whatsapp: "860000108", email: "cellleader@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-cell", department_name: "Ministério de Células", role_title: "Cell Leader", supervisor_user_id: "u-5", supervisor_name: "Pastora Flavia", start_date: "2025-01-01", employment_type: "Voluntário", salary_or_allowance: 0, payment_frequency: "Nenhum", payment_method: "Nenhum", bank_or_mobile_details: "", status: "Activo", date_of_birth: "1998-08-30", notes: "", created_at: "2025-01-01", updated_at: "2026-07-10" }
+    { id: "staff-8", user_id: "u-7", full_name: "Cell Leader Demo", title: "Irm�o", gender: "Masculino", phone: "860000108", whatsapp: "860000108", email: "cellleader@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-cell", department_name: "Minist�rio de C�lulas", role_title: "Cell Leader", supervisor_user_id: "u-5", supervisor_name: "Pastora Flavia", start_date: "2025-01-01", employment_type: "Volunt�rio", salary_or_allowance: 0, payment_frequency: "Nenhum", payment_method: "Nenhum", bank_or_mobile_details: "", status: "Activo", date_of_birth: "1998-08-30", notes: "", created_at: "2025-01-01", updated_at: "2026-07-10" }
   ],
   staffSalaries: [
     { id: "sal-1", staff_id: "staff-1", month: "2026-06", base_amount: 45000, bonus: 5000, deductions: 0, net_amount: 50000, payment_status: "Pago", approved_by: "Finance Head Demo", paid_by: "Finance Head Demo", paid_at: "2026-07-05", notes: "" },
-    { id: "sal-2", staff_id: "staff-3", month: "2026-07", base_amount: 52000, bonus: 0, deductions: 2000, net_amount: 50000, payment_status: "Pendente", approved_by: "", paid_by: "", paid_at: "", notes: "Aguardar aprovação." },
+    { id: "sal-2", staff_id: "staff-3", month: "2026-07", base_amount: 52000, bonus: 0, deductions: 2000, net_amount: 50000, payment_status: "Pendente", approved_by: "", paid_by: "", paid_at: "", notes: "Aguardar aprova��o." },
     { id: "sal-3", staff_id: "staff-4", month: "2026-07", base_amount: 40000, bonus: 0, deductions: 0, net_amount: 40000, payment_status: "Aprovado", approved_by: "Finance Head Demo", paid_by: "", paid_at: "", notes: "" }
   ],
   staffPerformance: [
-    { id: "perf-1", staff_id: "staff-1", evaluation_period: "2026-H1", punctuality_score: 9, task_completion_score: 9, report_submission_score: 8, teamwork_score: 9, supervisor_rating: 9, overall_score: 8.8, strengths: "Liderança e organização.", areas_to_improve: "Delegação de tarefas.", action_plan: "Formação de líderes de área.", evaluated_by: "Pastor Kene Ume", evaluated_at: "2026-07-01" },
+    { id: "perf-1", staff_id: "staff-1", evaluation_period: "2026-H1", punctuality_score: 9, task_completion_score: 9, report_submission_score: 8, teamwork_score: 9, supervisor_rating: 9, overall_score: 8.8, strengths: "Lideran�a e organiza��o.", areas_to_improve: "Delega��o de tarefas.", action_plan: "Forma��o de l�deres de �rea.", evaluated_by: "Pastor Kene Ume", evaluated_at: "2026-07-01" },
     { id: "perf-2", staff_id: "staff-3", evaluation_period: "2026-H1", punctuality_score: 0, task_completion_score: 0, report_submission_score: 0, teamwork_score: 0, supervisor_rating: 0, overall_score: 0, strengths: "", areas_to_improve: "", action_plan: "", evaluated_by: "", evaluated_at: "" }
   ],
   staffAttendance: [
     { id: "att-1", staff_id: "staff-1", date: "2026-07-10", church_id: "church-hq", department_id: "dept-cell", attendance_status: "Presente", check_in_time: "08:45", check_out_time: "17:30", notes: "" },
     { id: "att-2", staff_id: "staff-4", date: "2026-07-10", church_id: "church-hq", department_id: "dept-finance", attendance_status: "Presente", check_in_time: "09:00", check_out_time: "18:00", notes: "" },
-    { id: "att-3", staff_id: "staff-3", date: "2026-07-10", church_id: "church-hq", department_id: "dept-venue", attendance_status: "Atrasado", check_in_time: "09:35", check_out_time: "17:00", notes: "Trânsito." }
+    { id: "att-3", staff_id: "staff-3", date: "2026-07-10", church_id: "church-hq", department_id: "dept-venue", attendance_status: "Atrasado", check_in_time: "09:35", check_out_time: "17:00", notes: "Tr�nsito." }
   ],
   staffDocuments: [
     { id: "doc-1", staff_id: "staff-1", document_type: "BI", file_url: "/docs/staff-1-bi.pdf", expiry_date: "", notes: "" },
@@ -2978,19 +3253,44 @@ const seedData = {
     { id: "church-khongolote", church_id: "church-khongolote", church_name: "Igreja Embaixada de Cristo Khongolote", public_name: "Embaixada de Cristo Khongolote", type: "Igreja Local", province: "Maputo Província", city: "Matola", district_or_area: "Khongolote", address: "Rua Licuacuanine, 648 – Khongolote, Matola", pastor_in_charge: "", phone_primary: "", phone_secondary: "", email: "", facebook: "", instagram: "", youtube: "", service_times: defaultSeedServiceTimes("church-khongolote", "Igreja Local"), parent_church_id: "church-hq", status: "Activa", information_status: "Por Confirmar", notes: "", created_by: "Admin Principal", updated_by: "Admin Principal", created_at: "2026-07-01", updated_at: "2026-07-10", attendance_last_4_weeks: [32, 28, 30, 29] },
     { id: "church-choupal", church_id: "church-choupal", church_name: "Igreja Embaixada de Cristo Choupal", public_name: "Embaixada de Cristo Choupal", type: "Igreja Local", province: "Maputo Cidade", city: "KaMubukwana", district_or_area: "Choupal", address: "Choupal, Maputo", pastor_in_charge: "", phone_primary: "", phone_secondary: "", email: "", facebook: "", instagram: "", youtube: "", service_times: defaultSeedServiceTimes("church-choupal", "Igreja Local"), parent_church_id: "church-hq", status: "Activa", information_status: "Por Confirmar", notes: "", created_by: "Admin Principal", updated_by: "Admin Principal", created_at: "2026-07-01", updated_at: "2026-07-10", attendance_last_4_weeks: [28, 30, 27, 31] },
     { id: "church-beira", church_id: "church-beira", church_name: "Igreja Embaixada de Cristo Beira", public_name: "Igreja Embaixada de Cristo Beira", type: "Igreja Local", province: "Sofala", city: "Beira", district_or_area: "Beira", address: "Por confirmar", pastor_in_charge: "", phone_primary: "", phone_secondary: "", email: "", facebook: "Igreja Embaixada de Cristo Beira", instagram: "@embaixada_de_cristo_beira", youtube: "", service_times: defaultSeedServiceTimes("church-beira", "Igreja Local"), parent_church_id: "church-hq", status: "Activa", information_status: "Por Confirmar", notes: "Endereço e contactos a confirmar com a igreja local.", created_by: "Admin Principal", updated_by: "Admin Principal", created_at: "2026-07-01", updated_at: "2026-07-10", attendance_last_4_weeks: [40, 38, 42, 39] },
-    { id: "church-nampula", church_id: "church-nampula", church_name: "Igreja Embaixada de Cristo Nampula", public_name: "Embaixada De Cristo Nampula", type: "Igreja Local", province: "Nampula", city: "Nampula", district_or_area: "Muhala-Expansão", address: "Terminal de Chapa Muhala-Expansão, Paragem Igreja", pastor_in_charge: "Pastor Armando de Jesus", phone_primary: "", phone_secondary: "", email: "", facebook: "Embaixada De Cristo Nampula", instagram: "@embaixada_de_cristo.nampula", youtube: "", service_times: defaultSeedServiceTimes("church-nampula", "Igreja Local"), parent_church_id: "church-hq", status: "Activa", information_status: "Por Confirmar", notes: "", created_by: "Admin Principal", updated_by: "Admin Principal", created_at: "2026-07-01", updated_at: "2026-07-10", attendance_last_4_weeks: [36, 34, 35, 37] },
-    { id: "church-virtual", church_id: "church-virtual", church_name: "CE Mozambique Online Church", public_name: "Igreja Embaixada de Cristo Online", type: "Igreja Online", province: "Online", city: "Online", district_or_area: "Virtual", address: "Transmissão online", pastor_in_charge: "Equipa de Media", phone_primary: "+258 86 877 389", phone_secondary: "", email: "online@embaixada-de-cristo.obiuba.com", facebook: "", instagram: "", youtube: "Christ Embassy Mozambique Online", service_times: defaultSeedServiceTimes("church-virtual", "Igreja Online"), parent_church_id: "church-hq", status: "Activa", information_status: "Confirmado", notes: "", created_by: "Admin Principal", updated_by: "Admin Principal", created_at: "2024-06-01", updated_at: "2026-07-10", attendance_last_4_weeks: [54, 61, 48, 57] }
+    { id: "church-nampula", church_id: "church-nampula", church_name: "Igreja Embaixada de Cristo Nampula", public_name: "Embaixada De Cristo Nampula", type: "Igreja Local", province: "Nampula", city: "Nampula", district_or_area: "Muhala-Expans�o", address: "Terminal de Chapa Muhala-Expans�o, Paragem Igreja", pastor_in_charge: "Pastor Armando de Jesus", phone_primary: "", phone_secondary: "", email: "", facebook: "Embaixada De Cristo Nampula", instagram: "@embaixada_de_cristo.nampula", youtube: "", service_times: defaultSeedServiceTimes("church-nampula", "Igreja Local"), parent_church_id: "church-hq", status: "Activa", information_status: "Por Confirmar", notes: "", created_by: "Admin Principal", updated_by: "Admin Principal", created_at: "2026-07-01", updated_at: "2026-07-10", attendance_last_4_weeks: [36, 34, 35, 37] },
+    { id: "church-virtual", church_id: "church-virtual", church_name: "CE Mozambique Online Church", public_name: "Igreja Embaixada de Cristo Online", type: "Igreja Online", province: "Online", city: "Online", district_or_area: "Virtual", address: "Transmiss�o online", pastor_in_charge: "Equipa de Media", phone_primary: "+258 86 877 389", phone_secondary: "", email: "online@embaixada-de-cristo.obiuba.com", facebook: "", instagram: "", youtube: "Christ Embassy Mozambique Online", service_times: defaultSeedServiceTimes("church-virtual", "Igreja Online"), parent_church_id: "church-hq", status: "Activa", information_status: "Confirmado", notes: "", created_by: "Admin Principal", updated_by: "Admin Principal", created_at: "2024-06-01", updated_at: "2026-07-10", attendance_last_4_weeks: [54, 61, 48, 57] }
   ],
   firstTimers: [
-    { id: "ft-1", tratamento: "Irmã", nome: "Aminata", apelido: "Chivinda", genero: "Feminino", data_de_nascimento: "1991-05-05", telefone: "848287179", whatsapp: "848287179", email: "", endereco: "Mavalane A", church_id: "church-hq", data_do_culto: "2026-07-05", culto: "Domingo Manhã", convidado_por: "Irmão da igreja", nasceu_de_novo: false, quer_escola_de_fundacao: true, quer_aconselhamento: true, interesse_em_celula: true, celula_preferida: "Mavalane", estado_do_seguimento: "Pending", conselheiro_responsavel: "Líder de Aconselhamento", notas: "Exemplo baseado na ficha partilhada." },
-    { id: "ft-2", tratamento: "Sr.", nome: "Mateus", apelido: "Nhantumbo", genero: "Masculino", data_de_nascimento: "1998-11-12", telefone: "862720011", whatsapp: "862720011", email: "mateus@example.com", endereco: "Matola", church_id: "church-hq", data_do_culto: "2026-06-28", culto: "Domingo Manhã", convidado_por: "Cell Central", nasceu_de_novo: true, quer_escola_de_fundacao: true, quer_aconselhamento: false, interesse_em_celula: true, celula_preferida: "Cell Central", estado_do_seguimento: "Contacted", conselheiro_responsavel: "Líder de Aconselhamento", notas: "Quer integrar uma célula perto de casa." }
+    { id: "ft-1", tratamento: "Irm�", nome: "Aminata", apelido: "Chivinda", genero: "Feminino", data_de_nascimento: "1991-05-05", telefone: "848287179", whatsapp: "848287179", email: "", endereco: "Mavalane A", church_id: "church-hq", data_do_culto: "2026-07-05", culto: "Domingo Manh�", convidado_por: "Irm�o da igreja", nasceu_de_novo: false, quer_escola_de_fundacao: true, quer_aconselhamento: true, interesse_em_celula: true, celula_preferida: "Mavalane", estado_do_seguimento: "Pending", conselheiro_responsavel: "L�der de Aconselhamento", notas: "Exemplo baseado na ficha partilhada." },
+    { id: "ft-2", tratamento: "Sr.", nome: "Mateus", apelido: "Nhantumbo", genero: "Masculino", data_de_nascimento: "1998-11-12", telefone: "862720011", whatsapp: "862720011", email: "mateus@example.com", endereco: "Matola", church_id: "church-hq", data_do_culto: "2026-06-28", culto: "Domingo Manh�", convidado_por: "Cell Central", nasceu_de_novo: true, quer_escola_de_fundacao: true, quer_aconselhamento: false, interesse_em_celula: true, celula_preferida: "Cell Central", estado_do_seguimento: "Contacted", conselheiro_responsavel: "L�der de Aconselhamento", notas: "Quer integrar uma c�lula perto de casa." }
   ],
   followUps: [
     { id: "fu-1", first_timer_id: "ft-1", church_id: "church-hq", data_do_contacto: "2026-07-06", metodo: "WhatsApp", resultado: "Mensagem enviada", proximo_passo: "Confirmar presença no próximo culto", proxima_data_de_contacto: "2026-07-09", notas: "Aguardando resposta.", actualizado_por: "Líder de Aconselhamento" }
   ],
+  counseling: {
+    requests: [
+      { id: "cr-1", request_number: "CON-2026-0001", person_type: "First Timer", member_id: "", first_timer_id: "ft-1", full_name: "Aminata Chivinda", phone: "848287179", whatsapp: "848287179", email: "", gender: "Feminino", age: 35, church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", cell_group_id: "group-1", cell_group_name: "Grupo Mavalane", cell_id: "cell-1", cell_name: "Mavalane", counseling_category: "Crescimento Espiritual", counseling_subject: "Integra��o e crescimento espiritual", issue_summary: "Deseja orienta��o pastoral para crescer na Palavra e integrar uma c�lula.", urgency: "Normal", confidentiality_level: "Normal", preferred_date: "2026-07-16", preferred_time: "10:00", preferred_counselor_gender: "Feminino", preferred_language: "Portugu�s", requested_by_user_id: "u-2", requested_by_name: "L�der de Aconselhamento", source: "First Timer", assigned_counselor_id: "coun-1", assigned_counselor_name: "L�der de Aconselhamento", assigned_by_user_id: "u-1", assigned_by_name: "Admin Principal", assigned_at: "2026-07-15T09:00:00.000Z", status: "Scheduled", notes: "Precisa de acompanhamento ap�s a sess�o.", created_at: "2026-07-15", updated_at: "2026-07-15" },
+      { id: "cr-2", request_number: "CON-2026-0002", person_type: "Member", member_id: "m-1", first_timer_id: "", full_name: "Jo�o Nhaca", phone: "845551122", whatsapp: "845551122", email: "", gender: "Masculino", age: 42, church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", cell_group_id: "group-2", cell_group_name: "Grupo Central", cell_id: "cell-2", cell_name: "Central", counseling_category: "Fam�lia", counseling_subject: "Desafio familiar", issue_summary: "Solicita aconselhamento sobre reconcilia��o familiar.", urgency: "High", confidentiality_level: "Sensitive", preferred_date: "2026-07-15", preferred_time: "15:00", preferred_counselor_gender: "Masculino", preferred_language: "Portugu�s", requested_by_user_id: "u-8", requested_by_name: "Pastor da Igreja", source: "Pastor Referral", assigned_counselor_id: "coun-2", assigned_counselor_name: "Pastor da Igreja", assigned_by_user_id: "u-8", assigned_by_name: "Pastor da Igreja", assigned_at: "2026-07-14T11:00:00.000Z", status: "Referred to Church Pastor", notes: "Caso sens�vel.", created_at: "2026-07-14", updated_at: "2026-07-15" },
+      { id: "cr-3", request_number: "CON-2026-0003", person_type: "Staff", member_id: "", first_timer_id: "", full_name: "Maria Zitha", phone: "866000111", whatsapp: "866000111", email: "maria@example.com", gender: "Feminino", age: 29, church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", cell_group_id: "", cell_group_name: "", cell_id: "", cell_name: "", counseling_category: "Carreira", counseling_subject: "Decis�o profissional", issue_summary: "Precisa de orienta��o para decis�o de carreira e servi�o ministerial.", urgency: "Normal", confidentiality_level: "Normal", preferred_date: "2026-07-18", preferred_time: "11:30", preferred_counselor_gender: "", preferred_language: "Portugu�s", requested_by_user_id: "u-13", requested_by_name: "Staff Member Demo", source: "Manual", assigned_counselor_id: "", assigned_counselor_name: "", assigned_by_user_id: "", assigned_by_name: "", assigned_at: "", status: "Pending Review", notes: "", created_at: "2026-07-15", updated_at: "2026-07-15" }
+    ],
+    counselors: [
+      { id: "coun-1", user_id: "u-2", staff_id: "", full_name: "L�der de Aconselhamento", title: "Irm�", gender: "Feminino", phone: "860000201", email: "aconselhamento@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", counseling_categories: ["Crescimento Espiritual", "Ora��o", "Apoio Emocional"], languages: ["Portugu�s"], availability: "Ter�a e Quinta, 09:00-13:00", max_cases_per_week: 8, current_active_cases: 3, status: "Activo", notes: "", created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "coun-2", user_id: "u-8", staff_id: "", full_name: "Pastor da Igreja", title: "Pastor", gender: "Masculino", phone: "862270000", email: "pastor.branch@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", counseling_categories: ["Família", "Casamento", "Liderança"], languages: ["Português", "Inglês"], availability: "Quarta e Sexta, 14:00-17:00", max_cases_per_week: 6, current_active_cases: 2, status: "Activo", notes: "Recebe casos sensíveis da igreja.", created_at: "2026-07-01", updated_at: "2026-07-15" }
+    ],
+    appointments: [
+      { id: "ca-1", counseling_request_id: "cr-1", person_name: "Aminata Chivinda", counselor_id: "coun-1", counselor_name: "Líder de Aconselhamento", church_id: "church-hq", appointment_date: "2026-07-16", appointment_time: "10:00", duration_minutes: 45, location_type: "Presencial", location_details: "Sala de Aconselhamento", meeting_link: "", status: "Agendado", reminder_sent: false, notes: "", created_at: "2026-07-15", updated_at: "2026-07-15" },
+      { id: "ca-2", counseling_request_id: "cr-2", person_name: "Jo�o Nhaca", counselor_id: "coun-2", counselor_name: "Pastor da Igreja", church_id: "church-hq", appointment_date: "2026-07-15", appointment_time: "15:00", duration_minutes: 60, location_type: "Presencial", location_details: "Gabinete Pastoral", meeting_link: "", status: "Confirmado", reminder_sent: true, notes: "Caso sens�vel.", created_at: "2026-07-14", updated_at: "2026-07-15" }
+    ],
+    referrals: [
+      { id: "cref-1", counseling_request_id: "cr-2", referred_to_type: "Church Pastor", referred_to_user_id: "u-8", referred_to_role: "Church Pastor", referred_to_department: "", reason: "Caso familiar sensível requer acompanhamento pastoral.", urgency: "High", referred_by_user_id: "u-2", referred_by_name: "Líder de Aconselhamento", referred_at: "2026-07-15T08:30:00.000Z", status: "Em Curso", response_notes: "", completed_at: "", church_id: "church-hq", created_at: "2026-07-15", updated_at: "2026-07-15" }
+    ],
+    feedback: [
+      { id: "cfb-1", counseling_request_id: "cr-1", appointment_id: "ca-1", counselor_id: "coun-1", counselor_name: "Líder de Aconselhamento", feedback_summary: "", outcome: "Precisa de Acompanhamento", next_step: "Criar Acompanhamento", needs_follow_up: true, follow_up_date: "2026-07-20", needs_pastor_review: false, referred_to_pastor: "", confidentiality_note: "", visible_to_roles: ["Counseling Head", "Super Admin"], church_id: "church-hq", status: "Pendente", created_at: "2026-07-15", updated_at: "2026-07-15" }
+    ],
+    timeline: [
+      { id: "ctl-1", counseling_request_id: "cr-1", event_type: "created", title: "Pedido criado", description: "Pedido de aconselhamento criado a partir de Primeira Vez.", created_by: "Líder de Aconselhamento", created_at: "2026-07-15T09:00:00.000Z", metadata: {}, church_id: "church-hq" },
+      { id: "ctl-2", counseling_request_id: "cr-2", event_type: "referred", title: "Encaminhado ao Pastor da Igreja", description: "Caso encaminhado por sensibilidade pastoral.", created_by: "Líder de Aconselhamento", created_at: "2026-07-15T08:30:00.000Z", metadata: {}, church_id: "church-hq" }
+    ]
+  },
   members: [
     { id: "m-1", tratamento: "Pastor", nome: "Kene", apelido: "Ume", telefone: "+258 86 227 0000", email: "", church_id: "church-hq", celula: "Sede", departamento: "Leadership", estado: "Active", data_de_entrada: "2024-01-01", origem: "Manual", notas: "" },
-    { id: "m-2", tratamento: "Irmã", nome: "Aminata", apelido: "Chivinda", telefone: "848287179", email: "", church_id: "church-hq", celula: "Mavalane", departamento: "Seguimento", estado: "In Progress", data_de_entrada: "2026-07-05", origem: "Primeira Vez", notas: "" }
+    { id: "m-2", tratamento: "Irm�", nome: "Aminata", apelido: "Chivinda", telefone: "848287179", email: "", church_id: "church-hq", celula: "Mavalane", departamento: "Acompanhamento", estado: "In Progress", data_de_entrada: "2026-07-05", origem: "Primeira Vez", notas: "" }
   ],
   foundationStudents: [
     {
@@ -3022,12 +3322,12 @@ const seedData = {
   publicGivingSubmissions: [],
   finance: [
     { id: "fin-1", source_type: "contributor", contributor_id: "contrib-fin-1", member_id: "", first_timer_id: "", partner_id: "", nome: "Ana", apelido: "Mabunda", telefone: "874520011", whatsapp: "874520011", email: "", endereco: "Maputo", celula: "Cell Central", grupo_de_celula: "Grupo Central", igreja: "National HQ - Christ Embassy Mozambique", church_id: "church-hq", categoria_da_contribuicao: "Dízimo", metodo_de_pagamento: "M-Pesa", valor: 7500, referencia_da_transaccao: "MP463900298", data: "2026-07-05", imagem_envelope_ou_pop: "", imagem_do_envelope: "", observacoes: "", estado: FINANCE_STATUS_VERIFIED, recebido_por: "Admin Principal", verificado_por: "Admin Principal", verified_at: "2026-07-05T10:30:00.000Z", comentario_verificacao: "Pagamento confirmado no M-Pesa.", motivo_rejeicao: "", created_at: "2026-07-05T09:15:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-05" },
-    { id: "fin-2", source_type: "partner", contributor_id: "", member_id: "", first_timer_id: "", partner_id: "part-1", nome: "Carlos", apelido: "Muianga", telefone: "866877389", whatsapp: "866877389", email: "carlos@example.com", endereco: "Online", celula: "Virtual", igreja: "CE Mozambique Online Church", church_id: "church-virtual", categoria_da_contribuicao: "Loveworld SAT", metodo_de_pagamento: "Banco", valor: 4200, referencia_da_transaccao: "BCI-17596091110001", data: "2026-07-02", imagem_envelope_ou_pop: "", imagem_do_envelope: "", observacoes: "Aguardar confirmação bancária.", estado: FINANCE_STATUS_PENDING, recebido_por: "Admin Principal", verificado_por: "", verified_at: "", comentario_verificacao: "", motivo_rejeicao: "", created_at: "2026-07-02T14:20:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-02" },
-    { id: "fin-3", source_type: "contributor", contributor_id: "contrib-fin-2", nome: "João", apelido: "Nhaca", telefone: "845551122", celula: "Cell Mavalane", grupo_de_celula: "Grupo Matola", church_id: "church-hq", categoria_da_contribuicao: "Ofertas", metodo_de_pagamento: "M-Pesa", valor: 2500, data: "2026-07-08", estado: FINANCE_STATUS_VERIFIED, verificado_por: "Admin Principal", verified_at: "2026-07-08T11:00:00.000Z", created_at: "2026-07-08T10:00:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-08" },
+    { id: "fin-2", source_type: "partner", contributor_id: "", member_id: "", first_timer_id: "", partner_id: "part-1", nome: "Carlos", apelido: "Muianga", telefone: "866877389", whatsapp: "866877389", email: "carlos@example.com", endereco: "Online", celula: "Virtual", igreja: "CE Mozambique Online Church", church_id: "church-virtual", categoria_da_contribuicao: "Loveworld SAT", metodo_de_pagamento: "Banco", valor: 4200, referencia_da_transaccao: "BCI-17596091110001", data: "2026-07-02", imagem_envelope_ou_pop: "", imagem_do_envelope: "", observacoes: "Aguardar confirma��o banc�ria.", estado: FINANCE_STATUS_PENDING, recebido_por: "Admin Principal", verificado_por: "", verified_at: "", comentario_verificacao: "", motivo_rejeicao: "", created_at: "2026-07-02T14:20:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-02" },
+    { id: "fin-3", source_type: "contributor", contributor_id: "contrib-fin-2", nome: "Jo�o", apelido: "Nhaca", telefone: "845551122", celula: "Cell Mavalane", grupo_de_celula: "Grupo Matola", church_id: "church-hq", categoria_da_contribuicao: "Ofertas", metodo_de_pagamento: "M-Pesa", valor: 2500, data: "2026-07-08", estado: FINANCE_STATUS_VERIFIED, verificado_por: "Admin Principal", verified_at: "2026-07-08T11:00:00.000Z", created_at: "2026-07-08T10:00:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-08" },
     { id: "fin-4", source_type: "partner", partner_id: "part-2", nome: "Helena", apelido: "Cossa", telefone: "843332211", celula: "Cell Central", church_id: "church-hq", categoria_da_contribuicao: "Escola de Cura", metodo_de_pagamento: "E-Mola", valor: 5000, data: "2026-07-09", estado: FINANCE_STATUS_VERIFIED, verificado_por: "Admin Principal", verified_at: "2026-07-09T12:00:00.000Z", created_at: "2026-07-09T09:00:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-09" },
     { id: "fin-5", source_type: "partner", partner_id: "part-3", nome: "Miguel", apelido: "Tembe", telefone: "861112233", celula: "Cell Central", church_id: "church-matola", categoria_da_contribuicao: "Rapsódia de Realidades", metodo_de_pagamento: "M-Pesa", valor: 3000, data: "2026-07-10", estado: FINANCE_STATUS_VERIFIED, verificado_por: "Admin Principal", verified_at: "2026-07-10T08:30:00.000Z", created_at: "2026-07-10T08:00:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-10" },
     { id: "fin-6", source_type: "contributor", nome: "Sofia", apelido: "Macuacua", telefone: "872223344", celula: "Cell Mavalane", church_id: "church-hq", categoria_da_contribuicao: "Primícias", metodo_de_pagamento: "Banco", valor: 1800, data: "2026-06-15", estado: FINANCE_STATUS_VERIFIED, verificado_por: "Admin Principal", verified_at: "2026-06-15T14:00:00.000Z", created_at: "2026-06-15T13:00:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-06-15" },
-    { id: "fin-7", source_type: "partner", partner_id: "part-4", nome: "Carlos", apelido: "Muianga", telefone: "866877389", celula: "Virtual", church_id: "church-virtual", categoria_da_contribuicao: "Construtores de Visão", metodo_de_pagamento: "Banco", valor: 10000, data: "2026-06-20", estado: FINANCE_STATUS_VERIFIED, verificado_por: "Admin Principal", verified_at: "2026-06-21T09:00:00.000Z", created_at: "2026-06-20T16:00:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-06-21" },
+    { id: "fin-7", source_type: "partner", partner_id: "part-4", nome: "Carlos", apelido: "Muianga", telefone: "866877389", celula: "Virtual", church_id: "church-virtual", categoria_da_contribuicao: "Construtores de Vis�o", metodo_de_pagamento: "Banco", valor: 10000, data: "2026-06-20", estado: FINANCE_STATUS_VERIFIED, verificado_por: "Admin Principal", verified_at: "2026-06-21T09:00:00.000Z", created_at: "2026-06-20T16:00:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-06-21" },
     { id: "fin-8", source_type: "contributor", nome: "Rosa", apelido: "Jossias", telefone: "845667788", celula: "Cell Central", church_id: "church-beira", categoria_da_contribuicao: "Alcançar Moçambique", metodo_de_pagamento: "M-Pesa", valor: 1500, data: "2026-07-11", estado: FINANCE_STATUS_PENDING, created_at: "2026-07-11T07:00:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-11" }
   ],
   cells: [
@@ -3038,8 +3338,8 @@ const seedData = {
   cellRegistry: __cellSeed.cellRegistry,
   cellLeadership: {
     alecRegistrations: [
-      { id: "alec-reg-1", church_id: "church-hq", created_by: "Sister Angelica", updated_by: "Sister Angelica", created_at: "2026-06-15", updated_at: "2026-07-03", status: "Em Formação", nome_completo: "Aminata Chivinda", contacto: "848287179", igreja: "church-hq", celula: "Cell Mavalane", nome_do_lider_de_celula: "Aminata Chivinda", fez_escola_de_fundacao: true, e_lider: false, motivo_de_fazer_alec: "Crescer em liderança e ganhar almas.", estado: "Em Formação", observacoes: "Cadastro 2025 importado para protótipo." },
-      { id: "alec-reg-2", church_id: "church-hq", created_by: "Sister Angelica", updated_by: "Sister Angelica", created_at: "2026-06-15", updated_at: "2026-07-03", status: "Activo", nome_completo: "Mateus Nhantumbo", contacto: "862720011", igreja: "church-hq", celula: "Cell Central", nome_do_lider_de_celula: "Pastor Kene Ume", fez_escola_de_fundacao: true, e_lider: true, motivo_de_fazer_alec: "Preparação para liderar célula.", estado: "Activo", observacoes: "" }
+      { id: "alec-reg-1", church_id: "church-hq", created_by: "Sister Angelica", updated_by: "Sister Angelica", created_at: "2026-06-15", updated_at: "2026-07-03", status: "Em Forma��o", nome_completo: "Aminata Chivinda", contacto: "848287179", igreja: "church-hq", celula: "Cell Mavalane", nome_do_lider_de_celula: "Aminata Chivinda", fez_escola_de_fundacao: true, e_lider: false, motivo_de_fazer_alec: "Crescer em lideran�a e ganhar almas.", estado: "Em Forma��o", observacoes: "Cadastro 2025 importado para prot�tipo." },
+      { id: "alec-reg-2", church_id: "church-hq", created_by: "Sister Angelica", updated_by: "Sister Angelica", created_at: "2026-06-15", updated_at: "2026-07-03", status: "Activo", nome_completo: "Mateus Nhantumbo", contacto: "862720011", igreja: "church-hq", celula: "Cell Central", nome_do_lider_de_celula: "Pastor Kene Ume", fez_escola_de_fundacao: true, e_lider: true, motivo_de_fazer_alec: "Prepara��o para liderar c�lula.", estado: "Activo", observacoes: "" }
     ],
     alecScores: [
       { id: "alec-score-1", church_id: "church-hq", created_by: "Sister Angelica", updated_by: "Sister Angelica", created_at: "2026-07-03", updated_at: "2026-07-03", status: "Em Curso", nome_completo: "Aminata Chivinda", contacto: "848287179", igreja: "church-hq", celula: "Cell Mavalane", fase_1_aula_1: 80, fase_1_aula_2: 77, fase_1_aula_3: 84, fase_1_aula_4: 75, fase_2_aula_1: 0, fase_2_aula_2: 0, fase_2_aula_3: 0, terminou: false, faixa_certificado_pago: false, certificado_emitido: false, estado: "Em Curso" },
@@ -3049,39 +3349,39 @@ const seedData = {
       { id: "church-report-1", church_id: "church-hq", created_by: "Sister Angelica", updated_by: "Sister Angelica", created_at: "2026-06-07", updated_at: "2026-06-07", status: "Submetido", semana: "2026 Junho Semana 1", data_inicio: "2026-06-01", data_fim: "2026-06-07", culto: "Domingo", celula: "Cell Central", titulo_do_lider: "Pastor", nome_do_lider: "Kene Ume", att: 112, ft: 14, nc: 9, rs: 8, total_ft_reached: 12, comentarios: "Bom crescimento no culto de domingo.", submetido_por: "Sister Angelica", estado: "Submetido" }
     ],
     cellReports: [
-      { id: "cell-report-1", church_id: "church-hq", created_by: "Cell Leader Demo", updated_by: "Pastora Flavia", created_at: "2026-07-05", updated_at: "2026-07-06", status: "Em Avaliação", semana: "Julho Semana 1", data_inicio: "2026-06-29", data_fim: "2026-07-05", celula: "Cell Central", cell_id: "cell-1", titulo_do_lider: "Irmão", nome_do_lider: "Mateus Nhantumbo", leader_id: "leader-1", att: 18, ft: 5, nc: 3, oferta: 2300, rs: 2, observacoes: "EXPLOSAO - pronta para multiplicação.", submetido_por: "Cell Leader Demo", avaliado_por: "Pastora Flavia", validado_por: "", estado: "Em Avaliação" },
-      { id: "cell-report-2", church_id: "church-hq", created_by: "Cell Leader Demo", updated_by: "Sister Eduarda", created_at: "2026-07-05", updated_at: "2026-07-06", status: "Validado", semana: "Julho Semana 1", data_inicio: "2026-06-29", data_fim: "2026-07-05", celula: "Cell Mavalane", cell_id: "cell-2", titulo_do_lider: "Irmã", nome_do_lider: "Aminata Chivinda", leader_id: "leader-2", att: 9, ft: 1, nc: 1, oferta: 850, rs: 1, observacoes: "Precisa acompanhamento para crescimento.", submetido_por: "Cell Leader Demo", avaliado_por: "Pastora Flavia", validado_por: "Sister Eduarda", estado: "Validado" }
+      { id: "cell-report-1", church_id: "church-hq", created_by: "Cell Leader Demo", updated_by: "Pastora Flavia", created_at: "2026-07-05", updated_at: "2026-07-06", status: "Em Avalia��o", semana: "Julho Semana 1", data_inicio: "2026-06-29", data_fim: "2026-07-05", celula: "Cell Central", cell_id: "cell-1", titulo_do_lider: "Irm�o", nome_do_lider: "Mateus Nhantumbo", leader_id: "leader-1", att: 18, ft: 5, nc: 3, oferta: 2300, rs: 2, observacoes: "EXPLOSAO - pronta para multiplica��o.", submetido_por: "Cell Leader Demo", avaliado_por: "Pastora Flavia", validado_por: "", estado: "Em Avalia��o" },
+      { id: "cell-report-2", church_id: "church-hq", created_by: "Cell Leader Demo", updated_by: "Sister Eduarda", created_at: "2026-07-05", updated_at: "2026-07-06", status: "Validado", semana: "Julho Semana 1", data_inicio: "2026-06-29", data_fim: "2026-07-05", celula: "Cell Mavalane", cell_id: "cell-2", titulo_do_lider: "Irm�", nome_do_lider: "Aminata Chivinda", leader_id: "leader-2", att: 9, ft: 1, nc: 1, oferta: 850, rs: 1, observacoes: "Precisa acompanhamento para crescimento.", submetido_por: "Cell Leader Demo", avaliado_por: "Pastora Flavia", validado_por: "Sister Eduarda", estado: "Validado" }
     ],
     leaders: [
-      { id: "leader-1", church_id: "church-hq", created_by: "Sister Angelica", updated_by: "Pastora Flavia", created_at: "2026-07-03", updated_at: "2026-07-06", status: "Activo", nome_completo: "Mateus Nhantumbo", contacto: "862720011", titulo: "Irmão", igreja: "church-hq", celula: "Cell Central", e_lider_actual: true, veio_do_alec: true, alec_concluido: true, faixa_certificado_pago: true, estado: "Activo", supervisor: "Pastora Flavia", observacoes: "Pode submeter relatórios da sua célula." },
-      { id: "leader-2", church_id: "church-hq", created_by: "Sister Angelica", updated_by: "Pastora Flavia", created_at: "2026-07-03", updated_at: "2026-07-06", status: "Em Treinamento", nome_completo: "Aminata Chivinda", contacto: "848287179", titulo: "Irmã", igreja: "church-hq", celula: "Cell Mavalane", e_lider_actual: true, veio_do_alec: true, alec_concluido: false, faixa_certificado_pago: false, estado: "Em Treinamento", supervisor: "Pastora Flavia", observacoes: "Acompanhar conclusão do ALEC." }
+      { id: "leader-1", church_id: "church-hq", created_by: "Sister Angelica", updated_by: "Pastora Flavia", created_at: "2026-07-03", updated_at: "2026-07-06", status: "Activo", nome_completo: "Mateus Nhantumbo", contacto: "862720011", titulo: "Irm�o", igreja: "church-hq", celula: "Cell Central", e_lider_actual: true, veio_do_alec: true, alec_concluido: true, faixa_certificado_pago: true, estado: "Activo", supervisor: "Pastora Flavia", observacoes: "Pode submeter relat�rios da sua c�lula." },
+      { id: "leader-2", church_id: "church-hq", created_by: "Sister Angelica", updated_by: "Pastora Flavia", created_at: "2026-07-03", updated_at: "2026-07-06", status: "Em Treinamento", nome_completo: "Aminata Chivinda", contacto: "848287179", titulo: "Irm�", igreja: "church-hq", celula: "Cell Mavalane", e_lider_actual: true, veio_do_alec: true, alec_concluido: false, faixa_certificado_pago: false, estado: "Em Treinamento", supervisor: "Pastora Flavia", observacoes: "Acompanhar conclus�o do ALEC." }
     ],
     evaluations: [
-      { id: "eval-1", church_id: "church-hq", created_by: "Pastora Flavia", updated_by: "Pastora Flavia", created_at: "2026-07-06", updated_at: "2026-07-06", status: "Encaminhado para Validação", report_id: "cell-report-1", avaliador: "Pastora Flavia", data_da_avaliacao: "2026-07-06", classificacao: "Excelente", pontos_fortes: "Alto FT, NC consistente e célula em explosão.", pontos_a_melhorar: "Preparar novo líder auxiliar.", acao_recomendada: "Recomendar divisão da célula.", precisa_followup: true, estado: "Encaminhado para Validação" },
-      { id: "eval-2", church_id: "church-hq", created_by: "Pastora Flavia", updated_by: "Pastora Flavia", created_at: "2026-07-06", updated_at: "2026-07-06", status: "Aprovado", report_id: "cell-report-2", avaliador: "Pastora Flavia", data_da_avaliacao: "2026-07-06", classificacao: "Precisa de Atenção", pontos_fortes: "Líder constante.", pontos_a_melhorar: "Aumentar evangelismo e assistência.", acao_recomendada: "Follow-up semanal com supervisora.", precisa_followup: true, estado: "Aprovado" }
+      { id: "eval-1", church_id: "church-hq", created_by: "Pastora Flavia", updated_by: "Pastora Flavia", created_at: "2026-07-06", updated_at: "2026-07-06", status: "Encaminhado para Valida��o", report_id: "cell-report-1", avaliador: "Pastora Flavia", data_da_avaliacao: "2026-07-06", classificacao: "Excelente", pontos_fortes: "Alto FT, NC consistente e c�lula em explos�o.", pontos_a_melhorar: "Preparar novo l�der auxiliar.", acao_recomendada: "Recomendar divis�o da c�lula.", precisa_followup: true, estado: "Encaminhado para Valida��o" },
+      { id: "eval-2", church_id: "church-hq", created_by: "Pastora Flavia", updated_by: "Pastora Flavia", created_at: "2026-07-06", updated_at: "2026-07-06", status: "Aprovado", report_id: "cell-report-2", avaliador: "Pastora Flavia", data_da_avaliacao: "2026-07-06", classificacao: "Precisa de Aten��o", pontos_fortes: "L�der constante.", pontos_a_melhorar: "Aumentar evangelismo e assist�ncia.", acao_recomendada: "Acompanhamento semanal com supervisora.", precisa_followup: true, estado: "Aprovado" }
     ],
     validations: [
-      { id: "validation-1", church_id: "church-hq", created_by: "Sister Eduarda", updated_by: "Sister Eduarda", created_at: "2026-07-06", updated_at: "2026-07-06", status: "Validado", report_id: "cell-report-2", validado_por: "Sister Eduarda", data_validacao: "2026-07-06", decisao: "Validado", comentario_final: "Relatório aceite para consolidação nacional.", estado_final: "Validado" }
+      { id: "validation-1", church_id: "church-hq", created_by: "Sister Eduarda", updated_by: "Sister Eduarda", created_at: "2026-07-06", updated_at: "2026-07-06", status: "Validado", report_id: "cell-report-2", validado_por: "Sister Eduarda", data_validacao: "2026-07-06", decisao: "Validado", comentario_final: "Relat�rio aceite para consolida��o nacional.", estado_final: "Validado" }
     ],
     actionPlans: [
-      { id: "ap-1", church_id: "church-hq", leader_name: "Aminata Chivinda", cell_name: "Cell Mavalane", action: "Follow-up semanal com supervisora e reforço de evangelismo.", due_date: "2026-07-17", status: "Em Curso", owner: "Pastora Flavia", created_by: "Pastora Flavia", updated_by: "Pastora Flavia", created_at: "2026-07-06", updated_at: "2026-07-06" },
-      { id: "ap-2", church_id: "church-hq", leader_name: "Mateus Nhantumbo", cell_name: "Cell Central", action: "Preparar divisão da célula e identificar líder auxiliar.", due_date: "2026-07-20", status: "Planeado", owner: "Pastora Flavia", created_by: "Pastora Flavia", updated_by: "Pastora Flavia", created_at: "2026-07-06", updated_at: "2026-07-06" }
+      { id: "ap-1", church_id: "church-hq", leader_name: "Aminata Chivinda", cell_name: "Cell Mavalane", action: "Acompanhamento semanal com supervisora e reforço de evangelismo.", due_date: "2026-07-17", status: "Em Curso", owner: "Pastora Flavia", created_by: "Pastora Flavia", updated_by: "Pastora Flavia", created_at: "2026-07-06", updated_at: "2026-07-06" },
+      { id: "ap-2", church_id: "church-hq", leader_name: "Mateus Nhantumbo", cell_name: "Cell Central", action: "Preparar divis�o da c�lula e identificar l�der auxiliar.", due_date: "2026-07-20", status: "Planeado", owner: "Pastora Flavia", created_by: "Pastora Flavia", updated_by: "Pastora Flavia", created_at: "2026-07-06", updated_at: "2026-07-06" }
     ]
   },
   fevo: {
     weeklyConfigurations: [
-      { id: "fevo-cfg-1", church_id: "church-hq", semana_inicio: "2026-05-04", semana_fim: "2026-05-10", team_a_activity: "Follow-Up", team_b_activity: "Oração", team_c_activity: "Evangelização", team_d_activity: "Visitação", preparado_por: "Sister Cassandra", observacoes: "Rotação semanal conforme plano F.E.V.O.", estado: "Fechado", status: "Fechado", created_by: "Sister Cassandra", updated_by: "Sister Cassandra", created_at: "2026-05-03", updated_at: "2026-05-10" },
-      { id: "fevo-cfg-2", church_id: "church-hq", semana_inicio: "2026-05-25", semana_fim: "2026-05-31", team_a_activity: "Visitação", team_b_activity: "Follow-Up", team_c_activity: "Oração", team_d_activity: "Evangelização", preparado_por: "Sister Cassandra", observacoes: "Configuração activa de exemplo.", estado: "Activo", status: "Activo", created_by: "Sister Cassandra", updated_by: "Sister Cassandra", created_at: "2026-05-24", updated_at: "2026-05-25" }
+      { id: "fevo-cfg-1", church_id: "church-hq", semana_inicio: "2026-05-04", semana_fim: "2026-05-10", team_a_activity: "Acompanhamento", team_b_activity: "Ora��o", team_c_activity: "Evangeliza��o", team_d_activity: "Visita��o", preparado_por: "Sister Cassandra", observacoes: "Rota��o semanal conforme plano F.E.V.O.", estado: "Fechado", status: "Fechado", created_by: "Sister Cassandra", updated_by: "Sister Cassandra", created_at: "2026-05-03", updated_at: "2026-05-10" },
+      { id: "fevo-cfg-2", church_id: "church-hq", semana_inicio: "2026-05-25", semana_fim: "2026-05-31", team_a_activity: "Visita��o", team_b_activity: "Acompanhamento", team_c_activity: "Ora��o", team_d_activity: "Evangeliza��o", preparado_por: "Sister Cassandra", observacoes: "Configura��o activa de exemplo.", estado: "Activo", status: "Activo", created_by: "Sister Cassandra", updated_by: "Sister Cassandra", created_at: "2026-05-24", updated_at: "2026-05-25" }
     ],
     reports: [
-      { id: "fevo-rpt-1", church_id: "church-hq", semana_inicio: "2026-05-25", semana_fim: "2026-05-31", team: "Team A", activity_type: "Visitação", group_id: "group-1", cell_id: "cell-1", leader_id: "leader-1", group_name: "Group Central", leader_name: "Mateus Nhantumbo", number_of_cells: 2, number_of_members: 26, leaders_present: 3, members_present: 18, ft_in_church: 4, submitted_report: true, submitted_by: "F.E.V.O Team Leader", submitted_at: "2026-05-31", status: "Submetido", notes: "Visitação com bom testemunho.", souls_visited: 12, family_members_reached: 7, new_converts: 2, visit_location: "Mavalane", visit_result: "Famílias abertas para célula.", created_by: "F.E.V.O Team Leader", updated_by: "Sister Cassandra", created_at: "2026-05-31", updated_at: "2026-05-31" },
-      { id: "fevo-rpt-2", church_id: "church-hq", semana_inicio: "2026-05-25", semana_fim: "2026-05-31", team: "Team B", activity_type: "Follow-Up", group_id: "group-1", cell_id: "cell-2", leader_id: "leader-2", group_name: "Group Mavalane", leader_name: "Aminata Chivinda", number_of_cells: 1, number_of_members: 12, leaders_present: 2, members_present: 8, ft_in_church: 3, submitted_report: true, submitted_by: "Aminata Chivinda", submitted_at: "2026-05-31", status: "Em Revisão", notes: "Seguimento de primeira vez.", souls_contacted: 21, feedback_count: 14, followup_result: "8 confirmaram presença no culto.", next_action: "Adicionar ao grupo WhatsApp.", created_by: "Aminata Chivinda", updated_by: "Sister Cassandra", created_at: "2026-05-31", updated_at: "2026-05-31" },
-      { id: "fevo-rpt-3", church_id: "church-hq", semana_inicio: "2026-05-25", semana_fim: "2026-05-31", team: "Team C", activity_type: "Oração", group_id: "group-1", cell_id: "", leader_id: "", group_name: "Grupo de Oração", leader_name: "Sister Cassandra", number_of_cells: 3, number_of_members: 31, leaders_present: 4, members_present: 22, ft_in_church: 2, submitted_report: true, submitted_by: "Sister Cassandra", submitted_at: "2026-05-31", status: "Aprovado", notes: "Oração por novos convertidos.", average_members_present: 18, days_of_prayer: 5, prayer_focus: "Retenção de almas e crescimento celular.", prayer_testimonies: "Testemunhos de restauração familiar.", created_by: "Sister Cassandra", updated_by: "Sister Cassandra", created_at: "2026-05-31", updated_at: "2026-05-31" },
-      { id: "fevo-rpt-4", church_id: "church-hq", semana_inicio: "2026-05-25", semana_fim: "2026-05-31", team: "Team D", activity_type: "Evangelização", group_id: "group-1", cell_id: "cell-1", leader_id: "leader-1", group_name: "Grupo Evangelismo", leader_name: "Mateus Nhantumbo", number_of_cells: 2, number_of_members: 19, leaders_present: 3, members_present: 15, ft_in_church: 6, submitted_report: true, submitted_by: "Mateus Nhantumbo", submitted_at: "2026-05-31", status: "Submetido", notes: "Evangelização em equipa.", souls_evangelized: 42, new_converts: 9, evangelism_location: "Baixa da Cidade", materials_distributed: 60, created_by: "Mateus Nhantumbo", updated_by: "Sister Cassandra", created_at: "2026-05-31", updated_at: "2026-05-31" }
+      { id: "fevo-rpt-1", church_id: "church-hq", semana_inicio: "2026-05-25", semana_fim: "2026-05-31", team: "Team A", activity_type: "Visita��o", group_id: "group-1", cell_id: "cell-1", leader_id: "leader-1", group_name: "Group Central", leader_name: "Mateus Nhantumbo", number_of_cells: 2, number_of_members: 26, leaders_present: 3, members_present: 18, ft_in_church: 4, submitted_report: true, submitted_by: "F.E.V.O Team Leader", submitted_at: "2026-05-31", status: "Submetido", notes: "Visita��o com bom testemunho.", souls_visited: 12, family_members_reached: 7, new_converts: 2, visit_location: "Mavalane", visit_result: "Fam�lias abertas para c�lula.", created_by: "F.E.V.O Team Leader", updated_by: "Sister Cassandra", created_at: "2026-05-31", updated_at: "2026-05-31" },
+      { id: "fevo-rpt-2", church_id: "church-hq", semana_inicio: "2026-05-25", semana_fim: "2026-05-31", team: "Team B", activity_type: "Acompanhamento", group_id: "group-1", cell_id: "cell-2", leader_id: "leader-2", group_name: "Group Mavalane", leader_name: "Aminata Chivinda", number_of_cells: 1, number_of_members: 12, leaders_present: 2, members_present: 8, ft_in_church: 3, submitted_report: true, submitted_by: "Aminata Chivinda", submitted_at: "2026-05-31", status: "Em Revis�o", notes: "Acompanhamento de primeira vez.", souls_contacted: 21, feedback_count: 14, followup_result: "8 confirmaram presen�a no culto.", next_action: "Adicionar ao grupo WhatsApp.", created_by: "Aminata Chivinda", updated_by: "Sister Cassandra", created_at: "2026-05-31", updated_at: "2026-05-31" },
+      { id: "fevo-rpt-3", church_id: "church-hq", semana_inicio: "2026-05-25", semana_fim: "2026-05-31", team: "Team C", activity_type: "Ora��o", group_id: "group-1", cell_id: "", leader_id: "", group_name: "Grupo de Ora��o", leader_name: "Sister Cassandra", number_of_cells: 3, number_of_members: 31, leaders_present: 4, members_present: 22, ft_in_church: 2, submitted_report: true, submitted_by: "Sister Cassandra", submitted_at: "2026-05-31", status: "Aprovado", notes: "Ora��o por novos convertidos.", average_members_present: 18, days_of_prayer: 5, prayer_focus: "Reten��o de almas e crescimento celular.", prayer_testimonies: "Testemunhos de restaura��o familiar.", created_by: "Sister Cassandra", updated_by: "Sister Cassandra", created_at: "2026-05-31", updated_at: "2026-05-31" },
+      { id: "fevo-rpt-4", church_id: "church-hq", semana_inicio: "2026-05-25", semana_fim: "2026-05-31", team: "Team D", activity_type: "Evangeliza��o", group_id: "group-1", cell_id: "cell-1", leader_id: "leader-1", group_name: "Grupo Evangelismo", leader_name: "Mateus Nhantumbo", number_of_cells: 2, number_of_members: 19, leaders_present: 3, members_present: 15, ft_in_church: 6, submitted_report: true, submitted_by: "Mateus Nhantumbo", submitted_at: "2026-05-31", status: "Submetido", notes: "Evangeliza��o em equipa.", souls_evangelized: 42, new_converts: 9, evangelism_location: "Baixa da Cidade", materials_distributed: 60, created_by: "Mateus Nhantumbo", updated_by: "Sister Cassandra", created_at: "2026-05-31", updated_at: "2026-05-31" }
     ],
     noReports: [
-      { id: "fevo-nr-1", church_id: "church-hq", semana_inicio: "2026-05-25", semana_fim: "2026-05-31", team: "Team A", activity_type: "Visitação", group_name: "Grupo Matola", leader_name: "Irmã Celeste", reason_not_submitted: "Líder sem internet no domingo.", followup_action: "Contactar e recolher relatório por chamada.", contacted: true, contacted_by: "Sister Cassandra", status: "Contactado", created_by: "Sister Cassandra", updated_by: "Sister Cassandra", created_at: "2026-05-31", updated_at: "2026-06-01" },
-      { id: "fevo-nr-2", church_id: "church-hq", semana_inicio: "2026-05-25", semana_fim: "2026-05-31", team: "Team B", activity_type: "Follow-Up", group_name: "Grupo Choupal", leader_name: "Irmão Paulo", reason_not_submitted: "Sem resposta.", followup_action: "Escalar para supervisora.", contacted: false, contacted_by: "", status: "Reincidente", created_by: "Sister Cassandra", updated_by: "Sister Cassandra", created_at: "2026-05-31", updated_at: "2026-06-01" }
+      { id: "fevo-nr-1", church_id: "church-hq", semana_inicio: "2026-05-25", semana_fim: "2026-05-31", team: "Team A", activity_type: "Visita��o", group_name: "Grupo Matola", leader_name: "Irm� Celeste", reason_not_submitted: "L�der sem internet no domingo.", followup_action: "Contactar e recolher relat�rio por chamada.", contacted: true, contacted_by: "Sister Cassandra", status: "Contactado", created_by: "Sister Cassandra", updated_by: "Sister Cassandra", created_at: "2026-05-31", updated_at: "2026-06-01" },
+      { id: "fevo-nr-2", church_id: "church-hq", semana_inicio: "2026-05-25", semana_fim: "2026-05-31", team: "Team B", activity_type: "Acompanhamento", group_name: "Grupo Choupal", leader_name: "Irm�o Paulo", reason_not_submitted: "Sem resposta.", followup_action: "Escalar para supervisora.", contacted: false, contacted_by: "", status: "Reincidente", created_by: "Sister Cassandra", updated_by: "Sister Cassandra", created_at: "2026-05-31", updated_at: "2026-06-01" }
     ],
     weeklyReports: [
       { id: "fevo-week-1", church_id: "church-hq", title: "RELATÓRIO F.E.V.O", semana_inicio: "2026-05-25", semana_fim: "2026-05-31", status: "Submetido", created_by: "Sister Cassandra", updated_by: "Sister Cassandra", created_at: "2026-05-31", updated_at: "2026-05-31" }
@@ -3091,14 +3391,14 @@ const seedData = {
     inventory: [
       { id: "inv-1", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-01-10", updated_at: "2026-07-10", status: "Bom", nome_do_item: "Yamaha Mixer", categoria: "Som", quantidade: 1, estado: "Bom", localizacao: "Auditório Principal", departamento_responsavel: "Som", igreja: "church-hq", data_de_entrada: "2026-01-10", valor_unitario: 85000, valor_total: 85000, serial_number: "YMX-001", observacoes: "" },
       { id: "inv-2", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-01-12", updated_at: "2026-07-10", status: "Bom", nome_do_item: "Amplificador Pevey", categoria: "Som", quantidade: 1, estado: "Bom", localizacao: "Auditório Principal", departamento_responsavel: "Som", igreja: "church-hq", data_de_entrada: "2026-01-12", valor_unitario: 42000, valor_total: 42000, serial_number: "PVY-AMP-01", observacoes: "" },
-      { id: "inv-3", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-02-01", updated_at: "2026-07-10", status: "Em Reparação", nome_do_item: "Microphone FM Wireless", categoria: "Som", quantidade: 4, estado: "Em Reparação", localizacao: "Media Room", departamento_responsavel: "Media", igreja: "church-hq", data_de_entrada: "2026-02-01", valor_unitario: 9500, valor_total: 38000, serial_number: "MIC-FM-SET", observacoes: "Dois microfones com ruído." },
+      { id: "inv-3", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-02-01", updated_at: "2026-07-10", status: "Em Repara��o", nome_do_item: "Microphone FM Wireless", categoria: "Som", quantidade: 4, estado: "Em Repara��o", localizacao: "Media Room", departamento_responsavel: "Media", igreja: "church-hq", data_de_entrada: "2026-02-01", valor_unitario: 9500, valor_total: 38000, serial_number: "MIC-FM-SET", observacoes: "Dois microfones com ru�do." },
       { id: "inv-4", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-02-05", updated_at: "2026-07-10", status: "Bom", nome_do_item: "Yamaha Piano", categoria: "Instrumentos", quantidade: 1, estado: "Bom", localizacao: "Palco", departamento_responsavel: "Música", igreja: "church-hq", data_de_entrada: "2026-02-05", valor_unitario: 120000, valor_total: 120000, serial_number: "YPI-88", observacoes: "" },
-      { id: "inv-5", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-02-08", updated_at: "2026-07-10", status: "Mau", nome_do_item: "Guitar Bass", categoria: "Instrumentos", quantidade: 1, estado: "Mau", localizacao: "Palco", departamento_responsavel: "Música", igreja: "church-hq", data_de_entrada: "2026-02-08", valor_unitario: 35000, valor_total: 35000, serial_number: "BASS-01", observacoes: "Necessita revisão." },
+      { id: "inv-5", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-02-08", updated_at: "2026-07-10", status: "Mau", nome_do_item: "Guitar Bass", categoria: "Instrumentos", quantidade: 1, estado: "Mau", localizacao: "Palco", departamento_responsavel: "M�sica", igreja: "church-hq", data_de_entrada: "2026-02-08", valor_unitario: 35000, valor_total: 35000, serial_number: "BASS-01", observacoes: "Necessita revis�o." },
       { id: "inv-6", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-03-01", updated_at: "2026-07-10", status: "Bom", nome_do_item: "Colunas Hybrid", categoria: "Som", quantidade: 6, estado: "Bom", localizacao: "Auditório Principal", departamento_responsavel: "Som", igreja: "church-hq", data_de_entrada: "2026-03-01", valor_unitario: 30000, valor_total: 180000, serial_number: "HYB-SPK", observacoes: "" },
       { id: "inv-7", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-03-05", updated_at: "2026-07-10", status: "Bom", nome_do_item: "Canon Projectors", categoria: "Media", quantidade: 2, estado: "Bom", localizacao: "Media Room", departamento_responsavel: "Media", igreja: "church-hq", data_de_entrada: "2026-03-05", valor_unitario: 58000, valor_total: 116000, serial_number: "CAN-PROJ", observacoes: "" },
       { id: "inv-8", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-03-10", updated_at: "2026-07-10", status: "Bom", nome_do_item: "Stabilizador de Energia 5000W", categoria: "Energia", quantidade: 1, estado: "Bom", localizacao: "Sala Técnica", departamento_responsavel: "Venue Management", igreja: "church-hq", data_de_entrada: "2026-03-10", valor_unitario: 65000, valor_total: 65000, serial_number: "STB-5000", observacoes: "" },
-      { id: "inv-9", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-04-01", updated_at: "2026-07-10", status: "Bom", nome_do_item: "Air Conditioners", categoria: "AC / Climatização", quantidade: 5, estado: "Bom", localizacao: "Auditório e Escritórios", departamento_responsavel: "Venue Management", igreja: "church-hq", data_de_entrada: "2026-04-01", valor_unitario: 52000, valor_total: 260000, serial_number: "AC-HIS", observacoes: "" },
-      { id: "inv-10", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-04-10", updated_at: "2026-07-10", status: "Bom", nome_do_item: "Câmaras de Vídeo", categoria: "Media", quantidade: 3, estado: "Bom", localizacao: "Media Room", departamento_responsavel: "Media", igreja: "church-hq", data_de_entrada: "2026-04-10", valor_unitario: 98000, valor_total: 294000, serial_number: "VID-CAM", observacoes: "" },
+      { id: "inv-9", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-04-01", updated_at: "2026-07-10", status: "Bom", nome_do_item: "Air Conditioners", categoria: "AC / Climatiza��o", quantidade: 5, estado: "Bom", localizacao: "Audit�rio e Escrit�rios", departamento_responsavel: "Venue Management", igreja: "church-hq", data_de_entrada: "2026-04-01", valor_unitario: 52000, valor_total: 260000, serial_number: "AC-HIS", observacoes: "" },
+      { id: "inv-10", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-04-10", updated_at: "2026-07-10", status: "Bom", nome_do_item: "C�maras de V�deo", categoria: "Media", quantidade: 3, estado: "Bom", localizacao: "Media Room", departamento_responsavel: "Media", igreja: "church-hq", data_de_entrada: "2026-04-10", valor_unitario: 98000, valor_total: 294000, serial_number: "VID-CAM", observacoes: "" },
       { id: "inv-11", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-04-12", updated_at: "2026-07-10", status: "Bom", nome_do_item: "Cabos HDMI", categoria: "Media", quantidade: 12, estado: "Bom", localizacao: "Media Room", departamento_responsavel: "Media", igreja: "church-hq", data_de_entrada: "2026-04-12", valor_unitario: 900, valor_total: 10800, serial_number: "HDMI-BULK", observacoes: "" },
       { id: "inv-12", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-04-13", updated_at: "2026-07-10", status: "Bom", nome_do_item: "Camera Stand", categoria: "Media", quantidade: 4, estado: "Bom", localizacao: "Media Room", departamento_responsavel: "Media", igreja: "church-hq", data_de_entrada: "2026-04-13", valor_unitario: 6500, valor_total: 26000, serial_number: "CAM-STAND", observacoes: "" }
     ],
@@ -3106,13 +3406,13 @@ const seedData = {
       { id: "acq-1", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-05-02", updated_at: "2026-05-02", status: "Bom", codigo_do_item: "NEW-001", descricao: "Canon EOS R5 MK-III BODY", categoria: "Media", quantidade: 1, serial_number: "CAN-R5-III", estado: "Bom", data_de_compra_ou_entrada: "2026-05-02", valor_unitario: 245000, valor_total: 245000, fornecedor: "Canon Supplier", recebido_por: "Marcelo Panguene", comprovativo_ou_factura: "INV-2026-001", observacoes: "" },
       { id: "acq-2", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-05-02", updated_at: "2026-05-02", status: "Bom", codigo_do_item: "NEW-002", descricao: "Canon RF 24-105mm", categoria: "Media", quantidade: 1, serial_number: "RF-24-105", estado: "Bom", data_de_compra_ou_entrada: "2026-05-02", valor_unitario: 85000, valor_total: 85000, fornecedor: "Canon Supplier", recebido_por: "Marcelo Panguene", comprovativo_ou_factura: "INV-2026-002", observacoes: "" },
       { id: "acq-3", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-06-10", updated_at: "2026-06-10", status: "Bom", codigo_do_item: "NEW-003", descricao: "Laptop", categoria: "Informática", quantidade: 2, serial_number: "LTP-2026", estado: "Bom", data_de_compra_ou_entrada: "2026-06-10", valor_unitario: 62000, valor_total: 124000, fornecedor: "IT Supplier", recebido_por: "Marcelo Panguene", comprovativo_ou_factura: "INV-2026-003", observacoes: "" },
-      { id: "acq-4", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-06-15", updated_at: "2026-06-15", status: "Bom", codigo_do_item: "NEW-004", descricao: "Hisense BTU AC", categoria: "AC / Climatização", quantidade: 2, serial_number: "HIS-AC", estado: "Bom", data_de_compra_ou_entrada: "2026-06-15", valor_unitario: 54000, valor_total: 108000, fornecedor: "Hisense", recebido_por: "Marcelo Panguene", comprovativo_ou_factura: "INV-2026-004", observacoes: "" },
+      { id: "acq-4", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-06-15", updated_at: "2026-06-15", status: "Bom", codigo_do_item: "NEW-004", descricao: "Hisense BTU AC", categoria: "AC / Climatiza��o", quantidade: 2, serial_number: "HIS-AC", estado: "Bom", data_de_compra_ou_entrada: "2026-06-15", valor_unitario: 54000, valor_total: 108000, fornecedor: "Hisense", recebido_por: "Marcelo Panguene", comprovativo_ou_factura: "INV-2026-004", observacoes: "" },
       { id: "acq-5", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-01", updated_at: "2026-07-01", status: "Bom", codigo_do_item: "NEW-005", descricao: "Moving Wash Light", categoria: "Luzes", quantidade: 4, serial_number: "MWL-4", estado: "Bom", data_de_compra_ou_entrada: "2026-07-01", valor_unitario: 27500, valor_total: 110000, fornecedor: "Lighting Supplier", recebido_por: "Marcelo Panguene", comprovativo_ou_factura: "INV-2026-005", observacoes: "" },
       { id: "acq-6", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-02", updated_at: "2026-07-02", status: "Bom", codigo_do_item: "NEW-006", descricao: "Avolites Quartz Lighting Console", categoria: "Luzes", quantidade: 1, serial_number: "AVL-QTZ", estado: "Bom", data_de_compra_ou_entrada: "2026-07-02", valor_unitario: 180000, valor_total: 180000, fornecedor: "Avolites", recebido_por: "Marcelo Panguene", comprovativo_ou_factura: "INV-2026-006", observacoes: "" },
       { id: "acq-7", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-03", updated_at: "2026-07-03", status: "Bom", codigo_do_item: "NEW-007", descricao: "Panasonic 4K Camera", categoria: "Media", quantidade: 1, serial_number: "PAN-4K", estado: "Bom", data_de_compra_ou_entrada: "2026-07-03", valor_unitario: 135000, valor_total: 135000, fornecedor: "Panasonic", recebido_por: "Marcelo Panguene", comprovativo_ou_factura: "INV-2026-007", observacoes: "" },
       { id: "acq-8", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-04", updated_at: "2026-07-04", status: "Bom", codigo_do_item: "NEW-008", descricao: "Canon 100-400MM Lens", categoria: "Media", quantidade: 1, serial_number: "CAN-100-400", estado: "Bom", data_de_compra_ou_entrada: "2026-07-04", valor_unitario: 112000, valor_total: 112000, fornecedor: "Canon Supplier", recebido_por: "Marcelo Panguene", comprovativo_ou_factura: "INV-2026-008", observacoes: "" },
       { id: "acq-9", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-05", updated_at: "2026-07-05", status: "Bom", codigo_do_item: "NEW-009", descricao: "BMK ES600 Wireless Microphones", categoria: "Som", quantidade: 2, serial_number: "BMK-ES600", estado: "Bom", data_de_compra_ou_entrada: "2026-07-05", valor_unitario: 18500, valor_total: 37000, fornecedor: "Audio Supplier", recebido_por: "Marcelo Panguene", comprovativo_ou_factura: "INV-2026-009", observacoes: "" },
-      { id: "acq-10", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-06", updated_at: "2026-07-06", status: "Bom", codigo_do_item: "NEW-010", descricao: "Tripés de Câmera", categoria: "Media", quantidade: 3, serial_number: "TRP-CAM-3", estado: "Bom", data_de_compra_ou_entrada: "2026-07-06", valor_unitario: 12000, valor_total: 36000, fornecedor: "Media Supplier", recebido_por: "Marcelo Panguene", comprovativo_ou_factura: "INV-2026-010", observacoes: "" }
+      { id: "acq-10", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-06", updated_at: "2026-07-06", status: "Bom", codigo_do_item: "NEW-010", descricao: "Trip�s de C�mera", categoria: "Media", quantidade: 3, serial_number: "TRP-CAM-3", estado: "Bom", data_de_compra_ou_entrada: "2026-07-06", valor_unitario: 12000, valor_total: 36000, fornecedor: "Media Supplier", recebido_por: "Marcelo Panguene", comprovativo_ou_factura: "INV-2026-010", observacoes: "" }
     ],
     staffEquipment: [
       { id: "staff-eq-1", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-01-05", updated_at: "2026-07-10", status: "Activo", nome_do_funcionario: "Flavia Moneedi Tivane", departamento: "Cell Ministry", igreja: "church-hq", data_onboarding: "2026-01-05", dispositivo: "Laptop", modelo: "Dell Latitude 5410", device_id: "DL-5410-FL", product_id: "P-FL-001", data_de_entrega: "2026-01-05", estado_na_entrega: "Bom", estado_actual: "Bom", responsavel_pela_entrega: "Marcelo Panguene", assinatura_confirmada: true, data_de_devolucao: "", observacoes: "" },
@@ -3125,29 +3425,29 @@ const seedData = {
     ],
     maintenance: [
       { id: "maint-1", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-06-01", updated_at: "2026-06-04", status: "Reparado", item: "Laptop da Angelica", categoria: "Informática", quantidade: 1, problema_reportado: "Sistema lento e bateria fraca", estado_antes: "Mau", estado_depois: "Bom", custo_da_reparacao: 2500, tecnico_ou_responsavel: "Técnico Local", data_de_envio: "2026-06-01", data_de_retorno: "2026-06-04", estado: "Reparado", observacoes: "" },
-      { id: "maint-2", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-06-03", updated_at: "2026-06-08", status: "Reparado", item: "Laptop do Deacon", categoria: "Informática", quantidade: 1, problema_reportado: "Ecrã danificado", estado_antes: "Mau", estado_depois: "Bom", custo_da_reparacao: 6000, tecnico_ou_responsavel: "Técnico Local", data_de_envio: "2026-06-03", data_de_retorno: "2026-06-08", estado: "Reparado", observacoes: "" },
+      { id: "maint-2", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-06-03", updated_at: "2026-06-08", status: "Reparado", item: "Laptop do Deacon", categoria: "Inform�tica", quantidade: 1, problema_reportado: "Ecr� danificado", estado_antes: "Mau", estado_depois: "Bom", custo_da_reparacao: 6000, tecnico_ou_responsavel: "T�cnico Local", data_de_envio: "2026-06-03", data_de_retorno: "2026-06-08", estado: "Reparado", observacoes: "" },
       { id: "maint-3", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-06-05", updated_at: "2026-06-10", status: "Reparado", item: "Laptop do Marcelo", categoria: "Informática", quantidade: 1, problema_reportado: "Disco com falhas", estado_antes: "Mau", estado_depois: "Bom", custo_da_reparacao: 5500, tecnico_ou_responsavel: "Técnico Local", data_de_envio: "2026-06-05", data_de_retorno: "2026-06-10", estado: "Reparado", observacoes: "" },
       { id: "maint-4", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-06-07", updated_at: "2026-06-12", status: "Reparado", item: "Laptop do Bro. Valdemiro", categoria: "Informática", quantidade: 1, problema_reportado: "Teclado e sistema", estado_antes: "Mau", estado_depois: "Bom", custo_da_reparacao: 5500, tecnico_ou_responsavel: "Técnico Local", data_de_envio: "2026-06-07", data_de_retorno: "2026-06-12", estado: "Reparado", observacoes: "" }
     ],
     movements: [
-      { id: "move-1", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-05", updated_at: "2026-07-05", status: "Solicitado", item: "Canon Projector", quantidade: 1, origem: "Media Room", destino: "Sala de Formação", departamento_solicitante: "Escola de Fundação", pessoa_responsavel: "Sister Angelica", data_de_saida: "2026-07-06", data_prevista_de_retorno: "2026-07-07", data_real_de_retorno: "", estado_ao_sair: "Bom", estado_ao_voltar: "", aprovado_por: "", estado: "Solicitado", observacoes: "" },
+      { id: "move-1", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-05", updated_at: "2026-07-05", status: "Solicitado", item: "Canon Projector", quantidade: 1, origem: "Media Room", destino: "Sala de Forma��o", departamento_solicitante: "Escola de Funda��o", pessoa_responsavel: "Sister Angelica", data_de_saida: "2026-07-06", data_prevista_de_retorno: "2026-07-07", data_real_de_retorno: "", estado_ao_sair: "Bom", estado_ao_voltar: "", aprovado_por: "", estado: "Solicitado", observacoes: "" },
       { id: "move-2", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-06", updated_at: "2026-07-08", status: "Devolvido", item: "Microphone FM Wireless", quantidade: 2, origem: "Auditório", destino: "Culto Online", departamento_solicitante: "Media", pessoa_responsavel: "Media Team", data_de_saida: "2026-07-06", data_prevista_de_retorno: "2026-07-08", data_real_de_retorno: "2026-07-08", estado_ao_sair: "Bom", estado_ao_voltar: "Bom", aprovado_por: "Marcelo Panguene", estado: "Devolvido", observacoes: "" }
     ],
     venues: [
       { id: "venue-1", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-01-01", updated_at: "2026-07-10", status: "Activo", nome_do_espaco: "Auditório Principal", localizacao: "Sede Nacional", igreja: "church-hq", capacidade: 350, tipo: "Auditório", equipamentos_fixos: "Som, Luzes, AC, Projectores", estado: "Activo", responsavel: "Marcelo Panguene", observacoes: "" },
-      { id: "venue-2", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-01-01", updated_at: "2026-07-10", status: "Activo", nome_do_espaco: "Sala de Formação", localizacao: "Sede Nacional", igreja: "church-hq", capacidade: 60, tipo: "Sala", equipamentos_fixos: "Projector, cadeiras, quadro", estado: "Activo", responsavel: "Sister Angelica", observacoes: "" },
-      { id: "venue-3", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-01-01", updated_at: "2026-07-10", status: "Em Manutenção", nome_do_espaco: "Media Room", localizacao: "Sede Nacional", igreja: "church-hq", capacidade: 12, tipo: "Estúdio", equipamentos_fixos: "Câmaras, computadores, áudio", estado: "Em Manutenção", responsavel: "Media Team", observacoes: "Organizar cablagem." }
+      { id: "venue-2", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-01-01", updated_at: "2026-07-10", status: "Activo", nome_do_espaco: "Sala de Forma��o", localizacao: "Sede Nacional", igreja: "church-hq", capacidade: 60, tipo: "Sala", equipamentos_fixos: "Projector, cadeiras, quadro", estado: "Activo", responsavel: "Sister Angelica", observacoes: "" },
+      { id: "venue-3", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-01-01", updated_at: "2026-07-10", status: "Em Manuten��o", nome_do_espaco: "Media Room", localizacao: "Sede Nacional", igreja: "church-hq", capacidade: 12, tipo: "Est�dio", equipamentos_fixos: "C�maras, computadores, �udio", estado: "Em Manuten��o", responsavel: "Media Team", observacoes: "Organizar cablagem." }
     ],
     checklists: [
       { id: "check-1", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-05", updated_at: "2026-07-05", status: "Pronto", data_do_culto: "2026-07-05", igreja: "church-hq", espaco: "Auditório Principal", tipo_de_culto_ou_evento: "Domingo - 1º Culto", som_verificado: true, luzes_verificadas: true, ac_verificado: true, projector_verificado: true, cadeiras_organizadas: true, pulpito_pronto: true, cameras_prontas: true, microfones_prontos: true, limpeza_feita: true, responsavel: "Marcelo Panguene", estado: "Pronto", observacoes: "" },
-      { id: "check-2", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-09", updated_at: "2026-07-09", status: "Parcial", data_do_culto: "2026-07-12", igreja: "church-hq", espaco: "Auditório Principal", tipo_de_culto_ou_evento: "Domingo - 2º Culto", som_verificado: true, luzes_verificadas: false, ac_verificado: true, projector_verificado: true, cadeiras_organizadas: false, pulpito_pronto: true, cameras_prontas: true, microfones_prontos: true, limpeza_feita: false, responsavel: "Marcelo Panguene", estado: "Parcial", observacoes: "Concluir organização das cadeiras e limpeza." }
+      { id: "check-2", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-09", updated_at: "2026-07-09", status: "Parcial", data_do_culto: "2026-07-12", igreja: "church-hq", espaco: "Audit�rio Principal", tipo_de_culto_ou_evento: "Domingo - 2� Culto", som_verificado: true, luzes_verificadas: false, ac_verificado: true, projector_verificado: true, cadeiras_organizadas: false, pulpito_pronto: true, cameras_prontas: true, microfones_prontos: true, limpeza_feita: false, responsavel: "Marcelo Panguene", estado: "Parcial", observacoes: "Concluir organiza��o das cadeiras e limpeza." }
     ],
     reports: [
       { id: "ven-report-1", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-10", updated_at: "2026-07-10", status: "Concluído", name: "Inventário por Categoria", category: "Inventário", report_type: "inventoryByCategory" },
       { id: "ven-report-2", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-10", updated_at: "2026-07-10", status: "Concluído", name: "Inventário por Estado", category: "Inventário", report_type: "inventoryByStatus" },
       { id: "ven-report-3", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-10", updated_at: "2026-07-10", status: "Concluído", name: "Equipamentos Atribuídos ao Staff", category: "Staff", report_type: "staffEquipmentReport" },
       { id: "ven-report-4", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-10", updated_at: "2026-07-10", status: "Concluído", name: "Equipamentos Danificados", category: "Inventário", report_type: "damagedItemsReport" },
-      { id: "ven-report-5", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-10", updated_at: "2026-07-10", status: "Concluído", name: "Histórico de Reparações", category: "Manutenção", report_type: "repairHistory" },
+      { id: "ven-report-5", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-10", updated_at: "2026-07-10", status: "Conclu�do", name: "Hist�rico de Repara��es", category: "Manuten��o", report_type: "repairHistory" },
       { id: "ven-report-6", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-10", updated_at: "2026-07-10", status: "Concluído", name: "Movimentações por Período", category: "Movimentações", report_type: "movementsByPeriod" },
       { id: "ven-report-7", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-10", updated_at: "2026-07-10", status: "Concluído", name: "Checklist de Culto por Semana", category: "Checklist", report_type: "checklistByWeek" },
       { id: "ven-report-8", church_id: "church-hq", created_by: "Marcelo Panguene", updated_by: "Marcelo Panguene", created_at: "2026-07-10", updated_at: "2026-07-10", status: "Concluído", name: "Novas Aquisições por Mês", category: "Aquisições", report_type: "newAcquisitionsByMonth" }
@@ -3156,16 +3456,16 @@ const seedData = {
   prisonMinistry: {
     prisons: [
       { id: "prison-1", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-06-22", updated_at: "2026-07-05", status: "Activo", nome_da_prisao: "Cadeia Civil de Maputo", provincia: "Maputo", cidade: "Maputo", igreja_responsavel: "church-hq", representante_da_prisao: "Sr. Mateus Cumbe", contacto_do_representante: "+258 84 000 1001", estado: "Activo", observacoes: "Serviços semanais confirmados para quinta e sexta." },
-      { id: "prison-2", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-06-22", updated_at: "2026-07-05", status: "Activo", nome_da_prisao: "Centro de Reclusão Feminino", provincia: "Maputo", cidade: "Matola", igreja_responsavel: "church-hq", representante_da_prisao: "Dra. Celeste Mabunda", contacto_do_representante: "+258 84 000 1002", estado: "Activo", observacoes: "Prioridade para Rapsódia e Escola de Fundação." }
+      { id: "prison-2", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-06-22", updated_at: "2026-07-05", status: "Activo", nome_da_prisao: "Centro de Reclus�o Feminino", provincia: "Maputo", cidade: "Matola", igreja_responsavel: "church-hq", representante_da_prisao: "Dra. Celeste Mabunda", contacto_do_representante: "+258 84 000 1002", estado: "Activo", observacoes: "Prioridade para Raps�dia e Escola de Funda��o." }
     ],
     services: [
       { id: "ps-1", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-07-02", updated_at: "2026-07-02", status: "Relatório Submetido", data: "2026-07-02", dia_da_semana: "Quinta", prisao: "prison-1", igreja_responsavel: "church-hq", lider_responsavel: "Sister Janet Marquele", membros_que_foram: "Janet Marquele, Equipa de Células", numero_de_internos_presentes: 46, novos_convertidos: 12, interessados_em_escola_de_fundacao: 9, aula_de_fundacao_dada: true, tema_ou_mensagem: "Nova Vida em Cristo", observacoes: "Relatório e lista entregues.", estado: "Relatório Submetido" },
-      { id: "ps-2", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-07-03", updated_at: "2026-07-03", status: "Realizado", data: "2026-07-03", dia_da_semana: "Sexta", prisao: "prison-2", igreja_responsavel: "church-hq", lider_responsavel: "Sister Janet Marquele", membros_que_foram: "Janet Marquele, Escola de Fundação", numero_de_internos_presentes: 34, novos_convertidos: 7, interessados_em_escola_de_fundacao: 8, aula_de_fundacao_dada: false, tema_ou_mensagem: "O Amor do Pai", observacoes: "Enviar materiais de fundação.", estado: "Realizado" },
-      { id: "ps-3", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-07-09", updated_at: "2026-07-09", status: "Planeado", data: "2026-07-09", dia_da_semana: "Quinta", prisao: "prison-1", igreja_responsavel: "church-hq", lider_responsavel: "Sister Janet Marquele", membros_que_foram: "A confirmar", numero_de_internos_presentes: 0, novos_convertidos: 0, interessados_em_escola_de_fundacao: 0, aula_de_fundacao_dada: false, tema_ou_mensagem: "Comunhão com o Espírito", observacoes: "Confirmar entrada com representante.", estado: "Planeado" }
+      { id: "ps-2", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-07-03", updated_at: "2026-07-03", status: "Realizado", data: "2026-07-03", dia_da_semana: "Sexta", prisao: "prison-2", igreja_responsavel: "church-hq", lider_responsavel: "Sister Janet Marquele", membros_que_foram: "Janet Marquele, Escola de Funda��o", numero_de_internos_presentes: 34, novos_convertidos: 7, interessados_em_escola_de_fundacao: 8, aula_de_fundacao_dada: false, tema_ou_mensagem: "O Amor do Pai", observacoes: "Enviar materiais de funda��o.", estado: "Realizado" },
+      { id: "ps-3", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-07-09", updated_at: "2026-07-09", status: "Planeado", data: "2026-07-09", dia_da_semana: "Quinta", prisao: "prison-1", igreja_responsavel: "church-hq", lider_responsavel: "Sister Janet Marquele", membros_que_foram: "A confirmar", numero_de_internos_presentes: 0, novos_convertidos: 0, interessados_em_escola_de_fundacao: 0, aula_de_fundacao_dada: false, tema_ou_mensagem: "Comunh�o com o Esp�rito", observacoes: "Confirmar entrada com representante.", estado: "Planeado" }
     ],
     foundationStudents: [
       { id: "pfs-1", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-06-26", updated_at: "2026-07-05", status: "Em Curso", nome_do_participante: "Participante A", prisao: "prison-1", igreja_responsavel: "church-hq", aula_1_presenca: true, aula_2_presenca: true, aula_3_presenca: true, aula_4_presenca: false, aula_5_presenca: false, aula_6_presenca: false, aula_7_presenca: false, nota_exame: 0, pratica_evangelismo: false, aprovado: false, graduado: false, certificado_emitido: false, estado: "Em Curso", observacoes: "Turma prisional de Julho." },
-      { id: "pfs-2", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-06-20", updated_at: "2026-07-05", status: "Exame", nome_do_participante: "Participante B", prisao: "prison-2", igreja_responsavel: "church-hq", aula_1_presenca: true, aula_2_presenca: true, aula_3_presenca: true, aula_4_presenca: true, aula_5_presenca: true, aula_6_presenca: true, aula_7_presenca: true, nota_exame: 68, pratica_evangelismo: true, aprovado: false, graduado: false, certificado_emitido: false, estado: "Exame", observacoes: "Precisa repetir avaliação." }
+      { id: "pfs-2", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-06-20", updated_at: "2026-07-05", status: "Exame", nome_do_participante: "Participante B", prisao: "prison-2", igreja_responsavel: "church-hq", aula_1_presenca: true, aula_2_presenca: true, aula_3_presenca: true, aula_4_presenca: true, aula_5_presenca: true, aula_6_presenca: true, aula_7_presenca: true, nota_exame: 68, pratica_evangelismo: true, aprovado: false, graduado: false, certificado_emitido: false, estado: "Exame", observacoes: "Precisa repetir avalia��o." }
     ],
     weeklyAgenda: [
       { id: "pwa-1", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-07-06", updated_at: "2026-07-06", status: "Confirmado", semana_inicio: "2026-07-06", semana_fim: "2026-07-12", segunda_preparar_relatorios_e_agenda: true, terca_reuniao_de_oracao: true, quarta_followup_com_representante: true, quinta_servico_prisional: true, sexta_servico_prisional: true, sabado_domingo_acompanhamento: true, responsavel: "Sister Janet Marquele", estado: "Confirmado", observacoes: "Equipa preparada para quinta e sexta." }
@@ -3176,22 +3476,22 @@ const seedData = {
   },
   ministryMaterials: {
     catalogue: [
-      { id: "mat-1", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-06-22", updated_at: "2026-07-05", status: "Disponível", titulo_do_material: "Rapsódia de Realidades", tipo: "Rapsódia", autor_ou_origem: "LoveWorld", formato: "Físico", preco: 120, stock_actual: 180, stock_minimo: 40, estado: "Disponível", observacoes: "Distribuição semanal." },
-      { id: "mat-2", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-06-22", updated_at: "2026-07-05", status: "Disponível", titulo_do_material: "Manual da Escola de Fundação", tipo: "Manual", autor_ou_origem: "Christ Embassy", formato: "Físico", preco: 250, stock_actual: 26, stock_minimo: 25, estado: "Disponível", observacoes: "Atenção ao stock mínimo." }
+      { id: "mat-1", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-06-22", updated_at: "2026-07-05", status: "Dispon�vel", titulo_do_material: "Raps�dia de Realidades", tipo: "Raps�dia", autor_ou_origem: "LoveWorld", formato: "F�sico", preco: 120, stock_actual: 180, stock_minimo: 40, estado: "Dispon�vel", observacoes: "Distribui��o semanal." },
+      { id: "mat-2", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-06-22", updated_at: "2026-07-05", status: "Dispon�vel", titulo_do_material: "Manual da Escola de Funda��o", tipo: "Manual", autor_ou_origem: "Christ Embassy", formato: "F�sico", preco: 250, stock_actual: 26, stock_minimo: 25, estado: "Dispon�vel", observacoes: "Aten��o ao stock m�nimo." }
     ],
     sales: [
       { id: "sale-1", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-06-28", updated_at: "2026-06-28", status: "Confirmado", data: "2026-06-28", semana_do_relatorio: "2026-06-22/2026-06-28", comprador: "Relatório Semanal", igreja: "church-hq", titulo_do_material: "Rapsódia de Realidades", quantidade: 18, valor: 3440, metodo_de_pagamento: "M-Pesa", pop_prova_de_pagamento: "POP-22-28JUN", recebido_por: "Sister Janet Marquele", estado: "Confirmado", observacoes: "Resumo baseado no relatório semanal." },
       { id: "sale-2", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-07-05", updated_at: "2026-07-05", status: "Confirmado", data: "2026-07-05", semana_do_relatorio: "2026-06-29/2026-07-05", comprador: "Relatório Semanal", igreja: "church-hq", titulo_do_material: "Rapsódia de Realidades", quantidade: 17, valor: 6960, metodo_de_pagamento: "Banco", pop_prova_de_pagamento: "POP-29JUN-05JUL", recebido_por: "Sister Janet Marquele", estado: "Confirmado", observacoes: "Resumo baseado no relatório semanal." }
     ],
     distributions: [
-      { id: "dist-1", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-07-05", updated_at: "2026-07-05", status: "Solicitado", data: "2026-07-08", igreja_destinataria: "church-virtual", titulo_do_material: "Rapsódia de Realidades", quantidade: 35, tipo_de_distribuicao: "Distribuição Gratuita", responsavel_pelo_envio: "Sister Janet Marquele", recebido_por: "", estado: "Solicitado", observacoes: "Para evangelismo online e prisional." }
+      { id: "dist-1", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-07-05", updated_at: "2026-07-05", status: "Solicitado", data: "2026-07-08", igreja_destinataria: "church-virtual", titulo_do_material: "Raps�dia de Realidades", quantidade: 35, tipo_de_distribuicao: "Distribui��o Gratuita", responsavel_pelo_envio: "Sister Janet Marquele", recebido_por: "", estado: "Solicitado", observacoes: "Para evangelismo online e prisional." }
     ],
     weeklyStock: [
       { id: "stock-1", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-06-28", updated_at: "2026-06-28", status: "Concluído", semana_inicio: "2026-06-22", semana_fim: "2026-06-28", titulo_do_material: "Rapsódia de Realidades", stock_inicial: 215, entradas: 0, saidas: 18, stock_final: 197, diferenca: 0, observacoes: "18 unidades, 3440 MTn." },
       { id: "stock-2", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-07-05", updated_at: "2026-07-05", status: "Concluído", semana_inicio: "2026-06-29", semana_fim: "2026-07-05", titulo_do_material: "Rapsódia de Realidades", stock_inicial: 197, entradas: 0, saidas: 17, stock_final: 180, diferenca: 0, observacoes: "17 unidades, 6960 MTn." }
     ],
     freeFunds: [
-      { id: "fund-1", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-07-01", updated_at: "2026-07-05", status: "Activa", campanha: "Rapsódia para Prisões", valor_alvo: 25000, valor_levantado: 10400, materiais_a_distribuir: "Rapsódia de Realidades, Manuais de Fundação", igrejas_beneficiadas: "National HQ, Igreja Online", estado: "Activa", observacoes: "Fundo para distribuição gratuita em prisões." }
+      { id: "fund-1", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-07-01", updated_at: "2026-07-05", status: "Activa", campanha: "Raps�dia para Pris�es", valor_alvo: 25000, valor_levantado: 10400, materiais_a_distribuir: "Raps�dia de Realidades, Manuais de Funda��o", igrejas_beneficiadas: "National HQ, Igreja Online", estado: "Activa", observacoes: "Fundo para distribui��o gratuita em pris�es." }
     ],
     reports: [
       { id: "mat-report-1", church_id: "church-hq", created_by: "Sister Janet Marquele", updated_by: "Sister Janet Marquele", created_at: "2026-07-05", updated_at: "2026-07-05", status: "Concluído", name: "Relatório Semanal de Materiais", category: "22 Junho - 05 Julho 2026", quantity: 35, amount: 10400 }
@@ -3204,7 +3504,71 @@ const seedData = {
   },
   programs: [{ id: "prog-1", church_id: "church-hq", name: "Sunday Service", owner: "Programs Team", status: "Scheduled" }],
   partnership: [{ id: "part-1", church_id: "church-virtual", nome: "Carlos", apelido: "Muianga", name: "Loveworld SAT Partner", telefone: "866877389", whatsapp: "866877389", email: "carlos@example.com", endereco: "Online", celula: "Virtual", category: "Loveworld SAT", status: "Active" }],
-  media: [{ id: "media-1", church_id: "church-hq", name: "Sunday Live Service", channel: "YouTube", status: "Active" }],
+  media: {
+    technicians: [
+      { id: "mt-1", staff_id: "staff-4", full_name: "Marcelo Panguene", title: "Sr.", phone: "860000104", whatsapp: "860000104", email: "marcelo.panguene@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-media", department_name: "M�dia", status: "Activo", profile_photo: "", notes: "Respons�vel pela direc��o t�cnica e transmiss�o.", roles_can_perform: ["mediaDirector", "mediaSupervisor", "streamingTechnician", "videoMixerOperator"], preferred_services: ["Todos"], availability_notes: "Dispon�vel para cultos principais e programas globais.", skill_level: "Supervisor", start_date: "2023-01-10", supervisor_id: "u-17", supervisor_name: "Pastor Kene Ume", created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mt-2", full_name: "T�cnico A", title: "Irm�o", phone: "860001001", whatsapp: "860001001", email: "tecnico.a@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-media", department_name: "M�dia", status: "Activo", profile_photo: "", notes: "", roles_can_perform: ["cameraOperator"], preferred_services: ["Domingo 07:30", "Domingo 09:30"], availability_notes: "Dispon�vel aos domingos.", skill_level: "Interm�dio", start_date: "2025-02-01", supervisor_id: "mt-1", supervisor_name: "Marcelo Panguene", created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mt-3", full_name: "T�cnico B", title: "Irm�o", phone: "860001002", whatsapp: "860001002", email: "tecnico.b@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-media", department_name: "M�dia", status: "Activo", profile_photo: "", notes: "", roles_can_perform: ["soundTechnician"], preferred_services: ["Todos"], availability_notes: "Som e apoio t�cnico.", skill_level: "Avan�ado", start_date: "2024-09-12", supervisor_id: "mt-1", supervisor_name: "Marcelo Panguene", created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mt-4", full_name: "T�cnico C", title: "Irm�", phone: "860001003", whatsapp: "860001003", email: "tecnico.c@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-media", department_name: "M�dia", status: "Em Treinamento", profile_photo: "", notes: "", roles_can_perform: ["videoMixerOperator", "slidesOperator"], preferred_services: ["Quarta-feira 18:00"], availability_notes: "Em treinamento no video mixer.", skill_level: "Iniciante", start_date: "2026-02-10", supervisor_id: "mt-1", supervisor_name: "Marcelo Panguene", created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mt-5", full_name: "T�cnico D", title: "Irm�", phone: "860001004", whatsapp: "860001004", email: "tecnico.d@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-media", department_name: "M�dia", status: "Activo", profile_photo: "", notes: "", roles_can_perform: ["photographer"], preferred_services: ["Domingo 09:30"], availability_notes: "Fotografia e social media.", skill_level: "Interm�dio", start_date: "2025-06-20", supervisor_id: "mt-1", supervisor_name: "Marcelo Panguene", created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mt-6", full_name: "T�cnico E", title: "Irm�o", phone: "860001005", whatsapp: "860001005", email: "tecnico.e@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-media", department_name: "M�dia", status: "Activo", profile_photo: "", notes: "", roles_can_perform: ["scriptureOperator", "slidesOperator"], preferred_services: ["Quarta-feira 18:00", "Domingo 07:30"], availability_notes: "ProPresenter / EasyWorship.", skill_level: "Avan�ado", start_date: "2024-04-18", supervisor_id: "mt-1", supervisor_name: "Marcelo Panguene", created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mt-7", full_name: "T�cnico F", title: "Irm�o", phone: "860001006", whatsapp: "860001006", email: "tecnico.f@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-media", department_name: "M�dia", status: "Activo", profile_photo: "", notes: "", roles_can_perform: ["streamingTechnician"], preferred_services: ["Todos"], availability_notes: "Streaming e rede.", skill_level: "Interm�dio", start_date: "2025-11-03", supervisor_id: "mt-1", supervisor_name: "Marcelo Panguene", created_at: "2026-07-01", updated_at: "2026-07-15" }
+    ],
+    roles: [
+      { id: "mr-1", name: "Operador de C�mara", key: "cameraOperator", description: "Opera c�maras durante cultos e programas.", category: "Video", required_skill_level: "Interm�dio", is_required_for_service: true, allow_multiple: true, is_active: true, created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mr-2", name: "Fot�grafo", key: "photographer", description: "Regista momentos para arquivo e comunica��o.", category: "Foto", required_skill_level: "Interm�dio", is_required_for_service: false, allow_multiple: true, is_active: true, created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mr-3", name: "T�cnico de Som", key: "soundTechnician", description: "Gere som, microfones e capta��o.", category: "Som", required_skill_level: "Avan�ado", is_required_for_service: true, allow_multiple: false, is_active: true, created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mr-4", name: "Operador de Video Mixer", key: "videoMixerOperator", description: "Opera switcher/video mixer.", category: "Video", required_skill_level: "Avançado", is_required_for_service: true, allow_multiple: false, is_active: true, created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mr-5", name: "T�cnico de Transmiss�o", key: "streamingTechnician", description: "Configura e monitoriza transmiss�es.", category: "Streaming", required_skill_level: "Avan�ado", is_required_for_service: true, allow_multiple: false, is_active: true, created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mr-6", name: "Lançador de Escrituras", key: "scriptureOperator", description: "Projecta escrituras, letras e slides.", category: "Slides", required_skill_level: "Intermédio", is_required_for_service: true, allow_multiple: false, is_active: true, created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mr-7", name: "Supervisor de Mídia", key: "mediaSupervisor", description: "Coordena a equipa em cada culto.", category: "Liderança", required_skill_level: "Supervisor", is_required_for_service: true, allow_multiple: false, is_active: true, created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mr-8", name: "Director de Mídia", key: "mediaDirector", description: "Responsável pelo ministério de mídia.", category: "Liderança", required_skill_level: "Supervisor", is_required_for_service: false, allow_multiple: false, is_active: true, created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mr-9", name: "Operador de ProPresenter / EasyWorship", key: "presentationOperator", description: "Opera letras, escrituras e slides de apoio ao culto.", category: "Slides", required_skill_level: "Intermédio", is_required_for_service: true, allow_multiple: false, is_active: true, created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mr-10", name: "Operador de Slides", key: "slidesOperator", description: "Apoia projec��o de apresenta��es e conte�dos visuais.", category: "Slides", required_skill_level: "Iniciante", is_required_for_service: false, allow_multiple: true, is_active: true, created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mr-11", name: "Assistente T�cnico", key: "technicalAssistant", description: "Apoia montagem, cabos, comunica��o e substitui��es.", category: "Suporte", required_skill_level: "Iniciante", is_required_for_service: false, allow_multiple: true, is_active: true, created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mr-12", name: "Ilumina��o", key: "lightingOperator", description: "Gere luzes e ambiente visual do culto.", category: "Luzes", required_skill_level: "Interm�dio", is_required_for_service: false, allow_multiple: false, is_active: true, created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mr-13", name: "Edi��o de V�deo", key: "videoEditor", description: "Edita clips, mensagens e conte�do p�s-culto.", category: "P�s-produ��o", required_skill_level: "Interm�dio", is_required_for_service: false, allow_multiple: true, is_active: true, created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mr-14", name: "Social Media / Publica��o", key: "socialMediaPublisher", description: "Publica clips, chamadas e destaques nas redes sociais.", category: "Comunica��o", required_skill_level: "Interm�dio", is_required_for_service: false, allow_multiple: true, is_active: true, created_at: "2026-07-01", updated_at: "2026-07-15" }
+    ],
+    services: [
+      { id: "ms-1", name: "Culto de Quarta-feira", service_type: "Culto Regular", day_of_week: "Quarta-feira", time: "18:00", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", is_recurring: true, recurrence_rule: "weekly", is_special_event: false, event_date: "", status: "Activo", needs_streaming: true, needs_full_team: true, channels_used: ["Facebook", "YouTube"], responsible_name: "Marcelo Panguene", notes: "" },
+      { id: "ms-2", name: "Domingo 1º Culto", service_type: "Culto Regular", day_of_week: "Domingo", time: "07:30", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", is_recurring: true, recurrence_rule: "weekly", is_special_event: false, event_date: "", status: "Activo", needs_streaming: true, needs_full_team: true, channels_used: ["Facebook", "YouTube"], responsible_name: "Marcelo Panguene", notes: "" },
+      { id: "ms-3", name: "Domingo 2º Culto", service_type: "Culto Regular", day_of_week: "Domingo", time: "09:30", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", is_recurring: true, recurrence_rule: "weekly", is_special_event: false, event_date: "", status: "Activo", needs_streaming: true, needs_full_team: true, channels_used: ["Facebook", "YouTube", "Live TV"], responsible_name: "Marcelo Panguene", notes: "" },
+      { id: "ms-4", name: "Ora��es", service_type: "Ora��o", day_of_week: "Segunda-feira", time: "17:30", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", is_recurring: true, recurrence_rule: "weekly", is_special_event: false, event_date: "", status: "Activo", needs_streaming: false, needs_full_team: false, channels_used: ["Zoom"], responsible_name: "Media Supervisor Demo", notes: "" },
+      { id: "ms-5", name: "Master Class", service_type: "Master Class", day_of_week: "Segunda-feira", time: "19:00", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", is_recurring: true, recurrence_rule: "weekly", is_special_event: false, event_date: "", status: "Activo", needs_streaming: true, needs_full_team: false, channels_used: ["Zoom"], responsible_name: "Media Supervisor Demo", notes: "" },
+      { id: "ms-6", name: "Pray-a-thon", service_type: "Programa Especial", day_of_week: "", time: "18:00", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", is_recurring: false, recurrence_rule: "", is_special_event: true, event_date: "2026-07-24", status: "Planeado", needs_streaming: true, needs_full_team: true, channels_used: ["Facebook", "YouTube"], responsible_name: "Marcelo Panguene", notes: "Programa especial requer equipa de mídia." }
+    ],
+    schedules: [
+      { id: "sch-1", service_id: "ms-3", service_name: "Domingo 2º Culto", service_date: "2026-07-19", church_id: "church-hq", status: "Publicada", supervisor_id: "mt-1", supervisor_name: "Marcelo Panguene", notes: "Escala principal de domingo.", assignments: [
+        { id: "as-1", role_id: "mr-7", role_name: "Supervisor de Mídia", technician_id: "mt-1", technician_name: "Marcelo Panguene", status: "Confirmado", check_in_time: "", check_out_time: "", attendance_status: "Presente", performance_status: "Avaliado", notes: "" },
+        { id: "as-2", role_id: "mr-4", role_name: "Operador de Video Mixer", technician_id: "mt-4", technician_name: "Técnico C", status: "Escalado", check_in_time: "", check_out_time: "", attendance_status: "Pendente", performance_status: "Pendente", notes: "" },
+        { id: "as-3", role_id: "mr-3", role_name: "Técnico de Som", technician_id: "mt-3", technician_name: "Técnico B", status: "Confirmado", check_in_time: "", check_out_time: "", attendance_status: "Pendente", performance_status: "Pendente", notes: "" },
+        { id: "as-4", role_id: "mr-1", role_name: "Operador de C�mara", technician_id: "mt-2", technician_name: "T�cnico A", status: "Confirmado", check_in_time: "", check_out_time: "", attendance_status: "Pendente", performance_status: "Pendente", notes: "C�mara 1" },
+        { id: "as-5", role_id: "mr-2", role_name: "Fotógrafo", technician_id: "mt-5", technician_name: "Técnico D", status: "Escalado", check_in_time: "", check_out_time: "", attendance_status: "Pendente", performance_status: "Pendente", notes: "" },
+        { id: "as-6", role_id: "mr-6", role_name: "Lançador de Escrituras", technician_id: "mt-6", technician_name: "Técnico E", status: "Confirmado", check_in_time: "", check_out_time: "", attendance_status: "Pendente", performance_status: "Pendente", notes: "" },
+        { id: "as-7", role_id: "mr-5", role_name: "T�cnico de Transmiss�o", technician_id: "mt-7", technician_name: "T�cnico F", status: "Confirmado", check_in_time: "", check_out_time: "", attendance_status: "Pendente", performance_status: "Pendente", notes: "" }
+      ], created_at: "2026-07-15", updated_at: "2026-07-15" },
+      { id: "sch-2", service_id: "ms-1", service_name: "Culto de Quarta-feira", service_date: "2026-07-15", church_id: "church-hq", status: "Confirmada", supervisor_id: "mt-1", supervisor_name: "Marcelo Panguene", notes: "", assignments: [
+        { id: "as-8", role_id: "mr-7", role_name: "Supervisor de Mídia", technician_id: "mt-1", technician_name: "Marcelo Panguene", status: "Confirmado", attendance_status: "Pendente", performance_status: "Pendente", notes: "" },
+        { id: "as-9", role_id: "mr-6", role_name: "Lançador de Escrituras", technician_id: "mt-6", technician_name: "Técnico E", status: "Confirmado", attendance_status: "Pendente", performance_status: "Pendente", notes: "" }
+      ], created_at: "2026-07-14", updated_at: "2026-07-15" }
+    ],
+    streamingChannels: [
+      { id: "mc-1", name: "Facebook", platform: "Facebook", channel_url: "https://www.facebook.com/christembassymozambique", status: "Activo", responsible_user_id: "u-20", responsible_name: "Marcelo Panguene", notes: "Canal principal de live.", created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mc-2", name: "YouTube", platform: "YouTube", channel_url: "https://www.youtube.com/@embaixadadecristomocambiqu6895", status: "Activo", responsible_user_id: "u-20", responsible_name: "Marcelo Panguene", notes: "Cultos e arquivo de vídeos.", created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mc-3", name: "Instagram", platform: "Instagram", channel_url: "https://www.instagram.com/embaixada_de_cristo_mocambique/", status: "Por Configurar", responsible_user_id: "u-21", responsible_name: "Media Supervisor Demo", notes: "Uso para clips e chamadas.", created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mc-4", name: "Zoom", platform: "Zoom", channel_url: "#", status: "Activo", responsible_user_id: "u-21", responsible_name: "Media Supervisor Demo", notes: "Orações e Master Class.", created_at: "2026-07-01", updated_at: "2026-07-15" },
+      { id: "mc-5", name: "Live TV no Site P�blico", platform: "Live TV", channel_url: "https://salesio.github.io/ce-mozambique/culto.html", status: "Em Prepara��o", responsible_user_id: "u-20", responsible_name: "Marcelo Panguene", notes: "Transmiss�o directa para a p�gina LIVE TV do site p�blico.", created_at: "2026-07-01", updated_at: "2026-07-15" }
+    ],
+    performanceEvaluations: [
+      { id: "mev-1", technician_id: "mt-2", technician_name: "T�cnico A", schedule_id: "sch-1", service_id: "ms-3", service_date: "2026-07-19", role_performed: "Operador de C�mara", evaluated_by: "", evaluated_at: "", punctuality_score: 0, technical_quality_score: 0, teamwork_score: 0, responsibility_score: 0, problem_solving_score: 0, spiritual_attitude_score: 0, overall_score: 0, strengths: "", areas_to_improve: "", notes: "", status: "Pendente" },
+      { id: "mev-2", technician_id: "mt-1", technician_name: "Marcelo Panguene", schedule_id: "sch-1", service_id: "ms-3", service_date: "2026-07-19", role_performed: "Supervisor de Mídia", evaluated_by: "Pastor Kene Ume", evaluated_at: "2026-07-20", punctuality_score: 5, technical_quality_score: 5, teamwork_score: 5, responsibility_score: 5, problem_solving_score: 5, spiritual_attitude_score: 5, overall_score: 5, strengths: "Liderança e estabilidade técnica.", areas_to_improve: "", notes: "", status: "Avaliado" }
+    ],
+    awards: [
+      { id: "maw-1", year: 2026, category: "T�cnico do Ano", technician_id: "mt-1", technician_name: "Marcelo Panguene", reason: "Excel�ncia na supervis�o e transmiss�o.", score_basis: "M�dia 5/5 + presen�a consistente", awarded_by: "Pastor Kene Ume", awarded_at: "", notes: "Candidato sugerido." },
+      { id: "maw-2", year: 2026, category: "Mais Pontual", technician_id: "mt-6", technician_name: "Técnico E", reason: "Alta pontualidade nas escalas.", score_basis: "Presença pontual", awarded_by: "Marcelo Panguene", awarded_at: "", notes: "Candidato sugerido." }
+    ]
+  },
   auditLogs: [{ id: "audit-1", church_id: "church-hq", actor: "Admin Principal", action: "Created operations prototype", date: "2026-07-06" }]
 };
 
@@ -3214,6 +3578,132 @@ let activeUser = state.users[0];
 let activeRoute = "dashboard";
 let modalMode = null;
 let modalType = null;
+
+function normalizeMediaMockData() {
+  const media = state.media || {};
+  const technicianNames = {
+    "mt-1": "Marcelo Panguene",
+    "mt-2": "Técnico A",
+    "mt-3": "Técnico B",
+    "mt-4": "Técnico C",
+    "mt-5": "Técnico D",
+    "mt-6": "Técnico E",
+    "mt-7": "Técnico F"
+  };
+  const roleNames = {
+    "mr-1": "Operador de Câmara",
+    "mr-2": "Fotógrafo",
+    "mr-3": "Técnico de Som",
+    "mr-4": "Operador de Video Mixer",
+    "mr-5": "Técnico de Transmissão",
+    "mr-6": "Lançador de Escrituras",
+    "mr-7": "Supervisor de Mídia",
+    "mr-8": "Director de Mídia",
+    "mr-9": "Operador de ProPresenter / EasyWorship",
+    "mr-10": "Operador de Slides",
+    "mr-11": "Assistente Técnico",
+    "mr-12": "Iluminação",
+    "mr-13": "Edição de Vídeo",
+    "mr-14": "Social Media / Publicação"
+  };
+  const roleDescriptions = {
+    "mr-1": "Opera câmaras durante cultos e programas.",
+    "mr-2": "Regista momentos para arquivo e comunicação.",
+    "mr-3": "Gere som, microfones e captação.",
+    "mr-4": "Opera switcher/video mixer.",
+    "mr-5": "Configura e monitoriza transmissões.",
+    "mr-6": "Projecta escrituras, letras e slides.",
+    "mr-7": "Coordena a equipa em cada culto.",
+    "mr-8": "Responsável pelo ministério de mídia.",
+    "mr-9": "Opera letras, escrituras e slides de apoio ao culto.",
+    "mr-10": "Apoia projecção de apresentações e conteúdos visuais.",
+    "mr-11": "Apoia montagem, cabos, comunicação e substituições.",
+    "mr-12": "Gere luzes e ambiente visual do culto.",
+    "mr-13": "Edita clips, mensagens e conteúdo pós-culto.",
+    "mr-14": "Publica clips, chamadas e destaques nas redes sociais."
+  };
+  const roleCategories = {
+    "mr-7": "Liderança",
+    "mr-8": "Liderança",
+    "mr-13": "Pós-produção",
+    "mr-14": "Comunicação"
+  };
+  const skillLevels = {
+    "mr-1": "Intermédio",
+    "mr-2": "Intermédio",
+    "mr-3": "Avançado",
+    "mr-4": "Avançado",
+    "mr-5": "Avançado",
+    "mr-6": "Intermédio",
+    "mr-9": "Intermédio",
+    "mr-12": "Intermédio",
+    "mr-13": "Intermédio",
+    "mr-14": "Intermédio"
+  };
+  (media.technicians || []).forEach((item) => {
+    item.full_name = technicianNames[item.id] || item.full_name;
+    item.department_name = "Mídia";
+    item.title = item.id === "mt-4" || item.id === "mt-5" ? "Irmã" : (item.title === "Sr." ? "Sr." : "Irmão");
+    if (item.skill_level && /Avan|Interm|Supervisor|Iniciante/i.test(item.skill_level)) {
+      item.skill_level = item.skill_level.replace(/Avan.*/i, "Avançado").replace(/Interm.*/i, "Intermédio");
+    }
+  });
+  (media.roles || []).forEach((item) => {
+    item.name = roleNames[item.id] || item.name;
+    item.description = roleDescriptions[item.id] || item.description;
+    item.category = roleCategories[item.id] || item.category;
+    item.required_skill_level = skillLevels[item.id] || item.required_skill_level;
+  });
+  (media.services || []).forEach((item) => {
+    if (item.id === "ms-2") item.name = "Domingo 1º Culto";
+    if (item.id === "ms-3") item.name = "Domingo 2º Culto";
+    if (item.id === "ms-4") {
+      item.name = "Orações";
+      item.service_type = "Oração";
+    }
+    if (item.id === "ms-6") item.notes = "Programa especial requer equipa de mídia.";
+  });
+  (media.schedules || []).forEach((schedule) => {
+    if (schedule.service_id === "ms-3") schedule.service_name = "Domingo 2º Culto";
+    (schedule.assignments || []).forEach((assignment) => {
+      assignment.role_name = roleNames[assignment.role_id] || assignment.role_name;
+      assignment.technician_name = technicianNames[assignment.technician_id] || assignment.technician_name;
+      if (assignment.notes && /C.mara/i.test(assignment.notes)) assignment.notes = "Câmara 1";
+    });
+  });
+  (media.streamingChannels || []).forEach((item) => {
+    if (item.id === "mc-2") item.notes = "Cultos e arquivo de vídeos.";
+    if (item.id === "mc-4") item.notes = "Orações e Master Class.";
+    if (item.id === "mc-5") {
+      item.name = "Live TV no Site Público";
+      item.status = "Em Preparação";
+      item.notes = "Transmissão directa para a página LIVE TV do site público.";
+    }
+  });
+  (media.performanceEvaluations || []).forEach((item) => {
+    item.technician_name = technicianNames[item.technician_id] || item.technician_name;
+    if (item.role_performed && item.technician_id === "mt-2") item.role_performed = "Operador de Câmara";
+    if (item.technician_id === "mt-1") {
+      item.role_performed = "Supervisor de Mídia";
+      item.strengths = "Liderança e estabilidade técnica.";
+    }
+  });
+  (media.awards || []).forEach((item) => {
+    item.technician_name = technicianNames[item.technician_id] || item.technician_name;
+    if (item.id === "maw-1") {
+      item.category = "Técnico do Ano";
+      item.reason = "Excelência na supervisão e transmissão.";
+      item.score_basis = "Média 5/5 + presença consistente";
+    }
+    if (item.id === "maw-2") {
+      item.category = "Mais Pontual";
+      item.reason = "Alta pontualidade nas escalas.";
+      item.score_basis = "Presença pontual";
+    }
+  });
+}
+
+normalizeMediaMockData();
 let modalRecordId = null;
 let churchDrawerMode = null;
 let churchDrawerRecordId = null;
@@ -3291,9 +3781,11 @@ const staffHrPageState = {
 const foundationPageState = { panel: "", filter: {} };
 const firstTimersPageState = { filter: {} };
 const followUpPageState = { filter: {} };
+const counselingPageState = { tab: "overview", filter: {} };
 const fevoPageState = { filter: {} };
 const venuePageState = { route: "venueInventory", filter: {} };
 const sacramentsPageState = { panel: "", filter: {} };
+const mediaPageState = { tab: "overview", filter: {} };
 const reportsPageState = { domain: "", filters: { period: "month", dateFrom: "", dateTo: "", churchId: "", department: "", status: "", card_filter: "", search: "" } };
 const domainReportFilters = {
   staff: { period: "month", churchId: "", department: "", status: "", card_filter: "", search: "" },
@@ -3308,6 +3800,7 @@ const domainReportFilters = {
   prison: { period: "month", churchId: "", status: "", search: "" },
   materials: { period: "month", churchId: "", card_filter: "", search: "" }
 };
+const dashboardPageState = { period: "week", dateFrom: "", dateTo: "" };
 window.staffHrPageState = staffHrPageState;
 window.financePageState = financePageState;
 window.churchPageState = churchPageState;
@@ -3315,11 +3808,14 @@ window.requisitionsPageState = requisitionsPageState;
 window.foundationPageState = foundationPageState;
 window.firstTimersPageState = firstTimersPageState;
 window.followUpPageState = followUpPageState;
+window.counselingPageState = counselingPageState;
 window.fevoPageState = fevoPageState;
 window.venuePageState = venuePageState;
 window.sacramentsPageState = sacramentsPageState;
+window.mediaPageState = mediaPageState;
 window.reportsPageState = reportsPageState;
 window.domainReportFilters = domainReportFilters;
+window.dashboardPageState = dashboardPageState;
 
 function renderDomainReportsPanel(domainId, options = {}) {
   const framework = window.CEReportsFramework;
@@ -3352,8 +3848,342 @@ function getDomainReportContext(domainId) {
   return framework.getContext(adapter, state, activeUser, filters);
 }
 
+Object.assign(TEXT.pt, {
+  loginLead: "Acesso interno para acompanhamento espiritual, igrejas, células, escola, finanças e administração.",
+  loginNote: "Protótipo frontend-first. Autenticação real e base de dados entram na próxima fase.",
+  actions: "Acções",
+  to: "Até",
+  no: "Não",
+  address: "Endereço",
+  method: "Método",
+  foundation: "Fundação",
+  cellInterest: "Interesse em Célula",
+  practical: "Prática",
+  filterMonth: "Filtrar por Mês",
+  filterCell: "Filtrar por Célula",
+  empty: "Ainda não existem registos para este módulo.",
+  reports: "Relatórios",
+  foundationSchool: "Escola de Fundação",
+  finance: "Finanças",
+  cellMinistry: "Ministério de Células",
+  media: "Mídia",
+  usersRoles: "Utilizadores e Funções",
+  settings: "Definições",
+  requisitions: "Requisições & Aprovações",
+  staffHr: "Staff & Recursos Humanos",
+  staffHrSubtitle: "Registo de equipa, funções, salários, desempenho, presenças e equipamentos atribuídos.",
+  requisitionsSubtitle: "Fluxo de requisições departamentais: revisão, aprovação pastoral e liberação de recursos.",
+  reqTabOverview: "Visão Geral",
+  reqTabNew: "Nova Requisição",
+  reqTabReceived: "Requisições Recebidas",
+  reqTabReview: "Em Aprovação Pastoral",
+  reqInReview: "Em Revisão",
+  reqNumber: "Nº Requisição",
+  reqTitle: "Título",
+  reqUrgency: "Urgência",
+  reqNeededBy: "Necessário até",
+  reqJustification: "Justificação",
+  reqDescription: "Descrição",
+  reqQuotation: "Nº Cotação",
+  reqReturnForCorrection: "Devolver para Correção",
+  reqRejectionReason: "Motivo da Rejeição",
+  reqApprovedAwaitingRelease: "Aprovado - Aguardando Liberação de Recursos",
+  reqHistory: "Histórico da Requisição",
+  reqDetails: "Detalhes da Requisição",
+  reqSectionData: "Dados da Requisição",
+  reqSectionDescription: "Descrição e Justificativa",
+  reqSectionInternalReview: "Revisão Interna",
+  reqSectionPastoralDecision: "Decisão Pastoral",
+  reqReviewDate: "Data da revisão",
+  reqReviewNotes: "Notas da revisão",
+  reqObservations: "Observações",
+  reqBudget: "Orçamento",
+  reqApproveSuccess: "Requisição aprovada e enviada para Finanças para liberação de recursos.",
+  reqRejectSuccess: "Requisição rejeitada.",
+  reqReturnSuccess: "Requisição devolvida para correção.",
+  reqRejectionRequired: "Indique o motivo da rejeição.",
+  reqReturnedForCorrection: "Devolvido para Correção",
+  reqRegisteredInventory: "Registado no Inventário",
+  finAwaitingRelease: "Aguardando Liberação",
+  finPendingInFinance: "Pendente em Finanças",
+  finSentToFinance: "Enviado para Finanças",
+  finResourceDisbursement: "Saída de Recursos",
+  finApprovedRequisitions: "Requisições Aprovadas",
+  finReleasedThisMonth: "Recursos Liberados Este Mês",
+  finTotalReleasedMonth: "Total Liberado Este Mês",
+  finPartiallyPaid: "Requisições Parcialmente Pagas",
+  finReleaseDate: "Data de Liberação",
+  finPaymentReference: "Referência de Pagamento",
+  finApprovedAt: "Data de aprovação",
+  finApprovedReqHint: "Requisições aprovadas pelo Pastor Principal: liberação de recursos e pagamentos.",
+  finExceedsApproved: "O valor a liberar não pode exceder o valor aprovado.",
+  finPaymentMethodRequired: "Seleccione o método de pagamento.",
+  finReleaseDateRequired: "Indique a data de liberação.",
+  finMarkPaidSuccess: "Requisição marcada como paga.",
+  finSentToInventory: "Enviar para Inventário",
+  finSentToInventorySuccess: "Rascunho criado no Inventário.",
+  reqSendToInventory: "Enviar para Inventário",
+  reqTabReports: "Relatórios de Requisições",
+  reqReportsTitle: "Relatórios de Requisições",
+  reqReportsHint: "Análise do workflow e dos valores aprovados vs liberados.",
+  reqReportWorkflow: "Workflow das Requisições",
+  reqReportByDepartment: "Relatório por Departamento",
+  reqReportByChurch: "Relatório por Igreja",
+  reqReportByRequester: "Relatório por Solicitante",
+  reqReportByType: "Requisições por Tipo",
+  reqReportMonthly: "Evolução Mensal",
+  reqAvgPerRequisition: "Média por Requisição",
+  rptInventoryAwaiting: "Aguardando Liberação",
+  reqPrintReport: "Imprimir Relatório",
+  reqViewRelease: "Ver Liberação",
+  reqRequisitionStatus: "Estado da Requisição",
+  reqHighestRequisition: "Maior Requisição",
+  reqLastApproved: "Última Aprovação",
+  reqCompleted: "Concluídas",
+  rptExecutiveTitle: "Relatórios Executivos",
+  rptExecutiveHint: "Visão consolidada por departamento: clique para ver detalhes e exportar.",
+  rptFinanceExpensesTitle: "Despesas & Liberações",
+  rptFinanceExpensesHint: "Saídas financeiras por requisições aprovadas (não inclui receitas).",
+  rptReqInventoryTitle: "Requisições para Inventário",
+  rptReqInventoryHint: "Acompanhamento de aquisições liberadas e registo no inventário.",
+  rptStaffTitle: "Relatórios de Staff & RH",
+  rptStaffHint: "Headcount, salários pendentes, avaliações e distribuição por igreja.",
+  rptFoundationTitle: "Relatórios Escola de Fundação",
+  rptFoundationHint: "Funil de inscrição, progresso, exames e graduações.",
+  rptFunnelHint: "Primeiros visitantes, contacto, célula, fundação e membro.",
+  rptCellTitle: "Relatórios de Células",
+  rptCellHint: "Presenças, primeiros visitantes, novos convertidos e relatórios semanais.",
+  rptVenueTitle: "Relatórios de Inventário",
+  rptSacramentsHint: "Batismos, casamentos e apresentação de bebés.",
+  rptPrisonTitle: "Relatórios Ministério Carcerário",
+  rptPrisonHint: "Serviços, presenças e formação na prisão.",
+  rptMaterialsTitle: "Relatórios Materiais Ministeriais",
+  rptMaterialsHint: "Vendas, stock, distribuições e alertas de stock baixo.",
+  rptFoundationFunnel: "Funil da Escola de Fundação",
+  staffTabOverview: "Visão Geral",
+  staffTabRoles: "Funções",
+  staffTabSalaries: "Salários & Subsídios",
+  staffTabAttendance: "Presenças",
+  staffTabEquipment: "Equipamentos Atribuídos",
+  staffTabReports: "Relatórios",
+  staffTabBirthdays: "Aniversários",
+  evaluationPeriod: "Período de Avaliação",
+  taskCompletionScore: "Conclusão de Tarefas",
+  reportSubmissionScore: "Entrega de Relatórios",
+  supervisorRating: "Avaliação do Supervisor",
+  overallScore: "Pontuação Geral",
+  areasToImprove: "Áreas a Melhorar",
+  actionPlan: "Plano de Acção",
+  evaluatedAt: "Data da Avaliação",
+  staffRoleTitle: "Função",
+  accessDeniedText: "Não tem permissão para aceder a esta área. Contacte o administrador se precisar de acesso.",
+  navLockedTooltip: "Sem permissão para aceder a este módulo",
+  noPermission: "Sem permissão",
+  noPermissionArea: "Não tem permissão para aceder a esta área.",
+  accessMatrixModule: "Módulo",
+  accessMatrixScope: "Âmbito",
+  heroTitle: "Uma plataforma viva para cuidar da igreja, das almas e da visão.",
+  heroText: "Operações da Christ Embassy Mozambique com acompanhamento pastoral, crescimento celular, escola, finanças, sacramentos e relatórios por igreja.",
+  foundationEnrolments: "Inscrições na Escola de Fundação",
+  graduations: "Graduações",
+  activeCells: "Células Activas",
+  monthlyGiving: "Contribuições Mensais",
+  churchesReporting: "Igrejas com Relatório Este Mês",
+  firstTimersByMonth: "Primeira Vez por Mês",
+  givingByCategory: "Contribuições por Categoria",
+  givingByChurch: "Contribuições por Igreja",
+  foundationProgress: "Progresso da Escola de Fundação",
+  cellGrowth: "Crescimento de Células",
+  thisMonth: "Este mês",
+  needsAction: "Precisa de acção",
+  dashboardOverview: "Visão Geral Operacional",
+  mediaSubtitle: "Gestão da equipa técnica, transmissões, escalas por culto, canais, avaliações e premiações.",
+  mediaOverview: "Visão Geral",
+  mediaTechnicalTeam: "Equipa Técnica",
+  mediaRolesFunctions: "Papéis & Funções",
+  mediaSchedules: "Escalas",
+  mediaServicesPrograms: "Cultos & Programas",
+  mediaStreamingChannels: "Canais de Transmissão",
+  mediaPerformanceEvaluation: "Avaliação de Performance",
+  mediaReports: "Relatórios",
+  mediaAwards: "Premiações",
+  mediaTotalTechnicians: "Total de Técnicos",
+  mediaActiveTechnicians: "Técnicos Activos",
+  mediaSchedulesThisWeek: "Escalas Esta Semana",
+  mediaCompleteTeams: "Cultos com Equipa Completa",
+  mediaIncompleteTeams: "Cultos com Falta de Técnicos",
+  mediaNextService: "Próximo Culto",
+  mediaPendingEvaluations: "Avaliações Pendentes",
+  mediaMonthlyHighlights: "Destaques do Mês",
+  mediaInventoryPlaceholder: "Equipamentos de mídia serão ligados ao módulo Espaços & Inventário.",
+  cameraOperator: "Operador de Câmara",
+  photographer: "Fotógrafo",
+  soundTechnician: "Técnico de Som",
+  videoMixerOperator: "Operador de Video Mixer",
+  streamingTechnician: "Técnico de Transmissão",
+  scriptureOperator: "Lançador de Escrituras",
+  mediaSupervisor: "Supervisor de Mídia",
+  mediaDirector: "Director de Mídia",
+  presentationOperator: "Operador de ProPresenter / EasyWorship",
+  slidesOperator: "Operador de Slides",
+  technicalAssistant: "Assistente Técnico",
+  lightingOperator: "Iluminação",
+  videoEditor: "Edição de Vídeo",
+  socialMediaPublisher: "Social Media / Publicação",
+  pendingEvaluation: "Avaliação pendente",
+  technicianOfYear: "Técnico do Ano",
+  mostPunctual: "Mais Pontual",
+  bestTeamSpirit: "Melhor Espírito de Equipa",
+  breakthroughOfYear: "Revelação do Ano",
+  mostImproved: "Mais Melhorado",
+  counselingSubtitle: "Gestão pastoral de pedidos, agendamentos, conselheiros, encaminhamentos, feedback e histórico sensível.",
+  counselingOverview: "Visão Geral",
+  cellLeadership: "Células & Liderança",
+  cellOverview: "Visão Geral",
+  cellCells: "Células",
+  cellLeaders: "Líderes",
+  fevoFull: "Acompanhamento, Evangelização, Visitação e Oração",
+  fevoSubtitle: "Equipas semanais rotativas para acompanhamento, evangelização, visitação e oração, coordenadas por Sister Cassandra.",
+  venueInventory: "Gestão de Espaços & Inventário",
+  venueInventoryShort: "Espaços & Inventário",
+  cellAlecOverview: "Visão Geral ALEC",
+  cellMinistryOverview: "Visão Geral",
+  cellReportsArea: "Relatórios de Células / Sister Eduarda",
+  receivedReports: "Relatórios Recebidos",
+  cellEvaluation: "Avaliação",
+  cellPerformance: "Desempenho das Células",
+  leadersAttention: "Líderes em Atenção",
+  leadersNeedingAttention: "Líderes em Atenção",
+  finalValidation: "Validação Final",
+  consolidation: "Consolidação",
+  unread: "Não lidas",
+  unreadState: "Não lida",
+  actionRequired: "Acção necessária",
+  approvalRequired: "Aprovação necessária",
+  notificationInboxSubtitle: "Notificações internas filtradas por utilizador, função, departamento, igreja e permissões.",
+  newRequisitionSubmitted: "Nova requisição submetida",
+  requisitionPastoralApproval: "Requisição aguarda aprovação pastoral",
+  requisitionApproved: "Requisição aprovada",
+  requisitionRejected: "Requisição rejeitada",
+  requisitionReturned: "Requisição devolvida para correção",
+  publicGivingSubmission: "Nova submissão pública de contribuição",
+  verifySubmission: "Verificar Submissão",
+  reviewRequisition: "Rever Requisição",
+  correctRequisition: "Corrigir Requisição",
+  viewRelease: "Ver Liberação"
+});
+
+Object.assign(TEXT.pt, {
+  mediaAssignments: "Funções Técnicas",
+  mediaAssignmentsHint: "Seleccione os técnicos registados para operar cada equipamento e função do culto.",
+  mediaCameraOne: "Operador de Câmara 1",
+  mediaCameraTwo: "Operador de Câmara 2",
+  selectTechnician: "Seleccionar técnico",
+  technicianScheduled: "Escalado",
+  required: "Obrigatório",
+  optional: "Opcional"
+});
+
+Object.assign(TEXT.en, {
+  mediaAssignments: "Technical Assignments",
+  mediaAssignmentsHint: "Select registered technicians for each equipment and service role.",
+  mediaCameraOne: "Camera Operator 1",
+  mediaCameraTwo: "Camera Operator 2",
+  selectTechnician: "Select technician",
+  technicianScheduled: "Scheduled",
+  required: "Required",
+  optional: "Optional"
+});
+
+Object.assign(TEXT.pt, {
+  mediaCameraThree: "Operador de Câmara 3",
+  mediaCameraFour: "Operador de Câmara 4",
+  mediaCameraPolicy: "Segundas-feiras usam 2 operadores de câmara. Nos outros cultos e serviços, a escala deve prever 4 operadores de câmara.",
+  mondayCameraDisabled: "Não usado à segunda",
+  print: "Imprimir"
+});
+
+Object.assign(TEXT.en, {
+  mediaCameraThree: "Camera Operator 3",
+  mediaCameraFour: "Camera Operator 4",
+  mediaCameraPolicy: "Mondays use 2 camera operators. Other services should be scheduled with 4 camera operators.",
+  mondayCameraDisabled: "Not used on Monday",
+  print: "Print"
+});
+
+function cleanDisplayText(value) {
+  let text = String(value ?? "");
+  if (!text) return text;
+  if (/[ÃÂâï¿½]/.test(text)) {
+    try {
+      const bytes = Uint8Array.from([...text].map((char) => char.charCodeAt(0) & 255));
+      const decoded = new TextDecoder("utf-8", { fatal: false }).decode(bytes);
+      if (decoded && !/�/.test(decoded.replace(/�/g, ""))) text = decoded;
+      else if ((decoded.match(/[A-Za-zÀ-ÿ]/g) || []).length >= (text.match(/[A-Za-z]/g) || []).length * 0.7) text = decoded;
+    } catch (error) {
+      // Keep the original and continue with the replacement table below.
+    }
+  }
+  const replacements = [
+    [/�{2}es/g, "ções"], [/�{2}o/g, "ção"], [/�{2}a/g, "ça"],
+    [/Manuten�+o/gi, "Manutenção"], [/Repara�+es/gi, "Reparações"], [/Invent�rio/gi, "Inventário"],
+    [/requisi�+es/gi, "requisições"], [/Requisi�+es/g, "Requisições"], [/Requisi�+o/g, "Requisição"],
+    [/submiss�o/gi, "submissão"], [/Submiss�o/g, "Submissão"], [/contribui�+o/gi, "contribuição"],
+    [/verifica�+o/gi, "verificação"], [/Verifica�+o/g, "Verificação"], [/libera�+o/gi, "liberação"],
+    [/ac�+o/gi, "acção"], [/Ac�+o/g, "Acção"], [/ac�+es/gi, "acções"], [/Ac�+es/g, "Acções"],
+    [/avalia�+o/gi, "avaliação"], [/Avalia�+o/g, "Avaliação"], [/avalia�+es/gi, "avaliações"],
+    [/dedica�+o/gi, "dedicação"], [/Dedica�+o/g, "Dedicação"], [/beb�s/gi, "bebés"], [/Beb�s/g, "Bebés"],
+    [/fam�lia/gi, "família"], [/Fam�lia/g, "Família"], [/t�cnico/gi, "técnico"], [/T�cnico/g, "Técnico"],
+    [/m�dia/gi, "mídia"], [/M�dia/g, "Mídia"], [/m�todo/gi, "método"], [/M�todo/g, "Método"],
+    [/m�dulo/gi, "módulo"], [/M�dulo/g, "Módulo"], [/m�s/gi, "mês"], [/M�s/g, "Mês"],
+    [/m�e/gi, "mãe"], [/M�e/g, "Mãe"], [/m�trica/gi, "métrica"], [/M�trica/g, "Métrica"],
+    [/n�o/gi, "não"], [/N�o/g, "Não"], [/j�/gi, "já"], [/J�/g, "Já"], [/at�/gi, "até"], [/At�/g, "Até"],
+    [/pr�ximo/gi, "próximo"], [/Pr�ximo/g, "Próximo"], [/pr�xima/gi, "próxima"], [/Pr�xima/g, "Próxima"],
+    [/hist�rico/gi, "histórico"], [/Hist�rico/g, "Histórico"], [/prot�tipo/gi, "protótipo"], [/Prot�tipo/g, "Protótipo"],
+    [/c�lula/gi, "célula"], [/C�lula/g, "Célula"], [/c�lulas/gi, "células"], [/C�lulas/g, "Células"],
+    [/fun�+o/gi, "função"], [/Fun�+o/g, "Função"], [/permiss�es/gi, "permissões"], [/notifica�+es/gi, "notificações"],
+    [/autentica�+o/gi, "autenticação"], [/integra�+o/gi, "integração"], [/Funda�+o/g, "Fundação"], [/funda�+o/g, "fundação"],
+    [/finan�as/gi, "finanças"], [/Finan�as/g, "Finanças"], [/vis�o/gi, "visão"], [/Vis�o/g, "Visão"],
+    [/miss�o/gi, "missão"], [/Miss�o/g, "Missão"], [/ora�+o/gi, "oração"], [/Ora�+o/g, "Oração"],
+    [/visita�+o/gi, "visitação"], [/Visita�+o/g, "Visitação"], [/evangeliza�+o/gi, "evangelização"],
+    [/forma�+o/gi, "formação"], [/Forma�+o/g, "Formação"], [/pris�o/gi, "prisão"], [/Pris�o/g, "Prisão"],
+    [/espa�os/gi, "espaços"], [/Espa�os/g, "Espaços"], [/movimenta�+es/gi, "movimentações"],
+    [/aquisi�+es/gi, "aquisições"], [/Aquisi�+es/g, "Aquisições"], [/aten�+o/gi, "atenção"], [/Aten�+o/g, "Atenção"],
+    [/descri�+o/gi, "descrição"], [/Descri�+o/g, "Descrição"], [/observa�+o/gi, "observação"], [/classifica�+o/gi, "classificação"],
+    [/corre�+o/gi, "correcção"], [/Corre�+o/g, "Correcção"], [/devolu�+o/gi, "devolução"], [/evolu�+o/gi, "evolução"],
+    [/sal�rios/gi, "salários"], [/sa�das/gi, "saídas"], [/�ltima/gi, "última"], [/�rea/gi, "área"], [/�mbito/gi, "âmbito"]
+  ];
+  replacements.forEach(([pattern, replacement]) => {
+    text = text.replace(pattern, replacement);
+  });
+  return text;
+}
+
+function cleanRenderedText(root = document) {
+  if (!root) return;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      const tag = node.parentElement?.tagName;
+      return ["SCRIPT", "STYLE", "TEXTAREA"].includes(tag) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach((node) => {
+    const cleaned = cleanDisplayText(node.nodeValue);
+    if (cleaned !== node.nodeValue) node.nodeValue = cleaned;
+  });
+  root.querySelectorAll?.("[title], [aria-label], [placeholder]").forEach((el) => {
+    ["title", "aria-label", "placeholder"].forEach((attr) => {
+      if (!el.hasAttribute(attr)) return;
+      const cleaned = cleanDisplayText(el.getAttribute(attr));
+      if (cleaned !== el.getAttribute(attr)) el.setAttribute(attr, cleaned);
+    });
+  });
+}
+
 function L(key) {
-  return TEXT[lang]?.[key] || TEXT.en[key] || key;
+  return cleanDisplayText(TEXT[lang]?.[key] || TEXT.en[key] || key);
 }
 
 function byId(id) {
@@ -3368,6 +4198,7 @@ function loadState() {
       const result = importPublicGivingQueue(initial);
       initial = result.state;
     }
+    initial = normalizeState(initial);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(initial));
     return structuredClone(initial);
   }
@@ -3410,6 +4241,40 @@ function normalizeStaffProfileRecord(seed = {}, saved = {}) {
   return window.CEStaffHr?.enrichStaffProfile ? window.CEStaffHr.enrichStaffProfile(withDefaults) : withDefaults;
 }
 
+function normalizeUserProfile(user = {}, churches = [], departments = []) {
+  const church = churches.find((item) => item.id === user.church_id || item.church_id === user.church_id);
+  const deptNames = [
+    ...(user.department_names || []),
+    user.assigned_department
+  ].filter(Boolean);
+  const deptIds = new Set(user.department_ids || []);
+  departments.forEach((dept) => {
+    if (deptNames.some((name) => String(dept.name || "").toLowerCase() === String(name).toLowerCase())) {
+      deptIds.add(dept.id);
+    }
+  });
+  const moduleNames = window.CEAccessControl?.ALL_MODULES || [];
+  const permissions = moduleNames
+    .map((module) => window.CEAccessControl?.resolveModuleAccess?.(user, module))
+    .filter(Boolean)
+    .map((permission) => ({ ...permission, module: permission.module }));
+  const primaryScope = user.scope || (
+    (user.department_permissions || []).includes("*") ? "all" :
+    user.can_view_all_churches ? "national" :
+    user.role === "Staff Member" ? "own" :
+    deptIds.size || user.assigned_department ? "department" :
+    "church"
+  );
+  return {
+    ...user,
+    church_name: user.church_name || church?.church_name || church?.public_name || "",
+    department_ids: [...deptIds],
+    department_names: [...new Set(deptNames)],
+    permissions,
+    scope: primaryScope
+  };
+}
+
 function normalizeState(saved) {
   const merged = { ...structuredClone(seedData), ...saved };
   const savedUserIds = new Set((merged.users || []).map((user) => user.id));
@@ -3418,9 +4283,10 @@ function normalizeState(saved) {
   });
   const venueDemoUserIds = new Set(["u-8", "u-11", "u-12", "u-13"]);
   merged.users = (merged.users || []).map((user) => {
-    if (!venueDemoUserIds.has(user.id)) return user;
+    if (!venueDemoUserIds.has(user.id)) return normalizeUserProfile(user, merged.churches || [], merged.departments || []);
     const seedUser = seedData.users.find((item) => item.id === user.id);
-    return seedUser ? { ...user, department_permissions: [...seedUser.department_permissions], assigned_department: seedUser.assigned_department, assigned_staff_name: seedUser.assigned_staff_name } : user;
+    const mergedUser = seedUser ? { ...user, department_permissions: [...seedUser.department_permissions], assigned_department: seedUser.assigned_department, assigned_staff_name: seedUser.assigned_staff_name } : user;
+    return normalizeUserProfile(mergedUser, merged.churches || [], merged.departments || []);
   });
   merged.prisonMinistry = {
     ...structuredClone(seedData.prisonMinistry),
@@ -3430,6 +4296,18 @@ function normalizeState(saved) {
     ...structuredClone(seedData.ministryMaterials),
     ...(saved.ministryMaterials || {})
   };
+  merged.media = Array.isArray(saved.media)
+    ? structuredClone(seedData.media)
+    : {
+      ...structuredClone(seedData.media),
+      ...(saved.media || {})
+    };
+  merged.counseling = Array.isArray(saved.counseling)
+    ? structuredClone(seedData.counseling)
+    : {
+      ...structuredClone(seedData.counseling),
+      ...(saved.counseling || {})
+    };
   merged.cellLeadership = {
     ...structuredClone(seedData.cellLeadership),
     ...(saved.cellLeadership || {})
@@ -3484,8 +4362,8 @@ function normalizeState(saved) {
     }
   });
   merged.churches = savedChurches.length ? savedChurches : seedChurches;
-  const seedFinance = seedData.finance.map((record) => migrateFinanceRecord(structuredClone(record)));
-  const savedFinance = (merged.finance || []).map((record) => migrateFinanceRecord(record));
+  const seedFinance = seedData.finance.map((record) => migrateFinanceRecord(structuredClone(record), merged.churches));
+  const savedFinance = (merged.finance || []).map((record) => migrateFinanceRecord(record, merged.churches));
   const savedFinanceIds = new Set(savedFinance.map((record) => record.id));
   seedFinance.forEach((record) => {
     if (!savedFinanceIds.has(record.id)) savedFinance.push(record);
@@ -3520,9 +4398,104 @@ function saveState(action = "Updated data") {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
-function scoped(records) {
+function scoped(records, module = "dashboard") {
+  const list = Array.isArray(records) ? records : [];
+  if (window.CEAccessControl?.filterDataByScope) {
+    return window.CEAccessControl.filterDataByScope(list, activeUser, module);
+  }
   const ids = activeUser.can_view_all_churches ? state.churches.map((church) => church.id) : [activeUser.church_id];
-  return records.filter((record) => ids.includes(record.church_id));
+  return list.filter((record) => !record.church_id || ids.includes(record.church_id));
+}
+
+function cellGroupName(idOrName) {
+  return (state.cellGroups || []).find((group) => group.id === idOrName || group.group_name === idOrName)?.group_name || idOrName || "";
+}
+
+function cellName(idOrName) {
+  return (state.cellRegistry || []).find((cell) => cell.id === idOrName || cell.cell_name === idOrName)?.cell_name || idOrName || "";
+}
+
+function getCellGroupsForChurch(churchId = "") {
+  return scopedNested(state.cellGroups || [])
+    .filter((group) => !churchId || group.church_id === churchId)
+    .sort((a, b) => String(a.group_name || "").localeCompare(String(b.group_name || "")));
+}
+
+function getCellsForGroup(cellGroupId = "", churchId = "") {
+  return scopedNested(state.cellRegistry || [])
+    .filter((cell) => (!churchId || cell.church_id === churchId) && (!cellGroupId || cell.group_id === cellGroupId || cell.cell_group_id === cellGroupId || cell.group_cell_id === cellGroupId))
+    .sort((a, b) => String(a.cell_name || "").localeCompare(String(b.cell_name || "")));
+}
+
+function cellGroupSelectField(name, label, record = {}, { colClass = "col-md-6" } = {}) {
+  const churchId = record.church_id || record.igreja || "";
+  const current = record[name] || record.cell_group_id || "";
+  const groups = getCellGroupsForChurch(churchId);
+  return `
+    <div class="${colClass}">
+      <label class="form-label">${label}</label>
+      <select name="${name}" class="form-select" data-cell-group-select data-cell-name-target="${name === "grupo_de_celula" ? "celula" : "cell_id"}">
+        <option value="">${L("selectCellGroup")}</option>
+        ${groups.map((group) => `<option value="${group.id}" ${current === group.id || current === group.group_name ? "selected" : ""}>${group.group_name}</option>`).join("")}
+      </select>
+    </div>`;
+}
+
+function cellSelectField(name, label, record = {}, { colClass = "col-md-6" } = {}) {
+  const churchId = record.church_id || record.igreja || "";
+  const groupId = record.cell_group_id || record.group_id || record.group_cell_id || record.grupo_de_celula || "";
+  const selectedGroup = (state.cellGroups || []).find((group) => group.id === groupId || group.group_name === groupId);
+  const cells = selectedGroup ? getCellsForGroup(selectedGroup.id, churchId) : [];
+  const current = record[name] || record.cell_id || "";
+  const disabled = !selectedGroup;
+  return `
+    <div class="${colClass}">
+      <label class="form-label">${label}</label>
+      <select name="${name}" class="form-select" data-cell-select ${disabled ? "disabled" : ""}>
+        <option value="">${L("selectCell")}</option>
+        ${cells.map((cell) => `<option value="${cell.id}" ${current === cell.id || current === cell.cell_name ? "selected" : ""}>${cell.cell_name}</option>`).join("")}
+      </select>
+      <small class="cell-select-empty ${selectedGroup && !cells.length ? "" : "d-none"}">${L("noCellsInGroup")}</small>
+    </div>`;
+}
+
+function enrichCellSelectionFields(data) {
+  const groupValue = data.cell_group_id || data.group_id || data.grupo_de_celula || "";
+  const cellValue = data.cell_id || data.celula || data.celula_preferida || "";
+  const group = (state.cellGroups || []).find((item) => item.id === groupValue || item.group_name === groupValue);
+  const cell = (state.cellRegistry || []).find((item) => item.id === cellValue || item.cell_name === cellValue);
+  if (group) {
+    if ("group_id" in data) data.group_id = group.id;
+    data.cell_group_id = group.id;
+    data.cell_group_name = group.group_name;
+    data.grupo_de_celula = group.group_name;
+  }
+  if (cell) {
+    data.cell_id = cell.id;
+    data.cell_name = cell.cell_name;
+    data.celula = cell.cell_name;
+    if ("celula_preferida" in data) data.celula_preferida = cell.cell_name;
+  }
+}
+
+function updateDependentCellSelect(groupSelect) {
+  const form = groupSelect.closest("form") || document;
+  const cellSelect = form.querySelector(`[name="${groupSelect.dataset.cellNameTarget || "cell_id"}"]`) || form.querySelector("[data-cell-select]");
+  if (!cellSelect) return;
+  const churchId = form.querySelector("[name='church_id'], [name='igreja_id'], [name='igreja']")?.value || "";
+  const cells = getCellsForGroup(groupSelect.value, churchId);
+  cellSelect.innerHTML = `<option value="">${L("selectCell")}</option>${cells.map((cell) => `<option value="${cell.id}">${cell.cell_name}</option>`).join("")}`;
+  cellSelect.disabled = !groupSelect.value;
+  cellSelect.closest(".col-md-6, .col-12")?.querySelector(".cell-select-empty")?.classList.toggle("d-none", !groupSelect.value || cells.length > 0);
+}
+
+function refreshCellGroupSelectForChurch(form, churchId = "") {
+  const groupSelect = form.querySelector("[data-cell-group-select]");
+  if (!groupSelect) return;
+  const groups = getCellGroupsForChurch(churchId);
+  groupSelect.innerHTML = `<option value="">${L("selectCellGroup")}</option>${groups.map((group) => `<option value="${group.id}">${group.group_name}</option>`).join("")}`;
+  groupSelect.value = "";
+  updateDependentCellSelect(groupSelect);
 }
 
 function hasPermission(...permissions) {
@@ -3694,9 +4667,32 @@ function migrateChurchRecord(church) {
   };
 }
 
-function churchName(id) {
-  const church = state.churches.find((item) => item.id === id || item.church_id === id);
+function churchNameFromList(id, churches = []) {
+  const church = churches.find((item) => item.id === id || item.church_id === id);
   return church?.public_name || church?.church_name || id || "-";
+}
+
+function churchName(id) {
+  return churchNameFromList(id, state.churches || []);
+}
+
+function churchFilterAliases(value = "", selectedText = "") {
+  const raw = String(value || "");
+  const church = (state.churches || []).find((item) =>
+    item.id === raw || item.church_id === raw || item.church_name === raw || item.public_name === raw
+  );
+  return [
+    raw,
+    selectedText,
+    church?.id,
+    church?.church_id,
+    church?.church_name,
+    church?.public_name
+  ].filter(Boolean).map((item) => String(item).trim().toLowerCase());
+}
+
+function churchFilterTokens(record = {}) {
+  return churchFilterAliases(record.church_id || record.igreja || record.church_name || "", record.church_name || record.igreja || "").join(" ");
 }
 
 function churchTypeText(type) {
@@ -3709,7 +4705,7 @@ function churchPhone(church) {
   return [church.phone_primary, church.phone_secondary].filter(Boolean).join(" / ") || "-";
 }
 
-function migrateFinanceRecord(record) {
+function migrateFinanceRecord(record, churches = null) {
   if (!record) return record;
   const legacyStatus = {
     "Pending Verification": FINANCE_STATUS_PENDING,
@@ -3728,7 +4724,7 @@ function migrateFinanceRecord(record) {
     motivo_rejeicao: record.motivo_rejeicao || "",
     observacoes: record.observacoes || "",
     whatsapp: record.whatsapp || "",
-    igreja: record.igreja || churchName(churchId),
+    igreja: record.igreja || (Array.isArray(churches) ? churchNameFromList(churchId, churches) : churchName(churchId)),
     source_type: record.source_type || "manual",
     member_id: record.member_id || "",
     contributor_id: record.contributor_id || "",
@@ -3740,6 +4736,10 @@ function migrateFinanceRecord(record) {
     submission_group_id: record.submission_group_id || "",
     public_submission_id: record.public_submission_id || "",
     mensagem_transferencia: record.mensagem_transferencia || "",
+    cell_group_id: record.cell_group_id || "",
+    cell_group_name: record.cell_group_name || record.grupo_de_celula || "",
+    cell_id: record.cell_id || "",
+    cell_name: record.cell_name || record.celula || "",
     grupo_de_celula: record.grupo_de_celula || "",
     data_de_aniversario: record.data_de_aniversario || "",
     outros_descricao: record.outros_descricao || "",
@@ -3756,6 +4756,7 @@ function getScopedFinanceList() {
 function getFinanceReportLabels() {
   return {
     period: L("date"),
+    search: L("search"),
     periodToday: L("financePeriodToday"),
     periodWeek: L("financePeriodWeek"),
     periodMonth: L("financePeriodMonth"),
@@ -3985,9 +4986,15 @@ function buildFinanceExportHtml(reportType, list, stats, churchRows, partnerProf
   return summary + body;
 }
 
-function moduleTabButton(label, { active = false, attrs = "" } = {}) {
-  if (typeof TabButton === "function") return TabButton(label, { active, attrs });
-  return `<button type="button" class="tab-button ${active ? "active" : ""}" ${attrs}>${label}</button>`;
+function moduleTabButton(label, { active = false, attrs = "", disabled = false, tooltip = "" } = {}) {
+  let safeAttrs = attrs || "";
+  const routeMatch = safeAttrs.match(/data-route="([^"]+)"/);
+  if (routeMatch && !safeAttrs.includes("onclick=")) {
+    safeAttrs += ` onclick="window.setRoute && window.setRoute('${routeMatch[1]}'); return false;"`;
+  }
+  safeAttrs = `${safeAttrs}${disabled && tooltip ? ` title="${tooltip}"` : ""}`;
+  if (typeof TabButton === "function") return TabButton(label, { active, attrs: safeAttrs, disabled });
+  return `<button type="button" class="tab-button ${active ? "active" : ""} ${disabled ? "is-disabled" : ""}" ${safeAttrs}${disabled ? " disabled" : ""}>${disabled ? `<i class="bi bi-lock-fill me-1" aria-hidden="true"></i>` : ""}${label}</button>`;
 }
 
 function moduleTabsNav(buttonsHtml, className = "") {
@@ -4013,15 +5020,21 @@ function financeModuleTabs() {
     ["partners", L("financeTabPartners")],
     ["exports", L("financeTabExports")]
   ];
-  return moduleTabsNav(tabs.map(([key, label]) =>
-    moduleTabButton(label, { active: financePageState.tab === key, attrs: `data-finance-tab="${key}"` })
-  ).join(""), "finance-module-tabs");
+  return moduleTabsNav(tabs.map(([key, label]) => {
+    const canAccess = window.CEAccessControl?.canAccessTab?.(activeUser, "finance", key) !== false;
+    return moduleTabButton(label, {
+      active: financePageState.tab === key,
+      attrs: `data-finance-tab="${key}"${canAccess ? "" : ` aria-disabled="true" data-locked-tab="finance:${key}"`}`,
+      disabled: !canAccess,
+      tooltip: L("navLockedTooltip")
+    });
+  }).join(""), "finance-module-tabs");
 }
 
 function migrateRequisitionsFinanceState() {
   const disb = window.CEFinanceDisbursements;
   if (!disb) return;
-  const approvedStatuses = ["Aprovado — Aguardando Liberação de Recursos", "Aprovado", "Recursos Liberados", "Comprado / Executado", "Registado no Inventário", "Fechado"];
+  const approvedStatuses = ["Aprovado � Aguardando Libera��o de Recursos", "Aprovado", "Recursos Liberados", "Comprado / Executado", "Registado no Invent�rio", "Fechado"];
   (state.requisitions || []).forEach((r) => {
     disb.migrateRequisitionFinanceFields(r);
     if (approvedStatuses.includes(r.status) || r.finance_status) {
@@ -4034,7 +5047,7 @@ function financeApprovedReqBadge(financeStatus) {
   const disb = window.CEFinanceDisbursements;
   const cls = disb?.financeStatusBadgeClass?.(financeStatus) || "warn";
   const labels = {
-    "Aguardando Liberação": "finAwaitingRelease",
+    "Aguardando Libera��o": "finAwaitingRelease",
     "Recursos Liberados": "finResourcesReleased",
     "Pago": "finMarkPaid",
     "Parcialmente Pago": "finPartialPayment",
@@ -4070,7 +5083,7 @@ function financeApprovedReqFilterBar(filters) {
     <div class="col-md-3">
       <label class="form-label">${L("finFinanceStatus")}</label>
       <select name="finance_status" class="form-select"><option value="">${L("all")}</option>${Object.values(statuses).map((s) => {
-        const map = { "Aguardando Liberação": "finAwaitingRelease", "Recursos Liberados": "finResourcesReleased", "Pago": "finMarkPaid", "Parcialmente Pago": "finPartialPayment", "Cancelado": "rejected" };
+        const map = { "Aguardando Libera��o": "finAwaitingRelease", "Recursos Liberados": "finResourcesReleased", "Pago": "finMarkPaid", "Parcialmente Pago": "finPartialPayment", "Cancelado": "rejected" };
         return `<option value="${s}" ${filters.finance_status === s ? "selected" : ""}>${L(map[s] || "finFinanceStatus")}</option>`;
       }).join("")}</select>
     </div>
@@ -4091,7 +5104,7 @@ function financeApprovedReqFilterBar(filters) {
       <input name="maxValue" type="number" class="form-control" value="${filters.maxValue || ""}">
     </div>
     <div class="col-md-4 d-flex align-items-end gap-2">
-      <button type="submit" class="btn btn-ce-gold">${L("save")}</button>
+      <button type="submit" class="btn btn-ce-gold"><i class="bi bi-search me-1"></i>${L("search")}</button>
       <button type="button" class="btn btn-outline-glass" data-finance-approved-req-clear>${L("clearFilters")}</button>
     </div>
   </form>`;
@@ -4100,9 +5113,9 @@ function financeApprovedReqFilterBar(filters) {
 function financeApprovedReqActions(record) {
   const disb = window.CEFinanceDisbursements;
   const canRelease = disb?.canReleaseResources?.(activeUser);
-  const finStatus = record.finance_status || "Aguardando Liberação";
+  const finStatus = record.finance_status || "Aguardando Libera��o";
   const buttons = [["view", "financeApprovedReq", record.id, L("view")]];
-  if (canRelease && finStatus === "Aguardando Liberação") {
+  if (canRelease && finStatus === "Aguardando Libera��o") {
     buttons.push(["releaseResources", "financeApprovedReq", record.id, L("reqReleaseResources")]);
   }
   if (canRelease && ["Recursos Liberados", "Parcialmente Pago"].includes(finStatus)) {
@@ -4111,7 +5124,7 @@ function financeApprovedReqActions(record) {
       buttons.push(["partialPayment", "financeApprovedReq", record.id, L("finPartialPayment")]);
     }
   }
-  const invTypes = new Set(["Nova Aquisição", "Equipamento", "Material de Ministério", "Reparação"]);
+  const invTypes = new Set(["Nova Aquisi��o", "Equipamento", "Material de Minist�rio", "Repara��o"]);
   if (canRelease && invTypes.has(record.requisition_type) && record.finance_status === "Recursos Liberados" && !record.inventory_item_id) {
     buttons.push(["sendToInventory", "financeApprovedReq", record.id, L("finSentToInventory")]);
   }
@@ -4250,7 +5263,7 @@ function requisitionReportFilterBar(filters, formAttr = "data-requisition-report
     <div class="col-md-1"><label class="form-label">Min</label><input name="minValue" type="number" class="form-control" value="${filters.minValue || ""}"></div>
     <div class="col-md-1"><label class="form-label">Max</label><input name="maxValue" type="number" class="form-control" value="${filters.maxValue || ""}"></div>
     <div class="col-md-4 d-flex align-items-end gap-2">
-      <button type="submit" class="btn btn-ce-gold">${L("save")}</button>
+      <button type="submit" class="btn btn-ce-gold"><i class="bi bi-search me-1"></i>${L("search")}</button>
       <button type="button" class="btn btn-outline-glass" data-requisition-report-clear>${L("clearFilters")}</button>
     </div>
   </form>`;
@@ -4270,7 +5283,7 @@ function requisitionReportTableRows(list) {
     money(r.approved_amount),
     money(r.released_amount),
     money(r.pending_amount),
-    financeApprovedReqBadge(r.finance_status || "Aguardando Liberação"),
+    financeApprovedReqBadge(r.finance_status || "Aguardando Libera��o"),
     r.released_by || r.resources_released_by || "-",
     formatDateTime(r.released_at || r.resources_released_at).split(",")[0] || "-",
     financeApprovedReqActions(r)
@@ -4368,7 +5381,7 @@ function renderRequisitionReportsPanel(options = {}) {
   const summaryCards = `
     <div class="row g-3 summary-cards-row requisition-report-cards mb-4">
       ${sm("bi-clipboard-check", L("finApprovedRequisitions"), stats.approvedCount || stats.total, moduleKey, { targetTab: options.targetTab || "approvedRequisitions", filterPayload: { card_filter: "approved" } })}
-      ${sm("bi-hourglass-split", L("finAwaitingRelease"), stats.awaiting, moduleKey, { targetTab: options.targetTab || "approvedRequisitions", filterPayload: { card_filter: "awaiting", finance_status: "Aguardando Liberação" } })}
+      ${sm("bi-hourglass-split", L("finAwaitingRelease"), stats.awaiting, moduleKey, { targetTab: options.targetTab || "approvedRequisitions", filterPayload: { card_filter: "awaiting", finance_status: "Aguardando Libera��o" } })}
       ${sm("bi-check-circle", L("finResourcesReleased"), stats.released, moduleKey, { targetTab: options.targetTab || "approvedRequisitions", filterPayload: { card_filter: "released", finance_status: "Recursos Liberados" } })}
       ${sm("bi-pie-chart", L("finPartialPayment"), stats.partial, moduleKey, { targetTab: options.targetTab || "approvedRequisitions", filterPayload: { card_filter: "partial", finance_status: "Parcialmente Pago" } })}
       ${sm("bi-cash-coin", L("reqApprovedValue"), money(stats.approvedTotal), moduleKey, { targetTab: options.targetTab || "approvedRequisitions" })}
@@ -4732,6 +5745,11 @@ function buildContributorCandidate(base) {
     email: base.email || "",
     endereco: base.endereco || "",
     celula: base.celula || "",
+    cell_id: base.cell_id || "",
+    cell_name: base.cell_name || base.celula || "",
+    cell_group_id: base.cell_group_id || "",
+    cell_group_name: base.cell_group_name || base.grupo_de_celula || "",
+    grupo_de_celula: base.grupo_de_celula || base.cell_group_name || "",
     church_id: churchId,
     igreja: base.igreja || churchName(churchId),
     displayName: base.displayName || fullName({ nome, apelido }),
@@ -4764,7 +5782,12 @@ function getContributorSearchIndex() {
       whatsapp: member.whatsapp,
       email: member.email,
       endereco: member.endereco,
-      celula: member.celula,
+      celula: member.cell_name || member.celula,
+      cell_id: member.cell_id,
+      cell_name: member.cell_name || member.celula,
+      cell_group_id: member.cell_group_id,
+      cell_group_name: member.cell_group_name || member.grupo_de_celula,
+      grupo_de_celula: member.grupo_de_celula || member.cell_group_name,
       church_id: member.church_id
     }));
   });
@@ -4779,7 +5802,12 @@ function getContributorSearchIndex() {
       whatsapp: person.whatsapp,
       email: person.email,
       endereco: person.endereco,
-      celula: person.celula_preferida || "",
+      celula: person.cell_name || person.celula || person.celula_preferida || "",
+      cell_id: person.cell_id,
+      cell_name: person.cell_name || person.celula || person.celula_preferida,
+      cell_group_id: person.cell_group_id,
+      cell_group_name: person.cell_group_name || person.grupo_de_celula,
+      grupo_de_celula: person.grupo_de_celula || person.cell_group_name,
       church_id: person.church_id
     }));
   });
@@ -4951,8 +5979,10 @@ function applyContributorToFinanceForm(candidate) {
   set("whatsapp", candidate.whatsapp);
   set("email", candidate.email);
   set("endereco", candidate.endereco);
-  set("celula", candidate.celula);
   set("church_id", candidate.church_id);
+  set("cell_group_id", candidate.cell_group_id || candidate.grupo_de_celula);
+  set("cell_id", candidate.cell_id || candidate.celula);
+  set("celula", candidate.celula);
   set("igreja", candidate.igreja);
   set("source_type", candidate.source_type);
   set("member_id", candidate.member_id);
@@ -4969,6 +5999,13 @@ function applyContributorToFinanceForm(candidate) {
   renderFinanceDuplicateWarning([]);
   const churchSelectEl = form.querySelector('[name="church_id"][data-church-select]');
   if (churchSelectEl) applyChurchSelection(churchSelectEl, relationalChurches(), relationalFormOptions());
+  const groupSelect = form.querySelector("[data-cell-group-select]");
+  if (groupSelect) {
+    if (candidate.cell_group_id || candidate.grupo_de_celula) groupSelect.value = candidate.cell_group_id || (state.cellGroups || []).find((g) => g.group_name === candidate.grupo_de_celula)?.id || "";
+    updateDependentCellSelect(groupSelect);
+    const cellSelect = form.querySelector("[data-cell-select]");
+    if (cellSelect) cellSelect.value = candidate.cell_id || (state.cellRegistry || []).find((c) => c.cell_name === candidate.celula)?.id || "";
+  }
 }
 
 function clearFinanceContributorLink(clearFields = false) {
@@ -5044,7 +6081,8 @@ function financeContributorSectionHtml(record = {}) {
         <div class="col-md-6"><label class="form-label">${L("whatsapp")}</label><input class="form-control" name="whatsapp" data-finance-person-field value="${migrated.whatsapp || ""}"></div>
         <div class="col-md-6"><label class="form-label">${L("email")}</label><input class="form-control" name="email" type="email" data-finance-person-field value="${migrated.email || ""}"></div>
         <div class="col-md-6"><label class="form-label">${L("address")}</label><input class="form-control" name="endereco" data-finance-person-field value="${migrated.endereco || ""}"></div>
-        <div class="col-md-6"><label class="form-label">${L("cell")}</label><input class="form-control" name="celula" data-finance-person-field value="${migrated.celula || ""}"></div>
+        ${cellGroupSelectField("cell_group_id", L("cellGroup"), migrated)}
+        ${cellSelectField("cell_id", L("cell"), migrated)}
         ${churchField}
       </div>
       <label class="finance-save-contributor form-check mt-3">
@@ -5079,7 +6117,7 @@ function renderFinanceAddForm(record = {}) {
 function financeEntrySchema() {
   return [
     ["nome", "name"], ["apelido", "surname"], ["endereco", "address"], ["telefone", "phone"], ["whatsapp", "whatsapp"], ["email", "email", "email"],
-    ["celula", "cell"], ["church_id", "church", "church"],
+    ["cell_group_id", "cellGroup", "cellGroupSelect"], ["cell_id", "cell", "cellRegistrySelect"], ["church_id", "church", "church"],
     ["categoria_da_contribuicao", "category", "select", givingCategories],
     ["metodo_de_pagamento", "method", "select", paymentMethods],
     ["valor", "amount", "number"], ["referencia_da_transaccao", "transactionReference"],
@@ -5509,11 +6547,87 @@ function badgeClass(status) {
   return "blue";
 }
 
+const FALLBACK_SENSITIVE_MODULES = new Set(["finance", "staffHr", "requisitions", "accessControl", "usersRoles", "auditLogs"]);
+const FALLBACK_ROUTE_MODULES = {
+  dashboard: "dashboard",
+  churches: "churches",
+  members: "members",
+  firstTimers: "firstTimers",
+  followUp: "followUp",
+  reports: "reports",
+  counseling: "counseling",
+  foundation: "foundation",
+  finance: "finance",
+  fevo: "fevo",
+  venueInventory: "venueInventory",
+  sacraments: "sacraments",
+  cellPrison: "prisonMinistry",
+  cellMaterials: "ministryMaterials",
+  programs: "programs",
+  partnership: "partnership",
+  media: "media",
+  requisitions: "requisitions",
+  staffHr: "staffHr",
+  users: "usersRoles",
+  access: "accessControl",
+  settings: "settings",
+  audit: "auditLogs"
+};
+
+function fallbackRouteModule(route = "dashboard") {
+  if (FALLBACK_ROUTE_MODULES[route]) return FALLBACK_ROUTE_MODULES[route];
+  if (route.startsWith("cell")) return "cell";
+  if (route.startsWith("fevo")) return "fevo";
+  if (route.startsWith("venueInventory")) return "venueInventory";
+  return route;
+}
+
+function fallbackCanViewModule(user = activeUser, module = "dashboard") {
+  const role = user.role || "";
+  const grants = user.department_permissions || [];
+  if (grants.includes("*") || role === "Super Admin") return true;
+  if (module === "dashboard") return true;
+  if (role === "Main Pastor") return !["accessControl"].includes(module);
+  if (role === "Church Pastor") return !["usersRoles", "accessControl", "auditLogs"].includes(module);
+  if (role === "Finance Head" || role === "Finance Officer") return ["finance", "reports", "requisitions", "auditLogs"].includes(module);
+  if (role === "HR Manager") return ["staffHr", "reports"].includes(module);
+  if (role === "Requisition Officer") return ["requisitions", "reports", "venueInventory"].includes(module);
+  if (role === "Counseling Head") return ["counseling", "followUp", "firstTimers", "reports", "notifications"].includes(module);
+  if (role === "Counselor") return ["counseling", "followUp", "notifications"].includes(module);
+  if (role === "Follow-Up Coordinator") return ["followUp", "firstTimers", "counseling", "reports", "notifications"].includes(module);
+  if (role === "Media Director" || role === "Media Supervisor") return ["media", "reports", "venueInventory", "programs", "notifications"].includes(module);
+  if (role === "Media Team Member") return ["media", "notifications"].includes(module);
+  if (role === "Department Head") return ["members", "firstTimers", "followUp", "reports", "requisitions", "staffHr", "venueInventory", "cell", "fevo"].includes(module);
+  if (role === "Staff Member") return ["requisitions", "venueInventory", "staffHr", "notifications"].includes(module);
+  const legacyModuleKeys = {
+    finance: ["finance", "financeHead", "financeOfficer", "financeVerify", "financeViewer"],
+    staffHr: ["staffHr"],
+    requisitions: ["requisitions"],
+    reports: ["reports"],
+    cell: ["cell", "cellReports", "cellEvaluation", "churchReports", "alecRegistration", "alecScores", "finalValidation"],
+    fevo: ["fevo", "fevoConfig", "fevoReports", "fevoAnalytics"],
+    venueInventory: ["venueInventory", "venueInventoryRequests", "assignedEquipment", "inventory", "venues", "maintenance", "checklists"],
+    prisonMinistry: ["prisonMinistry"],
+    ministryMaterials: ["ministryMaterials"],
+    media: ["media", "mediaTeam"]
+  };
+  return (legacyModuleKeys[module] || [module]).some((key) => grants.includes(key));
+}
+
+function fallbackRouteAccess(route) {
+  const module = fallbackRouteModule(route);
+  const canView = fallbackCanViewModule(activeUser, module);
+  const sensitive = FALLBACK_SENSITIVE_MODULES.has(module);
+  if (canView) return { route, module, visible: true, locked: false, access: { can_view: true }, sensitive };
+  if (sensitive) return { route, module, visible: false, locked: true, access: { can_view: false }, sensitive };
+  return { route, module, visible: true, locked: true, access: { can_view: false }, sensitive };
+}
+
 function resolveRouteAccess(route) {
   if (window.CEAccessControl?.getNavItemState) {
     return window.CEAccessControl.getNavItemState(activeUser, route);
   }
-  return { visible: true, locked: false, access: { can_view: true } };
+  return fallbackRouteAccess(route);
 }
 
 function canAccessNavRoute(route) {
@@ -5592,11 +6706,14 @@ function renderCellSidebarNav() {
                 </button>
                 <div class="nav-cell-area-body">
                   <div class="nav-cell-area-body-inner">
-                    ${area.routes.map(([route, label]) => `
-                      <button type="button" class="nav-cell-item ${activeRoute === route ? "active" : ""}" data-route="${route}" title="${L(label)}">
-                        <span>${L(label)}</span>
+                    ${area.routes.map(([route, label]) => {
+                      const nav = resolveRouteAccess(route);
+                      if (!nav.visible) return "";
+                      return `
+                      <button type="button" class="nav-cell-item ${activeRoute === route ? "active" : ""} ${nav.locked ? "is-locked" : ""}" ${nav.locked ? `data-locked-route="${route}" aria-disabled="true"` : `data-route="${route}" onclick="window.setRoute && window.setRoute('${route}'); return false;"`} title="${nav.locked ? L("navLockedTooltip") : L(label)}">
+                        <span>${L(label)}</span>${nav.locked ? `<i class="bi bi-lock-fill nav-lock-icon" aria-hidden="true"></i>` : ""}
                       </button>
-                    `).join("")}
+                    `; }).join("")}
                   </div>
                 </div>
               </div>`;
@@ -5639,7 +6756,7 @@ function renderShell() {
     const expanded = isSidebarGroupExpanded(group.key);
     const cellNav = group.key === "departments" ? renderCellSidebarNav() : "";
     const navItems = items.map(({ route, icon, label, nav }) => `
-      <button type="button" class="nav-item-btn ${nav.locked ? "is-locked" : ""}" ${nav.locked ? `data-locked-route="${route}"` : `data-route="${route}"`} title="${nav.locked ? L("navLockedTooltip") : L(label)}" ${nav.locked ? "disabled" : ""}>
+      <button type="button" class="nav-item-btn ${nav.locked ? "is-locked" : ""}" ${nav.locked ? `data-locked-route="${route}" aria-disabled="true"` : `data-route="${route}" onclick="window.setRoute && window.setRoute('${route}'); return false;"`} title="${nav.locked ? L("navLockedTooltip") : L(label)}">
         <i class="bi ${icon}"></i><span>${L(label)}</span>${nav.locked ? `<i class="bi bi-lock-fill nav-lock-icon" aria-hidden="true"></i>` : ""}
       </button>
     `).join("");
@@ -5660,6 +6777,8 @@ function renderShell() {
   }).join("");
   byId("activeUserName").textContent = activeUser.name;
   byId("activeUserRole").textContent = activeUser.role;
+  cleanRenderedText(byId("sidebarNav"));
+  cleanRenderedText(document.querySelector(".ops-sidebar"));
   applySidebarCollapse();
   updateNotificationCenter();
 }
@@ -5818,7 +6937,7 @@ function setRoute(route) {
     followUp: renderFollowUp,
     reports: renderReports,
     notifications: renderNotifications,
-    counseling: renderFirstTimers,
+    counseling: renderCounseling,
     foundation: renderFoundation,
     finance: renderFinance,
     cellAlecOverview: () => renderCellMinistry("alecOverview"),
@@ -5860,7 +6979,7 @@ function setRoute(route) {
     sacraments: renderSacraments,
     programs: () => renderSimple("programs", L("programs"), state.programs),
     partnership: () => renderSimple("partnership", L("partnership"), state.partnership),
-    media: () => renderSimple("media", L("media"), state.media),
+    media: renderMedia,
     requisitions: renderRequisitions,
     staffHr: renderStaffHr,
     users: renderUsers,
@@ -5879,6 +6998,8 @@ function setRoute(route) {
     updateBackToTopVisibility();
   }
 }
+
+window.setRoute = setRoute;
 
 function syncTopbarHeight() {
   const topbar = document.querySelector(".ops-topbar");
@@ -5913,12 +7034,14 @@ function toggleModuleNav(key) {
   });
 }
 
-const modulePageState = { members: { view: "table" }, firstTimers: { view: "table" }, followUp: { view: "kanban" } };
+const modulePageState = { members: { view: "table", filter: {} }, firstTimers: { view: "table" }, followUp: { view: "kanban" } };
+window.modulePageState = modulePageState;
 
 function setPageContent(html) {
   const el = byId("content");
   if (!el) return;
   el.innerHTML = typeof PageShell === "function" ? PageShell(html) : html;
+  cleanRenderedText(el);
 }
 
 function moduleNavShell(key, config, tabsHtml = "", extraHtml = "") {
@@ -5975,6 +7098,7 @@ function sectionHeader(title, subtitle, modalType, icon = "bi-stars", { compact 
 
 function filterBar(options = {}) {
   const opts = typeof options === "object" && options !== null ? options : {};
+  const statusOptionsHtml = (opts.statusOptions || []).map((status) => `<option value="${status}">${status}</option>`).join("");
   if (typeof FilterToolbar === "function") {
     return FilterToolbar({
       search: opts.search !== false,
@@ -5982,8 +7106,14 @@ function filterBar(options = {}) {
       month: opts.month !== false,
       status: opts.status !== false,
       exportBtn: opts.exportBtn !== false,
+      applyBtn: opts.applyBtn !== false,
       churches: state.churches,
       statusOptions: opts.statusOptions || [],
+      filterScope: opts.filterScope || "generic",
+      searchValue: opts.searchValue || "",
+      churchValue: opts.churchValue || "",
+      monthValue: opts.monthValue || "",
+      statusValue: opts.statusValue || "",
       extraFields: opts.extraFields || "",
       viewToggle: opts.viewToggle || "",
       addBtn: opts.addBtn || "",
@@ -5995,7 +7125,8 @@ function filterBar(options = {}) {
       ${opts.search !== false ? `<div class="filter-toolbar-search"><i class="bi bi-search"></i><input class="form-control" type="search" placeholder="${L("search")}"></div>` : ""}
       ${opts.church !== false ? `<select class="form-select"><option value="">${L("filterChurch")}</option>${state.churches.map((c) => `<option>${c.church_name}</option>`).join("")}</select>` : ""}
       ${opts.month !== false ? `<input class="form-control" type="month" aria-label="${L("filterMonth")}">` : ""}
-      ${opts.status !== false ? `<select class="form-select"><option value="">${L("filterStatus")}</option></select>` : ""}
+      ${opts.status !== false ? `<select class="form-select"><option value="">${L("filterStatus")}</option>${statusOptionsHtml}</select>` : ""}
+      ${opts.applyBtn !== false ? `<button type="button" class="btn btn-ce-gold btn-touch" data-filter-apply="${opts.filterScope || "generic"}"><i class="bi bi-search me-1"></i>${L("search")}</button>` : ""}
       ${opts.exportBtn !== false ? `<button type="button" class="btn btn-outline-cyan action-secondary btn-touch"><i class="bi bi-download me-1"></i>${L("export")}</button>` : ""}
     </div>`;
 }
@@ -6182,50 +7313,261 @@ function renderDashboardActivityList() {
   return typeof DashboardQuickList === "function" ? DashboardQuickList(items) : `<div class="dashboard-quick-list">${items.join("")}</div>`;
 }
 
+function dashboardToday() {
+  return new Date("2026-07-14T12:00:00");
+}
+
+function dateOnly(value) {
+  if (!value) return "";
+  if (/^\d{4}-\d{2}$/.test(String(value))) return `${value}-01`;
+  return String(value).slice(0, 10);
+}
+
+function dashboardQuarter(date = dashboardToday()) {
+  return Math.floor(date.getMonth() / 3) + 1;
+}
+
+function dashboardQuarterLabel(quarter = dashboardQuarter(), year = dashboardToday().getFullYear()) {
+  const pt = [`1º ${L("quarter")}`, `2º ${L("quarter")}`, `3º ${L("quarter")}`, `4º ${L("quarter")}`];
+  const en = [`1st ${L("quarter")}`, `2nd ${L("quarter")}`, `3rd ${L("quarter")}`, `4th ${L("quarter")}`];
+  return `${(lang === "pt" ? pt : en)[quarter - 1]} ${year}`;
+}
+
+function dashboardDateRange(period = dashboardPageState.period) {
+  const today = dashboardToday();
+  const y = today.getFullYear();
+  const m = today.getMonth();
+  const d = today.getDate();
+  if (period === "month") return { from: `${y}-${String(m + 1).padStart(2, "0")}-01`, to: `${y}-${String(m + 1).padStart(2, "0")}-31`, label: L("thisMonth") };
+  if (period === "quarter") {
+    const q = dashboardQuarter(today);
+    const startMonth = (q - 1) * 3;
+    return { from: `${y}-${String(startMonth + 1).padStart(2, "0")}-01`, to: `${y}-${String(startMonth + 3).padStart(2, "0")}-31`, label: L("currentQuarter") };
+  }
+  if (period === "year") return { from: `${y}-01-01`, to: `${y}-12-31`, label: L("thisYear") };
+  if (period === "custom") return { from: dashboardPageState.dateFrom || "", to: dashboardPageState.dateTo || "", label: L("custom") };
+  const start = new Date(y, m, d - today.getDay() + 1);
+  const end = new Date(start);
+  end.setDate(start.getDate() + 6);
+  return { from: start.toISOString().slice(0, 10), to: end.toISOString().slice(0, 10), label: L("thisWeek") };
+}
+
+function previousQuarterRange() {
+  const today = dashboardToday();
+  let q = dashboardQuarter(today) - 1;
+  let y = today.getFullYear();
+  if (q < 1) { q = 4; y -= 1; }
+  const startMonth = (q - 1) * 3;
+  return { from: `${y}-${String(startMonth + 1).padStart(2, "0")}-01`, to: `${y}-${String(startMonth + 3).padStart(2, "0")}-31`, label: L("lastQuarter"), quarterLabel: dashboardQuarterLabel(q, y) };
+}
+
+function inDashboardRange(record, fields, range = dashboardDateRange()) {
+  if (!range.from && !range.to) return true;
+  const date = fields.map((field) => dateOnly(record[field])).find(Boolean);
+  if (!date) return false;
+  return (!range.from || date >= range.from) && (!range.to || date <= range.to);
+}
+
+function dashboardScope(records = []) {
+  let list = scoped(records || []);
+  if (activeUser.role === "Department Head" && activeUser.assigned_department) {
+    const dept = String(activeUser.assigned_department).toLowerCase();
+    list = list.filter((item) => String(item.department_name || item.departamento || item.department || item.departamento_responsavel || "").toLowerCase().includes(dept));
+  }
+  if (activeUser.role === "Staff Member") {
+    list = list.filter((item) => item.created_by === activeUser.name ||
+      item.requested_by_name === activeUser.name ||
+      item.user_id === activeUser.id ||
+      item.assigned_to === activeUser.name ||
+      item.nome_do_funcionario === activeUser.assigned_staff_name ||
+      item.full_name === activeUser.assigned_staff_name);
+  }
+  return list;
+}
+
+function canDashboardSee(moduleKey) {
+  const role = activeUser.role || "";
+  if (role === "Viewer") return ["firstTimers", "followUp", "reports"].includes(moduleKey);
+  if (["Super Admin", "Main Pastor", "National Admin"].includes(role) || (activeUser.department_permissions || []).includes("*")) return true;
+  if (role === "Church Pastor") return !["staffHr"].includes(moduleKey);
+  if (role === "Finance Head" || role === "Finance Officer") return ["finance", "reports", "requisitions"].includes(moduleKey);
+  if (role === "HR Manager") return ["staffHr", "reports"].includes(moduleKey);
+  if (role === "Requisition Officer") return ["requisitions", "reports"].includes(moduleKey);
+  if (role === "Counseling Head") return ["counseling", "followUp", "firstTimers", "reports", "notifications"].includes(moduleKey);
+  if (role === "Counselor") return ["counseling", "followUp", "notifications"].includes(moduleKey);
+  if (role === "Follow-Up Coordinator") return ["followUp", "firstTimers", "counseling", "reports", "notifications"].includes(moduleKey);
+  if (role === "Media Director" || role === "Media Supervisor") return ["media", "reports", "venueInventory", "programs", "notifications"].includes(moduleKey);
+  if (role === "Media Team Member") return ["media", "notifications"].includes(moduleKey);
+  if (role === "Department Head") return ["requisitions", "reports", "staffHr", "cellMinistryOverview", "venueInventory"].includes(moduleKey);
+  if (role === "Staff Member") return ["requisitions", "venueInventory", "staffHr", "notifications"].includes(moduleKey);
+  return hasPermission(moduleKey) || (activeUser.department_permissions || []).includes(moduleKey);
+}
+
+function dashboardPeriodControls() {
+  const opts = [["week", L("thisWeek")], ["month", L("thisMonth")], ["quarter", L("thisQuarter")], ["year", L("thisYear")], ["custom", L("custom")]];
+  return `
+    <div class="dashboard-period-toolbar">
+      <label class="form-label">${L("period")}</label>
+      <select class="form-select" data-dashboard-period>
+        ${opts.map(([value, label]) => `<option value="${value}" ${dashboardPageState.period === value ? "selected" : ""}>${label}</option>`).join("")}
+      </select>
+      <input class="form-control ${dashboardPageState.period === "custom" ? "" : "d-none"}" type="date" data-dashboard-date-from value="${dashboardPageState.dateFrom || ""}" aria-label="${L("from")}">
+      <input class="form-control ${dashboardPageState.period === "custom" ? "" : "d-none"}" type="date" data-dashboard-date-to value="${dashboardPageState.dateTo || ""}" aria-label="${L("to")}">
+    </div>`;
+}
+
+function dashboardMetricCard(card) {
+  return metric(card.icon, card.title, card.value, card.subtitle, {
+    isClickable: Boolean(card.module || card.route),
+    module: card.module || "",
+    route: card.route || card.module || "",
+    targetTab: card.targetTab || "",
+    filterPayload: card.filterPayload || {},
+    periodLabel: card.periodLabel,
+    ariaLabel: `${card.title}: ${card.value}`
+  });
+}
+
+function getDashboardHeroAlert() {
+  const role = activeUser.role || "";
+  const scopedFirstTimers = dashboardScope(state.firstTimers || []);
+  const scopedReqs = dashboardScope(state.requisitions || []);
+  const notifications = typeof getVisibleNotifications === "function" ? getVisibleNotifications(activeUser).filter((n) => !n.is_read) : [];
+  if (role === "Main Pastor") return { label: L("reqAwaitingPastor"), value: scopedReqs.filter((r) => /Pastor Principal|Enviado ao Pastor/.test(r.status || "")).length, hint: L("needsAction") };
+  if (role === "Finance Head") return { label: L("finAwaitingRelease"), value: scopedReqs.filter((r) => /Aguardando Libera/.test(r.finance_status || r.status || "")).length, hint: L("finance") };
+  if (role === "HR Manager") return { label: L("hrPendingHero"), value: (state.staffPerformance || []).filter((p) => /Pendente|Pending/.test(p.status || p.estado || "")).length, hint: L("staffHr") };
+  if (role === "Requisition Officer") return { label: L("reqForReview"), value: scopedReqs.filter((r) => /Submetido|Revis/.test(r.status || "")).length, hint: L("requisitions") };
+  if (role === "Staff Member") return { label: L("myPendingNotifications"), value: notifications.length, hint: L("notifications") };
+  return { label: L("pendingFollowups"), value: scopedFirstTimers.filter((p) => statusKey(p.estado_do_seguimento) === "pending").length, hint: L("needsAction") };
+}
+
+function getDashboardCardsForUser(user = activeUser) {
+  const range = dashboardDateRange();
+  const currentQuarter = dashboardDateRange("quarter");
+  const lastQuarter = previousQuarterRange();
+  const firstTimers = dashboardScope(state.firstTimers || []);
+  const finance = dashboardScope(state.finance || []).map((record) => migrateFinanceRecord(record));
+  const students = dashboardScope(state.foundationStudents || []);
+  const reqs = dashboardScope(state.requisitions || []);
+  const cells = dashboardScope(state.cellRegistry?.length ? state.cellRegistry : state.cells || []);
+  const staff = dashboardScope(state.staffProfiles || []);
+  const perf = dashboardScope(state.staffPerformance || []);
+  const equipment = dashboardScope(state.venueInventory?.staffEquipment || []);
+  const salaries = dashboardScope(state.staffSalaries || []);
+  const notifications = typeof getVisibleNotifications === "function" ? getVisibleNotifications(user).filter((n) => !n.is_read) : [];
+  const disbursements = dashboardScope(state.financeDisbursements || []);
+  const baptisms = dashboardScope(state.sacraments?.baptisms || []);
+  const periodFirstTimers = firstTimers.filter((p) => inDashboardRange(p, ["data_do_culto", "created_at"], range));
+  const todayIso = dashboardToday().toISOString().slice(0, 10);
+  const todayFinance = finance.filter((f) => (f.data || f.created_at || "").slice(0, 10) === todayIso && /Verificado|Verified|Inclu/.test(f.estado || ""));
+  const monthFinance = finance.filter((f) => inDashboardRange(f, ["data"], dashboardDateRange("month")) && /Verificado|Verified|Inclu/.test(f.estado || ""));
+  const releasedThisMonth = disbursements.filter((d) => /Recursos Liberados|Pago/.test(d.status || "") && inDashboardRange(d, ["released_at", "updated_at"], dashboardDateRange("month")));
+  const topPartners = typeof computeContributorProfiles === "function" ? computeContributorProfiles(finance).filter((p) => Number(p.total || 0) > 0) : [];
+  const mediaState = getMediaState();
+  const mediaTechnicians = mediaVisibleTechnicians(mediaState.technicians || []);
+  const mediaSchedules = dashboardScope(mediaState.schedules || []);
+  const mediaEvaluations = dashboardScope(mediaState.performanceEvaluations || []);
+  const mediaChannels = mediaState.streamingChannels || [];
+  const myMediaAssignments = mediaSchedules.flatMap((schedule) => (schedule.assignments || [])
+    .filter((assignment) => mediaTechnicianName(assignment.technician_id) === (user.assigned_staff_name || user.name))
+    .map((assignment) => ({ ...assignment, schedule })));
+  const cards = [
+    { roles: ["Super Admin", "Main Pastor", "National Admin", "Church Pastor", "Viewer"], module: "firstTimers", icon: "bi-person-heart", title: L("totalFirstTimers"), value: periodFirstTimers.length, subtitle: L("visitorsCaptured"), periodLabel: range.label, filterPayload: { date_range: dashboardPageState.period, churchId: user.can_view_all_churches ? "" : user.church_id } },
+    { roles: ["Super Admin", "Main Pastor", "National Admin", "Church Pastor"], module: "firstTimers", icon: "bi-stars", title: L("newConverts"), value: periodFirstTimers.filter((p) => p.nasceu_de_novo).length, subtitle: L("bornAgainHint"), periodLabel: range.label, filterPayload: { born_again: true, date_range: dashboardPageState.period } },
+    { roles: ["Super Admin", "Main Pastor", "National Admin", "Church Pastor"], module: "foundation", icon: "bi-mortarboard", title: L("foundationEnrolments"), value: students.filter((s) => inDashboardRange(s, ["mes_de_inscricao", "created_at"], currentQuarter)).length, subtitle: L("activeEnrolments"), periodLabel: dashboardQuarterLabel(), filterPayload: { quarter: "current_quarter" } },
+    { roles: ["Super Admin", "Main Pastor", "National Admin", "Church Pastor"], module: "foundation", targetTab: "graduations", icon: "bi-award", title: L("graduations"), value: students.filter((s) => s.graduado && inDashboardRange(s, ["updated_at", "created_at"], lastQuarter)).length, subtitle: L("completedGraduations"), periodLabel: lastQuarter.label, filterPayload: { quarter: "last_quarter", graduado: true } },
+    { roles: ["Super Admin", "Main Pastor", "National Admin", "Church Pastor", "Department Head"], module: "cellMinistryOverview", icon: "bi-diagram-3", title: L("activeCells"), value: cells.filter((c) => statusKey(c.status || c.estado) === "active" || /Activo|Active/i.test(c.status || c.estado || "")).length || cells.length, subtitle: L("cellGrowth"), periodLabel: L("currentReport"), filterPayload: { status: "Activo" } },
+    { roles: ["Super Admin", "Main Pastor", "National Admin", "Church Pastor"], module: "sacraments", icon: "bi-droplet", title: L("baptisms"), value: baptisms.filter((b) => inDashboardRange(b, ["baptism_date", "data"], dashboardDateRange("month"))).length, subtitle: L("sacraments"), periodLabel: L("thisMonth"), filterPayload: { type: "baptism", period: "month" } },
+    { roles: ["Super Admin", "Main Pastor", "National Admin", "Finance Head", "Finance Officer", "Church Pastor"], module: "finance", icon: "bi-cash-coin", title: L("monthlyGiving"), value: money(monthFinance.reduce((sum, f) => sum + Number(f.valor || 0), 0)), subtitle: L("verifiedIncome"), periodLabel: L("thisMonth"), filterPayload: { period: "month", status: FINANCE_STATUS_VERIFIED } },
+    { roles: ["Super Admin", "Main Pastor", "National Admin", "Church Pastor"], module: "followUp", icon: "bi-telephone-outbound", title: L("pendingFollowups"), value: firstTimers.filter((p) => statusKey(p.estado_do_seguimento) === "pending").length, subtitle: L("needsAction"), periodLabel: L("now"), filterPayload: { followup: "pending" } },
+    { roles: ["Super Admin", "Main Pastor", "National Admin", "Finance Head", "Requisition Officer"], module: "requisitions", icon: "bi-clipboard-check", title: L("approvedRequisitions"), value: reqs.filter((r) => r.approved_by && inDashboardRange(r, ["approved_at", "updated_at"], dashboardDateRange("month"))).length, subtitle: L("thisMonth"), periodLabel: L("thisMonth"), filterPayload: { status: "approved", period: "month" } },
+    { roles: ["Super Admin", "Main Pastor", "Finance Head"], module: "finance", targetTab: "approvedRequisitions", icon: "bi-hourglass-split", title: L("finAwaitingRelease"), value: reqs.filter((r) => /Aguardando Libera/.test(r.finance_status || r.status || "")).length, subtitle: L("needsAction"), periodLabel: L("now"), filterPayload: { finance_status: "Aguardando Libera��o" } },
+    { roles: ["Finance Head", "Finance Officer"], module: "finance", targetTab: "verification", icon: "bi-patch-question", title: L("pendingVerification"), value: finance.filter((f) => f.estado === FINANCE_STATUS_PENDING).length, subtitle: L("publicSubmissions"), periodLabel: L("now"), filterPayload: { status: FINANCE_STATUS_PENDING } },
+    { roles: ["HR Manager", "Super Admin", "Main Pastor"], module: "staffHr", icon: "bi-people-fill", title: L("staffActive"), value: staff.filter((s) => statusKey(s.status) === "active" || /Activo|Active/.test(s.status || "")).length, subtitle: L("staffHr"), periodLabel: L("now"), filterPayload: { status: "Activo" } },
+    { roles: ["HR Manager"], module: "staffHr", targetTab: "birthdays", icon: "bi-cake2", title: L("birthdaysThisMonth"), value: staff.filter((s) => String(s.date_of_birth || "").slice(5, 7) === String(dashboardToday().getMonth() + 1).padStart(2, "0")).length, subtitle: L("staffHr"), periodLabel: L("thisMonth"), filterPayload: { has_dob: true } },
+    { roles: ["HR Manager"], module: "staffHr", targetTab: "performance", icon: "bi-clipboard2-pulse", title: L("pendingEvaluations"), value: perf.filter((p) => /Pending|Pendente|Verification/.test(p.status || p.estado || "")).length, subtitle: L("needsAction"), periodLabel: L("now"), filterPayload: { status: "pending" } },
+    { roles: ["Requisition Officer"], module: "requisitions", icon: "bi-inbox", title: L("submittedRequisitions"), value: reqs.filter((r) => /Submetido/.test(r.status || "")).length, subtitle: L("reqForReview"), periodLabel: L("now"), filterPayload: { status: "Submetido" } },
+    { roles: ["Department Head"], module: "requisitions", icon: "bi-building-gear", title: L("departmentRequisitions"), value: reqs.length, subtitle: user.assigned_department || L("department"), periodLabel: range.label, filterPayload: { department: user.assigned_department || "" } },
+    { roles: ["Staff Member"], module: "requisitions", icon: "bi-person-workspace", title: L("myRequisitions"), value: reqs.length, subtitle: L("myScope"), periodLabel: L("now"), filterPayload: { requester: user.name } },
+    { roles: ["Staff Member"], module: "venueInventory", icon: "bi-pc-display", title: L("myEquipment"), value: equipment.length, subtitle: L("assignedEquipment"), periodLabel: L("now"), filterPayload: { assigned_to: user.assigned_staff_name || user.name } },
+    { id: "finance-total-today", priority: 5, roles: ["Finance Head", "Finance Officer"], module: "finance", targetTab: "entries", icon: "bi-calendar-day", title: L("totalToday"), value: money(todayFinance.reduce((sum, f) => sum + Number(f.valor || 0), 0)), subtitle: L("verifiedIncome"), periodLabel: L("financePeriodToday"), filterPayload: { period: "today", dateFrom: todayIso, dateTo: todayIso, status: FINANCE_STATUS_VERIFIED } },
+    { id: "finance-total-month", priority: 8, roles: ["Finance Head", "Finance Officer"], module: "finance", targetTab: "reports", icon: "bi-calendar3", title: L("totalThisMonth"), value: money(monthFinance.reduce((sum, f) => sum + Number(f.valor || 0), 0)), subtitle: L("financeReportsSection"), periodLabel: L("thisMonth"), filterPayload: { period: "month", status: FINANCE_STATUS_VERIFIED } },
+    { id: "finance-public-pending", priority: 12, roles: ["Finance Head", "Finance Officer"], module: "finance", targetTab: "public", icon: "bi-globe2", title: L("financeTabPublic"), value: finance.filter((f) => f.source_type === "public_website" && f.estado === FINANCE_STATUS_PENDING).length, subtitle: L("pendingVerification"), periodLabel: L("now"), filterPayload: { source: "public_website", status: FINANCE_STATUS_PENDING } },
+    { id: "finance-released-month", priority: 18, roles: ["Finance Head"], module: "finance", targetTab: "approvedRequisitions", icon: "bi-cash-stack", title: L("finReleasedThisMonth"), value: releasedThisMonth.length, subtitle: money(releasedThisMonth.reduce((sum, d) => sum + Number(d.released_amount || 0), 0)), periodLabel: L("thisMonth"), filterPayload: { finance_status: "Recursos Liberados", period: "month" } },
+    { id: "finance-featured-partners", priority: 22, roles: ["Finance Head"], module: "finance", targetTab: "partners", icon: "bi-trophy", title: L("financeFeaturedPartners"), value: topPartners.length, subtitle: L("financeTopPartners"), periodLabel: L("thisMonth"), filterPayload: { segment: "top" } },
+    { id: "finance-reports", priority: 24, roles: ["Finance Head"], module: "finance", targetTab: "reports", icon: "bi-bar-chart-line", title: L("financeReportsSection"), value: L("rptViewAll"), subtitle: L("financeReportsHint"), periodLabel: L("thisMonth"), filterPayload: { period: "month" } },
+    { id: "hr-staff-total", priority: 10, roles: ["HR Manager"], module: "staffHr", targetTab: "staff", icon: "bi-people", title: L("staffTotal"), value: staff.length, subtitle: L("staffHr"), periodLabel: L("now"), filterPayload: {} },
+    { id: "hr-upcoming-birthdays", priority: 16, roles: ["HR Manager"], module: "staffHr", targetTab: "birthdays", icon: "bi-calendar-event", title: L("staffUpcomingBirthdays"), value: staff.filter((s) => s.date_of_birth).length, subtitle: L("staffHr"), periodLabel: L("now"), filterPayload: { upcoming: true } },
+    { id: "hr-pending-payments", priority: 20, roles: ["HR Manager"], module: "staffHr", targetTab: "salaries", icon: "bi-cash", title: L("staffPendingPay"), value: salaries.filter((s) => s.payment_status === "Pendente").length, subtitle: L("needsAction"), periodLabel: L("now"), filterPayload: { payment_status: "Pendente" } },
+    { id: "hr-staff-with-pay", priority: 22, roles: ["HR Manager"], module: "staffHr", targetTab: "salaries", icon: "bi-wallet2", title: L("staffWithSalary"), value: staff.filter((s) => Number(s.salary_or_allowance || 0) > 0).length, subtitle: L("staffHr"), periodLabel: L("now"), filterPayload: { has_salary: true } },
+    { id: "hr-assigned-equipment", priority: 24, roles: ["HR Manager"], module: "staffHr", targetTab: "equipment", icon: "bi-laptop", title: L("staffAssignedEq"), value: equipment.filter((e) => e.estado === "Activo" || e.status === "Activo").length, subtitle: L("assignedStaffEquipment"), periodLabel: L("now"), filterPayload: { assigned: true } },
+    { id: "media-next-service", priority: 10, roles: ["Media Director", "Media Supervisor"], module: "media", targetTab: "schedules", icon: "bi-broadcast", title: L("mediaNextService"), value: mediaSchedules[0]?.service_name || "-", subtitle: mediaSchedules[0]?.date || L("mediaSchedules"), periodLabel: L("now"), filterPayload: { tab: "schedules" } },
+    { id: "media-active-techs", priority: 12, roles: ["Media Director", "Media Supervisor"], module: "media", targetTab: "team", icon: "bi-people", title: L("mediaActiveTechnicians"), value: mediaTechnicians.filter((item) => /Activo|Active/i.test(item.status || "")).length, subtitle: L("mediaTechnicalTeam"), periodLabel: L("now"), filterPayload: { tab: "team" } },
+    { id: "media-incomplete", priority: 14, roles: ["Media Director", "Media Supervisor"], module: "media", targetTab: "schedules", icon: "bi-exclamation-triangle", title: L("mediaIncompleteTeams"), value: mediaSchedules.filter((item) => /Incompleta|Pendente|Draft/i.test(item.status || item.estado || "")).length, subtitle: L("needsAction"), periodLabel: L("now"), filterPayload: { tab: "schedules" } },
+    { id: "media-evals", priority: 16, roles: ["Media Director", "Media Supervisor"], module: "media", targetTab: "performance", icon: "bi-clipboard2-pulse", title: L("mediaPendingEvaluations"), value: mediaEvaluations.filter((item) => /Pending|Pendente/i.test(item.status || item.estado || "")).length, subtitle: L("mediaPerformanceEvaluation"), periodLabel: L("now"), filterPayload: { tab: "performance" } },
+    { id: "media-channels", priority: 18, roles: ["Media Director"], module: "media", targetTab: "channels", icon: "bi-youtube", title: L("mediaStreamingChannels"), value: mediaChannels.filter((item) => /Activo|Active/i.test(item.status || "")).length, subtitle: L("mediaOpenChannel"), periodLabel: L("now"), filterPayload: { tab: "channels" } },
+    { id: "media-my-next", priority: 10, roles: ["Media Team Member"], module: "media", targetTab: "schedules", icon: "bi-calendar-check", title: L("mediaNextService"), value: myMediaAssignments[0]?.schedule?.service_name || "-", subtitle: myMediaAssignments[0] ? mediaRoleName(myMediaAssignments[0].role) : L("mediaSchedules"), periodLabel: L("now"), filterPayload: { tab: "schedules" } },
+    { id: "media-my-role", priority: 12, roles: ["Media Team Member"], module: "media", targetTab: "team", icon: "bi-person-video3", title: L("role"), value: mediaTechnicians[0]?.roles_can_perform?.map(mediaRoleName).join(", ") || "-", subtitle: L("myScope"), periodLabel: L("now"), filterPayload: { tab: "team" } },
+    { id: "media-my-evals", priority: 14, roles: ["Media Team Member"], module: "media", targetTab: "performance", icon: "bi-clipboard2-pulse", title: L("mediaPerformanceEvaluation"), value: mediaEvaluations.filter((item) => mediaTechnicianName(item.technician_id) === (user.assigned_staff_name || user.name)).length, subtitle: L("myScope"), periodLabel: L("now"), filterPayload: { tab: "performance" } },
+    { id: "req-review", priority: 12, roles: ["Requisition Officer"], module: "requisitions", targetTab: "review", icon: "bi-search", title: L("reqTabReview"), value: reqs.filter((r) => /Revis/.test(r.status || "")).length, subtitle: L("requisitions"), periodLabel: L("now"), filterPayload: { status: "Em Revis�o" } },
+    { id: "req-pastoral", priority: 14, roles: ["Requisition Officer"], module: "requisitions", targetTab: "pastoral", icon: "bi-person-check", title: L("reqTabPastoral"), value: reqs.filter((r) => /Pastor Principal|Enviado ao Pastor/.test(r.status || "")).length, subtitle: L("needsAction"), periodLabel: L("now"), filterPayload: { status: "Enviado ao Pastor Principal" } },
+    { id: "req-returned", priority: 16, roles: ["Requisition Officer"], module: "requisitions", targetTab: "received", icon: "bi-arrow-return-left", title: L("returned"), value: reqs.filter((r) => /Devolv/.test(r.status || "")).length, subtitle: L("reqReturnForCorrection"), periodLabel: L("now"), filterPayload: { status: "Devolvido" } },
+    { id: "req-sent-finance", priority: 20, roles: ["Requisition Officer"], module: "requisitions", targetTab: "approved", icon: "bi-send-check", title: L("finSentToFinance"), value: reqs.filter((r) => r.sent_to_finance || r.sent_to_finance_at).length, subtitle: L("finance"), periodLabel: L("now"), filterPayload: { sent_to_finance: true } },
+    { id: "req-inventory-pending", priority: 22, roles: ["Requisition Officer"], module: "requisitions", targetTab: "released", icon: "bi-box-seam", title: L("rptReqInventoryTitle"), value: reqs.filter((r) => /Recursos Liberados|Pago/.test(r.finance_status || r.status || "") && !r.inventory_item_id).length, subtitle: L("rptReqInventoryHint"), periodLabel: L("now"), filterPayload: { inventory_pending: true } },
+    { id: "department-staff", priority: 12, roles: ["Department Head"], module: "staffHr", targetTab: "staff", icon: "bi-people", title: L("staffTotal"), value: staff.length, subtitle: user.assigned_department || L("department"), periodLabel: L("now"), filterPayload: { department: user.assigned_department || "" } },
+    { id: "staff-my-notifications", priority: 12, roles: ["Staff Member"], module: "notifications", route: "notifications", icon: "bi-bell", title: L("myPendingNotifications"), value: notifications.length, subtitle: L("recentNotifications"), periodLabel: L("now"), filterPayload: { unread: true } },
+    { id: "staff-my-profile", priority: 14, roles: ["Staff Member"], module: "staffHr", targetTab: "staff", icon: "bi-person-badge", title: L("viewProfile"), value: user.assigned_staff_name || user.name, subtitle: L("myScope"), periodLabel: L("now"), filterPayload: { requester: user.name } }
+  ];
+  return cards
+    .filter((card) => card.roles.includes(user.role) || (user.role === "National Admin" && card.roles.includes("Super Admin")))
+    .filter((card) => !card.module || canDashboardSee(card.module))
+    .map((card, index) => ({
+      id: card.id || `${card.module || card.route || "dashboard"}-${index + 1}`,
+      requiredPermission: card.requiredPermission || "can_view",
+      scope: card.scope || user.scope || (user.can_view_all_churches ? "national" : "church"),
+      priority: card.priority ?? index + 100,
+      ...card
+    }))
+    .sort((a, b) => (a.priority || 10) - (b.priority || 10))
+    .slice(0, 12);
+}
+
 function renderDashboard() {
   const firstTimers = scoped(state.firstTimers);
   const finance = scoped(state.finance);
   const cells = scoped(state.cells);
   const students = scoped(state.foundationStudents);
-  const pendingFollowups = firstTimers.filter((p) => statusKey(p.estado_do_seguimento) !== "closed").length;
-  const monthlyGiving = finance.filter((f) => f.data?.startsWith("2026-07")).reduce((sum, f) => sum + Number(f.valor || 0), 0);
+  const dashboardCards = getDashboardCardsForUser(activeUser);
   setPageContent(`
     <section class="ops-hero ops-hero--command">
       <div>
         <span class="eyebrow">Christ Embassy Mozambique</span>
         <h2>${L("heroTitle")}</h2>
         <p>${L("heroText")}</p>
-        <button class="btn btn-ce-gold mt-3 btn-touch" data-open-form="firstTimer"><i class="bi bi-person-plus me-2"></i>${L("registerFirstTimer")}</button>
       </div>
-      <aside class="hero-card">
-        <span>${L("pendingFollowups")}</span>
-        <strong>${pendingFollowups}</strong>
-        <small>${state.churches.length} ${L("churches").toLowerCase()}</small>
-      </aside>
     </section>
-    <div class="dashboard-overview-label"><span class="eyebrow">${L("dashboardOverview")}</span></div>
+    <div class="dashboard-overview-head">
+      <div class="dashboard-overview-label">
+        <span class="eyebrow">${L("dashboardOverview")}</span>
+        <p>${L("dashboardRoleScope")}: <strong>${activeUser.role}</strong>${activeUser.can_view_all_churches ? ` · ${L("nationalScope")}` : ` · ${churchName(activeUser.church_id)}`}</p>
+      </div>
+      ${dashboardPeriodControls()}
+    </div>
     <div class="row g-3 mb-2 dashboard-stats-row">
-      ${metric("bi-person-heart", L("totalFirstTimers"), firstTimers.length, L("visitorsCaptured"))}
-      ${metric("bi-stars", L("newConverts"), firstTimers.filter((p) => p.nasceu_de_novo).length, L("bornAgainHint"))}
-      ${metric("bi-mortarboard", L("foundationEnrolments"), students.length, `${foundationPending().length} ${L("pending").toLowerCase()}`)}
-      ${metric("bi-award", L("graduations"), students.filter((s) => s.graduado).length, L("thisCycle"))}
-      ${metric("bi-diagram-3", L("activeCells"), cells.length, L("cellGrowth"))}
-      ${metric("bi-droplet", L("baptisms"), state.sacraments.baptisms.length, L("sacraments"))}
-      ${metric("bi-cash-coin", L("monthlyGiving"), money(monthlyGiving), L("thisMonth"))}
-      ${metric("bi-telephone-outbound", L("pendingFollowups"), pendingFollowups, L("needsAction"))}
+      ${dashboardCards.map((card) => dashboardMetricCard(card)).join("") || `<div class="col-12">${noResultsHtml()}</div>`}
     </div>
-    <div class="row g-3 mb-4 summary-cards-row">
+    ${canDashboardSee("reports") ? `<div class="row g-3 mb-4 summary-cards-row">
       ${sm("bi-bar-chart-line", L("rptExecutiveTitle"), L("rptViewAll"), "reports", { route: "reports" })}
-      ${sm("bi-wallet2", L("rptFinanceExpensesTitle"), money((state.financeDisbursements || []).reduce((s, d) => s + Number(d.released_amount || 0), 0)), "reports", { filterPayload: { domain: "financeExpenses" }, route: "reports" })}
-      ${sm("bi-people-fill", L("rptStaffTitle"), (state.staffProfiles || []).length, "reports", { filterPayload: { domain: "staff" }, route: "reports" })}
-      ${sm("bi-funnel", L("rptFunnelTitle"), firstTimers.length, "reports", { filterPayload: { domain: "funnel" }, route: "reports" })}
-    </div>
-    ${dashboardSection(L("dashboardChurchGrowth"), L("dashboardChurchGrowthHint"), "bi-graph-up-arrow", "firstTimers", `
+      ${canDashboardSee("finance") ? sm("bi-wallet2", L("rptFinanceExpensesTitle"), money((state.financeDisbursements || []).reduce((s, d) => s + Number(d.released_amount || 0), 0)), "reports", { filterPayload: { domain: "financeExpenses" }, route: "reports", scrollTo: "report-domain-financeExpenses" }) : ""}
+      ${canDashboardSee("staffHr") ? sm("bi-people-fill", L("rptStaffTitle"), (state.staffProfiles || []).length, "reports", { filterPayload: { domain: "staff" }, route: "reports", scrollTo: "report-domain-staff" }) : ""}
+      ${sm("bi-funnel", L("rptFunnelTitle"), firstTimers.length, "reports", { filterPayload: { domain: "funnel" }, route: "reports", scrollTo: "report-domain-funnel" })}
+    </div>` : ""}
+    ${canDashboardSee("firstTimers") ? dashboardSection(L("dashboardChurchGrowth"), L("dashboardChurchGrowthHint"), "bi-graph-up-arrow", "firstTimers", `
       <div class="row g-4">
         <div class="col-xl-6">${chartCard(L("firstTimersByMonth"), groupCount(firstTimers, "data_do_culto", true))}</div>
         <div class="col-xl-6">${chartCard(L("foundationProgress"), students.map((s) => [fullName(s), foundationProgress(s)]))}</div>
-      </div>`)}
-    ${dashboardSection(L("dashboardPendingSection"), L("dashboardPendingHint"), "bi-telephone-outbound", "followUp", `
+      </div>`) : ""}
+    ${canDashboardSee("followUp") ? dashboardSection(L("dashboardPendingSection"), L("dashboardPendingHint"), "bi-telephone-outbound", "followUp", `
       <div class="row g-4 align-items-stretch">
         <div class="col-xl-7">${renderDashboardPendingList(firstTimers)}</div>
         <div class="col-xl-5">
@@ -6239,17 +7581,17 @@ function renderDashboard() {
             </div>
           </article>
         </div>
-      </div>`)}
-    ${dashboardSection(L("dashboardFinanceSection"), L("dashboardFinanceHint"), "bi-cash-stack", "finance", `
+      </div>`) : ""}
+    ${canDashboardSee("finance") ? dashboardSection(L("dashboardFinanceSection"), L("dashboardFinanceHint"), "bi-cash-stack", "finance", `
       <div class="row g-4">
         <div class="col-xl-6">${chartCard(L("givingByCategory"), groupSum(finance, "categoria_da_contribuicao", "valor"))}</div>
         <div class="col-xl-6">${chartCard(L("givingByChurch"), groupSum(finance.map((f) => ({ ...f, igreja: churchName(f.church_id) })), "igreja", "valor"))}</div>
-      </div>`)}
-    ${dashboardSection(L("dashboardCellsSection"), L("dashboardCellsHint"), "bi-diagram-3", "cellMinistryOverview", `
+      </div>`) : ""}
+    ${canDashboardSee("cellMinistryOverview") ? dashboardSection(L("dashboardCellsSection"), L("dashboardCellsHint"), "bi-diagram-3", "cellMinistryOverview", `
       <div class="row g-4">
         <div class="col-xl-8">${chartCard(L("cellGrowth"), cells.map((c) => [c.nome_da_celula, c.presencas[0]?.total || 0]))}</div>
         <div class="col-xl-4">${summaryTiles(L("activeCells"), cells.slice(0, 4).map((c) => [c.nome_da_celula, c.presencas[0]?.total || 0]))}</div>
-      </div>`)}
+      </div>`) : ""}
     ${dashboardSection(L("dashboardRecentSection"), L("dashboardRecentHint"), "bi-journal-text", "audit", `
       <div class="row g-4">
         <div class="col-xl-7">${renderDashboardActivityList()}</div>
@@ -6412,25 +7754,37 @@ function renderMemberCard(member) {
   });
 }
 
+function applyMemberCardFilters(list, filters = {}) {
+  let rows = [...list];
+  if (filters.status) rows = rows.filter((member) => statusKey(member.estado) === filters.status);
+  if (filters.hasChurch) rows = rows.filter((member) => Boolean(member.church_id));
+  return rows;
+}
+
 function renderMembers() {
   const list = scoped(state.members);
   const view = modulePageState.members.view;
+  const filtered = applyMemberCardFilters(list, modulePageState.members.filter || {});
   const churchesCount = new Set(list.map((m) => m.church_id).filter(Boolean)).size;
-  const tableRows = list.map((m) => [
+  const tableRows = filtered.map((m) => [
     fullName(m), m.telefone, churchName(m.church_id), m.celula, m.departamento, badge(m.estado), memberActions(m.id)
   ]);
+  const rowAttrs = filtered.map((m) => ` data-filter-row data-filter-church-values="${churchFilterTokens(m)}" data-filter-status-values="${statusKey(m.estado)} ${m.estado || ""}"`);
   setPageContent(`
     ${sectionHeader(L("members"), L("membersSubtitle"), "member", "bi-people")}
     <div class="row g-3 mb-4 summary-cards-row">
-      ${metric("bi-people", L("total"), list.length, L("members"))}
-      ${metric("bi-check-circle", L("active"), list.filter((m) => statusKey(m.estado) === "active").length, L("status"))}
-      ${metric("bi-hourglass", L("inProgress"), list.filter((m) => statusKey(m.estado) === "inProgress").length, L("followUp"))}
-      ${metric("bi-arrow-left-right", L("transferred"), list.filter((m) => statusKey(m.estado) === "transferred").length, L("status"))}
-      ${metric("bi-building", L("membersByChurch"), churchesCount, L("churches"))}
+      ${sm("bi-people", L("total"), list.length, "members", { scrollTo: "members-results", filterPayload: {} })}
+      ${sm("bi-check-circle", L("active"), list.filter((m) => statusKey(m.estado) === "active").length, "members", { scrollTo: "members-results", filterPayload: { status: "active" } })}
+      ${sm("bi-hourglass", L("inProgress"), list.filter((m) => statusKey(m.estado) === "inProgress").length, "members", { scrollTo: "members-results", filterPayload: { status: "inProgress" } })}
+      ${sm("bi-arrow-left-right", L("transferred"), list.filter((m) => statusKey(m.estado) === "transferred").length, "members", { scrollTo: "members-results", filterPayload: { status: "transferred" } })}
+      ${sm("bi-building", L("membersByChurch"), churchesCount, "members", { scrollTo: "members-results", filterPayload: { hasChurch: true } })}
     </div>
+    ${summaryFilterChips("members")}
     <article class="panel glass-panel">
       ${filterBar({ viewToggle: ViewToggle(view) })}
-      ${view === "cards" ? DataCardsGrid(list.map((m) => renderMemberCard(m)).join("")) : dataTable([L("name"), L("phone"), L("church"), L("cell"), L("department"), L("status"), L("actions")], tableRows)}
+      <div id="members-results">
+        ${view === "cards" ? DataCardsGrid(filtered.map((m) => renderMemberCard(m)).join("")) : dataTable([L("name"), L("phone"), L("church"), L("cell"), L("department"), L("status"), L("actions")], tableRows, { rowAttrs })}
+      </div>
     </article>
   `);
 }
@@ -6790,6 +8144,9 @@ function foundationProgress(student) {
 let financeSupabaseSyncToken = 0;
 
 function renderFinance() {
+  if (window.CEAccessControl?.canAccessTab?.(activeUser, "finance", financePageState.tab) === false) {
+    financePageState.tab = "overview";
+  }
   const syncToken = ++financeSupabaseSyncToken;
   syncFinanceFromSupabaseIfEnabled().then((changed) => {
     if (changed && syncToken === financeSupabaseSyncToken && activeRoute === "finance") renderFinance();
@@ -6966,7 +8323,7 @@ function renderFinance() {
         </div>
         <div class="row g-3 summary-cards-row mt-2">
           ${sm("bi-clipboard-check", L("finApprovedRequisitions"), approvedReqStats.total || 0, "finance", { targetTab: "approvedRequisitions" })}
-          ${sm("bi-hourglass-split", L("finAwaitingRelease"), approvedReqStats.awaiting || 0, "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Aguardando Liberação" } })}
+          ${sm("bi-hourglass-split", L("finAwaitingRelease"), approvedReqStats.awaiting || 0, "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Aguardando Libera��o" } })}
           ${sm("bi-cash-stack", L("finReleasedThisMonth"), approvedReqStats.releasedThisMonth || 0, "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Recursos Liberados", period: "month" } })}
           ${sm("bi-graph-up", L("finTotalReleasedMonth"), money(approvedReqStats.releasedValueMonth || 0), "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Recursos Liberados", period: "month" } })}
           ${sm("bi-clock-history", L("reqRemainingPending"), money(approvedReqStats.pendingTotal || 0), "finance", { targetTab: "reports", filterPayload: { card_filter: "awaiting" } })}
@@ -6995,11 +8352,11 @@ function renderFinance() {
       const reqStats = disbLib.computeStats(filteredApproved);
       tabContent = moduleSection(L("financeTabApprovedReq"), L("finApprovedReqHint"), "bi-clipboard-check", "", `
         <div class="row g-3 summary-cards-row mb-4">
-          ${sm("bi-hourglass-split", L("finAwaitingRelease"), reqStats.awaiting, "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Aguardando Liberação" } })}
+          ${sm("bi-hourglass-split", L("finAwaitingRelease"), reqStats.awaiting, "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Aguardando Libera��o" } })}
           ${sm("bi-check-circle", L("finResourcesReleased"), reqStats.released, "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Recursos Liberados" } })}
           ${sm("bi-cash-coin", L("finApprovedAmount"), money(reqStats.approvedTotal), "finance", { targetTab: "approvedRequisitions" })}
           ${sm("bi-wallet2", L("finReleasedAmount"), money(reqStats.releasedTotal), "finance", { targetTab: "approvedRequisitions" })}
-          ${sm("bi-clock-history", L("finPendingPayments"), reqStats.pendingPayments, "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Aguardando Liberação" } })}
+          ${sm("bi-clock-history", L("finPendingPayments"), reqStats.pendingPayments, "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Aguardando Libera��o" } })}
           ${sm("bi-pie-chart", L("finPartiallyPaid"), reqStats.partial, "finance", { targetTab: "approvedRequisitions", filterPayload: { finance_status: "Parcialmente Pago" } })}
         </div>
         ${financeApprovedReqFilterBar(filters)}
@@ -7015,7 +8372,7 @@ function renderFinance() {
             r.approved_by || "-",
             money(r.approved_amount || r.estimated_amount),
             money(r.released_amount || r.amount_released || 0),
-            financeApprovedReqBadge(r.finance_status || "Aguardando Liberação"),
+            financeApprovedReqBadge(r.finance_status || "Aguardando Libera��o"),
             financeApprovedReqActions(r)
           ])
         ) : noResultsHtml()}`
@@ -7238,11 +8595,11 @@ function renderChurches() {
   setPageContent( `
     ${sectionHeader(L("churches"), L("churchesSubtitle"), "church", "bi-building")}
     <div class="row g-3 mb-4">
-      ${sm("bi-building", L("totalChurches"), allChurches.length, "churches", { filterPayload: {} })}
-      ${sm("bi-check-circle", L("activeChurches"), activeCount, "churches", { filterPayload: { status: "Activa" } })}
-      ${sm("bi-broadcast", L("onlineVirtualChurches"), onlineCount, "churches", { filterPayload: { type: "Igreja Online" } })}
+      ${sm("bi-building", L("totalChurches"), allChurches.length, "churches", { scrollTo: "churches-results", filterPayload: {} })}
+      ${sm("bi-check-circle", L("activeChurches"), activeCount, "churches", { scrollTo: "churches-results", filterPayload: { status: "Activa" } })}
+      ${sm("bi-broadcast", L("onlineVirtualChurches"), onlineCount, "churches", { scrollTo: "churches-results", filterPayload: { type: "Igreja Online" } })}
       ${sm("bi-geo-alt", L("provincesCovered"), provinces.size, "churches", { scrollTo: "churches-filter-grid" })}
-      ${sm("bi-flag", L("infoToConfirm"), confirmCount, "churches", { filterPayload: { information_status: "Por Confirmar" } })}
+      ${sm("bi-flag", L("infoToConfirm"), confirmCount, "churches", { scrollTo: "churches-results", filterPayload: { information_status: "Por Confirmar" } })}
     </div>
     ${summaryFilterChips("churches")}
     <div class="churches-toolbar">
@@ -7260,7 +8617,7 @@ function renderChurches() {
       ${churchFilterSelect("status", L("filterStatus"), CHURCH_STATUSES, filters.status)}
       ${churchFilterSelect("information_status", L("filterInfoStatus"), CHURCH_INFO_STATUSES, filters.information_status)}
     </div>
-    ${listHtml}
+    <div id="churches-results">${listHtml}</div>
   `);
 }
 
@@ -7443,8 +8800,8 @@ function renderCellMinistry(activeTab = "alecOverview") {
   const totalNc = cellReports.reduce((sum, report) => sum + Number(report.nc || 0), 0);
   const totalOffering = cellReports.reduce((sum, report) => sum + Number(report.oferta || 0), 0);
   const explosionCells = registry.filter((item) => String(item.observation || "").toUpperCase().includes("EXPLOSAO")).length;
-  const attentionLeaders = leaders.filter((item) => ["Em Treinamento", "Precisa de Atenção"].includes(item.estado));
-  const attentionEvaluations = evaluations.filter((item) => ["Precisa de Atenção", "Crítico"].includes(item.classificacao));
+  const attentionLeaders = leaders.filter((item) => ["Em Treinamento", "Precisa de Aten��o"].includes(item.estado));
+  const attentionEvaluations = evaluations.filter((item) => ["Precisa de Aten��o", "Cr�tico"].includes(item.classificacao));
   const navHtml = cellModuleHeader(activeRoute, { modalType: cellModalType(activeTab) });
   let bodyHtml = "";
 
@@ -7455,7 +8812,7 @@ function renderCellMinistry(activeTab = "alecOverview") {
           ${metric("bi-mortarboard", L("totalAlecRegistered"), alecRegistrations.length, L("alecFull"))}
           ${metric("bi-person-badge", L("alreadyLeaders"), alecRegistrations.filter((item) => item.e_lider).length, L("cellLeaders"))}
           ${metric("bi-book", L("didFoundationSchool"), alecRegistrations.filter((item) => item.fez_escola_de_fundacao).length, L("foundationSchool"))}
-          ${metric("bi-hourglass-split", L("inTraining"), alecRegistrations.filter((item) => item.estado === "Em Formação").length, L("active"))}
+          ${metric("bi-hourglass-split", L("inTraining"), alecRegistrations.filter((item) => item.estado === "Em Forma��o").length, L("active"))}
           ${metric("bi-award", L("alecCompleted"), alecScores.filter((item) => item.terminou).length, L("certificateIssued"))}
           ${metric("bi-clipboard-check", L("churchReports"), churchReports.length, L("reports"))}
         </div>`)}
@@ -7471,7 +8828,7 @@ function renderCellMinistry(activeTab = "alecOverview") {
           ${metric("bi-collection", L("totalGroupCells"), groups.length, L("cellGroups"))}
           ${metric("bi-diagram-3", L("totalCells"), registry.length, L("activeCells"))}
           ${metric("bi-clipboard-check", L("submittedReports"), cellReports.filter((item) => item.estado !== "Rascunho").length, L("reports"))}
-          ${metric("bi-hourglass-split", L("pendingReportsShort"), cellReports.filter((item) => ["Rascunho", "Submetido", "Em Avaliação"].includes(item.estado)).length, L("needsAction"))}
+          ${metric("bi-hourglass-split", L("pendingReportsShort"), cellReports.filter((item) => ["Rascunho", "Submetido", "Em Avalia��o"].includes(item.estado)).length, L("needsAction"))}
           ${metric("bi-lightning-charge", L("explosionCells"), explosionCells, L("readyToSplit"))}
           ${metric("bi-exclamation-triangle", L("attentionCells"), attentionEvaluations.length, L("leaderSupport"))}
         </div>`)}
@@ -7564,40 +8921,92 @@ function renderCellMinistry(activeTab = "alecOverview") {
 function renderCellGroups() {
   const groups = scopedNested(state.cellGroups || []);
   const registry = scopedNested(state.cellRegistry || []);
+  const statusOptions = [...new Set(registry.map((item) => item.status).filter(Boolean))].sort();
   const navHtml = cellModuleHeader("cellGroups");
   const bodyHtml = `
-    ${filterBar({ search: true, church: true, month: false, status: true })}
+    ${filterBar({ search: true, church: true, month: false, status: true, statusOptions, exportBtn: true })}
     <div class="row g-3 mb-4">
       ${metric("bi-collection", L("totalGroupCells"), groups.length, L("cellGroups"))}
       ${metric("bi-diagram-3", L("totalCells"), registry.length, L("activeCells"))}
       ${metric("bi-people", L("totalMembers"), groups.reduce((sum, item) => sum + Number(item.total_members || 0), 0), L("members"))}
       ${metric("bi-flag", L("needsReview"), groups.filter((item) => item.needs_review).length, L("importReview"))}
     </div>
-    <div class="row g-4">
-      <div class="col-12">${modulePanel("cellGroup", L("cellGroups"), null, [L("groupName"), L("leaderName"), L("church"), L("totalCells"), L("totalMembers"), L("status"), L("review"), L("actions")], groups.map((item) => [
-        `${item.group_name} ${reviewFlag(item.needs_review)}`,
-        item.leader_name || "-",
-        churchName(item.church_id),
-        item.total_cells,
-        item.total_members || "-",
-        badge(item.status),
-        item.needs_review ? badge("Em Revisão") : "-",
-        actionButtons([
-          ["view", "cellGroup", item.id, L("view")],
-          ["edit", "cellGroup", item.id, L("edit")],
-          ["viewGroupCells", "cellGroup", item.id, L("viewCells")]
-        ])
-      ]), true)}</div>
-    </div>`;
+    <div class="cell-accordion-toolbar">
+      <div class="cell-accordion-search"><i class="bi bi-search"></i><input class="form-control" type="search" data-cell-accordion-search placeholder="${L("search")}"></div>
+      <div class="cell-accordion-actions">
+        <button type="button" class="btn btn-sm btn-outline-cyan" data-action="expandCellGroups">${L("expandAll")}</button>
+        <button type="button" class="btn btn-sm btn-outline-light" data-action="collapseCellGroups">${L("collapseAll")}</button>
+      </div>
+    </div>
+    ${renderCellGroupAccordion(groups, registry, { showMetrics: true, showActions: true })}`;
   setPageContent(navHtml + tabParallaxWrap(bodyHtml, activeRoute));
   triggerTabParallax();
 }
 
+function renderCellGroupAccordion(groups, registry, { showMetrics = true, showActions = true } = {}) {
+  const cellsByGroup = new Map();
+  registry.forEach((cell) => {
+    const key = cell.group_id || cell.cell_group_id || cell.group_cell_id || "";
+    if (!cellsByGroup.has(key)) cellsByGroup.set(key, []);
+    cellsByGroup.get(key).push(cell);
+  });
+  return `<div class="cell-group-accordion" data-cell-group-accordion>
+    ${groups.map((group) => {
+      const cells = cellsByGroup.get(group.id) || [];
+      const searchText = `${group.group_name} ${group.leader_name || ""} ${churchName(group.church_id)}`.toLowerCase();
+      return `
+        <details class="cell-group-item" data-cell-group-item data-search-text="${searchText}">
+          <summary>
+            <div class="cell-group-title"><strong>${group.group_name}</strong><span>${churchName(group.church_id)}</span></div>
+            <div class="cell-group-summary-meta">
+              <span class="cell-count-pill">${cells.length} ${L("cellCellsList")}</span>
+              ${group.leader_name ? `<span>${group.leader_name}</span>` : ""}
+              ${badge(group.status)}
+              ${group.needs_review ? `<span class="status-pill status-amber">${L("needsReview")}</span>` : ""}
+            </div>
+          </summary>
+          <div class="cell-group-inner">
+            ${showMetrics ? `<div class="cell-mini-metrics">
+              <span>${L("attendance")}: <strong>${cells.reduce((sum, cell) => sum + Number(cell.attendance || 0), 0)}</strong></span>
+              <span>FT: <strong>${cells.reduce((sum, cell) => sum + Number(cell.first_timers || 0), 0)}</strong></span>
+              <span>NC: <strong>${cells.reduce((sum, cell) => sum + Number(cell.new_converts || 0), 0)}</strong></span>
+              <span>${L("offering")}: <strong>${money(cells.reduce((sum, cell) => sum + Number(cell.offering || 0), 0))}</strong></span>
+            </div>` : ""}
+            ${dataTable([L("cellName"), L("leaderName"), L("attendance"), L("firstTimeShort"), L("newConvertsShort"), L("offering"), L("status"), L("observation"), L("actions")], cells.map((cell) => [
+              cell.cell_name,
+              `${cell.leader_title || ""} ${cell.leader_name || ""}`.trim() || "-",
+              cell.attendance || 0,
+              cell.first_timers || 0,
+              cell.new_converts || 0,
+              money(cell.offering || 0),
+              badge(cell.status),
+              cell.observation || "-",
+              showActions ? actionButtons([["view", "cellRegistry", cell.id, L("view")], ["edit", "cellRegistry", cell.id, L("edit")], ["updateReport", "cellRegistry", cell.id, L("updateCellReport")]]) : "-"
+            ]))}
+          </div>
+        </details>`;
+    }).join("")}
+  </div>`;
+}
 function renderCellCellsList() {
   const groups = scopedNested(state.cellGroups || []);
   let cells = scopedNested(state.cellRegistry || []);
   const filterGroup = cellRegistryFilter.groupId ? groups.find((item) => item.id === cellRegistryFilter.groupId) : null;
-  if (filterGroup) cells = cells.filter((item) => item.group_id === filterGroup.id);
+  if (filterGroup) cells = cells.filter((item) => item.group_id === filterGroup.id || item.cell_group_id === filterGroup.id || item.group_cell_id === filterGroup.id);
+  const statusOptions = [...new Set(cells.map((item) => item.status).filter(Boolean))].sort();
+  if (cellRegistryFilter.churchId) cells = cells.filter((item) => item.church_id === cellRegistryFilter.churchId);
+  if (cellRegistryFilter.status) cells = cells.filter((item) => String(item.status || "") === cellRegistryFilter.status);
+  if (cellRegistryFilter.search) {
+    const query = cellRegistryFilter.search.toLowerCase();
+    cells = cells.filter((item) => [
+      item.cell_name,
+      item.group_name,
+      item.leader_title,
+      item.leader_name,
+      item.observation,
+      item.status
+    ].some((value) => String(value || "").toLowerCase().includes(query)));
+  }
   const navHtml = cellModuleHeader("cellCellsList");
   const filterBanner = filterGroup ? `
     <div class="cell-filter-banner mb-3">
@@ -7606,7 +9015,19 @@ function renderCellCellsList() {
     </div>` : "";
   const bodyHtml = `
     ${filterBanner}
-    ${filterBar({ search: true, church: true, month: false, status: true, exportBtn: true })}
+    ${filterBar({
+      search: true,
+      church: true,
+      month: false,
+      status: true,
+      statusOptions,
+      exportBtn: true,
+      applyBtn: true,
+      filterScope: "cellRegistry",
+      searchValue: cellRegistryFilter.search,
+      churchValue: cellRegistryFilter.churchId,
+      statusValue: cellRegistryFilter.status
+    })}
     <div class="row g-3 mb-4">
       ${metric("bi-diagram-3", L("totalCells"), cells.length, filterGroup ? filterGroup.group_name : L("all"))}
       ${metric("bi-people", L("totalAttendance"), cells.reduce((sum, item) => sum + Number(item.attendance || 0), 0), L("reportWeek"))}
@@ -7776,7 +9197,7 @@ function renderVenueInventory(activeTab = "overview") {
   const checklists = scopedNested(venue.checklists);
   const reports = scopedNested(venue.reports || []);
   const goodItems = inventory.filter((item) => item.estado === "Bom");
-  const damagedItems = inventory.filter((item) => ["Mau", "Em Reparação"].includes(item.estado));
+  const damagedItems = inventory.filter((item) => ["Mau", "Em Repara��o"].includes(item.estado));
   const acquisitionValue = acquisitions.reduce((sum, item) => sum + Number(item.valor_total || 0), 0);
   const pendingMovements = movements.filter((item) => ["Solicitado", "Aprovado", "Em Uso"].includes(item.estado));
   const pendingChecklists = checklists.filter((item) => item.estado !== "Pronto");
@@ -7789,7 +9210,7 @@ function renderVenueInventory(activeTab = "overview") {
       ${sm("bi-box-seam", L("totalItems"), inventory.length, "venue", { route: "venueInventoryGeneral" })}
       ${sm("bi-check-circle", L("goodEquipment"), goodItems.length, "venue", { route: "venueInventoryGeneral", filterPayload: { estado: "Bom" } })}
       ${sm("bi-exclamation-triangle", L("damagedEquipment"), damagedItems.length, "venue", { route: "venueInventoryGeneral", filterPayload: { estado: "Mau" } })}
-      ${sm("bi-tools", L("inRepair"), inventory.filter((item) => item.estado === "Em Reparação").length, "venue", { route: "venueInventoryMaintenance", filterPayload: { estado: "Em Reparação" } })}
+      ${sm("bi-tools", L("inRepair"), inventory.filter((item) => item.estado === "Em Repara��o").length, "venue", { route: "venueInventoryMaintenance", filterPayload: { estado: "Em Repara��o" } })}
       ${sm("bi-laptop", L("assignedStaffEquipment"), staffEquipment.filter((item) => item.estado === "Activo").length, "venue", { route: "venueInventoryStaff", filterPayload: { assigned: true } })}
       ${sm("bi-cart-plus", L("acquisitions2026"), acquisitions.length, "venue", { route: "venueInventoryAcquisitions" })}
       ${sm("bi-arrow-left-right", L("pendingMovements"), pendingMovements.length, "venue", { route: "venueInventoryMovements" })}
@@ -7986,10 +9407,10 @@ function renderFevo(activeTab = "overview") {
   const dataPanels = `
     <div class="row g-4">
       ${show("config") ? `<div class="col-12">${modulePanel("fevoConfig", L("weeklyConfiguration"), "fevoConfig", [L("weekStart"), L("weekEnd"), L("teamAActivity"), L("teamBActivity"), L("teamCActivity"), L("teamDActivity"), L("preparedBy"), L("status"), L("actions")], configs.map((item) => [item.semana_inicio, item.semana_fim, item.team_a_activity, item.team_b_activity, item.team_c_activity, item.team_d_activity, item.preparado_por, badge(item.estado), backendActions("fevoConfig", item.id)]), true)}</div>` : ""}
-      ${show("followup") ? `<div class="col-12">${fevoActivityPanel("fevoFollowUp", L("followUp"), reports.filter((item) => item.activity_type === "Follow-Up"))}</div>` : ""}
-      ${show("evangelism") ? `<div class="col-12">${fevoActivityPanel("fevoEvangelism", L("evangelism"), reports.filter((item) => item.activity_type === "Evangelização"))}</div>` : ""}
-      ${show("visitation") ? `<div class="col-12">${fevoActivityPanel("fevoVisitation", L("visitation"), reports.filter((item) => item.activity_type === "Visitação"))}</div>` : ""}
-      ${show("prayer") ? `<div class="col-12">${fevoActivityPanel("fevoPrayer", L("prayer"), reports.filter((item) => item.activity_type === "Oração"))}</div>` : ""}
+      ${show("followup") ? `<div class="col-12">${fevoActivityPanel("fevoFollowUp", L("followUp"), reports.filter((item) => ["Acompanhamento", "Follow-Up"].includes(item.activity_type)))}</div>` : ""}
+      ${show("evangelism") ? `<div class="col-12">${fevoActivityPanel("fevoEvangelism", L("evangelism"), reports.filter((item) => item.activity_type === "Evangeliza��o"))}</div>` : ""}
+      ${show("visitation") ? `<div class="col-12">${fevoActivityPanel("fevoVisitation", L("visitation"), reports.filter((item) => item.activity_type === "Visita��o"))}</div>` : ""}
+      ${show("prayer") ? `<div class="col-12">${fevoActivityPanel("fevoPrayer", L("prayer"), reports.filter((item) => item.activity_type === "Ora��o"))}</div>` : ""}
       ${show("weeklyReports") ? `<div class="col-12">${modulePanel("fevoReport", L("weeklyReports"), "fevoReport", [L("weekStart"), L("team"), L("activityType"), L("groupName"), L("leaderName"), L("leadersPresent"), L("membersPresent"), L("ftInChurch"), L("status"), L("actions")], reports.map((item) => [item.semana_inicio, item.team, item.activity_type, item.group_name, item.leader_name, item.leaders_present, item.members_present, item.ft_in_church, badge(item.status), actionButtons([["view", "fevoReport", item.id, L("view")], ["edit", "fevoReport", item.id, L("edit")], ["submit", "fevoReport", item.id, L("submit")], ["approve", "fevoReport", item.id, L("approve")], ["reject", "fevoReport", item.id, L("reject")], ["export", "fevoReport", item.id, L("export")]])]), true)}</div>` : ""}
       ${show("noReports") ? `<div class="col-12">${modulePanel("fevoNoReport", L("groupsWithoutReport"), "fevoNoReport", [L("weekStart"), L("team"), L("activityType"), L("groupName"), L("leaderName"), L("reasonNotSubmitted"), L("contacted"), L("status"), L("actions")], noReports.map((item) => [item.semana_inicio, item.team, item.activity_type, item.group_name, item.leader_name, item.reason_not_submitted, yesNo(item.contacted), badge(item.status), backendActions("fevoNoReport", item.id)]), true)}</div><div class="col-12">${summaryTiles(L("groupsWithoutReport"), [[L("groupsNoReportThisWeek"), noReports.length], [L("recurringGroups"), noReports.filter((item) => statusKey(item.status) === "recurrent").length], [L("contacted"), noReports.filter((item) => item.contacted).length], [L("resolved"), noReports.filter((item) => statusKey(item.status) === "resolved").length]])}</div>` : ""}
       ${show("weeklyReports") ? `<div class="col-12">${renderFevoWeeklyReport(weeklyReports[0], reports, noReports)}</div>` : ""}
@@ -8029,9 +9450,9 @@ function renderFevoWeeklyReport(report, reports, noReports) {
 
 function fevoActivityPanel(id, title, rows) {
   const activity = rows[0]?.activity_type || title;
-  const activityMetric = activity === "Follow-Up" ? ["soulsContacted", "souls_contacted"] :
-    activity === "Evangelização" ? ["soulsEvangelized", "souls_evangelized"] :
-    activity === "Visitação" ? ["soulsVisited", "souls_visited"] :
+  const activityMetric = ["Acompanhamento", "Follow-Up"].includes(activity) ? ["soulsContacted", "souls_contacted"] :
+    activity === "Evangeliza��o" ? ["soulsEvangelized", "souls_evangelized"] :
+    activity === "Visita��o" ? ["soulsVisited", "souls_visited"] :
     ["daysOfPrayer", "days_of_prayer"];
   return `
     <article id="panel-${id}" class="panel h-100">
@@ -8086,7 +9507,7 @@ function renderReports() {
     const title = adapter?.titleKey ? L(adapter.titleKey) : d.id;
     const primary = stats.total ?? stats.releasedTotal ?? stats.salesValue ?? 0;
     const display = typeof primary === "number" && primary > 999 ? money(primary) : primary;
-    return sm(d.icon, title, display, "reports", { filterPayload: { domain: d.id } });
+    return sm(d.icon, title, display, "reports", { route: "reports", scrollTo: `report-domain-${d.id}`, filterPayload: { domain: d.id } });
   }).join("");
   const activeDomain = reportsPageState.domain && framework?.canViewDomain(activeUser, reportsPageState.domain)
     ? reportsPageState.domain
@@ -8115,7 +9536,7 @@ function renderReports() {
         <div class="tab-strip module-tab-strip reports-hub-tabs mb-3">${domainTabs}</div>
         <div class="row g-3 summary-cards-row reports-hub-executive mb-4">${executiveCards}</div>
         ${summaryFilterChips("reports")}
-        <div class="tab-content-panel reports-hub-panel">${activePanel}</div>
+        <div class="tab-content-panel reports-hub-panel" id="report-domain-${activeDomain}">${activePanel}</div>
       </article>
       ${reqApprovedSection}
     </div>
@@ -8135,9 +9556,15 @@ function requisitionsModuleTabs() {
     ["reports", L("reqTabReports")],
     ["history", L("reqTabHistory")]
   ];
-  return moduleTabsNav(tabs.map(([key, label]) =>
-    moduleTabButton(label, { active: requisitionsPageState.tab === key, attrs: `data-requisition-tab="${key}"` })
-  ).join(""), "requisitions-module-tabs");
+  return moduleTabsNav(tabs.map(([key, label]) => {
+    const canAccess = window.CEAccessControl?.canAccessTab?.(activeUser, "requisitions", key) !== false;
+    return moduleTabButton(label, {
+      active: requisitionsPageState.tab === key,
+      attrs: `data-requisition-tab="${key}"${canAccess ? "" : ` aria-disabled="true" data-locked-tab="requisitions:${key}"`}`,
+      disabled: !canAccess,
+      tooltip: L("navLockedTooltip")
+    });
+  }).join(""), "requisitions-module-tabs");
 }
 
 function requisitionActionLabel(action) {
@@ -8219,10 +9646,10 @@ function requisitionTimelineHtml(record) {
 
 function requisitionFinanceSectionHtml(record) {
   const lib = window.CERequisitions;
-  const approvedStatuses = [lib?.STATUSES?.APPROVED_AWAITING_RELEASE, lib?.STATUSES?.APPROVED, lib?.STATUSES?.RESOURCES_RELEASED, lib?.STATUSES?.PURCHASED, "Aprovado", "Aprovado — Aguardando Liberação de Recursos", "Recursos Liberados"];
+  const approvedStatuses = [lib?.STATUSES?.APPROVED_AWAITING_RELEASE, lib?.STATUSES?.APPROVED, lib?.STATUSES?.RESOURCES_RELEASED, lib?.STATUSES?.PURCHASED, "Aprovado", "Aprovado � Aguardando Libera��o de Recursos", "Recursos Liberados"];
   if (!approvedStatuses.includes(record.status) && !record.finance_status && !record.sent_to_finance) return "";
-  const finStatus = record.finance_status || "Aguardando Liberação";
-  const pendingBadge = finStatus === "Aguardando Liberação"
+  const finStatus = record.finance_status || "Aguardando Libera��o";
+  const pendingBadge = finStatus === "Aguardando Libera��o"
     ? `<span class="status-pill status-warn ms-2"><i class="bi bi-circle-fill"></i>${L("finPendingInFinance")}</span>`
     : finStatus === "Recursos Liberados" || finStatus === "Pago"
       ? `<span class="status-pill status-good ms-2"><i class="bi bi-circle-fill"></i>${L("finResourcesReleased")}</span>`
@@ -8427,6 +9854,9 @@ function submitRequisitionPastoralDecision(decision) {
 function renderRequisitions() {
   const lib = window.CERequisitions;
   if (!lib?.resolveAccess(activeUser).can_view) return renderAccessDenied();
+  if (window.CEAccessControl?.canAccessTab?.(activeUser, "requisitions", requisitionsPageState.tab) === false) {
+    requisitionsPageState.tab = "overview";
+  }
   const access = lib.resolveAccess(activeUser);
   const scoped = lib.scopeFilter(state.requisitions || [], activeUser, access);
   const stats = lib.computeStats(scoped);
@@ -8465,7 +9895,7 @@ function renderRequisitions() {
   } else {
     let filtered = lib.filterByTab(scoped, requisitionsPageState.tab);
     if (requisitionsPageState.cardFilter?.pending_value) {
-      filtered = filtered.filter((r) => ["Submetido", "Em Revisão", "Rascunho", "Devolvido para Correção"].includes(r.status) && Number(r.estimated_amount || 0) > 0);
+      filtered = filtered.filter((r) => ["Submetido", "Em Revis�o", "Rascunho", "Devolvido para Corre��o"].includes(r.status) && Number(r.estimated_amount || 0) > 0);
     }
     tabContent = `${summaryFilterChips("requisitions")}${filtered.length ? dataTable(
       [L("reqNumber"), L("reqTitle"), L("reqDepartment"), L("reqUrgency"), L("reqNeededBy"), L("reqEstimated"), L("status"), L("actions")],
@@ -8596,7 +10026,7 @@ function staffBirthdayCard(staff, lib, canEdit = false) {
           <h6 class="staff-birthday-card-name">${staff.full_name}</h6>
           <p class="staff-birthday-card-role mb-0">${staff.role_title || "-"} · ${staff.department_name || "-"}</p>
         </div>
-        ${staff.days_until_birthday === 0 ? `<span class="staff-birthday-today-badge">🎂</span>` : ""}
+        ${staff.days_until_birthday === 0 ? `<span class="staff-birthday-today-badge">ðŸŽ‚</span>` : ""}
       </div>
       <div class="staff-birthday-card-meta">
         <span><strong>${L("church")}:</strong> ${churchName(staff.church_id)}</span>
@@ -8696,7 +10126,7 @@ function staffUpcomingBirthdaysPanel(staffList, lib, access) {
         <strong>${staff.full_name}</strong>
         <small class="text-secondary d-block">${lib.formatBirthdayDisplay(staff.date_of_birth, lang)}</small>
       </button>
-      <span class="text-nowrap staff-birthday-days">${staff.days_until_birthday === 0 ? "🎂" : `${staff.days_until_birthday} ${lang === "pt" ? "dias" : "days"}`}</span>
+      <span class="text-nowrap staff-birthday-days">${staff.days_until_birthday === 0 ? "ðŸŽ‚" : `${staff.days_until_birthday} ${lang === "pt" ? "dias" : "days"}`}</span>
     </li>`).join("")}</ul>`;
 }
 
@@ -8778,14 +10208,23 @@ function staffHrModuleTabs() {
     ["documents", L("staffTabDocuments")],
     ["reports", L("staffTabReports")]
   ];
-  return moduleTabsNav(tabs.map(([key, label]) =>
-    moduleTabButton(label, { active: staffHrPageState.tab === key, attrs: `data-staff-tab="${key}"` })
-  ).join(""), "staff-hr-module-tabs");
+  return moduleTabsNav(tabs.map(([key, label]) => {
+    const canAccess = window.CEAccessControl?.canAccessTab?.(activeUser, "staffHr", key) !== false;
+    return moduleTabButton(label, {
+      active: staffHrPageState.tab === key,
+      attrs: `data-staff-tab="${key}"${canAccess ? "" : ` aria-disabled="true" data-locked-tab="staffHr:${key}"`}`,
+      disabled: !canAccess,
+      tooltip: L("navLockedTooltip")
+    });
+  }).join(""), "staff-hr-module-tabs");
 }
 
 function renderStaffHr() {
   const lib = window.CEStaffHr;
   if (!lib?.resolveAccess(activeUser).can_view) return renderAccessDenied();
+  if (window.CEAccessControl?.canAccessTab?.(activeUser, "staffHr", staffHrPageState.tab) === false) {
+    staffHrPageState.tab = "overview";
+  }
   const access = lib.resolveAccess(activeUser);
   const staffList = lib.scopeFilterStaff(state.staffProfiles || [], activeUser, access);
   const salaries = lib.filterSalaries(state.staffSalaries || [], state.staffProfiles || [], activeUser);
@@ -8934,7 +10373,7 @@ function renderAccess() {
 }
 
 function renderSettings() {
-  setPageContent(`${sectionHeader(L("settings"), lang === "pt" ? "Definições futuras para backend, autenticação, notificações e API mobile." : "Backend, authentication, notifications and mobile API settings will live here.", null, "bi-gear")}<div class="module-grid">${["Supabase/Firebase/PostgreSQL", "Authentication", "Mobile API", "Notifications"].map((item) => `<article class="record-card data-card"><span class="eyebrow">${L("settings")}</span><h3>${item}</h3><p class="text-secondary mb-0">${lang === "pt" ? "Espaço reservado do protótipo." : "Frontend placeholder."}</p></article>`).join("")}</div>`);
+  setPageContent(`${sectionHeader(L("settings"), lang === "pt" ? "Defini��es futuras para backend, autentica��o, notifica��es e API mobile." : "Backend, authentication, notifications and mobile API settings will live here.", null, "bi-gear")}<div class="module-grid">${["Supabase/Firebase/PostgreSQL", "Authentication", "Mobile API", "Notifications"].map((item) => `<article class="record-card data-card"><span class="eyebrow">${L("settings")}</span><h3>${item}</h3><p class="text-secondary mb-0">${lang === "pt" ? "Espa�o reservado do prot�tipo." : "Frontend placeholder."}</p></article>`).join("")}</div>`);
 }
 
 function renderAudit() {
@@ -8946,21 +10385,771 @@ function renderSimple(type, title, records) {
   setPageContent(`${sectionHeader(title, title, type, "bi-grid")}<article class="panel glass-panel">${dataTable([L("name"), L("church"), L("category"), L("status"), L("actions")], scoped(records).map((r) => [r.name, churchName(r.church_id), r.category || r.owner || r.channel || "-", badge(r.status), actionButtons([["view", type, r.id, L("view")], ["edit", type, r.id, L("edit")]])]))}</article>`);
 }
 
+function getMediaState() {
+  const base = structuredClone(seedData.media || {});
+  const current = state.media;
+  if (!current || Array.isArray(current)) return base;
+  return { ...base, ...current };
+}
+
+function mediaVisibleTechnicians(technicians) {
+  const rows = scoped(technicians || [], "media");
+  if (activeUser.role === "Media Team Member") {
+    const owner = activeUser.assigned_staff_name || activeUser.name;
+    return rows.filter((item) => item.full_name === owner || item.email === activeUser.email);
+  }
+  return rows;
+}
+
+function mediaRoleName(roleKey) {
+  const role = (getMediaState().roles || []).find((item) => item.id === roleKey || item.name === roleKey);
+  if (role) return L(mediaRoleKey(role)) !== mediaRoleKey(role) ? L(mediaRoleKey(role)) : role.name;
+  return L(roleKey) !== roleKey ? L(roleKey) : roleKey;
+}
+
+function mediaRoleKey(role = {}) {
+  return role.role_key || role.key || role.id || "";
+}
+
+function mediaChannelUrl(channel = {}) {
+  return channel.channel_url || channel.url || channel.handle || "";
+}
+
+function mediaTechnicianName(idOrName) {
+  const media = getMediaState();
+  return (media.technicians || []).find((item) => item.id === idOrName)?.full_name || idOrName || "-";
+}
+
+function mediaEscape(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
+}
+
+function mediaRoleByKey(roleKey) {
+  const media = getMediaState();
+  return (media.roles || []).find((role) => mediaRoleKey(role) === roleKey) || {};
+}
+
+const mediaScheduleAssignmentSlots = [
+  { slot: "supervisor", roleKey: "mediaSupervisor", labelKey: "mediaSupervisor", required: true },
+  { slot: "video-mixer", roleKey: "videoMixerOperator", labelKey: "videoMixerOperator", required: true },
+  { slot: "sound", roleKey: "soundTechnician", labelKey: "soundTechnician", required: true },
+  { slot: "camera-1", roleKey: "cameraOperator", labelKey: "mediaCameraOne", required: true },
+  { slot: "camera-2", roleKey: "cameraOperator", labelKey: "mediaCameraTwo", required: true },
+  { slot: "camera-3", roleKey: "cameraOperator", labelKey: "mediaCameraThree", required: true, extraCamera: true },
+  { slot: "camera-4", roleKey: "cameraOperator", labelKey: "mediaCameraFour", required: true, extraCamera: true },
+  { slot: "streaming", roleKey: "streamingTechnician", labelKey: "streamingTechnician", required: true },
+  { slot: "scripture", roleKey: "scriptureOperator", labelKey: "scriptureOperator", required: true },
+  { slot: "slides", roleKey: "slidesOperator", labelKey: "slidesOperator", required: false },
+  { slot: "photography", roleKey: "photographer", labelKey: "photographer", required: false },
+  { slot: "lighting", roleKey: "lightingOperator", labelKey: "lightingOperator", required: false },
+  { slot: "assistant", roleKey: "technicalAssistant", labelKey: "technicalAssistant", required: false }
+];
+
+function findMediaScheduleAssignment(record = {}, slotConfig = {}, index = 0) {
+  const assignments = record.assignments || [];
+  const role = mediaRoleByKey(slotConfig.roleKey);
+  const bySlot = assignments.find((item) => item.slot_key === slotConfig.slot);
+  if (bySlot) return bySlot;
+  const roleMatches = assignments.filter((item) =>
+    item.role_id === role.id || item.role_key === slotConfig.roleKey || item.role === slotConfig.roleKey || item.role_name === L(slotConfig.labelKey)
+  );
+  if (slotConfig.slot === "camera-1") {
+    return roleMatches.find((item) => /1|um|one|c.mara 1|camera 1/i.test(item.notes || item.slot_key || "")) || roleMatches[0] || {};
+  }
+  if (slotConfig.slot === "camera-2") {
+    return roleMatches.find((item) => /2|dois|two|c.mara 2|camera 2/i.test(item.notes || item.slot_key || "")) || roleMatches[1] || {};
+  }
+  if (slotConfig.slot === "camera-3") {
+    return roleMatches.find((item) => /3|tr.s|three|c.mara 3|camera 3/i.test(item.notes || item.slot_key || "")) || roleMatches[2] || {};
+  }
+  if (slotConfig.slot === "camera-4") {
+    return roleMatches.find((item) => /4|quatro|four|c.mara 4|camera 4/i.test(item.notes || item.slot_key || "")) || roleMatches[3] || {};
+  }
+  return roleMatches[index] || {};
+}
+
+function mediaTechnicianCanServeRole(technician = {}, roleKey = "", selectedId = "") {
+  if (technician.id === selectedId) return true;
+  const roles = technician.roles_can_perform || [];
+  if (roleKey === "mediaSupervisor") return roles.includes("mediaSupervisor") || roles.includes("mediaDirector");
+  return roles.includes(roleKey);
+}
+
+function renderMediaTechnicianOptions(roleKey, selectedId = "") {
+  const technicians = mediaVisibleTechnicians(getMediaState().technicians || []);
+  const options = technicians
+    .filter((technician) => /Activo|Active|Treinamento|Training/i.test(technician.status || "") && mediaTechnicianCanServeRole(technician, roleKey, selectedId))
+    .map((technician) => `<option value="${mediaEscape(technician.id)}" ${technician.id === selectedId ? "selected" : ""}>${mediaEscape(technician.full_name)}${technician.skill_level ? ` - ${mediaEscape(technician.skill_level)}` : ""}</option>`)
+    .join("");
+  return `<option value="">${mediaEscape(L("selectTechnician"))}</option>${options}`;
+}
+
+function isMediaMondaySchedule(record = {}) {
+  const serviceText = `${record.service_name || record.name || ""} ${record.day_of_week || ""}`.toLowerCase();
+  if (/segunda|monday/.test(serviceText)) return true;
+  const dateValue = record.date || record.service_date || "";
+  if (!dateValue) return false;
+  const date = new Date(`${dateValue}T12:00:00`);
+  return !Number.isNaN(date.getTime()) && date.getDay() === 1;
+}
+
+function syncMediaScheduleCameraSlots(form = byId("entryForm")) {
+  if (!form || modalType !== "mediaSchedule") return;
+  const mondaySchedule = isMediaMondaySchedule({
+    date: form.querySelector('[name="date"]')?.value || "",
+    service_name: form.querySelector('[name="service_name"]')?.value || ""
+  });
+  form.querySelectorAll("[data-extra-camera-slot]").forEach((slot) => {
+    slot.classList.toggle("d-none", mondaySchedule);
+    slot.classList.toggle("is-disabled", mondaySchedule);
+    slot.querySelectorAll("select, input").forEach((control) => {
+      if (control.type === "hidden") return;
+      control.disabled = mondaySchedule;
+    });
+    const optional = slot.querySelector(".field-optional");
+    if (optional) optional.textContent = mondaySchedule ? L("mondayCameraDisabled") : "";
+  });
+}
+
+function mountMediaScheduleFormControls(form = byId("entryForm")) {
+  if (!form || modalType !== "mediaSchedule") return;
+  form.querySelector('[name="date"]')?.addEventListener("change", () => syncMediaScheduleCameraSlots(form));
+  form.querySelector('[name="service_name"]')?.addEventListener("input", () => syncMediaScheduleCameraSlots(form));
+  syncMediaScheduleCameraSlots(form);
+}
+
+function renderMediaScheduleForm(record = {}) {
+  const mondaySchedule = isMediaMondaySchedule(record);
+  const baseFields = [
+    ["date", "date", "date"],
+    ["service_name", "service"],
+    ["church_id", "church", "church"],
+    ["start_time", "time", "time"],
+    ["status", "status", "select", ["Rascunho", "Publicada", "Incompleta", "Concluida"]],
+    ["notes", "notes", "textarea"]
+  ].map((field) => fieldControl(field, record)).join("");
+  const assignmentsHtml = mediaScheduleAssignmentSlots.map((slotConfig, index) => {
+    const role = mediaRoleByKey(slotConfig.roleKey);
+    const assignment = findMediaScheduleAssignment(record, slotConfig, index);
+    const label = L(slotConfig.labelKey);
+    const inactiveExtraCamera = slotConfig.extraCamera && mondaySchedule;
+    return `
+      <div class="col-xl-6 media-assignment-slot ${inactiveExtraCamera ? "is-disabled d-none" : ""}" ${slotConfig.extraCamera ? "data-extra-camera-slot=\"1\"" : ""}>
+        <div class="media-assignment-picker">
+          <input type="hidden" name="assignment_slot[]" value="${mediaEscape(slotConfig.slot)}">
+          <input type="hidden" name="assignment_role_id[]" value="${mediaEscape(role.id || slotConfig.roleKey)}">
+          <input type="hidden" name="assignment_role_key[]" value="${mediaEscape(slotConfig.roleKey)}">
+          <input type="hidden" name="assignment_role_name[]" value="${mediaEscape(label)}">
+          <label class="form-label d-flex justify-content-between gap-2">
+            <span>${mediaEscape(label)}</span>
+            ${slotConfig.required && !inactiveExtraCamera ? `<span class="mini-chip">${mediaEscape(L("required"))}</span>` : `<span class="field-optional">${mediaEscape(inactiveExtraCamera ? L("mondayCameraDisabled") : L("optional"))}</span>`}
+          </label>
+          <select name="assignment_technician_id[]" class="form-select" ${inactiveExtraCamera ? "disabled" : ""}>
+            ${renderMediaTechnicianOptions(slotConfig.roleKey, assignment.technician_id || "")}
+          </select>
+          <div class="row g-2 mt-1">
+            <div class="col-md-5">
+              <select name="assignment_status[]" class="form-select form-select-sm" ${inactiveExtraCamera ? "disabled" : ""}>
+                ${["Escalado", "Confirmado", "Substituir", "Ausente"].map((status) => `<option value="${status}" ${(assignment.status || "Escalado") === status ? "selected" : ""}>${status}</option>`).join("")}
+              </select>
+            </div>
+            <div class="col-md-7">
+              <input name="assignment_notes[]" class="form-control form-control-sm" value="${mediaEscape(assignment.notes || "")}" placeholder="${mediaEscape(L("notes"))}" ${inactiveExtraCamera ? "disabled" : ""}>
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }).join("");
+  return `
+    ${baseFields}
+    <div class="col-12">
+      <div class="media-assignment-form">
+        <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3">
+          <div>
+            <h3 class="section-title-elegant mb-1">${mediaEscape(L("mediaAssignments"))}</h3>
+            <p class="muted mb-0">${mediaEscape(L("mediaAssignmentsHint"))}</p>
+            <p class="form-hint mt-2 mb-0">${mediaEscape(L("mediaCameraPolicy"))}</p>
+          </div>
+          <span class="mini-chip">${mediaEscape(L("mediaTechnicalTeam"))}</span>
+        </div>
+        <div class="row g-3">${assignmentsHtml}</div>
+      </div>
+    </div>`;
+}
+
+function collectMediaScheduleForm(form, existing = {}) {
+  const fd = new FormData(form);
+  const activeSlots = [...form.querySelectorAll(".media-assignment-slot")].filter((slot) => !slot.classList.contains("d-none"));
+  const assignments = activeSlots.map((slotEl, index) => {
+    const slot = slotEl.querySelector('[name="assignment_slot[]"]')?.value || "";
+    const roleId = slotEl.querySelector('[name="assignment_role_id[]"]')?.value || "";
+    const roleKey = slotEl.querySelector('[name="assignment_role_key[]"]')?.value || "";
+    const roleName = slotEl.querySelector('[name="assignment_role_name[]"]')?.value || "";
+    const technicianId = slotEl.querySelector('[name="assignment_technician_id[]"]')?.value || "";
+    if (!technicianId) return null;
+    const previous = (existing.assignments || []).find((item) => item.slot_key === slot || (item.role_id === roleId && item.technician_id === technicianId)) || {};
+    return {
+      id: previous.id || `as-${Date.now()}-${index}`,
+      slot_key: slot,
+      role_id: roleId,
+      role_key: roleKey,
+      role_name: roleName,
+      technician_id: technicianId,
+      technician_name: mediaTechnicianName(technicianId),
+      status: slotEl.querySelector('[name="assignment_status[]"]')?.value || "Escalado",
+      attendance_status: previous.attendance_status || "Pendente",
+      performance_status: previous.performance_status || "Pendente",
+      check_in_time: previous.check_in_time || "",
+      check_out_time: previous.check_out_time || "",
+      notes: slotEl.querySelector('[name="assignment_notes[]"]')?.value || ""
+    };
+  }).filter(Boolean);
+  const supervisor = assignments.find((item) => item.slot_key === "supervisor");
+  const record = {
+    ...existing,
+    date: fd.get("date") || existing.date || "",
+    service_date: fd.get("date") || existing.service_date || "",
+    service_name: fd.get("service_name") || existing.service_name || "",
+    church_id: fd.get("church_id") || existing.church_id || activeUser.church_id,
+    church_name: churchName(fd.get("church_id") || existing.church_id || activeUser.church_id),
+    start_time: fd.get("start_time") || existing.start_time || "",
+    leader_responsible: supervisor?.technician_name || existing.leader_responsible || "",
+    supervisor_id: supervisor?.technician_id || existing.supervisor_id || "",
+    supervisor_name: supervisor?.technician_name || existing.supervisor_name || "",
+    status: fd.get("status") || existing.status || "Rascunho",
+    notes: fd.get("notes") || "",
+    assignments
+  };
+  const requiredSlots = mediaScheduleAssignmentSlots.filter((slot) => slot.required && !(slot.extraCamera && isMediaMondaySchedule(record)));
+  if (record.status === "Publicada" && requiredSlots.some((slot) => !assignments.some((item) => item.slot_key === slot.slot))) {
+    record.status = "Incompleta";
+  }
+  return record;
+}
+
+function mediaTabsNav(active) {
+  const tabs = [
+    ["overview", "mediaOverview"],
+    ["team", "mediaTechnicalTeam"],
+    ["roles", "mediaRolesFunctions"],
+    ["schedules", "mediaSchedules"],
+    ["services", "mediaServicesPrograms"],
+    ["channels", "mediaStreamingChannels"],
+    ["performance", "mediaPerformanceEvaluation"],
+    ["reports", "mediaReports"],
+    ["awards", "mediaAwards"]
+  ];
+  return moduleTabsNav(tabs.map(([tab, label]) =>
+    moduleTabButton(L(label), { active: active === tab, attrs: `data-media-tab="${tab}" onclick="window.mediaPageState.tab='${tab}'; window.renderMedia && window.renderMedia(); return false;"` })
+  ).join(""), "media-module-tabs");
+}
+
+function mediaActionButtons(type, id, extra = []) {
+  return actionButtons([
+    ["view", type, id, L("view")],
+    ["edit", type, id, L("edit")],
+    ["update", type, id, L("updateStatus")],
+    ...extra
+  ]);
+}
+
+function renderMediaAssignmentList(assignments = []) {
+  if (!assignments.length) return `<div class="muted">${L("noResultsFound")}</div>`;
+  return `
+    <div class="media-assignment-list">
+      ${assignments.map((item) => `
+        <div class="media-assignment-row">
+          <span>${mediaRoleName(item.role_key || item.role || item.role_name || item.role_id)}</span>
+          <strong>${mediaTechnicianName(item.technician_id)}</strong>
+          ${badge(item.status || L("technicianScheduled"))}
+        </div>
+      `).join("")}
+    </div>`;
+}
+
+function mediaScheduleAssignmentsHtml(assignments = [], { printable = false } = {}) {
+  const rows = (assignments || []).filter(Boolean);
+  if (!rows.length) return `<div class="empty-state ui-empty-state">${L("noResultsFound")}</div>`;
+  return `
+    <div class="media-schedule-assignment-table ${printable ? "is-printable" : ""}">
+      <div class="media-schedule-assignment-head">
+        <span>${L("role")}</span>
+        <span>${L("name")}</span>
+        <span>${L("status")}</span>
+        <span>${L("notes")}</span>
+      </div>
+      ${rows.map((item) => `
+        <div class="media-schedule-assignment-row">
+          <span class="assignment-role">${mediaRoleName(item.role_key || item.role || item.role_name || item.role_id)}</span>
+          <strong>${mediaTechnicianName(item.technician_id || item.technician_name)}</strong>
+          <span>${printable ? cleanDisplayText(statusText(item.status || L("technicianScheduled"))) : badge(item.status || L("technicianScheduled"))}</span>
+          <span>${cleanDisplayText(item.notes || "-")}</span>
+        </div>
+      `).join("")}
+    </div>`;
+}
+
+function mediaScheduleViewHtml(record = {}) {
+  const meta = [
+    [L("service"), record.service_name || record.name || "-"],
+    [L("date"), record.service_date || record.date || "-"],
+    [L("time"), record.start_time || record.time || "-"],
+    [L("church"), churchName(record.church_id) || record.church_name || "-"],
+    [L("mediaSupervisor"), record.supervisor_name || mediaTechnicianName(record.supervisor_id) || "-"],
+    [L("status"), badge(record.status || record.estado || "-")],
+    [L("notes"), record.notes || "-"]
+  ];
+  return `
+    <div class="col-12 media-schedule-view" data-media-schedule-print-area>
+      <div class="media-schedule-view-head">
+        <div>
+          <span class="eyebrow">${L("mediaSchedules")}</span>
+          <h3>${cleanDisplayText(record.service_name || L("mediaSchedules"))}</h3>
+          <p>${cleanDisplayText(`${record.service_date || record.date || ""} ${record.start_time || ""}`.trim())}</p>
+        </div>
+        <button type="button" class="btn btn-ce-gold btn-touch" data-print-media-schedule="${record.id}">
+          <i class="bi bi-printer me-2"></i>${L("print")}
+        </button>
+      </div>
+      <div class="detail-grid mb-3">
+        ${meta.map(([label, value]) => `<div><span>${label}</span><strong>${value}</strong></div>`).join("")}
+      </div>
+      <h4 class="section-title-elegant mb-3">${L("mediaAssignments")}</h4>
+      ${mediaScheduleAssignmentsHtml(record.assignments || [])}
+    </div>`;
+}
+
+function printMediaSchedule(id) {
+  const record = getCollection("mediaSchedule").find((item) => item.id === id);
+  if (!record) return;
+  const title = cleanDisplayText(`${L("mediaSchedules")} - ${record.service_name || ""}`);
+  const html = `
+    <!doctype html>
+    <html lang="${lang}">
+    <head>
+      <meta charset="utf-8">
+      <title>${mediaEscape(title)}</title>
+      <style>
+        body { font-family: Arial, sans-serif; color: #0f172a; margin: 32px; }
+        h1 { margin: 0 0 6px; font-size: 28px; }
+        .muted { color: #475569; margin: 0 0 24px; }
+        .meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 24px; }
+        .meta div { border: 1px solid #cbd5e1; border-radius: 10px; padding: 10px; }
+        .meta span, th { color: #475569; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+        .meta strong { display: block; margin-top: 4px; font-size: 15px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border-bottom: 1px solid #cbd5e1; padding: 11px 8px; text-align: left; vertical-align: top; }
+        td:first-child { font-weight: 800; }
+        @media print { body { margin: 18mm; } }
+      </style>
+    </head>
+    <body>
+      <h1>${mediaEscape(title)}</h1>
+      <p class="muted">Christ Embassy Mozambique Operations</p>
+      <div class="meta">
+        <div><span>${mediaEscape(L("service"))}</span><strong>${mediaEscape(record.service_name || "-")}</strong></div>
+        <div><span>${mediaEscape(L("date"))}</span><strong>${mediaEscape(record.service_date || record.date || "-")}</strong></div>
+        <div><span>${mediaEscape(L("time"))}</span><strong>${mediaEscape(record.start_time || "-")}</strong></div>
+        <div><span>${mediaEscape(L("church"))}</span><strong>${mediaEscape(churchName(record.church_id) || record.church_name || "-")}</strong></div>
+        <div><span>${mediaEscape(L("mediaSupervisor"))}</span><strong>${mediaEscape(record.supervisor_name || mediaTechnicianName(record.supervisor_id) || "-")}</strong></div>
+        <div><span>${mediaEscape(L("status"))}</span><strong>${mediaEscape(statusText(record.status || record.estado || "-"))}</strong></div>
+      </div>
+      <table>
+        <thead><tr><th>${mediaEscape(L("role"))}</th><th>${mediaEscape(L("name"))}</th><th>${mediaEscape(L("status"))}</th><th>${mediaEscape(L("notes"))}</th></tr></thead>
+        <tbody>
+          ${(record.assignments || []).map((item) => `
+            <tr>
+              <td>${mediaEscape(mediaRoleName(item.role_key || item.role || item.role_name || item.role_id))}</td>
+              <td>${mediaEscape(mediaTechnicianName(item.technician_id || item.technician_name))}</td>
+              <td>${mediaEscape(statusText(item.status || L("technicianScheduled")))}</td>
+              <td>${mediaEscape(item.notes || "-")}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+      <script>window.addEventListener("load", () => { window.print(); });</script>
+    </body>
+    </html>`;
+  const printWindow = window.open("", "_blank");
+  if (!printWindow) return;
+  printWindow.document.open();
+  printWindow.document.write(html);
+  printWindow.document.close();
+}
+
+function renderMediaCardGrid(items, mapper) {
+  return `
+    <div class="row g-3">
+      ${items.length ? items.map((item) => `<div class="col-xl-4 col-md-6">${mapper(item)}</div>`).join("") : `<div class="col-12">${noResultsHtml()}</div>`}
+    </div>`;
+}
+
+function renderMedia() {
+  const media = getMediaState();
+  const active = mediaPageState.tab || "overview";
+  const activeFilters = mediaPageState.filter || {};
+  const technicians = mediaVisibleTechnicians(media.technicians || []);
+  const schedules = scoped(media.schedules || [], "media");
+  const services = scoped(media.services || [], "media");
+  const channels = media.streamingChannels || [];
+  const evaluations = scoped(media.performanceEvaluations || [], "media");
+  const awards = scoped(media.awards || [], "media");
+  const roles = media.roles || [];
+  const incompleteSchedules = schedules.filter((item) => /Incompleta|Pendente|Draft/i.test(item.status || item.estado || ""));
+  const completeSchedules = schedules.filter((item) => /Completa|Confirmada|Concluída|Conclu/i.test(item.status || item.estado || ""));
+  const pendingEvaluations = evaluations.filter((item) => /Pending|Pendente/i.test(item.status || item.estado || ""));
+  const filteredSchedules = schedules.filter((item) => {
+    if (activeFilters.status === "incomplete") return incompleteSchedules.includes(item);
+    if (activeFilters.status === "complete") return completeSchedules.includes(item);
+    if (activeFilters.current_week) return true;
+    if (activeFilters.status && activeFilters.status !== "incomplete") return statusKey(item.status || item.estado) === statusKey(activeFilters.status);
+    return true;
+  });
+  const filteredEvaluations = evaluations.filter((item) => {
+    if (activeFilters.status === "pending") return pendingEvaluations.includes(item);
+    if (activeFilters.status) return statusKey(item.status || item.estado) === statusKey(activeFilters.status);
+    return true;
+  });
+  const nextSchedule = schedules[0] || {};
+
+  let content = "";
+  if (active === "overview") {
+    content = `
+      <div class="row g-3 mb-4">
+        ${metric("bi-people", L("mediaTotalTechnicians"), technicians.length, L("mediaTechnicalTeam"), { isClickable: true, route: "media", targetTab: "team" })}
+        ${metric("bi-person-check", L("mediaActiveTechnicians"), technicians.filter((item) => /Activo|Active/i.test(item.status || "")).length, L("status"), { isClickable: true, route: "media", targetTab: "team" })}
+        ${metric("bi-calendar-week", L("mediaSchedulesThisWeek"), schedules.length, L("mediaSchedules"), { isClickable: true, route: "media", targetTab: "schedules", filterPayload: { current_week: true } })}
+        ${metric("bi-check2-circle", L("mediaCompleteTeams"), completeSchedules.length, L("mediaSchedules"), { isClickable: true, route: "media", targetTab: "schedules", filterPayload: { status: "complete" } })}
+        ${metric("bi-exclamation-triangle", L("mediaIncompleteTeams"), incompleteSchedules.length, L("needsAction"), { isClickable: true, route: "media", targetTab: "schedules", filterPayload: { status: "incomplete" } })}
+        ${metric("bi-broadcast", L("mediaNextService"), nextSchedule.service_name || "-", nextSchedule.date || "", { isClickable: true, route: "media", targetTab: "schedules" })}
+        ${metric("bi-clipboard2-pulse", L("mediaPendingEvaluations"), pendingEvaluations.length, L("mediaPerformanceEvaluation"), { isClickable: true, route: "media", targetTab: "performance", filterPayload: { status: "pending" } })}
+        ${metric("bi-award", L("mediaMonthlyHighlights"), awards[0]?.category || "-", mediaTechnicianName(awards[0]?.technician_id || awards[0]?.winner_id), { isClickable: true, route: "media", targetTab: "awards" })}
+      </div>
+      <div class="row g-4">
+        <div class="col-xl-6">${chartCard(L("mediaRolesFunctions"), roles.map((item) => [mediaRoleName(mediaRoleKey(item)), Number(item.required_per_service || 1)]))}</div>
+        <div class="col-xl-6">${chartCard(L("mediaStreamingChannels"), channels.map((item) => [item.name, /Activo|Active/i.test(item.status || "") ? 1 : 0]))}</div>
+        <div class="col-xl-7">${modulePanel("mediaScheduleSummary", L("mediaSchedules"), null, [L("date"), L("service"), L("church"), L("status"), L("actions")], filteredSchedules.map((item) => [item.date, item.service_name, churchName(item.church_id), badge(item.status), mediaActionButtons("mediaSchedule", item.id, [["export", "mediaSchedule", item.id, L("export")]])]), false)}</div>
+        <div class="col-xl-5">${modulePanel("mediaEvaluationSummary", L("mediaPerformanceEvaluation"), null, [L("name"), L("date"), L("score"), L("status"), L("actions")], pendingEvaluations.map((item) => [mediaTechnicianName(item.technician_id), item.period || item.date || "-", item.score || "-", badge(item.status), mediaActionButtons("mediaEvaluation", item.id, [["evaluate", "mediaEvaluation", item.id, L("evaluate")]])]), false)}</div>
+      </div>`;
+  } else if (active === "team") {
+    content = modulePanel("mediaTechnician", L("mediaTechnicalTeam"), "mediaTechnician", [L("name"), L("role"), L("phone"), L("email"), L("church"), L("status"), L("actions")], technicians.map((item) => [
+      item.full_name,
+      (item.roles_can_perform || []).map((role) => `<span class="mini-chip">${mediaRoleName(role)}</span>`).join(" "),
+      item.phone || "-",
+      item.email || "-",
+      churchName(item.church_id),
+      badge(item.status),
+      mediaActionButtons("mediaTechnician", item.id)
+    ]), true);
+  } else if (active === "roles") {
+    content = modulePanel("mediaRole", L("mediaRolesFunctions"), "mediaRole", [L("role"), L("description"), L("minimumTeam"), L("status"), L("actions")], roles.map((item) => [
+      mediaRoleName(mediaRoleKey(item)),
+      item.description || item.notes || "-",
+      item.required_per_service || 1,
+      badge(item.status || "Activo"),
+      mediaActionButtons("mediaRole", item.id)
+    ]), false);
+  } else if (active === "schedules") {
+    content = `
+      <div class="d-flex justify-content-end mb-3">
+        <button type="button" class="btn btn-ce-gold" data-action="generate" data-type="mediaSchedule" data-id="new"><i class="bi bi-calendar-plus me-2"></i>${L("mediaGenerateSchedule")}</button>
+      </div>
+      ${renderMediaCardGrid(filteredSchedules, (item) => `
+        <article class="panel glass-panel h-100">
+          <div class="panel-head">
+            <div><span class="eyebrow">${item.date}</span><h3 class="panel-title">${item.service_name}</h3></div>
+            ${badge(item.status)}
+          </div>
+          <p class="muted mb-3">${churchName(item.church_id)} · ${item.start_time || ""}</p>
+          ${renderMediaAssignmentList(item.assignments)}
+          <div class="mt-3">${mediaActionButtons("mediaSchedule", item.id, [["export", "mediaSchedule", item.id, L("export")]])}</div>
+        </article>`)}
+    `;
+  } else if (active === "services") {
+    content = modulePanel("mediaService", L("mediaServicesPrograms"), "mediaService", [L("name"), L("day"), L("time"), L("church"), L("category"), L("status"), L("actions")], services.map((item) => [
+      item.name || item.service_name,
+      item.day_of_week || "-",
+      item.time || item.start_time || "-",
+      churchName(item.church_id),
+      item.category || item.type || "-",
+      badge(item.status || "Activo"),
+      mediaActionButtons("mediaService", item.id)
+    ]), true);
+  } else if (active === "channels") {
+    content = renderMediaCardGrid(channels, (item) => `
+      <article class="panel glass-panel h-100">
+        <div class="panel-head">
+          <div><span class="eyebrow">${L("mediaStreamingChannels")}</span><h3 class="panel-title">${item.name}</h3></div>
+          ${badge(item.status || "Activo")}
+        </div>
+        <p class="muted">${mediaChannelUrl(item) || "-"}</p>
+        <p>${item.notes || item.platform || ""}</p>
+        ${actionButtons([["open", "streamingChannel", item.id, L("mediaOpenChannel")], ["edit", "streamingChannel", item.id, L("edit")], ["export", "streamingChannel", item.id, L("export")]])}
+      </article>`);
+  } else if (active === "performance") {
+    content = modulePanel("mediaEvaluation", L("mediaPerformanceEvaluation"), "mediaEvaluation", [L("name"), L("date"), L("role"), L("score"), L("status"), L("actions")], filteredEvaluations.map((item) => [
+      mediaTechnicianName(item.technician_id),
+      item.period || item.date || "-",
+      mediaRoleName(item.role || item.primary_role || ""),
+      item.score || item.final_score || "-",
+      badge(item.status || item.estado),
+      mediaActionButtons("mediaEvaluation", item.id, [["evaluate", "mediaEvaluation", item.id, L("evaluate")]])
+    ]), true);
+  } else if (active === "reports") {
+    content = `
+      <div class="row g-4">
+        <div class="col-xl-4">${chartCard(L("mediaTechnicalTeam"), groupCount(technicians, "skill_level"))}</div>
+        <div class="col-xl-4">${chartCard(L("mediaSchedules"), groupCount(schedules, "status"))}</div>
+        <div class="col-xl-4">${chartCard(L("mediaPerformanceEvaluation"), groupCount(evaluations, "status"))}</div>
+        <div class="col-12">${modulePanel("mediaReport", L("mediaReports"), null, [L("name"), L("category"), L("status"), L("actions")], [
+          [L("mediaTechnicalTeam"), L("media"), badge("Activo"), actionButtons([["export", "mediaReport", "team", L("export")]])],
+          [L("mediaSchedules"), L("media"), badge("Activo"), actionButtons([["export", "mediaReport", "schedules", L("export")]])],
+          [L("mediaPerformanceEvaluation"), L("media"), badge("Activo"), actionButtons([["export", "mediaReport", "performance", L("export")]])]
+        ], false)}</div>
+      </div>`;
+  } else if (active === "awards") {
+    content = renderMediaCardGrid(awards, (item) => `
+      <article class="panel glass-panel h-100">
+        <div class="panel-head">
+          <div><span class="eyebrow">${item.period || item.year || ""}</span><h3 class="panel-title">${item.category}</h3></div>
+          <span class="header-icon header-icon-sm"><i class="bi bi-award"></i></span>
+        </div>
+        <p class="lead mb-1">${mediaTechnicianName(item.technician_id || item.winner_id)}</p>
+        <p class="muted">${item.reason || item.notes || ""}</p>
+        ${actionButtons([["view", "mediaAward", item.id, L("view")], ["edit", "mediaAward", item.id, L("edit")], ["export", "mediaAward", item.id, L("mediaExportCertificate")]])}
+      </article>`);
+  }
+
+  setPageContent(`
+    ${moduleNavShell("media", { title: L("media"), subtitle: L("mediaSubtitle"), modalType: active === "overview" ? "mediaTechnician" : null, icon: "bi-camera-reels" }, mediaTabsNav(active))}
+    ${summaryFilterChips("media")}
+    ${content}
+  `);
+}
+
+window.renderMedia = renderMedia;
+
+function getCounselingState() {
+  const base = structuredClone(seedData.counseling || {});
+  const current = state.counseling;
+  if (!current || Array.isArray(current)) return base;
+  return { ...base, ...current };
+}
+
+function counselingTabsNav(active) {
+  const tabs = [
+    ["overview", "counselingOverview"],
+    ["requests", "counselingRequests"],
+    ["appointments", "counselingAppointments"],
+    ["active", "counselingActiveCases"],
+    ["counselors", "counselingCounselors"],
+    ["referrals", "counselingReferrals"],
+    ["feedback", "counselingFeedbackReports"],
+    ["history", "counselingHistory"],
+    ["reports", "counselingReports"]
+  ];
+  return moduleTabsNav(tabs.map(([tab, label]) =>
+    moduleTabButton(L(label), { active: active === tab, attrs: `data-counseling-tab="${tab}" onclick="window.counselingPageState.tab='${tab}'; window.counselingPageState.filter={}; window.renderCounseling && window.renderCounseling(); return false;"` })
+  ).join(""), "counseling-module-tabs");
+}
+
+function counselingRecordActions(type, id, extra = []) {
+  return actionButtons([
+    ["view", type, id, L("view")],
+    ["edit", type, id, L("edit")],
+    ["status", type, id, L("updateStatus")],
+    ...extra,
+    ["export", type, id, L("export")]
+  ]);
+}
+
+function renderCounseling() {
+  const counseling = getCounselingState();
+  const active = counselingPageState.tab || "overview";
+  const requests = scoped(counseling.requests || [], "counseling");
+  const appointments = scoped(counseling.appointments || [], "counseling");
+  const counselors = scoped(counseling.counselors || [], "counseling");
+  const referrals = scoped(counseling.referrals || [], "counseling");
+  const feedback = scoped(counseling.feedback || [], "counseling");
+  const timeline = scoped(counseling.timeline || [], "counseling");
+  const activeFilters = counselingPageState.filter || {};
+  const today = "2026-07-15";
+  const thisMonth = "2026-07";
+  const pendingRequests = requests.filter((item) => /New|Novo|Pending|Pendente/i.test(item.status || ""));
+  const activeCases = requests.filter((item) => /Assigned|Scheduled|Progress|Atribu|Agend|Curso/i.test(item.status || ""));
+  const pastorReferrals = requests.filter((item) => /Church Pastor|Pastor da Igreja/i.test(item.status || ""));
+  const mainPastorReferrals = requests.filter((item) => /Main Pastor|Pastor Principal/i.test(item.status || ""));
+  const pendingFeedback = feedback.filter((item) => /Pendente|Pending/i.test(item.status || "") || !item.feedback_summary);
+  const needsFollowUp = feedback.filter((item) => item.needs_follow_up || /Acompanhamento|Follow-Up/i.test(item.outcome || item.next_step || ""));
+  const completedMonth = requests.filter((item) => /Completed|Conclu/i.test(item.status || "") && String(item.updated_at || "").startsWith(thisMonth));
+  const filteredRequests = requests.filter((item) => {
+    if (activeFilters.status === "pending" && !pendingRequests.includes(item)) return false;
+    if (activeFilters.status && activeFilters.status !== "pending" && statusKey(item.status) !== statusKey(activeFilters.status)) return false;
+    if (activeFilters.category && item.counseling_category !== activeFilters.category) return false;
+    if (activeFilters.urgency && statusKey(item.urgency) !== statusKey(activeFilters.urgency)) return false;
+    if (activeFilters.confidentiality && statusKey(item.confidentiality_level) !== statusKey(activeFilters.confidentiality)) return false;
+    return true;
+  });
+  const filteredAppointments = appointments.filter((item) => {
+    if (activeFilters.date && item.appointment_date !== activeFilters.date) return false;
+    if (activeFilters.status && statusKey(item.status) !== statusKey(activeFilters.status)) return false;
+    return true;
+  });
+  const filteredFeedback = feedback.filter((item) => {
+    if (activeFilters.needs_follow_up && !item.needs_follow_up) return false;
+    if (activeFilters.status && statusKey(item.status) !== statusKey(activeFilters.status)) return false;
+    return true;
+  });
+
+  let content = "";
+  if (active === "overview") {
+    content = `
+      <div class="row g-3 mb-4 summary-cards-row">
+        ${metric("bi-inbox", L("pendingCounselingRequests"), pendingRequests.length, L("counselingRequests"), { isClickable: true, module: "counseling", route: "counseling", targetTab: "requests", filterPayload: { status: "pending" } })}
+        ${metric("bi-calendar-day", L("appointmentsToday"), appointments.filter((item) => item.appointment_date === today).length, L("counselingAppointments"), { isClickable: true, module: "counseling", route: "counseling", targetTab: "appointments", filterPayload: { date: today } })}
+        ${metric("bi-calendar-week", L("appointmentsThisWeek"), appointments.length, L("counselingAppointments"), { isClickable: true, module: "counseling", route: "counseling", targetTab: "appointments" })}
+        ${metric("bi-hourglass-split", L("counselingActiveCases"), activeCases.length, L("needsAction"), { isClickable: true, module: "counseling", route: "counseling", targetTab: "active" })}
+        ${metric("bi-person-badge", L("referredChurchPastor"), pastorReferrals.length, L("counselingReferrals"), { isClickable: true, module: "counseling", route: "counseling", targetTab: "referrals" })}
+        ${metric("bi-shield-check", L("referredMainPastor"), mainPastorReferrals.length, L("counselingReferrals"), { isClickable: true, module: "counseling", route: "counseling", targetTab: "referrals" })}
+        ${metric("bi-chat-square-text", L("pendingFeedbacks"), pendingFeedback.length, L("counselingFeedbackReports"), { isClickable: true, module: "counseling", route: "counseling", targetTab: "feedback" })}
+        ${metric("bi-telephone-outbound", L("casesNeedFollowUp"), needsFollowUp.length, L("createFollowUp"), { isClickable: true, module: "counseling", route: "counseling", targetTab: "feedback" })}
+        ${metric("bi-check2-circle", L("completedThisMonth"), completedMonth.length, L("thisMonth"), { isClickable: true, module: "counseling", route: "counseling", targetTab: "reports" })}
+      </div>
+      <div class="row g-4">
+        <div class="col-xl-6">${chartCard(L("counselingCategory"), groupCount(requests, "counseling_category"))}</div>
+        <div class="col-xl-6">${chartCard(L("status"), groupCount(requests, "status"))}</div>
+        <div class="col-12">${modulePanel("counselingRecent", L("counselingRequests"), null, [L("counselingRequest"), L("name"), L("counselingCategory"), L("urgency"), L("confidentiality"), L("status"), L("actions")], filteredRequests.map((item) => [item.request_number, item.full_name, item.counseling_category, badge(item.urgency), badge(item.confidentiality_level), badge(item.status), counselingRecordActions("counselingRequest", item.id)]), false)}</div>
+      </div>`;
+  } else if (active === "requests") {
+    content = modulePanel("counselingRequest", L("counselingRequests"), "counselingRequest", [L("counselingRequest"), L("personType"), L("name"), L("phone"), L("church"), L("counselingCategory"), L("urgency"), L("status"), L("actions")], filteredRequests.map((item) => [item.request_number, item.person_type, item.full_name, item.phone, churchName(item.church_id), item.counseling_category, badge(item.urgency), badge(item.status), counselingRecordActions("counselingRequest", item.id)]), true);
+  } else if (active === "appointments") {
+    content = modulePanel("counselingAppointment", L("counselingAppointments"), "counselingAppointment", [L("date"), L("time"), L("name"), L("assignedCounselor"), L("church"), L("location"), L("status"), L("actions")], filteredAppointments.map((item) => [item.appointment_date, item.appointment_time, item.person_name, item.counselor_name, churchName(item.church_id), item.location_type, badge(item.status), counselingRecordActions("counselingAppointment", item.id)]), true);
+  } else if (active === "active") {
+    content = modulePanel("counselingActive", L("counselingActiveCases"), null, [L("counselingRequest"), L("name"), L("assignedCounselor"), L("urgency"), L("nextStep"), L("status"), L("actions")], activeCases.map((item) => [item.request_number, item.full_name, item.assigned_counselor_name || "-", badge(item.urgency), item.notes || "-", badge(item.status), counselingRecordActions("counselingRequest", item.id)]), false);
+  } else if (active === "counselors") {
+    content = modulePanel("counselor", L("counselingCounselors"), "counselor", [L("name"), L("gender"), L("church"), L("counselingCategory"), L("availability"), L("counselingActiveCases"), L("status"), L("actions")], counselors.map((item) => [item.full_name, item.gender, churchName(item.church_id), (item.counseling_categories || []).join(", "), item.availability, `${item.current_active_cases}/${item.max_cases_per_week}`, badge(item.status), counselingRecordActions("counselor", item.id)]), true);
+  } else if (active === "referrals") {
+    content = modulePanel("counselingReferral", L("counselingReferrals"), "counselingReferral", [L("counselingRequest"), L("referralDestination"), L("urgency"), L("reason"), L("submittedBy"), L("status"), L("actions")], referrals.map((item) => [item.counseling_request_id, item.referred_to_type, badge(item.urgency), item.reason, item.referred_by_name, badge(item.status), counselingRecordActions("counselingReferral", item.id)]), true);
+  } else if (active === "feedback") {
+    content = modulePanel("counselingFeedback", L("counselingFeedbackReports"), "counselingFeedback", [L("counselingRequest"), L("assignedCounselor"), L("outcome"), L("nextStep"), L("createFollowUp"), L("pastorReview"), L("status"), L("actions")], filteredFeedback.map((item) => [item.counseling_request_id, item.counselor_name, item.outcome, item.next_step, yesNo(item.needs_follow_up), yesNo(item.needs_pastor_review), badge(item.status), counselingRecordActions("counselingFeedback", item.id, item.needs_follow_up ? [["followup", "counselingFeedback", item.id, L("createFollowUp")]] : [])]), true);
+  } else if (active === "history") {
+    content = modulePanel("counselingTimeline", L("counselingHistory"), null, [L("date"), L("counselingRequest"), L("title"), L("description"), L("createdBy"), L("actions")], timeline.map((item) => [formatDateTime(item.created_at), item.counseling_request_id, item.title, item.description, item.created_by, actionButtons([["view", "counselingTimeline", item.id, L("view")]])]), false);
+  } else if (active === "reports") {
+    content = `
+      <div class="row g-4">
+        <div class="col-xl-6">${chartCard(L("counselingCategory"), groupCount(requests, "counseling_category"))}</div>
+        <div class="col-xl-6">${chartCard(L("status"), groupCount(requests, "status"))}</div>
+        <div class="col-xl-6">${chartCard(L("assignedCounselor"), groupCount(requests, "assigned_counselor_name"))}</div>
+        <div class="col-xl-6">${chartCard(L("referralDestination"), groupCount(referrals, "referred_to_type"))}</div>
+        <div class="col-12">${modulePanel("counselingReport", L("counselingReports"), null, [L("name"), L("category"), L("total"), L("actions")], [
+          [L("counselingRequests"), L("counseling"), requests.length, actionButtons([["export", "counselingReport", "requests", L("export")]])],
+          [L("counselingReferrals"), L("counseling"), referrals.length, actionButtons([["export", "counselingReport", "referrals", L("export")]])],
+          [L("pendingFeedbacks"), L("counseling"), pendingFeedback.length, actionButtons([["export", "counselingReport", "feedback", L("export")]])]
+        ], false)}</div>
+      </div>`;
+  }
+
+  setPageContent(`
+    ${moduleNavShell("counseling", { title: L("counseling"), subtitle: L("counselingSubtitle"), modalType: "counselingRequest", icon: "bi-chat-heart" }, counselingTabsNav(active))}
+    ${summaryFilterChips("counseling")}
+    ${content}
+  `);
+}
+
+window.renderCounseling = renderCounseling;
+
 function dataTable(headers, rows, options = {}) {
   if (typeof DataTable === "function") return DataTable(headers, rows, options);
+  const rowAttrs = Array.isArray(options.rowAttrs) ? options.rowAttrs : [];
   return `
     <div class="data-table-wrap glass-panel">
       <div class="table-responsive data-table">
         <table class="table align-middle data-table-desktop">
           <thead><tr>${headers.map((h) => `<th scope="col">${h}</th>`).join("")}</tr></thead>
-          <tbody>${rows.length ? rows.map((row) => `<tr>${row.map((cell, index) => `<td data-label="${headers[index]}">${cell ?? "-"}</td>`).join("")}</tr>`).join("") : `<tr><td colspan="${headers.length}">${EmptyState({ compact: true, title: L("empty") })}</td></tr>`}</tbody>
+          <tbody>${rows.length ? rows.map((row, rowIndex) => `<tr${rowAttrs[rowIndex] || ""}>${row.map((cell, index) => `<td data-label="${headers[index]}">${cell ?? "-"}</td>`).join("")}</tr>`).join("") : `<tr><td colspan="${headers.length}">${EmptyState({ compact: true, title: L("empty") })}</td></tr>`}</tbody>
         </table>
       </div>
     </div>`;
 }
 
+function actionModuleForType(type) {
+  const map = {
+    firstTimer: "firstTimers",
+    member: "members",
+    foundationStudent: "foundation",
+    foundationMarkClass: "foundation",
+    foundationScore: "foundation",
+    finance: "finance",
+    financeApprovedReq: "finance",
+    requisition: "requisitions",
+    church: "churches",
+    user: "usersRoles",
+    staffProfile: "staffHr",
+    staffPerformance: "staffHr",
+    staffSalary: "staffHr",
+    assignedEquipment: "staffHr",
+    baptism: "sacraments",
+    marriage: "sacraments",
+    baby: "sacraments",
+    counselingRequest: "counseling",
+    counselor: "counseling",
+    counselingAppointment: "counseling",
+    counselingReferral: "counseling",
+    counselingFeedback: "counseling",
+    counselingTimeline: "counseling",
+    counselingReport: "counseling",
+    cell: "cell",
+    cellRegistry: "cell",
+    cellGroup: "cell",
+    cellReport: "cell",
+    cellLeader: "cell",
+    cellEvaluation: "cell",
+    finalValidation: "cell",
+    alecRegistration: "cell",
+    alecScore: "cell",
+    churchReport: "cell",
+    fevoConfig: "fevo",
+    fevoReport: "fevo",
+    fevoWeeklyReport: "fevo",
+    fevoNoReport: "fevo",
+    inventoryItem: "venueInventory",
+    venueAcquisition: "venueInventory",
+    venueStaffEquipment: "venueInventory",
+    venueMaintenance: "venueInventory",
+    venueMovement: "venueInventory",
+    venueSpace: "venueInventory",
+    venueChecklist: "venueInventory",
+    prisonLocation: "prisonMinistry",
+    prisonService: "prisonMinistry",
+    prisonFoundation: "prisonMinistry",
+    prisonAgenda: "prisonMinistry",
+    prisonReport: "prisonMinistry",
+    materialCatalogue: "ministryMaterials",
+    materialSale: "ministryMaterials",
+    materialDistribution: "ministryMaterials",
+    materialStock: "ministryMaterials",
+    materialFund: "ministryMaterials",
+    materialReport: "ministryMaterials",
+    mediaTechnician: "media",
+    mediaRole: "media",
+    mediaSchedule: "media",
+    mediaService: "media",
+    streamingChannel: "media",
+    mediaEvaluation: "media",
+    mediaAward: "media",
+    mediaReport: "media"
+  };
+  return map[type] || window.CEAccessControl?.routeToModule?.(type) || type;
+}
+
+function canRenderAction(action, type) {
+  const module = actionModuleForType(type);
+  return window.CEAccessControl?.canPerformAction?.(activeUser, module, action) ?? true;
+}
+
 function actionButtons(buttons) {
-  return `<div class="action-cluster">${buttons.map(([action, type, id, label]) => `<button type="button" class="action-btn" data-action="${action}" data-type="${type}" data-id="${id}">${label}</button>`).join("")}</div>`;
+  const visible = buttons.filter(([action, type]) => canRenderAction(action, type));
+  return `<div class="action-cluster">${visible.map(([action, type, id, label]) => `<button type="button" class="action-btn" data-action="${action}" data-type="${type}" data-id="${id}">${label}</button>`).join("")}</div>`;
 }
 
 function notificationSafe(value) {
@@ -9254,12 +11443,12 @@ function labelFor(key) {
 
 const formSchemas = {
   firstTimer: [
-    ["tratamento", "treatment", "select", treatmentOptions], ["nome", "name"], ["apelido", "surname"], ["genero", "gender", "select", ["Feminino", "Masculino"]], ["data_de_nascimento", "birthDate", "date"], ["telefone", "phone"], ["whatsapp", "whatsapp"], ["email", "email", "email"], ["endereco", "address"], ["church_id", "church", "church"], ["data_do_culto", "date", "date"], ["culto", "service", "select", serviceOptions], ["convidado_por", "Invited by"], ["nasceu_de_novo", "bornAgain", "checkbox"], ["quer_escola_de_fundacao", "foundationSchool", "checkbox"], ["quer_aconselhamento", "counseling", "checkbox"], ["interesse_em_celula", "cellInterest", "checkbox"], ["celula_preferida", "preferredCell"], ["estado_do_seguimento", "followupState", "select", followupStatuses], ["conselheiro_responsavel", "responsibleCounselor"], ["notas", "notes", "textarea"]
+    ["tratamento", "treatment", "select", treatmentOptions], ["nome", "name"], ["apelido", "surname"], ["genero", "gender", "select", ["Feminino", "Masculino"]], ["data_de_nascimento", "birthDate", "date"], ["telefone", "phone"], ["whatsapp", "whatsapp"], ["email", "email", "email"], ["endereco", "address"], ["church_id", "church", "church"], ["cell_group_id", "cellGroup", "cellGroupSelect"], ["cell_id", "cell", "cellRegistrySelect"], ["data_do_culto", "date", "date"], ["culto", "service", "select", serviceOptions], ["convidado_por", "Invited by"], ["nasceu_de_novo", "bornAgain", "checkbox"], ["quer_escola_de_fundacao", "foundationSchool", "checkbox"], ["quer_aconselhamento", "counseling", "checkbox"], ["interesse_em_celula", "cellInterest", "checkbox"], ["estado_do_seguimento", "followupState", "select", followupStatuses], ["conselheiro_responsavel", "responsibleCounselor"], ["notas", "notes", "textarea"]
   ],
   member: [
     ["tratamento", "treatment", "select", treatmentOptions], ["nome", "name"], ["apelido", "surname"], ["telefone", "phone"], ["email", "email", "email"],
     ["church_id", "church", "church", { showInfoCard: true, autofillFields: ["church_id", "province", "city", "district_or_area"], igrejaField: "igreja" }],
-    ["celula", "cell"], ["departamento", "department"], ["estado", "status", "select", memberStatuses], ["data_de_entrada", "entryDate", "date"], ["origem", "origin", "select", ["Primeira Vez", "Escola de Fundação", "Transferência", "Manual"]], ["notas", "notes", "textarea"]
+    ["cell_group_id", "cellGroup", "cellGroupSelect"], ["cell_id", "cell", "cellRegistrySelect"], ["departamento", "department"], ["estado", "status", "select", memberStatuses], ["data_de_entrada", "entryDate", "date"], ["origem", "origin", "select", ["Primeira Vez", "Escola de Funda��o", "Transfer�ncia", "Manual"]], ["notas", "notes", "textarea"]
   ],
   foundationStudent: [],
   finance: financeEntrySchema(),
@@ -9277,8 +11466,13 @@ const formSchemas = {
   baptism: [["nome", "name"], ["apelido", "surname"], ["telefone", "phone"], ["church_id", "church", "church"], ["celula", "cell"], ["idade", "Age", "number"], ["data_do_baptismo", "date", "date"], ["local_do_baptismo", "Local"], ["baptizado_por", "Pastor"], ["quer_certificado", "certificates", "checkbox"], ["certificado_pago", "Paid", "checkbox"], ["certificado_emitido", "certificateIssued", "checkbox"], ["estado", "status", "select", ["Pending", "Scheduled", "Completed", "Certificate Issued"]], ["observacoes", "notes", "textarea"]],
   marriage: [["nome_do_noivo", "Groom"], ["telefone_do_noivo", "phone"], ["nome_da_noiva", "Bride"], ["telefone_da_noiva", "phone"], ["church_id", "church", "church"], ["aconselhamento_concluido", "counseling", "checkbox"], ["data_do_casamento", "date", "date"], ["pastor_responsavel", "Pastor"], ["documentos_entregues", "Documents", "checkbox"], ["estado", "status", "select", ["Pending", "In Progress", "Scheduled", "Completed"]], ["observacoes", "notes", "textarea"]],
   baby: [["nome_da_crianca", "name"], ["data_de_nascimento", "birthDate", "date"], ["nome_do_pai", "Father"], ["nome_da_mae", "Mother"], ["telefone_dos_pais", "phone"], ["church_id", "church", "church"], ["data_da_dedicacao", "date", "date"], ["pastor_responsavel", "Pastor"], ["certificado_emitido", "certificateIssued", "checkbox"], ["estado", "status", "select", ["Pending", "Scheduled", "Completed", "Certificate Issued"]], ["observacoes", "notes", "textarea"]],
+  counselingRequest: [["person_type", "personType", "select", ["Member", "First Timer", "Visitor", "Staff", "Other"]], ["full_name", "fullName"], ["phone", "phone"], ["whatsapp", "whatsapp"], ["email", "email", "email"], ["church_id", "church", "church"], ["cell_group_id", "cellGroup", "cellGroupSelect"], ["cell_id", "cell", "cellRegistrySelect"], ["counseling_category", "counselingCategory", "select", ["Casamento", "Fam�lia", "Neg�cios", "Crescimento Espiritual", "Ora��o", "Apoio Emocional", "Lideran�a", "Carreira", "Orienta��o Financeira", "Resolu��o de Conflitos", "Quest�o Ministerial", "Decis�o Pessoal", "Outro"]], ["counseling_subject", "counselingSubject"], ["issue_summary", "issueSummary", "textarea"], ["urgency", "urgency", "select", ["Low", "Normal", "High", "Urgent"]], ["confidentiality_level", "confidentiality", "select", ["Normal", "Sensitive", "Strictly Confidential"]], ["preferred_date", "preferredDate", "date"], ["preferred_time", "preferredTime", "time"], ["preferred_language", "language"], ["assigned_counselor_name", "assignedCounselor"], ["status", "status", "select", ["New", "Pending Review", "Assigned", "Scheduled", "In Progress", "Awaiting Feedback", "Needs Follow-Up", "Referred to Church Pastor", "Referred to Main Pastor", "Completed", "Cancelled"]], ["notes", "notes", "textarea"]],
+  counselor: [["full_name", "fullName"], ["title", "treatment", "select", treatmentOptions], ["gender", "gender", "select", ["Feminino", "Masculino"]], ["phone", "phone"], ["email", "email", "email"], ["church_id", "church", "church"], ["counseling_categories", "counselingCategory"], ["languages", "language"], ["availability", "availability"], ["max_cases_per_week", "maximum", "number"], ["current_active_cases", "counselingActiveCases", "number"], ["status", "status", "select", ["Activo", "Inactivo", "Indisponível", "Em Treinamento"]], ["notes", "notes", "textarea"]],
+  counselingAppointment: [["counseling_request_id", "counselingRequest"], ["person_name", "name"], ["counselor_name", "assignedCounselor"], ["church_id", "church", "church"], ["appointment_date", "date", "date"], ["appointment_time", "time", "time"], ["duration_minutes", "duration", "number"], ["location_type", "location", "select", ["Presencial", "Telefone", "WhatsApp", "Zoom", "Outro"]], ["location_details", "location"], ["meeting_link", "url"], ["status", "status", "select", ["Agendado", "Confirmado", "Reagendado", "Concluído", "Faltou", "Cancelado"]], ["reminder_sent", "reminder", "checkbox"], ["notes", "notes", "textarea"]],
+  counselingReferral: [["counseling_request_id", "counselingRequest"], ["referred_to_type", "referralDestination", "select", ["Counselor", "Church Pastor", "Main Pastor", "Department", "Follow-Up", "Foundation School", "Prayer Team", "Cell Leader"]], ["referred_to_role", "role"], ["referred_to_department", "department"], ["reason", "reason", "textarea"], ["urgency", "urgency", "select", ["Low", "Normal", "High", "Urgent"]], ["status", "status", "select", ["Pendente", "Aceite", "Em Curso", "Concluído", "Recusado", "Devolvido"]], ["response_notes", "notes", "textarea"]],
+  counselingFeedback: [["counseling_request_id", "counselingRequest"], ["counselor_name", "assignedCounselor"], ["feedback_summary", "feedback", "textarea"], ["outcome", "outcome", "select", ["Resolvido", "Precisa de Mais Sess�es", "Precisa de Acompanhamento", "Encaminhado", "Sem Compar�ncia", "Cancelado", "Outro"]], ["next_step", "nextStep", "select", ["Nenhuma Ac��o", "Marcar Nova Sess�o", "Criar Acompanhamento", "Encaminhar ao Pastor da Igreja", "Encaminhar ao Pastor Principal", "Encaminhar para Escola de Funda��o", "Encaminhar para C�lula", "Outro"]], ["needs_follow_up", "createFollowUp", "checkbox"], ["follow_up_date", "nextDate", "date"], ["needs_pastor_review", "pastorReview", "checkbox"], ["confidentiality_note", "confidentiality", "textarea"], ["status", "status", "select", ["Pendente", "Submetido", "Revisto"]]],
   fevoConfig: [["semana_inicio", "weekStart", "date"], ["semana_fim", "weekEnd", "date"], ["team_a_activity", "teamAActivity", "select", fevoActivities], ["team_b_activity", "teamBActivity", "select", fevoActivities], ["team_c_activity", "teamCActivity", "select", fevoActivities], ["team_d_activity", "teamDActivity", "select", fevoActivities], ["preparado_por", "preparedBy"], ["church_id", "church", "church"], ["observacoes", "observations", "textarea"], ["estado", "status", "select", fevoConfigStatuses]],
-  fevoReport: [["semana_inicio", "weekStart", "date"], ["semana_fim", "weekEnd", "date"], ["team", "team", "select", fevoTeams], ["activity_type", "activityType", "select", fevoActivities], ["group_id", "groupName"], ["cell_id", "cell", "cellSelect"], ["leader_id", "Leader"], ["church_id", "church", "church"], ["group_name", "groupName"], ["leader_name", "leaderName"], ["number_of_cells", "numberOfCells", "number"], ["number_of_members", "numberOfMembers", "number"], ["leaders_present", "leadersPresent", "number"], ["members_present", "membersPresent", "number"], ["ft_in_church", "ftInChurch", "number"], ["submitted_report", "submittedReport", "checkbox"], ["submitted_by", "submittedBy"], ["submitted_at", "submittedAt", "date"], ["souls_contacted", "soulsContacted", "number"], ["feedback_count", "feedbackCount", "number"], ["followup_result", "followupResult", "textarea"], ["next_action", "nextAction"], ["souls_evangelized", "soulsEvangelized", "number"], ["new_converts", "newConverts", "number"], ["evangelism_location", "evangelismLocation"], ["materials_distributed", "materialsDistributed", "number"], ["souls_visited", "soulsVisited", "number"], ["family_members_reached", "familyMembersReached", "number"], ["visit_location", "visitLocation"], ["visit_result", "visitResult", "textarea"], ["average_members_present", "averageMembersPresent", "number"], ["days_of_prayer", "daysOfPrayer", "number"], ["prayer_focus", "prayerFocus", "textarea"], ["prayer_testimonies", "prayerTestimonies", "textarea"], ["notes", "notes", "textarea"], ["status", "status", "select", fevoReportStatuses]],
+  fevoReport: [["semana_inicio", "weekStart", "date"], ["semana_fim", "weekEnd", "date"], ["team", "team", "select", fevoTeams], ["activity_type", "activityType", "select", fevoActivities], ["group_id", "cellGroup", "cellGroupSelect"], ["cell_id", "cell", "cellRegistrySelect"], ["leader_id", "Leader"], ["church_id", "church", "church"], ["group_name", "groupName"], ["leader_name", "leaderName"], ["number_of_cells", "numberOfCells", "number"], ["number_of_members", "numberOfMembers", "number"], ["leaders_present", "leadersPresent", "number"], ["members_present", "membersPresent", "number"], ["ft_in_church", "ftInChurch", "number"], ["submitted_report", "submittedReport", "checkbox"], ["submitted_by", "submittedBy"], ["submitted_at", "submittedAt", "date"], ["souls_contacted", "soulsContacted", "number"], ["feedback_count", "feedbackCount", "number"], ["followup_result", "followupResult", "textarea"], ["next_action", "nextAction"], ["souls_evangelized", "soulsEvangelized", "number"], ["new_converts", "newConverts", "number"], ["evangelism_location", "evangelismLocation"], ["materials_distributed", "materialsDistributed", "number"], ["souls_visited", "soulsVisited", "number"], ["family_members_reached", "familyMembersReached", "number"], ["visit_location", "visitLocation"], ["visit_result", "visitResult", "textarea"], ["average_members_present", "averageMembersPresent", "number"], ["days_of_prayer", "daysOfPrayer", "number"], ["prayer_focus", "prayerFocus", "textarea"], ["prayer_testimonies", "prayerTestimonies", "textarea"], ["notes", "notes", "textarea"], ["status", "status", "select", fevoReportStatuses]],
   fevoNoReport: [["semana_inicio", "weekStart", "date"], ["semana_fim", "weekEnd", "date"], ["team", "team", "select", fevoTeams], ["activity_type", "activityType", "select", fevoActivities], ["church_id", "church", "church"], ["group_name", "groupName"], ["leader_name", "leaderName"], ["reason_not_submitted", "reasonNotSubmitted", "textarea"], ["followup_action", "followupAction", "textarea"], ["contacted", "contacted", "checkbox"], ["contacted_by", "contactedBy"], ["status", "status", "select", fevoNoReportStatuses]],
   prisonLocation: [["nome_da_prisao", "prisonName"], ["provincia", "province", "province"], ["cidade", "cityDistrict", "city"], ["church_id", "church", "church"], ["igreja_responsavel", "responsibleChurch", "church"], ["representante_da_prisao", "prisonRepresentative"], ["contacto_do_representante", "representativeContact"], ["estado", "status", "select", prisonStatusOptions], ["observacoes", "observations", "textarea"]],
   prisonService: [["data", "date", "date"], ["dia_da_semana", "weekday", "select", ["Quinta", "Sexta"]], ["prisao", "prison", "prison"], ["church_id", "church", "church"], ["igreja_responsavel", "responsibleChurch", "church"], ["lider_responsavel", "responsibleLeader"], ["membros_que_foram", "membersWent", "textarea"], ["numero_de_internos_presentes", "inmatesPresent", "number"], ["novos_convertidos", "prisonNewConverts", "number"], ["interessados_em_escola_de_fundacao", "interestedFoundation", "number"], ["aula_de_fundacao_dada", "foundationClassGiven", "checkbox"], ["tema_ou_mensagem", "topicMessage"], ["estado", "status", "select", prisonServiceStatuses], ["observacoes", "observations", "textarea"]],
@@ -9295,7 +11489,7 @@ const formSchemas = {
   cellReport: [["semana", "week"], ["data_inicio", "startDate", "date"], ["data_fim", "endDate", "date"], ["church_id", "church", "church"], ["celula", "cell"], ["titulo_do_lider", "leaderTitle"], ["nome_do_lider", "leaderName"], ["att", "attendance", "number"], ["ft", "firstTimeShort", "number"], ["nc", "newConvertsShort", "number"], ["oferta", "offering", "number"], ["rs", "RS", "number"], ["observacoes", "observations", "textarea"], ["submetido_por", "submittedBy"], ["avaliado_por", "evaluatedBy"], ["validado_por", "validatedBy"], ["estado", "status", "select", cellReportStatuses]],
   cellLeader: [["nome_completo", "fullName"], ["contacto", "contact"], ["titulo", "treatment"], ["igreja", "church", "church"], ["church_id", "church", "church"], ["celula", "cell"], ["e_lider_actual", "actualLeader", "checkbox"], ["veio_do_alec", "cameFromAlec", "checkbox"], ["alec_concluido", "alecFinished", "checkbox"], ["faixa_certificado_pago", "certificateBandPaid", "checkbox"], ["estado", "status", "select", cellLeaderStatuses], ["supervisor", "supervisor"], ["observacoes", "observations", "textarea"]],
   cellEvaluation: [["report_id", "reports"], ["avaliador", "evaluator"], ["data_da_avaliacao", "evaluationDate", "date"], ["classificacao", "classification", "select", classifications], ["pontos_fortes", "strengths", "textarea"], ["pontos_a_melhorar", "improvements", "textarea"], ["acao_recomendada", "recommendedAction", "textarea"], ["precisa_followup", "needsFollowup", "checkbox"], ["church_id", "church", "church"], ["estado", "status", "select", evaluationStatuses]],
-  finalValidation: [["report_id", "reports"], ["validado_por", "validatedBy"], ["data_validacao", "date", "date"], ["decisao", "decision", "select", ["Validado", "Devolver para Correção", "Rejeitado"]], ["comentario_final", "finalComment", "textarea"], ["church_id", "church", "church"], ["estado_final", "finalStatus", "select", validationStatuses]],
+  finalValidation: [["report_id", "reports"], ["validado_por", "validatedBy"], ["data_validacao", "date", "date"], ["decisao", "decision", "select", ["Validado", "Devolver para Corre��o", "Rejeitado"]], ["comentario_final", "finalComment", "textarea"], ["church_id", "church", "church"], ["estado_final", "finalStatus", "select", validationStatuses]],
   inventoryItem: [["nome_do_item", "itemName"], ["categoria", "category", "select", inventoryCategories], ["quantidade", "quantity", "number"], ["estado", "status", "select", inventoryStatuses], ["localizacao", "location"], ["departamento_responsavel", "responsibleDepartment"], ["church_id", "church", "church"], ["data_de_entrada", "entryDate", "date"], ["valor_unitario", "unitValue", "number"], ["valor_total", "totalValue", "number"], ["serial_number", "serialNumber"], ["observacoes", "observations", "textarea"]],
   venueAcquisition: [["codigo_do_item", "itemCode"], ["descricao", "description"], ["categoria", "category", "select", inventoryCategories], ["quantidade", "quantity", "number"], ["serial_number", "serialNumber"], ["estado", "status", "select", inventoryStatuses], ["data_de_compra_ou_entrada", "purchaseEntryDate", "date"], ["valor_unitario", "unitValue", "number"], ["valor_total", "totalValue", "number"], ["fornecedor", "supplier"], ["recebido_por", "receivedBy"], ["comprovativo_ou_factura", "invoiceProof"], ["church_id", "church", "church"], ["observacoes", "observations", "textarea"]],
   venueStaffEquipment: [["nome_do_funcionario", "staffName"], ["departamento", "department"], ["church_id", "church", "church"], ["data_onboarding", "onboardingDate", "date"], ["dispositivo", "device"], ["modelo", "model"], ["device_id", "deviceId"], ["product_id", "productId"], ["data_de_entrega", "deliveryDate", "date"], ["estado_na_entrega", "conditionAtDelivery", "select", inventoryStatuses], ["estado_actual", "currentCondition", "select", inventoryStatuses], ["responsavel_pela_entrega", "deliveredBy"], ["assinatura_confirmada", "signatureConfirmed", "checkbox"], ["data_de_devolucao", "returnDate", "date"], ["estado", "status", "select", ["Activo", "Inactivo"]], ["observacoes", "observations", "textarea"]],
@@ -9303,6 +11497,13 @@ const formSchemas = {
   venueMovement: [["item", "item"], ["quantidade", "quantity", "number"], ["origem", "originPlace"], ["destino", "destination"], ["departamento_solicitante", "requestingDepartment"], ["pessoa_responsavel", "responsiblePerson"], ["data_de_saida", "exitDate", "date"], ["data_prevista_de_retorno", "expectedReturnDate", "date"], ["data_real_de_retorno", "actualReturnDate", "date"], ["estado_ao_sair", "conditionOut", "select", inventoryStatuses], ["estado_ao_voltar", "conditionBack", "select", inventoryStatuses], ["aprovado_por", "approvedBy"], ["church_id", "church", "church"], ["estado", "status", "select", movementStatuses], ["observacoes", "observations", "textarea"]],
   venueSpace: [["nome_do_espaco", "spaceName"], ["localizacao", "location"], ["church_id", "church", "church"], ["capacidade", "capacity", "number"], ["tipo", "spaceType", "select", venueTypes], ["equipamentos_fixos", "fixedEquipment", "textarea"], ["responsavel", "responsible"], ["estado", "status", "select", venueStatuses], ["observacoes", "observations", "textarea"]],
   venueChecklist: [["data_do_culto", "serviceDate", "date"], ["church_id", "church", "church"], ["espaco", "space"], ["tipo_de_culto_ou_evento", "serviceEventType"], ["som_verificado", "soundChecked", "checkbox"], ["luzes_verificadas", "lightsChecked", "checkbox"], ["ac_verificado", "acChecked", "checkbox"], ["projector_verificado", "projectorChecked", "checkbox"], ["cadeiras_organizadas", "chairsOrganized", "checkbox"], ["pulpito_pronto", "pulpitReady", "checkbox"], ["cameras_prontas", "camerasReady", "checkbox"], ["microfones_prontos", "microphonesReady", "checkbox"], ["limpeza_feita", "cleaningDone", "checkbox"], ["responsavel", "responsible"], ["estado", "status", "select", checklistStatuses], ["observacoes", "observations", "textarea"]],
+  mediaTechnician: [["full_name", "fullName"], ["title", "treatment", "select", treatmentOptions], ["phone", "phone"], ["whatsapp", "whatsapp"], ["email", "email", "email"], ["church_id", "church", "church"], ["department_name", "reqDepartment"], ["skill_level", "skillLevel", "select", ["Iniciante", "Intermédio", "Avançado", "Supervisor"]], ["roles_can_perform", "mediaRolesFunctions"], ["preferred_services", "mediaSchedules"], ["availability_notes", "notes", "textarea"], ["status", "status", "select", ["Activo", "Inactivo"]]],
+  mediaRole: [["key", "role"], ["description", "description", "textarea"], ["category", "category"], ["required_skill_level", "skillLevel", "select", ["Iniciante", "Intermédio", "Avançado", "Supervisor"]], ["required_per_service", "minimumTeam", "number"], ["is_required_for_service", "required", "checkbox"], ["allow_multiple", "allowMultiple", "checkbox"], ["status", "status", "select", ["Activo", "Inactivo"]]],
+  mediaSchedule: [["date", "date", "date"], ["service_name", "service"], ["church_id", "church", "church"], ["start_time", "time", "time"], ["leader_responsible", "responsible"], ["status", "status", "select", ["Rascunho", "Publicada", "Incompleta", "Concluída"]], ["notes", "notes", "textarea"]],
+  mediaService: [["name", "name"], ["day_of_week", "weekday"], ["time", "time", "time"], ["church_id", "church", "church"], ["category", "category"], ["status", "status", "select", ["Activo", "Inactivo"]], ["notes", "notes", "textarea"]],
+  streamingChannel: [["name", "name"], ["platform", "platform"], ["channel_url", "url"], ["responsible_name", "responsible"], ["status", "status", "select", ["Activo", "Por Configurar", "Em Breve", "Inactivo"]], ["notes", "notes", "textarea"]],
+  mediaEvaluation: [["technician_id", "staffFullName"], ["period", "evaluationPeriod"], ["role", "role"], ["score", "score", "number"], ["status", "status", "select", ["Pending Evaluation", "Evaluated", "Approved"]], ["notes", "notes", "textarea"]],
+  mediaAward: [["category", "category"], ["technician_id", "staffFullName"], ["period", "evaluationPeriod"], ["reason", "description", "textarea"], ["status", "status", "select", ["Activo", "Publicado"]]],
   requisition: [["title", "reqTitle"], ["requisition_type", "reqType", "select", (window.CERequisitions?.TYPES || [])], ["department_name", "reqDepartment"], ["church_id", "church", "church"], ["description", "reqDescription", "textarea"], ["justification", "reqJustification", "textarea"], ["estimated_amount", "reqEstimated", "number"], ["urgency", "reqUrgency", "select", (window.CERequisitions?.URGENCY || [])], ["needed_by_date", "reqNeededBy", "date"], ["supplier_or_vendor", "reqSupplier"], ["quotation_number", "reqQuotation"]],
   staffProfile: [["full_name", "staffFullName"], ["title", "treatment", "select", treatmentOptions], ["gender", "gender", "select", ["Feminino", "Masculino"]], ["phone", "phone"], ["whatsapp", "whatsapp"], ["email", "email", "email"], ["church_id", "church", "church"], ["department_name", "reqDepartment"], ["role_title", "staffRoleTitle"], ["supervisor_name", "staffSupervisor"], ["start_date", "staffStartDate", "date"], ["employment_type", "staffEmploymentType", "select", (window.CEStaffHr?.EMPLOYMENT_TYPES || [])], ["salary_or_allowance", "staffSalary", "number"], ["payment_frequency", "staffPaymentFreq", "select", (window.CEStaffHr?.PAYMENT_FREQUENCIES || [])], ["payment_method", "method", "select", paymentMethods], ["status", "status", "select", (window.CEStaffHr?.STAFF_STATUSES || [])], ["notes", "notes", "textarea"]],
   staffPerformance: [
@@ -9337,6 +11538,13 @@ function getCollection(type) {
   if (type === "baptism") return state.sacraments.baptisms;
   if (type === "marriage") return state.sacraments.marriages;
   if (type === "baby") return state.sacraments.babies;
+  if (type === "counselingRequest") return state.counseling.requests || [];
+  if (type === "counselor") return state.counseling.counselors || [];
+  if (type === "counselingAppointment") return state.counseling.appointments || [];
+  if (type === "counselingReferral") return state.counseling.referrals || [];
+  if (type === "counselingFeedback") return state.counseling.feedback || [];
+  if (type === "counselingTimeline") return state.counseling.timeline || [];
+  if (type === "counselingReport") return [];
   if (type === "fevoConfig") return state.fevo.weeklyConfigurations;
   if (type === "fevoReport") return state.fevo.reports;
   if (type === "fevoNoReport") return state.fevo.noReports;
@@ -9370,10 +11578,23 @@ function getCollection(type) {
   if (type === "venueSpace") return state.venueInventory.venues;
   if (type === "venueChecklist") return state.venueInventory.checklists;
   if (type === "venueReport") return state.venueInventory.reports || [];
+  if (type === "mediaTechnician") return state.media.technicians || [];
+  if (type === "mediaRole") return state.media.roles || [];
+  if (type === "mediaSchedule") return state.media.schedules || [];
+  if (type === "mediaService") return state.media.services || [];
+  if (type === "streamingChannel") return state.media.streamingChannels || [];
+  if (type === "mediaEvaluation") return state.media.performanceEvaluations || [];
+  if (type === "mediaAward") return state.media.awards || [];
+  if (type === "mediaReport") return [];
   return state[type] || [];
 }
 
 function openForm(type, id = null) {
+  const action = id ? "edit" : "add";
+  if (!canRenderAction(action, type)) {
+    alert(L("noPermissionArea"));
+    return;
+  }
   if (type === "foundationStudent") return openFoundationStudentForm(id);
   if (type === "church") return openChurchDrawer(id ? "form" : "form", id);
   if (type === "finance" && id) return openFinanceDrawer("edit", id);
@@ -9386,7 +11607,10 @@ function openForm(type, id = null) {
     byId("modalTitle").textContent = formTitle(type);
     byId("modalFields").innerHTML = renderStaffProfileForm(record, modalMode);
     bootstrap.Modal.getOrCreateInstance(byId("entryModal")).show();
-    requestAnimationFrame(() => mountRelationalControls(byId("entryForm")));
+    requestAnimationFrame(() => {
+      mountRelationalControls(byId("entryForm"));
+      cleanRenderedText(byId("entryModal"));
+    });
     return;
   }
   modalMode = id ? "edit" : "create";
@@ -9397,16 +11621,22 @@ function openForm(type, id = null) {
   byId("modalTitle").textContent = type === "finance" && !id ? L("addFinance") : formTitle(type);
   if (type === "finance" && !id) {
     byId("modalFields").innerHTML = renderFinanceAddForm(record);
+  } else if (type === "mediaSchedule") {
+    byId("modalFields").innerHTML = renderMediaScheduleForm(record || {});
   } else {
     const schema = type === "finance" ? getFinanceSchema("create") : formSchemas[type];
     byId("modalFields").innerHTML = schema.map((field) => fieldControl(field, record)).join("");
   }
   bootstrap.Modal.getOrCreateInstance(byId("entryModal")).show();
-  requestAnimationFrame(() => mountRelationalControls(byId("entryForm")));
+  requestAnimationFrame(() => {
+    mountRelationalControls(byId("entryForm"));
+    mountMediaScheduleFormControls(byId("entryForm"));
+    cleanRenderedText(byId("entryModal"));
+  });
 }
 
 function formTitle(type) {
-  const map = { firstTimer: L("firstTimers"), member: L("members"), foundationStudent: L("foundationSchool"), finance: L("finance"), church: L("churches"), cell: L("cellLeadership"), user: L("usersRoles"), requisition: L("requisitions"), staffProfile: L("staffHr"), staffPerformance: L("staffTabPerformance"), baptism: L("baptismTab"), marriage: L("marriageTab"), baby: L("babyTab"), fevoConfig: L("weeklyConfiguration"), fevoReport: L("weeklyReports"), fevoNoReport: L("groupsWithoutReport"), fevoWeeklyReport: L("weeklyReports"), prisonLocation: L("prisonsLocations"), prisonService: L("prisonServices"), prisonFoundation: L("foundationSchool"), prisonAgenda: L("weeklyAgenda"), prisonReport: L("ministryReports"), materialCatalogue: L("catalogue"), materialSale: L("sales"), materialDistribution: L("churchDistribution"), materialStock: L("weeklyStock"), materialFund: L("freeDistributionFunds"), materialReport: L("ministryReports"), alecRegistration: L("alecRegistration"), alecScore: L("alecScores"), churchReport: L("churchReports"), cellReport: L("cellReports"), cellLeader: L("cellLeaders"), cellEvaluation: L("cellEvaluation"), finalValidation: L("finalValidation"), inventoryItem: L("generalInventory"), venueAcquisition: L("newAcquisitions"), venueStaffEquipment: L("staffEquipment"), venueMaintenance: L("maintenanceRepairs"), venueMovement: L("loansMovements"), venueSpace: L("venuesRooms"), venueChecklist: L("serviceChecklist") };
+  const map = { firstTimer: L("firstTimers"), member: L("members"), foundationStudent: L("foundationSchool"), finance: L("finance"), church: L("churches"), cell: L("cellLeadership"), user: L("usersRoles"), requisition: L("requisitions"), staffProfile: L("staffHr"), staffPerformance: L("staffTabPerformance"), baptism: L("baptismTab"), marriage: L("marriageTab"), baby: L("babyTab"), counselingRequest: L("newCounselingRequest"), counselor: L("counselingCounselors"), counselingAppointment: L("counselingAppointments"), counselingReferral: L("counselingReferrals"), counselingFeedback: L("counselingFeedbackReports"), fevoConfig: L("weeklyConfiguration"), fevoReport: L("weeklyReports"), fevoNoReport: L("groupsWithoutReport"), fevoWeeklyReport: L("weeklyReports"), prisonLocation: L("prisonsLocations"), prisonService: L("prisonServices"), prisonFoundation: L("foundationSchool"), prisonAgenda: L("weeklyAgenda"), prisonReport: L("ministryReports"), materialCatalogue: L("catalogue"), materialSale: L("sales"), materialDistribution: L("churchDistribution"), materialStock: L("weeklyStock"), materialFund: L("freeDistributionFunds"), materialReport: L("ministryReports"), alecRegistration: L("alecRegistration"), alecScore: L("alecScores"), churchReport: L("churchReports"), cellReport: L("cellReports"), cellLeader: L("cellLeaders"), cellEvaluation: L("cellEvaluation"), finalValidation: L("finalValidation"), inventoryItem: L("generalInventory"), venueAcquisition: L("newAcquisitions"), venueStaffEquipment: L("staffEquipment"), venueMaintenance: L("maintenanceRepairs"), venueMovement: L("loansMovements"), venueSpace: L("venuesRooms"), venueChecklist: L("serviceChecklist"), mediaTechnician: L("mediaTechnicalTeam"), mediaRole: L("mediaRolesFunctions"), mediaSchedule: L("mediaSchedules"), mediaService: L("mediaServicesPrograms"), streamingChannel: L("mediaStreamingChannels"), mediaEvaluation: L("mediaPerformanceEvaluation"), mediaAward: L("mediaAwards") };
   return map[type] || type;
 }
 
@@ -9460,6 +11690,12 @@ function fieldControl([name, labelKey, inputType = "text", options = []], record
   if (inputType === "cellSelect") {
     return `<div class="col-md-6"><label class="form-label">${label}</label><select name="${name}" class="form-select"><option value="">${L("all")}</option>${state.cells.map((c) => `<option value="${c.id}" ${value === c.id ? "selected" : ""}>${c.nome_da_celula}</option>`).join("")}</select></div>`;
   }
+  if (inputType === "cellGroupSelect") {
+    return cellGroupSelectField(name, label, enrichedRecord);
+  }
+  if (inputType === "cellRegistrySelect") {
+    return cellSelectField(name, label, enrichedRecord);
+  }
   if (inputType === "staffSelect") {
     const staffLib = window.CEStaffHr;
     const access = staffLib?.resolveAccess(activeUser) || { scope: "church" };
@@ -9493,6 +11729,44 @@ function fieldControl([name, labelKey, inputType = "text", options = []], record
 function submitForm(form) {
   const schema = modalType === "finance" ? getFinanceSchema(modalMode === "edit" ? "edit" : "create") : formSchemas[modalType];
   const data = Object.fromEntries(new FormData(form).entries());
+  if (!canRenderAction(modalMode === "edit" ? "edit" : "add", modalType)) {
+    alert(L("noPermissionArea"));
+    return;
+  }
+  if (modalType === "mediaSchedule") {
+    const collection = getCollection("mediaSchedule");
+    const nowIso = new Date().toISOString();
+    const today = nowIso.slice(0, 10);
+    if (modalMode === "edit") {
+      const index = collection.findIndex((item) => item.id === modalRecordId);
+      if (index >= 0) {
+        collection[index] = {
+          ...collectMediaScheduleForm(form, collection[index]),
+          updated_by: activeUser.name,
+          updated_at: today
+        };
+      }
+    } else {
+      collection.push({
+        id: `med-${Date.now()}`,
+        created_by: activeUser.name,
+        updated_by: activeUser.name,
+        created_at: nowIso,
+        updated_at: today,
+        ...collectMediaScheduleForm(form, {})
+      });
+    }
+    saveState(`${modalMode} mediaSchedule`);
+    bootstrap.Modal.getOrCreateInstance(byId("entryModal")).hide();
+    form.reset();
+    if (activeRoute === "media") {
+      mediaPageState.tab = "schedules";
+      renderMedia();
+    } else {
+      setRoute(activeRoute);
+    }
+    return;
+  }
   if (modalType === "requisition") {
     schema.forEach(([name, , inputType]) => {
       if (inputType === "checkbox") data[name] = new FormData(form).has(name);
@@ -9608,6 +11882,7 @@ function submitForm(form) {
     if (inputType === "checkbox") data[name] = new FormData(form).has(name);
   });
   enrichRecordChurchFields(data);
+  enrichCellSelectionFields(data);
   const collection = getCollection(modalType);
   if (modalMode === "edit") {
     const index = collection.findIndex((item) => item.id === modalRecordId);
@@ -9656,6 +11931,11 @@ function submitForm(form) {
           email: record.email,
           endereco: record.endereco,
           celula: record.celula,
+          cell_id: record.cell_id || "",
+          cell_name: record.cell_name || record.celula || "",
+          cell_group_id: record.cell_group_id || "",
+          cell_group_name: record.cell_group_name || record.grupo_de_celula || "",
+          grupo_de_celula: record.grupo_de_celula || "",
           church_id: record.church_id,
           igreja: record.igreja,
           created_at: nowIso
@@ -9684,6 +11964,16 @@ function openView(type, id) {
   if (type === "church") return openChurchDrawer("view", id);
   if (type === "finance") return openFinanceDrawer("view", id);
   if (type === "staffProfile") return openStaffProfileView(id);
+  if (type === "mediaSchedule") {
+    const record = getCollection(type).find((item) => item.id === id);
+    byId("modalEyebrow").textContent = L("view");
+    byId("modalTitle").textContent = L("mediaSchedules");
+    byId("modalFields").innerHTML = mediaScheduleViewHtml(record || {});
+    modalType = null;
+    bootstrap.Modal.getOrCreateInstance(byId("entryModal")).show();
+    requestAnimationFrame(() => cleanRenderedText(byId("entryModal")));
+    return;
+  }
   if (type === "foundationStudent") {
     const record = getCollection(type).find((item) => item.id === id);
     byId("modalEyebrow").textContent = L("view");
@@ -9743,6 +12033,10 @@ function submitFollowup(form) {
 }
 
 function quickAction(action, type, id) {
+  if (!canRenderAction(action, type)) {
+    alert(L("noPermissionArea"));
+    return;
+  }
   if (type === "financeApprovedReq") {
     const disb = window.CEFinanceDisbursements;
     const record = (state.requisitions || []).find((r) => r.id === id);
@@ -9791,6 +12085,12 @@ function quickAction(action, type, id) {
     cellRegistryFilter.groupId = null;
     return setRoute("cellCellsList");
   }
+  if (action === "expandCellGroups" || action === "collapseCellGroups") {
+    document.querySelectorAll("[data-cell-group-item]").forEach((item) => {
+      item.open = action === "expandCellGroups";
+    });
+    return;
+  }
   if (action === "updateReport") return alert(`${L("updateCellReport")}: ${id}`);
   if (action === "staffMessage" && type === "staffProfile") {
     const record = (state.staffProfiles || []).find((item) => item.id === id);
@@ -9804,6 +12104,13 @@ function quickAction(action, type, id) {
     return;
   }
   if (action === "view") return openView(type, id);
+  if (action === "open" && type === "streamingChannel") {
+    const channel = getCollection(type).find((item) => item.id === id);
+    const url = mediaChannelUrl(channel);
+    if (!url || url === "#") return alert(lang === "pt" ? "Canal ainda sem link configurado." : "Channel link not configured yet.");
+    window.open(url, "_blank", "noopener,noreferrer");
+    return;
+  }
   if (action === "status" && type === "church") return openChurchDrawer("status", id);
   if (action === "export" && type === "church") return alert(`${L("exportChurch")}: ${churchName(id)}`);
   if (action === "viewSubmission" && type === "finance") return openPublicSubmissionDrawer("viewSubmission", id);
@@ -9812,6 +12119,33 @@ function quickAction(action, type, id) {
   if (action === "edit" && type === "finance") return openFinanceDrawer("edit", id);
   if (action === "markClass" && type === "foundationStudent") return openFoundationMarkClass(id);
   if (action === "score" && type === "foundationStudent") return openFoundationScore(id);
+  if (action === "followup" && type === "counselingFeedback") {
+    const feedbackRecord = getCollection("counselingFeedback").find((item) => item.id === id);
+    if (!feedbackRecord) return;
+    state.followUps.push({
+      id: `fu-counseling-${Date.now()}`,
+      counseling_request_id: feedbackRecord.counseling_request_id,
+      church_id: feedbackRecord.church_id,
+      data_do_contacto: new Date().toISOString().slice(0, 10),
+      metodo: "WhatsApp",
+      resultado: "Criado a partir de Aconselhamento",
+      proximo_passo: feedbackRecord.next_step || L("createFollowUp"),
+      proxima_data_de_contacto: feedbackRecord.follow_up_date || "",
+      notas: "Origem: Aconselhamento",
+      actualizado_por: activeUser.name
+    });
+    feedbackRecord.status = "Submetido";
+    feedbackRecord.updated_by = activeUser.name;
+    feedbackRecord.updated_at = new Date().toISOString().slice(0, 10);
+    saveState("Created follow-up from counseling");
+    alert(L("createFollowUp"));
+    return renderCounseling();
+  }
+  if (action === "generate" && type === "mediaSchedule") return openForm("mediaSchedule", null);
+  if (type && type.startsWith("media") && (action === "generate" || action === "open")) return alert(`${L("media")}: ${lang === "pt" ? "Prot�tipo frontend preparado para liga��o ao backend." : "Frontend prototype ready for backend connection."}`);
+  if ((type && type.startsWith("media")) || type === "streamingChannel") {
+    if (action === "update" || action === "evaluate") return openForm(type, id === "new" ? null : id);
+  }
   if (action === "edit" || action === "moveChurch" || action === "status") return openForm(type, id);
   if (action === "followup") return openFollowup(id);
   if (action === "submit" || action === "approve") {
@@ -9858,6 +12192,44 @@ function quickAction(action, type, id) {
   if (action === "export") return alert(`${L("export")}: ${id}`);
 }
 
+function applyFilterToolbar(scope, sourceElement = document) {
+  const toolbar = sourceElement.closest?.(".filter-toolbar") || document;
+  if (scope !== "cellRegistry") {
+    const search = toolbar.querySelector(`[data-filter-search="${scope}"]`)?.value.trim().toLowerCase() || "";
+    const churchSelect = toolbar.querySelector(`[data-filter-church="${scope}"]`);
+    const statusSelect = toolbar.querySelector(`[data-filter-status="${scope}"]`);
+    const month = toolbar.querySelector(`[data-filter-month="${scope}"]`)?.value || "";
+    const churchValue = churchSelect?.value || "";
+    const churchText = churchSelect?.selectedOptions?.[0]?.textContent?.trim().toLowerCase() || "";
+    const statusValue = statusSelect?.value || "";
+    const statusText = statusSelect?.selectedOptions?.[0]?.textContent?.trim().toLowerCase() || "";
+    const panel = toolbar.closest(".panel, article, .module-content-card, .tab-content-panel") || document;
+    const rows = [...panel.querySelectorAll("tbody tr, .record-card, .data-card, [data-filter-row]")];
+    let visible = 0;
+    const churchAliases = churchFilterAliases(churchValue, churchText);
+    rows.forEach((row) => {
+      const text = row.textContent.toLowerCase();
+      const churchTokens = String(row.dataset.filterChurchValues || "").toLowerCase();
+      const statusTokens = String(row.dataset.filterStatusValues || "").toLowerCase();
+      const searchableText = `${text} ${churchTokens} ${statusTokens}`;
+      const matchesSearch = !search || text.includes(search);
+      const matchesChurch = !churchValue || churchAliases.some((alias) => alias && searchableText.includes(alias));
+      const matchesStatus = !statusValue || searchableText.includes(statusValue.toLowerCase()) || (statusText && searchableText.includes(statusText));
+      const matchesMonth = !month || text.includes(month);
+      const show = matchesSearch && matchesChurch && matchesStatus && matchesMonth;
+      row.classList.toggle("d-none", !show);
+      if (show) visible += 1;
+    });
+    panel.querySelectorAll("[data-filter-empty]").forEach((empty) => empty.classList.toggle("d-none", visible > 0));
+    return rows.length > 0;
+  }
+  cellRegistryFilter.search = toolbar.querySelector(`[data-filter-search="${scope}"]`)?.value.trim() || "";
+  cellRegistryFilter.churchId = toolbar.querySelector(`[data-filter-church="${scope}"]`)?.value || "";
+  cellRegistryFilter.status = toolbar.querySelector(`[data-filter-status="${scope}"]`)?.value || "";
+  setRoute("cellCellsList");
+  return true;
+}
+
 function enrollFirstTimer(id) {
   const person = state.firstTimers.find((item) => item.id === id);
   if (!person) return;
@@ -9869,7 +12241,12 @@ function enrollFirstTimer(id) {
     nome: person.nome,
     apelido: person.apelido,
     telefone: person.telefone,
-    celula: person.celula_preferida || "",
+    cell_id: person.cell_id || "",
+    cell_name: person.cell_name || person.celula || person.celula_preferida || "",
+    cell_group_id: person.cell_group_id || "",
+    cell_group_name: person.cell_group_name || person.grupo_de_celula || "",
+    grupo_de_celula: person.grupo_de_celula || person.cell_group_name || "",
+    celula: person.cell_name || person.celula || person.celula_preferida || "",
     mes_de_inscricao: new Date().toISOString().slice(0, 7),
     class_attendance: defaultFoundationAttendance(),
     nota_exame: 0,
@@ -9932,11 +12309,33 @@ document.addEventListener("click", (event) => {
   }
   const notificationRead = event.target.closest("[data-notification-read]");
   if (notificationRead) return markNotificationRead(notificationRead.dataset.notificationRead);
+  const printMediaScheduleBtn = event.target.closest("[data-print-media-schedule]");
+  if (printMediaScheduleBtn) return printMediaSchedule(printMediaScheduleBtn.dataset.printMediaSchedule);
   const notificationAction = event.target.closest("[data-notification-action]");
   if (notificationAction) {
     markNotificationRead(notificationAction.dataset.notificationAction);
     toggleNotificationPanel(false);
     if (notificationAction.dataset.route) return setRoute(notificationAction.dataset.route);
+    return;
+  }
+  const mediaTab = event.target.closest("[data-media-tab]");
+  if (mediaTab) {
+    mediaPageState.tab = mediaTab.dataset.mediaTab || "overview";
+    if (activeRoute !== "media") return setRoute("media");
+    return renderMedia();
+  }
+  const counselingTab = event.target.closest("[data-counseling-tab]");
+  if (counselingTab) {
+    counselingPageState.tab = counselingTab.dataset.counselingTab || "overview";
+    counselingPageState.filter = {};
+    if (activeRoute !== "counseling") return setRoute("counseling");
+    return renderCounseling();
+  }
+  const logoutButton = event.target.closest("#logoutBtn");
+  if (logoutButton) {
+    byId("appView")?.classList.add("d-none");
+    byId("loginView")?.classList.remove("d-none");
+    updateBackToTopVisibility();
     return;
   }
   const routeButton = event.target.closest("[data-route]");
@@ -9945,7 +12344,10 @@ document.addEventListener("click", (event) => {
     return setRoute(routeButton.dataset.route);
   }
   const lockedRoute = event.target.closest("[data-locked-route]");
-  if (lockedRoute) return;
+  if (lockedRoute) {
+    alert(L("noPermissionArea"));
+    return;
+  }
   const scrollButton = event.target.closest("[data-scroll]");
   if (scrollButton) {
     scrollButton.closest(".department-tabs, .tab-strip, .module-tabs")?.querySelectorAll("button").forEach((button) => button.classList.toggle("active", button === scrollButton));
@@ -10045,7 +12447,16 @@ document.addEventListener("click", (event) => {
   }
   const financeTabBtn = event.target.closest("[data-finance-tab]");
   if (financeTabBtn) {
-    financePageState.tab = financeTabBtn.dataset.financeTab || "overview";
+    const tab = financeTabBtn.dataset.financeTab || "overview";
+    if (window.CEAccessControl?.canAccessTab?.(activeUser, "finance", tab) === false) {
+      alert(L("noPermissionArea"));
+      return;
+    }
+    financePageState.tab = tab;
+    if (activeRoute === "finance") renderFinance();
+    return;
+  }
+  if (event.target.closest("[data-finance-report-apply]")) {
     if (activeRoute === "finance") renderFinance();
     return;
   }
@@ -10113,12 +12524,20 @@ document.addEventListener("click", (event) => {
   const reportDomainTab = event.target.closest("[data-report-domain-tab]");
   if (reportDomainTab) {
     reportsPageState.domain = reportDomainTab.dataset.reportDomainTab || "";
-    if (activeRoute === "reports") renderReports();
+    if (activeRoute === "reports") {
+      renderReports();
+      scrollContentTo(`report-domain-${reportsPageState.domain}`);
+    }
     return;
   }
   const requisitionTabBtn = event.target.closest("[data-requisition-tab]");
   if (requisitionTabBtn) {
-    requisitionsPageState.tab = requisitionTabBtn.dataset.requisitionTab || "overview";
+    const tab = requisitionTabBtn.dataset.requisitionTab || "overview";
+    if (window.CEAccessControl?.canAccessTab?.(activeUser, "requisitions", tab) === false) {
+      alert(L("noPermissionArea"));
+      return;
+    }
+    requisitionsPageState.tab = tab;
     if (activeRoute === "requisitions") renderRequisitions();
     return;
   }
@@ -10138,7 +12557,12 @@ document.addEventListener("click", (event) => {
   }
   const staffTabBtn = event.target.closest("[data-staff-tab]");
   if (staffTabBtn) {
-    staffHrPageState.tab = staffTabBtn.dataset.staffTab || "overview";
+    const tab = staffTabBtn.dataset.staffTab || "overview";
+    if (window.CEAccessControl?.canAccessTab?.(activeUser, "staffHr", tab) === false) {
+      alert(L("noPermissionArea"));
+      return;
+    }
+    staffHrPageState.tab = tab;
     if (activeRoute === "staffHr") renderStaffHr();
     return;
   }
@@ -10210,6 +12634,8 @@ document.addEventListener("click", (event) => {
   }
   const openButton = event.target.closest("[data-open-form]");
   if (openButton) return openForm(openButton.dataset.openForm);
+  const applyFilterButton = event.target.closest("[data-filter-apply]");
+  if (applyFilterButton && applyFilterToolbar(applyFilterButton.dataset.filterApply, applyFilterButton)) return;
   const actionButton = event.target.closest("[data-action]");
   if (actionButton) return quickAction(actionButton.dataset.action, actionButton.dataset.type, actionButton.dataset.id);
   const enrollButton = event.target.closest("[data-enroll]");
@@ -10271,6 +12697,16 @@ document.addEventListener("submit", (event) => {
 });
 
 document.addEventListener("input", (event) => {
+  if (modalType === "mediaSchedule" && event.target.closest("#entryForm") && event.target.name === "service_name") {
+    syncMediaScheduleCameraSlots(byId("entryForm"));
+  }
+  if (event.target.matches("[data-cell-accordion-search]")) {
+    const query = event.target.value.trim().toLowerCase();
+    document.querySelectorAll("[data-cell-group-item]").forEach((item) => {
+      item.classList.toggle("d-none", query && !String(item.dataset.searchText || "").includes(query));
+    });
+    return;
+  }
   if (event.target.matches("[data-foundation-class]")) {
     const form = event.target.closest("form");
     if (form) updateFoundationProgressPreview(form);
@@ -10352,6 +12788,11 @@ document.addEventListener("input", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
+  const filterScope = event.target.dataset?.filterSearch;
+  if (event.key === "Enter" && filterScope && applyFilterToolbar(filterScope, event.target)) {
+    event.preventDefault();
+    return;
+  }
   if (event.target.id !== "financeContributorSearch" || !financeContributorUI.open) return;
   const max = financeContributorUI.results.length - 1;
   if (event.key === "ArrowDown") {
@@ -10375,7 +12816,38 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+byId("entryModal")?.addEventListener("shown.bs.modal", () => {
+  cleanRenderedText(byId("entryModal"));
+  mountMediaScheduleFormControls(byId("entryForm"));
+});
+
 document.addEventListener("change", (event) => {
+  if (modalType === "mediaSchedule" && event.target.closest("#entryForm") && ["date", "service_name"].includes(event.target.name)) {
+    syncMediaScheduleCameraSlots(byId("entryForm"));
+  }
+  if (event.target.matches("[data-dashboard-period]")) {
+    dashboardPageState.period = event.target.value || "week";
+    renderDashboard();
+    return;
+  }
+  if (event.target.matches("[data-dashboard-date-from]")) {
+    dashboardPageState.dateFrom = event.target.value || "";
+    if (dashboardPageState.period === "custom") renderDashboard();
+    return;
+  }
+  if (event.target.matches("[data-dashboard-date-to]")) {
+    dashboardPageState.dateTo = event.target.value || "";
+    if (dashboardPageState.period === "custom") renderDashboard();
+    return;
+  }
+  const groupSelect = event.target.closest?.("[data-cell-group-select]");
+  if (groupSelect) {
+    updateDependentCellSelect(groupSelect);
+    return;
+  }
+  if (event.target.matches?.("form [name='church_id'], form [name='igreja_id'], form [name='igreja']")) {
+    refreshCellGroupSelectForChurch(event.target.closest("form"), event.target.value);
+  }
   if (event.target.matches("[data-foundation-class]")) {
     const form = event.target.closest("form");
     if (form) updateFoundationProgressPreview(form);
@@ -10460,10 +12932,9 @@ byId("loginForm")?.addEventListener("submit", (event) => {
 
 window.addEventListener("resize", syncTopbarHeight);
 
-byId("logoutBtn")?.addEventListener("click", () => {
-  byId("appView")?.classList.add("d-none");
-  byId("loginView")?.classList.remove("d-none");
-  updateBackToTopVisibility();
+window.addEventListener("hashchange", () => {
+  if (byId("appView")?.classList.contains("d-none")) return;
+  setRoute(location.hash.replace("#", "") || "dashboard");
 });
 
 byId("menuToggle")?.addEventListener("click", () => {
@@ -10481,6 +12952,13 @@ window.CENotifications = {
   notifyDepartment,
   notifyChurch,
   updateNotificationCenter
+};
+
+window.CECellOptions = {
+  groups: getCellGroupsForChurch,
+  cells: getCellsForGroup,
+  groupName: cellGroupName,
+  cellName
 };
 
 applyLanguage(lang);

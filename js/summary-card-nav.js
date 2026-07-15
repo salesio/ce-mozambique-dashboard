@@ -52,10 +52,13 @@
       foundation: () => window.foundationPageState,
       firstTimers: () => window.firstTimersPageState,
       followUp: () => window.followUpPageState,
+      members: () => window.modulePageState?.members,
+      counseling: () => window.counselingPageState,
       fevo: () => window.fevoPageState,
       requisitions: () => window.requisitionsPageState,
       venue: () => window.venuePageState,
       sacraments: () => window.sacramentsPageState,
+      media: () => window.mediaPageState,
       reports: () => window.reportsPageState
     };
     return stores[module]?.() || null;
@@ -91,6 +94,15 @@
       store.filter = {};
       return;
     }
+    if (module === "members") {
+      store.filter = {};
+      return;
+    }
+    if (module === "counseling") {
+      store.tab = "overview";
+      store.filter = {};
+      return;
+    }
     if (module === "fevo") {
       store.filter = {};
       return;
@@ -109,6 +121,11 @@
       store.panel = "";
       store.filter = {};
     }
+    if (module === "media") {
+      store.tab = "overview";
+      store.filter = {};
+      return;
+    }
     if (module === "reports") {
       store.domain = "";
       if (window.domainReportFilters) {
@@ -125,6 +142,7 @@
       employment_type: t("staffEmploymentType", "Employment Type"),
       payment_status: t("status", "Status"),
       has_salary: t("staffWithSalary", "Salary"),
+      hasChurch: t("membersByChurch", "By Church"),
       pending_eval: t("staffPendingEval", "Pending Evaluations"),
       assigned: t("staffAssignedEq", "Assigned Equipment"),
       birthday_month: t("staffFilterBirthdayMonth", "Birthday Month"),
@@ -181,7 +199,7 @@
       if (store.sourceFilter) chips.push(["source", store.sourceFilter]);
     } else if (module === "churches") {
       Object.entries(store.filters || {}).forEach(([k, v]) => { if (v) chips.push([k, v]); });
-    } else if (module === "foundation" || module === "firstTimers" || module === "followUp" || module === "fevo" || module === "venue" || module === "sacraments") {
+    } else if (module === "foundation" || module === "members" || module === "firstTimers" || module === "followUp" || module === "counseling" || module === "fevo" || module === "venue" || module === "sacraments" || module === "media") {
       Object.entries(store.filter || {}).forEach(([k, v]) => { if (v !== "" && v != null) chips.push([k, v]); });
     } else if (module === "requisitions") {
       if (store.tab === "reports") {
@@ -208,11 +226,23 @@
       </div>`;
   }
 
-  function scrollToPanel(id) {
+  function scrollToPanel(id, attempt = 0) {
     if (!id) return;
     requestAnimationFrame(() => {
       const el = document.getElementById(id) || document.querySelector(`[id="${id}"]`);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (!el) {
+        if (attempt < 8) setTimeout(() => scrollToPanel(id, attempt + 1), 60);
+        return;
+      }
+      const content = document.getElementById("content");
+      if (content && content.contains(el)) {
+        const stickyNav = content.querySelector(".module-nav-sticky");
+        const offset = (stickyNav?.offsetHeight || 0) + 12;
+        const top = el.getBoundingClientRect().top - content.getBoundingClientRect().top + content.scrollTop - offset;
+        content.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+        return;
+      }
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   }
 
@@ -224,10 +254,13 @@
       foundation: "foundationSchool",
       firstTimers: "firstTimers",
       followUp: "followUp",
+      counseling: "counseling",
       fevo: "fevo",
       requisitions: "requisitions",
       venue: window.venuePageState?.route || "venueInventory",
+      members: "members",
       sacraments: "sacraments",
+      media: "media",
       reports: "reports"
     }[module];
     if (typeof setRoute === "function" && targetRoute) setRoute(targetRoute);
@@ -294,7 +327,9 @@
   function applyChurches(payload) {
     const store = window.churchPageState;
     if (!store) return;
-    Object.assign(store.filters, payload.filterPayload || {});
+    const filters = payload.filterPayload || {};
+    if (!Object.keys(filters).length) store.filters = { search: "", province: "", city: "", type: "", status: "", information_status: "" };
+    else Object.assign(store.filters, filters);
     return true;
   }
 
@@ -375,8 +410,16 @@
     const targetRoute = payload.route || (filters.domain ? "reports" : "");
     if (targetRoute && typeof setRoute === "function") {
       setRoute(targetRoute);
+      scrollToPanel(payload.scrollTo || (filters.domain ? `report-domain-${filters.domain}` : ""));
       return false;
     }
+    return true;
+  }
+
+  function applyMembers(payload) {
+    const store = window.modulePageState?.members;
+    if (!store) return;
+    store.filter = { ...(payload.filterPayload || {}) };
     return true;
   }
 
@@ -393,6 +436,26 @@
     return true;
   }
 
+  function applyCounseling(payload) {
+    const store = window.counselingPageState;
+    if (!store) return;
+    const filters = payload.filterPayload || {};
+    if (payload.targetTab) store.tab = payload.targetTab;
+    if (filters.tab) store.tab = filters.tab;
+    store.filter = { ...store.filter, ...filters };
+    return true;
+  }
+
+  function applyMedia(payload) {
+    const store = window.mediaPageState;
+    if (!store) return;
+    const filters = payload.filterPayload || {};
+    if (payload.targetTab) store.tab = payload.targetTab;
+    if (filters.tab) store.tab = filters.tab;
+    store.filter = { ...store.filter, ...filters };
+    return true;
+  }
+
   function applyAction(module, payload = {}) {
     const handlers = {
       staffHr: applyStaffHr,
@@ -401,10 +464,13 @@
       foundation: applyFoundation,
       firstTimers: applyFirstTimers,
       followUp: applyFollowUp,
+      counseling: applyCounseling,
       fevo: applyFevo,
       requisitions: applyRequisitions,
       venue: applyVenue,
       sacraments: applySacraments,
+      media: applyMedia,
+      members: applyMembers,
       reports: applyReports
     };
     const handler = handlers[module];
@@ -413,6 +479,7 @@
     if (shouldRerender === false) return;
     if (payload.route && typeof setRoute === "function") {
       setRoute(payload.route);
+      if (payload.scrollTo) scrollToPanel(payload.scrollTo);
       return;
     }
     rerenderModule(module, payload.route);

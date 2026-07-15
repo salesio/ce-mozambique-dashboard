@@ -5,7 +5,7 @@
   "use strict";
 
   const FINANCE_STATUS = {
-    AWAITING: "Aguardando Liberação",
+    AWAITING: "Aguardando Libera��o",
     RELEASED: "Recursos Liberados",
     PAID: "Pago",
     PARTIAL: "Parcialmente Pago",
@@ -15,7 +15,7 @@
   const PAYMENT_METHODS = ["M-Pesa", "E-Mola", "Banco", "Dinheiro", "Cheque", "Outro"];
 
   const APPROVED_REQ_STATUSES = new Set([
-    "Aprovado — Aguardando Liberação de Recursos",
+    "Aprovado � Aguardando Libera��o de Recursos",
     "Aprovado",
     "Recursos Liberados",
     "Comprado / Executado",
@@ -44,6 +44,8 @@
   }
 
   function canReleaseResources(user) {
+    const access = accessApi()?.resolveModuleAccess?.(user, "finance");
+    if (typeof access?.can_release_resources === "boolean") return access.can_release_resources;
     const { isSuper, isFinanceHead } = resolveFinanceRole(user);
     return isSuper || isFinanceHead;
   }
@@ -286,7 +288,7 @@
     if (!record.finance_status) {
       if (record.status === "Recursos Liberados" || record.resources_released_at) {
         record.finance_status = FINANCE_STATUS.RELEASED;
-      } else if (record.status === "Aprovado — Aguardando Liberação de Recursos" || record.status === "Aprovado") {
+      } else if (record.status === "Aprovado � Aguardando Libera��o de Recursos" || record.status === "Aprovado") {
         record.finance_status = FINANCE_STATUS.AWAITING;
       }
     }

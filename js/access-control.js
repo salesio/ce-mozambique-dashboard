@@ -87,12 +87,12 @@
 
   const FULL_ACCESS = {
     can_view: true, can_create: true, can_edit: true, can_delete: true,
-    can_approve: true, can_verify: true, can_export: true, scope: "all"
+    can_approve: true, can_verify: true, can_release_resources: true, can_export: true, scope: "all"
   };
 
   const VIEW_ONLY = {
     can_view: true, can_create: false, can_edit: false, can_delete: false,
-    can_approve: false, can_verify: false, can_export: false, scope: "church"
+    can_approve: false, can_verify: false, can_release_resources: false, can_export: false, scope: "church"
   };
 
   const ROLE_TEMPLATES = {
@@ -107,7 +107,7 @@
         reports: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: false, can_verify: false, can_export: true, scope: "all" },
         counseling: { can_view: true, can_create: false, can_edit: true, can_delete: false, can_approve: false, can_verify: false, can_export: false, scope: "all" },
         foundation: { can_view: true, can_create: false, can_edit: true, can_delete: false, can_approve: true, can_verify: false, can_export: true, scope: "all" },
-        finance: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: false, can_verify: false, can_export: true, scope: "all" },
+        finance: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: false, can_verify: false, can_release_resources: false, can_export: true, scope: "all" },
         fevo: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: true, can_verify: false, can_export: true, scope: "all" },
         venueInventory: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: false, can_verify: false, can_export: true, scope: "all" },
         sacraments: { can_view: true, can_create: false, can_edit: true, can_delete: false, can_approve: true, can_verify: false, can_export: true, scope: "all" },
@@ -117,7 +117,7 @@
         partnership: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: false, can_verify: false, can_export: true, scope: "all" },
         media: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: false, can_verify: false, can_export: true, scope: "all" },
         cell: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: true, can_verify: false, can_export: true, scope: "all" },
-        requisitions: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: true, can_verify: false, can_export: true, scope: "all" },
+        requisitions: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: true, can_verify: false, can_release_resources: false, can_export: true, scope: "all" },
         staffHr: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: false, can_verify: false, can_export: true, scope: "all" },
         usersRoles: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: false, can_verify: false, can_export: false, scope: "all" },
         accessControl: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: false, can_verify: false, can_export: false, scope: "all" },
@@ -173,20 +173,46 @@
         cell: { can_view: true, can_create: true, can_edit: true, can_delete: false, can_approve: false, can_verify: false, can_export: true, scope: "department" }
       }
     },
+    "Counseling Head": {
+      modules: {
+        dashboard: { ...VIEW_ONLY, scope: "all" },
+        counseling: { can_view: true, can_create: true, can_edit: true, can_delete: false, can_approve: true, can_verify: true, can_export: true, scope: "all", can_assign_counselor: true, can_schedule_counseling: true, can_write_counseling_feedback: true, can_view_sensitive_counseling_notes: true, can_refer_to_pastor: true, can_create_follow_up_from_counseling: true },
+        followUp: { can_view: true, can_create: true, can_edit: true, can_delete: false, can_approve: false, can_verify: false, can_export: true, scope: "all" },
+        firstTimers: { ...VIEW_ONLY, scope: "all" },
+        reports: { ...VIEW_ONLY, scope: "all", can_export: true },
+        notifications: { ...VIEW_ONLY, scope: "all" }
+      }
+    },
+    "Counselor": {
+      modules: {
+        dashboard: { ...VIEW_ONLY, scope: "own" },
+        counseling: { can_view: true, can_create: true, can_edit: true, can_delete: false, can_approve: false, can_verify: false, can_export: false, scope: "own", can_write_counseling_feedback: true },
+        followUp: { ...VIEW_ONLY, scope: "own" },
+        notifications: { ...VIEW_ONLY, scope: "own" }
+      }
+    },
+    "Follow-Up Coordinator": {
+      modules: {
+        dashboard: { ...VIEW_ONLY, scope: "all" },
+        followUp: { can_view: true, can_create: true, can_edit: true, can_delete: false, can_approve: false, can_verify: false, can_export: true, scope: "all" },
+        counseling: { can_view: true, can_create: false, can_edit: true, can_delete: false, can_approve: false, can_verify: false, can_export: false, scope: "all", can_create_follow_up_from_counseling: true },
+        firstTimers: { ...VIEW_ONLY, scope: "all" },
+        reports: { ...VIEW_ONLY, scope: "all", can_export: true }
+      }
+    },
     "Finance Head": {
       modules: {
         dashboard: { ...VIEW_ONLY, scope: "all" },
-        finance: { can_view: true, can_create: true, can_edit: true, can_delete: false, can_approve: true, can_verify: true, can_export: true, scope: "all" },
+        finance: { can_view: true, can_create: true, can_edit: true, can_delete: false, can_approve: true, can_verify: true, can_release_resources: true, can_export: true, scope: "all" },
         reports: { ...VIEW_ONLY, scope: "all", can_export: true },
-        requisitions: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: false, can_verify: true, can_export: true, scope: "all" },
-        staffHr: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: false, can_verify: false, can_export: true, scope: "all", can_view_salary: true },
+        requisitions: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: false, can_verify: true, can_release_resources: true, can_export: true, scope: "all" },
         auditLogs: { ...VIEW_ONLY, scope: "all" }
       }
     },
     "Finance Officer": {
       modules: {
         dashboard: { ...VIEW_ONLY, scope: "church" },
-        finance: { can_view: true, can_create: true, can_edit: true, can_delete: false, can_approve: false, can_verify: true, can_export: true, scope: "church" },
+        finance: { can_view: true, can_create: true, can_edit: true, can_delete: false, can_approve: false, can_verify: true, can_release_resources: false, can_export: true, scope: "church" },
         reports: { ...VIEW_ONLY, scope: "church", can_export: true }
       }
     },
@@ -194,7 +220,6 @@
       modules: {
         dashboard: { ...VIEW_ONLY, scope: "all" },
         staffHr: { can_view: true, can_create: true, can_edit: true, can_delete: false, can_approve: true, can_verify: false, can_export: true, scope: "all", can_view_salary: true },
-        requisitions: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: false, can_verify: false, can_export: true, scope: "all" },
         reports: { ...VIEW_ONLY, scope: "all", can_export: true }
       }
     },
@@ -204,6 +229,30 @@
         reports: { ...VIEW_ONLY, scope: "all", can_export: true },
         requisitions: { can_view: true, can_create: true, can_edit: true, can_delete: false, can_approve: false, can_verify: false, can_export: true, scope: "all", can_review: true, can_forward: true },
         venueInventory: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: false, can_verify: false, can_export: false, scope: "all" }
+      }
+    },
+    "Media Director": {
+      modules: {
+        dashboard: { ...VIEW_ONLY, scope: "all" },
+        media: { can_view: true, can_create: true, can_edit: true, can_delete: false, can_approve: true, can_verify: true, can_export: true, scope: "all", can_view_media: true, can_create_media_schedule: true, can_edit_media_schedule: true, can_manage_media_team: true, can_evaluate_media_team: true, can_view_media_reports: true, can_manage_media_awards: true, can_export_media_reports: true },
+        reports: { ...VIEW_ONLY, scope: "all", can_export: true },
+        venueInventory: { ...VIEW_ONLY, scope: "all" },
+        programs: { ...VIEW_ONLY, scope: "all" }
+      }
+    },
+    "Media Supervisor": {
+      modules: {
+        dashboard: { ...VIEW_ONLY, scope: "all" },
+        media: { can_view: true, can_create: true, can_edit: true, can_delete: false, can_approve: false, can_verify: true, can_export: true, scope: "all", can_view_media: true, can_create_media_schedule: true, can_edit_media_schedule: true, can_manage_media_team: true, can_evaluate_media_team: true, can_view_media_reports: true, can_manage_media_awards: false, can_export_media_reports: true },
+        reports: { ...VIEW_ONLY, scope: "all", can_export: true },
+        venueInventory: { ...VIEW_ONLY, scope: "all" }
+      }
+    },
+    "Media Team Member": {
+      modules: {
+        dashboard: { ...VIEW_ONLY, scope: "own" },
+        media: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: false, can_verify: false, can_export: false, scope: "own", can_view_media: true, can_create_media_schedule: false, can_edit_media_schedule: false, can_manage_media_team: false, can_evaluate_media_team: false, can_view_media_reports: false, can_manage_media_awards: false, can_export_media_reports: false },
+        notifications: { ...VIEW_ONLY, scope: "own" }
       }
     },
     "Venue Manager": {
@@ -275,6 +324,8 @@
     reports: "reports",
     prisonMinistry: "prisonMinistry",
     ministryMaterials: "ministryMaterials",
+    media: "media",
+    mediaTeam: "media",
     requisitions: "requisitions",
     staffHr: "staffHr",
     users: "usersRoles",
@@ -283,7 +334,7 @@
 
   const NO_ACCESS = {
     can_view: false, can_create: false, can_edit: false, can_delete: false,
-    can_approve: false, can_verify: false, can_export: false, scope: "own"
+    can_approve: false, can_verify: false, can_release_resources: false, can_export: false, scope: "own"
   };
 
   function routeToModule(route) {
@@ -331,6 +382,17 @@
   function resolveModuleAccess(user, module) {
     if (!user || !module) return emptyAccess();
     const base = { module, ...NO_ACCESS };
+    const explicitDeniedModules = {
+      "Finance Head": new Set(["staffHr", "usersRoles", "accessControl"]),
+      "Finance Officer": new Set(["staffHr", "usersRoles", "accessControl", "auditLogs"]),
+      "HR Manager": new Set(["finance", "requisitions", "usersRoles", "accessControl", "auditLogs"]),
+      "Requisition Officer": new Set(["finance", "staffHr", "usersRoles", "accessControl", "auditLogs"]),
+      "Staff Member": new Set(["finance", "reports", "usersRoles", "accessControl", "auditLogs"])
+    };
+
+    if (explicitDeniedModules[user.role]?.has(module)) {
+      return base;
+    }
 
     if (module === "notifications") {
       return { module, ...VIEW_ONLY, scope: user.can_view_all_churches ? "all" : user.assigned_department ? "department" : "church" };
@@ -363,6 +425,96 @@
     return resolveModuleAccess(user, module).can_view;
   }
 
+  function canViewModule(user, module) {
+    return Boolean(resolveModuleAccess(user, module).can_view);
+  }
+
+  function canAccessTab(user, module, tab) {
+    const access = resolveModuleAccess(user, module);
+    if (!access.can_view) return false;
+    if (!tab) return true;
+    const financeSensitiveTabs = new Set(["partners", "exports"]);
+    const financeVerificationTabs = new Set(["verification", "approvedRequisitions"]);
+    const staffSensitiveTabs = new Set(["salaries", "performance", "documents"]);
+    const requisitionApprovalTabs = new Set(["review", "pastoral", "approved"]);
+    const requisitionFinanceTabs = new Set(["released"]);
+    const requisitionReportTabs = new Set(["reports", "history"]);
+    if (module === "finance" && financeSensitiveTabs.has(tab)) return Boolean(access.can_export || access.can_verify || access.can_approve);
+    if (module === "finance" && financeVerificationTabs.has(tab)) return Boolean(access.can_verify || access.can_approve || access.can_release_resources);
+    if (module === "staffHr" && staffSensitiveTabs.has(tab)) return Boolean(access.can_view_salary || access.can_edit || access.can_approve);
+    if (module === "requisitions" && requisitionApprovalTabs.has(tab)) return Boolean(access.can_approve || access.can_verify || access.can_review || access.can_forward);
+    if (module === "requisitions" && requisitionFinanceTabs.has(tab)) return Boolean(access.can_release_resources || access.can_verify);
+    if (module === "requisitions" && requisitionReportTabs.has(tab)) return Boolean(access.can_export || access.can_approve || access.can_verify);
+    return true;
+  }
+
+  function canPerformAction(user, module, action) {
+    const access = resolveModuleAccess(user, module);
+    const map = {
+      view: "can_view",
+      add: "can_create",
+      create: "can_create",
+      edit: "can_edit",
+      delete: "can_delete",
+      approve: "can_approve",
+      reject: "can_approve",
+      verify: "can_verify",
+      rejectGroup: "can_verify",
+      verifyGroup: "can_verify",
+      releaseResources: "can_release_resources",
+      partialPayment: "can_release_resources",
+      markPaid: "can_release_resources",
+      export: "can_export",
+      status: "can_edit",
+      moveChurch: "can_edit",
+      followup: "can_edit",
+      updateReport: "can_edit"
+    };
+    if (action === "sendToInventory") return Boolean(access.can_approve || access.can_verify || access.can_edit);
+    if (action === "markClass" || action === "score") return Boolean(access.can_edit || access.can_approve);
+    const key = map[action] || "can_view";
+    return Boolean(access[key]);
+  }
+
+  function getUserScope(user, module = "dashboard") {
+    const access = resolveModuleAccess(user, module);
+    if (access.scope) return access.scope;
+    if ((user?.department_permissions || []).includes("*")) return "all";
+    if (user?.can_view_all_churches) return "national";
+    if (user?.assigned_department || user?.department_ids?.length) return "department";
+    return "church";
+  }
+
+  function recordMatchesScope(record, user, module = "dashboard") {
+    const scope = getUserScope(user, module);
+    if (!record || !user) return false;
+    if (["all", "national"].includes(scope)) return true;
+    if (scope === "own") {
+      const staffName = user.assigned_staff_name || user.name;
+      return record.user_id === user.id ||
+        record.requested_by_user_id === user.id ||
+        record.created_by_user_id === user.id ||
+        record.created_by === user.name ||
+        record.requested_by_name === user.name ||
+        record.assigned_to === user.name ||
+        record.full_name === staffName ||
+        record.nome_completo === staffName;
+    }
+    if (scope === "department") {
+      const deptIds = new Set(user.department_ids || []);
+      const deptNames = new Set([...(user.department_names || []), user.assigned_department].filter(Boolean).map((v) => String(v).toLowerCase()));
+      const recordDeptId = record.department_id || record.recipient_department_id || record.departamento_id;
+      const recordDeptName = String(record.department_name || record.departamento || record.department || record.departamento_responsavel || "").toLowerCase();
+      return (recordDeptId && deptIds.has(recordDeptId)) || (recordDeptName && deptNames.has(recordDeptName));
+    }
+    return !record.church_id || record.church_id === user.church_id || record.igreja_id === user.church_id || record.recipient_church_id === user.church_id;
+  }
+
+  function filterDataByScope(data, user, module = "dashboard") {
+    if (!Array.isArray(data)) return [];
+    return data.filter((record) => recordMatchesScope(record, user, module));
+  }
+
   function isSensitiveModule(module) {
     return SENSITIVE_MODULES.has(module);
   }
@@ -387,11 +539,31 @@
     return { route, module, visible: false, locked: true, access, sensitive };
   }
 
+  function getVisibleSidebarItems(user, routes = []) {
+    return routes
+      .map((route) => getNavItemState(user, Array.isArray(route) ? route[0] : route))
+      .filter((item) => item.visible);
+  }
+
+  function getVisibleTabs(user, module, tabs = []) {
+    return tabs.map((tab) => {
+      const key = Array.isArray(tab) ? tab[0] : tab;
+      const allowed = canAccessTab(user, module, key);
+      const sensitive = isSensitiveModule(module);
+      return {
+        key,
+        tab,
+        visible: allowed || SHOW_LOCKED_MODULES || !sensitive,
+        locked: !allowed
+      };
+    }).filter((tab) => tab.visible);
+  }
+
   function canViewSalary(user) {
     if ((user?.department_permissions || []).includes("*")) return true;
     const access = resolveModuleAccess(user, "staffHr");
     if (access.can_view_salary) return true;
-    return ["Super Admin", "Main Pastor", "Finance Head", "HR Manager"].includes(user?.role);
+    return ["Super Admin", "Main Pastor", "HR Manager"].includes(user?.role);
   }
 
   function canViewStaffBirthday(user) {
@@ -411,8 +583,16 @@
     ROLE_TEMPLATES,
     routeToModule,
     resolveModuleAccess,
+    canViewModule,
+    canAccessTab,
+    canPerformAction,
+    getUserScope,
+    filterDataByScope,
+    recordMatchesScope,
     canViewRoute,
     getNavItemState,
+    getVisibleSidebarItems,
+    getVisibleTabs,
     canViewSalary,
     canViewStaffBirthday,
     canViewSensitiveStaffData,

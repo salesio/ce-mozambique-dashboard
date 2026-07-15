@@ -70,6 +70,7 @@ function SummaryCard(icon, label, value, hint = "", options = {}) {
         <div class="summary-card-body">
           <span class="summary-card-label metric-label chart-label label">${label}</span>
           <strong class="summary-card-value metric-value">${value}</strong>
+          ${options.periodLabel ? `<span class="summary-card-period">${options.periodLabel}</span>` : ""}
           ${hintText ? `<small class="summary-card-hint meta-text subtitle">${hintText}</small>` : ""}
         </div>
       </article>
@@ -87,21 +88,26 @@ function FilterToolbar(options = {}) {
     month = true,
     status = true,
     exportBtn = true,
+    applyBtn = true,
     addBtn = "",
     viewToggle = "",
     extraFields = "",
     className = "",
     variant = "light"
   } = options;
+  const scope = options.filterScope || "generic";
+  const selectedChurch = options.churchValue || "";
+  const selectedStatus = options.statusValue || "";
   return `
     <div class="filter-toolbar filter-bar ${surfaceClass(variant)} ${className}">
-      ${search ? `<div class="filter-toolbar-field filter-toolbar-search"><i class="bi bi-search"></i><input class="form-control" type="search" placeholder="${uiT("search", "Pesquisar")}" aria-label="${uiT("search", "Pesquisar")}"></div>` : ""}
-      ${church ? `<select class="form-select" aria-label="${uiT("filterChurch", "Filtrar por Igreja")}"><option value="">${uiT("filterChurch", "Filtrar por Igreja")}</option>${(options.churches || []).map((c) => `<option value="${c.id || c}">${c.church_name || c}</option>`).join("")}</select>` : ""}
-      ${month ? `<input class="form-control" type="month" aria-label="${uiT("filterMonth", "Filtrar por Mês")}">` : ""}
-      ${status ? `<select class="form-select" aria-label="${uiT("filterStatus", "Filtrar por Estado")}"><option value="">${uiT("filterStatus", "Filtrar por Estado")}</option>${(options.statusOptions || []).map((s) => `<option value="${s}">${s}</option>`).join("")}</select>` : ""}
+      ${search ? `<div class="filter-toolbar-field filter-toolbar-search"><i class="bi bi-search"></i><input class="form-control" type="search" data-filter-search="${scope}" value="${options.searchValue || ""}" placeholder="${uiT("search", "Pesquisar")}" aria-label="${uiT("search", "Pesquisar")}"></div>` : ""}
+      ${church ? `<select class="form-select" data-filter-church="${scope}" aria-label="${uiT("filterChurch", "Filtrar por Igreja")}"><option value="">${uiT("filterChurch", "Filtrar por Igreja")}</option>${(options.churches || []).map((c) => `<option value="${c.id || c}" ${selectedChurch === (c.id || c) ? "selected" : ""}>${c.church_name || c}</option>`).join("")}</select>` : ""}
+      ${month ? `<input class="form-control" type="month" data-filter-month="${scope}" value="${options.monthValue || ""}" aria-label="${uiT("filterMonth", "Filtrar por Mes")}">` : ""}
+      ${status ? `<select class="form-select" data-filter-status="${scope}" aria-label="${uiT("filterStatus", "Filtrar por Estado")}"><option value="">${uiT("filterStatus", "Filtrar por Estado")}</option>${(options.statusOptions || []).map((s) => `<option value="${s}" ${selectedStatus === s ? "selected" : ""}>${s}</option>`).join("")}</select>` : ""}
       ${extraFields}
       ${viewToggle}
       <div class="filter-toolbar-actions">
+        ${applyBtn ? `<button type="button" class="btn btn-ce-gold btn-touch" data-filter-apply="${scope}"><i class="bi bi-search me-1"></i>${uiT("search", "Pesquisar")}</button>` : ""}
         ${exportBtn ? `<button type="button" class="btn btn-outline-cyan btn-touch action-secondary"><i class="bi bi-download me-1"></i>${uiT("export", "Exportar")}</button>` : ""}
         ${addBtn}
       </div>
@@ -118,7 +124,7 @@ function TabButton(label, options = {}) {
 function ModuleTabs(buttonsHtml = "", options = {}) {
   const className = options.className || "";
   const surface = options.variant ? surfaceClass(options.variant) : "";
-  const aria = options.ariaLabel || uiT("moduleNavigation", "Navegação do módulo");
+  const aria = options.ariaLabel || uiT("moduleNavigation", "Navega��o do m�dulo");
   const classes = ["module-tabs", "tab-strip", "module-tab-strip", surface, className].filter(Boolean).join(" ");
   return `<nav class="${classes}" role="tablist" aria-label="${aria}">${buttonsHtml}</nav>`;
 }
@@ -127,7 +133,7 @@ function ViewToggle(activeView = "table", labels = {}) {
   const cardsLabel = labels.cards || uiT("cardsView", "Cartões");
   const tableLabel = labels.table || uiT("tableView", "Tabela");
   return `
-    <div class="view-toggle light-surface" role="group" aria-label="${uiT("viewMode", "Modo de visualização")}">
+    <div class="view-toggle light-surface" role="group" aria-label="${uiT("viewMode", "Modo de visualiza��o")}">
       <button type="button" class="view-toggle-btn ${activeView === "cards" ? "active" : ""}" data-view-mode="cards"><i class="bi bi-grid-3x3-gap"></i><span>${cardsLabel}</span></button>
       <button type="button" class="view-toggle-btn ${activeView === "table" ? "active" : ""}" data-view-mode="table"><i class="bi bi-table"></i><span>${tableLabel}</span></button>
     </div>`;
@@ -162,9 +168,10 @@ function DataCardsGrid(cardsHtml = "", emptyHtml = "") {
 function DataTable(headers, rows, options = {}) {
   const tableId = options.id ? ` id="${options.id}"` : "";
   const variant = options.variant || "light";
+  const rowAttrs = Array.isArray(options.rowAttrs) ? options.rowAttrs : [];
   const mobileCards = options.mobileCards !== false && rows.length
-    ? `<div class="data-table-mobile">${rows.map((row) => `
-        <article class="data-table-mobile-card ${surfaceClass(variant)}">
+    ? `<div class="data-table-mobile">${rows.map((row, rowIndex) => `
+        <article class="data-table-mobile-card ${surfaceClass(variant)}"${rowAttrs[rowIndex] || ""}>
           ${row.map((cell, index) => {
             if (headers[index] === uiT("actions", "Acções") || String(headers[index]).toLowerCase().includes("acç") || String(headers[index]).toLowerCase().includes("action")) {
               return `<div class="data-table-mobile-actions">${cell}</div>`;
@@ -178,7 +185,7 @@ function DataTable(headers, rows, options = {}) {
       <div class="table-responsive data-table">
         <table class="table align-middle data-table-desktop">
           <thead><tr>${headers.map((h) => `<th scope="col" class="chart-label">${h}</th>`).join("")}</tr></thead>
-          <tbody>${rows.length ? rows.map((row) => `<tr>${row.map((cell, index) => `<td data-label="${headers[index]}">${cell ?? "-"}</td>`).join("")}</tr>`).join("") : `<tr><td colspan="${headers.length}" class="data-table-empty">${EmptyState({ icon: "bi-inbox", title: uiT("empty", "Sem registos"), compact: true })}</td></tr>`}</tbody>
+          <tbody>${rows.length ? rows.map((row, rowIndex) => `<tr${rowAttrs[rowIndex] || ""}>${row.map((cell, index) => `<td data-label="${headers[index]}">${cell ?? "-"}</td>`).join("")}</tr>`).join("") : `<tr><td colspan="${headers.length}" class="data-table-empty">${EmptyState({ icon: "bi-inbox", title: uiT("empty", "Sem registos"), compact: true })}</td></tr>`}</tbody>
         </table>
       </div>
       ${mobileCards}
@@ -314,16 +321,16 @@ function FollowUpCard(person) {
   const nextDate = followup?.proxima_data_de_contacto || "-";
   return DataCard({
     title: name,
-    subtitle: uiT("followUp", "Seguimento"),
+    subtitle: uiT("followUp", "Acompanhamento"),
     badges: [StatusBadge(person.estado_do_seguimento)],
     meta: [
       [uiT("phone", "Telefone"), person.telefone, "bi-telephone"],
       [uiT("church", "Igreja"), church, "bi-building"],
       [uiT("nextContact", "Próximo Contacto"), nextDate, "bi-calendar-event"]
     ],
-    pills: [person.culto, person.quer_escola_de_fundacao ? uiT("foundationSchool", "Escola de Fundação") : null].filter(Boolean),
+    pills: [person.culto, person.quer_escola_de_fundacao ? uiT("foundationSchool", "Escola de Funda��o") : null].filter(Boolean),
     actions: typeof actionButtons === "function"
-      ? actionButtons([["view", "firstTimer", person.id, uiT("view", "Ver")], ["followup", "firstTimer", person.id, uiT("updateFollowup", "Actualizar Seguimento")]])
+      ? actionButtons([["view", "firstTimer", person.id, uiT("view", "Ver")], ["followup", "firstTimer", person.id, uiT("updateFollowup", "Actualizar Acompanhamento")]])
       : ""
   });
 }

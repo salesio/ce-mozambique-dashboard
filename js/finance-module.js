@@ -2,18 +2,18 @@
  * Finance module — taxonomy, filters, reports, charts (frontend-first).
  */
 const FINANCE_GENERAL_CATEGORIES = [
-  "Dízimo", "Ofertas", "Acção de Graças", "Primícias", "Semente de Fé", "Ofertas Especiais", "Outros"
+  "D�zimo", "Ofertas", "Ac��o de Gra�as", "Prim�cias", "Semente de F�", "Ofertas Especiais", "Outros"
 ];
 
 const FINANCE_PARTNERSHIP_ARMS = [
   "Escola de Cura",
   "Rapsódia de Realidades",
   "Loveworld SAT",
-  "Construtores de Visão",
+  "Construtores de Vis�o",
   "Missões de Cidades do Interior",
   "Alcançar Moçambique",
   "Projecto da Igreja",
-  "Projecto de Construção de Igreja",
+  "Projecto de Constru��o de Igreja",
   "Rapsódias das Crianças",
   "Mandato de Célula",
   "Outros Braços"
@@ -32,7 +32,7 @@ const FINANCE_CATEGORY_ALIASES = {
 
 const FINANCE_REPORT_CATEGORY_BUCKETS = [
   { key: "tithe", labelKey: "financeReportTithe", match: ["Dízimo"] },
-  { key: "offerings", labelKey: "financeReportOfferings", match: ["Ofertas", "Acção de Graças", "Ofertas Especiais"] },
+  { key: "offerings", labelKey: "financeReportOfferings", match: ["Ofertas", "Ac��o de Gra�as", "Ofertas Especiais"] },
   { key: "partnerships", labelKey: "financeReportPartnerships", groups: ["Parceria", "Projecto", "Missões"] },
   { key: "firstfruits", labelKey: "financeReportFirstfruits", match: ["Primícias"] },
   { key: "seed", labelKey: "financeReportSeed", match: ["Semente de Fé"] },
@@ -694,8 +694,15 @@ function financeReportFilterBar(filters, churches, labels) {
         ${frequencyOptions.map(([v, l]) => `<option value="${v}" ${filters.frequency === v ? "selected" : ""}>${l}</option>`).join("")}
       </select>
       <input class="form-control" type="search" data-finance-report-filter="contributor" value="${filters.contributor || ""}" placeholder="${labels.contributorPlaceholder}" aria-label="${labels.contributor}">
-      <input class="form-control" type="text" data-finance-report-filter="cell" value="${filters.cell || ""}" placeholder="${labels.cell}" aria-label="${labels.cell}">
-      <input class="form-control" type="text" data-finance-report-filter="cellGroup" value="${filters.cellGroup || ""}" placeholder="${labels.cellGroup}" aria-label="${labels.cellGroup}">
+      <select class="form-select" data-finance-report-filter="cellGroup" aria-label="${labels.cellGroup}">
+        <option value="">${labels.cellGroup}</option>
+        ${(window.CECellOptions?.groups?.() || []).map((group) => `<option value="${group.group_name}" ${filters.cellGroup === group.group_name ? "selected" : ""}>${group.group_name}</option>`).join("")}
+      </select>
+      <select class="form-select" data-finance-report-filter="cell" aria-label="${labels.cell}">
+        <option value="">${labels.cell}</option>
+        ${(window.CECellOptions?.cells?.() || []).map((cell) => `<option value="${cell.cell_name}" ${filters.cell === cell.cell_name ? "selected" : ""}>${cell.cell_name}</option>`).join("")}
+      </select>
+      <button type="button" class="btn btn-ce-gold btn-touch" data-finance-report-apply><i class="bi bi-search me-1"></i>${labels.search || "Pesquisar"}</button>
     </div>`;
 }
 

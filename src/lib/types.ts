@@ -31,6 +31,10 @@ export interface PublicGivingSubmissionRow {
   email: string | null;
   igreja_id: string;
   igreja_nome: string | null;
+  cell_group_id: string | null;
+  cell_group_name: string | null;
+  cell_id: string | null;
+  cell_name: string | null;
   grupo_de_celula: string | null;
   celula: string | null;
   contribuicoes: ContributionLine[];
@@ -59,6 +63,10 @@ export interface FinanceRecordRow {
   whatsapp: string | null;
   email: string | null;
   celula: string | null;
+  cell_id: string | null;
+  cell_name: string | null;
+  cell_group_id: string | null;
+  cell_group_name: string | null;
   grupo_de_celula: string | null;
   data_de_aniversario: string | null;
   categoria_da_contribuicao: string;
@@ -95,6 +103,10 @@ export interface PublicGivingPayload {
   email?: string;
   igreja_id: string;
   igreja_nome?: string;
+  cell_group_id?: string;
+  cell_group_name?: string;
+  cell_id?: string;
+  cell_name?: string;
   grupo_de_celula?: string;
   celula?: string;
   contribuicoes: ContributionLine[];

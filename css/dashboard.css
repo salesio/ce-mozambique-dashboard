@@ -1248,6 +1248,40 @@ table,
   color: var(--gold);
 }
 
+.ops-hero--welcome-line {
+  display: flex;
+  align-items: center;
+  min-height: 54px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1.35rem;
+  border-radius: 1rem;
+  background:
+    linear-gradient(90deg, rgba(3, 10, 25, 0.96), rgba(9, 32, 60, 0.88)),
+    url("https://embaixada-de-cristo.obiuba.com/assets/web/hero-service.jpg") center 38% / cover;
+}
+
+.ops-hero--welcome-line::after {
+  inset: auto -10% -120% 55%;
+  height: 120px;
+}
+
+.ops-hero--welcome-line h2 {
+  margin: 0.16rem 0 0;
+  max-width: none;
+  font-family: var(--font-ui);
+  font-size: clamp(0.98rem, 1.5vw, 1.2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.ops-hero--welcome-line .eyebrow {
+  display: block;
+  margin-bottom: 0.06rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+}
+
 .hero-card {
   align-self: end;
   position: relative;
@@ -2026,6 +2060,12 @@ table,
 .foundation-attachment-link:hover {
   color: var(--cyan);
   text-decoration: underline;
+}
+
+.foundation-student-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0.85rem;
 }
 
 .foundation-check-graduated input {

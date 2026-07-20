@@ -3125,7 +3125,7 @@ const FINANCE_STATUS_VERIFIED = "Verificado";
 const FINANCE_STATUS_REJECTED = "Rejeitado";
 const FINANCE_STATUS_INCLUDED = "Incluído no Relatório";
 const financeStatuses = [FINANCE_STATUS_PENDING, FINANCE_STATUS_VERIFIED, FINANCE_STATUS_REJECTED, FINANCE_STATUS_INCLUDED];
-const foundationStatuses = ["Inscrito", "Em Curso", "Pronto para Exame", "Aprovado", "Graduado", "Certificado Emitido"];
+const foundationStatuses = ["Inscrito", "Em Curso", "Aulas e Testes Concluídos", "Ganhar Almas Pendente", "Pronto para Exame", "Exame Realizado", "Aprovado", "Pronto para Graduação", "Graduado", "Certificado Emitido", "Reprovado"];
 const FOUNDATION_STATUS_MAP = {
   "Pending Enrolment": "Inscrito",
   Enrolled: "Inscrito",
@@ -3211,7 +3211,9 @@ const seedData = {
     { id: "u-22", name: "Técnico A", email: "media.member@ce-mozambique.org", role: "Media Team Member", church_id: "church-hq", department_permissions: ["mediaTeam"], assigned_department: "Mídia", assigned_staff_name: "Técnico A", can_view_all_churches: false },
     { id: "u-23", name: "Head de Aconselhamento", email: "counseling.head@ce-mozambique.org", role: "Counseling Head", church_id: "church-hq", department_permissions: ["counseling", "followUp", "firstTimers", "reports"], can_view_all_churches: true },
     { id: "u-24", name: "Professor Joao Mazive", email: "foundation.teacher@ce-mozambique.org", role: "Foundation Teacher", church_id: "church-hq", department_permissions: ["foundation_teacher"], assigned_foundation_teacher_id: "ftch-1", can_view_all_churches: false },
-    { id: "u-25", name: "Assistente da Escola de Fundacao", email: "foundation.assistant@ce-mozambique.org", role: "Foundation Assistant", church_id: "church-hq", department_permissions: ["foundation_assistant"], assigned_foundation_teacher_id: "ftch-3", can_view_all_churches: false }
+    { id: "u-25", name: "Assistente da Escola de Fundacao", email: "foundation.assistant@ce-mozambique.org", role: "Foundation Assistant", church_id: "church-hq", department_permissions: ["foundation_assistant"], assigned_foundation_teacher_id: "ftch-3", can_view_all_churches: false },
+    { id: "u-foundation-rector", name: "Pastor Coordenador", email: "foundation.rector@ce-mozambique.org", role: "Foundation Rector", church_id: "church-hq", department_permissions: ["foundation_rector", "foundation"], assigned_foundation_teacher_id: "ftch-rector", can_view_all_churches: true },
+    { id: "u-foundation-coordinator", name: "Irma Coordenadora", email: "foundation.coord@ce-mozambique.org", role: "Foundation Coordinator", church_id: "church-hq", department_permissions: ["foundation_coordinator", "foundation"], assigned_foundation_teacher_id: "ftch-coordinator", can_view_all_churches: true }
   ],
   departments: [
     { id: "dept-finance", church_id: "church-hq", name: "Finanças", lead_name: "Finance Head Demo" },
@@ -3915,7 +3917,7 @@ const foundationPageState = {
   tab: "overview",
   panel: "",
   filter: {},
-  lesson: { classGroupId: "", lessonNumber: "1", teacherId: "", status: "", date: new Date().toISOString().slice(0, 10) },
+  lesson: { section: "attendance", classGroupId: "", lessonNumber: "1", teacherId: "", status: "", date: new Date().toISOString().slice(0, 10) },
   exam: { classGroupId: "", status: "" },
   graduation: { classGroupId: "", status: "" }
 };
@@ -7734,11 +7736,10 @@ function renderDashboard() {
   const students = scoped(state.foundationStudents);
   const dashboardCards = getDashboardCardsForUser(activeUser);
   setPageContent(`
-    <section class="ops-hero ops-hero--command">
+    <section class="ops-hero ops-hero--command ops-hero--welcome-line">
       <div>
         <span class="eyebrow">Christ Embassy Mozambique</span>
-        <h2>${L("heroTitle")}</h2>
-        <p>${L("heroText")}</p>
+        <h2>${lang === "pt" ? "Bem-vindo à plataforma de operações da Christ Embassy Moçambique." : "Welcome to the Christ Embassy Mozambique operations platform."}</h2>
       </div>
     </section>
     <div class="dashboard-overview-head">
@@ -7997,6 +7998,57 @@ function getFoundationClassProgressPercent(student) {
   return Math.round((getFoundationCompletedClasses(student) / 7) * 100);
 }
 
+function foundationSubmissionsForStudent(studentId) {
+  return (state.foundationLessonTestSubmissions || [])
+    .filter((item) => item.student_id === studentId && !["Rejected"].includes(item.review_status))
+    .map((item) => foundationNormalizeLessonRecord(item));
+}
+
+function foundationBestLessonSubmission(studentId, lessonNumber) {
+  return foundationSubmissionsForStudent(studentId)
+    .filter((item) => Number(item.lesson_number) === Number(lessonNumber))
+    .sort((a, b) => Number(b.test_score_obtained || b.score || 0) - Number(a.test_score_obtained || a.score || 0))[0] || null;
+}
+
+function foundationLessonTestsSummary(studentId) {
+  let score = 0;
+  let submitted = 0;
+  let passed = 0;
+  for (let n = 1; n <= 7; n += 1) {
+    const result = foundationBestLessonSubmission(studentId, n);
+    if (!result) continue;
+    submitted += 1;
+    score += Number(result.test_score_obtained || result.score || 0);
+    if (result.test_passed || result.passed) passed += 1;
+  }
+  const settings = foundationGradingSettings();
+  const percentage = settings.lesson_tests_total_max_score ? Math.round((score / settings.lesson_tests_total_max_score) * 100) : 0;
+  return {
+    submitted,
+    passed,
+    lesson_tests_total_score: score,
+    lesson_tests_max_score: settings.lesson_tests_total_max_score,
+    lesson_tests_percentage: percentage
+  };
+}
+
+function foundationCourseGrade(student) {
+  const settings = foundationGradingSettings();
+  const lesson = foundationLessonTestsSummary(student.id);
+  const exam = (state.foundationFinalExams || []).find((item) => item.student_id === student.id) || {};
+  const finalScore = Number(exam.score || student.final_exam_score || student.nota_exame || 0);
+  const finalPercentage = settings.final_exam_max_score ? Math.round((finalScore / settings.final_exam_max_score) * 100) : 0;
+  const coursePercentage = Math.round((lesson.lesson_tests_percentage * (settings.lesson_tests_weight_percent / 100)) + (finalPercentage * (settings.final_exam_weight_percent / 100)));
+  return {
+    ...lesson,
+    final_exam_score: finalScore,
+    final_exam_max_score: settings.final_exam_max_score,
+    final_exam_percentage: finalPercentage,
+    course_final_percentage: coursePercentage,
+    course_passed: coursePercentage >= settings.passing_percentage && !!finalScore
+  };
+}
+
 function migrateFoundationStudent(student) {
   const record = { ...student };
   if (!record.class_attendance) {
@@ -8020,6 +8072,7 @@ function applyFoundationCalculations(student, autoStatus = false) {
   const record = migrateFoundationStudent(student);
   record.completed_classes = getFoundationCompletedClasses(record);
   record.class_progress_percent = getFoundationClassProgressPercent(record);
+  Object.assign(record, foundationCourseGrade(record));
   if (autoStatus) record.estado = suggestFoundationStatus(record);
   return record;
 }
@@ -8027,10 +8080,17 @@ function applyFoundationCalculations(student, autoStatus = false) {
 function suggestFoundationStatus(student) {
   const record = migrateFoundationStudent(student);
   const completed = record.completed_classes;
+  const tests = foundationLessonTestsSummary(record.id);
+  const soul = foundationSoulWinningForStudent(record.id);
+  const exam = (state.foundationFinalExams || []).find((item) => item.student_id === record.id) || {};
   if (record.certificado_emitido) return "Certificado Emitido";
   if (record.graduado) return "Graduado";
-  if (record.aprovado && record.pratica_evangelismo && Number(record.nota_exame) > 0) return "Aprovado";
-  if (completed === 7 && !Number(record.nota_exame)) return "Pronto para Exame";
+  if (record.ready_for_graduation) return "Pronto para Graduação";
+  if (record.aprovado || record.course_passed) return "Aprovado";
+  if (Number(exam.score || record.nota_exame || 0) > 0) return "Exame Realizado";
+  if (completed === 7 && tests.submitted >= 7 && state.foundationSchoolSettings?.require_soul_winning_for_lesson_4 && soul.status !== "Confirmado" && !record.pratica_evangelismo) return "Ganhar Almas Pendente";
+  if (completed === 7 && tests.submitted >= 7) return "Pronto para Exame";
+  if (completed === 7 || tests.submitted >= 7) return "Aulas e Testes Concluídos";
   if (completed >= 1 && completed <= 6) return "Em Curso";
   if (completed === 0) return "Inscrito";
   return record.estado || "Inscrito";
@@ -8134,8 +8194,17 @@ function renderFoundationStudentForm(record = {}, mode = "edit") {
     ${churchField}
     <div class="col-md-6"><label class="form-label">${L("cell")}</label><input name="celula" class="form-control" value="${student.celula || ""}" ${readonly}></div>
     <div class="col-md-6"><label class="form-label">${L("status")}</label><select name="estado" class="form-select" data-foundation-status ${readonly}>${statusOptions}</select><small class="form-hint d-block mt-1">${L("autoStatusHint")}</small></div>
+    ${foundationSectionTitle(FS("deliveryMode"))}
+    <div class="col-md-6"><label class="form-label">${FS("preferredDeliveryMode")}</label><select name="preferred_delivery_mode" class="form-select" ${readonly}>${foundationDeliveryOptions(student.preferred_delivery_mode || "in_person")}</select></div>
+    <div class="col-md-6"><label class="form-label">${FS("assignedDeliveryMode")}</label><select name="assigned_delivery_mode" class="form-select" ${readonly}>${foundationDeliveryOptions(student.assigned_delivery_mode || "in_person")}</select></div>
+    <div class="col-md-6"><label class="form-label">${FS("assignedLocation")}</label><select name="assigned_location_id" class="form-select" ${readonly}><option value="">${FS("lessonLocation")}</option>${foundationLocationOptions(student.assigned_location_id || "")}</select></div>
+    <div class="col-md-6"><label class="form-label">${FS("onlineContact")}</label><input name="online_contact" class="form-control" value="${student.online_contact || ""}" ${readonly}></div>
+    <div class="col-md-6 d-flex align-items-end"><label class="form-check"><input name="is_prison_ministry_student" type="checkbox" class="form-check-input" ${student.is_prison_ministry_student ? "checked" : ""} ${readonly}> <span class="form-check-label">${FS("prisonStudent")}</span></label></div>
+    <div class="col-md-6 d-flex align-items-end"><label class="form-check"><input name="needs_home_visit_class" type="checkbox" class="form-check-input" ${student.needs_home_visit_class ? "checked" : ""} ${readonly}> <span class="form-check-label">${FS("needsHomeVisit")}</span></label></div>
+    <div class="col-12"><label class="form-label">${FS("homeAddress")}</label><input name="home_address" class="form-control" value="${student.home_address || ""}" ${readonly}></div>
     ${foundationSectionTitle(L("classProgress"))}
     <div class="col-12">${mode === "view" ? foundationProgressPreviewHtml(student) : foundationClassCheckboxes(student)}</div>
+    ${mode === "view" ? `<div class="col-12">${foundationStudentLessonDetailHtml(student)}</div>` : ""}
     ${mode !== "view" ? `<div class="col-12">${foundationProgressPreviewHtml(student)}</div>` : ""}
     ${foundationSectionTitle(L("evaluation"))}
     <div class="col-md-6"><label class="form-label">${L("examScore")}</label><input name="nota_exame" type="number" min="0" max="100" class="form-control" value="${student.nota_exame || ""}" ${readonly}></div>
@@ -8169,6 +8238,27 @@ function renderFoundationScoreForm(record) {
   `;
 }
 
+function foundationStudentLessonDetailHtml(student) {
+  const record = migrateFoundationStudent(student);
+  return `<div class="foundation-student-detail-grid">${Array.from({ length: 7 }, (_, i) => {
+    const n = i + 1;
+    const lesson = foundationLessonRecords(record.id).find((item) => Number(item.lesson_number) === n) || {};
+    const session = foundationSessionByContext(record.class_group_id, n) || {};
+    const submission = foundationBestLessonSubmission(record.id, n);
+    const soul = n === 4 ? foundationSoulWinningForStudent(record.id) : {};
+    return `<div class="record-card">
+      <div class="d-flex justify-content-between gap-2"><strong>${FS("lesson")} ${n}</strong>${badge(lesson.attended ? FS("present") : FS("notStarted"))}</div>
+      <p class="mb-1"><strong>${L("date")}:</strong> ${lesson.lesson_date || session.lesson_date || "-"}</p>
+      <p class="mb-1"><strong>${FS("deliveryMode")}:</strong> ${foundationDeliveryLabel(lesson.delivery_mode || session.delivery_mode || record.assigned_delivery_mode)}</p>
+      <p class="mb-1"><strong>${FS("lessonLocation")}:</strong> ${lesson.location_name || session.location_name || record.assigned_location_name || "-"}</p>
+      <p class="mb-1"><strong>${FS("responsibleTeacher")}:</strong> ${lesson.teacher_name || session.teacher_name || "-"}</p>
+      <p class="mb-1"><strong>${FS("onlineTestResult")}:</strong> ${submission ? foundationLessonScoreLabel(submission) : FS("testNotSubmitted")}</p>
+      <p class="mb-0"><strong>${FS("recordedBy")}:</strong> ${lesson.attendance_marked_by || "-"} ${lesson.attendance_marked_at ? `· ${new Date(lesson.attendance_marked_at).toLocaleDateString()}` : ""}</p>
+      ${n === 4 ? `<p class="mb-0 mt-2"><strong>${FS("soulWinning")}:</strong> ${Number(soul.souls_won_count || record.numero_de_almas_ganhas || 0)} · ${statusText(soul.status || "Pendente")} ${soul.confirmed_by_teacher_name ? `· ${soul.confirmed_by_teacher_name}` : ""}</p>` : ""}
+    </div>`;
+  }).join("")}</div>`;
+}
+
 function renderFoundationTeacherForm(record = {}, mode = "edit") {
   const teacher = { status: "Activo", subjects_or_lessons_allowed: [], ...record };
   const readonly = mode === "view" ? "disabled" : "";
@@ -8177,6 +8267,14 @@ function renderFoundationTeacherForm(record = {}, mode = "edit") {
     const n = i + 1;
     const checked = teacher.can_teach_all_lessons || (teacher.subjects_or_lessons_allowed || []).map(Number).includes(n);
     return `<label class="foundation-class-toggle"><input type="checkbox" name="lesson_${n}" ${checked ? "checked" : ""} ${readonly}><span>${FS("lesson")} ${n}</span></label>`;
+  }).join("");
+  const deliveryModes = FOUNDATION_DELIVERY_MODES.map((mode) => {
+    const checked = (teacher.delivery_modes_allowed || []).includes(mode.id);
+    return `<label class="foundation-class-toggle"><input type="checkbox" name="delivery_${mode.id}" ${checked ? "checked" : ""} ${readonly}><span>${mode[lang]}</span></label>`;
+  }).join("");
+  const locationOptions = (state.foundationLessonLocations || []).map((loc) => {
+    const checked = (teacher.assigned_locations || []).includes(loc.id);
+    return `<label class="foundation-class-toggle"><input type="checkbox" name="location_${loc.id}" ${checked ? "checked" : ""} ${readonly}><span>${loc.name}</span></label>`;
   }).join("");
   return `
     ${foundationSectionTitle(FS("foundationTabTeachers"))}
@@ -8190,8 +8288,13 @@ function renderFoundationTeacherForm(record = {}, mode = "edit") {
     <div class="col-md-6 d-flex align-items-end"><label class="form-check"><input name="can_teach_all_lessons" type="checkbox" class="form-check-input" ${teacher.can_teach_all_lessons ? "checked" : ""} ${readonly}> <span class="form-check-label">${FS("canTeachAll")}</span></label></div>
     ${foundationSectionTitle(FS("lessonsAllowed"))}
     <div class="col-12"><div class="foundation-class-grid">${lessons}</div></div>
+    ${foundationSectionTitle(FS("deliveryModesAllowed"))}
+    <div class="col-12"><div class="foundation-class-grid">${deliveryModes}</div></div>
+    ${foundationSectionTitle(FS("assignedLocations"))}
+    <div class="col-12"><div class="foundation-class-grid">${locationOptions}</div></div>
     <div class="col-md-6"><label class="form-label">${L("availability")}</label><input name="availability" class="form-control" value="${teacher.availability || ""}" ${readonly}></div>
-    <div class="col-md-6"><label class="form-label">${L("staffHr")}</label><input name="staff_id" class="form-control" value="${teacher.staff_id || ""}" ${readonly} placeholder="staff_id futuro"></div>
+    <div class="col-md-3"><label class="form-label">${FS("maxClassesPerWeek")}</label><input name="max_classes_per_week" type="number" min="0" class="form-control" value="${teacher.max_classes_per_week || 3}" ${readonly}></div>
+    <div class="col-md-3"><label class="form-label">${L("staffHr")}</label><input name="staff_id" class="form-control" value="${teacher.staff_id || ""}" ${readonly} placeholder="staff_id futuro"></div>
     <div class="col-12"><label class="form-label">${L("notes")}</label><textarea name="notes" class="form-control" rows="3" ${readonly}>${teacher.notes || ""}</textarea></div>
   `;
 }
@@ -8214,16 +8317,22 @@ function collectFoundationTeacherPayload(form, base = {}) {
   const data = Object.fromEntries(formData.entries());
   const canTeachAll = formData.has("can_teach_all_lessons");
   const lessons = Array.from({ length: 7 }, (_, i) => i + 1).filter((n) => canTeachAll || formData.has(`lesson_${n}`));
+  const deliveryModes = FOUNDATION_DELIVERY_MODES.filter((mode) => formData.has(`delivery_${mode.id}`)).map((mode) => mode.id);
+  const assignedLocations = (state.foundationLessonLocations || []).filter((loc) => formData.has(`location_${loc.id}`)).map((loc) => loc.id);
   const churchId = data.church_id || base.church_id || state.foundationSchoolSettings?.default_church_id || "church-hq";
-  return {
+  return foundationNormalizeTeacherCapabilities({
     ...base,
     ...data,
     church_id: churchId,
     church_name: churchName(churchId),
     can_teach_all_lessons: canTeachAll,
+    can_teach_lessons: lessons,
     subjects_or_lessons_allowed: canTeachAll ? [1, 2, 3, 4, 5, 6, 7] : lessons,
+    delivery_modes_allowed: deliveryModes.length ? deliveryModes : ["in_person"],
+    assigned_locations: assignedLocations.length ? assignedLocations : ["fsloc-hq-main"],
+    max_classes_per_week: Number(data.max_classes_per_week || base.max_classes_per_week || 3),
     updated_at: new Date().toISOString().slice(0, 10)
-  };
+  });
 }
 
 function submitFoundationTeacher(form) {
@@ -8284,9 +8393,13 @@ function openFoundationScore(id) {
 
 function collectFoundationStudentPayload(form, base = {}) {
   const data = Object.fromEntries(new FormData(form).entries());
-  ["pratica_evangelismo", "aprovado", "graduado", "certificado_emitido"].forEach((key) => {
+  ["pratica_evangelismo", "aprovado", "graduado", "certificado_emitido", "is_prison_ministry_student", "needs_home_visit_class", "can_attend_online"].forEach((key) => {
     data[key] = new FormData(form).has(key);
   });
+  const loc = foundationLocationById(data.assigned_location_id);
+  data.assigned_location_name = loc.name || data.assigned_location_name || "";
+  data.prison_center_id = loc.prison_center_id || data.prison_center_id || "";
+  data.prison_center_name = loc.prison_center_name || data.prison_center_name || "";
   data.class_attendance = readFoundationAttendanceFromForm(form);
   data.nota_exame = Number(data.nota_exame || 0);
   data.numero_de_almas_ganhas = Number(data.numero_de_almas_ganhas || 0);
@@ -8428,13 +8541,46 @@ const FOUNDATION_TABS = [
   ["enrolments", "foundationTabEnrolments"],
   ["classes", "foundationTabClasses"],
   ["students", "foundationTabStudents"],
-  ["lessons", "foundationTabLessonsTests"],
+  ["lessons", "foundationTabLessonsAttendance"],
+  ["onlineTests", "foundationTabOnlineTests"],
   ["finalExam", "foundationTabFinalExam"],
   ["soulWinning", "foundationTabSoulWinning"],
   ["teachers", "foundationTabTeachers"],
   ["graduation", "foundationTabGraduation"],
   ["reports", "foundationTabReports"]
 ];
+
+const FOUNDATION_DELIVERY_MODES = [
+  { id: "in_person", pt: "Presencial", en: "In Person" },
+  { id: "online", pt: "Online", en: "Online" },
+  { id: "home_visit", pt: "Ao Domicílio", en: "Home Visit" },
+  { id: "prison_ministry", pt: "Ministério Prisional", en: "Prison Ministry" },
+  { id: "hybrid", pt: "Híbrido", en: "Hybrid" },
+  { id: "other", pt: "Outro", en: "Other" }
+];
+
+const FOUNDATION_LOCATION_TYPES = ["Church", "Online", "Home", "Prison Center", "External Venue", "Other"];
+
+function foundationDeliveryLabel(mode) {
+  const item = FOUNDATION_DELIVERY_MODES.find((entry) => entry.id === mode || entry.pt === mode || entry.en === mode);
+  return item ? item[lang] : (mode || "-");
+}
+
+function foundationDeliveryOptions(selected = "") {
+  return FOUNDATION_DELIVERY_MODES.map((item) => `<option value="${item.id}" ${item.id === selected ? "selected" : ""}>${item[lang]}</option>`).join("");
+}
+
+function foundationLocationById(id) {
+  return (state.foundationLessonLocations || []).find((item) => item.id === id) || {};
+}
+
+function foundationLocationOptions(selected = "") {
+  return (state.foundationLessonLocations || []).map((item) => `<option value="${item.id}" ${item.id === selected ? "selected" : ""}>${item.name}</option>`).join("");
+}
+
+function foundationSessionByContext(classGroupId, lessonNumber) {
+  return (state.foundationLessonSessions || []).find((item) => item.class_group_id === classGroupId && Number(item.lesson_number) === Number(lessonNumber)) || null;
+}
 
 const FOUNDATION_TEXT = {
   pt: {
@@ -8443,6 +8589,8 @@ const FOUNDATION_TEXT = {
     foundationTabClasses: "Turmas",
     foundationTabStudents: "Alunos",
     foundationTabLessonsTests: "Aulas & Testes",
+    foundationTabLessonsAttendance: "Aulas & Presenças",
+    foundationTabOnlineTests: "Testes Online",
     foundationTabFinalExam: "Exame Final",
     foundationTabSoulWinning: "Ganhar Almas",
     foundationTabTeachers: "Professores",
@@ -8511,6 +8659,8 @@ const FOUNDATION_TEXT = {
     foundationTabClasses: "Classes",
     foundationTabStudents: "Students",
     foundationTabLessonsTests: "Lessons & Tests",
+    foundationTabLessonsAttendance: "Lessons & Attendance",
+    foundationTabOnlineTests: "Online Tests",
     foundationTabFinalExam: "Final Exam",
     foundationTabSoulWinning: "Soul Winning",
     foundationTabTeachers: "Teachers",
@@ -8575,8 +8725,282 @@ const FOUNDATION_TEXT = {
   }
 };
 
+const FOUNDATION_EXTRA_TEXT = {
+  pt: {
+    attendanceClasses: "Presenças / Aulas dadas",
+    testLinks: "Links dos Testes",
+    receivedResults: "Resultados Recebidos",
+    resultsByStudent: "Resultados por Aluno",
+    rectorReview: "Revisão do Reitor",
+    onlineTests: "Testes Online",
+    onlineTestResult: "Resultado do Teste Online",
+    testNotSubmitted: "Teste não submetido",
+    submitted: "Submetido",
+    formProvider: "Fornecedor do Formulário",
+    formLink: "Link do Formulário",
+    responsesSheet: "Planilha de Respostas",
+    openForm: "Abrir Formulário",
+    copyLink: "Copiar Link",
+    importResults: "Importar Resultados",
+    maxScore: "Pontuação Máxima",
+    passingScore: "Nota Mínima",
+    reviewStatus: "Estado da Revisão",
+    autoMatched: "Ligação Automática",
+    matchConfidence: "Confiança",
+    overrideScore: "Corrigir Nota",
+    overrideReason: "Motivo da Correcção",
+    confirmSubmission: "Confirmar Submissão",
+    rejectSubmission: "Rejeitar",
+    physicalExam: "Exame Final Físico",
+    attachPhysicalExam: "Anexar Exame Físico",
+    attachmentStatus: "Estado do Anexo",
+    noAttachment: "Sem anexo",
+    attached: "Anexado",
+    awaitingReview: "Aguardando revisão",
+    correctedBy: "Corrigido por",
+    scannedBy: "Digitalizado por",
+    courseGrade: "Nota Final do Curso",
+    lessonTestsTotal: "Total dos Testes Online",
+    gradingWeights: "Pesos configuráveis",
+    gradeFormulaHint: "Testes online 40% e exame final 60% por defeito. O Reitor/Super Admin pode ajustar depois.",
+    examNeedsAttachment: "Exame final precisa de scan/anexo"
+    ,
+    deliveryMode: "Formato da Aula",
+    lessonLocation: "Local da Aula",
+    lessonSession: "Sessão de Aula",
+    createLessonSession: "Criar Sessão de Aula",
+    deliveryModesAllowed: "Formatos Permitidos",
+    assignedLocations: "Locais Atribuídos",
+    maxClassesPerWeek: "Máx. aulas/semana",
+    prisonTeacher: "Professor Prisional",
+    onlineTeacher: "Professor Online",
+    homeVisitTeacher: "Professor ao Domicílio",
+    inPersonTeacher: "Professor Presencial",
+    preferredDeliveryMode: "Formato Preferido",
+    assignedDeliveryMode: "Formato Atribuído",
+    assignedLocation: "Local Atribuído",
+    prisonStudent: "Aluno do Ministério Prisional",
+    needsHomeVisit: "Precisa de aula ao domicílio",
+    homeAddress: "Endereço para aula ao domicílio",
+    canAttendOnline: "Pode participar online",
+    onlineContact: "Contacto online/WhatsApp",
+    lessonsInPerson: "Aulas Presenciais",
+    lessonsOnline: "Aulas Online",
+    lessonsHomeVisit: "Aulas ao Domicílio",
+    lessonsPrison: "Aulas no Ministério Prisional",
+    examsWithoutAttachment: "Exames Físicos sem Anexo",
+    attendanceStatus: "Estado da Presença",
+    scheduled: "Agendada",
+    held: "Realizada"
+  },
+  en: {
+    attendanceClasses: "Attendance / Lessons Held",
+    testLinks: "Test Links",
+    receivedResults: "Received Results",
+    resultsByStudent: "Results by Student",
+    rectorReview: "Rector Review",
+    onlineTests: "Online Tests",
+    onlineTestResult: "Online Test Result",
+    testNotSubmitted: "Test not submitted",
+    submitted: "Submitted",
+    formProvider: "Form Provider",
+    formLink: "Form Link",
+    responsesSheet: "Responses Sheet",
+    openForm: "Open Form",
+    copyLink: "Copy Link",
+    importResults: "Import Results",
+    maxScore: "Max Score",
+    passingScore: "Passing Score",
+    reviewStatus: "Review Status",
+    autoMatched: "Auto Matched",
+    matchConfidence: "Confidence",
+    overrideScore: "Override Score",
+    overrideReason: "Override Reason",
+    confirmSubmission: "Confirm Submission",
+    rejectSubmission: "Reject",
+    physicalExam: "Physical Final Exam",
+    attachPhysicalExam: "Attach Physical Exam",
+    attachmentStatus: "Attachment Status",
+    noAttachment: "No attachment",
+    attached: "Attached",
+    awaitingReview: "Awaiting review",
+    correctedBy: "Corrected By",
+    scannedBy: "Scanned By",
+    courseGrade: "Course Final Grade",
+    lessonTestsTotal: "Online Tests Total",
+    gradingWeights: "Configurable Weights",
+    gradeFormulaHint: "Online tests 40% and final exam 60% by default. Rector/Super Admin can adjust later.",
+    examNeedsAttachment: "Final exam needs scan/attachment",
+    deliveryMode: "Lesson Format",
+    lessonLocation: "Lesson Location",
+    lessonSession: "Lesson Session",
+    createLessonSession: "Create Lesson Session",
+    deliveryModesAllowed: "Allowed Formats",
+    assignedLocations: "Assigned Locations",
+    maxClassesPerWeek: "Max classes/week",
+    prisonTeacher: "Prison Teacher",
+    onlineTeacher: "Online Teacher",
+    homeVisitTeacher: "Home Visit Teacher",
+    inPersonTeacher: "In-Person Teacher",
+    preferredDeliveryMode: "Preferred Format",
+    assignedDeliveryMode: "Assigned Format",
+    assignedLocation: "Assigned Location",
+    prisonStudent: "Prison Ministry Student",
+    needsHomeVisit: "Needs home visit class",
+    homeAddress: "Home class address",
+    canAttendOnline: "Can attend online",
+    onlineContact: "Online/WhatsApp contact",
+    lessonsInPerson: "In-Person Lessons",
+    lessonsOnline: "Online Lessons",
+    lessonsHomeVisit: "Home Visit Lessons",
+    lessonsPrison: "Prison Ministry Lessons",
+    examsWithoutAttachment: "Physical Exams Without Attachment",
+    attendanceStatus: "Attendance Status",
+    scheduled: "Scheduled",
+    held: "Held"
+  }
+};
+
 function FS(key) {
-  return cleanDisplayText(FOUNDATION_TEXT[lang]?.[key] || FOUNDATION_TEXT.en[key] || L(key));
+  return cleanDisplayText(FOUNDATION_EXTRA_TEXT[lang]?.[key] || FOUNDATION_EXTRA_TEXT.en[key] || FOUNDATION_TEXT[lang]?.[key] || FOUNDATION_TEXT.en[key] || L(key));
+}
+
+function ensureFoundationLessonLocations(hq, churchLabel) {
+  if (!Array.isArray(state.foundationLessonLocations)) {
+    const prison = state.prisonMinistry?.locations?.[0] || {};
+    state.foundationLessonLocations = [
+      { id: "fsloc-hq-main", name: "Sede / Igreja Central", location_type: "Church", church_id: hq, church_name: churchLabel, address: "Av. de Angola, Maputo", prison_center_id: "", prison_center_name: "", online_platform: "", online_link: "", contact_person: "Coordenação da Escola", notes: "", status: "Activo", created_at: "2026-07-01", updated_at: new Date().toISOString().slice(0, 10) },
+      { id: "fsloc-hq-room-1", name: "Sala 1 - Escola de Fundação", location_type: "Church", church_id: hq, church_name: churchLabel, address: "Sede / Igreja Central", prison_center_id: "", prison_center_name: "", online_platform: "", online_link: "", contact_person: "Irmã Coordenadora", notes: "", status: "Activo", created_at: "2026-07-01", updated_at: new Date().toISOString().slice(0, 10) },
+      { id: "fsloc-online-zoom", name: "Online via Zoom", location_type: "Online", church_id: hq, church_name: churchLabel, address: "", prison_center_id: "", prison_center_name: "", online_platform: "Zoom", online_link: "https://zoom.us/j/foundation-school", contact_person: "Professor Online", notes: "Link mock para aulas online.", status: "Activo", created_at: "2026-07-01", updated_at: new Date().toISOString().slice(0, 10) },
+      { id: "fsloc-home-visit", name: "Aula ao Domicílio", location_type: "Home", church_id: hq, church_name: churchLabel, address: "Endereço definido no aluno", prison_center_id: "", prison_center_name: "", online_platform: "", online_link: "", contact_person: "Professor atribuído", notes: "Usado para alunos que precisam de aula em casa.", status: "Activo", created_at: "2026-07-01", updated_at: new Date().toISOString().slice(0, 10) },
+      { id: "fsloc-prison-1", name: prison.nome_da_prisao ? `Ministério Prisional - ${prison.nome_da_prisao}` : "Ministério Prisional - Turma 1", location_type: "Prison Center", church_id: hq, church_name: churchLabel, address: prison.cidade || "Maputo", prison_center_id: prison.id || "prison-1", prison_center_name: prison.nome_da_prisao || "Centro Penitenciário", online_platform: "", online_link: "", contact_person: prison.representante_da_prisao || "Sister Janet Marquele", notes: "Acesso sujeito à autorização do centro.", status: "Activo", created_at: "2026-07-01", updated_at: new Date().toISOString().slice(0, 10) }
+    ];
+  }
+}
+
+function foundationNormalizeTeacherCapabilities(teacher) {
+  const lessonList = teacher.can_teach_all_lessons ? [1, 2, 3, 4, 5, 6, 7] : (teacher.subjects_or_lessons_allowed || teacher.can_teach_lessons || []);
+  const modes = teacher.delivery_modes_allowed || [
+    teacher.can_teach_in_person !== false ? "in_person" : "",
+    teacher.can_teach_online ? "online" : "",
+    teacher.can_teach_home_visit ? "home_visit" : "",
+    teacher.is_prison_ministry_teacher ? "prison_ministry" : ""
+  ].filter(Boolean);
+  return {
+    ...teacher,
+    can_teach_lessons: lessonList.map(Number),
+    subjects_or_lessons_allowed: lessonList.map(Number),
+    delivery_modes_allowed: modes.length ? modes : ["in_person"],
+    assigned_locations: teacher.assigned_locations || ["fsloc-hq-main"],
+    max_classes_per_week: Number(teacher.max_classes_per_week || 3),
+    is_prison_ministry_teacher: !!teacher.is_prison_ministry_teacher || modes.includes("prison_ministry"),
+    can_teach_online: !!teacher.can_teach_online || modes.includes("online"),
+    can_teach_home_visit: !!teacher.can_teach_home_visit || modes.includes("home_visit"),
+    can_teach_in_person: teacher.can_teach_in_person !== false && modes.includes("in_person")
+  };
+}
+
+function ensureFoundationTeacherScale(hq, churchLabel) {
+  state.foundationTeachers = (state.foundationTeachers || []).map((teacher) => foundationNormalizeTeacherCapabilities(teacher));
+  const targetCount = 24;
+  const firstNames = ["Ana", "Carlos", "Marta", "Edson", "Helena", "Samuel", "Rosa", "David", "Celina", "Mateus", "Sofia", "Miguel", "Alda", "Nelson", "Paula", "Tito", "Elisa", "João", "Lúcia", "Pedro", "Teresa", "Daniel"];
+  while ((state.foundationTeachers || []).length < targetCount) {
+    const index = state.foundationTeachers.length + 1;
+    const modeSet = index % 7 === 0 ? ["prison_ministry"] : index % 5 === 0 ? ["home_visit"] : index % 4 === 0 ? ["online"] : ["in_person"];
+    const location = modeSet.includes("prison_ministry") ? "fsloc-prison-1" : modeSet.includes("online") ? "fsloc-online-zoom" : modeSet.includes("home_visit") ? "fsloc-home-visit" : "fsloc-hq-room-1";
+    state.foundationTeachers.push(foundationNormalizeTeacherCapabilities({
+      id: `ftch-auto-${index}`,
+      user_id: "",
+      staff_id: "",
+      full_name: `Professor ${firstNames[(index - 1) % firstNames.length]}`,
+      title: "Professor",
+      phone: `84600${String(index).padStart(4, "0")}`,
+      whatsapp: `84600${String(index).padStart(4, "0")}`,
+      email: `foundation.teacher${index}@ce-mozambique.org`,
+      church_id: hq,
+      church_name: churchLabel,
+      status: "Activo",
+      subjects_or_lessons_allowed: [((index - 1) % 7) + 1],
+      can_teach_all_lessons: index % 6 === 0,
+      delivery_modes_allowed: modeSet,
+      assigned_locations: [location],
+      availability: index % 2 ? "Domingo 1º Culto" : "Quarta-feira 18:00",
+      max_classes_per_week: index % 3 === 0 ? 4 : 2,
+      is_prison_ministry_teacher: modeSet.includes("prison_ministry"),
+      can_teach_online: modeSet.includes("online"),
+      can_teach_home_visit: modeSet.includes("home_visit"),
+      can_teach_in_person: modeSet.includes("in_person"),
+      notes: "",
+      created_at: "2026-07-01",
+      updated_at: new Date().toISOString().slice(0, 10)
+    }));
+  }
+}
+
+function ensureFoundationClassGroupContexts(hq, churchLabel) {
+  state.foundationClassGroups = (state.foundationClassGroups || []).map((group, index) => {
+    const mode = group.delivery_mode || (index === 1 ? "online" : index === 2 ? "hybrid" : "in_person");
+    const locationId = group.primary_location_id || (mode === "online" ? "fsloc-online-zoom" : mode === "prison_ministry" ? "fsloc-prison-1" : mode === "home_visit" ? "fsloc-home-visit" : "fsloc-hq-main");
+    const loc = foundationLocationById(locationId);
+    const assistantIds = Array.isArray(group.assistant_teacher_ids)
+      ? group.assistant_teacher_ids
+      : [group.assistant_teacher_id].filter(Boolean);
+    return {
+      ...group,
+      delivery_mode: mode,
+      primary_location_id: locationId,
+      primary_location_name: group.primary_location_name || loc.name || "",
+      location_type: group.location_type || loc.location_type || "Church",
+      prison_center_id: group.prison_center_id || loc.prison_center_id || "",
+      prison_center_name: group.prison_center_name || loc.prison_center_name || "",
+      online_platform: group.online_platform || loc.online_platform || "",
+      online_link: group.online_link || loc.online_link || "",
+      assistant_teacher_ids: assistantIds,
+      coordinator_id: group.coordinator_id || "ftch-coordinator",
+      coordinator_name: group.coordinator_name || "Irmã Coordenadora",
+      church_id: group.church_id || hq,
+      church_name: group.church_name || churchLabel
+    };
+  });
+  const templates = [
+    { id: "fcg-online-q3", name: "Turma Online - 3º Trimestre 2026", delivery_mode: "online", primary_location_id: "fsloc-online-zoom", main_teacher_id: "ftch-auto-4" },
+    { id: "fcg-home-q3", name: "Turma Domicílio - Família Assistida", delivery_mode: "home_visit", primary_location_id: "fsloc-home-visit", main_teacher_id: "ftch-auto-5" },
+    { id: "fcg-prison-q3", name: "Turma Ministério Prisional - 3º Trimestre 2026", delivery_mode: "prison_ministry", primary_location_id: "fsloc-prison-1", main_teacher_id: "ftch-auto-7" }
+  ];
+  templates.forEach((template) => {
+    if (state.foundationClassGroups.some((group) => group.id === template.id)) return;
+    const loc = foundationLocationById(template.primary_location_id);
+    const teacher = foundationTeacherById(template.main_teacher_id);
+    state.foundationClassGroups.push({
+      id: template.id,
+      name: template.name,
+      church_id: hq,
+      church_name: churchLabel,
+      quarter: "3º Trimestre",
+      year: 2026,
+      delivery_mode: template.delivery_mode,
+      primary_location_id: template.primary_location_id,
+      primary_location_name: loc.name || "",
+      location_type: loc.location_type || "",
+      prison_center_id: loc.prison_center_id || "",
+      prison_center_name: loc.prison_center_name || "",
+      online_platform: loc.online_platform || "",
+      online_link: loc.online_link || "",
+      start_date: "2026-07-19",
+      expected_graduation_date: "2026-10-11",
+      main_teacher_id: teacher.id || template.main_teacher_id,
+      main_teacher_name: teacher.full_name || "",
+      assistant_teacher_ids: [],
+      rector_id: "ftch-rector",
+      rector_name: "Pastor Coordenador",
+      coordinator_id: "ftch-coordinator",
+      coordinator_name: "Irmã Coordenadora",
+      status: "Aberta",
+      notes: "",
+      created_at: "2026-07-19",
+      updated_at: new Date().toISOString().slice(0, 10)
+    });
+  });
 }
 
 function ensureFoundationData() {
@@ -8601,6 +9025,7 @@ function ensureFoundationData() {
     teacher.user_id = teacherUserMap[teacher.id].user_id;
     teacher.email = teacherUserMap[teacher.id].email;
   });
+  ensureFoundationTeacherScale(hq, churchLabel);
   if (!state.foundationSchoolSettings) {
     state.foundationSchoolSettings = {
       rector_user_id: "u-foundation-rector",
@@ -8609,7 +9034,8 @@ function ensureFoundationData() {
       coordinator_name: "Irmã Coordenadora",
       default_church_id: hq,
       passing_score_per_lesson: 50,
-      lesson_test_max_score: 25,
+      lesson_test_max_score: 20,
+      final_exam_max_score: 100,
       final_exam_passing_score: 50,
       require_all_7_lessons: true,
       require_lesson_tests: true,
@@ -8619,7 +9045,20 @@ function ensureFoundationData() {
       updated_at: today
     };
   }
-  state.foundationSchoolSettings.lesson_test_max_score = Number(state.foundationSchoolSettings.lesson_test_max_score || 25);
+  state.foundationSchoolSettings.lesson_test_max_score = Number(state.foundationSchoolSettings.lesson_test_max_score || 20);
+  state.foundationSchoolSettings.final_exam_max_score = Number(state.foundationSchoolSettings.final_exam_max_score || 100);
+  if (!state.foundationGradingSettings) {
+    state.foundationGradingSettings = {
+      lesson_tests_total_max_score: 130,
+      final_exam_max_score: 100,
+      lesson_tests_weight_percent: 40,
+      final_exam_weight_percent: 60,
+      passing_percentage: 50,
+      updated_at: today
+    };
+  }
+  ensureFoundationLessonLocations(hq, churchLabel);
+  ensureFoundationOnlineTests();
   if (!Array.isArray(state.foundationClassGroups)) {
     state.foundationClassGroups = [
       { id: "fcg-2026-q3-hq", name: "Turma 1 - 3º Trimestre 2026", church_id: hq, church_name: churchLabel, quarter: "3º Trimestre", year: 2026, start_date: "2026-07-05", expected_graduation_date: "2026-09-27", main_teacher_id: "ftch-1", main_teacher_name: "Professor João", assistant_teacher_id: "ftch-2", assistant_teacher_name: "Professora Ana", rector_id: "ftch-rector", rector_name: "Pastor Coordenador", status: "Em Curso", notes: "Turma principal de Maputo.", created_at: "2026-07-01", updated_at: today },
@@ -8627,6 +9066,7 @@ function ensureFoundationData() {
       { id: "fcg-2026-q2-hq", name: "Turma Domingo 1º Culto - 2º Trimestre 2026", church_id: hq, church_name: churchLabel, quarter: "2º Trimestre", year: 2026, start_date: "2026-04-05", expected_graduation_date: "2026-06-28", main_teacher_id: "ftch-coordinator", main_teacher_name: "Irmã Coordenadora", assistant_teacher_id: "ftch-1", assistant_teacher_name: "Professor João", rector_id: "ftch-rector", rector_name: "Pastor Coordenador", status: "Pronta para Exame", notes: "Alunos em fase final.", created_at: "2026-04-01", updated_at: today }
     ];
   }
+  ensureFoundationClassGroupContexts(hq, churchLabel);
   state.foundationStudents = (state.foundationStudents || []).map((student, index) => foundationNormalizeStudent(student, index));
   if (state.foundationStudents.length < 15) {
     const sampleNames = ["Aminata Chivinda", "João Nhaca", "Maria Zitha", "Carlos Mucavele", "Elisa Macamo", "Pedro Ndlovu", "Helena Cossa", "Marta Bila", "Samuel Dlamini", "Rosa Manjate", "Edson Tembe", "Celina Mabunda", "David Sithole", "Ana Muianga", "Mateus Zandamela"];
@@ -8674,8 +9114,12 @@ function ensureFoundationData() {
     });
   }
   ensureFoundationLessonRecords();
+  ensureFoundationLessonSessions();
+  ensureFoundationLessonTestSubmissions();
   ensureFoundationSoulWinning();
   ensureFoundationFinalExams();
+  ensureFoundationNotifications();
+  state.foundationStudents = (state.foundationStudents || []).map((student, index) => foundationNormalizeStudent(student, index));
   if (!Array.isArray(state.foundationAuditLogs)) state.foundationAuditLogs = [];
 }
 
@@ -8685,6 +9129,17 @@ function foundationNormalizeStudent(student, index = 0) {
     ...student,
     class_group_id: student.class_group_id || group.id || "",
     class_group_name: student.class_group_name || group.name || "",
+    preferred_delivery_mode: student.preferred_delivery_mode || group.delivery_mode || "in_person",
+    assigned_delivery_mode: student.assigned_delivery_mode || group.delivery_mode || "in_person",
+    assigned_location_id: student.assigned_location_id || group.primary_location_id || "fsloc-hq-main",
+    assigned_location_name: student.assigned_location_name || group.primary_location_name || foundationLocationById(group.primary_location_id).name || "",
+    is_prison_ministry_student: !!student.is_prison_ministry_student || group.delivery_mode === "prison_ministry",
+    prison_center_id: student.prison_center_id || group.prison_center_id || "",
+    prison_center_name: student.prison_center_name || group.prison_center_name || "",
+    needs_home_visit_class: !!student.needs_home_visit_class || group.delivery_mode === "home_visit",
+    home_address: student.home_address || "",
+    can_attend_online: !!student.can_attend_online || group.delivery_mode === "online",
+    online_contact: student.online_contact || student.whatsapp || student.telefone || "",
     full_name: student.full_name || fullName(student),
     church_id: student.church_id || group.church_id || "church-hq",
     church_name: student.church_name || churchName(student.church_id || group.church_id || "church-hq"),
@@ -8702,12 +9157,32 @@ function foundationNormalizeStudent(student, index = 0) {
   record.completed_lessons_count = record.completed_classes;
   record.lesson_progress_percent = record.class_progress_percent;
   record.passed_lesson_tests_count = foundationPassedLessonTests(record.id).length;
-  record.ready_for_graduation = record.final_exam_passed || record.aprovado;
+  record.ready_for_graduation = record.course_passed || record.final_exam_passed || record.aprovado;
   return record;
 }
 
 function foundationDefaultLessonMaxScore() {
-  return Number(state.foundationSchoolSettings?.lesson_test_max_score || 25);
+  return 20;
+}
+
+function getLessonMaxScore(lessonNumber) {
+  const n = Number(lessonNumber || 0);
+  if (n >= 1 && n <= 6) return 20;
+  if (n === 7) return 10;
+  return foundationDefaultLessonMaxScore();
+}
+
+window.getLessonMaxScore = getLessonMaxScore;
+
+function foundationGradingSettings() {
+  const settings = state.foundationGradingSettings || state.foundationSchoolSettings?.grading_settings || {};
+  return {
+    lesson_tests_total_max_score: 130,
+    final_exam_max_score: Number(settings.final_exam_max_score || state.foundationSchoolSettings?.final_exam_max_score || 100),
+    lesson_tests_weight_percent: Number(settings.lesson_tests_weight_percent || 40),
+    final_exam_weight_percent: Number(settings.final_exam_weight_percent || 60),
+    passing_percentage: Number(settings.passing_percentage || 50)
+  };
 }
 
 function foundationLessonScorePercent(obtained, maxScore) {
@@ -8719,7 +9194,7 @@ function foundationLessonScorePercent(obtained, maxScore) {
 }
 
 function foundationNormalizeLessonRecord(record = {}) {
-  const maxScore = Number(record.test_score_max || record.max_score || foundationDefaultLessonMaxScore());
+  const maxScore = Number(record.test_score_max || record.max_score || getLessonMaxScore(record.lesson_number));
   let obtained = record.test_score_obtained ?? record.score_obtained ?? "";
   if ((obtained === "" || obtained === undefined) && record.test_score !== "" && record.test_score !== undefined) {
     obtained = Math.round((Number(record.test_score || 0) / 100) * maxScore);
@@ -8730,9 +9205,10 @@ function foundationNormalizeLessonRecord(record = {}) {
     test_score_obtained: obtained === "" || obtained === undefined ? "" : Number(obtained),
     test_score_max: maxScore,
     test_score: percent,
-    test_attachment_name: record.test_attachment_name || record.attachment_name || "",
-    test_attachment_type: record.test_attachment_type || record.attachment_type || "",
-    test_attachment_data_url: record.test_attachment_data_url || record.attachment_data_url || "",
+    form_id: record.form_id || "",
+    submission_id: record.submission_id || "",
+    submitted_at: record.submitted_at || "",
+    review_status: record.review_status || (percent !== "" ? "Confirmed" : "Pending Review"),
     test_passed: percent !== "" ? percent >= Number(state.foundationSchoolSettings?.passing_score_per_lesson || 50) : false
   };
 }
@@ -8741,12 +9217,6 @@ function foundationLessonScoreLabel(lesson = {}) {
   const record = foundationNormalizeLessonRecord(lesson);
   if (record.test_score_obtained === "" || record.test_score_obtained === undefined) return "-";
   return `${record.test_score_obtained}/${record.test_score_max} (${record.test_score}%)`;
-}
-
-function foundationAttachmentLink(lesson = {}) {
-  if (!lesson.test_attachment_data_url) return "";
-  const label = lesson.test_attachment_name || (lang === "pt" ? "Teste corrigido" : "Corrected test");
-  return `<a class="foundation-attachment-link" href="${lesson.test_attachment_data_url}" target="_blank" rel="noopener" download="${label}"><i class="bi bi-paperclip me-1"></i>${label}</a>`;
 }
 
 function readFoundationAttachment(selector) {
@@ -8770,18 +9240,181 @@ function readFoundationAttachment(selector) {
   });
 }
 
-function readFoundationTestAttachment(studentId) {
-  return readFoundationAttachment(`[data-foundation-row-field="attachment"][data-student-id="${studentId}"]`);
-}
-
 function foundationExamAttachmentLink(exam = {}) {
-  if (!exam.exam_attachment_data_url) return "";
-  const label = exam.exam_attachment_name || (lang === "pt" ? "Exame corrigido" : "Corrected exam");
-  return `<a class="foundation-attachment-link" href="${exam.exam_attachment_data_url}" target="_blank" rel="noopener" download="${label}"><i class="bi bi-paperclip me-1"></i>${label}</a>`;
+  const url = exam.physical_exam_file_url || exam.exam_attachment_data_url || "";
+  if (!url) return "";
+  const label = exam.physical_exam_file_name || exam.exam_attachment_name || (lang === "pt" ? "Exame físico anexado" : "Attached physical exam");
+  return `<a class="foundation-attachment-link" href="${url}" target="_blank" rel="noopener" download="${label}"><i class="bi bi-paperclip me-1"></i>${label}</a>`;
 }
 
 function readFoundationExamAttachment(studentId) {
   return readFoundationAttachment(`[data-foundation-exam-attachment="${studentId}"]`);
+}
+
+function foundationOnlineTestByLesson(lessonNumber) {
+  return (state.foundationLessonOnlineTests || []).find((item) => Number(item.lesson_number) === Number(lessonNumber)) || {};
+}
+
+function ensureFoundationOnlineTests() {
+  if (!Array.isArray(state.foundationLessonOnlineTests)) state.foundationLessonOnlineTests = [];
+  for (let n = 1; n <= 7; n += 1) {
+    const existing = foundationOnlineTestByLesson(n);
+    const now = new Date().toISOString();
+    const base = {
+      lesson_number: n,
+      lesson_title: FOUNDATION_LESSON_TITLES[n - 1],
+      form_title: `${lang === "pt" ? "Teste Online - Aula" : "Online Test - Lesson"} ${n}`,
+      form_provider: "Google Forms",
+      max_score: getLessonMaxScore(n),
+      passing_score: Math.ceil(getLessonMaxScore(n) * 0.5),
+      is_active: true,
+      created_by: activeUser?.name || "Admin Principal",
+      created_at: "2026-07-01",
+      updated_at: now
+    };
+    if (!existing.id) {
+      state.foundationLessonOnlineTests.push({
+        id: `flot-${n}`,
+        form_url: `https://forms.google.com/foundation-school-lesson-${n}`,
+        responses_sheet_url: `https://docs.google.com/spreadsheets/foundation-school-lesson-${n}`,
+        ...base
+      });
+    } else {
+      Object.assign(existing, {
+        lesson_title: existing.lesson_title || base.lesson_title,
+        form_title: existing.form_title || base.form_title,
+        form_provider: existing.form_provider || base.form_provider,
+        max_score: getLessonMaxScore(n),
+        passing_score: Number(existing.passing_score || base.passing_score),
+        is_active: existing.is_active !== false,
+        updated_at: existing.updated_at || base.updated_at
+      });
+    }
+  }
+}
+
+function normalizeFoundationSubmission(record = {}) {
+  const lessonNumber = Number(record.lesson_number || 1);
+  const maxScore = getLessonMaxScore(lessonNumber);
+  const score = record.rector_override_score !== "" && record.rector_override_score !== undefined
+    ? Number(record.rector_override_score)
+    : Number(record.score ?? record.test_score_obtained ?? 0);
+  const percentage = maxScore ? Math.round((score / maxScore) * 100) : 0;
+  return {
+    ...record,
+    lesson_number: lessonNumber,
+    lesson_title: record.lesson_title || FOUNDATION_LESSON_TITLES[lessonNumber - 1],
+    score,
+    test_score_obtained: score,
+    max_score: maxScore,
+    test_score_max: maxScore,
+    percentage,
+    test_score: percentage,
+    delivery_mode: record.delivery_mode || "in_person",
+    lesson_session_id: record.lesson_session_id || "",
+    teacher_id: record.teacher_id || "",
+    teacher_name: record.teacher_name || "",
+    location_id: record.location_id || "",
+    location_name: record.location_name || "",
+    passed: percentage >= Number(state.foundationSchoolSettings?.passing_score_per_lesson || 50),
+    test_passed: percentage >= Number(state.foundationSchoolSettings?.passing_score_per_lesson || 50),
+    review_status: record.review_status || (record.auto_matched === false ? "Needs Review" : "Auto Matched"),
+    answers: Array.isArray(record.answers) ? record.answers : [],
+    updated_at: record.updated_at || new Date().toISOString().slice(0, 10)
+  };
+}
+
+function ensureFoundationLessonTestSubmissions() {
+  if (!Array.isArray(state.foundationLessonTestSubmissions)) state.foundationLessonTestSubmissions = [];
+  state.foundationLessonTestSubmissions = state.foundationLessonTestSubmissions.map((item) => normalizeFoundationSubmission(item));
+  const existing = new Set(state.foundationLessonTestSubmissions.map((item) => `${item.student_id}-${item.lesson_number}`));
+  (state.foundationStudents || []).forEach((student) => {
+    for (let n = 1; n <= 7; n += 1) {
+      if (!student.class_attendance?.[`class_${n}`]) continue;
+      const key = `${student.id}-${n}`;
+      if (existing.has(key)) continue;
+      const onlineTest = foundationOnlineTestByLesson(n);
+      const session = foundationSessionByContext(student.class_group_id, n) || {};
+      const maxScore = getLessonMaxScore(n);
+      const mockScore = Math.min(maxScore, Math.max(Math.ceil(maxScore * 0.55), Math.round(maxScore * ((60 + ((n * 5) % 30)) / 100))));
+      state.foundationLessonTestSubmissions.push(normalizeFoundationSubmission({
+        id: `flts-${student.id}-${n}`,
+        student_id: student.id,
+        student_name: fullName(student),
+        class_group_id: student.class_group_id,
+        class_group_name: student.class_group_name,
+        lesson_number: n,
+        delivery_mode: session.delivery_mode || student.assigned_delivery_mode || "in_person",
+        lesson_session_id: session.id || "",
+        teacher_id: session.teacher_id || "",
+        teacher_name: session.teacher_name || "",
+        location_id: session.location_id || student.assigned_location_id || "",
+        location_name: session.location_name || student.assigned_location_name || "",
+        form_id: onlineTest.id || `flot-${n}`,
+        form_url: onlineTest.form_url || "",
+        submission_id: `mock-${student.id}-${n}`,
+        submitted_at: `2026-07-${String(10 + n).padStart(2, "0")}T09:00:00.000Z`,
+        raw_student_name: fullName(student),
+        raw_phone: student.telefone || "",
+        raw_email: student.email || "",
+        score: mockScore,
+        max_score: maxScore,
+        answers: [],
+        auto_matched: true,
+        match_confidence: 96,
+        matched_by: "Sistema",
+        matched_at: new Date().toISOString(),
+        reviewed_by: "",
+        reviewed_at: "",
+        review_status: "Auto Matched",
+        rector_override_score: "",
+        rector_override_reason: "",
+        created_at: "2026-07-01",
+        updated_at: new Date().toISOString().slice(0, 10)
+      }));
+    }
+  });
+  if (!state.foundationLessonTestSubmissions.some((item) => item.review_status === "Needs Review")) {
+    const sample = (state.foundationStudents || [])[0];
+    if (sample) {
+      const sampleSession = foundationSessionByContext(sample.class_group_id, 2) || {};
+      state.foundationLessonTestSubmissions.push(normalizeFoundationSubmission({
+        id: `flts-review-${Date.now()}`,
+        student_id: sample.id,
+        student_name: fullName(sample),
+        class_group_id: sample.class_group_id,
+        class_group_name: sample.class_group_name,
+        lesson_number: 2,
+        delivery_mode: sampleSession.delivery_mode || sample.assigned_delivery_mode || "in_person",
+        lesson_session_id: sampleSession.id || "",
+        teacher_id: sampleSession.teacher_id || "",
+        teacher_name: sampleSession.teacher_name || "",
+        location_id: sampleSession.location_id || sample.assigned_location_id || "",
+        location_name: sampleSession.location_name || sample.assigned_location_name || "",
+        form_id: "flot-2",
+        form_url: foundationOnlineTestByLesson(2).form_url || "",
+        submission_id: "mock-needs-review",
+        submitted_at: "2026-07-17T10:30:00.000Z",
+        raw_student_name: `${sample.nome || ""} ${sample.apelido || ""}`.trim(),
+        raw_phone: sample.telefone || "",
+        raw_email: sample.email || "",
+        score: 12,
+        max_score: 20,
+        answers: [],
+        auto_matched: false,
+        match_confidence: 58,
+        matched_by: "",
+        matched_at: "",
+        reviewed_by: "",
+        reviewed_at: "",
+        review_status: "Needs Review",
+        rector_override_score: "",
+        rector_override_reason: "",
+        created_at: "2026-07-17",
+        updated_at: "2026-07-17"
+      }));
+    }
+  }
 }
 
 function ensureFoundationLessonRecords() {
@@ -8812,20 +9445,83 @@ function ensureFoundationLessonRecords() {
         lesson_completed: attended,
         lesson_completed_by: attended ? "Admin Principal" : "",
         lesson_completed_at: attended ? new Date().toISOString() : "",
-        test_score_obtained: attended ? Math.min(25, Math.max(13, Math.round((25 * (55 + ((n * 7) % 35))) / 100))) : "",
-        test_score_max: foundationDefaultLessonMaxScore(),
-        test_score: attended ? foundationLessonScorePercent(Math.min(25, Math.max(13, Math.round((25 * (55 + ((n * 7) % 35))) / 100))), foundationDefaultLessonMaxScore()) : "",
-        test_passed: attended,
-        test_attachment_name: "",
-        test_attachment_type: "",
-        test_attachment_data_url: "",
-        test_marked_by: attended ? "Admin Principal" : "",
-        test_marked_at: attended ? new Date().toISOString() : "",
+        test_score_obtained: "",
+        test_score_max: getLessonMaxScore(n),
+        test_score: "",
+        test_passed: false,
+        test_marked_by: "",
+        test_marked_at: "",
         notes: "",
         created_at: "2026-07-01",
         updated_at: new Date().toISOString().slice(0, 10)
       });
     }
+  });
+}
+
+function ensureFoundationLessonSessions() {
+  if (!Array.isArray(state.foundationLessonSessions)) state.foundationLessonSessions = [];
+  if (!Array.isArray(state.foundationLessonAttendance)) state.foundationLessonAttendance = [];
+  const sessionKeys = new Set(state.foundationLessonSessions.map((item) => `${item.class_group_id}-${item.lesson_number}`));
+  (state.foundationClassGroups || []).forEach((group) => {
+    for (let n = 1; n <= 7; n += 1) {
+      const key = `${group.id}-${n}`;
+      if (sessionKeys.has(key)) continue;
+      const loc = foundationLocationById(group.primary_location_id);
+      const teacher = foundationTeacherById(n === 4 && group.assistant_teacher_ids?.[0] ? group.assistant_teacher_ids[0] : group.main_teacher_id);
+      state.foundationLessonSessions.push({
+        id: `fls-${group.id}-${n}`,
+        class_group_id: group.id,
+        class_group_name: group.name,
+        lesson_number: n,
+        lesson_title: FOUNDATION_LESSON_TITLES[n - 1],
+        delivery_mode: group.delivery_mode || "in_person",
+        location_id: group.primary_location_id || "",
+        location_name: group.primary_location_name || loc.name || "",
+        location_type: group.location_type || loc.location_type || "",
+        prison_center_id: group.prison_center_id || loc.prison_center_id || "",
+        prison_center_name: group.prison_center_name || loc.prison_center_name || "",
+        online_platform: group.online_platform || loc.online_platform || "",
+        online_link: group.online_link || loc.online_link || "",
+        lesson_date: group.start_date || new Date().toISOString().slice(0, 10),
+        start_time: n === 1 ? "09:00" : "",
+        end_time: "",
+        teacher_id: teacher.id || group.main_teacher_id || "",
+        teacher_name: teacher.full_name || group.main_teacher_name || "",
+        assistant_teacher_ids: group.assistant_teacher_ids || [],
+        status: "Agendada",
+        notes: "",
+        created_by: activeUser?.name || "Admin Principal",
+        created_at: "2026-07-01",
+        updated_at: new Date().toISOString().slice(0, 10)
+      });
+    }
+  });
+  const attendanceKeys = new Set(state.foundationLessonAttendance.map((item) => `${item.lesson_session_id}-${item.student_id}`));
+  (state.foundationLessonProgress || []).forEach((record) => {
+    const session = foundationSessionByContext(record.class_group_id, record.lesson_number);
+    if (!session) return;
+    record.lesson_session_id = record.lesson_session_id || session.id;
+    record.delivery_mode = record.delivery_mode || session.delivery_mode;
+    record.location_id = record.location_id || session.location_id;
+    record.location_name = record.location_name || session.location_name;
+    const key = `${session.id}-${record.student_id}`;
+    if (attendanceKeys.has(key)) return;
+    const student = (state.foundationStudents || []).find((item) => item.id === record.student_id) || {};
+    state.foundationLessonAttendance.push({
+      id: `fla-${session.id}-${record.student_id}`,
+      lesson_session_id: session.id,
+      student_id: record.student_id,
+      student_name: fullName(student),
+      class_group_id: record.class_group_id,
+      lesson_number: Number(record.lesson_number),
+      attended: !!record.attended,
+      attendance_status: record.attended ? (session.delivery_mode === "online" ? "Online Confirmado" : session.delivery_mode === "home_visit" ? "Domicílio Confirmado" : session.delivery_mode === "prison_ministry" ? "Prisão Confirmado" : "Presente") : "Ausente",
+      marked_by_user_id: activeUser?.id || "u-1",
+      marked_by_name: record.attendance_marked_by || activeUser?.name || "Admin Principal",
+      marked_at: record.attendance_marked_at || "",
+      notes: record.notes || ""
+    });
   });
 }
 
@@ -8859,6 +9555,12 @@ function ensureFoundationFinalExams() {
   if (!Array.isArray(state.foundationFinalExams)) state.foundationFinalExams = [];
   state.foundationFinalExams = state.foundationFinalExams.map((exam) => ({
     ...exam,
+    max_score: Number(exam.max_score || foundationGradingSettings().final_exam_max_score),
+    percentage: exam.percentage || (exam.max_score ? Math.round((Number(exam.score || 0) / Number(exam.max_score || 100)) * 100) : 0),
+    physical_exam_file_name: exam.physical_exam_file_name || exam.exam_attachment_name || "",
+    physical_exam_file_url: exam.physical_exam_file_url || exam.exam_attachment_data_url || "",
+    corrected_by_name: exam.corrected_by_name || exam.marked_by_name || "",
+    document_type: exam.document_type || "foundation_final_exam",
     exam_attachment_name: exam.exam_attachment_name || "",
     exam_attachment_type: exam.exam_attachment_type || "",
     exam_attachment_data_url: exam.exam_attachment_data_url || ""
@@ -8872,7 +9574,21 @@ function ensureFoundationFinalExams() {
       class_group_id: student.class_group_id,
       exam_date: "2026-07-15",
       score: Number(student.nota_exame || student.final_exam_score || 0),
-      passed: Number(student.nota_exame || student.final_exam_score || 0) >= (state.foundationSchoolSettings?.final_exam_passing_score || 50),
+      max_score: foundationGradingSettings().final_exam_max_score,
+      percentage: Math.round((Number(student.nota_exame || student.final_exam_score || 0) / foundationGradingSettings().final_exam_max_score) * 100),
+      passed: Math.round((Number(student.nota_exame || student.final_exam_score || 0) / foundationGradingSettings().final_exam_max_score) * 100) >= foundationGradingSettings().passing_percentage,
+      corrected_by: activeUser?.id || "u-1",
+      corrected_by_name: activeUser?.name || "Admin Principal",
+      corrected_at: new Date().toISOString(),
+      physical_exam_file_url: "",
+      physical_exam_file_name: "",
+      scanned_by: "",
+      scanned_at: "",
+      uploaded_by: "",
+      uploaded_at: "",
+      scanned_by_app: false,
+      scan_session_id: "",
+      document_type: "foundation_final_exam",
       marked_by_user_id: activeUser?.id || "u-1",
       marked_by_name: activeUser?.name || "Admin Principal",
       marked_at: new Date().toISOString(),
@@ -8881,6 +9597,46 @@ function ensureFoundationFinalExams() {
       updated_at: new Date().toISOString().slice(0, 10)
     });
   });
+}
+
+function ensureFoundationNotifications() {
+  if (!Array.isArray(state.notifications)) state.notifications = [];
+  const existing = new Set(state.notifications.map((item) => item.id));
+  const add = (id, title, message, entityType, entityId, priority = "normal") => {
+    if (existing.has(id)) return;
+    state.notifications.unshift({
+      id,
+      title,
+      message,
+      type: "reminder",
+      module: "foundation_school",
+      entity_type: entityType,
+      entity_id: entityId,
+      priority,
+      recipient_user_id: "",
+      recipient_role: "Foundation Rector",
+      recipient_department_id: "",
+      recipient_church_id: "church-hq",
+      scope: "role",
+      action_url: "foundation",
+      action_label: lang === "pt" ? "Ver Escola" : "View School",
+      is_read: false,
+      read_at: "",
+      created_at: new Date().toISOString(),
+      expires_at: "",
+      metadata: {}
+    });
+  };
+  const review = (state.foundationLessonTestSubmissions || []).find((item) => item.review_status === "Needs Review");
+  if (review) add("fs-not-review-online-test", lang === "pt" ? "Resultado precisa de revisão" : "Result needs review", lang === "pt" ? "Um teste online da Escola de Fundação precisa de revisão do Reitor." : "A Foundation School online test needs Rector review.", "foundationLessonTestSubmission", review.id, "high");
+  const ready = foundationReadyForExamStudents()[0];
+  if (ready) add("fs-not-ready-exam", lang === "pt" ? "Aluno pronto para exame final" : "Student ready for final exam", `${fullName(ready)} ${lang === "pt" ? "está pronto para o exame final." : "is ready for the final exam."}`, "foundationStudent", ready.id, "normal");
+  const examNoAttachment = (state.foundationFinalExams || []).find((item) => item.score && !(item.physical_exam_file_url || item.exam_attachment_data_url));
+  if (examNoAttachment) add("fs-not-exam-scan-needed", FS("examNeedsAttachment"), lang === "pt" ? "Um exame final físico já tem nota mas ainda não tem scan/PDF anexado." : "A physical final exam has a score but no scan/PDF attached yet.", "foundationFinalExam", examNoAttachment.id, "high");
+  const prisonSession = (state.foundationLessonSessions || []).find((item) => item.delivery_mode === "prison_ministry");
+  if (prisonSession) add("fs-not-prison-session", lang === "pt" ? "Aula prisional agendada" : "Prison lesson scheduled", lang === "pt" ? "Existe uma aula da Escola de FundaÃ§Ã£o ligada ao MinistÃ©rio Prisional para acompanhamento." : "A Foundation School lesson is linked to Prison Ministry for follow-up.", "foundationLessonSession", prisonSession.id, "normal");
+  const onlineSession = (state.foundationLessonSessions || []).find((item) => item.delivery_mode === "online");
+  if (onlineSession) add("fs-not-online-session", lang === "pt" ? "Aula online agendada" : "Online lesson scheduled", lang === "pt" ? "Confirme link, professor e presenÃ§as da aula online da Escola de FundaÃ§Ã£o." : "Confirm link, teacher and attendance for the online Foundation School lesson.", "foundationLessonSession", onlineSession.id, "normal");
 }
 
 function foundationClassGroupById(id) {
@@ -8923,7 +9679,7 @@ function foundationLessonRecords(studentId) {
 
 function foundationPassedLessonTests(studentId) {
   const pass = Number(state.foundationSchoolSettings?.passing_score_per_lesson || 50);
-  return foundationLessonRecords(studentId).map((item) => foundationNormalizeLessonRecord(item)).filter((item) => item.attended && Number(item.test_score || 0) >= pass);
+  return foundationSubmissionsForStudent(studentId).filter((item) => Number(item.test_score || item.percentage || 0) >= pass);
 }
 
 function foundationSoulWinningForStudent(studentId) {
@@ -8934,8 +9690,8 @@ function foundationCanManage(area = "overview") {
   const role = String(activeUser?.role || "").toLowerCase();
   const perms = foundationPermissions();
   if (foundationCanViewAllClasses()) return true;
-  const teacherTabs = new Set(["overview", "classes", "students", "lessons", "soulWinning", "reports"]);
-  const assistantTabs = new Set(["overview", "classes", "students", "lessons"]);
+  const teacherTabs = new Set(["overview", "classes", "students", "lessons", "onlineTests", "soulWinning", "reports"]);
+  const assistantTabs = new Set(["overview", "classes", "students", "lessons", "onlineTests"]);
   if (perms.includes("foundation_teacher") || role.includes("foundation teacher")) return teacherTabs.has(area);
   if (perms.includes("foundation_assistant") || role.includes("foundation assistant")) return assistantTabs.has(area);
   return false;
@@ -8960,8 +9716,7 @@ function foundationStudentsForGroup(groupId = "") {
 
 function foundationReadyForExamStudents() {
   return foundationStudentsForGroup().filter((student) => {
-    const lessonRecords = foundationLessonRecords(student.id);
-    const testsOk = !state.foundationSchoolSettings?.require_lesson_tests || lessonRecords.filter((item) => item.attended && item.test_score !== "").length >= 7;
+    const testsOk = !state.foundationSchoolSettings?.require_lesson_tests || foundationLessonTestsSummary(student.id).submitted >= 7;
     const lessonsOk = getFoundationCompletedClasses(student) >= 7;
     const soulOk = !state.foundationSchoolSettings?.require_soul_winning_for_lesson_4 || foundationSoulWinningForStudent(student.id).status === "Confirmado" || student.pratica_evangelismo;
     return lessonsOk && testsOk && soulOk && !student.final_exam_passed && !student.aprovado;
@@ -8995,8 +9750,9 @@ function foundationStudentLessonChips(student) {
     const n = i + 1;
     const lesson = records.find((item) => Number(item.lesson_number) === n) || {};
     const done = lesson.attended || student.class_attendance?.[`class_${n}`];
-    const score = lesson.test_score !== "" && lesson.test_score !== undefined ? foundationLessonScoreLabel(lesson) : "-";
-    return `<span class="foundation-lesson-chip ${done ? "done" : "pending"}" title="${FOUNDATION_LESSON_TITLES[i]}">${FS("lesson")} ${n}<small>${done ? score : FS("notStarted")}</small>${n === 4 ? `<em>${FS("soulWinning")}</em>` : ""}</span>`;
+    const submission = foundationBestLessonSubmission(student.id, n);
+    const score = submission ? foundationLessonScoreLabel(submission) : (done ? FS("testNotSubmitted") : FS("notStarted"));
+    return `<span class="foundation-lesson-chip ${done ? "done" : "pending"}" title="${FOUNDATION_LESSON_TITLES[i]}">${FS("lesson")} ${n}<small>${score}</small>${n === 4 ? `<em>${FS("soulWinning")}: ${Number(foundationSoulWinningForStudent(student.id).souls_won_count || student.numero_de_almas_ganhas || 0)}</em>` : ""}</span>`;
   }).join("")}</div>`;
 }
 
@@ -9023,6 +9779,99 @@ function foundationStudentCompactProgress(student) {
   `;
 }
 
+function foundationLessonSectionNav() {
+  const sections = [
+    ["attendance", "attendanceClasses"],
+    ["links", "testLinks"],
+    ["submissions", "receivedResults"],
+    ["studentResults", "resultsByStudent"],
+    ["review", "rectorReview"]
+  ];
+  return moduleTabsNav(sections.map(([key, label]) => moduleTabButton(FS(label), {
+    active: (foundationPageState.lesson.section || "attendance") === key,
+    attrs: `data-foundation-lesson-section="${key}"`
+  })).join(""));
+}
+
+function foundationCanReviewResults() {
+  const role = String(activeUser?.role || "").toLowerCase();
+  const perms = foundationPermissions();
+  return foundationCanViewAllClasses() || role.includes("rector") || role.includes("coordinator") || perms.includes("foundation_rector") || perms.includes("foundation_coordinator");
+}
+
+function foundationSubmissionActions(item) {
+  if (!foundationCanReviewResults()) return `<span class="text-secondary small">${lang === "pt" ? "Somente leitura" : "Read only"}</span>`;
+  return `
+    <div class="d-flex flex-wrap gap-2">
+      <button type="button" class="action-btn" data-foundation-confirm-submission="${item.id}">${FS("confirmSubmission")}</button>
+      <button type="button" class="action-btn" data-foundation-correct-submission="${item.id}">${FS("overrideScore")}</button>
+      <button type="button" class="action-btn" data-foundation-reject-submission="${item.id}">${FS("rejectSubmission")}</button>
+    </div>
+  `;
+}
+
+function foundationLessonLinksPanel() {
+  return moduleSection(FS("testLinks"), lang === "pt" ? "Guarde aqui os links dos formulários online das aulas 1 a 7." : "Store the online form links for lessons 1 to 7 here.", "bi-link-45deg", "", `
+    ${dataTable([FS("lesson"), FS("formProvider"), FS("formLink"), FS("maxScore"), FS("passingScore"), L("status"), L("actions")], (state.foundationLessonOnlineTests || []).map((test) => [
+      `${FS("lesson")} ${test.lesson_number}<small class="d-block text-secondary">${test.lesson_title || ""}</small>`,
+      test.form_provider || "-",
+      `<a class="foundation-attachment-link" href="${test.form_url || "#"}" target="_blank" rel="noopener">${test.form_url || "-"}</a>`,
+      test.max_score,
+      test.passing_score,
+      badge(test.is_active ? L("active") : L("inactive")),
+      `<div class="d-flex flex-wrap gap-2"><a class="action-btn" href="${test.form_url || "#"}" target="_blank" rel="noopener">${FS("openForm")}</a><button type="button" class="action-btn" data-copy-text="${test.form_url || ""}">${FS("copyLink")}</button><button type="button" class="action-btn" data-foundation-import-results="${test.id}">${FS("importResults")}</button></div>`
+    ]))}
+  `);
+}
+
+function foundationReceivedResultsPanel() {
+  const rows = (state.foundationLessonTestSubmissions || []).filter((item) => foundationStudentsForGroup().some((s) => s.id === item.student_id));
+  return moduleSection(FS("receivedResults"), lang === "pt" ? "Resultados mock vindos dos formulários online. Integração real fica preparada para API/webhook." : "Mock results coming from online forms. Real API/webhook integration is prepared for later.", "bi-cloud-check", "", `
+    ${dataTable([FS("foundationTabStudents"), FS("classGroup"), FS("lesson"), FS("score"), FS("maxScore"), "%", FS("reviewStatus"), FS("autoMatched"), L("actions")], rows.map((item) => [
+      item.student_name || fullName((state.foundationStudents || []).find((s) => s.id === item.student_id) || {}),
+      item.class_group_name || foundationClassGroupById(item.class_group_id).name || "-",
+      `${FS("lesson")} ${item.lesson_number}`,
+      item.score,
+      item.max_score,
+      `${item.percentage}%`,
+      badge(item.review_status),
+      `${yesNo(item.auto_matched)} ${item.match_confidence ? `<small class="d-block text-secondary">${item.match_confidence}%</small>` : ""}`,
+      foundationSubmissionActions(item)
+    ]))}
+  `);
+}
+
+function foundationResultsByStudentPanel(students) {
+  return moduleSection(FS("resultsByStudent"), FS("gradeFormulaHint"), "bi-graph-up-arrow", "", `
+    ${dataTable([FS("foundationTabStudents"), FS("classGroup"), FS("lessonTestsTotal"), FS("finalExam"), FS("courseGrade"), L("status")], students.map((student) => {
+      const grade = foundationCourseGrade(student);
+      return [
+        fullName(student),
+        student.class_group_name || foundationClassGroupById(student.class_group_id).name || "-",
+        `${grade.lesson_tests_total_score}/${grade.lesson_tests_max_score}<small class="d-block text-secondary">${grade.lesson_tests_percentage}%</small>`,
+        `${grade.final_exam_score || 0}/${grade.final_exam_max_score}<small class="d-block text-secondary">${grade.final_exam_percentage}%</small>`,
+        `${grade.course_final_percentage}%`,
+        badge(student.estado || student.status)
+      ];
+    }))}
+  `);
+}
+
+function foundationRectorReviewPanel() {
+  const rows = (state.foundationLessonTestSubmissions || []).filter((item) => ["Needs Review", "Pending Review", "Corrected by Rector", "Rejected"].includes(item.review_status));
+  return moduleSection(FS("rectorReview"), lang === "pt" ? "Notas só podem ser corrigidas por Reitor/Coordenador com motivo registado." : "Scores can only be corrected by Rector/Coordinator with a recorded reason.", "bi-shield-check", "", `
+    ${rows.length ? dataTable([FS("foundationTabStudents"), FS("lesson"), FS("score"), FS("matchConfidence"), FS("reviewStatus"), FS("correctedBy"), L("actions")], rows.map((item) => [
+      item.student_name || item.raw_student_name || "-",
+      `${FS("lesson")} ${item.lesson_number}`,
+      `${item.score}/${item.max_score}`,
+      `${item.match_confidence || 0}%`,
+      badge(item.review_status),
+      item.reviewed_by || "-",
+      foundationSubmissionActions(item)
+    ])) : EmptyState({ compact: true, title: L("empty") })}
+  `);
+}
+
 function foundationAudit(action, entityType, entityId, oldValue, newValue, notes = "") {
   if (!Array.isArray(state.foundationAuditLogs)) state.foundationAuditLogs = [];
   state.foundationAuditLogs.unshift({
@@ -9043,16 +9892,23 @@ function renderFoundationOverview(students, pending) {
   const groups = foundationScopedClassGroups();
   const readyExam = foundationReadyForExamStudents();
   const readyGrad = foundationReadyForGraduationStudents();
-  const pendingTests = (state.foundationLessonProgress || []).filter((item) => item.attended && item.test_score === "").length;
+  const pendingTests = (state.foundationLessonProgress || []).filter((item) => item.attended && !foundationBestLessonSubmission(item.student_id, item.lesson_number)).length;
   const certificates = students.filter((s) => (s.graduated || s.graduado) && !(s.certificate_issued || s.certificado_emitido));
+  const sessions = state.foundationLessonSessions || [];
+  const examsWithoutAttachment = (state.foundationFinalExams || []).filter((exam) => exam.score && !(exam.physical_exam_file_url || exam.exam_attachment_data_url));
   return `
     <div class="row g-3 mb-4 summary-cards-row">
       ${sm("bi-person-plus", FS("enrolledStudentsCount"), students.length, "foundation", { tab: "students" })}
       ${sm("bi-collection", FS("activeClassGroups"), groups.filter((g) => !["Concluída", "Cancelada"].includes(g.status)).length, "foundation", { tab: "classes" })}
       ${sm("bi-person-workspace", FS("activeTeachers"), (state.foundationTeachers || []).filter((t) => t.status === "Activo").length, "foundation", { tab: "teachers" })}
       ${sm("bi-calendar-check", FS("lessonsThisWeek"), (state.foundationLessonProgress || []).filter((l) => l.attended).length, "foundation", { tab: "lessons" })}
-      ${sm("bi-hourglass-split", FS("pendingTests"), pendingTests, "foundation", { tab: "lessons", filterPayload: { pendingTests: true } })}
+      ${sm("bi-building", FS("lessonsInPerson"), sessions.filter((s) => s.delivery_mode === "in_person").length, "foundation", { tab: "lessons" })}
+      ${sm("bi-camera-video", FS("lessonsOnline"), sessions.filter((s) => s.delivery_mode === "online").length, "foundation", { tab: "lessons" })}
+      ${sm("bi-house-heart", FS("lessonsHomeVisit"), sessions.filter((s) => s.delivery_mode === "home_visit").length, "foundation", { tab: "lessons" })}
+      ${sm("bi-shield-check", FS("lessonsPrison"), sessions.filter((s) => s.delivery_mode === "prison_ministry").length, "foundation", { tab: "lessons" })}
+      ${sm("bi-hourglass-split", FS("pendingTests"), pendingTests, "foundation", { tab: "onlineTests", filterPayload: { pendingTests: true } })}
       ${sm("bi-clipboard-check", FS("studentsReadyForExam"), readyExam.length, "foundation", { tab: "finalExam" })}
+      ${sm("bi-paperclip", FS("examsWithoutAttachment"), examsWithoutAttachment.length, "foundation", { tab: "finalExam" })}
       ${sm("bi-award", FS("studentsReadyForGraduation"), readyGrad.length, "foundation", { tab: "graduation" })}
       ${sm("bi-patch-check", FS("pendingCertificates"), certificates.length, "foundation", { tab: "graduation", filterPayload: { certificates: "pending" } })}
     </div>
@@ -9065,17 +9921,18 @@ function renderFoundationOverview(students, pending) {
 
 function foundationSettingsPanel() {
   const settings = state.foundationSchoolSettings || {};
+  const grading = foundationGradingSettings();
   return moduleSection(FS("foundationSettings"), `${FS("rector")}: ${settings.rector_name || "-"} · ${FS("coordinator")}: ${settings.coordinator_name || "-"}`, "bi-sliders", "", `
     ${dataTable([FS("lessonTest"), FS("score"), L("required"), L("status")], [
-      [FS("lessonTest"), `${settings.passing_score_per_lesson || 50}%`, yesNo(settings.require_lesson_tests), badge(L("active"))],
-      [lang === "pt" ? "Valor máximo por teste" : "Maximum score per test", `${settings.lesson_test_max_score || 25}`, yesNo(true), badge(L("active"))],
-      [FS("finalExam"), `${settings.final_exam_passing_score || 50}%`, yesNo(true), badge(L("active"))],
+      [FS("lessonTest"), `1-6: 20 · 7: 10 · ${FS("lessonTestsTotal")}: ${grading.lesson_tests_total_max_score}`, yesNo(settings.require_lesson_tests), badge(L("active"))],
+      [FS("gradingWeights"), `${grading.lesson_tests_weight_percent}% / ${grading.final_exam_weight_percent}%`, yesNo(true), badge(L("active"))],
+      [FS("finalExam"), `${grading.final_exam_max_score} · ${grading.passing_percentage}%`, yesNo(true), badge(L("active"))],
       [`${FS("lesson")} 4 - ${FS("soulWinning")}`, "-", yesNo(settings.require_soul_winning_for_lesson_4), badge(L("active"))],
       [L("classesAttendance"), "1-7", yesNo(settings.require_all_7_lessons), badge(settings.allow_lessons_in_random_order ? L("active") : L("inactive"))]
     ])}
+    <p class="text-secondary small mb-0 mt-3">${FS("gradeFormulaHint")}</p>
   `);
 }
-
 function foundationAuditPanel() {
   const logs = (state.foundationAuditLogs || []).slice(0, 6);
   return moduleSection(FS("activityLogs"), L("clickToView"), "bi-clock-history", "", logs.length ? `
@@ -9105,6 +9962,10 @@ function renderFoundationClasses() {
             <div class="record-card h-100">
               <div class="d-flex justify-content-between gap-2"><strong>${group.name}</strong>${badge(group.status)}</div>
               <p class="text-secondary mb-2">${group.church_name || churchName(group.church_id)} · ${group.quarter} ${group.year}</p>
+              <p class="mb-1"><strong>${FS("deliveryMode")}:</strong> ${foundationDeliveryLabel(group.delivery_mode)}</p>
+              <p class="mb-1"><strong>${FS("lessonLocation")}:</strong> ${group.primary_location_name || "-"}</p>
+              ${group.prison_center_name ? `<p class="mb-1"><strong>${lang === "pt" ? "Centro" : "Center"}:</strong> ${group.prison_center_name}</p>` : ""}
+              ${group.online_link ? `<p class="mb-1"><strong>Link:</strong> <a href="${group.online_link}" target="_blank" rel="noopener">${group.online_platform || "Online"}</a></p>` : ""}
               <p class="mb-1"><strong>${FS("mainTeacher")}:</strong> ${group.main_teacher_name || "-"}</p>
               <p class="mb-1"><strong>${FS("assistantTeacher")}:</strong> ${group.assistant_teacher_name || "-"}</p>
               <p class="mb-2"><strong>${FS("expectedGraduation")}:</strong> ${group.expected_graduation_date || "-"}</p>
@@ -9135,7 +9996,7 @@ function renderFoundationStudents(students) {
         s.celula || s.cell_name || "-",
         badge(s.estado || s.status),
         foundationStudentCompactProgress(s),
-        `${foundationPassedLessonTests(s.id).length}/7`,
+        `${foundationLessonTestsSummary(s.id).submitted}/7<small class="d-block text-secondary">${foundationLessonTestsSummary(s.id).lesson_tests_total_score}/${foundationLessonTestsSummary(s.id).lesson_tests_max_score}</small>`,
         badge(foundationSoulWinningForStudent(s.id).status || (s.pratica_evangelismo ? "Confirmado" : "Pendente")),
         actionButtons([["view", "foundationStudent", s.id, L("view")], ["edit", "foundationStudent", s.id, L("edit")], ["markClass", "foundationStudent", s.id, FS("markAttendance")], ["score", "foundationStudent", s.id, FS("enterScore")], ["graduate", "foundationStudent", s.id, L("graduate")]])
       ]))}
@@ -9150,23 +10011,29 @@ function renderFoundationLessons(students) {
   const lessonNumber = Number(ctx.lessonNumber || 1);
   return `
     <article class="panel" id="panel-foundation-lessons">
-      <div class="panel-header-row"><div><h3 class="panel-title">${FS("quickLessonEntry")}</h3><p class="text-secondary mb-0">${FS("recordedBy")}: ${activeUser?.name || "Admin Principal"}</p></div></div>
+      <div class="panel-header-row"><div><h3 class="panel-title">${FS("attendanceClasses")}</h3><p class="text-secondary mb-0">${FS("recordedBy")}: ${activeUser?.name || "Admin Principal"} · ${FS("onlineTests")}: ${lang === "pt" ? "os resultados vêm dos formulários" : "results come from forms"}</p></div></div>
       <form class="filter-toolbar filter-bar mb-4" data-foundation-lesson-context>
         <select class="form-select" name="classGroupId" data-foundation-lesson-field><option value="">${FS("classGroup")}</option>${foundationSelectOptions(foundationScopedClassGroups(), "id", "name", ctx.classGroupId)}</select>
         <select class="form-select" name="lessonNumber" data-foundation-lesson-field>${Array.from({ length: 7 }, (_, i) => `<option value="${i + 1}" ${String(ctx.lessonNumber) === String(i + 1) ? "selected" : ""}>${FS("lesson")} ${i + 1} - ${FOUNDATION_LESSON_TITLES[i]}</option>`).join("")}</select>
+        <select class="form-select" name="deliveryMode" data-foundation-lesson-field>${foundationDeliveryOptions(ctx.deliveryMode || foundationClassGroupById(ctx.classGroupId).delivery_mode || "in_person")}</select>
+        <select class="form-select" name="locationId" data-foundation-lesson-field><option value="">${FS("lessonLocation")}</option>${foundationLocationOptions(ctx.locationId || foundationClassGroupById(ctx.classGroupId).primary_location_id || "")}</select>
         <select class="form-select" name="teacherId" data-foundation-lesson-field><option value="">${FS("responsibleTeacher")}</option>${foundationSelectOptions(state.foundationTeachers || [], "id", "full_name", ctx.teacherId)}</select>
         <input class="form-control" name="date" type="date" value="${ctx.date || new Date().toISOString().slice(0, 10)}" data-foundation-lesson-field>
         <button type="button" class="btn btn-ce-gold btn-touch" data-foundation-save-all><i class="bi bi-check2-circle me-1"></i>${FS("massProgress")}</button>
       </form>
-      ${dataTable([FS("foundationTabStudents"), FS("attendance"), FS("score"), lang === "pt" ? "Teste corrigido" : "Corrected test", L("status"), L("notes"), L("actions")], groupStudents.map((student) => {
+      ${dataTable([FS("foundationTabStudents"), FS("attendance"), FS("deliveryMode"), FS("onlineTestResult"), FS("soulWinning"), L("status"), L("notes"), L("actions")], groupStudents.map((student) => {
         const lesson = foundationNormalizeLessonRecord(foundationLessonRecords(student.id).find((item) => Number(item.lesson_number) === lessonNumber) || {});
-        const passed = Number(lesson.test_score || 0) >= Number(state.foundationSchoolSettings?.passing_score_per_lesson || 50);
+        const session = foundationSessionByContext(student.class_group_id, lessonNumber) || {};
+        const submission = foundationBestLessonSubmission(student.id, lessonNumber);
+        const passed = submission ? Number(submission.test_score || submission.percentage || 0) >= Number(state.foundationSchoolSettings?.passing_score_per_lesson || 50) : false;
+        const soul = foundationSoulWinningForStudent(student.id);
         return [
           `<strong>${fullName(student)}</strong><small class="d-block text-secondary">${student.class_group_name || ""}</small>`,
           `<label class="form-check mb-0"><input type="checkbox" class="form-check-input" data-foundation-row-field="attended" data-student-id="${student.id}" ${lesson.attended ? "checked" : ""}> ${FS("present")}</label>`,
-          `<div class="foundation-score-entry"><input type="number" min="0" step="0.5" class="form-control form-control-sm" data-foundation-row-field="scoreObtained" data-student-id="${student.id}" value="${lesson.test_score_obtained ?? ""}" placeholder="${lang === "pt" ? "Obtido" : "Obtained"}"><span>/</span><input type="number" min="1" step="0.5" class="form-control form-control-sm" data-foundation-row-field="scoreMax" data-student-id="${student.id}" value="${lesson.test_score_max || foundationDefaultLessonMaxScore()}" placeholder="${lang === "pt" ? "Máx." : "Max"}"></div><small class="d-block text-secondary mt-1">${foundationLessonScoreLabel(lesson)}</small>`,
-          `<div class="foundation-attachment-field"><input type="file" class="form-control form-control-sm" data-foundation-row-field="attachment" data-student-id="${student.id}" accept="image/*,application/pdf">${foundationAttachmentLink(lesson) || `<small class="d-block text-secondary mt-1">${lang === "pt" ? "Imagem ou PDF" : "Image or PDF"}</small>`}</div>`,
-          badge(lesson.attended ? (lesson.test_score !== "" ? (passed ? FS("passed") : FS("failed")) : FS("lessonCompleted")) : FS("notStarted")),
+          `${foundationDeliveryLabel(lesson.delivery_mode || session.delivery_mode || student.assigned_delivery_mode)}<small class="d-block text-secondary">${lesson.location_name || session.location_name || student.assigned_location_name || ""}</small>`,
+          submission ? `${foundationLessonScoreLabel(submission)}<small class="d-block text-secondary">${statusText(submission.review_status)} · ${submission.submitted_at ? new Date(submission.submitted_at).toLocaleDateString() : ""}</small>` : `<span class="text-secondary">${FS("testNotSubmitted")}</span>`,
+          lessonNumber === 4 ? `${Number(soul.souls_won_count || student.numero_de_almas_ganhas || 0)}<small class="d-block text-secondary">${statusText(soul.status || "Pendente")}</small>` : "-",
+          badge(lesson.attended ? (submission ? (passed ? FS("passed") : FS("failed")) : FS("lessonCompleted")) : FS("notStarted")),
           `<input class="form-control form-control-sm" data-foundation-row-field="notes" data-student-id="${student.id}" value="${lesson.notes || ""}" placeholder="${L("notes")}">`,
           `<button type="button" class="action-btn" data-foundation-save-row="${student.id}">${FS("saveProgress")}</button>`
         ];
@@ -9175,26 +10042,45 @@ function renderFoundationLessons(students) {
   `;
 }
 
+function renderFoundationOnlineTests(students) {
+  const allowed = new Set(["links", "submissions", "studentResults", "review"]);
+  const section = allowed.has(foundationPageState.lesson.section) ? foundationPageState.lesson.section : "links";
+  const nav = moduleTabsNav([
+    moduleTabButton(FS("testLinks"), { active: section === "links", attrs: `data-foundation-lesson-section="links"` }),
+    moduleTabButton(FS("receivedResults"), { active: section === "submissions", attrs: `data-foundation-lesson-section="submissions"` }),
+    moduleTabButton(FS("resultsByStudent"), { active: section === "studentResults", attrs: `data-foundation-lesson-section="studentResults"` }),
+    moduleTabButton(FS("rectorReview"), { active: section === "review", attrs: `data-foundation-lesson-section="review"` })
+  ].join(""));
+  if (section === "submissions") return `${nav}${foundationReceivedResultsPanel()}`;
+  if (section === "studentResults") return `${nav}${foundationResultsByStudentPanel(students)}`;
+  if (section === "review") return `${nav}${foundationRectorReviewPanel()}`;
+  return `${nav}${foundationLessonLinksPanel()}`;
+}
+
 function renderFoundationFinalExam() {
   const ready = foundationReadyForExamStudents();
   const exams = state.foundationFinalExams || [];
-  return moduleSection(FS("finalExam"), FS("finalExamHint"), "bi-clipboard-check", "", `
-    ${dataTable([FS("foundationTabStudents"), FS("classGroup"), FS("progress"), FS("score"), lang === "pt" ? "Exame corrigido" : "Corrected exam", L("status"), L("actions")], [...ready, ...foundationStudentsForGroup().filter((s) => s.final_exam_passed || s.aprovado)].map((student) => {
+  const rows = [...ready, ...foundationStudentsForGroup().filter((s) => s.final_exam_passed || s.aprovado || Number(s.nota_exame || s.final_exam_score || 0) > 0)];
+  const settings = foundationGradingSettings();
+  return moduleSection(FS("physicalExam"), `${FS("finalExamHint")} ${FS("gradeFormulaHint")}`, "bi-clipboard-check", "", `
+    ${dataTable([FS("foundationTabStudents"), FS("classGroup"), FS("lessonTestsTotal"), FS("score"), FS("attachmentStatus"), FS("correctedBy"), L("status"), L("actions")], rows.map((student) => {
       const exam = exams.find((item) => item.student_id === student.id) || {};
+      const grade = foundationCourseGrade(student);
       const score = Number(exam.score || student.final_exam_score || student.nota_exame || 0);
+      const hasAttachment = !!(exam.physical_exam_file_url || exam.exam_attachment_data_url);
       return [
         fullName(student),
         student.class_group_name || "-",
-        `${getFoundationCompletedClasses(student)}/7`,
-        `<input type="number" min="0" max="100" class="form-control form-control-sm" data-foundation-exam-score="${student.id}" value="${score || ""}" placeholder="${FS("score")}">`,
-        `<div class="foundation-attachment-field"><input type="file" class="form-control form-control-sm" data-foundation-exam-attachment="${student.id}" accept="image/*,application/pdf">${foundationExamAttachmentLink(exam) || `<small class="d-block text-secondary mt-1">${lang === "pt" ? "Imagem ou PDF" : "Image or PDF"}</small>`}</div>`,
-        badge(score ? (score >= Number(state.foundationSchoolSettings?.final_exam_passing_score || 50) ? FS("passed") : FS("failed")) : FS("studentsReadyForExam")),
+        `${grade.lesson_tests_total_score}/${grade.lesson_tests_max_score}<small class="d-block text-secondary">${grade.lesson_tests_percentage}%</small>`,
+        `<div class="foundation-score-entry"><input type="number" min="0" max="${settings.final_exam_max_score}" class="form-control form-control-sm" data-foundation-exam-score="${student.id}" value="${score || ""}" placeholder="${FS("score")}"><span>/</span><input type="number" min="1" class="form-control form-control-sm" data-foundation-exam-max="${student.id}" value="${exam.max_score || settings.final_exam_max_score}"></div><small class="d-block text-secondary mt-1">${grade.course_final_percentage}% ${FS("courseGrade")}</small>`,
+        `<div class="foundation-attachment-field"><input type="file" class="form-control form-control-sm" data-foundation-exam-attachment="${student.id}" accept="image/*,application/pdf">${foundationExamAttachmentLink(exam) || `<small class="d-block text-secondary mt-1">${FS("noAttachment")}</small>`}</div>`,
+        exam.corrected_by_name || exam.marked_by_name || "-",
+        badge(hasAttachment ? FS("attached") : (score ? FS("examNeedsAttachment") : FS("studentsReadyForExam"))),
         `<button type="button" class="action-btn" data-foundation-save-exam="${student.id}">${FS("enterScore")}</button>`
       ];
     }))}
   `);
 }
-
 function renderFoundationSoulWinning() {
   const rows = state.foundationSoulWinning || [];
   return moduleSection(FS("soulWinning"), `${FS("lesson")} 4`, "bi-stars", "", `
@@ -9221,14 +10107,16 @@ function renderFoundationTeachers() {
       <div></div>
       <button type="button" class="btn btn-ce-gold btn-touch" data-foundation-teacher-add><i class="bi bi-plus-lg me-1"></i>${L("add")}</button>
     </div>
-    ${dataTable([FS("foundationTabTeachers"), L("phone"), L("church"), FS("lessonsAllowed"), FS("assignedClasses"), FS("testsEntered"), L("status"), L("actions")], teachers.map((teacher) => {
+    ${dataTable([FS("foundationTabTeachers"), L("phone"), L("church"), FS("lessonsAllowed"), FS("deliveryModesAllowed"), FS("assignedClasses"), FS("testsEntered"), L("status"), L("actions")], teachers.map((teacher) => {
       const classes = (state.foundationClassGroups || []).filter((group) => group.main_teacher_id === teacher.id || group.assistant_teacher_id === teacher.id);
-      const lessons = (state.foundationLessonProgress || []).filter((item) => item.teacher_id === teacher.id && item.test_score !== "");
+      const lessonStudentIds = new Set((state.foundationLessonProgress || []).filter((item) => item.teacher_id === teacher.id).map((item) => item.student_id));
+      const lessons = (state.foundationLessonTestSubmissions || []).filter((item) => lessonStudentIds.has(item.student_id));
       return [
         `<strong>${teacher.full_name}</strong><small class="d-block text-secondary">${teacher.title || ""}</small>`,
         teacher.phone || "-",
         teacher.church_name || churchName(teacher.church_id),
-        teacher.can_teach_all_lessons ? FS("canTeachAll") : (teacher.subjects_or_lessons_allowed || []).map((n) => `${FS("lesson")} ${n}`).join(", "),
+        `<div class="d-flex flex-wrap gap-1">${(teacher.can_teach_all_lessons ? [1, 2, 3, 4, 5, 6, 7] : (teacher.subjects_or_lessons_allowed || [])).map((n) => badge(`${FS("lesson")} ${n}`)).join("")}</div>`,
+        `<div class="d-flex flex-wrap gap-1">${(teacher.delivery_modes_allowed || []).map((mode) => badge(foundationDeliveryLabel(mode))).join("")}</div>`,
         classes.length,
         lessons.length,
         badge(teacher.status),
@@ -9261,11 +10149,18 @@ function renderFoundationReports(students) {
   }, {}));
   const teacherRows = (state.foundationTeachers || []).map((teacher) => {
     const lessonRows = (state.foundationLessonProgress || []).filter((item) => item.teacher_id === teacher.id && item.attended);
-    const scores = lessonRows.map((item) => Number(item.test_score || 0)).filter(Boolean);
+    const lessonStudentIds = new Set(lessonRows.map((item) => item.student_id));
+    const scores = (state.foundationLessonTestSubmissions || []).filter((item) => lessonStudentIds.has(item.student_id)).map((item) => Number(item.percentage || item.test_score || 0)).filter(Boolean);
     return [teacher.full_name, lessonRows.length, new Set(lessonRows.map((item) => item.student_id)).size, scores.length, scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : "-", (state.foundationClassGroups || []).filter((group) => group.main_teacher_id === teacher.id || group.assistant_teacher_id === teacher.id).length];
   });
+  const byDelivery = FOUNDATION_DELIVERY_MODES.map((mode) => [mode[lang], students.filter((student) => student.assigned_delivery_mode === mode.id || foundationClassGroupById(student.class_group_id).delivery_mode === mode.id).length]);
+  const lessonsByDelivery = FOUNDATION_DELIVERY_MODES.map((mode) => [mode[lang], (state.foundationLessonSessions || []).filter((session) => session.delivery_mode === mode.id).length]);
+  const prisonLessons = (state.foundationLessonSessions || []).filter((session) => session.delivery_mode === "prison_ministry");
   return `
     ${moduleSection(FS("studentsByStatus"), L("reports"), "bi-bar-chart", "", dataTable([L("status"), L("total")], byStatus.map(([status, total]) => [badge(status), total])))}
+    ${moduleSection(lang === "pt" ? "Alunos por formato de aula" : "Students by lesson format", L("reports"), "bi-pie-chart", "", dataTable([FS("deliveryMode"), L("total")], byDelivery))}
+    ${moduleSection(lang === "pt" ? "Aulas dadas por formato" : "Lessons by format", L("reports"), "bi-columns-gap", "", dataTable([FS("deliveryMode"), L("total")], lessonsByDelivery))}
+    ${moduleSection(lang === "pt" ? "Aulas em centros penitenciários" : "Prison center lessons", L("reports"), "bi-shield-check", "", dataTable([FS("classGroup"), FS("lesson"), FS("lessonLocation"), FS("responsibleTeacher"), L("status")], prisonLessons.map((session) => [session.class_group_name, `${FS("lesson")} ${session.lesson_number}`, session.location_name || session.prison_center_name || "-", session.teacher_name || "-", badge(session.status)])))}
     ${moduleSection(FS("progressByClass"), L("reports"), "bi-graph-up", "", dataTable([FS("classGroup"), L("church"), FS("averageProgress"), FS("enrolledStudentsCount")], foundationScopedClassGroups().map((group) => [group.name, group.church_name || churchName(group.church_id), `${foundationClassProgressForGroup(group.id)}%`, foundationStudentsForGroup(group.id).length])))}
     ${moduleSection(FS("teacherPerformance"), L("reports"), "bi-person-check", "", dataTable([FS("foundationTabTeachers"), FS("lessonsThisWeek"), FS("studentsTaught"), FS("testsEntered"), L("average"), FS("assignedClasses")], teacherRows))}
     ${renderDomainReportsPanel("foundation", { module: "foundation", showTitle: false })}
@@ -9279,6 +10174,7 @@ function renderFoundationActiveTab(students, pending) {
   if (tab === "classes") return renderFoundationClasses();
   if (tab === "students") return renderFoundationStudents(students);
   if (tab === "lessons") return renderFoundationLessons(students);
+  if (tab === "onlineTests") return renderFoundationOnlineTests(students);
   if (tab === "finalExam") return renderFoundationFinalExam();
   if (tab === "soulWinning") return renderFoundationSoulWinning();
   if (tab === "teachers") return renderFoundationTeachers();
@@ -9296,39 +10192,53 @@ async function saveFoundationLessonRow(studentId) {
     state.foundationLessonProgress.push(record);
   }
   const attended = document.querySelector(`[data-foundation-row-field="attended"][data-student-id="${studentId}"]`)?.checked || false;
-  const scoreObtainedValue = document.querySelector(`[data-foundation-row-field="scoreObtained"][data-student-id="${studentId}"]`)?.value || "";
-  const scoreMaxValue = document.querySelector(`[data-foundation-row-field="scoreMax"][data-student-id="${studentId}"]`)?.value || foundationDefaultLessonMaxScore();
   const notes = document.querySelector(`[data-foundation-row-field="notes"][data-student-id="${studentId}"]`)?.value || "";
-  const attachment = await readFoundationTestAttachment(studentId);
   const teacher = foundationTeacherById(ctx.teacherId) || {};
+  const group = foundationClassGroupById(ctx.classGroupId);
+  const loc = foundationLocationById(ctx.locationId || group.primary_location_id);
+  let session = foundationSessionByContext(ctx.classGroupId, lessonNumber);
   const now = new Date().toISOString();
-  const oldValue = JSON.stringify({ attended: record.attended, score: record.test_score, attachment: record.test_attachment_name || "" });
-  const scoreMax = Number(scoreMaxValue || foundationDefaultLessonMaxScore());
-  const scoreObtained = scoreObtainedValue === "" ? "" : Number(scoreObtainedValue);
-  const scorePercent = foundationLessonScorePercent(scoreObtained, scoreMax);
+  const oldValue = JSON.stringify({ attended: record.attended, notes: record.notes || "" });
+  if (!session) {
+    session = {
+      id: `fls-${ctx.classGroupId}-${lessonNumber}-${Date.now()}`,
+      class_group_id: ctx.classGroupId,
+      class_group_name: group.name || "",
+      lesson_number: lessonNumber,
+      lesson_title: FOUNDATION_LESSON_TITLES[lessonNumber - 1],
+      created_by: activeUser?.name || "Admin Principal",
+      created_at: now.slice(0, 10)
+    };
+    state.foundationLessonSessions.push(session);
+  }
+  session.delivery_mode = ctx.deliveryMode || group.delivery_mode || "in_person";
+  session.location_id = ctx.locationId || group.primary_location_id || "";
+  session.location_name = loc.name || group.primary_location_name || "";
+  session.location_type = loc.location_type || group.location_type || "";
+  session.prison_center_id = loc.prison_center_id || group.prison_center_id || "";
+  session.prison_center_name = loc.prison_center_name || group.prison_center_name || "";
+  session.online_platform = loc.online_platform || group.online_platform || "";
+  session.online_link = loc.online_link || group.online_link || "";
+  session.lesson_date = ctx.date || session.lesson_date || now.slice(0, 10);
+  session.teacher_id = ctx.teacherId || session.teacher_id || group.main_teacher_id || "";
+  session.teacher_name = teacher.full_name || session.teacher_name || group.main_teacher_name || "";
+  session.status = attended ? "Realizada" : (session.status || "Agendada");
+  session.updated_at = now.slice(0, 10);
+  record.lesson_session_id = session.id;
   record.class_group_id = ctx.classGroupId || record.class_group_id;
   record.lesson_date = ctx.date || record.lesson_date || now.slice(0, 10);
   record.teacher_id = ctx.teacherId || record.teacher_id;
   record.teacher_name = teacher.full_name || record.teacher_name || "";
+  record.delivery_mode = session.delivery_mode;
+  record.location_id = session.location_id;
+  record.location_name = session.location_name;
   record.attended = attended;
   record.attendance_marked_by = attended ? (activeUser?.name || "Admin Principal") : "";
   record.attendance_marked_at = attended ? now : "";
   record.lesson_completed = attended;
   record.lesson_completed_by = attended ? (activeUser?.name || "Admin Principal") : "";
   record.lesson_completed_at = attended ? now : "";
-  record.test_score_obtained = scoreObtained;
-  record.test_score_max = scoreMax;
-  record.test_score = scorePercent;
-  record.test_passed = scorePercent !== "" ? Number(scorePercent) >= Number(state.foundationSchoolSettings?.passing_score_per_lesson || 50) : false;
-  record.test_marked_by = scorePercent !== "" ? (activeUser?.name || "Admin Principal") : "";
-  record.test_marked_at = scorePercent !== "" ? now : "";
-  if (attachment) {
-    record.test_attachment_name = attachment.name;
-    record.test_attachment_type = attachment.type;
-    record.test_attachment_data_url = attachment.dataUrl;
-    record.test_attachment_uploaded_by = activeUser?.name || "Admin Principal";
-    record.test_attachment_uploaded_at = now;
-  }
+  record.test_score_max = getLessonMaxScore(lessonNumber);
   record.notes = notes;
   record.updated_at = now.slice(0, 10);
   const studentIndex = (state.foundationStudents || []).findIndex((student) => student.id === studentId);
@@ -9337,13 +10247,27 @@ async function saveFoundationLessonRow(studentId) {
     attendance[`class_${lessonNumber}`] = attended;
     state.foundationStudents[studentIndex] = applyFoundationCalculations({ ...state.foundationStudents[studentIndex], class_attendance: attendance, updated_at: now.slice(0, 10) }, true);
   }
-  foundationAudit("lesson_progress_updated", "foundationLessonProgress", record.id, oldValue, JSON.stringify({ attended, score: foundationLessonScoreLabel(record), attachment: record.test_attachment_name || "" }), `${FS("lesson")} ${lessonNumber} - ${fullName((state.foundationStudents || []).find((s) => s.id === studentId) || {})}`);
+  let attendance = (state.foundationLessonAttendance || []).find((item) => item.lesson_session_id === session.id && item.student_id === studentId);
+  if (!attendance) {
+    attendance = { id: `fla-${session.id}-${studentId}`, lesson_session_id: session.id, student_id: studentId, class_group_id: record.class_group_id, lesson_number: lessonNumber };
+    state.foundationLessonAttendance.push(attendance);
+  }
+  attendance.student_name = fullName((state.foundationStudents || []).find((student) => student.id === studentId) || {});
+  attendance.attended = attended;
+  attendance.attendance_status = attended ? (session.delivery_mode === "online" ? "Online Confirmado" : session.delivery_mode === "home_visit" ? "Domicílio Confirmado" : session.delivery_mode === "prison_ministry" ? "Prisão Confirmado" : "Presente") : "Ausente";
+  attendance.marked_by_user_id = activeUser?.id || "u-1";
+  attendance.marked_by_name = activeUser?.name || "Admin Principal";
+  attendance.marked_at = now;
+  attendance.notes = notes;
+  foundationAudit("lesson_attendance_updated", "foundationLessonAttendance", record.id, oldValue, JSON.stringify({ attended, lesson_date: record.lesson_date, teacher: record.teacher_name }), `${FS("lesson")} ${lessonNumber} - ${fullName((state.foundationStudents || []).find((s) => s.id === studentId) || {})}`);
 }
-
 async function saveFoundationExam(studentId) {
   const input = document.querySelector(`[data-foundation-exam-score="${studentId}"]`);
+  const maxInput = document.querySelector(`[data-foundation-exam-max="${studentId}"]`);
   const score = Number(input?.value || 0);
-  const passed = score >= Number(state.foundationSchoolSettings?.final_exam_passing_score || 50);
+  const maxScore = Number(maxInput?.value || foundationGradingSettings().final_exam_max_score || 100);
+  const percentage = maxScore ? Math.round((score / maxScore) * 100) : 0;
+  const passed = percentage >= Number(foundationGradingSettings().passing_percentage || state.foundationSchoolSettings?.final_exam_passing_score || 50);
   const attachment = await readFoundationExamAttachment(studentId);
   let exam = (state.foundationFinalExams || []).find((item) => item.student_id === studentId);
   if (!exam) {
@@ -9351,24 +10275,41 @@ async function saveFoundationExam(studentId) {
     state.foundationFinalExams.push(exam);
   }
   const now = new Date().toISOString();
+  exam.class_group_id = exam.class_group_id || (state.foundationStudents || []).find((student) => student.id === studentId)?.class_group_id || "";
+  exam.exam_date = exam.exam_date || now.slice(0, 10);
   exam.score = score;
+  exam.max_score = maxScore;
+  exam.percentage = percentage;
   exam.passed = passed;
-  exam.marked_by_user_id = activeUser?.id || "u-1";
-  exam.marked_by_name = activeUser?.name || "Admin Principal";
+  exam.corrected_by = activeUser?.id || "u-1";
+  exam.corrected_by_name = activeUser?.name || "Admin Principal";
+  exam.corrected_at = now;
+  exam.marked_by_user_id = exam.corrected_by;
+  exam.marked_by_name = exam.corrected_by_name;
   exam.marked_at = now;
   if (attachment) {
     exam.exam_attachment_name = attachment.name;
     exam.exam_attachment_type = attachment.type;
     exam.exam_attachment_data_url = attachment.dataUrl;
+    exam.physical_exam_file_name = attachment.name;
+    exam.physical_exam_file_url = attachment.dataUrl;
+    exam.physical_exam_file_type = attachment.type;
+    exam.scanned_by = activeUser?.name || "Admin Principal";
+    exam.scanned_at = now;
+    exam.uploaded_by = activeUser?.name || "Admin Principal";
+    exam.uploaded_at = now;
+    exam.scanned_by_app = false;
+    exam.scan_session_id = "";
+    exam.document_type = "foundation_final_exam";
     exam.exam_attachment_uploaded_by = activeUser?.name || "Admin Principal";
     exam.exam_attachment_uploaded_at = now;
   }
   exam.updated_at = now.slice(0, 10);
   const index = (state.foundationStudents || []).findIndex((student) => student.id === studentId);
   if (index >= 0) {
-    state.foundationStudents[index] = applyFoundationCalculations({ ...state.foundationStudents[index], final_exam_score: score, nota_exame: score, final_exam_passed: passed, aprovado: passed, estado: passed ? "Aprovado" : "Reprovado", updated_at: now.slice(0, 10) }, false);
+    state.foundationStudents[index] = applyFoundationCalculations({ ...state.foundationStudents[index], final_exam_score: score, nota_exame: score, final_exam_passed: passed, aprovado: passed, estado: passed ? "Aprovado" : "Reprovado", updated_at: now.slice(0, 10) }, true);
   }
-  foundationAudit("final_exam_updated", "foundationFinalExam", exam.id, "", JSON.stringify({ score, passed, attachment: exam.exam_attachment_name || "" }), fullName((state.foundationStudents || []).find((s) => s.id === studentId) || {}));
+  foundationAudit("final_exam_updated", "foundationFinalExam", exam.id, "", JSON.stringify({ score, maxScore, percentage, passed, attachment: exam.physical_exam_file_name || "" }), fullName((state.foundationStudents || []).find((s) => s.id === studentId) || {}));
 }
 
 function renderFoundation() {
@@ -10341,6 +11282,24 @@ function renderPrisonMinistry() {
   const prisons = scopedNested(state.prisonMinistry.prisons);
   const services = scopedNested(state.prisonMinistry.services);
   const students = scopedNested(state.prisonMinistry.foundationStudents);
+  const foundationPrisonStudents = (state.foundationStudents || []).filter((student) => student.is_prison_ministry_student || student.assigned_delivery_mode === "prison_ministry" || foundationClassGroupById(student.class_group_id).delivery_mode === "prison_ministry");
+  const foundationPrisonSessions = (state.foundationLessonSessions || []).filter((session) => session.delivery_mode === "prison_ministry");
+  const foundationPrisonReady = foundationPrisonStudents.filter((student) => foundationReadyForExamStudents().some((ready) => ready.id === student.id));
+  const foundationPrisonGraduated = foundationPrisonStudents.filter((student) => student.graduado || student.graduated);
+  const foundationPrisonTeachers = new Set(foundationPrisonSessions.map((session) => session.teacher_id).filter(Boolean));
+  const prisonFoundationRows = foundationPrisonStudents.length
+    ? foundationPrisonStudents.map((item) => [
+        fullName(item),
+        item.prison_center_name || foundationLocationById(item.assigned_location_id).name || "-",
+        `${Number(item.completed_classes || 0)}/7`,
+        item.nota_exame || "-",
+        yesNo(item.pratica_evangelismo),
+        yesNo(item.graduado || item.graduated),
+        badge(item.estado),
+        foundationStudentCompactProgress(item),
+        backendActions("foundationStudent", item.id)
+      ])
+    : students.map((item) => [item.nome_do_participante, prisonName(item.prisao), `${prisonClassCount(item)}/7`, item.nota_exame || "-", yesNo(item.pratica_evangelismo), yesNo(item.graduado), badge(item.estado), prisonProgress(item), backendActions("prisonFoundation", item.id)]);
   const agenda = scopedNested(state.prisonMinistry.weeklyAgenda);
   const reports = scopedNested(state.prisonMinistry.reports);
   const thisWeekServices = services.filter((service) => service.data >= "2026-07-06" && service.data <= "2026-07-12");
@@ -10360,13 +11319,16 @@ function renderPrisonMinistry() {
       ${metric("bi-calendar-week", L("servicesThisWeek"), thisWeekServices.length, "Quinta / Sexta")}
       ${metric("bi-people", L("inmatesReached"), services.reduce((sum, item) => sum + Number(item.numero_de_internos_presentes || 0), 0), L("thisMonth"))}
       ${metric("bi-stars", L("prisonNewConverts"), services.reduce((sum, item) => sum + Number(item.novos_convertidos || 0), 0), L("newConverts"))}
-      ${metric("bi-mortarboard", L("prisonFoundationStudents"), students.length, L("foundationSchool"))}
+      ${metric("bi-mortarboard", L("prisonFoundationStudents"), foundationPrisonStudents.length || students.length, L("foundationSchool"))}
+      ${metric("bi-person-video3", FS("responsibleTeacher"), foundationPrisonTeachers.size, FS("deliveryMode"))}
+      ${metric("bi-clipboard-check", L("readyForExam"), foundationPrisonReady.length, L("foundationSchool"))}
+      ${metric("bi-award", L("graduated"), foundationPrisonGraduated.length, L("graduation"))}
       ${metric("bi-clipboard-check", L("pendingReports"), services.filter((item) => item.estado !== "Relatório Submetido").length, L("needsAction"))}
     </div>
     <div class="row g-4">
       <div class="col-12">${modulePanel("prisonLocation", L("prisonsLocations"), "prisonLocation", [L("prisonName"), L("province"), L("city"), L("responsibleChurch"), L("prisonRepresentative"), L("status"), L("actions")], prisons.map((item) => [item.nome_da_prisao, item.provincia, item.cidade, churchName(item.igreja_responsavel), item.representante_da_prisao, badge(item.estado), backendActions("prisonLocation", item.id)]), true)}</div>
       <div class="col-12">${modulePanel("prisonService", L("prisonServices"), "prisonService", [L("date"), L("weekday"), L("prison"), L("responsibleLeader"), L("inmatesPresent"), L("prisonNewConverts"), L("status"), L("actions")], services.map((item) => [item.data, item.dia_da_semana, prisonName(item.prisao), item.lider_responsavel, item.numero_de_internos_presentes, item.novos_convertidos, badge(item.estado), backendActions("prisonService", item.id)]), true)}</div>
-      <div class="col-12">${modulePanel("prisonFoundation", L("foundationSchool"), "prisonFoundation", [L("participantName"), L("prison"), L("classes"), L("exam"), L("evangelismPractice"), L("graduated"), L("status"), L("progress"), L("actions")], students.map((item) => [item.nome_do_participante, prisonName(item.prisao), `${prisonClassCount(item)}/7`, item.nota_exame || "-", yesNo(item.pratica_evangelismo), yesNo(item.graduado), badge(item.estado), prisonProgress(item), backendActions("prisonFoundation", item.id)]), true)}</div>
+      <div class="col-12">${modulePanel("prisonFoundation", L("foundationSchool"), "foundationStudent", [L("participantName"), L("prison"), L("classes"), L("exam"), L("evangelismPractice"), L("graduated"), L("status"), L("progress"), L("actions")], prisonFoundationRows, true)}</div>
       <div class="col-xl-6">${modulePanel("prisonAgenda", L("weeklyAgenda"), "prisonAgenda", [L("weekStart"), L("weekEnd"), L("responsible"), L("thursdayService"), L("fridayService"), L("status"), L("actions")], agenda.map((item) => [item.semana_inicio, item.semana_fim, item.responsavel, yesNo(item.quinta_servico_prisional), yesNo(item.sexta_servico_prisional), badge(item.estado), backendActions("prisonAgenda", item.id)]), false)}</div>
       <div class="col-xl-6">${modulePanel("prisonReport", L("ministryReports"), null, [L("name"), L("category"), L("status"), L("actions")], reports.map((item) => [item.name, item.category, badge(item.estado || item.status), backendActions("prisonReport", item.id)]), false)}</div>
     </div>
@@ -13932,7 +14894,91 @@ document.addEventListener("click", async (event) => {
   const foundationTabBtn = event.target.closest("[data-foundation-tab]");
   if (foundationTabBtn) {
     foundationPageState.tab = foundationTabBtn.dataset.foundationTab || "overview";
+    if (foundationPageState.tab === "onlineTests" && !["links", "submissions", "studentResults", "review"].includes(foundationPageState.lesson.section)) foundationPageState.lesson.section = "links";
     if (activeRoute === "foundation") renderFoundation();
+    return;
+  }
+  const foundationLessonSectionBtn = event.target.closest("[data-foundation-lesson-section]");
+  if (foundationLessonSectionBtn) {
+    foundationPageState.lesson.section = foundationLessonSectionBtn.dataset.foundationLessonSection || "attendance";
+    if (activeRoute === "foundation") renderFoundation();
+    return;
+  }
+  const copyTextBtn = event.target.closest("[data-copy-text]");
+  if (copyTextBtn) {
+    const text = copyTextBtn.dataset.copyText || "";
+    if (text && navigator.clipboard) await navigator.clipboard.writeText(text);
+    return;
+  }
+  const importResultsBtn = event.target.closest("[data-foundation-import-results]");
+  if (importResultsBtn) {
+    const test = (state.foundationLessonOnlineTests || []).find((item) => item.id === importResultsBtn.dataset.foundationImportResults);
+    foundationAudit("online_test_import_mock", "foundationLessonOnlineTest", test?.id || "", "", test?.form_url || "", activeUser?.name || "Admin Principal");
+    saveState("Mock imported Foundation School online test results");
+    if (activeRoute === "foundation") renderFoundation();
+    return;
+  }
+  const confirmSubmissionBtn = event.target.closest("[data-foundation-confirm-submission]");
+  if (confirmSubmissionBtn) {
+    const record = (state.foundationLessonTestSubmissions || []).find((item) => item.id === confirmSubmissionBtn.dataset.foundationConfirmSubmission);
+    if (record && foundationCanReviewResults()) {
+      const oldValue = JSON.stringify({ review_status: record.review_status, score: record.score });
+      record.review_status = "Confirmed";
+      record.reviewed_by = activeUser?.name || "Admin Principal";
+      record.reviewed_at = new Date().toISOString();
+      record.updated_at = new Date().toISOString().slice(0, 10);
+      foundationAudit("lesson_test_submission_confirmed", "foundationLessonTestSubmission", record.id, oldValue, JSON.stringify({ review_status: record.review_status, score: record.score }), record.student_name || "");
+      saveState("Confirmed Foundation School online test submission");
+      if (activeRoute === "foundation") renderFoundation();
+    }
+    return;
+  }
+  const correctSubmissionBtn = event.target.closest("[data-foundation-correct-submission]");
+  if (correctSubmissionBtn) {
+    const record = (state.foundationLessonTestSubmissions || []).find((item) => item.id === correctSubmissionBtn.dataset.foundationCorrectSubmission);
+    if (record && foundationCanReviewResults()) {
+      const maxScore = getLessonMaxScore(record.lesson_number);
+      const scoreInput = prompt(`${FS("overrideScore")} (0-${maxScore})`, String(record.score ?? ""));
+      if (scoreInput === null) return;
+      const reason = prompt(FS("overrideReason"), "");
+      if (!reason) {
+        alert(lang === "pt" ? "O motivo da correcção é obrigatório." : "Override reason is required.");
+        return;
+      }
+      const oldValue = JSON.stringify({ review_status: record.review_status, score: record.score });
+      record.rector_override_score = Number(scoreInput || 0);
+      record.rector_override_reason = reason;
+      record.score = Number(scoreInput || 0);
+      record.test_score_obtained = record.score;
+      record.max_score = maxScore;
+      record.test_score_max = maxScore;
+      record.percentage = maxScore ? Math.round((record.score / maxScore) * 100) : 0;
+      record.test_score = record.percentage;
+      record.passed = record.percentage >= Number(state.foundationSchoolSettings?.passing_score_per_lesson || 50);
+      record.test_passed = record.passed;
+      record.review_status = "Corrected by Rector";
+      record.reviewed_by = activeUser?.name || "Admin Principal";
+      record.reviewed_at = new Date().toISOString();
+      record.updated_at = new Date().toISOString().slice(0, 10);
+      foundationAudit("lesson_test_score_overridden", "foundationLessonTestSubmission", record.id, oldValue, JSON.stringify({ score: record.score, reason }), record.student_name || "");
+      saveState("Corrected Foundation School online test score");
+      if (activeRoute === "foundation") renderFoundation();
+    }
+    return;
+  }
+  const rejectSubmissionBtn = event.target.closest("[data-foundation-reject-submission]");
+  if (rejectSubmissionBtn) {
+    const record = (state.foundationLessonTestSubmissions || []).find((item) => item.id === rejectSubmissionBtn.dataset.foundationRejectSubmission);
+    if (record && foundationCanReviewResults() && confirm(lang === "pt" ? "Rejeitar esta submissão?" : "Reject this submission?")) {
+      const oldValue = JSON.stringify({ review_status: record.review_status, score: record.score });
+      record.review_status = "Rejected";
+      record.reviewed_by = activeUser?.name || "Admin Principal";
+      record.reviewed_at = new Date().toISOString();
+      record.updated_at = new Date().toISOString().slice(0, 10);
+      foundationAudit("lesson_test_submission_rejected", "foundationLessonTestSubmission", record.id, oldValue, JSON.stringify({ review_status: record.review_status }), record.student_name || "");
+      saveState("Rejected Foundation School online test submission");
+      if (activeRoute === "foundation") renderFoundation();
+    }
     return;
   }
   if (event.target.closest("[data-foundation-teacher-add]")) {

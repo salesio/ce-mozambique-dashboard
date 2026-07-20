@@ -269,6 +269,22 @@
         notifications: { ...VIEW_ONLY, scope: "own" }
       }
     },
+    "Foundation Rector": {
+      modules: {
+        dashboard: { ...VIEW_ONLY, scope: "all" },
+        foundation: { can_view: true, can_create: true, can_edit: true, can_delete: false, can_approve: true, can_verify: true, can_export: true, scope: "all" },
+        notifications: { ...VIEW_ONLY, scope: "all" },
+        reports: { ...VIEW_ONLY, scope: "all", can_export: true }
+      }
+    },
+    "Foundation Coordinator": {
+      modules: {
+        dashboard: { ...VIEW_ONLY, scope: "all" },
+        foundation: { can_view: true, can_create: true, can_edit: true, can_delete: false, can_approve: true, can_verify: true, can_export: true, scope: "all" },
+        notifications: { ...VIEW_ONLY, scope: "all" },
+        reports: { ...VIEW_ONLY, scope: "all", can_export: true }
+      }
+    },
     "Foundation Assistant": {
       modules: {
         dashboard: { ...VIEW_ONLY, scope: "own" },
@@ -457,8 +473,8 @@
     const requisitionApprovalTabs = new Set(["review", "pastoral", "approved"]);
     const requisitionFinanceTabs = new Set(["released"]);
     const requisitionReportTabs = new Set(["reports", "history"]);
-    const foundationTeacherTabs = new Set(["overview", "classes", "students", "lessons", "soulWinning", "reports"]);
-    const foundationAssistantTabs = new Set(["overview", "classes", "students", "lessons"]);
+    const foundationTeacherTabs = new Set(["overview", "classes", "students", "lessons", "onlineTests", "soulWinning", "reports"]);
+    const foundationAssistantTabs = new Set(["overview", "classes", "students", "lessons", "onlineTests"]);
     if (module === "finance" && financeSensitiveTabs.has(tab)) return Boolean(access.can_export || access.can_verify || access.can_approve);
     if (module === "finance" && financeVerificationTabs.has(tab)) return Boolean(access.can_verify || access.can_approve || access.can_release_resources);
     if (module === "staffHr" && staffSensitiveTabs.has(tab)) return Boolean(access.can_view_salary || access.can_edit || access.can_approve);

@@ -2,7 +2,7 @@
 
 First dashboard prototype for the church team portal.
 
-**Live demo:** https://salesio.github.io/ce-mozambique-dashboard/
+**Live demo:** https://salesio.github.io/ce-operations-portal/
 
 Login with the demo credentials on the page (`admin@ce-mozambique.org` / `demo`).
 

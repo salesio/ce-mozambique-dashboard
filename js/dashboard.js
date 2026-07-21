@@ -11650,6 +11650,7 @@ function cellReportRows(reports) {
   return reports.map((item) => [
     item.semana || item.report_week || "-",
     item.meeting_date || item.data_fim || item.created_at?.slice?.(0, 10) || "-",
+    churchName(item.church_id || item.igreja || item.church_name),
     cellGroupName(item.cell_group_id || item.group_name) || item.group_name || "-",
     item.celula || item.cell_name || "-",
     item.nome_do_lider || item.leader_name || "-",
@@ -11669,6 +11670,7 @@ function cellReportHeaders() {
   return [
     L("week"),
     L("date"),
+    L("church"),
     L("cellGroups"),
     L("cell"),
     L("leaderName"),
@@ -11682,6 +11684,17 @@ function cellReportHeaders() {
     lang === "pt" ? "Submetido em" : "Submitted at",
     L("actions")
   ];
+}
+
+function cellReportRowAttrs(reports) {
+  return reports.map((item) => {
+    const churchTokens = churchFilterTokens({
+      church_id: item.church_id || item.igreja || item.church_name,
+      church_name: item.church_name || churchName(item.church_id || item.igreja || item.church_name)
+    });
+    const statusValue = item.estado || item.status || "";
+    return ` data-filter-row data-filter-church-values="${escapeAttr(churchTokens)}" data-filter-status-values="${escapeAttr(`${statusKey(statusValue)} ${statusValue}`)}"`;
+  });
 }
 
 function renderCellMinistry(activeTab = "alecOverview") {
@@ -11785,7 +11798,7 @@ function renderCellMinistry(activeTab = "alecOverview") {
         ${metric("bi-person-heart", L("totalFirstTime"), totalFt, L("firstTimers"))}
         ${metric("bi-stars", L("totalNewConverts"), totalNc, L("newConverts"))}
       </div>
-      <div class="row g-4"><div class="col-12">${modulePanel("cellReport", L("weeklyCellReport"), "cellReport", cellReportHeaders(), cellReportRows(cellReports), true)}</div></div>`;
+      <div class="row g-4"><div class="col-12">${modulePanel("cellReport", L("weeklyCellReport"), "cellReport", cellReportHeaders(), cellReportRows(cellReports), true, false, { rowAttrs: cellReportRowAttrs(cellReports) })}</div></div>`;
   } else if (activeTab === "consolidation") {
     bodyHtml = `
       <div class="row g-3 mb-4">
@@ -11805,7 +11818,7 @@ function renderCellMinistry(activeTab = "alecOverview") {
       alecRegistration: () => modulePanel("alecRegistration", L("alecRegistration"), "alecRegistration", [L("fullName"), L("contact"), L("church"), L("cell"), L("cellLeaderName"), L("didFoundation"), L("isLeader"), L("status"), L("actions")], alecRegistrations.map((item) => [item.nome_completo, item.contacto, churchName(item.igreja), item.celula, item.nome_do_lider_de_celula, yesNo(item.fez_escola_de_fundacao), yesNo(item.e_lider), badge(item.estado), backendActions("alecRegistration", item.id)]), true),
       alecScores: () => modulePanel("alecScore", L("alecScores"), "alecScore", [L("fullName"), L("church"), L("cell"), L("phase1Average"), L("phase2Average"), L("finalAverage"), L("finished"), L("status"), L("progress"), L("actions")], alecScores.map((item) => [item.nome_completo, churchName(item.igreja), item.celula, alecPhaseAverage(item, 1), alecPhaseAverage(item, 2), alecFinalAverage(item), yesNo(item.terminou), badge(item.estado), alecProgress(item), backendActions("alecScore", item.id)]), true),
       churchReports: () => modulePanel("churchReport", L("churchReports"), "churchReport", [L("week"), L("worshipService"), L("cell"), L("leaderName"), "ATT", "FT", "NC", "RS", L("status"), L("actions")], churchReports.map((item) => [item.semana, item.culto, item.celula, item.nome_do_lider, item.att, item.ft, item.nc, item.rs, badge(item.estado), backendActions("churchReport", item.id)]), true),
-      receivedReports: () => modulePanel("cellReport", L("receivedReports"), "cellReport", cellReportHeaders(), cellReportRows(cellReports), true),
+      receivedReports: () => modulePanel("cellReport", L("receivedReports"), "cellReport", cellReportHeaders(), cellReportRows(cellReports), true, false, { rowAttrs: cellReportRowAttrs(cellReports) }),
       cellEvaluation: () => modulePanel("cellEvaluation", L("cellEvaluation"), "cellEvaluation", [L("reports"), L("evaluator"), L("evaluationDate"), L("classification"), L("needsFollowup"), L("recommendedAction"), L("status"), L("actions")], evaluations.map((item) => [item.report_id, item.avaliador, item.data_da_avaliacao, badge(item.classificacao), yesNo(item.precisa_followup), item.acao_recomendada, badge(item.estado), backendActions("cellEvaluation", item.id)]), true),
       cellLeaders: () => modulePanel("cellLeader", L("cellLeaders"), "cellLeader", [L("fullName"), L("contact"), L("church"), L("cell"), L("actualLeader"), L("cameFromAlec"), L("alecFinished"), L("supervisor"), L("status"), L("actions")], leaders.map((item) => [item.nome_completo, item.contacto, churchName(item.igreja), item.celula, yesNo(item.e_lider_actual), yesNo(item.veio_do_alec), yesNo(item.alec_concluido), item.supervisor, badge(item.estado), backendActions("cellLeader", item.id)]), true),
       finalValidation: () => modulePanel("finalValidation", L("finalValidation"), "finalValidation", [L("reports"), L("validatedBy"), L("date"), L("decision"), L("finalStatus"), L("actions")], validations.map((item) => [item.report_id, item.validado_por, item.data_validacao, badge(item.decisao), badge(item.estado_final), backendActions("finalValidation", item.id)]), true)
@@ -12211,7 +12224,9 @@ function renderMinistryMaterials() {
   `);
 }
 
-function modulePanel(type, title, modalType, headers, rows, showFilters = false, materialFilters = false) {
+function modulePanel(type, title, modalType, headers, rows, showFilters = false, materialFilters = false, options = {}) {
+  const tableOptions = options.tableOptions || {};
+  if (Array.isArray(options.rowAttrs)) tableOptions.rowAttrs = options.rowAttrs;
   return `
     <article id="panel-${type}" class="panel glass-panel h-100">
       <div class="panel-head">
@@ -12222,7 +12237,7 @@ function modulePanel(type, title, modalType, headers, rows, showFilters = false,
         </div>
       </div>
       ${showFilters ? advancedFilterBar(materialFilters) : ""}
-      ${dataTable(headers, rows)}
+      ${dataTable(headers, rows, tableOptions)}
     </article>
   `;
 }

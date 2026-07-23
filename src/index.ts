@@ -199,6 +199,49 @@ export {
   CELLS_SEED,
   CELL_LEADERS_SEED,
   CELL_REPORTS_SEED,
+  // Finance
+  listFinanceRecords,
+  getFinanceRecordById,
+  createFinanceRecord,
+  updateFinanceRecord,
+  deleteFinanceRecord,
+  searchFinanceRecords,
+  getFinanceRecordsByChurch,
+  getFinanceRecordsByCategory,
+  getFinanceRecordsByContributionGroup,
+  getFinanceRecordsByPartnershipArm,
+  getFinanceRecordsByStatus,
+  getFinanceRecordsByDateRange,
+  getPendingVerificationRecords,
+  getVerifiedRecords,
+  getMonthlyGiving,
+  getTotalGivingByPeriod,
+  listPublicGivingSubmissions,
+  getPublicGivingSubmissionById,
+  createPublicGivingSubmission,
+  updatePublicGivingSubmission,
+  deletePublicGivingSubmission,
+  getPublicGivingSubmissionsByStatus,
+  getPendingPublicGivingSubmissions,
+  verifyPublicGivingSubmission,
+  rejectPublicGivingSubmission,
+  listFinanceDisbursements,
+  getFinanceDisbursementById,
+  createFinanceDisbursement,
+  updateFinanceDisbursement,
+  getDisbursementsByRequisition,
+  getPendingDisbursements,
+  getReleasedDisbursements,
+  getDisbursementsByDateRange,
+  ensureFinanceSeeded,
+  getFinanceDataSourceInfo,
+  normalizeFinanceRecord,
+  normalizePublicGivingSubmission,
+  normalizeFinanceDisbursement,
+  createFinanceRecordFromCellReport,
+  FINANCE_RECORDS_SEED,
+  PUBLIC_GIVING_SUBMISSIONS_SEED,
+  FINANCE_DISBURSEMENTS_SEED,
 } from "./data";
 
 export type {
@@ -220,6 +263,9 @@ export type {
   FoundationTestSubmission,
   FoundationFinalExam,
   FinanceRecord,
+  PublicGivingSubmission,
+  FinanceDisbursement,
+  PublicGivingContributionLine,
   Requisition,
   Notification,
   CellGroup,
@@ -379,6 +425,45 @@ import {
   CELLS_SEED,
   CELL_LEADERS_SEED,
   CELL_REPORTS_SEED,
+  listFinanceRecords,
+  getFinanceRecordById,
+  createFinanceRecord,
+  updateFinanceRecord,
+  deleteFinanceRecord,
+  searchFinanceRecords,
+  getFinanceRecordsByChurch,
+  getFinanceRecordsByCategory,
+  getFinanceRecordsByContributionGroup,
+  getFinanceRecordsByPartnershipArm,
+  getFinanceRecordsByStatus,
+  getFinanceRecordsByDateRange,
+  getPendingVerificationRecords,
+  getVerifiedRecords,
+  getMonthlyGiving,
+  getTotalGivingByPeriod,
+  listPublicGivingSubmissions,
+  getPublicGivingSubmissionById,
+  createPublicGivingSubmission,
+  updatePublicGivingSubmission,
+  deletePublicGivingSubmission,
+  getPublicGivingSubmissionsByStatus,
+  getPendingPublicGivingSubmissions,
+  verifyPublicGivingSubmission,
+  rejectPublicGivingSubmission,
+  listFinanceDisbursements,
+  getFinanceDisbursementById,
+  createFinanceDisbursement,
+  updateFinanceDisbursement,
+  getDisbursementsByRequisition,
+  getPendingDisbursements,
+  getReleasedDisbursements,
+  getDisbursementsByDateRange,
+  ensureFinanceSeeded,
+  getFinanceDataSourceInfo,
+  createFinanceRecordFromCellReport,
+  FINANCE_RECORDS_SEED,
+  PUBLIC_GIVING_SUBMISSIONS_SEED,
+  FINANCE_DISBURSEMENTS_SEED,
   getDataProvider,
   getDataSource,
   getActiveDataSource,
@@ -397,6 +482,7 @@ function installDataLayerGlobals(): void {
     CEFollowUps?: Record<string, unknown>;
     CEFoundationSchool?: Record<string, unknown>;
     CECellMinistry?: Record<string, unknown>;
+    CEFinance?: Record<string, unknown>;
   };
 
   const churches = {
@@ -605,6 +691,77 @@ function installDataLayerGlobals(): void {
     getDuplicateReports,
   };
 
+  const finance = {
+    listFinanceRecords,
+    getFinanceRecordById,
+    createFinanceRecord,
+    updateFinanceRecord,
+    deleteFinanceRecord,
+    searchFinanceRecords,
+    getFinanceRecordsByChurch,
+    getFinanceRecordsByCategory,
+    getFinanceRecordsByContributionGroup,
+    getFinanceRecordsByPartnershipArm,
+    getFinanceRecordsByStatus,
+    getFinanceRecordsByDateRange,
+    getPendingVerificationRecords,
+    getVerifiedRecords,
+    getMonthlyGiving,
+    getTotalGivingByPeriod,
+    listPublicGivingSubmissions,
+    getPublicGivingSubmissionById,
+    createPublicGivingSubmission,
+    updatePublicGivingSubmission,
+    deletePublicGivingSubmission,
+    getPublicGivingSubmissionsByStatus,
+    getPendingPublicGivingSubmissions,
+    verifyPublicGivingSubmission,
+    rejectPublicGivingSubmission,
+    listFinanceDisbursements,
+    getFinanceDisbursementById,
+    createFinanceDisbursement,
+    updateFinanceDisbursement,
+    getDisbursementsByRequisition,
+    getPendingDisbursements,
+    getReleasedDisbursements,
+    getDisbursementsByDateRange,
+    ensureFinanceSeeded,
+    getFinanceDataSourceInfo,
+    createFinanceRecordFromCellReport,
+    getInfo: getFinanceDataSourceInfo,
+  };
+
+  const financeRecords = {
+    listFinanceRecords,
+    getFinanceRecordById,
+    createFinanceRecord,
+    updateFinanceRecord,
+    deleteFinanceRecord,
+    searchFinanceRecords,
+    getPendingVerificationRecords,
+    getVerifiedRecords,
+    getMonthlyGiving,
+  };
+
+  const publicGivingSubmissions = {
+    listPublicGivingSubmissions,
+    getPublicGivingSubmissionById,
+    createPublicGivingSubmission,
+    updatePublicGivingSubmission,
+    verifyPublicGivingSubmission,
+    rejectPublicGivingSubmission,
+    getPendingPublicGivingSubmissions,
+  };
+
+  const financeDisbursements = {
+    listFinanceDisbursements,
+    getFinanceDisbursementById,
+    createFinanceDisbursement,
+    updateFinanceDisbursement,
+    getPendingDisbursements,
+    getReleasedDisbursements,
+  };
+
   root.CESupabase = Object.assign(root.CESupabase || {}, {
     ...churches,
     ...members,
@@ -612,10 +769,14 @@ function installDataLayerGlobals(): void {
     ...followUps,
     ...foundationSchool,
     ...cellMinistry,
+    ...finance,
     CELL_GROUPS_SEED,
     CELLS_SEED,
     CELL_LEADERS_SEED,
     CELL_REPORTS_SEED,
+    FINANCE_RECORDS_SEED,
+    PUBLIC_GIVING_SUBMISSIONS_SEED,
+    FINANCE_DISBURSEMENTS_SEED,
     getDataProvider,
     getDataSource,
     getActiveDataSource,
@@ -634,6 +795,10 @@ function installDataLayerGlobals(): void {
     cellGroups,
     cells,
     cellReports,
+    finance,
+    financeRecords,
+    publicGivingSubmissions,
+    financeDisbursements,
     getDataProvider,
     getDataSource,
     getActiveDataSource,
@@ -662,6 +827,9 @@ function installDataLayerGlobals(): void {
   if (!root.CECellMinistry) {
     root.CECellMinistry = cellMinistry;
   }
+  if (!root.CEFinance) {
+    root.CEFinance = finance;
+  }
 
   try {
     const churchInfo = getChurchesDataSourceInfo();
@@ -675,6 +843,7 @@ function installDataLayerGlobals(): void {
       followUps: Object.keys(followUps),
       foundationSchool: Object.keys(foundationSchool),
       cellMinistry: Object.keys(cellMinistry),
+      finance: Object.keys(finance),
     });
   } catch (error) {
     console.warn("[CE DataLayer] installed with provider warning", error);

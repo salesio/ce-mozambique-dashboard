@@ -6,8 +6,10 @@ import type {
   Church,
   EntityCollectionName,
   EntityId,
+  FinanceDisbursement,
   FinanceRecord,
   FirstTimer,
+  PublicGivingSubmission,
   FollowUp,
   FoundationClassGroup,
   FoundationFinalExam,
@@ -43,6 +45,9 @@ function storageKeyFor(key: EntityCollectionName): string {
   if (key === "cells") return `${STORAGE_PREFIX}cells`;
   if (key === "cell_leaders") return `${STORAGE_PREFIX}cell-leaders`;
   if (key === "cell_report_submissions") return `${STORAGE_PREFIX}cell-reports`;
+  if (key === "finance_records") return `${STORAGE_PREFIX}finance-records`;
+  if (key === "public_giving_submissions") return `${STORAGE_PREFIX}public-giving-submissions`;
+  if (key === "finance_disbursements") return `${STORAGE_PREFIX}finance-disbursements`;
   return STORAGE_PREFIX + key;
 }
 
@@ -128,6 +133,12 @@ export function createLocalStorageProvider(): DataProvider {
     "foundation_final_exams",
   );
   const financeRecords = createPersistedRepository<FinanceRecord>("finance_records");
+  const publicGivingSubmissions = createPersistedRepository<PublicGivingSubmission>(
+    "public_giving_submissions",
+  );
+  const financeDisbursements = createPersistedRepository<FinanceDisbursement>(
+    "finance_disbursements",
+  );
   const requisitions = createPersistedRepository<Requisition>("requisitions");
   const notifications = createPersistedRepository<Notification>("notifications");
   const cellGroups = createPersistedRepository<CellGroup>("cell_groups");
@@ -152,6 +163,8 @@ export function createLocalStorageProvider(): DataProvider {
     foundation_test_submissions: foundationTestSubmissions as EntityRepository<unknown>,
     foundation_final_exams: foundationFinalExams as EntityRepository<unknown>,
     finance_records: financeRecords as EntityRepository<unknown>,
+    public_giving_submissions: publicGivingSubmissions as EntityRepository<unknown>,
+    finance_disbursements: financeDisbursements as EntityRepository<unknown>,
     requisitions: requisitions as EntityRepository<unknown>,
     notifications: notifications as EntityRepository<unknown>,
     cell_groups: cellGroups as EntityRepository<unknown>,
@@ -179,6 +192,8 @@ export function createLocalStorageProvider(): DataProvider {
     foundationTestSubmissions,
     foundationFinalExams,
     financeRecords,
+    publicGivingSubmissions,
+    financeDisbursements,
     requisitions,
     notifications,
     cellGroups,

@@ -79,7 +79,7 @@ const TEXT = {
     cellMinistry: "Ministério de Células",
     sacraments: "Sacramentos",
     programs: "Programas",
-    partnership: "Parceria",
+    partnership: "Parcerias",
     media: "Mídia",
     usersRoles: "Utilizadores e Funções",
     accessControl: "Controlo de Acesso",
@@ -793,7 +793,7 @@ const TEXT = {
     cellMinistry: "Cell Ministry",
     sacraments: "Sacraments",
     programs: "Programs",
-    partnership: "Partnership",
+    partnership: "Partnerships",
     media: "Media",
     usersRoles: "Users & Roles",
     accessControl: "Access Control",
@@ -3158,6 +3158,7 @@ function isModuleTabRoute(route) {
 const NAV_GROUPS = [
   { key: "main", items: [["dashboard", "bi-speedometer2", "dashboard"], ["churches", "bi-building", "churches"], ["members", "bi-people", "members"], ["reports", "bi-bar-chart-line", "reports"]] },
   { key: "pastoralCare", items: [["firstTimers", "bi-person-heart", "firstTimers"], ["followUp", "bi-telephone-outbound", "followUp"], ["foundation", "bi-mortarboard", "foundationSchool"], ["sacraments", "bi-droplet", "sacraments"], ["counseling", "bi-chat-heart", "counseling"]] },
+  // Order: Finanças → Parcerias → … (Loveworld SAT is a partnership arm, not a department)
   { key: "departments", items: [["fevo", "bi-compass", "fevo"], ["finance", "bi-cash-coin", "finance"], ["partnership", "bi-stars", "partnership"], ["programs", "bi-calendar-event", "programs"], ["media", "bi-camera-reels", "media"], ["requisitions", "bi-clipboard-check", "requisitions"], ["venueInventory", "bi-box-seam", "venueInventoryShort"], ["cellPrison", "bi-shield-lock", "prisonMinistry"], ["cellMaterials", "bi-journal-richtext", "ministryMaterials"]] },
   { key: "admin", items: [["staffHr", "bi-people-fill", "staffHr"], ["users", "bi-person-lock", "usersRoles"], ["access", "bi-shield-lock", "accessControl"], ["settings", "bi-gear", "settings"], ["audit", "bi-journal-check", "auditLogs"]] }
 ];
@@ -3284,7 +3285,8 @@ const seedData = {
     { id: "u-12", name: "Department Head Demo", email: "department.head@ce-mozambique.org", role: "Department Head", church_id: "church-hq", department_permissions: ["venueInventoryRequests", "venueInventory"], assigned_department: "Cell Ministry", can_view_all_churches: false },
     { id: "u-13", name: "Staff Member Demo", email: "staff.member@ce-mozambique.org", role: "Staff Member", church_id: "church-hq", department_permissions: ["assignedEquipment"], assigned_staff_name: "Laiza Teresa Chirindza", can_view_all_churches: false },
     { id: "u-14", name: "Finance Officer Demo", email: "finance.officer@ce-mozambique.org", role: "Finance Officer", church_id: "church-hq", department_permissions: ["finance", "financeOfficer"], can_view_all_churches: false },
-    { id: "u-15", name: "Finance Head Demo", email: "finance.head@ce-mozambique.org", role: "Finance Head", church_id: "church-hq", department_permissions: ["finance", "financeHead", "financeVerify", "reports"], can_view_all_churches: true },
+    { id: "u-15", name: "Finance Head Demo", email: "finance.head@ce-mozambique.org", role: "Finance Head", church_id: "church-hq", department_permissions: ["finance", "financeHead", "financeVerify", "reports", "partnership"], can_view_all_churches: true },
+    { id: "u-partnership", name: "Coordenadora de Parcerias", email: "partnerships@ce-mozambique.org", role: "Partnership Coordinator", church_id: "church-hq", department_permissions: ["partnership", "finance", "reports"], can_view_all_churches: true },
     { id: "u-16", name: "Finance Viewer Demo", email: "finance.viewer@ce-mozambique.org", role: "Viewer", church_id: "church-hq", department_permissions: ["financeViewer", "reports"], can_view_all_churches: true },
     { id: "u-17", name: "Pastor Kene Ume", email: "pastor.kene@ce-mozambique.org", role: "Main Pastor", church_id: "church-hq", department_permissions: ["reports", "requisitions", "staffHr", "finance"], can_view_all_churches: true },
     { id: "u-18", name: "Pastora Responsável Requisições", email: "requisitions@ce-mozambique.org", role: "Requisition Officer", church_id: "church-hq", department_permissions: ["requisitions"], can_view_all_churches: true },
@@ -3456,11 +3458,12 @@ const seedData = {
     { id: "fin-1", source_type: "contributor", contributor_id: "contrib-fin-1", member_id: "", first_timer_id: "", partner_id: "", nome: "Ana", apelido: "Mabunda", telefone: "874520011", whatsapp: "874520011", email: "", endereco: "Maputo", celula: "Cell Central", grupo_de_celula: "Grupo Central", igreja: "National HQ - Christ Embassy Mozambique", church_id: "church-hq", categoria_da_contribuicao: "Dízimo", metodo_de_pagamento: "M-Pesa", valor: 7500, referencia_da_transaccao: "MP463900298", data: "2026-07-05", imagem_envelope_ou_pop: "", imagem_do_envelope: "", observacoes: "", estado: FINANCE_STATUS_VERIFIED, recebido_por: "Admin Principal", verificado_por: "Admin Principal", verified_at: "2026-07-05T10:30:00.000Z", comentario_verificacao: "Pagamento confirmado no M-Pesa.", motivo_rejeicao: "", created_at: "2026-07-05T09:15:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-05" },
     { id: "fin-2", source_type: "partner", contributor_id: "", member_id: "", first_timer_id: "", partner_id: "part-1", nome: "Carlos", apelido: "Muianga", telefone: "866877389", whatsapp: "866877389", email: "carlos@example.com", endereco: "Online", celula: "Virtual", igreja: "CE Mozambique Online Church", church_id: "church-virtual", categoria_da_contribuicao: "Loveworld SAT", metodo_de_pagamento: "Banco", valor: 4200, referencia_da_transaccao: "BCI-17596091110001", data: "2026-07-02", imagem_envelope_ou_pop: "", imagem_do_envelope: "", observacoes: "Aguardar confirma��o banc�ria.", estado: FINANCE_STATUS_PENDING, recebido_por: "Admin Principal", verificado_por: "", verified_at: "", comentario_verificacao: "", motivo_rejeicao: "", created_at: "2026-07-02T14:20:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-02" },
     { id: "fin-3", source_type: "contributor", contributor_id: "contrib-fin-2", nome: "Jo�o", apelido: "Nhaca", telefone: "845551122", celula: "Cell Mavalane", grupo_de_celula: "Grupo Matola", church_id: "church-hq", categoria_da_contribuicao: "Ofertas", metodo_de_pagamento: "M-Pesa", valor: 2500, data: "2026-07-08", estado: FINANCE_STATUS_VERIFIED, verificado_por: "Admin Principal", verified_at: "2026-07-08T11:00:00.000Z", created_at: "2026-07-08T10:00:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-08" },
-    { id: "fin-4", source_type: "partner", partner_id: "part-2", nome: "Helena", apelido: "Cossa", telefone: "843332211", celula: "Cell Central", church_id: "church-hq", categoria_da_contribuicao: "Escola de Cura", metodo_de_pagamento: "E-Mola", valor: 5000, data: "2026-07-09", estado: FINANCE_STATUS_VERIFIED, verificado_por: "Admin Principal", verified_at: "2026-07-09T12:00:00.000Z", created_at: "2026-07-09T09:00:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-09" },
-    { id: "fin-5", source_type: "partner", partner_id: "part-3", nome: "Miguel", apelido: "Tembe", telefone: "861112233", celula: "Cell Central", church_id: "church-matola", categoria_da_contribuicao: "Rapsódia de Realidades", metodo_de_pagamento: "M-Pesa", valor: 3000, data: "2026-07-10", estado: FINANCE_STATUS_VERIFIED, verificado_por: "Admin Principal", verified_at: "2026-07-10T08:30:00.000Z", created_at: "2026-07-10T08:00:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-10" },
+    { id: "fin-4", source_type: "partner", partner_id: "part-2", nome: "Helena", apelido: "Cossa", telefone: "843332211", celula: "Cell Central", church_id: "church-hq", categoria_da_contribuicao: "Escola de Cura", contribution_group: "Parcerias", partnership_arm_id: "arm-healing", partnership_arm_name: "Escola de Cura", metodo_de_pagamento: "E-Mola", valor: 5000, data: "2026-07-09", estado: FINANCE_STATUS_VERIFIED, status: "Verified", transaction_type: "income", verificado_por: "Admin Principal", verified_at: "2026-07-09T12:00:00.000Z", created_at: "2026-07-09T09:00:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-09" },
+    { id: "fin-5", source_type: "partner", partner_id: "part-3", nome: "Miguel", apelido: "Tembe", telefone: "861112233", celula: "Cell Central", church_id: "church-matola", categoria_da_contribuicao: "Rapsódia de Realidades", contribution_group: "Parcerias", partnership_arm_id: "arm-rhapsody", partnership_arm_name: "Rapsódia de Realidades", metodo_de_pagamento: "M-Pesa", valor: 3000, data: "2026-07-10", estado: FINANCE_STATUS_VERIFIED, status: "Verified", transaction_type: "income", verificado_por: "Admin Principal", verified_at: "2026-07-10T08:30:00.000Z", created_at: "2026-07-10T08:00:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-10" },
     { id: "fin-6", source_type: "contributor", nome: "Sofia", apelido: "Macuacua", telefone: "872223344", celula: "Cell Mavalane", church_id: "church-hq", categoria_da_contribuicao: "Primícias", metodo_de_pagamento: "Banco", valor: 1800, data: "2026-06-15", estado: FINANCE_STATUS_VERIFIED, verificado_por: "Admin Principal", verified_at: "2026-06-15T14:00:00.000Z", created_at: "2026-06-15T13:00:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-06-15" },
-    { id: "fin-7", source_type: "partner", partner_id: "part-4", nome: "Carlos", apelido: "Muianga", telefone: "866877389", celula: "Virtual", church_id: "church-virtual", categoria_da_contribuicao: "Construtores de Vis�o", metodo_de_pagamento: "Banco", valor: 10000, data: "2026-06-20", estado: FINANCE_STATUS_VERIFIED, verificado_por: "Admin Principal", verified_at: "2026-06-21T09:00:00.000Z", created_at: "2026-06-20T16:00:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-06-21" },
-    { id: "fin-8", source_type: "contributor", nome: "Rosa", apelido: "Jossias", telefone: "845667788", celula: "Cell Central", church_id: "church-beira", categoria_da_contribuicao: "Alcançar Moçambique", metodo_de_pagamento: "M-Pesa", valor: 1500, data: "2026-07-11", estado: FINANCE_STATUS_PENDING, created_at: "2026-07-11T07:00:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-11" }
+    { id: "fin-7", source_type: "partner", partner_id: "part-4", nome: "Carlos", apelido: "Muianga", telefone: "866877389", celula: "Virtual", church_id: "church-virtual", categoria_da_contribuicao: "Construtores de Visão", contribution_group: "Parcerias", partnership_arm_id: "arm-vision", partnership_arm_name: "Construtores de Visão", metodo_de_pagamento: "Banco", valor: 10000, data: "2026-06-20", estado: FINANCE_STATUS_VERIFIED, status: "Verified", transaction_type: "income", verificado_por: "Admin Principal", verified_at: "2026-06-21T09:00:00.000Z", created_at: "2026-06-20T16:00:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-06-21" },
+    { id: "fin-8", source_type: "contributor", nome: "Rosa", apelido: "Jossias", telefone: "845667788", celula: "Cell Central", church_id: "church-beira", categoria_da_contribuicao: "Alcançar Moçambique", contribution_group: "Parcerias", partnership_arm_id: "arm-reach-mz", partnership_arm_name: "Alcançar Moçambique", metodo_de_pagamento: "M-Pesa", valor: 1500, data: "2026-07-11", estado: FINANCE_STATUS_PENDING, status: "Pending Verification", transaction_type: "income", created_at: "2026-07-11T07:00:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-11" },
+    { id: "fin-lw-sat-ok", source_type: "partner", partner_id: "part-1", nome: "Carlos", apelido: "Muianga", telefone: "866877389", celula: "Virtual", church_id: "church-virtual", categoria_da_contribuicao: "Loveworld SAT", contribution_group: "Parcerias", partnership_arm_id: "arm-lw-sat", partnership_arm_name: "Loveworld SAT", metodo_de_pagamento: "Banco", valor: 5500, data: "2026-07-08", estado: FINANCE_STATUS_VERIFIED, status: "Verified", transaction_type: "income", verificado_por: "Admin Principal", verified_at: "2026-07-08T12:00:00.000Z", created_at: "2026-07-08T10:00:00.000Z", created_by: "Admin Principal", updated_by: "Admin Principal", updated_at: "2026-07-08" }
   ],
   cells: [
     { id: "cell-1", church_id: "church-hq", group_cell_id: "group-1", nome_da_celula: "Cell Central", lider_id: "m-1", lider: "Pastor Kene Ume", area: "Maputo", membros: ["m-1", "m-2"], presencas: [{ data: "2026-07-05", total: 18 }, { data: "2026-06-28", total: 16 }], almas_ganhas: [{ data: "2026-07-05", total: 3 }], limite_crescimento: 20 },
@@ -3636,6 +3639,8 @@ const seedData = {
   },
   programs: [{ id: "prog-1", church_id: "church-hq", name: "Sunday Service", owner: "Programs Team", status: "Scheduled" }],
   partnership: [{ id: "part-1", church_id: "church-virtual", nome: "Carlos", apelido: "Muianga", name: "Loveworld SAT Partner", telefone: "866877389", whatsapp: "866877389", email: "carlos@example.com", endereco: "Online", celula: "Virtual", category: "Loveworld SAT", status: "Active" }],
+  // Catalog of partnership arms (analytics layer; financeRecords remain the source of truth)
+  partnershipArms: typeof PARTNERSHIP_ARMS_SEED !== "undefined" ? structuredClone(PARTNERSHIP_ARMS_SEED) : [],
   media: {
     technicians: [
       { id: "mt-1", staff_id: "staff-4", full_name: "Marcelo Panguene", title: "Sr.", phone: "860000104", whatsapp: "860000104", email: "marcelo.panguene@ce-mozambique.org", church_id: "church-hq", church_name: "National HQ - Christ Embassy Mozambique", department_id: "dept-media", department_name: "M�dia", status: "Activo", profile_photo: "", notes: "Respons�vel pela direc��o t�cnica e transmiss�o.", roles_can_perform: ["mediaDirector", "mediaSupervisor", "streamingTechnician", "videoMixerOperator"], preferred_services: ["Todos"], availability_notes: "Dispon�vel para cultos principais e programas globais.", skill_level: "Supervisor", start_date: "2023-01-10", supervisor_id: "u-17", supervisor_name: "Pastor Kene Ume", created_at: "2026-07-01", updated_at: "2026-07-15" },
@@ -4378,7 +4383,15 @@ Object.assign(TEXT.en, {
   needsFollowup: "Needs Follow-Up",
   reportAlreadySubmittedWeek: "A report has already been submitted for this cell this week",
   receivedReports: "Weekly Submissions",
-  weeklyCellReport: "Weekly Submissions"
+  weeklyCellReport: "Weekly Submissions",
+  partnership: "Partnerships",
+  partnershipsOverview: "Overview",
+  partnershipArms: "Partnership Arms",
+  partnershipPartners: "Partners",
+  partnershipContributions: "Contributions",
+  partnershipHighlights: "Highlights",
+  partnershipAnalytics: "Analytics",
+  needsPromotion: "Needs Promotion"
 });
 
 function cleanDisplayText(value) {
@@ -4606,6 +4619,12 @@ function normalizeState(saved) {
     merged.cellLeadership.actionPlans = structuredClone(seedData.cellLeadership.actionPlans || []);
   }
   merged.cellReportSubmissions = Array.isArray(merged.cellReportSubmissions) ? merged.cellReportSubmissions : [];
+  merged.financeDisbursements = Array.isArray(merged.financeDisbursements) ? merged.financeDisbursements : [];
+  if (!Array.isArray(merged.partnershipArms) || !merged.partnershipArms.length) {
+    merged.partnershipArms = typeof PARTNERSHIP_ARMS_SEED !== "undefined"
+      ? structuredClone(PARTNERSHIP_ARMS_SEED)
+      : structuredClone(seedData.partnershipArms || []);
+  }
   ["cellGroups", "cellRegistry"].forEach((key) => {
     const seedItems = seedData[key] || [];
     const savedItems = merged[key] || [];
@@ -6160,28 +6179,59 @@ function migrateFinanceRecord(record, churches = null) {
     "Pending Verification": FINANCE_STATUS_PENDING,
     Verified: FINANCE_STATUS_VERIFIED,
     Rejected: FINANCE_STATUS_REJECTED,
-    "Included in Report": FINANCE_STATUS_INCLUDED
+    "Included in Report": FINANCE_STATUS_INCLUDED,
+    Cancelled: "Cancelado",
+    "Under Review": "Em Revisão",
+    "Needs Correction": "Precisa Correção"
   };
   const churchId = record.church_id || "";
+  const amount = Number(record.amount ?? record.valor ?? 0);
+  const contributorName =
+    record.contributor_name ||
+    [record.nome, record.apelido].filter(Boolean).join(" ").trim() ||
+    "";
   const migrated = {
     ...record,
-    estado: legacyStatus[record.estado] || record.estado || FINANCE_STATUS_PENDING,
-    recebido_por: record.recebido_por || "",
-    verificado_por: record.verificado_por || "",
+    transaction_type: record.transaction_type || "income",
+    amount,
+    valor: amount,
+    contributor_name: contributorName,
+    status: record.status || record.estado || FINANCE_STATUS_PENDING,
+    estado: legacyStatus[record.status] || legacyStatus[record.estado] || record.estado || FINANCE_STATUS_PENDING,
+    contribution_category: record.contribution_category || record.categoria_da_contribuicao || record.category || "",
+    categoria_da_contribuicao: record.categoria_da_contribuicao || record.contribution_category || record.category || "",
+    contribution_group: record.contribution_group || "",
+    partnership_arm_id: record.partnership_arm_id || "",
+    partnership_arm_name: record.partnership_arm_name || "",
+    currency: record.currency || "MZN",
+    payment_method: record.payment_method || record.metodo_de_pagamento || "",
+    metodo_de_pagamento: record.metodo_de_pagamento || record.payment_method || "",
+    payment_reference: record.payment_reference || record.referencia_da_transaccao || "",
+    referencia_da_transaccao: record.referencia_da_transaccao || record.payment_reference || "",
+    payment_date: record.payment_date || record.data || record.data_da_transferencia || "",
+    data: record.data || record.payment_date || "",
+    recebido_por: record.recebido_por || record.received_by_name || record.received_by || "",
+    received_by_name: record.received_by_name || record.recebido_por || "",
+    verificado_por: record.verificado_por || record.verified_by_name || record.verified_by || "",
+    verified_by_name: record.verified_by_name || record.verificado_por || "",
     verified_at: record.verified_at || "",
     comentario_verificacao: record.comentario_verificacao || "",
-    motivo_rejeicao: record.motivo_rejeicao || "",
-    observacoes: record.observacoes || "",
+    motivo_rejeicao: record.motivo_rejeicao || record.rejection_reason || "",
+    rejection_reason: record.rejection_reason || record.motivo_rejeicao || "",
+    observacoes: record.observacoes || record.notes || "",
+    notes: record.notes || record.observacoes || "",
     whatsapp: record.whatsapp || "",
-    igreja: record.igreja || (Array.isArray(churches) ? churchNameFromList(churchId, churches) : churchName(churchId)),
+    igreja: record.igreja || record.church_name || (Array.isArray(churches) ? churchNameFromList(churchId, churches) : churchName(churchId)),
+    church_name: record.church_name || record.igreja || "",
     source_type: record.source_type || "manual",
     member_id: record.member_id || "",
     contributor_id: record.contributor_id || "",
     first_timer_id: record.first_timer_id || "",
     partner_id: record.partner_id || "",
-    imagem_envelope_ou_pop: record.imagem_envelope_ou_pop || record.imagem_do_envelope || "",
-    imagem_do_envelope: record.imagem_do_envelope || record.imagem_envelope_ou_pop || "",
-    source: record.source || (record.source_type === "public_website" ? "public_website" : record.source === "imported" ? "imported" : ""),
+    imagem_envelope_ou_pop: record.imagem_envelope_ou_pop || record.imagem_do_envelope || record.proof_file_url || "",
+    imagem_do_envelope: record.imagem_do_envelope || record.imagem_envelope_ou_pop || record.proof_file_url || "",
+    proof_file_url: record.proof_file_url || record.imagem_envelope_ou_pop || "",
+    source: record.source || (record.source_type === "public_website" ? "Public Giving Form" : record.source === "imported" ? "Import" : "Manual Entry"),
     submission_group_id: record.submission_group_id || "",
     public_submission_id: record.public_submission_id || "",
     mensagem_transferencia: record.mensagem_transferencia || "",
@@ -6192,10 +6242,118 @@ function migrateFinanceRecord(record, churches = null) {
     grupo_de_celula: record.grupo_de_celula || "",
     data_de_aniversario: record.data_de_aniversario || "",
     outros_descricao: record.outros_descricao || "",
-    data_da_transferencia: record.data_da_transferencia || record.data || "",
+    data_da_transferencia: record.data_da_transferencia || record.data || record.payment_date || "",
     created_at: record.created_at || record.updated_at || record.data || ""
   };
   return typeof enrichFinanceRecord === "function" ? enrichFinanceRecord(migrated) : migrated;
+}
+
+function getFinanceRepoSafe() {
+  return window.CEFinance || window.CEDataLayer?.finance || window.CEDataLayer?.financeRecords || null;
+}
+
+async function dualWriteFinanceRecord(mode, record) {
+  const repo = getFinanceRepoSafe();
+  if (!repo || !record) return { ok: true, skipped: true };
+  try {
+    let result = null;
+    if (mode === "create" && repo.createFinanceRecord) result = await repo.createFinanceRecord(record);
+    else if (mode === "update" && repo.updateFinanceRecord) result = await repo.updateFinanceRecord(record.id, record);
+    if (result && result.ok === false) {
+      console.warn("[CE Finance] dual-write soft-fail", result);
+      return { ok: true, skipped: true, repoError: result };
+    }
+    return result || { ok: true, data: record };
+  } catch (error) {
+    console.warn("[CE Finance] dual-write failed — local fallback", error);
+    return { ok: true, skipped: true, error: error?.message };
+  }
+}
+
+async function dualWritePublicGivingSubmission(mode, record) {
+  const repo = getFinanceRepoSafe();
+  if (!repo || !record) return { ok: true, skipped: true };
+  try {
+    let result = null;
+    if (mode === "create" && repo.createPublicGivingSubmission) result = await repo.createPublicGivingSubmission(record);
+    else if (mode === "update" && repo.updatePublicGivingSubmission) result = await repo.updatePublicGivingSubmission(record.id, record);
+    if (result && result.ok === false) {
+      console.warn("[CE Finance] public giving dual-write soft-fail", result);
+      return { ok: true, skipped: true, repoError: result };
+    }
+    return result || { ok: true, data: record };
+  } catch (error) {
+    console.warn("[CE Finance] public giving dual-write failed", error);
+    return { ok: true, skipped: true, error: error?.message };
+  }
+}
+
+async function hydrateFinanceFromRepository() {
+  const repo = getFinanceRepoSafe();
+  if (!repo) return false;
+  try {
+    let hydrated = false;
+    if (typeof repo.listFinanceRecords === "function") {
+      const result = await repo.listFinanceRecords();
+      if (result?.ok && Array.isArray(result.data) && result.data.length) {
+        const prev = new Map((state.finance || []).map((r) => [r.id, r]));
+        const byId = new Map();
+        result.data.forEach((row) => {
+          const previous = prev.get(row.id) || {};
+          byId.set(row.id, migrateFinanceRecord({ ...row, ...previous, id: row.id }));
+        });
+        prev.forEach((localRow, id) => {
+          if (!byId.has(id)) byId.set(id, migrateFinanceRecord(localRow));
+        });
+        state.finance = [...byId.values()];
+        hydrated = true;
+        console.info("[CE Finance] hydrated records", state.finance.length);
+      }
+    }
+    if (typeof repo.listPublicGivingSubmissions === "function") {
+      const result = await repo.listPublicGivingSubmissions();
+      if (result?.ok && Array.isArray(result.data) && result.data.length) {
+        const prev = new Map((state.publicGivingSubmissions || []).map((r) => [r.id, r]));
+        const byId = new Map();
+        result.data.forEach((row) => {
+          const previous = prev.get(row.id) || {};
+          byId.set(row.id, { ...row, ...previous, id: row.id });
+        });
+        prev.forEach((localRow, id) => {
+          if (!byId.has(id)) byId.set(id, localRow);
+        });
+        state.publicGivingSubmissions = [...byId.values()];
+        hydrated = true;
+        console.info("[CE Finance] hydrated public giving", state.publicGivingSubmissions.length);
+      }
+    }
+    if (typeof repo.listFinanceDisbursements === "function") {
+      const result = await repo.listFinanceDisbursements();
+      if (result?.ok && Array.isArray(result.data) && result.data.length) {
+        state.financeDisbursements = Array.isArray(state.financeDisbursements) ? state.financeDisbursements : [];
+        const prev = new Map(state.financeDisbursements.map((r) => [r.id, r]));
+        const byId = new Map();
+        result.data.forEach((row) => {
+          const previous = prev.get(row.id) || {};
+          byId.set(row.id, { ...row, ...previous, id: row.id });
+        });
+        prev.forEach((localRow, id) => {
+          if (!byId.has(id)) byId.set(id, localRow);
+        });
+        state.financeDisbursements = [...byId.values()];
+        hydrated = true;
+      }
+    }
+    if (hydrated) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (_) {}
+    }
+    return hydrated;
+  } catch (error) {
+    console.warn("[CE Finance] hydrate failed — keeping local finance data.", error);
+    return false;
+  }
 }
 
 function getScopedFinanceList() {
@@ -7098,20 +7256,59 @@ async function syncFinanceFromSupabaseIfEnabled() {
 
 function applyFinanceGroupDecision(submissionGroupId, mode, data) {
   const records = state.finance.filter((record) => record.submission_group_id === submissionGroupId);
-  if (!records.length) return false;
   const nowIso = new Date().toISOString();
   const today = nowIso.slice(0, 10);
+  const submission = (state.publicGivingSubmissions || []).find(
+    (item) => item.submission_group_id === submissionGroupId || item.id === submissionGroupId
+  );
+
   if (mode === "verifyGroup") {
+    // Prefer data-layer verify when we have a public submission with contributions and no records yet.
+    if (submission && (!records.length || submission.contributions?.length) && getFinanceRepoSafe()?.verifyPublicGivingSubmission) {
+      void (async () => {
+        try {
+          const result = await getFinanceRepoSafe().verifyPublicGivingSubmission(submission.id, {
+            verified_by: activeUser.name,
+            notes: data.comentario_verificacao || ""
+          });
+          if (result?.ok && result.data) {
+            submission.status = "Verified";
+            submission.verified_by = activeUser.name;
+            submission.verified_at = nowIso;
+            submission.created_finance_record_ids = (result.data.financeRecords || []).map((r) => r.id);
+            (result.data.financeRecords || []).forEach((rec) => {
+              const migrated = migrateFinanceRecord(rec);
+              const idx = state.finance.findIndex((f) => f.id === migrated.id);
+              if (idx >= 0) state.finance[idx] = migrated;
+              else state.finance.unshift(migrated);
+            });
+            saveState(`Verified public submission ${submissionGroupId} via data layer`);
+            setRoute(activeRoute);
+            return;
+          }
+        } catch (error) {
+          console.warn("[CE Finance] verifyPublicGivingSubmission fallback", error);
+        }
+      })();
+    }
+    if (!records.length && !submission) return false;
     records.forEach((record) => {
       record.estado = FINANCE_STATUS_VERIFIED;
+      record.status = "Verified";
       record.verificado_por = activeUser.name;
+      record.verified_by_name = activeUser.name;
       record.verified_at = nowIso;
       record.comentario_verificacao = data.comentario_verificacao || "";
       record.updated_by = activeUser.name;
       record.updated_at = today;
+      void dualWriteFinanceRecord("update", record);
     });
-    const submission = (state.publicGivingSubmissions || []).find((item) => item.submission_group_id === submissionGroupId);
-    if (submission) submission.status = FINANCE_STATUS_VERIFIED;
+    if (submission) {
+      submission.status = "Verified";
+      submission.verified_by = activeUser.name;
+      submission.verified_at = nowIso;
+      void dualWritePublicGivingSubmission("update", submission);
+    }
     saveState(`Verified public submission ${submissionGroupId}`);
     if (window.CESupabaseBridge?.persistGroupDecision) {
       window.CESupabaseBridge.persistGroupDecision(submissionGroupId, mode, data, activeUser.name);
@@ -7123,16 +7320,32 @@ function applyFinanceGroupDecision(submissionGroupId, mode, data) {
       alert(L("rejectionReasonRequired"));
       return false;
     }
+    if (submission && getFinanceRepoSafe()?.rejectPublicGivingSubmission) {
+      void getFinanceRepoSafe().rejectPublicGivingSubmission(
+        submission.id,
+        data.motivo_rejeicao.trim(),
+        activeUser.name
+      );
+    }
     records.forEach((record) => {
       record.estado = FINANCE_STATUS_REJECTED;
+      record.status = "Rejected";
       record.verificado_por = activeUser.name;
       record.verified_at = nowIso;
       record.motivo_rejeicao = data.motivo_rejeicao.trim();
+      record.rejection_reason = data.motivo_rejeicao.trim();
       record.updated_by = activeUser.name;
       record.updated_at = today;
+      void dualWriteFinanceRecord("update", record);
     });
-    const submission = (state.publicGivingSubmissions || []).find((item) => item.submission_group_id === submissionGroupId);
-    if (submission) submission.status = FINANCE_STATUS_REJECTED;
+    if (submission) {
+      submission.status = "Rejected";
+      submission.rejection_reason = data.motivo_rejeicao.trim();
+      submission.motivo_rejeicao = data.motivo_rejeicao.trim();
+      submission.rejected_by = activeUser.name;
+      submission.rejected_at = nowIso;
+      void dualWritePublicGivingSubmission("update", submission);
+    }
     saveState(`Rejected public submission ${submissionGroupId}`);
     if (window.CESupabaseBridge?.persistGroupDecision) {
       window.CESupabaseBridge.persistGroupDecision(submissionGroupId, mode, data, activeUser.name);
@@ -7763,12 +7976,15 @@ function submitFinanceDrawer(form) {
 
   if (financeDrawerMode === "verify") {
     record.estado = FINANCE_STATUS_VERIFIED;
+    record.status = "Verified";
     record.verificado_por = activeUser.name;
+    record.verified_by_name = activeUser.name;
     record.verified_at = nowIso;
     record.comentario_verificacao = data.comentario_verificacao || "";
     record.updated_by = activeUser.name;
     record.updated_at = today;
     saveState(`Verified finance record ${fullName(record)}`);
+    void dualWriteFinanceRecord("update", record);
     if (window.CESupabaseBridge?.persistRecordDecision) {
       window.CESupabaseBridge.persistRecordDecision(record, {
         estado: FINANCE_STATUS_VERIFIED,
@@ -7785,12 +8001,15 @@ function submitFinanceDrawer(form) {
       return;
     }
     record.estado = FINANCE_STATUS_REJECTED;
+    record.status = "Rejected";
     record.verificado_por = activeUser.name;
     record.verified_at = nowIso;
     record.motivo_rejeicao = data.motivo_rejeicao.trim();
+    record.rejection_reason = data.motivo_rejeicao.trim();
     record.updated_by = activeUser.name;
     record.updated_at = today;
     saveState(`Rejected finance record ${fullName(record)}`);
+    void dualWriteFinanceRecord("update", record);
     if (window.CESupabaseBridge?.persistRecordDecision) {
       window.CESupabaseBridge.persistRecordDecision(record, {
         estado: FINANCE_STATUS_REJECTED,
@@ -7805,6 +8024,7 @@ function submitFinanceDrawer(form) {
     const payload = { ...data, updated_by: activeUser.name, updated_at: today };
     Object.assign(record, migrateFinanceRecord({ ...record, ...payload }));
     saveState(`Updated finance record ${fullName(record)}`);
+    void dualWriteFinanceRecord("update", record);
   }
 
   closeFinanceDrawer();
@@ -8453,7 +8673,7 @@ function setRoute(route) {
     venueInventoryReports: () => renderVenueInventory("reports"),
     sacraments: renderSacraments,
     programs: () => renderSimple("programs", L("programs"), state.programs),
-    partnership: () => renderSimple("partnership", L("partnership"), state.partnership),
+    partnership: () => (typeof renderPartnerships === "function" ? renderPartnerships() : renderSimple("partnership", L("partnership"), state.partnership)),
     media: renderMedia,
     requisitions: renderRequisitions,
     staffHr: renderStaffHr,
@@ -9040,6 +9260,25 @@ function getDashboardCardsForUser(user = activeUser) {
     { id: "finance-released-month", priority: 18, roles: ["Finance Head"], module: "finance", targetTab: "approvedRequisitions", icon: "bi-cash-stack", title: L("finReleasedThisMonth"), value: releasedThisMonth.length, subtitle: money(releasedThisMonth.reduce((sum, d) => sum + Number(d.released_amount || 0), 0)), periodLabel: L("thisMonth"), filterPayload: { finance_status: "Recursos Liberados", period: "month" } },
     { id: "finance-featured-partners", priority: 22, roles: ["Finance Head"], module: "finance", targetTab: "partners", icon: "bi-trophy", title: L("financeFeaturedPartners"), value: topPartners.length, subtitle: L("financeTopPartners"), periodLabel: L("thisMonth"), filterPayload: { segment: "top" } },
     { id: "finance-reports", priority: 24, roles: ["Finance Head"], module: "finance", targetTab: "reports", icon: "bi-bar-chart-line", title: L("financeReportsSection"), value: L("rptViewAll"), subtitle: L("financeReportsHint"), periodLabel: L("thisMonth"), filterPayload: { period: "month" } },
+    // Partnerships analytics (verified income only)
+    ...(typeof computePartnershipArmAnalytics === "function"
+      ? (() => {
+          const arms = computePartnershipArmAnalytics("month");
+          const partners = typeof computePartnershipPartners === "function" ? computePartnershipPartners("month") : [];
+          const total = arms.reduce((s, a) => s + Number(a.total_amount || 0), 0);
+          const topArm = [...arms].sort((a, b) => b.total_amount - a.total_amount)[0];
+          const topDonorsArm = [...arms].sort((a, b) => b.donor_count - a.donor_count)[0];
+          const promo = arms.filter((a) => a.needs_promotion).length;
+          const newP = partners.filter((p) => /Novo|New/i.test(p.status || "")).length;
+          return [
+            { id: "partnerships-month", priority: 15, roles: ["Super Admin", "Main Pastor", "National Admin", "Finance Head", "Finance Officer", "Partnership Coordinator", "Church Pastor"], module: "partnership", icon: "bi-stars", title: lang === "pt" ? "Parcerias Este Mês" : "Partnerships This Month", value: money(total), subtitle: lang === "pt" ? "Receita verificada" : "Verified income", periodLabel: L("thisMonth"), filterPayload: { period: "month" } },
+            { id: "partnerships-top-arm", priority: 16, roles: ["Super Admin", "Main Pastor", "Finance Head", "Partnership Coordinator"], module: "partnership", icon: "bi-trophy", title: lang === "pt" ? "Braço com Maior Valor" : "Highest Value Arm", value: topArm?.name || "-", subtitle: money(topArm?.total_amount || 0), periodLabel: L("thisMonth"), filterPayload: { armId: topArm?.id || "" } },
+            { id: "partnerships-top-donors", priority: 17, roles: ["Super Admin", "Main Pastor", "Finance Head", "Partnership Coordinator"], module: "partnership", icon: "bi-people", title: lang === "pt" ? "Braço com Mais Dadores" : "Arm with Most Donors", value: topDonorsArm?.name || "-", subtitle: String(topDonorsArm?.donor_count || 0), periodLabel: L("thisMonth"), filterPayload: {} },
+            { id: "partnerships-promo", priority: 18, roles: ["Super Admin", "Main Pastor", "Finance Head", "Partnership Coordinator"], module: "partnership", icon: "bi-megaphone", title: lang === "pt" ? "Braços que Precisam de Promoção" : "Arms Needing Promotion", value: promo, subtitle: L("needsAction"), periodLabel: L("now"), filterPayload: { needs_promotion: true } },
+            { id: "partnerships-new", priority: 19, roles: ["Super Admin", "Finance Head", "Partnership Coordinator"], module: "partnership", icon: "bi-person-plus", title: lang === "pt" ? "Novos Parceiros" : "New Partners", value: newP, subtitle: L("thisMonth"), periodLabel: L("thisMonth"), filterPayload: { segment: "new" } }
+          ];
+        })()
+      : []),
     { id: "hr-staff-total", priority: 10, roles: ["HR Manager"], module: "staffHr", targetTab: "staff", icon: "bi-people", title: L("staffTotal"), value: staff.length, subtitle: L("staffHr"), periodLabel: L("now"), filterPayload: {} },
     { id: "hr-upcoming-birthdays", priority: 16, roles: ["HR Manager"], module: "staffHr", targetTab: "birthdays", icon: "bi-calendar-event", title: L("staffUpcomingBirthdays"), value: staff.filter((s) => s.date_of_birth).length, subtitle: L("staffHr"), periodLabel: L("now"), filterPayload: { upcoming: true } },
     { id: "hr-pending-payments", priority: 20, roles: ["HR Manager"], module: "staffHr", targetTab: "salaries", icon: "bi-cash", title: L("staffPendingPay"), value: salaries.filter((s) => s.payment_status === "Pendente").length, subtitle: L("needsAction"), periodLabel: L("now"), filterPayload: { payment_status: "Pendente" } },
@@ -17203,6 +17442,7 @@ async function submitForm(form) {
     }
     saveState(`Updated ${modalType}`);
     void dualWriteCellMinistryRecord(modalType, "update", collection[index]);
+    if (modalType === "finance") void dualWriteFinanceRecord("update", collection[index]);
   } else {
     const idPrefix = modalType.slice(0, 3);
     const nowIso = new Date().toISOString();
@@ -17219,12 +17459,15 @@ async function submitForm(form) {
     };
     if (modalType === "finance") {
       record.estado = FINANCE_STATUS_PENDING;
+      record.status = "Pending Verification";
+      record.transaction_type = "income";
+      record.source = "Manual Entry";
       record.recebido_por = activeUser.name;
+      record.received_by_name = activeUser.name;
       record.verificado_por = "";
       record.verified_at = "";
       record.comentario_verificacao = "";
       record.motivo_rejeicao = "";
-      record.status = record.estado;
       record.source_type = data.source_type || "manual";
       record.member_id = data.member_id || "";
       record.contributor_id = data.contributor_id || "";
@@ -17232,6 +17475,12 @@ async function submitForm(form) {
       record.partner_id = data.partner_id || "";
       record.whatsapp = data.whatsapp || "";
       record.igreja = data.igreja || churchName(record.church_id);
+      record.church_name = record.igreja;
+      record.currency = record.currency || "MZN";
+      record.amount = Number(record.valor || record.amount || 0);
+      record.valor = record.amount;
+      record.contribution_category = record.contribution_category || record.categoria_da_contribuicao || "";
+      record.categoria_da_contribuicao = record.categoria_da_contribuicao || record.contribution_category || "";
       record.imagem_envelope_ou_pop = data.imagem_do_envelope || "";
       record.imagem_do_envelope = record.imagem_envelope_ou_pop;
       if (new FormData(form).has("save_as_contributor") && record.source_type === "manual") {
@@ -17288,6 +17537,7 @@ async function submitForm(form) {
     collection.push(record);
     saveState(`Created ${modalType}`);
     void dualWriteCellMinistryRecord(modalType, "create", record);
+    if (modalType === "finance") void dualWriteFinanceRecord("create", record);
   }
   bootstrap.Modal.getOrCreateInstance(byId("entryModal")).hide();
   form.reset();
@@ -18687,6 +18937,14 @@ function enterDashboard() {
       if (hydrated && String(activeRoute || "").startsWith("cell")) setRoute(activeRoute);
     })
     .catch((error) => console.warn("[CE CellMinistry] background hydrate skipped", error));
+  Promise.resolve()
+    .then(() => hydrateFinanceFromRepository())
+    .then((hydrated) => {
+      if (hydrated && (activeRoute === "finance" || String(activeRoute || "").startsWith("finance"))) {
+        setRoute(activeRoute);
+      }
+    })
+    .catch((error) => console.warn("[CE Finance] background hydrate skipped", error));
 }
 
 window.enterDashboard = enterDashboard;

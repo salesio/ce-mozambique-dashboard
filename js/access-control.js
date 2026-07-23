@@ -204,6 +204,7 @@
       modules: {
         dashboard: { ...VIEW_ONLY, scope: "all" },
         finance: { can_view: true, can_create: true, can_edit: true, can_delete: false, can_approve: true, can_verify: true, can_release_resources: true, can_export: true, scope: "all" },
+        partnership: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: false, can_verify: false, can_export: true, scope: "all" },
         reports: { ...VIEW_ONLY, scope: "all", can_export: true },
         requisitions: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: false, can_verify: true, can_release_resources: true, can_export: true, scope: "all" },
         auditLogs: { ...VIEW_ONLY, scope: "all" }
@@ -213,7 +214,16 @@
       modules: {
         dashboard: { ...VIEW_ONLY, scope: "church" },
         finance: { can_view: true, can_create: true, can_edit: true, can_delete: false, can_approve: false, can_verify: true, can_release_resources: false, can_export: true, scope: "church" },
+        partnership: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: false, can_verify: false, can_export: true, scope: "church" },
         reports: { ...VIEW_ONLY, scope: "church", can_export: true }
+      }
+    },
+    "Partnership Coordinator": {
+      modules: {
+        dashboard: { ...VIEW_ONLY, scope: "all" },
+        partnership: { can_view: true, can_create: true, can_edit: true, can_delete: false, can_approve: false, can_verify: false, can_export: true, scope: "all" },
+        finance: { can_view: true, can_create: false, can_edit: false, can_delete: false, can_approve: false, can_verify: false, can_export: true, scope: "all" },
+        reports: { ...VIEW_ONLY, scope: "all", can_export: true }
       }
     },
     "HR Manager": {

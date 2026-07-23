@@ -11,6 +11,8 @@
     "dev:supabase": "vite build --watch",
     "test:public-cell-report": "node scripts/smoke-public-cell-report.mjs",
     "test:e2e-cell-report": "node scripts/e2e-public-cell-report.mjs",
+    "test:finance-data": "node scripts/smoke-finance-data.mjs",
+    "test:partnerships-data": "node scripts/smoke-partnerships-data.mjs",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",

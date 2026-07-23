@@ -11,7 +11,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" type="image/png" href="https://embaixada-de-cristo.obiuba.com/assets/web/LoveWorld.png">
-  <link rel="stylesheet" href="css/dashboard.css?v=20260723-cell-report-submit-v2">
+  <link rel="stylesheet" href="css/dashboard.css?v=20260723-partnerships-v1">
 </head>
 <body>
   <main id="loginView" class="login-shell">
@@ -203,20 +203,22 @@
   <script src="js/requisitions-module.js?v=20260712-reports-v2"></script>
   <script src="js/staff-hr-module.js?v=20260712-staff-birthdays-v3"></script>
   <script src="js/finance-module.js?v=20260714-filter-apply-v2"></script>
+  <script src="js/partnerships-module.js?v=20260723-partnerships-v1"></script>
   <script>
     // Runtime env overrides (optional). Prefer Vite .env at build time for the bundle.
     window.__CE_ENV__ = window.__CE_ENV__ || {};
     // window.__CE_ENV__.VITE_DATA_SOURCE = 'local'; // test churches localStorage provider
   </script>
   <!-- Data layer bundle (churches + members + first timers + follow-ups + foundation school + cell ministry) -->
-  <script src="js/supabase-bundle.js?v=20260723-cell-report-submit-v1"></script>
-  <script src="js/churches-data-bridge.js?v=20260723-cell-report-submit-v1"></script>
-  <script src="js/members-data-bridge.js?v=20260723-cell-report-submit-v1"></script>
-  <script src="js/first-timers-data-bridge.js?v=20260723-cell-report-submit-v1"></script>
-  <script src="js/follow-ups-data-bridge.js?v=20260723-cell-report-submit-v1"></script>
-  <script src="js/foundation-school-data-bridge.js?v=20260723-cell-report-submit-v1"></script>
-  <script src="js/cell-ministry-data-bridge.js?v=20260723-cell-report-submit-v1"></script>
-  <script src="js/dashboard.js?v=20260723-cell-report-submit-v2"></script>
+  <script src="js/supabase-bundle.js?v=20260723-finance-data-v1"></script>
+  <script src="js/churches-data-bridge.js?v=20260723-finance-data-v1"></script>
+  <script src="js/members-data-bridge.js?v=20260723-finance-data-v1"></script>
+  <script src="js/first-timers-data-bridge.js?v=20260723-finance-data-v1"></script>
+  <script src="js/follow-ups-data-bridge.js?v=20260723-finance-data-v1"></script>
+  <script src="js/foundation-school-data-bridge.js?v=20260723-finance-data-v1"></script>
+  <script src="js/cell-ministry-data-bridge.js?v=20260723-finance-data-v1"></script>
+  <script src="js/finance-data-bridge.js?v=20260723-finance-data-v1"></script>
+  <script src="js/dashboard.js?v=20260723-partnerships-v1"></script>
   <!-- UMD build (classic script) — ESM CDN breaks without type="module" -->
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script defer src="js/supabase-config.js?v=20260712-supabase"></script>

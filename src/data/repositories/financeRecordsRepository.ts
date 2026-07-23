@@ -1,0 +1,21 @@
+/** Thin re-export — finance record methods live in financeRepository. */
+export {
+  listFinanceRecords,
+  getFinanceRecordById,
+  createFinanceRecord,
+  updateFinanceRecord,
+  deleteFinanceRecord,
+  searchFinanceRecords,
+  getFinanceRecordsByChurch,
+  getFinanceRecordsByCategory,
+  getFinanceRecordsByContributionGroup,
+  getFinanceRecordsByPartnershipArm,
+  getFinanceRecordsByStatus,
+  getFinanceRecordsByDateRange,
+  getPendingVerificationRecords,
+  getVerifiedRecords,
+  getMonthlyGiving,
+  getTotalGivingByPeriod,
+  normalizeFinanceRecord,
+  createFinanceRecordFromCellReport,
+} from "./financeRepository";

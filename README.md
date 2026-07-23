@@ -13,18 +13,24 @@ npm install
 npm run dev          # dashboard at http://localhost:5173
 npm run build        # rebuild js/supabase-bundle.js
 npm run test:public-cell-report   # smoke: public form wiring + createCellReport
+npm run test:finance-data         # smoke: finance records + verify public giving
+npm run test:partnerships-data    # smoke: partnership analytics rules
 ```
 
 ### Data layer (progressive DB migration)
 
 The UI still uses **localStorage mock** for most modules. Typed adapters live under `src/data/`.
 
-**Pilots already on the data layer:** Churches, Members, First Timers, Follow-Up, Foundation School / Escola de Fundação, **Cell Ministry / Células & Liderança**  
+**Pilots already on the data layer:** Churches, Members, First Timers, Follow-Up, Foundation School / Escola de Fundação, Cell Ministry / Células & Liderança, **Finance / Finanças**  
 (`VITE_DATA_SOURCE=mock|local|api|supabase` — default `mock`).
 
 **Escola de Fundação (functional):** full tabs (overview → reports), 20+ teachers at HQ, delivery modes (in-person / online / home / prison), lesson sessions & attendance, online tests 1–7 (mock Forms; 20×6+10), soul winning (lesson 4), physical final exam + attachment prep, grading 40/60, audit log. No real Google API / scan app / Postgres yet.
 
 **Células & Liderança (pilot):** cell groups, cells, leaders, weekly reports via data layer + accordion UI. Offering → Finance is placeholder only (no auto verified receipt).
+
+**Finance (pilot):** finance records, public giving submissions, and disbursements via data layer + `CEFinance` bridge. Public giving becomes verified income only after Finance Head verifies. Cell offerings stay Pending Finance Review (not auto revenue). Income and expense stay separated.
+
+**Partnerships / Parcerias:** analytics layer on **verified** partnership financeRecords (no duplicate ledger). Loveworld SAT is a partnership arm, not a department. Sidebar: Finanças → Parcerias.
 
 **Public Cell Report Form (leaders, no admin login):**
 - Button on the **login screen** only: *Submeter Relatório de Célula* → `#cell-report-submit`

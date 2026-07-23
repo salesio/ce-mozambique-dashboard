@@ -141,6 +141,54 @@ export { CELL_LEADERS_SEED } from "./seeds/cellLeadersSeed";
 export { CELL_REPORTS_SEED } from "./seeds/cellReportsSeed";
 
 export {
+  listFinanceRecords,
+  getFinanceRecordById,
+  createFinanceRecord,
+  updateFinanceRecord,
+  deleteFinanceRecord,
+  searchFinanceRecords,
+  getFinanceRecordsByChurch,
+  getFinanceRecordsByCategory,
+  getFinanceRecordsByContributionGroup,
+  getFinanceRecordsByPartnershipArm,
+  getFinanceRecordsByStatus,
+  getFinanceRecordsByDateRange,
+  getPendingVerificationRecords,
+  getVerifiedRecords,
+  getMonthlyGiving,
+  getTotalGivingByPeriod,
+  listPublicGivingSubmissions,
+  getPublicGivingSubmissionById,
+  createPublicGivingSubmission,
+  updatePublicGivingSubmission,
+  deletePublicGivingSubmission,
+  getPublicGivingSubmissionsByStatus,
+  getPendingPublicGivingSubmissions,
+  verifyPublicGivingSubmission,
+  rejectPublicGivingSubmission,
+  listFinanceDisbursements,
+  getFinanceDisbursementById,
+  createFinanceDisbursement,
+  updateFinanceDisbursement,
+  getDisbursementsByRequisition,
+  getPendingDisbursements,
+  getReleasedDisbursements,
+  getDisbursementsByDateRange,
+  ensureFinanceSeeded,
+  getFinanceDataSourceInfo,
+  normalizeFinanceRecord,
+  normalizePublicGivingSubmission,
+  normalizeFinanceDisbursement,
+  createFinanceRecordFromCellReport,
+  toEnglishFinanceStatus,
+  toLegacyFinanceEstado,
+} from "./repositories/financeRepository";
+
+export { FINANCE_RECORDS_SEED } from "./seeds/financeRecordsSeed";
+export { PUBLIC_GIVING_SUBMISSIONS_SEED } from "./seeds/publicGivingSubmissionsSeed";
+export { FINANCE_DISBURSEMENTS_SEED } from "./seeds/financeDisbursementsSeed";
+
+export {
   listFoundationStudents,
   getFoundationStudentById,
   createFoundationStudent,

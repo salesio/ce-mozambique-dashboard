@@ -1479,6 +1479,102 @@ tr[data-public-cell-report="1"] td:last-child {
   letter-spacing: 0.02em;
 }
 
+/* Partnerships analytics */
+.partnership-arm-grid .partnership-arm-card {
+  padding: 1.1rem;
+  border: 1px solid rgba(34, 211, 238, 0.22);
+}
+
+.partnership-arm-card-head {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.partnership-arm-logo,
+.partnership-arm-placeholder {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.partnership-arm-placeholder {
+  display: grid;
+  place-items: center;
+  gap: 0.1rem;
+  background: linear-gradient(145deg, rgba(34, 211, 238, 0.18), rgba(215, 174, 75, 0.22));
+  color: #0b1f3a;
+  font-weight: 900;
+  font-size: 0.75rem;
+}
+
+.partnership-arm-placeholder i {
+  font-size: 1.1rem;
+  color: #0e7490;
+}
+
+.partnership-arm-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin: 0.85rem 0 0.75rem;
+}
+
+.partnership-arm-stats div {
+  padding: 0.45rem 0.5rem;
+  border-radius: 0.65rem;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(11, 31, 58, 0.08);
+}
+
+.partnership-arm-stats span {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.partnership-arm-stats strong {
+  color: #0b1f3a;
+  font-size: 0.9rem;
+}
+
+.partnership-goal-bar {
+  height: 0.45rem;
+  background: rgba(11, 31, 58, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.partnership-goal-bar .progress-bar {
+  background: linear-gradient(90deg, #22d3ee, #d7ad45);
+}
+
+.badge-promo {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(220, 38, 38, 0.12);
+  color: #b91c1c;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.partnership-tabs {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 767.98px) {
+  .partnership-arm-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .public-form-alert {
   margin-bottom: 1rem;
   padding: 0.8rem 1rem;

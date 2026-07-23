@@ -6,8 +6,10 @@ import type {
   Church,
   EntityCollectionName,
   EntityId,
+  FinanceDisbursement,
   FinanceRecord,
   FirstTimer,
+  PublicGivingSubmission,
   FollowUp,
   FoundationClassGroup,
   FoundationFinalExam,
@@ -69,6 +71,8 @@ export interface DataProvider {
   foundationTestSubmissions: EntityRepository<FoundationTestSubmission>;
   foundationFinalExams: EntityRepository<FoundationFinalExam>;
   financeRecords: EntityRepository<FinanceRecord>;
+  publicGivingSubmissions: EntityRepository<PublicGivingSubmission>;
+  financeDisbursements: EntityRepository<FinanceDisbursement>;
   requisitions: EntityRepository<Requisition>;
   notifications: EntityRepository<Notification>;
   cellGroups: EntityRepository<CellGroup>;

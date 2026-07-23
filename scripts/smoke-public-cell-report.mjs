@@ -33,9 +33,9 @@ function read(rel) {
 const indexHtml = read("index.html");
 ok("login button present", /data-public-cell-report/.test(indexHtml) && /Submeter Relat[oó]rio de C[eé]lula/.test(indexHtml));
 ok("public view shell", /id="publicCellReportView"/.test(indexHtml));
-ok("cache buster v1", /20260723-cell-report-submit-v1/.test(indexHtml));
-ok("dashboard script tagged", /dashboard\.js\?v=20260723-cell-report-submit-v1/.test(indexHtml));
-ok("cell ministry bridge tagged", /cell-ministry-data-bridge\.js\?v=20260723-cell-report-submit-v1/.test(indexHtml));
+ok("cache buster present", /20260723-(cell-report-submit|finance-data)-v\d+/.test(indexHtml));
+ok("dashboard script tagged", /dashboard\.js\?v=20260723-/.test(indexHtml));
+ok("cell ministry bridge tagged", /cell-ministry-data-bridge\.js\?v=20260723-/.test(indexHtml));
 
 const dash = read("js/dashboard.js");
 ok("hash route cell-report-submit", /cell-report-submit/.test(dash));

@@ -709,15 +709,227 @@ export interface FoundationGradingSettings {
 // Finance & operations
 // ---------------------------------------------------------------------------
 
+/** Single contribution line inside a public giving submission. */
+export interface PublicGivingContributionLine {
+  contribution_group?: string | null;
+  contribution_category?: string | null;
+  partnership_arm_id?: EntityId | null;
+  partnership_arm_name?: string | null;
+  amount?: number | null;
+}
+
+/**
+ * Finance Record / Lançamento — income or expense.
+ * Supports dashboard legacy fields (nome, valor, estado) + data-layer snake_case.
+ */
 export interface FinanceRecord {
   id: EntityId;
-  churchId: EntityId | null;
-  category: string | null;
-  amount: number | null;
-  recordedAt: IsoDate | null;
-  notes: string | null;
+  transaction_type?: "income" | "expense" | string | null;
+  contribution_group?: string | null;
+  contribution_category?: string | null;
+  /** Legacy alias */
+  category?: string | null;
+  categoria_da_contribuicao?: string | null;
+
+  partnership_arm_id?: EntityId | null;
+  partnership_arm_name?: string | null;
+
+  contributor_id?: EntityId | null;
+  contributor_name?: string | null;
+  contributor_phone?: string | null;
+  contributor_email?: string | null;
+  nome?: string | null;
+  apelido?: string | null;
+  telefone?: string | null;
+  whatsapp?: string | null;
+  email?: string | null;
+  endereco?: string | null;
+
+  member_id?: EntityId | null;
+  first_timer_id?: EntityId | null;
+  partner_id?: EntityId | null;
+  source_type?: string | null;
+
+  church_id?: EntityId | null;
+  churchId?: EntityId | null;
+  church_name?: string | null;
+  igreja?: string | null;
+
+  cell_group_id?: EntityId | null;
+  cell_group_name?: string | null;
+  grupo_de_celula?: string | null;
+  cell_id?: EntityId | null;
+  cell_name?: string | null;
+  celula?: string | null;
+
+  amount?: number | null;
+  valor?: number | null;
+  currency?: string | null;
+
+  payment_method?: string | null;
+  metodo_de_pagamento?: string | null;
+  payment_reference?: string | null;
+  referencia_da_transaccao?: string | null;
+  payment_date?: IsoDate | null;
+  data?: IsoDate | null;
+  data_da_transferencia?: IsoDate | null;
+  recordedAt?: IsoDate | null;
+
+  proof_file_url?: string | null;
+  proof_file_name?: string | null;
+  imagem_envelope_ou_pop?: string | null;
+  imagem_do_envelope?: string | null;
+
+  /** English data-layer status */
   status?: string | null;
-  createdAt: IsoDateTime;
+  /** PT dashboard status (Pendente de Verificação / Verificado / …) */
+  estado?: string | null;
+
+  source?: string | null;
+  submission_group_id?: string | null;
+  public_submission_id?: string | null;
+  requisition_id?: EntityId | null;
+  cell_report_id?: EntityId | null;
+
+  received_by?: string | null;
+  received_by_name?: string | null;
+  recebido_por?: string | null;
+
+  verified_by?: string | null;
+  verified_by_name?: string | null;
+  verificado_por?: string | null;
+  verified_at?: IsoDateTime | null;
+  comentario_verificacao?: string | null;
+
+  rejected_by?: string | null;
+  rejected_by_name?: string | null;
+  rejected_at?: IsoDateTime | null;
+  rejection_reason?: string | null;
+  motivo_rejeicao?: string | null;
+
+  notes?: string | null;
+  observacoes?: string | null;
+  mensagem_transferencia?: string | null;
+  outros_descricao?: string | null;
+  data_de_aniversario?: string | null;
+
+  created_by?: string | null;
+  updated_by?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+  createdAt?: IsoDateTime;
+  updatedAt?: IsoDateTime;
+}
+
+export interface PublicGivingSubmission {
+  id: EntityId;
+  submission_group_id?: string | null;
+
+  full_name?: string | null;
+  nome?: string | null;
+  apelido?: string | null;
+  birthday?: string | null;
+  data_de_aniversario?: string | null;
+  phone?: string | null;
+  telefone?: string | null;
+  email?: string | null;
+
+  church_id?: EntityId | null;
+  igreja_id?: EntityId | null;
+  church_name?: string | null;
+  igreja?: string | null;
+
+  cell_group_id?: EntityId | null;
+  cell_group_name?: string | null;
+  grupo_de_celula?: string | null;
+  cell_id?: EntityId | null;
+  cell_name?: string | null;
+  celula?: string | null;
+
+  contributions?: PublicGivingContributionLine[] | null;
+  total_amount?: number | null;
+  valor_total?: number | null;
+  currency?: string | null;
+
+  payment_method?: string | null;
+  metodo_de_pagamento?: string | null;
+  payment_reference?: string | null;
+  referencia_da_transaccao?: string | null;
+  payment_date?: IsoDate | null;
+  data_da_transferencia?: IsoDate | null;
+
+  proof_file_url?: string | null;
+  proof_file_name?: string | null;
+  imagem_envelope_ou_pop?: string | null;
+
+  transfer_message?: string | null;
+  mensagem_transferencia?: string | null;
+  notes?: string | null;
+  observacoes?: string | null;
+
+  status?: string | null;
+  source?: string | null;
+
+  created_finance_record_ids?: EntityId[] | null;
+
+  submitted_at?: IsoDateTime | null;
+  reviewed_by?: string | null;
+  reviewed_at?: IsoDateTime | null;
+  verified_by?: string | null;
+  verified_at?: IsoDateTime | null;
+  rejected_by?: string | null;
+  rejected_at?: IsoDateTime | null;
+  rejection_reason?: string | null;
+  motivo_rejeicao?: string | null;
+
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+  createdAt?: IsoDateTime;
+  updatedAt?: IsoDateTime;
+}
+
+export interface FinanceDisbursement {
+  id: EntityId;
+  requisition_id?: EntityId | null;
+  request_number?: string | null;
+  title?: string | null;
+
+  department_id?: EntityId | null;
+  department_name?: string | null;
+
+  church_id?: EntityId | null;
+  church_name?: string | null;
+
+  requested_by?: string | null;
+  requested_by_name?: string | null;
+
+  approved_by?: string | null;
+  approved_by_name?: string | null;
+  approved_at?: IsoDateTime | null;
+
+  approved_amount?: number | null;
+  released_amount?: number | null;
+  pending_amount?: number | null;
+
+  payment_method?: string | null;
+  payment_reference?: string | null;
+  release_date?: IsoDate | null;
+
+  released_by?: string | null;
+  released_by_name?: string | null;
+  released_at?: IsoDateTime | null;
+
+  status?: string | null;
+  proof_file_url?: string | null;
+  proof_file_name?: string | null;
+  notes?: string | null;
+
+  finance_record_id?: EntityId | null;
+
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+  createdAt?: IsoDateTime;
+  updatedAt?: IsoDateTime;
 }
 
 export interface Requisition {
@@ -966,6 +1178,8 @@ export type EntityCollectionName =
   | "foundation_test_submissions"
   | "foundation_final_exams"
   | "finance_records"
+  | "public_giving_submissions"
+  | "finance_disbursements"
   | "requisitions"
   | "notifications"
   | "cell_groups"

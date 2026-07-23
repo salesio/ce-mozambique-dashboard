@@ -14,6 +14,7 @@
 | **Follow-Up / Acompanhamento UI** | Contact logs + create-from-FT via `followUpsRepository` (+ first-timer status dual-write) |
 | **Foundation School / ESF UI** | Full operational module on data layer + local state (sessions, tests, soul winning, final exam, audit) |
 | **Cell Ministry / Células & Liderança** | Groups, cells, leaders, reports via `cellMinistryRepository` + bridge |
+| **Finance / Finanças** | Records, public giving submissions, disbursements via `financeRepository` + bridge |
 
 **Other modules** still use the classic `dashboard.js` localStorage blob only.  
 **Nothing is abandoned:** open http://localhost:5173 and the app still works.
@@ -591,4 +592,93 @@ npm run dev
 #    Expect: status Submitted|Pending Review, Public form badge, finance_review if offering
 # 4) Actions: Ver / Aprovar / Pedir Correção / Validar / Rejeitar / Enviar Finanças (placeholder)
 # 5) F5 with VITE_DATA_SOURCE=local — report still present
+```
+
+---
+
+## Pilot migration: Finance
+
+**Status: live (pilot)** — dual-write / hydrate pattern as Churches → Cell Ministry.
+
+### Scope
+
+| Collection | Local key | UI state |
+|------------|-----------|----------|
+| Finance records | `ce-data-layer:finance-records` | `state.finance` |
+| Public giving submissions | `ce-data-layer:public-giving-submissions` | `state.publicGivingSubmissions` |
+| Finance disbursements | `ce-data-layer:finance-disbursements` | `state.financeDisbursements` |
+
+### Code
+
+| Piece | Role |
+|-------|------|
+| `src/data/repositories/financeRepository.ts` | Records + public giving + disbursements API |
+| Thin re-exports | `financeRecords/publicGivingSubmissions/financeDisbursementsRepository.ts` |
+| Seeds | Realistic dízimos/ofertas/parcerias + pending public + disbursements |
+| `js/finance-data-bridge.js` | `window.CEFinance` pure-JS fallback |
+| `js/dashboard.js` | Dual-write on create/edit/verify; hydrate on login |
+
+### Rules (non-negotiable)
+
+- **Income vs expense separated** (`transaction_type`)
+- Public Giving creates **Verified** `financeRecord`s only after Finance Head **Verificar**
+- Manual entry starts as **Pending Verification** / `source = Manual Entry`
+- Cell report offerings stay **Pending Finance Review** — never auto-verified income
+- `createFinanceRecordFromCellReport` exists as future hook only
+- Partnerships: `partnership_arm_id` / `partnership_arm_name` prepared (module not migrated)
+- Direct PostgreSQL / real bank / M-Pesa = **future phase**
+- Existing RBAC + finance visual unchanged
+
+### How to test Finance
+
+```bash
+npm run build
+npm run test:finance-data   # smoke repository create/verify/monthly
+npm run dev
+# 1) Finanças → listar lançamentos
+# 2) Adicionar → status Pending Verification
+# 3) Verificar → Verified
+# 4) Submissão pública → Verificar → financeRecords criados
+# 5) Monthly Giving só conta Verified
+# 6) Oferta de célula com Pending Finance Review NÃO entra como receita
+# 7) F5 com VITE_DATA_SOURCE=local — persistência
+# 8) Churches / Members / FT / Follow-Up / Foundation / Cells still OK
+```
+
+---
+
+## Partnerships analytics layer
+
+**Status: live** — view/analytics over **verified** finance income; no duplicate ledger.
+
+### Rules
+
+| Rule | Detail |
+|------|--------|
+| Source of truth | `financeRecords` (`transaction_type=income`, status **Verified**) with partnership arm or `contribution_group=Parcerias` |
+| Not included | Pending Verification, Rejected, expense, disbursements, cell `Pending Finance Review` |
+| Loveworld SAT | **Partnership arm only** — not a sidebar department |
+| Sidebar | Finanças → **Parcerias** → Mídia / … |
+| Module file | `js/partnerships-module.js` (`window.CEPartnerships`, `renderPartnerships`) |
+| Tabs | Visão Geral · Braços · Parceiros · Contribuições · Destaques · Análise · Relatórios · Exportações |
+
+### Promotion logic
+
+`getPartnershipArmPromotionStatus` marks **Precisa de Promoção** when donors &lt; 3, total &lt; 40% of monthly goal, growth &lt; −20%, no gift &gt; 30 days, or total = 0.
+
+### Integration
+
+- Public giving verified with partnership arm → appears automatically in Parcerias
+- Finanças creates/verifies; Parcerias only analyses
+- Cache buster: `?v=20260723-partnerships-v1`
+
+### How to test Partnerships
+
+```bash
+npm run build
+npm run test:partnerships-data
+npm run dev
+# Finanças → verify partnership gift (e.g. Loveworld SAT)
+# Parcerias → arm shows value; Pending does not; expense does not
+# needs_promotion / top partners / refresh local
 ```

@@ -5,8 +5,10 @@ import type {
   CellReportSubmission,
   Church,
   EntityCollectionName,
+  FinanceDisbursement,
   FinanceRecord,
   FirstTimer,
+  PublicGivingSubmission,
   FollowUp,
   FoundationClassGroup,
   FoundationFinalExam,
@@ -34,6 +36,9 @@ import { CELL_GROUPS_SEED } from "../seeds/cellGroupsSeed";
 import { CELLS_SEED } from "../seeds/cellsSeed";
 import { CELL_LEADERS_SEED } from "../seeds/cellLeadersSeed";
 import { CELL_REPORTS_SEED } from "../seeds/cellReportsSeed";
+import { FINANCE_RECORDS_SEED } from "../seeds/financeRecordsSeed";
+import { PUBLIC_GIVING_SUBMISSIONS_SEED } from "../seeds/publicGivingSubmissionsSeed";
+import { FINANCE_DISBURSEMENTS_SEED } from "../seeds/financeDisbursementsSeed";
 
 const sampleUser: User = {
   id: "user-admin-mock",
@@ -72,7 +77,15 @@ export function createMockProvider(): DataProvider {
   const foundationLessonSessions = createMemoryRepository<FoundationLessonSession>([]);
   const foundationTestSubmissions = createMemoryRepository<FoundationTestSubmission>([]);
   const foundationFinalExams = createMemoryRepository<FoundationFinalExam>([]);
-  const financeRecords = createMemoryRepository<FinanceRecord>([]);
+  const financeRecords = createMemoryRepository<FinanceRecord>(
+    FINANCE_RECORDS_SEED.map((r) => ({ ...r })),
+  );
+  const publicGivingSubmissions = createMemoryRepository<PublicGivingSubmission>(
+    PUBLIC_GIVING_SUBMISSIONS_SEED.map((s) => ({ ...s })),
+  );
+  const financeDisbursements = createMemoryRepository<FinanceDisbursement>(
+    FINANCE_DISBURSEMENTS_SEED.map((d) => ({ ...d })),
+  );
   const requisitions = createMemoryRepository<Requisition>([]);
   const notifications = createMemoryRepository<Notification>([]);
   const cellGroups = createMemoryRepository<CellGroup>(CELL_GROUPS_SEED.map((g) => ({ ...g })));
@@ -99,6 +112,8 @@ export function createMockProvider(): DataProvider {
     foundation_test_submissions: foundationTestSubmissions as EntityRepository<unknown>,
     foundation_final_exams: foundationFinalExams as EntityRepository<unknown>,
     finance_records: financeRecords as EntityRepository<unknown>,
+    public_giving_submissions: publicGivingSubmissions as EntityRepository<unknown>,
+    finance_disbursements: financeDisbursements as EntityRepository<unknown>,
     requisitions: requisitions as EntityRepository<unknown>,
     notifications: notifications as EntityRepository<unknown>,
     cell_groups: cellGroups as EntityRepository<unknown>,
@@ -125,6 +140,8 @@ export function createMockProvider(): DataProvider {
     foundationTestSubmissions,
     foundationFinalExams,
     financeRecords,
+    publicGivingSubmissions,
+    financeDisbursements,
     requisitions,
     notifications,
     cellGroups,

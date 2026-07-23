@@ -932,14 +932,127 @@ export interface FinanceDisbursement {
   updatedAt?: IsoDateTime;
 }
 
+/**
+ * Requisition / Requisição — full workflow (submit → review → pastor → finance → inventory).
+ * Supports PT dashboard statuses + English aliases.
+ */
 export interface Requisition {
   id: EntityId;
-  churchId: EntityId | null;
-  title: string | null;
-  status: string | null;
-  amount: number | null;
-  createdAt: IsoDateTime;
-  updatedAt: IsoDateTime;
+  request_number?: string | null;
+  title?: string | null;
+  description?: string | null;
+  justification?: string | null;
+
+  requested_by_user_id?: EntityId | null;
+  requested_by_name?: string | null;
+  requested_by_role?: string | null;
+
+  department_id?: EntityId | null;
+  department_name?: string | null;
+
+  church_id?: EntityId | null;
+  churchId?: EntityId | null;
+  church_name?: string | null;
+
+  requisition_type?: string | null;
+  urgency?: string | null;
+  needed_by_date?: IsoDate | null;
+
+  estimated_amount?: number | null;
+  approved_amount?: number | null;
+  amount?: number | null;
+  currency?: string | null;
+
+  supplier_name?: string | null;
+  supplier_or_vendor?: string | null;
+  quotation_number?: string | null;
+  quotation_file_url?: string | null;
+  attachments?: Array<Record<string, unknown> | string> | null;
+
+  reviewed_by_user_id?: EntityId | null;
+  reviewed_by?: string | null;
+  reviewed_by_name?: string | null;
+  reviewed_at?: IsoDateTime | null;
+  review_notes?: string | null;
+
+  sent_to_main_pastor_by?: string | null;
+  sent_to_main_pastor_by_name?: string | null;
+  sent_to_main_pastor_at?: IsoDateTime | null;
+
+  approved_by_user_id?: EntityId | null;
+  approved_by?: string | null;
+  approved_by_name?: string | null;
+  approved_at?: IsoDateTime | null;
+  approval_notes?: string | null;
+  final_priority?: string | null;
+
+  rejected_by_user_id?: EntityId | null;
+  rejected_by?: string | null;
+  rejected_by_name?: string | null;
+  rejected_at?: IsoDateTime | null;
+  rejection_reason?: string | null;
+
+  returned_by_user_id?: EntityId | null;
+  returned_by?: string | null;
+  returned_by_name?: string | null;
+  returned_at?: IsoDateTime | null;
+  return_reason?: string | null;
+  return_notes?: string | null;
+
+  finance_status?: string | null;
+  released_amount?: number | null;
+  amount_released?: number | null;
+  pending_amount?: number | null;
+  resources_released_by?: string | null;
+  resources_released_by_name?: string | null;
+  resources_released_at?: IsoDateTime | null;
+  released_by?: string | null;
+  released_at?: IsoDateTime | null;
+  payment_method?: string | null;
+  payment_reference?: string | null;
+  payment_notes?: string | null;
+  sent_to_finance?: boolean | null;
+  sent_to_finance_at?: IsoDateTime | null;
+
+  finance_disbursement_id?: EntityId | null;
+  finance_record_id?: EntityId | null;
+
+  inventory_required?: boolean | null;
+  inventory_item_id?: EntityId | null;
+  inventory_status?: string | null;
+  sent_to_inventory_at?: IsoDateTime | null;
+
+  status?: string | null;
+  notes?: string | null;
+  audit_history?: Array<Record<string, unknown>> | null;
+  timeline?: RequisitionTimelineEvent[] | null;
+
+  submitted_by?: string | null;
+  submitted_at?: IsoDateTime | null;
+  closed_by?: string | null;
+  closed_at?: IsoDateTime | null;
+
+  created_by?: string | null;
+  updated_by?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+  createdAt?: IsoDateTime;
+  updatedAt?: IsoDateTime;
+}
+
+export interface RequisitionTimelineEvent {
+  id: EntityId;
+  requisition_id?: EntityId | null;
+  event_type?: string | null;
+  title?: string | null;
+  description?: string | null;
+  old_status?: string | null;
+  new_status?: string | null;
+  performed_by_user_id?: EntityId | null;
+  performed_by_name?: string | null;
+  performed_by_role?: string | null;
+  created_at?: IsoDateTime | null;
+  metadata?: Record<string, unknown> | null;
 }
 
 export interface Notification {
@@ -1181,6 +1294,7 @@ export type EntityCollectionName =
   | "public_giving_submissions"
   | "finance_disbursements"
   | "requisitions"
+  | "requisition_timeline"
   | "notifications"
   | "cell_groups"
   | "cells"

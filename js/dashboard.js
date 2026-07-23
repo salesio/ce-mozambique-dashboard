@@ -17220,28 +17220,38 @@ async function submitForm(form) {
     if (modalMode === "edit") {
       const index = state.requisitions.findIndex((item) => item.id === modalRecordId);
       state.requisitions[index] = { ...state.requisitions[index], ...data, updated_at: now };
+      dualWriteRequisitionRecord("update", state.requisitions[index]);
     } else {
       state.requisitions = state.requisitions || [];
-      state.requisitions.push({
+      const invRequired = window.CERequisitions?.TYPES
+        ? /Equipamento|Material|Aquisi|Repara|Mídia|Media/i.test(String(data.requisition_type || ""))
+        : false;
+      const newReq = {
         id: `req-${Date.now()}`,
         request_number: window.CERequisitions?.nextRequestNumber(state.requisitions) || `REQ-${Date.now()}`,
         requested_by_user_id: activeUser.id,
         requested_by_name: activeUser.name,
+        requested_by_role: activeUser.role || "",
         department_id: dept?.id || "",
         church_name: churchName(data.church_id || activeUser.church_id),
         currency: "MZN",
         attachments: [],
         status: "Rascunho",
+        finance_status: "Not Applicable",
+        inventory_required: invRequired || !!data.inventory_required,
+        inventory_status: "Not Applicable",
         created_at: now,
         updated_at: now,
         reviewed_by: "", reviewed_at: "", review_notes: "", sent_to_main_pastor_at: "",
         approved_by: "", approved_at: "", approval_notes: "",
         rejected_by: "", rejected_at: "", rejection_reason: "",
-        resources_released_by: "", resources_released_at: "", amount_released: 0,
+        resources_released_by: "", resources_released_at: "", amount_released: 0, released_amount: 0,
         finance_record_id: "", inventory_item_id: "",
         ...data,
         church_id: data.church_id || activeUser.church_id
-      });
+      };
+      state.requisitions.push(newReq);
+      dualWriteRequisitionRecord("create", newReq);
     }
     saveState(`${modalMode} requisition`);
     bootstrap.Modal.getOrCreateInstance(byId("entryModal")).hide();
@@ -18945,6 +18955,56 @@ function enterDashboard() {
       }
     })
     .catch((error) => console.warn("[CE Finance] background hydrate skipped", error));
+  Promise.resolve()
+    .then(() => hydrateRequisitionsFromRepository())
+    .then((hydrated) => {
+      if (hydrated && activeRoute === "requisitions" && typeof renderRequisitions === "function") {
+        renderRequisitions();
+      }
+    })
+    .catch((error) => console.warn("[CE Requisitions] background hydrate skipped", error));
+}
+
+async function hydrateRequisitionsFromRepository() {
+  const repo =
+    window.CERequisitionsDataBridge ||
+    window.CEDataLayer?.requisitionsWorkflow ||
+    window.CEDataLayer?.requisitions ||
+    window.CERequisitionsData;
+  if (!repo?.listRequisitions) return false;
+  try {
+    const result = await repo.listRequisitions();
+    if (!result?.ok || !Array.isArray(result.data) || !result.data.length) return false;
+    const prev = new Map((state.requisitions || []).map((r) => [r.id, r]));
+    const byId = new Map();
+    result.data.forEach((row) => {
+      const previous = prev.get(row.id) || {};
+      byId.set(row.id, { ...row, ...previous, id: row.id });
+    });
+    prev.forEach((localRow, id) => {
+      if (!byId.has(id)) byId.set(id, localRow);
+    });
+    state.requisitions = [...byId.values()];
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (_) {}
+    console.info("[CE Requisitions] hydrated", state.requisitions.length);
+    return true;
+  } catch (error) {
+    console.warn("[CE Requisitions] hydrate failed", error);
+    return false;
+  }
+}
+
+function dualWriteRequisitionRecord(mode, record) {
+  const bridge = window.CERequisitionsDataBridge || window.CEDataLayer?.requisitions;
+  if (!bridge || !record) return;
+  if (typeof bridge.dualWriteRecord === "function") {
+    void bridge.dualWriteRecord(mode, record);
+    return;
+  }
+  if (mode === "create" && bridge.createRequisition) void bridge.createRequisition(record);
+  else if (mode === "update" && bridge.updateRequisition) void bridge.updateRequisition(record.id, record);
 }
 
 window.enterDashboard = enterDashboard;

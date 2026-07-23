@@ -22,6 +22,7 @@ import type {
   Member,
   Notification,
   Requisition,
+  RequisitionTimelineEvent,
   User,
 } from "../types/entities";
 import type {
@@ -48,6 +49,8 @@ function storageKeyFor(key: EntityCollectionName): string {
   if (key === "finance_records") return `${STORAGE_PREFIX}finance-records`;
   if (key === "public_giving_submissions") return `${STORAGE_PREFIX}public-giving-submissions`;
   if (key === "finance_disbursements") return `${STORAGE_PREFIX}finance-disbursements`;
+  if (key === "requisitions") return `${STORAGE_PREFIX}requisitions`;
+  if (key === "requisition_timeline") return `${STORAGE_PREFIX}requisition-timeline`;
   return STORAGE_PREFIX + key;
 }
 
@@ -140,6 +143,9 @@ export function createLocalStorageProvider(): DataProvider {
     "finance_disbursements",
   );
   const requisitions = createPersistedRepository<Requisition>("requisitions");
+  const requisitionTimeline = createPersistedRepository<RequisitionTimelineEvent>(
+    "requisition_timeline",
+  );
   const notifications = createPersistedRepository<Notification>("notifications");
   const cellGroups = createPersistedRepository<CellGroup>("cell_groups");
   const cells = createPersistedRepository<Cell>("cells");
@@ -166,6 +172,7 @@ export function createLocalStorageProvider(): DataProvider {
     public_giving_submissions: publicGivingSubmissions as EntityRepository<unknown>,
     finance_disbursements: financeDisbursements as EntityRepository<unknown>,
     requisitions: requisitions as EntityRepository<unknown>,
+    requisition_timeline: requisitionTimeline as EntityRepository<unknown>,
     notifications: notifications as EntityRepository<unknown>,
     cell_groups: cellGroups as EntityRepository<unknown>,
     cells: cells as EntityRepository<unknown>,
@@ -195,6 +202,7 @@ export function createLocalStorageProvider(): DataProvider {
     publicGivingSubmissions,
     financeDisbursements,
     requisitions,
+    requisitionTimeline,
     notifications,
     cellGroups,
     cells,

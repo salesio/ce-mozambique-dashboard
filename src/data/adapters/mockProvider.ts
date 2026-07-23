@@ -21,6 +21,7 @@ import type {
   Member,
   Notification,
   Requisition,
+  RequisitionTimelineEvent,
   User,
 } from "../types/entities";
 import type { DataProvider, EntityRepository } from "../types/repository";
@@ -39,6 +40,7 @@ import { CELL_REPORTS_SEED } from "../seeds/cellReportsSeed";
 import { FINANCE_RECORDS_SEED } from "../seeds/financeRecordsSeed";
 import { PUBLIC_GIVING_SUBMISSIONS_SEED } from "../seeds/publicGivingSubmissionsSeed";
 import { FINANCE_DISBURSEMENTS_SEED } from "../seeds/financeDisbursementsSeed";
+import { REQUISITIONS_SEED, REQUISITION_TIMELINE_SEED } from "../seeds/requisitionsSeed";
 
 const sampleUser: User = {
   id: "user-admin-mock",
@@ -86,7 +88,12 @@ export function createMockProvider(): DataProvider {
   const financeDisbursements = createMemoryRepository<FinanceDisbursement>(
     FINANCE_DISBURSEMENTS_SEED.map((d) => ({ ...d })),
   );
-  const requisitions = createMemoryRepository<Requisition>([]);
+  const requisitions = createMemoryRepository<Requisition>(
+    REQUISITIONS_SEED.map((r) => ({ ...r })),
+  );
+  const requisitionTimeline = createMemoryRepository<RequisitionTimelineEvent>(
+    REQUISITION_TIMELINE_SEED.map((e) => ({ ...e })),
+  );
   const notifications = createMemoryRepository<Notification>([]);
   const cellGroups = createMemoryRepository<CellGroup>(CELL_GROUPS_SEED.map((g) => ({ ...g })));
   const cells = createMemoryRepository<Cell>(CELLS_SEED.map((c) => ({ ...c })));
@@ -115,6 +122,7 @@ export function createMockProvider(): DataProvider {
     public_giving_submissions: publicGivingSubmissions as EntityRepository<unknown>,
     finance_disbursements: financeDisbursements as EntityRepository<unknown>,
     requisitions: requisitions as EntityRepository<unknown>,
+    requisition_timeline: requisitionTimeline as EntityRepository<unknown>,
     notifications: notifications as EntityRepository<unknown>,
     cell_groups: cellGroups as EntityRepository<unknown>,
     cells: cells as EntityRepository<unknown>,
@@ -143,6 +151,7 @@ export function createMockProvider(): DataProvider {
     publicGivingSubmissions,
     financeDisbursements,
     requisitions,
+    requisitionTimeline,
     notifications,
     cellGroups,
     cells,

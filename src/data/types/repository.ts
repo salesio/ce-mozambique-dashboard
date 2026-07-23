@@ -22,8 +22,9 @@ import type {
   Member,
   Notification,
   Requisition,
+  RequisitionTimelineEvent,
   User,
-} from "./entities";
+}
 
 /** Result wrapper so adapters can return soft failures without throwing. */
 export type DataResult<T> =
@@ -74,6 +75,7 @@ export interface DataProvider {
   publicGivingSubmissions: EntityRepository<PublicGivingSubmission>;
   financeDisbursements: EntityRepository<FinanceDisbursement>;
   requisitions: EntityRepository<Requisition>;
+  requisitionTimeline: EntityRepository<RequisitionTimelineEvent>;
   notifications: EntityRepository<Notification>;
   cellGroups: EntityRepository<CellGroup>;
   cells: EntityRepository<Cell>;

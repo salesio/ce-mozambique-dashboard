@@ -15,6 +15,7 @@
 | **Foundation School / ESF UI** | Full operational module on data layer + local state (sessions, tests, soul winning, final exam, audit) |
 | **Cell Ministry / Células & Liderança** | Groups, cells, leaders, reports via `cellMinistryRepository` + bridge |
 | **Finance / Finanças** | Records, public giving submissions, disbursements via `financeRepository` + bridge |
+| **Requisitions & Approvals** | Workflow + timeline via `requisitionsRepository`; approved → financeDisbursement (expense) |
 
 **Other modules** still use the classic `dashboard.js` localStorage blob only.  
 **Nothing is abandoned:** open http://localhost:5173 and the app still works.
@@ -681,4 +682,55 @@ npm run dev
 # Finanças → verify partnership gift (e.g. Loveworld SAT)
 # Parcerias → arm shows value; Pending does not; expense does not
 # needs_promotion / top partners / refresh local
+```
+
+---
+
+## Pilot migration: Requisitions & Approvals
+
+**Status: live (pilot)** — dual-write / hydrate; UI workflow remains in `js/requisitions-module.js`.
+
+### Local keys
+
+| Collection | Key |
+|------------|-----|
+| Requisitions | `ce-data-layer:requisitions` |
+| Timeline | `ce-data-layer:requisition-timeline` |
+
+(Reviews/approvals are events on the requisition + timeline, not separate ledgers.)
+
+### Workflow
+
+1. Staff/Department creates → Draft / Submitted  
+2. Requisition Officer reviews → Under Review → **Send to Main Pastor** (does **not** approve pastorally)  
+3. Main Pastor → Approve / Reject / Return  
+4. On **Approve** → `finance_status = Awaiting Release` + `createFinanceDisbursement` (**expense**, never income)  
+5. Finance Head releases → Partially Released / Released (may create expense `financeRecord` on full release)  
+6. Optional inventory placeholder → Sent to Inventory (full inventory module later)
+
+### Code
+
+| Piece | Role |
+|-------|------|
+| `src/data/repositories/requisitionsRepository.ts` | CRUD + workflow API |
+| Thin re-exports | reviews / approvals / workflow aggregators |
+| `js/requisitions-data-bridge.js` | Dual-write + wrap `applyWorkflowAction` |
+| `js/finance-disbursements-module.js` | Syncs disbursement to `CEFinance` on approve/release |
+
+### Rules
+
+- Resources release is **expense**, never income  
+- No verified expense without Finance action  
+- Inventory fields prepared; full inventory not migrated  
+- PostgreSQL direct = future  
+- Cache buster: `?v=20260723-requisitions-data-v1`
+
+### How to test Requisitions
+
+```bash
+npm run build
+npm run test:requisitions-data
+npm run test:finance-data   # regression
+# Manual: create → submit → review → send pastor → approve → finance release
+# VITE_DATA_SOURCE=local + F5
 ```

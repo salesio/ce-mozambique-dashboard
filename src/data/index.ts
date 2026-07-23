@@ -189,6 +189,46 @@ export { PUBLIC_GIVING_SUBMISSIONS_SEED } from "./seeds/publicGivingSubmissionsS
 export { FINANCE_DISBURSEMENTS_SEED } from "./seeds/financeDisbursementsSeed";
 
 export {
+  listRequisitions,
+  getRequisitionById,
+  createRequisition,
+  updateRequisition,
+  deleteRequisition,
+  searchRequisitions,
+  getRequisitionsByChurch,
+  getRequisitionsByDepartment,
+  getRequisitionsByRequester,
+  getRequisitionsByStatus,
+  getRequisitionsByUrgency,
+  getRequisitionsByDateRange,
+  getSubmittedRequisitions,
+  getUnderReviewRequisitions,
+  getAwaitingMainPastorRequisitions,
+  getApprovedRequisitions,
+  getRejectedRequisitions,
+  getReturnedForCorrectionRequisitions,
+  getApprovedAwaitingFinance,
+  getResourcesReleasedRequisitions,
+  getRequisitionsPendingInventory,
+  submitRequisition,
+  reviewRequisition,
+  sendToMainPastor,
+  approveRequisition,
+  rejectRequisition,
+  returnRequisitionForCorrection,
+  markResourcesReleased,
+  markSentToInventory,
+  closeRequisition,
+  listRequisitionTimeline,
+  ensureRequisitionsSeeded,
+  getRequisitionsDataSourceInfo,
+  normalizeRequisition,
+  shouldRequireInventory,
+} from "./repositories/requisitionsRepository";
+
+export { REQUISITIONS_SEED, REQUISITION_TIMELINE_SEED } from "./seeds/requisitionsSeed";
+
+export {
   listFoundationStudents,
   getFoundationStudentById,
   createFoundationStudent,

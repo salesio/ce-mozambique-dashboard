@@ -137,7 +137,22 @@
       at: now,
       notes: FINANCE_STATUS.AWAITING
     });
-    return syncDisbursement(state, record);
+    const disb = syncDisbursement(state, record);
+    // Dual-write disbursement to finance data layer (expense, never income)
+    try {
+      const financeApi = window.CEFinance || window.CEDataLayer?.finance;
+      if (financeApi?.createFinanceDisbursement && disb) {
+        void financeApi.createFinanceDisbursement({
+          ...disb,
+          status: "Awaiting Release",
+          transaction_type: "expense",
+          pending_amount: Number(disb.approved_amount || 0) - Number(disb.released_amount || 0)
+        });
+      }
+    } catch (error) {
+      console.warn("[CE FinanceDisbursements] data-layer dual-write soft-fail", error);
+    }
+    return disb;
   }
 
   function computeStats(list) {
@@ -262,10 +277,44 @@
       disb.payment_reference = record.payment_reference;
       disb.status = record.finance_status;
       disb.notes = record.payment_notes;
+      disb.pending_amount = Math.max(0, approved - totalReleased);
       disb.updated_at = now;
+      try {
+        const financeApi = window.CEFinance || window.CEDataLayer?.finance;
+        if (financeApi?.updateFinanceDisbursement) {
+          void financeApi.updateFinanceDisbursement(disb.id, {
+            ...disb,
+            status: totalReleased < approved ? "Partially Released" : "Released"
+          });
+        }
+        // Optional expense finance record on full release only
+        if (totalReleased >= approved && financeApi?.createFinanceRecord) {
+          void financeApi.createFinanceRecord({
+            transaction_type: "expense",
+            contribution_group: "Outros",
+            contribution_category: "Liberação de Requisição",
+            amount: totalReleased,
+            currency: "MZN",
+            church_id: record.church_id,
+            status: "Verified",
+            source: "Requisition Disbursement",
+            requisition_id: record.id,
+            notes: `Despesa — ${record.request_number || record.id}`,
+            payment_method: record.payment_method,
+            payment_reference: record.payment_reference,
+            payment_date: releaseDate
+          });
+        }
+      } catch (error) {
+        console.warn("[CE FinanceDisbursements] release dual-write soft-fail", error);
+      }
     }
 
     record.updated_at = now;
+    record.pending_amount = Math.max(0, approved - totalReleased);
+    if (window.CERequisitionsDataBridge?.dualWriteRecord) {
+      void window.CERequisitionsDataBridge.dualWriteRecord("update", record);
+    }
     return { ok: true, record };
   }
 

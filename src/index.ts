@@ -242,6 +242,42 @@ export {
   FINANCE_RECORDS_SEED,
   PUBLIC_GIVING_SUBMISSIONS_SEED,
   FINANCE_DISBURSEMENTS_SEED,
+  listRequisitions,
+  getRequisitionById,
+  createRequisition,
+  updateRequisition,
+  deleteRequisition,
+  searchRequisitions,
+  getRequisitionsByChurch,
+  getRequisitionsByDepartment,
+  getRequisitionsByRequester,
+  getRequisitionsByStatus,
+  getRequisitionsByUrgency,
+  getRequisitionsByDateRange,
+  getSubmittedRequisitions,
+  getUnderReviewRequisitions,
+  getAwaitingMainPastorRequisitions,
+  getApprovedRequisitions,
+  getRejectedRequisitions,
+  getReturnedForCorrectionRequisitions,
+  getApprovedAwaitingFinance,
+  getResourcesReleasedRequisitions,
+  getRequisitionsPendingInventory,
+  submitRequisition,
+  reviewRequisition,
+  sendToMainPastor,
+  approveRequisition,
+  rejectRequisition,
+  returnRequisitionForCorrection,
+  markResourcesReleased,
+  markSentToInventory,
+  closeRequisition,
+  listRequisitionTimeline,
+  ensureRequisitionsSeeded,
+  getRequisitionsDataSourceInfo,
+  normalizeRequisition,
+  REQUISITIONS_SEED,
+  REQUISITION_TIMELINE_SEED,
 } from "./data";
 
 export type {
@@ -267,6 +303,7 @@ export type {
   FinanceDisbursement,
   PublicGivingContributionLine,
   Requisition,
+  RequisitionTimelineEvent,
   Notification,
   CellGroup,
   Cell,
@@ -464,6 +501,41 @@ import {
   FINANCE_RECORDS_SEED,
   PUBLIC_GIVING_SUBMISSIONS_SEED,
   FINANCE_DISBURSEMENTS_SEED,
+  listRequisitions,
+  getRequisitionById,
+  createRequisition,
+  updateRequisition,
+  deleteRequisition,
+  searchRequisitions,
+  getRequisitionsByChurch,
+  getRequisitionsByDepartment,
+  getRequisitionsByRequester,
+  getRequisitionsByStatus,
+  getRequisitionsByUrgency,
+  getRequisitionsByDateRange,
+  getSubmittedRequisitions,
+  getUnderReviewRequisitions,
+  getAwaitingMainPastorRequisitions,
+  getApprovedRequisitions,
+  getRejectedRequisitions,
+  getReturnedForCorrectionRequisitions,
+  getApprovedAwaitingFinance,
+  getResourcesReleasedRequisitions,
+  getRequisitionsPendingInventory,
+  submitRequisition,
+  reviewRequisition,
+  sendToMainPastor,
+  approveRequisition,
+  rejectRequisition,
+  returnRequisitionForCorrection,
+  markResourcesReleased,
+  markSentToInventory,
+  closeRequisition,
+  listRequisitionTimeline,
+  ensureRequisitionsSeeded,
+  getRequisitionsDataSourceInfo,
+  REQUISITIONS_SEED,
+  REQUISITION_TIMELINE_SEED,
   getDataProvider,
   getDataSource,
   getActiveDataSource,
@@ -483,6 +555,7 @@ function installDataLayerGlobals(): void {
     CEFoundationSchool?: Record<string, unknown>;
     CECellMinistry?: Record<string, unknown>;
     CEFinance?: Record<string, unknown>;
+    CERequisitionsData?: Record<string, unknown>;
   };
 
   const churches = {
@@ -762,6 +835,43 @@ function installDataLayerGlobals(): void {
     getReleasedDisbursements,
   };
 
+  const requisitionsWorkflow = {
+    listRequisitions,
+    getRequisitionById,
+    createRequisition,
+    updateRequisition,
+    deleteRequisition,
+    searchRequisitions,
+    getRequisitionsByChurch,
+    getRequisitionsByDepartment,
+    getRequisitionsByRequester,
+    getRequisitionsByStatus,
+    getRequisitionsByUrgency,
+    getRequisitionsByDateRange,
+    getSubmittedRequisitions,
+    getUnderReviewRequisitions,
+    getAwaitingMainPastorRequisitions,
+    getApprovedRequisitions,
+    getRejectedRequisitions,
+    getReturnedForCorrectionRequisitions,
+    getApprovedAwaitingFinance,
+    getResourcesReleasedRequisitions,
+    getRequisitionsPendingInventory,
+    submitRequisition,
+    reviewRequisition,
+    sendToMainPastor,
+    approveRequisition,
+    rejectRequisition,
+    returnRequisitionForCorrection,
+    markResourcesReleased,
+    markSentToInventory,
+    closeRequisition,
+    listRequisitionTimeline,
+    ensureRequisitionsSeeded,
+    getRequisitionsDataSourceInfo,
+    getInfo: getRequisitionsDataSourceInfo,
+  };
+
   root.CESupabase = Object.assign(root.CESupabase || {}, {
     ...churches,
     ...members,
@@ -770,6 +880,7 @@ function installDataLayerGlobals(): void {
     ...foundationSchool,
     ...cellMinistry,
     ...finance,
+    ...requisitionsWorkflow,
     CELL_GROUPS_SEED,
     CELLS_SEED,
     CELL_LEADERS_SEED,
@@ -777,6 +888,8 @@ function installDataLayerGlobals(): void {
     FINANCE_RECORDS_SEED,
     PUBLIC_GIVING_SUBMISSIONS_SEED,
     FINANCE_DISBURSEMENTS_SEED,
+    REQUISITIONS_SEED,
+    REQUISITION_TIMELINE_SEED,
     getDataProvider,
     getDataSource,
     getActiveDataSource,
@@ -799,6 +912,8 @@ function installDataLayerGlobals(): void {
     financeRecords,
     publicGivingSubmissions,
     financeDisbursements,
+    requisitions: requisitionsWorkflow,
+    requisitionsWorkflow,
     getDataProvider,
     getDataSource,
     getActiveDataSource,
@@ -830,6 +945,9 @@ function installDataLayerGlobals(): void {
   if (!root.CEFinance) {
     root.CEFinance = finance;
   }
+  if (!root.CERequisitionsData) {
+    root.CERequisitionsData = requisitionsWorkflow;
+  }
 
   try {
     const churchInfo = getChurchesDataSourceInfo();
@@ -844,6 +962,7 @@ function installDataLayerGlobals(): void {
       foundationSchool: Object.keys(foundationSchool),
       cellMinistry: Object.keys(cellMinistry),
       finance: Object.keys(finance),
+      requisitions: Object.keys(requisitionsWorkflow),
     });
   } catch (error) {
     console.warn("[CE DataLayer] installed with provider warning", error);

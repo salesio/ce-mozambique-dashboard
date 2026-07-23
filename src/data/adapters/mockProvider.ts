@@ -26,6 +26,13 @@ import type {
   Requisition,
   RequisitionTimelineEvent,
   ServiceChecklist,
+  StaffAttendance,
+  StaffDepartment,
+  StaffDocument,
+  StaffMember,
+  StaffPerformanceReview,
+  StaffRole,
+  StaffSalary,
   User,
   VenueSpace,
 } from "../types/entities";
@@ -51,6 +58,13 @@ import { INVENTORY_MOVEMENTS_SEED } from "../seeds/inventoryMovementsSeed";
 import { INVENTORY_MAINTENANCE_SEED } from "../seeds/inventoryMaintenanceSeed";
 import { VENUE_SPACES_SEED } from "../seeds/venueSpacesSeed";
 import { SERVICE_CHECKLISTS_SEED } from "../seeds/serviceChecklistsSeed";
+import { STAFF_SEED } from "../seeds/staffSeed";
+import { STAFF_DEPARTMENTS_SEED } from "../seeds/staffDepartmentsSeed";
+import { STAFF_ROLES_SEED } from "../seeds/staffRolesSeed";
+import { STAFF_SALARIES_SEED } from "../seeds/staffSalariesSeed";
+import { STAFF_PERFORMANCE_SEED } from "../seeds/staffPerformanceSeed";
+import { STAFF_DOCUMENTS_SEED } from "../seeds/staffDocumentsSeed";
+import { STAFF_ATTENDANCE_SEED } from "../seeds/staffAttendanceSeed";
 
 const sampleUser: User = {
   id: "user-admin-mock",
@@ -130,6 +144,23 @@ export function createMockProvider(): DataProvider {
   const serviceChecklists = createMemoryRepository<ServiceChecklist>(
     SERVICE_CHECKLISTS_SEED.map((r) => ({ ...r })),
   );
+  const staff = createMemoryRepository<StaffMember>(STAFF_SEED.map((r) => ({ ...r })));
+  const staffDepartments = createMemoryRepository<StaffDepartment>(
+    STAFF_DEPARTMENTS_SEED.map((r) => ({ ...r })),
+  );
+  const staffRoles = createMemoryRepository<StaffRole>(STAFF_ROLES_SEED.map((r) => ({ ...r })));
+  const staffSalaries = createMemoryRepository<StaffSalary>(
+    STAFF_SALARIES_SEED.map((r) => ({ ...r })),
+  );
+  const staffPerformance = createMemoryRepository<StaffPerformanceReview>(
+    STAFF_PERFORMANCE_SEED.map((r) => ({ ...r })),
+  );
+  const staffDocuments = createMemoryRepository<StaffDocument>(
+    STAFF_DOCUMENTS_SEED.map((r) => ({ ...r })),
+  );
+  const staffAttendance = createMemoryRepository<StaffAttendance>(
+    STAFF_ATTENDANCE_SEED.map((r) => ({ ...r })),
+  );
 
   const map: Record<EntityCollectionName, EntityRepository<unknown>> = {
     users: users as EntityRepository<unknown>,
@@ -160,6 +191,13 @@ export function createMockProvider(): DataProvider {
     inventory_maintenance: inventoryMaintenance as EntityRepository<unknown>,
     venue_spaces: venueSpaces as EntityRepository<unknown>,
     service_checklists: serviceChecklists as EntityRepository<unknown>,
+    staff: staff as EntityRepository<unknown>,
+    staff_departments: staffDepartments as EntityRepository<unknown>,
+    staff_roles: staffRoles as EntityRepository<unknown>,
+    staff_salaries: staffSalaries as EntityRepository<unknown>,
+    staff_performance: staffPerformance as EntityRepository<unknown>,
+    staff_documents: staffDocuments as EntityRepository<unknown>,
+    staff_attendance: staffAttendance as EntityRepository<unknown>,
   };
 
   return {
@@ -194,6 +232,13 @@ export function createMockProvider(): DataProvider {
     inventoryMaintenance,
     venueSpaces,
     serviceChecklists,
+    staff,
+    staffDepartments,
+    staffRoles,
+    staffSalaries,
+    staffPerformance,
+    staffDocuments,
+    staffAttendance,
     collection(name) {
       return map[name];
     },

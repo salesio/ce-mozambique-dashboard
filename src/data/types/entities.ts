@@ -1557,6 +1557,236 @@ export interface ServiceChecklist {
   updated_at?: IsoDate | IsoDateTime;
 }
 
+// ---------------------------------------------------------------------------
+// Staff & Human Resources
+// ---------------------------------------------------------------------------
+
+/** Staff member — English model + existing UI aliases. */
+export interface StaffMember {
+  id: EntityId;
+  staff_code?: string | null;
+  full_name?: string | null;
+  first_name?: string | null;
+  last_name?: string | null;
+  title?: string | null;
+  gender?: string | null;
+  date_of_birth?: IsoDate | null;
+  data_de_aniversario?: IsoDate | null;
+
+  phone?: string | null;
+  whatsapp?: string | null;
+  email?: string | null;
+  address?: string | null;
+  city?: string | null;
+  province?: string | null;
+  marital_status?: string | null;
+
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  department_id?: EntityId | null;
+  department_name?: string | null;
+  role_id?: EntityId | null;
+  role_title?: string | null;
+  supervisor_id?: EntityId | null;
+  supervisor_user_id?: EntityId | null;
+  supervisor_name?: string | null;
+
+  employment_type?: string | null;
+  staff_type?: string | null;
+  start_date?: IsoDate | null;
+  end_date?: IsoDate | null;
+  contract_start_date?: IsoDate | null;
+  contract_end_date?: IsoDate | null;
+  probation_end_date?: IsoDate | null;
+  status?: string | null;
+
+  emergency_contact_name?: string | null;
+  emergency_contact_phone?: string | null;
+  national_id_number?: string | null;
+  nuit?: string | null;
+  profile_photo?: string | null;
+
+  /** Sensitive — only expose to authorized roles */
+  salary_or_allowance?: number | null;
+  payment_frequency?: string | null;
+  payment_method?: string | null;
+  bank_name?: string | null;
+  bank_account_number?: string | null;
+  mobile_money_number?: string | null;
+  bank_or_mobile_details?: string | null;
+
+  has_dashboard_access?: boolean | null;
+  user_id?: EntityId | null;
+  login_email?: string | null;
+
+  notes?: string | null;
+  birthday_month?: string | null;
+  birthday_day?: string | null;
+  age?: number | null;
+  next_birthday?: IsoDate | null;
+  days_until_birthday?: number | null;
+
+  created_by?: string | null;
+  created_by_name?: string | null;
+  updated_by?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface StaffDepartment {
+  id: EntityId;
+  name?: string | null;
+  description?: string | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  head_staff_id?: EntityId | null;
+  head_staff_name?: string | null;
+  parent_department_id?: EntityId | null;
+  status?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface StaffRole {
+  id: EntityId;
+  title?: string | null;
+  description?: string | null;
+  department_id?: EntityId | null;
+  department_name?: string | null;
+  permission_template?: string | null;
+  level?: string | null;
+  status?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+/** Salary config + optional monthly payment row (UI dual-map). */
+export interface StaffSalary {
+  id: EntityId;
+  staff_id?: EntityId | null;
+  staff_name?: string | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  department_id?: EntityId | null;
+  department_name?: string | null;
+
+  salary_type?: string | null;
+  amount?: number | null;
+  base_amount?: number | null;
+  bonus?: number | null;
+  deductions?: number | null;
+  net_amount?: number | null;
+  currency?: string | null;
+
+  payment_frequency?: string | null;
+  payment_method?: string | null;
+  bank_name?: string | null;
+  bank_account_number?: string | null;
+  mobile_money_number?: string | null;
+
+  month?: string | null;
+  effective_from?: IsoDate | null;
+  effective_to?: IsoDate | null;
+
+  status?: string | null;
+  payment_status?: string | null;
+
+  approved_by_user_id?: EntityId | null;
+  approved_by_name?: string | null;
+  approved_by?: string | null;
+  approved_at?: IsoDateTime | null;
+  paid_by?: string | null;
+  paid_at?: IsoDateTime | null;
+
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface StaffPerformanceReview {
+  id: EntityId;
+  staff_id?: EntityId | null;
+  staff_name?: string | null;
+  department_id?: EntityId | null;
+  department_name?: string | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+
+  review_period?: string | null;
+  evaluation_period?: string | null;
+  review_start_date?: IsoDate | null;
+  review_end_date?: IsoDate | null;
+
+  reviewed_by_user_id?: EntityId | null;
+  reviewed_by_name?: string | null;
+  evaluated_by?: string | null;
+  evaluated_at?: IsoDate | null;
+
+  punctuality_score?: number | null;
+  responsibility_score?: number | null;
+  teamwork_score?: number | null;
+  technical_skill_score?: number | null;
+  spiritual_attitude_score?: number | null;
+  communication_score?: number | null;
+  leadership_score?: number | null;
+  task_completion_score?: number | null;
+  report_submission_score?: number | null;
+  supervisor_rating?: number | null;
+  overall_score?: number | null;
+
+  strengths?: string | null;
+  improvements?: string | null;
+  areas_to_improve?: string | null;
+  goals_next_period?: string | null;
+  action_plan?: string | null;
+
+  status?: string | null;
+  reviewed_at?: IsoDateTime | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface StaffDocument {
+  id: EntityId;
+  staff_id?: EntityId | null;
+  staff_name?: string | null;
+  document_type?: string | null;
+  document_title?: string | null;
+  file_url?: string | null;
+  file_name?: string | null;
+  issue_date?: IsoDate | null;
+  expiry_date?: IsoDate | null;
+  status?: string | null;
+  uploaded_by_user_id?: EntityId | null;
+  uploaded_by_name?: string | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface StaffAttendance {
+  id: EntityId;
+  staff_id?: EntityId | null;
+  staff_name?: string | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  department_id?: EntityId | null;
+  department_name?: string | null;
+  event_type?: string | null;
+  event_name?: string | null;
+  attendance_date?: IsoDate | null;
+  date?: IsoDate | null;
+  check_in_time?: string | null;
+  check_out_time?: string | null;
+  status?: string | null;
+  attendance_status?: string | null;
+  recorded_by_user_id?: EntityId | null;
+  recorded_by_name?: string | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
 /** Map of collection names used by repositories / adapters. */
 export type EntityCollectionName =
   | "users"
@@ -1586,4 +1816,11 @@ export type EntityCollectionName =
   | "inventory_movements"
   | "inventory_maintenance"
   | "venue_spaces"
-  | "service_checklists";
+  | "service_checklists"
+  | "staff"
+  | "staff_departments"
+  | "staff_roles"
+  | "staff_salaries"
+  | "staff_performance"
+  | "staff_documents"
+  | "staff_attendance";

@@ -27,6 +27,13 @@ import type {
   Requisition,
   RequisitionTimelineEvent,
   ServiceChecklist,
+  StaffAttendance,
+  StaffDepartment,
+  StaffDocument,
+  StaffMember,
+  StaffPerformanceReview,
+  StaffRole,
+  StaffSalary,
   User,
   VenueSpace,
 } from "../types/entities";
@@ -61,6 +68,13 @@ function storageKeyFor(key: EntityCollectionName): string {
   if (key === "inventory_maintenance") return `${STORAGE_PREFIX}inventory-maintenance`;
   if (key === "venue_spaces") return `${STORAGE_PREFIX}venue-spaces`;
   if (key === "service_checklists") return `${STORAGE_PREFIX}service-checklists`;
+  if (key === "staff") return `${STORAGE_PREFIX}staff`;
+  if (key === "staff_departments") return `${STORAGE_PREFIX}staff-departments`;
+  if (key === "staff_roles") return `${STORAGE_PREFIX}staff-roles`;
+  if (key === "staff_salaries") return `${STORAGE_PREFIX}staff-salaries`;
+  if (key === "staff_performance") return `${STORAGE_PREFIX}staff-performance`;
+  if (key === "staff_documents") return `${STORAGE_PREFIX}staff-documents`;
+  if (key === "staff_attendance") return `${STORAGE_PREFIX}staff-attendance`;
   return STORAGE_PREFIX + key;
 }
 
@@ -171,6 +185,13 @@ export function createLocalStorageProvider(): DataProvider {
     createPersistedRepository<InventoryMaintenanceRecord>("inventory_maintenance");
   const venueSpaces = createPersistedRepository<VenueSpace>("venue_spaces");
   const serviceChecklists = createPersistedRepository<ServiceChecklist>("service_checklists");
+  const staff = createPersistedRepository<StaffMember>("staff");
+  const staffDepartments = createPersistedRepository<StaffDepartment>("staff_departments");
+  const staffRoles = createPersistedRepository<StaffRole>("staff_roles");
+  const staffSalaries = createPersistedRepository<StaffSalary>("staff_salaries");
+  const staffPerformance = createPersistedRepository<StaffPerformanceReview>("staff_performance");
+  const staffDocuments = createPersistedRepository<StaffDocument>("staff_documents");
+  const staffAttendance = createPersistedRepository<StaffAttendance>("staff_attendance");
 
   const map: Record<EntityCollectionName, EntityRepository<unknown>> = {
     users: users as EntityRepository<unknown>,
@@ -201,6 +222,13 @@ export function createLocalStorageProvider(): DataProvider {
     inventory_maintenance: inventoryMaintenance as EntityRepository<unknown>,
     venue_spaces: venueSpaces as EntityRepository<unknown>,
     service_checklists: serviceChecklists as EntityRepository<unknown>,
+    staff: staff as EntityRepository<unknown>,
+    staff_departments: staffDepartments as EntityRepository<unknown>,
+    staff_roles: staffRoles as EntityRepository<unknown>,
+    staff_salaries: staffSalaries as EntityRepository<unknown>,
+    staff_performance: staffPerformance as EntityRepository<unknown>,
+    staff_documents: staffDocuments as EntityRepository<unknown>,
+    staff_attendance: staffAttendance as EntityRepository<unknown>,
   };
 
   return {
@@ -236,6 +264,13 @@ export function createLocalStorageProvider(): DataProvider {
     inventoryMaintenance,
     venueSpaces,
     serviceChecklists,
+    staff,
+    staffDepartments,
+    staffRoles,
+    staffSalaries,
+    staffPerformance,
+    staffDocuments,
+    staffAttendance,
     collection(name) {
       return map[name];
     },

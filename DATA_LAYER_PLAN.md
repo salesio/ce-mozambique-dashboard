@@ -17,6 +17,7 @@
 | **Finance / Finanças** | Records, public giving submissions, disbursements via `financeRepository` + bridge |
 | **Requisitions & Approvals** | Workflow + timeline via `requisitionsRepository`; approved → financeDisbursement (expense) |
 | **Venue & Inventory** | Items, movements, maintenance, spaces, checklists via `venueInventoryRepository` + bridge |
+| **Staff & Human Resources** | Staff, departments, roles, salaries, performance, documents, attendance via `staffHrRepository` + bridge |
 
 **Other modules** still use the classic `dashboard.js` localStorage blob only.  
 **Nothing is abandoned:** open http://localhost:5173 and the app still works.
@@ -798,5 +799,66 @@ npm run test:requisitions-data   # regression
 npm run test:finance-data        # regression
 # Manual: Espaços & Inventário → create item → assign → maintenance → checklist
 # Register from requisition on Novas Aquisições
+# VITE_DATA_SOURCE=local + F5
+```
+
+---
+
+## Pilot migration: Staff & Human Resources
+
+**Status: live (pilot)** — dual-write / hydrate; UI helpers remain in `js/staff-hr-module.js` (RBAC, birthdays, masking).
+
+### Local keys
+
+| Collection | Key |
+|------------|-----|
+| Staff | `ce-data-layer:staff` |
+| Departments | `ce-data-layer:staff-departments` |
+| Roles | `ce-data-layer:staff-roles` |
+| Salaries | `ce-data-layer:staff-salaries` |
+| Performance | `ce-data-layer:staff-performance` |
+| Documents | `ce-data-layer:staff-documents` |
+| Attendance | `ce-data-layer:staff-attendance` |
+
+### Domain rules
+
+- **Staff & RH** manages people, departments, roles, performance, documents, attendance  
+- **Salaries and documents are sensitive** — UI must hide amounts/bank/ID from unauthorized roles (`canViewSalary`)  
+- **Assigned equipment** comes from **Venue & Inventory** (not duplicated as finance)  
+- Requisitions can be viewed per staff when `CERequisitions` is available  
+- Staff & RH **does not** create finance salary expense automatically in this phase  
+- Staff roles prepare future permission templates; they do not replace current login/RBAC  
+- PostgreSQL direct = future  
+
+### Code
+
+| Piece | Role |
+|-------|------|
+| `src/data/repositories/staffHrRepository.ts` | Aggregator CRUD + birthday/salary/performance queries |
+| Seeds | staff, departments, roles, salaries, performance, documents, attendance |
+| `js/staff-hr-data-bridge.js` | Dual-write + pure-JS fallback (`CEStaffHR`) |
+| `js/staff-hr-module.js` | UI helpers: mask salary, birthdays, scope filter |
+| Dashboard | dual-write on staff/performance save + hydrate |
+
+### Globals
+
+```js
+window.CEStaffHR = { listStaff, createStaff, listStaffSalaries, … }
+window.CEStaffHr  // legacy UI helpers + data methods
+window.CEDataLayer.staffHR / staff / staffSalaries / …
+```
+
+Cache buster: `?v=20260723-staff-hr-data-v1`
+
+### How to test Staff & HR
+
+```bash
+npm run build
+npm run test:staff-hr-data
+npm run test:venue-inventory-data   # regression
+npm run test:requisitions-data
+npm run test:finance-data
+# Manual: Staff & RH → create staff → performance → birthday
+# Login as non-HR → salary masked
 # VITE_DATA_SOURCE=local + F5
 ```

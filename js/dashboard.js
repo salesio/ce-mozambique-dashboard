@@ -17341,17 +17341,42 @@ async function submitForm(form) {
     enrichRecordChurchFields(data);
     data.church_name = churchName(data.church_id);
     if (canSalary) data.salary_or_allowance = Number(data.salary_or_allowance || 0);
+    else delete data.salary_or_allowance;
+    if (!canSalary) {
+      delete data.bank_name;
+      delete data.bank_account_number;
+      delete data.mobile_money_number;
+      delete data.bank_or_mobile_details;
+      delete data.national_id_number;
+      delete data.nuit;
+    }
     const today = new Date().toISOString().slice(0, 10);
     if (modalMode === "edit") {
       const index = state.staffProfiles.findIndex((item) => item.id === modalRecordId);
-      state.staffProfiles[index] = staffLib.enrichStaffProfile({ ...state.staffProfiles[index], ...data, updated_at: today });
+      const previous = state.staffProfiles[index] || {};
+      // Preserve sensitive fields if user cannot edit salary
+      const merged = { ...previous, ...data, updated_at: today };
+      if (!canSalary) {
+        merged.salary_or_allowance = previous.salary_or_allowance;
+        merged.bank_name = previous.bank_name;
+        merged.bank_account_number = previous.bank_account_number;
+        merged.mobile_money_number = previous.mobile_money_number;
+        merged.bank_or_mobile_details = previous.bank_or_mobile_details;
+        merged.national_id_number = previous.national_id_number;
+        merged.nuit = previous.nuit;
+      }
+      if (!merged.status) merged.status = "Activo";
+      state.staffProfiles[index] = staffLib.enrichStaffProfile(merged);
+      dualWriteStaffHrRecord("staffProfile", "update", state.staffProfiles[index]);
     } else {
       state.staffProfiles = state.staffProfiles || [];
-      state.staffProfiles.push(staffLib.enrichStaffProfile({
+      const created = staffLib.enrichStaffProfile({
         id: `staff-${Date.now()}`,
+        staff_code: `STF-${String(Date.now()).slice(-6)}`,
         user_id: "",
         created_at: today,
         updated_at: today,
+        status: data.status || "Activo",
         bank_or_mobile_details: "",
         date_of_birth: "",
         marital_status: "Por Confirmar",
@@ -17367,8 +17392,11 @@ async function submitForm(form) {
         contract_end_date: "",
         probation_end_date: "",
         profile_photo: "",
+        created_by: activeUser.name,
         ...data
-      }));
+      });
+      state.staffProfiles.push(created);
+      dualWriteStaffHrRecord("staffProfile", "create", created);
     }
     saveState(`${modalMode} staffProfile`);
     bootstrap.Modal.getOrCreateInstance(byId("entryModal")).hide();
@@ -17386,17 +17414,23 @@ async function submitForm(form) {
     data.evaluated_at = new Date().toISOString().slice(0, 10);
     data.updated_by = activeUser.name;
     data.updated_at = data.evaluated_at;
+    data.status = data.status || "Reviewed";
     if (modalMode === "edit") {
       const index = state.staffPerformance.findIndex((item) => item.id === modalRecordId);
-      if (index >= 0) state.staffPerformance[index] = { ...state.staffPerformance[index], ...data };
+      if (index >= 0) {
+        state.staffPerformance[index] = { ...state.staffPerformance[index], ...data };
+        dualWriteStaffHrRecord("staffPerformance", "update", state.staffPerformance[index]);
+      }
     } else {
       state.staffPerformance = state.staffPerformance || [];
-      state.staffPerformance.push({
+      const created = {
         id: `perf-${Date.now()}`,
         created_by: activeUser.name,
         created_at: data.evaluated_at,
         ...data
-      });
+      };
+      state.staffPerformance.push(created);
+      dualWriteStaffHrRecord("staffPerformance", "create", created);
     }
     saveState(`${modalMode} staffPerformance`);
     bootstrap.Modal.getOrCreateInstance(byId("entryModal")).hide();
@@ -19240,6 +19274,114 @@ function enterDashboard() {
       }
     })
     .catch((error) => console.warn("[CE VenueInventory] background hydrate skipped", error));
+  Promise.resolve()
+    .then(() => hydrateStaffHrFromRepository())
+    .then((hydrated) => {
+      if (hydrated && activeRoute === "staffHr" && typeof renderStaffHr === "function") {
+        renderStaffHr();
+      }
+    })
+    .catch((error) => console.warn("[CE StaffHR] background hydrate skipped", error));
+}
+
+function getStaffHrRepoSafe() {
+  return (
+    window.CEStaffHR ||
+    window.CEDataLayer?.staffHR ||
+    window.CEDataLayer?.staff ||
+    window.CEStaffHr?.dataApi ||
+    null
+  );
+}
+
+function dualWriteStaffHrRecord(kind, mode, record) {
+  const bridge =
+    window.CEStaffHR ||
+    window.CEStaffHr ||
+    window.CEDataLayer?.staffHR;
+  if (!bridge || !record) return;
+  if (typeof bridge.dualWriteRecord === "function") {
+    void bridge.dualWriteRecord(kind, mode, record);
+    return;
+  }
+  if (kind === "staffProfile") {
+    if (mode === "create" && bridge.createStaff) void bridge.createStaff(record);
+    else if (mode === "update" && bridge.updateStaff) void bridge.updateStaff(record.id, record);
+  } else if (kind === "staffPerformance") {
+    if (mode === "create" && bridge.createPerformanceReview) void bridge.createPerformanceReview(record);
+    else if (mode === "update" && bridge.updatePerformanceReview) void bridge.updatePerformanceReview(record.id, record);
+  }
+}
+
+async function hydrateStaffHrFromRepository() {
+  const repo = getStaffHrRepoSafe();
+  if (!repo?.listStaff) return false;
+  try {
+    let hydrated = false;
+    const list = await repo.listStaff();
+    if (list?.ok && Array.isArray(list.data) && list.data.length) {
+      const prev = new Map((state.staffProfiles || []).map((r) => [r.id, r]));
+      const byId = new Map();
+      const lib = window.CEStaffHr;
+      list.data.forEach((row) => {
+        const previous = prev.get(row.id) || {};
+        const merged = {
+          ...row,
+          ...previous,
+          id: row.id,
+          full_name: row.full_name || previous.full_name,
+          status: row.status || previous.status || "Activo",
+          date_of_birth: row.date_of_birth || previous.date_of_birth,
+          department_name: row.department_name || previous.department_name,
+          role_title: row.role_title || previous.role_title,
+          // Prefer previous sensitive fields if hydrate row empty (local edit)
+          salary_or_allowance: previous.salary_or_allowance ?? row.salary_or_allowance,
+          bank_name: previous.bank_name || row.bank_name,
+          bank_account_number: previous.bank_account_number || row.bank_account_number,
+          mobile_money_number: previous.mobile_money_number || row.mobile_money_number,
+        };
+        byId.set(row.id, lib?.enrichStaffProfile ? lib.enrichStaffProfile(merged) : merged);
+      });
+      prev.forEach((localRow, id) => {
+        if (!byId.has(id)) byId.set(id, localRow);
+      });
+      state.staffProfiles = [...byId.values()];
+      hydrated = true;
+      console.info("[CE StaffHR] hydrated staff", state.staffProfiles.length);
+    }
+
+    async function merge(listFn, stateKey) {
+      if (typeof listFn !== "function") return;
+      const result = await listFn();
+      if (!result?.ok || !Array.isArray(result.data) || !result.data.length) return;
+      const prev = new Map((state[stateKey] || []).map((r) => [r.id, r]));
+      const byId = new Map();
+      result.data.forEach((row) => {
+        const previous = prev.get(row.id) || {};
+        byId.set(row.id, { ...row, ...previous, id: row.id });
+      });
+      prev.forEach((localRow, id) => {
+        if (!byId.has(id)) byId.set(id, localRow);
+      });
+      state[stateKey] = [...byId.values()];
+      hydrated = true;
+    }
+
+    await merge(repo.listStaffSalaries?.bind(repo), "staffSalaries");
+    await merge(repo.listPerformanceReviews?.bind(repo), "staffPerformance");
+    await merge(repo.listStaffDocuments?.bind(repo), "staffDocuments");
+    await merge(repo.listStaffAttendance?.bind(repo), "staffAttendance");
+
+    if (hydrated) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (_) {}
+    }
+    return hydrated;
+  } catch (error) {
+    console.warn("[CE StaffHR] hydrate failed", error);
+    return false;
+  }
 }
 
 function getVenueInventoryRepoSafe() {

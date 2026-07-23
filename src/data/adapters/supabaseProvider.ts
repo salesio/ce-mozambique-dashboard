@@ -68,6 +68,13 @@ export function createSupabaseProvider(): DataProvider {
     "inventory_maintenance",
     "venue_spaces",
     "service_checklists",
+    "staff",
+    "staff_departments",
+    "staff_roles",
+    "staff_salaries",
+    "staff_performance",
+    "staff_documents",
+    "staff_attendance",
   ];
 
   const map = Object.fromEntries(
@@ -109,6 +116,13 @@ export function createSupabaseProvider(): DataProvider {
     inventoryMaintenance: map.inventory_maintenance as EntityRepository<never>,
     venueSpaces: map.venue_spaces as EntityRepository<never>,
     serviceChecklists: map.service_checklists as EntityRepository<never>,
+    staff: map.staff as EntityRepository<never>,
+    staffDepartments: map.staff_departments as EntityRepository<never>,
+    staffRoles: map.staff_roles as EntityRepository<never>,
+    staffSalaries: map.staff_salaries as EntityRepository<never>,
+    staffPerformance: map.staff_performance as EntityRepository<never>,
+    staffDocuments: map.staff_documents as EntityRepository<never>,
+    staffAttendance: map.staff_attendance as EntityRepository<never>,
     collection(name) {
       return map[name];
     },

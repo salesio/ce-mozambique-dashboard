@@ -27,6 +27,13 @@ import type {
   Requisition,
   RequisitionTimelineEvent,
   ServiceChecklist,
+  StaffAttendance,
+  StaffDepartment,
+  StaffDocument,
+  StaffMember,
+  StaffPerformanceReview,
+  StaffRole,
+  StaffSalary,
   User,
   VenueSpace,
 }
@@ -93,6 +100,13 @@ export interface DataProvider {
   inventoryMaintenance: EntityRepository<InventoryMaintenanceRecord>;
   venueSpaces: EntityRepository<VenueSpace>;
   serviceChecklists: EntityRepository<ServiceChecklist>;
+  staff: EntityRepository<StaffMember>;
+  staffDepartments: EntityRepository<StaffDepartment>;
+  staffRoles: EntityRepository<StaffRole>;
+  staffSalaries: EntityRepository<StaffSalary>;
+  staffPerformance: EntityRepository<StaffPerformanceReview>;
+  staffDocuments: EntityRepository<StaffDocument>;
+  staffAttendance: EntityRepository<StaffAttendance>;
 
   /** Escape hatch for progressive module adapters. */
   collection(name: EntityCollectionName): EntityRepository<unknown>;

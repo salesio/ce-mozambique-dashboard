@@ -18,6 +18,7 @@
 | **Requisitions & Approvals** | Workflow + timeline via `requisitionsRepository`; approved → financeDisbursement (expense) |
 | **Venue & Inventory** | Items, movements, maintenance, spaces, checklists via `venueInventoryRepository` + bridge |
 | **Staff & Human Resources** | Staff, departments, roles, salaries, performance, documents, attendance via `staffHrRepository` + bridge |
+| **Users, Roles & Access Control** | Users, app roles, permissions, templates, audit logs via `accessControlRepository` + bridge |
 
 **Other modules** still use the classic `dashboard.js` localStorage blob only.  
 **Nothing is abandoned:** open http://localhost:5173 and the app still works.
@@ -860,5 +861,56 @@ npm run test:requisitions-data
 npm run test:finance-data
 # Manual: Staff & RH → create staff → performance → birthday
 # Login as non-HR → salary masked
+# VITE_DATA_SOURCE=local + F5
+```
+
+---
+
+## Pilot migration: Users, Roles & Access Control
+
+**Status: live (pilot)** — dual-write / hydrate; live RBAC remains in `js/access-control.js` (`ROLE_TEMPLATES`, `resolveModuleAccess`).
+
+### Local keys
+
+| Collection | Key |
+|------------|-----|
+| Users | `ce-data-layer:users` |
+| Roles | `ce-data-layer:roles` |
+| Permissions | `ce-data-layer:permissions` |
+| Permission templates | `ce-data-layer:permission-templates` |
+| Audit logs | `ce-data-layer:audit-logs` |
+
+### Domain rules
+
+- **No real auth yet** — demo login unchanged; **no real passwords** in localStorage  
+- Live RBAC continues via `CEAccessControl.resolveModuleAccess` / `ROLE_TEMPLATES`  
+- Data layer stores users, roles, explicit permissions, templates, audit  
+- Bridge adds `canUser`, dual-write, audit helpers **without replacing** templates  
+- Sensitive modules: finance, staffHr, requisitions, usersRoles, accessControl, auditLogs  
+- Access denied routes write `access_denied` audit log  
+- Staff link optional via `staff_id`  
+- PostgreSQL / Supabase Auth = future  
+
+### Code
+
+| Piece | Role |
+|-------|------|
+| `src/data/repositories/accessControlRepository.ts` | Aggregator |
+| Seeds | users, roles, permissions, templates, audit |
+| `js/access-control.js` | Live RBAC templates (unchanged core) |
+| `js/access-control-data-bridge.js` | Data layer merge + canUser + dual-write |
+| Dashboard | hydrate users/audit; saveState audit dual-write; access_denied log |
+
+Cache buster: `?v=20260723-access-control-data-v1`
+
+### How to test Access Control
+
+```bash
+npm run build
+npm run test:access-control-data
+npm run test:staff-hr-data
+npm run test:finance-data
+# Super Admin sees all; Staff Member blocked on finance
+# Direct #finance as staff → Access Restricted + audit access_denied
 # VITE_DATA_SOURCE=local + F5
 ```

@@ -75,6 +75,10 @@ export function createSupabaseProvider(): DataProvider {
     "staff_performance",
     "staff_documents",
     "staff_attendance",
+    "roles",
+    "permissions",
+    "permission_templates",
+    "audit_logs",
   ];
 
   const map = Object.fromEntries(
@@ -123,6 +127,10 @@ export function createSupabaseProvider(): DataProvider {
     staffPerformance: map.staff_performance as EntityRepository<never>,
     staffDocuments: map.staff_documents as EntityRepository<never>,
     staffAttendance: map.staff_attendance as EntityRepository<never>,
+    roles: map.roles as EntityRepository<never>,
+    permissions: map.permissions as EntityRepository<never>,
+    permissionTemplates: map.permission_templates as EntityRepository<never>,
+    auditLogs: map.audit_logs as EntityRepository<never>,
     collection(name) {
       return map[name];
     },

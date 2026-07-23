@@ -34,6 +34,10 @@ import type {
   StaffPerformanceReview,
   StaffRole,
   StaffSalary,
+  AccessPermission,
+  AccessRole,
+  AuditLog,
+  PermissionTemplate,
   User,
   VenueSpace,
 } from "../types/entities";
@@ -75,6 +79,10 @@ function storageKeyFor(key: EntityCollectionName): string {
   if (key === "staff_performance") return `${STORAGE_PREFIX}staff-performance`;
   if (key === "staff_documents") return `${STORAGE_PREFIX}staff-documents`;
   if (key === "staff_attendance") return `${STORAGE_PREFIX}staff-attendance`;
+  if (key === "roles") return `${STORAGE_PREFIX}roles`;
+  if (key === "permissions") return `${STORAGE_PREFIX}permissions`;
+  if (key === "permission_templates") return `${STORAGE_PREFIX}permission-templates`;
+  if (key === "audit_logs") return `${STORAGE_PREFIX}audit-logs`;
   return STORAGE_PREFIX + key;
 }
 
@@ -192,6 +200,10 @@ export function createLocalStorageProvider(): DataProvider {
   const staffPerformance = createPersistedRepository<StaffPerformanceReview>("staff_performance");
   const staffDocuments = createPersistedRepository<StaffDocument>("staff_documents");
   const staffAttendance = createPersistedRepository<StaffAttendance>("staff_attendance");
+  const roles = createPersistedRepository<AccessRole>("roles");
+  const permissions = createPersistedRepository<AccessPermission>("permissions");
+  const permissionTemplates = createPersistedRepository<PermissionTemplate>("permission_templates");
+  const auditLogs = createPersistedRepository<AuditLog>("audit_logs");
 
   const map: Record<EntityCollectionName, EntityRepository<unknown>> = {
     users: users as EntityRepository<unknown>,
@@ -229,6 +241,10 @@ export function createLocalStorageProvider(): DataProvider {
     staff_performance: staffPerformance as EntityRepository<unknown>,
     staff_documents: staffDocuments as EntityRepository<unknown>,
     staff_attendance: staffAttendance as EntityRepository<unknown>,
+    roles: roles as EntityRepository<unknown>,
+    permissions: permissions as EntityRepository<unknown>,
+    permission_templates: permissionTemplates as EntityRepository<unknown>,
+    audit_logs: auditLogs as EntityRepository<unknown>,
   };
 
   return {
@@ -271,6 +287,10 @@ export function createLocalStorageProvider(): DataProvider {
     staffPerformance,
     staffDocuments,
     staffAttendance,
+    roles,
+    permissions,
+    permissionTemplates,
+    auditLogs,
     collection(name) {
       return map[name];
     },

@@ -194,7 +194,7 @@
   <script src="js/summary-card-nav.js?v=20260716-foundation-school-v1"></script>
   <script src="js/cell-seed-data.js?v=20260710-cell-nav"></script>
   <script src="js/public-giving-bridge.js?v=20260714-cell-selects-v1"></script>
-  <script src="js/access-control.js?v=20260717-foundation-rbac-v1"></script>
+  <script src="js/access-control.js?v=20260723-access-control-data-v1"></script>
   <script src="js/finance-disbursements-module.js?v=20260714-rbac-v4"></script>
   <script src="js/requisition-reports-module.js?v=20260712-reports-hub-v1"></script>
   <script src="js/reports-export-module.js?v=20260712-reports-hub-v1"></script>
@@ -210,8 +210,8 @@
     window.__CE_ENV__ = window.__CE_ENV__ || {};
     // window.__CE_ENV__.VITE_DATA_SOURCE = 'local'; // test churches localStorage provider
   </script>
-  <!-- Data layer bundle (churches … venue inventory + staff HR) -->
-  <script src="js/supabase-bundle.js?v=20260723-staff-hr-data-v1"></script>
+  <!-- Data layer bundle (churches … staff HR + access control) -->
+  <script src="js/supabase-bundle.js?v=20260723-access-control-data-v1"></script>
   <script src="js/churches-data-bridge.js?v=20260723-finance-data-v1"></script>
   <script src="js/members-data-bridge.js?v=20260723-finance-data-v1"></script>
   <script src="js/first-timers-data-bridge.js?v=20260723-finance-data-v1"></script>
@@ -222,7 +222,8 @@
   <script src="js/requisitions-data-bridge.js?v=20260723-requisitions-data-v1"></script>
   <script src="js/venue-inventory-data-bridge.js?v=20260723-venue-inventory-data-v1"></script>
   <script src="js/staff-hr-data-bridge.js?v=20260723-staff-hr-data-v1"></script>
-  <script src="js/dashboard.js?v=20260723-staff-hr-data-v1"></script>
+  <script src="js/access-control-data-bridge.js?v=20260723-access-control-data-v1"></script>
+  <script src="js/dashboard.js?v=20260723-access-control-data-v1"></script>
   <!-- UMD build (classic script) — ESM CDN breaks without type="module" -->
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script defer src="js/supabase-config.js?v=20260712-supabase"></script>

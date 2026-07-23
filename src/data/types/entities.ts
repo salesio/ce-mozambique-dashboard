@@ -13,15 +13,142 @@ export type IsoDateTime = string;
 // Core identity & organisation
 // ---------------------------------------------------------------------------
 
+/**
+ * User / login account — dashboard-compatible (name, role, church_id)
+ * plus English model aliases for progressive migration.
+ * Never store real passwords in localStorage.
+ */
 export interface User {
   id: EntityId;
   email: string | null;
-  fullName: string;
-  role: string | null;
-  churchId: EntityId | null;
-  isActive: boolean;
-  createdAt: IsoDateTime;
-  updatedAt: IsoDateTime;
+  /** Dashboard UI field */
+  name?: string | null;
+  fullName?: string | null;
+  full_name?: string | null;
+  display_name?: string | null;
+  phone?: string | null;
+
+  role?: string | null;
+  role_id?: EntityId | null;
+  role_name?: string | null;
+
+  churchId?: EntityId | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+
+  department_id?: EntityId | null;
+  department_name?: string | null;
+  assigned_department?: string | null;
+  department_permissions?: string[] | null;
+  can_view_all_churches?: boolean | null;
+
+  staff_id?: EntityId | null;
+  staff_name?: string | null;
+  assigned_staff_name?: string | null;
+  assigned_cells?: string[] | null;
+  assigned_teams?: string[] | null;
+  assigned_groups?: string[] | null;
+  assigned_foundation_teacher_id?: string | null;
+
+  status?: string | null;
+  isActive?: boolean;
+  has_dashboard_access?: boolean | null;
+
+  last_login_at?: IsoDateTime | null;
+  last_active_at?: IsoDateTime | null;
+  failed_login_attempts?: number | null;
+  locked_until?: IsoDateTime | null;
+  preferred_language?: string | null;
+  avatar_url?: string | null;
+  notes?: string | null;
+
+  /** Demo-only password marker — never real credentials */
+  demo_password_hint?: string | null;
+
+  permissions?: Array<Record<string, unknown>> | null;
+
+  created_by?: string | null;
+  created_by_name?: string | null;
+  createdAt?: IsoDateTime;
+  updatedAt?: IsoDateTime;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+/** Access-control role (app RBAC), distinct from StaffRole titles. */
+export interface AccessRole {
+  id: EntityId;
+  name?: string | null;
+  display_name?: string | null;
+  description?: string | null;
+  level?: string | null;
+  department_id?: EntityId | null;
+  department_name?: string | null;
+  is_system_role?: boolean | null;
+  is_custom_role?: boolean | null;
+  permission_template_id?: EntityId | null;
+  default_scope?: string | null;
+  status?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface AccessPermission {
+  id: EntityId;
+  role_id?: EntityId | null;
+  role_name?: string | null;
+  module?: string | null;
+  can_view?: boolean | null;
+  can_create?: boolean | null;
+  can_edit?: boolean | null;
+  can_delete?: boolean | null;
+  can_approve?: boolean | null;
+  can_verify?: boolean | null;
+  can_release_resources?: boolean | null;
+  can_export?: boolean | null;
+  can_manage_settings?: boolean | null;
+  can_view_salary?: boolean | null;
+  scope?: string | null;
+  conditions?: Record<string, unknown> | null;
+  is_sensitive?: boolean | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface PermissionTemplate {
+  id: EntityId;
+  name?: string | null;
+  description?: string | null;
+  role_level?: string | null;
+  permissions?: Array<Record<string, unknown>> | null;
+  is_system_template?: boolean | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface AuditLog {
+  id: EntityId;
+  user_id?: EntityId | null;
+  user_name?: string | null;
+  user_role?: string | null;
+  /** Legacy dashboard fields */
+  actor?: string | null;
+  church_id?: EntityId | null;
+  date?: IsoDate | null;
+
+  module?: string | null;
+  action?: string | null;
+  entity_type?: string | null;
+  entity_id?: EntityId | null;
+  entity_label?: string | null;
+  old_value?: unknown;
+  new_value?: unknown;
+  description?: string | null;
+  severity?: string | null;
+  ip_address?: string | null;
+  user_agent?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  metadata?: Record<string, unknown> | null;
 }
 
 /** Service times as used by the Churches UI module. */
@@ -1823,4 +1950,8 @@ export type EntityCollectionName =
   | "staff_salaries"
   | "staff_performance"
   | "staff_documents"
-  | "staff_attendance";
+  | "staff_attendance"
+  | "roles"
+  | "permissions"
+  | "permission_templates"
+  | "audit_logs";

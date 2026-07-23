@@ -4708,8 +4708,68 @@ function normalizeState(saved) {
 }
 
 function saveState(action = "Updated data") {
-  state.auditLogs.push({ id: `audit-${Date.now()}`, church_id: activeUser.church_id, actor: activeUser.name, action, date: new Date().toISOString().slice(0, 10) });
+  const log = {
+    id: `audit-${Date.now()}`,
+    church_id: activeUser?.church_id || "",
+    actor: activeUser?.name || "",
+    user_id: activeUser?.id || "",
+    user_name: activeUser?.name || "",
+    user_role: activeUser?.role || "",
+    action: "update",
+    module: "dashboard",
+    description: action,
+    severity: "info",
+    date: new Date().toISOString().slice(0, 10),
+    created_at: new Date().toISOString(),
+  };
+  state.auditLogs = Array.isArray(state.auditLogs) ? state.auditLogs : [];
+  state.auditLogs.push(log);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  // Dual-write audit to data layer (soft-fail)
+  try {
+    const ac = window.CEAccessControl || window.CEAccessControlData;
+    if (ac?.createAuditLog) void ac.createAuditLog(log);
+    else if (ac?.dualWriteAudit) void ac.dualWriteAudit(log);
+  } catch (_) {}
+}
+
+function dualWriteUserRecord(mode, record) {
+  const ac = window.CEAccessControl || window.CEAccessControlData || window.CEDataLayer?.accessControl;
+  if (!ac || !record) return;
+  if (typeof ac.dualWriteUser === "function") {
+    void ac.dualWriteUser(mode, record);
+    return;
+  }
+  if (mode === "create" && ac.createUser) void ac.createUser(record);
+  else if (mode === "update" && ac.updateUser) void ac.updateUser(record.id, record);
+}
+
+function logAccessDenied(route, module) {
+  const log = {
+    id: `audit-denied-${Date.now()}`,
+    user_id: activeUser?.id || "",
+    user_name: activeUser?.name || "",
+    user_role: activeUser?.role || "",
+    actor: activeUser?.name || "",
+    church_id: activeUser?.church_id || "",
+    module: module || route || "unknown",
+    action: "access_denied",
+    entity_type: "module",
+    entity_id: route || module || "",
+    description: `Access denied to ${route || module}`,
+    severity: "warning",
+    date: new Date().toISOString().slice(0, 10),
+    created_at: new Date().toISOString(),
+  };
+  state.auditLogs = Array.isArray(state.auditLogs) ? state.auditLogs : [];
+  state.auditLogs.push(log);
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (_) {}
+  try {
+    const ac = window.CEAccessControl || window.CEAccessControlData;
+    if (ac?.createAuditLog) void ac.createAuditLog(log);
+  } catch (_) {}
 }
 
 function scoped(records, module = "dashboard") {
@@ -8558,6 +8618,10 @@ function setRoute(route) {
   activeRoute = route || "dashboard";
   if (CELL_ROUTE_ALIASES[activeRoute]) activeRoute = CELL_ROUTE_ALIASES[activeRoute];
   if (!canEnterRoute(activeRoute)) {
+    try {
+      const mod = window.CEAccessControl?.routeToModule?.(activeRoute) || activeRoute;
+      logAccessDenied(activeRoute, mod);
+    } catch (_) {}
     renderAccessDenied();
     byId("pageTitle").textContent = L("accessDeniedTitle");
     byId("sectionLabel").textContent = L("admin");
@@ -15835,7 +15899,29 @@ function renderStaffHr() {
 
 function renderUsers() {
   if (!canEnterRoute("users")) return renderAccessDenied();
-  setPageContent(`${sectionHeader(L("usersRoles"), L("accessControl"), "user", "bi-person-lock")}<article class="panel glass-panel">${dataTable([L("name"), L("email"), L("Role"), L("church"), L("Permissions"), L("actions")], state.users.map((u) => [u.name, u.email, u.role, churchName(u.church_id), u.department_permissions.join(", "), actionButtons([["view", "user", u.id, L("view")], ["edit", "user", u.id, L("edit")]])]))}</article>`);
+  const users = state.users || [];
+  const activeCount = users.filter((u) => /active|activo/i.test(String(u.status || "Active")) || u.isActive !== false).length;
+  const lockedCount = users.filter((u) => /lock|bloque/i.test(String(u.status || ""))).length;
+  const withoutStaff = users.filter((u) => !u.staff_id && !u.assigned_staff_name).length;
+  setPageContent(`${sectionHeader(L("usersRoles"), L("accessControl"), "user", "bi-person-lock")}
+    <div class="row g-3 mb-4">
+      ${sm("bi-people", "Total", users.length, "users", {})}
+      ${sm("bi-person-check", "Activos", activeCount, "users", {})}
+      ${sm("bi-lock", "Bloqueados", lockedCount, "users", {})}
+      ${sm("bi-link-45deg", "Sem Staff", withoutStaff, "users", {})}
+    </div>
+    <article class="panel glass-panel">${dataTable(
+      [L("name"), L("email"), L("Role"), "Staff", L("church"), L("Permissions"), L("actions")],
+      users.map((u) => [
+        u.name || u.full_name,
+        u.email,
+        u.role || u.role_name,
+        u.staff_name || u.assigned_staff_name || u.staff_id || "—",
+        churchName(u.church_id),
+        (u.department_permissions || []).join(", "),
+        actionButtons([["view", "user", u.id, L("view")], ["edit", "user", u.id, L("edit")]]),
+      ]),
+    )}</article>`);
 }
 
 function renderAccess() {
@@ -15849,12 +15935,19 @@ function renderAccess() {
     staffHr: "staffHr", usersRoles: "usersRoles", accessControl: "accessControl", settings: "settings", auditLogs: "auditLogs"
   };
   const modules = window.CEAccessControl?.ALL_MODULES || [];
+  const canUser = window.CEAccessControl?.canUser;
   const rows = modules.map((mod) => {
     const access = window.CEAccessControl.resolveModuleAccess(activeUser, mod);
     return [L(moduleLabels[mod] || mod), access.can_view ? L("yes") : L("no"), access.can_create ? L("yes") : L("no"), access.can_edit ? L("yes") : L("no"), access.can_approve ? L("yes") : L("no"), access.scope || "-"];
   });
+  const salaryOk = canUser ? canUser(activeUser, "staffHr", "view_salary") : window.CEAccessControl?.canViewSalary?.(activeUser);
   setPageContent(`${sectionHeader(L("accessControl"), L("staffHrSubtitle"), null, "bi-shield-lock")}
-    <article class="panel glass-panel mb-3">${dataTable([L("Role"), L("Scope"), L("Permissions")], state.users.map((u) => [u.role, u.can_view_all_churches ? L("all") : churchName(u.church_id), u.department_permissions.join(", ")]))}</article>
+    <div class="row g-3 mb-3">
+      <div class="col-md-4"><article class="panel glass-panel p-3"><span class="eyebrow">Role actual</span><h4 class="mb-0">${activeUser?.role || "—"}</h4></article></div>
+      <div class="col-md-4"><article class="panel glass-panel p-3"><span class="eyebrow">Ver salários</span><h4 class="mb-0">${salaryOk ? L("yes") : L("no")}</h4></article></div>
+      <div class="col-md-4"><article class="panel glass-panel p-3"><span class="eyebrow">Módulos com view</span><h4 class="mb-0">${rows.filter((r) => r[1] === L("yes")).length}</h4></article></div>
+    </div>
+    <article class="panel glass-panel mb-3">${dataTable([L("Role"), L("Scope"), L("Permissions")], (state.users || []).map((u) => [u.role, u.can_view_all_churches ? L("all") : churchName(u.church_id), (u.department_permissions || []).join(", ")]))}</article>
     <article class="panel glass-panel">${dataTable([L("accessMatrixModule"), L("accessMatrixView"), L("accessMatrixCreate"), L("accessMatrixEdit"), L("accessMatrixApprove"), L("accessMatrixScope")], rows)}</article>`);
 }
 
@@ -15864,7 +15957,28 @@ function renderSettings() {
 
 function renderAudit() {
   if (!canEnterRoute("audit")) return renderAccessDenied();
-  setPageContent(`${sectionHeader(L("auditLogs"), lang === "pt" ? "Histórico operacional das alterações neste protótipo." : "Operational history for changes in this prototype.", null, "bi-journal-check")}<article class="panel glass-panel">${dataTable([L("date"), L("Actor"), L("church"), L("Action")], state.auditLogs.slice().reverse().map((log) => [log.date, log.actor, churchName(log.church_id), log.action]))}</article>`);
+  const logs = (state.auditLogs || []).slice().reverse();
+  const critical = logs.filter((l) => /critical|warning|access_denied|approve|verify|export|view_sensitive|change_role/i.test(String(l.severity || l.action || "")));
+  const denied = logs.filter((l) => /access_denied/i.test(String(l.action || "")));
+  setPageContent(`${sectionHeader(L("auditLogs"), lang === "pt" ? "Histórico operacional e acções sensíveis." : "Operational history and sensitive actions.", null, "bi-journal-check")}
+    <div class="row g-3 mb-3">
+      ${sm("bi-list-ul", "Total", logs.length, "audit", {})}
+      ${sm("bi-exclamation-triangle", "Críticos / avisos", critical.length, "audit", {})}
+      ${sm("bi-shield-x", "Acessos negados", denied.length, "audit", {})}
+    </div>
+    <article class="panel glass-panel">${dataTable(
+      [L("date"), L("Actor"), "Role", "Módulo", L("Action"), "Severidade", L("church"), "Descrição"],
+      logs.map((log) => [
+        log.date || String(log.created_at || "").slice(0, 10),
+        log.actor || log.user_name || "—",
+        log.user_role || "—",
+        log.module || "—",
+        log.action || "—",
+        log.severity || "info",
+        churchName(log.church_id),
+        log.description || log.action || "—",
+      ]),
+    )}</article>`);
 }
 
 function renderSimple(type, title, records) {
@@ -17560,6 +17674,7 @@ async function submitForm(form) {
     saveState(`Updated ${modalType}`);
     void dualWriteCellMinistryRecord(modalType, "update", collection[index]);
     if (modalType === "finance") void dualWriteFinanceRecord("update", collection[index]);
+    if (modalType === "user") void dualWriteUserRecord("update", collection[index]);
     if (
       [
         "inventoryItem",
@@ -17707,10 +17822,24 @@ async function submitForm(form) {
         record.estado = "Pronto";
       }
     }
+    if (modalType === "user") {
+      record.name = record.name || record.full_name || "";
+      record.full_name = record.full_name || record.name;
+      record.department_permissions = Array.isArray(record.department_permissions)
+        ? record.department_permissions
+        : String(record.department_permissions || "")
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean);
+      record.status = record.status || "Active";
+      record.has_dashboard_access = true;
+      delete record.password;
+    }
     collection.push(record);
     saveState(`Created ${modalType}`);
     void dualWriteCellMinistryRecord(modalType, "create", record);
     if (modalType === "finance") void dualWriteFinanceRecord("create", record);
+    if (modalType === "user") void dualWriteUserRecord("create", record);
     if (
       [
         "inventoryItem",
@@ -19282,6 +19411,80 @@ function enterDashboard() {
       }
     })
     .catch((error) => console.warn("[CE StaffHR] background hydrate skipped", error));
+  Promise.resolve()
+    .then(() => hydrateAccessControlFromRepository())
+    .then((hydrated) => {
+      if (hydrated && (activeRoute === "users" || activeRoute === "access" || activeRoute === "audit")) {
+        setRoute(activeRoute);
+      }
+    })
+    .catch((error) => console.warn("[CE AccessControl] background hydrate skipped", error));
+}
+
+async function hydrateAccessControlFromRepository() {
+  const repo =
+    window.CEAccessControlData ||
+    window.CEDataLayer?.accessControl ||
+    window.CEAccessControl?.dataApi;
+  if (!repo?.listUsers) return false;
+  try {
+    let hydrated = false;
+    const users = await repo.listUsers();
+    if (users?.ok && Array.isArray(users.data) && users.data.length) {
+      const prev = new Map((state.users || []).map((r) => [r.id, r]));
+      const byId = new Map();
+      users.data.forEach((row) => {
+        const previous = prev.get(row.id) || {};
+        byId.set(row.id, {
+          ...row,
+          ...previous,
+          id: row.id,
+          name: row.name || row.full_name || previous.name,
+          department_permissions: Array.isArray(row.department_permissions)
+            ? row.department_permissions
+            : previous.department_permissions || [],
+        });
+      });
+      prev.forEach((localRow, id) => {
+        if (!byId.has(id)) byId.set(id, localRow);
+      });
+      state.users = [...byId.values()];
+      hydrated = true;
+      console.info("[CE AccessControl] hydrated users", state.users.length);
+    }
+    if (typeof repo.listAuditLogs === "function") {
+      const logs = await repo.listAuditLogs();
+      if (logs?.ok && Array.isArray(logs.data) && logs.data.length) {
+        const prev = new Map((state.auditLogs || []).map((r) => [r.id, r]));
+        const byId = new Map();
+        logs.data.forEach((row) => {
+          const previous = prev.get(row.id) || {};
+          byId.set(row.id, {
+            ...row,
+            ...previous,
+            id: row.id,
+            actor: row.actor || row.user_name || previous.actor,
+            date: row.date || String(row.created_at || "").slice(0, 10) || previous.date,
+          });
+        });
+        prev.forEach((localRow, id) => {
+          if (!byId.has(id)) byId.set(id, localRow);
+        });
+        state.auditLogs = [...byId.values()];
+        hydrated = true;
+        console.info("[CE AccessControl] hydrated audit logs", state.auditLogs.length);
+      }
+    }
+    if (hydrated) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (_) {}
+    }
+    return hydrated;
+  } catch (error) {
+    console.warn("[CE AccessControl] hydrate failed", error);
+    return false;
+  }
 }
 
 function getStaffHrRepoSafe() {

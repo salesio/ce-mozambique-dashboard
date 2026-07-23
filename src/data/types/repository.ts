@@ -27,6 +27,10 @@ import type {
   Requisition,
   RequisitionTimelineEvent,
   ServiceChecklist,
+  AccessPermission,
+  AccessRole,
+  AuditLog,
+  PermissionTemplate,
   StaffAttendance,
   StaffDepartment,
   StaffDocument,
@@ -107,6 +111,10 @@ export interface DataProvider {
   staffPerformance: EntityRepository<StaffPerformanceReview>;
   staffDocuments: EntityRepository<StaffDocument>;
   staffAttendance: EntityRepository<StaffAttendance>;
+  roles: EntityRepository<AccessRole>;
+  permissions: EntityRepository<AccessPermission>;
+  permissionTemplates: EntityRepository<PermissionTemplate>;
+  auditLogs: EntityRepository<AuditLog>;
 
   /** Escape hatch for progressive module adapters. */
   collection(name: EntityCollectionName): EntityRepository<unknown>;

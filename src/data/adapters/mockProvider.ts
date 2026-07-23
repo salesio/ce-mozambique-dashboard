@@ -65,24 +65,19 @@ import { STAFF_SALARIES_SEED } from "../seeds/staffSalariesSeed";
 import { STAFF_PERFORMANCE_SEED } from "../seeds/staffPerformanceSeed";
 import { STAFF_DOCUMENTS_SEED } from "../seeds/staffDocumentsSeed";
 import { STAFF_ATTENDANCE_SEED } from "../seeds/staffAttendanceSeed";
-
-const sampleUser: User = {
-  id: "user-admin-mock",
-  email: "admin@ce-mozambique.org",
-  fullName: "Admin Principal",
-  role: "national_admin",
-  churchId: "church-hq",
-  isActive: true,
-  createdAt: "2026-01-01T00:00:00.000Z",
-  updatedAt: "2026-01-01T00:00:00.000Z",
-};
+import { USERS_SEED } from "../seeds/usersSeed";
+import { ROLES_SEED } from "../seeds/rolesSeed";
+import { PERMISSIONS_SEED } from "../seeds/permissionsSeed";
+import { PERMISSION_TEMPLATES_SEED } from "../seeds/permissionTemplatesSeed";
+import { AUDIT_LOGS_SEED } from "../seeds/auditLogsSeed";
+import type { AccessPermission, AccessRole, AuditLog, PermissionTemplate } from "../types/entities";
 
 /**
  * In-memory mock provider with tiny sample seed.
  * Safe for demos / unit experiments. Does not touch dashboard.js state.
  */
 export function createMockProvider(): DataProvider {
-  const users = createMemoryRepository<User>([sampleUser]);
+  const users = createMemoryRepository<User>(USERS_SEED.map((r) => ({ ...r })));
   const churches = createMemoryRepository<Church>(CHURCHES_SEED.map((c) => ({ ...c })));
   const members = createMemoryRepository<Member>(MEMBERS_SEED.map((m) => ({ ...m })));
   const firstTimers = createMemoryRepository<FirstTimer>(
@@ -161,6 +156,14 @@ export function createMockProvider(): DataProvider {
   const staffAttendance = createMemoryRepository<StaffAttendance>(
     STAFF_ATTENDANCE_SEED.map((r) => ({ ...r })),
   );
+  const roles = createMemoryRepository<AccessRole>(ROLES_SEED.map((r) => ({ ...r })));
+  const permissions = createMemoryRepository<AccessPermission>(
+    PERMISSIONS_SEED.map((r) => ({ ...r })),
+  );
+  const permissionTemplates = createMemoryRepository<PermissionTemplate>(
+    PERMISSION_TEMPLATES_SEED.map((r) => ({ ...r })),
+  );
+  const auditLogs = createMemoryRepository<AuditLog>(AUDIT_LOGS_SEED.map((r) => ({ ...r })));
 
   const map: Record<EntityCollectionName, EntityRepository<unknown>> = {
     users: users as EntityRepository<unknown>,
@@ -198,6 +201,10 @@ export function createMockProvider(): DataProvider {
     staff_performance: staffPerformance as EntityRepository<unknown>,
     staff_documents: staffDocuments as EntityRepository<unknown>,
     staff_attendance: staffAttendance as EntityRepository<unknown>,
+    roles: roles as EntityRepository<unknown>,
+    permissions: permissions as EntityRepository<unknown>,
+    permission_templates: permissionTemplates as EntityRepository<unknown>,
+    audit_logs: auditLogs as EntityRepository<unknown>,
   };
 
   return {
@@ -239,6 +246,10 @@ export function createMockProvider(): DataProvider {
     staffPerformance,
     staffDocuments,
     staffAttendance,
+    roles,
+    permissions,
+    permissionTemplates,
+    auditLogs,
     collection(name) {
       return map[name];
     },

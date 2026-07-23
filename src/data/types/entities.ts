@@ -1385,23 +1385,224 @@ export interface CellReportSubmission {
 }
 
 // ---------------------------------------------------------------------------
-// Media
+// Media Department
 // ---------------------------------------------------------------------------
 
+/** Media team member — dashboard technicians shape + English aliases. */
 export interface MediaTechnician {
   id: EntityId;
-  fullName: string;
-  phone: string | null;
-  createdAt: IsoDateTime;
+  staff_id?: EntityId | null;
+  staff_name?: string | null;
+  full_name?: string | null;
+  fullName?: string | null;
+  title?: string | null;
+  phone?: string | null;
+  whatsapp?: string | null;
+  email?: string | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  department_id?: EntityId | null;
+  department_name?: string | null;
+  primary_role_id?: EntityId | null;
+  primary_role_name?: string | null;
+  roles_can_perform?: string[] | null;
+  skill_level?: string | null;
+  preferred_services?: string[] | null;
+  availability_notes?: string | null;
+  supervisor_id?: EntityId | null;
+  supervisor_name?: string | null;
+  start_date?: IsoDate | null;
+  status?: string | null;
+  profile_photo?: string | null;
+  notes?: string | null;
+  equipment_assigned_ids?: string[] | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+  createdAt?: IsoDateTime;
+  updatedAt?: IsoDateTime;
 }
 
+export interface MediaRole {
+  id: EntityId;
+  name?: string | null;
+  key?: string | null;
+  description?: string | null;
+  category?: string | null;
+  required_skill_level?: string | null;
+  is_required_for_service?: boolean | null;
+  is_critical_role?: boolean | null;
+  allow_multiple?: boolean | null;
+  required_per_service?: number | null;
+  requires_equipment?: boolean | null;
+  equipment_categories?: string[] | null;
+  is_active?: boolean | null;
+  status?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface MediaService {
+  id: EntityId;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  name?: string | null;
+  description?: string | null;
+  service_type?: string | null;
+  day_of_week?: string | null;
+  time?: string | null;
+  service_date?: IsoDate | null;
+  event_date?: IsoDate | null;
+  start_time?: string | null;
+  end_time?: string | null;
+  is_recurring?: boolean | null;
+  recurrence_rule?: string | null;
+  is_special_event?: boolean | null;
+  needs_streaming?: boolean | null;
+  needs_full_team?: boolean | null;
+  channels_used?: string[] | null;
+  channels_required?: string[] | null;
+  venue_space_id?: EntityId | null;
+  venue_space_name?: string | null;
+  location?: string | null;
+  responsible_name?: string | null;
+  checklist_required?: boolean | null;
+  status?: string | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface MediaScheduleAssignment {
+  id?: string;
+  role_id?: EntityId | null;
+  role_name?: string | null;
+  technician_id?: EntityId | null;
+  technician_name?: string | null;
+  team_member_id?: EntityId | null;
+  team_member_name?: string | null;
+  status?: string | null;
+  confirmation_status?: string | null;
+  check_in_time?: string | null;
+  check_out_time?: string | null;
+  attendance_status?: string | null;
+  performance_status?: string | null;
+  notes?: string | null;
+}
+
+/** Schedule document (UI shape with nested assignments) + flat assignment aliases. */
 export interface MediaSchedule {
   id: EntityId;
-  technicianId: EntityId | null;
-  serviceDate: IsoDate | null;
-  role: string | null;
-  notes: string | null;
-  createdAt: IsoDateTime;
+  service_id?: EntityId | null;
+  service_name?: string | null;
+  service_date?: IsoDate | null;
+  date?: IsoDate | null;
+  start_time?: string | null;
+  end_time?: string | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  supervisor_id?: EntityId | null;
+  supervisor_name?: string | null;
+  status?: string | null;
+  notes?: string | null;
+  assignments?: MediaScheduleAssignment[] | null;
+  /** Flat assignment fields (optional single-row view) */
+  role_id?: EntityId | null;
+  role_name?: string | null;
+  team_member_id?: EntityId | null;
+  team_member_name?: string | null;
+  technicianId?: EntityId | null;
+  serviceDate?: IsoDate | null;
+  role?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+  createdAt?: IsoDateTime;
+  updatedAt?: IsoDateTime;
+}
+
+export interface MediaChannel {
+  id: EntityId;
+  name?: string | null;
+  type?: string | null;
+  platform?: string | null;
+  platform_url?: string | null;
+  channel_url?: string | null;
+  embed_url?: string | null;
+  channel_handle?: string | null;
+  is_active?: boolean | null;
+  status?: string | null;
+  requires_stream_key?: boolean | null;
+  stream_key_status?: string | null;
+  responsible_user_id?: EntityId | null;
+  responsible_name?: string | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface MediaPerformanceReview {
+  id: EntityId;
+  technician_id?: EntityId | null;
+  technician_name?: string | null;
+  team_member_id?: EntityId | null;
+  team_member_name?: string | null;
+  staff_id?: EntityId | null;
+  staff_name?: string | null;
+  schedule_id?: EntityId | null;
+  service_id?: EntityId | null;
+  service_name?: string | null;
+  service_date?: IsoDate | null;
+  period?: string | null;
+  role_performed?: string | null;
+  role_id?: EntityId | null;
+  role_name?: string | null;
+  evaluated_by?: string | null;
+  evaluated_at?: IsoDate | null;
+  reviewed_by_user_id?: EntityId | null;
+  reviewed_by_name?: string | null;
+  punctuality_score?: number | null;
+  technical_quality_score?: number | null;
+  teamwork_score?: number | null;
+  responsibility_score?: number | null;
+  problem_solving_score?: number | null;
+  spiritual_attitude_score?: number | null;
+  score?: number | null;
+  overall_score?: number | null;
+  strengths?: string | null;
+  areas_to_improve?: string | null;
+  improvements?: string | null;
+  incidents?: string | null;
+  recommendation?: string | null;
+  notes?: string | null;
+  status?: string | null;
+  reviewed_at?: IsoDateTime | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface MediaAward {
+  id: EntityId;
+  year?: number | null;
+  category?: string | null;
+  award_category?: string | null;
+  award_name?: string | null;
+  technician_id?: EntityId | null;
+  technician_name?: string | null;
+  team_member_id?: EntityId | null;
+  team_member_name?: string | null;
+  staff_id?: EntityId | null;
+  staff_name?: string | null;
+  winner_id?: EntityId | null;
+  reason?: string | null;
+  score_basis?: string | null;
+  awarded_by?: string | null;
+  awarded_at?: IsoDate | null;
+  approved_by_user_id?: EntityId | null;
+  approved_by_name?: string | null;
+  approved_at?: IsoDateTime | null;
+  status?: string | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
 }
 
 // ---------------------------------------------------------------------------
@@ -1939,6 +2140,11 @@ export type EntityCollectionName =
   | "cell_report_submissions"
   | "media_technicians"
   | "media_schedules"
+  | "media_roles"
+  | "media_services"
+  | "media_channels"
+  | "media_performance"
+  | "media_awards"
   | "inventory_items"
   | "inventory_movements"
   | "inventory_maintenance"

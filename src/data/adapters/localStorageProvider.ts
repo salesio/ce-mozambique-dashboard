@@ -20,7 +20,12 @@ import type {
   InventoryItem,
   InventoryMaintenanceRecord,
   InventoryMovement,
+  MediaAward,
+  MediaChannel,
+  MediaPerformanceReview,
+  MediaRole,
   MediaSchedule,
+  MediaService,
   MediaTechnician,
   Member,
   Notification,
@@ -83,6 +88,13 @@ function storageKeyFor(key: EntityCollectionName): string {
   if (key === "permissions") return `${STORAGE_PREFIX}permissions`;
   if (key === "permission_templates") return `${STORAGE_PREFIX}permission-templates`;
   if (key === "audit_logs") return `${STORAGE_PREFIX}audit-logs`;
+  if (key === "media_technicians") return `${STORAGE_PREFIX}media-team`;
+  if (key === "media_schedules") return `${STORAGE_PREFIX}media-schedules`;
+  if (key === "media_roles") return `${STORAGE_PREFIX}media-roles`;
+  if (key === "media_services") return `${STORAGE_PREFIX}media-services`;
+  if (key === "media_channels") return `${STORAGE_PREFIX}media-channels`;
+  if (key === "media_performance") return `${STORAGE_PREFIX}media-performance`;
+  if (key === "media_awards") return `${STORAGE_PREFIX}media-awards`;
   return STORAGE_PREFIX + key;
 }
 
@@ -187,6 +199,11 @@ export function createLocalStorageProvider(): DataProvider {
   );
   const mediaTechnicians = createPersistedRepository<MediaTechnician>("media_technicians");
   const mediaSchedules = createPersistedRepository<MediaSchedule>("media_schedules");
+  const mediaRoles = createPersistedRepository<MediaRole>("media_roles");
+  const mediaServices = createPersistedRepository<MediaService>("media_services");
+  const mediaChannels = createPersistedRepository<MediaChannel>("media_channels");
+  const mediaPerformance = createPersistedRepository<MediaPerformanceReview>("media_performance");
+  const mediaAwards = createPersistedRepository<MediaAward>("media_awards");
   const inventoryItems = createPersistedRepository<InventoryItem>("inventory_items");
   const inventoryMovements = createPersistedRepository<InventoryMovement>("inventory_movements");
   const inventoryMaintenance =
@@ -229,6 +246,11 @@ export function createLocalStorageProvider(): DataProvider {
     cell_report_submissions: cellReportSubmissions as EntityRepository<unknown>,
     media_technicians: mediaTechnicians as EntityRepository<unknown>,
     media_schedules: mediaSchedules as EntityRepository<unknown>,
+    media_roles: mediaRoles as EntityRepository<unknown>,
+    media_services: mediaServices as EntityRepository<unknown>,
+    media_channels: mediaChannels as EntityRepository<unknown>,
+    media_performance: mediaPerformance as EntityRepository<unknown>,
+    media_awards: mediaAwards as EntityRepository<unknown>,
     inventory_items: inventoryItems as EntityRepository<unknown>,
     inventory_movements: inventoryMovements as EntityRepository<unknown>,
     inventory_maintenance: inventoryMaintenance as EntityRepository<unknown>,
@@ -275,6 +297,11 @@ export function createLocalStorageProvider(): DataProvider {
     cellReportSubmissions,
     mediaTechnicians,
     mediaSchedules,
+    mediaRoles,
+    mediaServices,
+    mediaChannels,
+    mediaPerformance,
+    mediaAwards,
     inventoryItems,
     inventoryMovements,
     inventoryMaintenance,

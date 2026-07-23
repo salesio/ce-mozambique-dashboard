@@ -17,6 +17,7 @@
     "test:venue-inventory-data": "node scripts/smoke-venue-inventory-data.mjs",
     "test:staff-hr-data": "node scripts/smoke-staff-hr-data.mjs",
     "test:access-control-data": "node scripts/smoke-access-control-data.mjs",
+    "test:media-data": "node scripts/smoke-media-data.mjs",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",

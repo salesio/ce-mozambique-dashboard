@@ -19,7 +19,12 @@ import type {
   InventoryItem,
   InventoryMaintenanceRecord,
   InventoryMovement,
+  MediaAward,
+  MediaChannel,
+  MediaPerformanceReview,
+  MediaRole,
   MediaSchedule,
+  MediaService,
   MediaTechnician,
   Member,
   Notification,
@@ -70,6 +75,13 @@ import { ROLES_SEED } from "../seeds/rolesSeed";
 import { PERMISSIONS_SEED } from "../seeds/permissionsSeed";
 import { PERMISSION_TEMPLATES_SEED } from "../seeds/permissionTemplatesSeed";
 import { AUDIT_LOGS_SEED } from "../seeds/auditLogsSeed";
+import { MEDIA_TEAM_SEED } from "../seeds/mediaTeamSeed";
+import { MEDIA_ROLES_SEED } from "../seeds/mediaRolesSeed";
+import { MEDIA_SERVICES_SEED } from "../seeds/mediaServicesSeed";
+import { MEDIA_SCHEDULES_SEED } from "../seeds/mediaSchedulesSeed";
+import { MEDIA_CHANNELS_SEED } from "../seeds/mediaChannelsSeed";
+import { MEDIA_PERFORMANCE_SEED } from "../seeds/mediaPerformanceSeed";
+import { MEDIA_AWARDS_SEED } from "../seeds/mediaAwardsSeed";
 import type { AccessPermission, AccessRole, AuditLog, PermissionTemplate } from "../types/entities";
 
 /**
@@ -122,8 +134,23 @@ export function createMockProvider(): DataProvider {
   const cellReportSubmissions = createMemoryRepository<CellReportSubmission>(
     CELL_REPORTS_SEED.map((r) => ({ ...r })),
   );
-  const mediaTechnicians = createMemoryRepository<MediaTechnician>([]);
-  const mediaSchedules = createMemoryRepository<MediaSchedule>([]);
+  const mediaTechnicians = createMemoryRepository<MediaTechnician>(
+    MEDIA_TEAM_SEED.map((r) => ({ ...r })),
+  );
+  const mediaSchedules = createMemoryRepository<MediaSchedule>(
+    MEDIA_SCHEDULES_SEED.map((r) => ({ ...r })),
+  );
+  const mediaRoles = createMemoryRepository<MediaRole>(MEDIA_ROLES_SEED.map((r) => ({ ...r })));
+  const mediaServices = createMemoryRepository<MediaService>(
+    MEDIA_SERVICES_SEED.map((r) => ({ ...r })),
+  );
+  const mediaChannels = createMemoryRepository<MediaChannel>(
+    MEDIA_CHANNELS_SEED.map((r) => ({ ...r })),
+  );
+  const mediaPerformance = createMemoryRepository<MediaPerformanceReview>(
+    MEDIA_PERFORMANCE_SEED.map((r) => ({ ...r })),
+  );
+  const mediaAwards = createMemoryRepository<MediaAward>(MEDIA_AWARDS_SEED.map((r) => ({ ...r })));
   const inventoryItems = createMemoryRepository<InventoryItem>(
     INVENTORY_ITEMS_SEED.map((r) => ({ ...r })),
   );
@@ -189,6 +216,11 @@ export function createMockProvider(): DataProvider {
     cell_report_submissions: cellReportSubmissions as EntityRepository<unknown>,
     media_technicians: mediaTechnicians as EntityRepository<unknown>,
     media_schedules: mediaSchedules as EntityRepository<unknown>,
+    media_roles: mediaRoles as EntityRepository<unknown>,
+    media_services: mediaServices as EntityRepository<unknown>,
+    media_channels: mediaChannels as EntityRepository<unknown>,
+    media_performance: mediaPerformance as EntityRepository<unknown>,
+    media_awards: mediaAwards as EntityRepository<unknown>,
     inventory_items: inventoryItems as EntityRepository<unknown>,
     inventory_movements: inventoryMovements as EntityRepository<unknown>,
     inventory_maintenance: inventoryMaintenance as EntityRepository<unknown>,
@@ -234,6 +266,11 @@ export function createMockProvider(): DataProvider {
     cellReportSubmissions,
     mediaTechnicians,
     mediaSchedules,
+    mediaRoles,
+    mediaServices,
+    mediaChannels,
+    mediaPerformance,
+    mediaAwards,
     inventoryItems,
     inventoryMovements,
     inventoryMaintenance,

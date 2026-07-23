@@ -914,3 +914,66 @@ npm run test:finance-data
 # Direct #finance as staff → Access Restricted + audit access_denied
 # VITE_DATA_SOURCE=local + F5
 ```
+
+---
+
+## Pilot migration: Media Department
+
+**Status: live (pilot)** — dual-write / hydrate; UI remains in `js/dashboard.js` (`renderMedia`, `state.media`).
+
+See also **[MEDIA_MODULE_PLAN.md](MEDIA_MODULE_PLAN.md)**.
+
+### Local keys
+
+| Collection | Key |
+|------------|-----|
+| Media team | `ce-data-layer:media-team` |
+| Roles | `ce-data-layer:media-roles` |
+| Services / programs | `ce-data-layer:media-services` |
+| Schedules | `ce-data-layer:media-schedules` |
+| Channels | `ce-data-layer:media-channels` |
+| Performance | `ce-data-layer:media-performance` |
+| Awards | `ce-data-layer:media-awards` |
+
+### Domain rules
+
+- **Mídia** usa data layer; equipa técnica pode ligar a **Staff & RH** (`staff_id`)  
+- **Equipamentos** vêm de **Venue & Inventory** (categoria Media) — soft link, sem duplicar inventário  
+- **Live TV** fica embed/link externo; **sem** livestream próprio no VPS nesta fase  
+- **Stream keys reais** **não** são guardadas no frontend / localStorage (apenas `stream_key_status`)  
+- **Performance** calcula `overall_score` automaticamente  
+- **Prémios** são internos  
+- **RBAC** central protege o módulo; scopes Media Director / Supervisor / Team Member  
+- PostgreSQL direct = fase futura  
+
+### Code
+
+| Piece | Role |
+|-------|------|
+| `src/data/repositories/mediaRepository.ts` | Aggregator CRUD + check-in/out + awards candidates + overview |
+| Seeds | team, roles, services, schedules, channels, performance, awards |
+| `js/media-data-bridge.js` | Dual-write + pure-JS fallback (`CEMedia`) |
+| Dashboard | dual-write on media form save + hydrate on enter |
+
+### Globals
+
+```js
+window.CEMedia = { listMediaTeam, createMediaTeamMember, … markCheckIn, getMediaOverviewStats, getInfo }
+window.CEDataLayer.media / mediaTeam / mediaRoles / mediaServices /
+  mediaSchedules / mediaChannels / mediaPerformance / mediaAwards
+```
+
+Cache buster: `?v=20260723-media-data-v1`
+
+### How to test Media
+
+```bash
+npm run build
+npm run test:media-data
+npm run test:access-control-data   # regression
+npm run test:staff-hr-data
+npm run test:venue-inventory-data
+# Manual: Mídia → equipa → escala → check-in → performance → canais (sem stream key)
+# Media Team Member vê só o próprio âmbito (quando RBAC aplica)
+# VITE_DATA_SOURCE=local + F5
+```

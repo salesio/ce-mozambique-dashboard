@@ -17688,6 +17688,19 @@ async function submitForm(form) {
     ) {
       void dualWriteVenueInventoryRecord(modalType, "update", collection[index]);
     }
+    if (
+      [
+        "mediaTechnician",
+        "mediaRole",
+        "mediaService",
+        "mediaSchedule",
+        "streamingChannel",
+        "mediaEvaluation",
+        "mediaAward",
+      ].includes(modalType)
+    ) {
+      void dualWriteMediaRecord(modalType, "update", collection[index]);
+    }
   } else {
     const idPrefix = modalType.slice(0, 3);
     const nowIso = new Date().toISOString();
@@ -17852,6 +17865,39 @@ async function submitForm(form) {
       ].includes(modalType)
     ) {
       void dualWriteVenueInventoryRecord(modalType, "create", record);
+    }
+    if (
+      [
+        "mediaTechnician",
+        "mediaRole",
+        "mediaService",
+        "mediaSchedule",
+        "streamingChannel",
+        "mediaEvaluation",
+        "mediaAward",
+      ].includes(modalType)
+    ) {
+      if (modalType === "mediaEvaluation") {
+        const scoreFields = [
+          "punctuality_score",
+          "technical_quality_score",
+          "teamwork_score",
+          "responsibility_score",
+          "problem_solving_score",
+          "spiritual_attitude_score",
+        ];
+        const vals = scoreFields.map((f) => Number(record[f] || 0)).filter((n) => n > 0);
+        if (vals.length && !record.overall_score) {
+          record.overall_score = Number((vals.reduce((a, b) => a + b, 0) / vals.length).toFixed(1));
+          record.score = record.overall_score;
+        }
+      }
+      if (modalType === "streamingChannel") {
+        delete record.stream_key;
+        delete record.streamKey;
+        if (!record.stream_key_status) record.stream_key_status = "Not Required";
+      }
+      void dualWriteMediaRecord(modalType, "create", record);
     }
   }
   bootstrap.Modal.getOrCreateInstance(byId("entryModal")).hide();
@@ -19419,6 +19465,116 @@ function enterDashboard() {
       }
     })
     .catch((error) => console.warn("[CE AccessControl] background hydrate skipped", error));
+  Promise.resolve()
+    .then(() => hydrateMediaFromRepository())
+    .then((hydrated) => {
+      if (hydrated && activeRoute === "media" && typeof renderMedia === "function") {
+        renderMedia();
+      }
+    })
+    .catch((error) => console.warn("[CE Media] background hydrate skipped", error));
+}
+
+function dualWriteMediaRecord(modalType, mode, record) {
+  const bridge = window.CEMedia || window.CEDataLayer?.media;
+  if (!bridge || !record) return;
+  if (typeof bridge.dualWriteRecord === "function") {
+    void bridge.dualWriteRecord(modalType, mode, record);
+    return;
+  }
+  const map = {
+    mediaTechnician: ["createMediaTeamMember", "updateMediaTeamMember"],
+    mediaRole: ["createMediaRole", "updateMediaRole"],
+    mediaService: ["createMediaService", "updateMediaService"],
+    mediaSchedule: ["createMediaSchedule", "updateMediaSchedule"],
+    streamingChannel: ["createMediaChannel", "updateMediaChannel"],
+    mediaEvaluation: ["createMediaPerformanceReview", "updateMediaPerformanceReview"],
+    mediaAward: ["createMediaAward", "updateMediaAward"],
+  };
+  const pair = map[modalType];
+  if (!pair) return;
+  if (mode === "create" && bridge[pair[0]]) void bridge[pair[0]](record);
+  else if (mode === "update" && bridge[pair[1]]) void bridge[pair[1]](record.id, record);
+}
+
+async function hydrateMediaFromRepository() {
+  const repo = window.CEMedia || window.CEDataLayer?.media;
+  if (!repo?.listMediaTeam) return false;
+  try {
+    let hydrated = false;
+    const media = getMediaState();
+    state.media = state.media && !Array.isArray(state.media) ? state.media : structuredClone(seedData.media || {});
+
+    async function merge(listFn, key, mapRow) {
+      if (typeof listFn !== "function") return;
+      const result = await listFn();
+      if (!result?.ok || !Array.isArray(result.data) || !result.data.length) return;
+      const prev = new Map((state.media[key] || []).map((r) => [r.id, r]));
+      const byId = new Map();
+      result.data.forEach((row) => {
+        const previous = prev.get(row.id) || {};
+        const mapped = mapRow ? mapRow(row) : row;
+        byId.set(row.id, { ...mapped, ...previous, id: row.id });
+      });
+      prev.forEach((localRow, id) => {
+        if (!byId.has(id)) byId.set(id, localRow);
+      });
+      state.media[key] = [...byId.values()];
+      hydrated = true;
+    }
+
+    await merge(repo.listMediaTeam?.bind(repo), "technicians", (row) => ({
+      ...row,
+      full_name: row.full_name || row.fullName,
+      status: row.status || "Activo",
+    }));
+    await merge(repo.listMediaRoles?.bind(repo), "roles");
+    await merge(repo.listMediaServices?.bind(repo), "services", (row) => ({
+      ...row,
+      time: row.time || row.start_time,
+      status: row.status || "Activo",
+    }));
+    await merge(repo.listMediaSchedules?.bind(repo), "schedules", (row) => ({
+      ...row,
+      date: row.date || row.service_date,
+      status: row.status || "Publicada",
+      assignments: Array.isArray(row.assignments) ? row.assignments : previousAssignments(row),
+    }));
+    await merge(repo.listMediaChannels?.bind(repo), "streamingChannels", (row) => ({
+      ...row,
+      platform: row.platform || row.type,
+      channel_url: row.channel_url || row.platform_url,
+      status: row.status || (row.is_active ? "Activo" : "Inactivo"),
+    }));
+    await merge(repo.listMediaPerformanceReviews?.bind(repo), "performanceEvaluations", (row) => ({
+      ...row,
+      score: row.score ?? row.overall_score,
+      status: row.status || "Pendente",
+    }));
+    await merge(repo.listMediaAwards?.bind(repo), "awards", (row) => ({
+      ...row,
+      category: row.category || row.award_category,
+      winner_id: row.winner_id || row.technician_id,
+    }));
+
+    if (hydrated) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (_) {}
+      console.info("[CE Media] hydrated", {
+        technicians: (state.media.technicians || []).length,
+        schedules: (state.media.schedules || []).length,
+      });
+    }
+    return hydrated;
+  } catch (error) {
+    console.warn("[CE Media] hydrate failed", error);
+    return false;
+  }
+}
+
+function previousAssignments(row) {
+  return Array.isArray(row?.assignments) ? row.assignments : [];
 }
 
 async function hydrateAccessControlFromRepository() {

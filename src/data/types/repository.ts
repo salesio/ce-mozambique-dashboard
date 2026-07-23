@@ -20,7 +20,12 @@ import type {
   InventoryItem,
   InventoryMaintenanceRecord,
   InventoryMovement,
+  MediaAward,
+  MediaChannel,
+  MediaPerformanceReview,
+  MediaRole,
   MediaSchedule,
+  MediaService,
   MediaTechnician,
   Member,
   Notification,
@@ -99,6 +104,11 @@ export interface DataProvider {
   cellReportSubmissions: EntityRepository<CellReportSubmission>;
   mediaTechnicians: EntityRepository<MediaTechnician>;
   mediaSchedules: EntityRepository<MediaSchedule>;
+  mediaRoles: EntityRepository<MediaRole>;
+  mediaServices: EntityRepository<MediaService>;
+  mediaChannels: EntityRepository<MediaChannel>;
+  mediaPerformance: EntityRepository<MediaPerformanceReview>;
+  mediaAwards: EntityRepository<MediaAward>;
   inventoryItems: EntityRepository<InventoryItem>;
   inventoryMovements: EntityRepository<InventoryMovement>;
   inventoryMaintenance: EntityRepository<InventoryMaintenanceRecord>;

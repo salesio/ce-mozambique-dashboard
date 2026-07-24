@@ -134,24 +134,37 @@ CREATE TRIGGER trg_staff_members_updated_at
 -- CORE: users (app profile; auth_user_id maps to Supabase auth.users later)
 -- ---------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.users (
-  id                  uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  auth_user_id        uuid UNIQUE,
-  staff_id            uuid REFERENCES public.staff_members (id) ON DELETE SET NULL,
-  full_name           text,
-  email               text UNIQUE,
-  phone               text,
-  role_id             uuid REFERENCES public.roles (id) ON DELETE SET NULL,
-  church_id           uuid REFERENCES public.churches (id) ON DELETE SET NULL,
-  department_id       uuid,
-  status              text NOT NULL DEFAULT 'Active',
-  preferred_language  text DEFAULT 'pt',
-  last_login_at       timestamptz,
-  metadata            jsonb NOT NULL DEFAULT '{}'::jsonb,
-  created_at          timestamptz NOT NULL DEFAULT now(),
-  updated_at          timestamptz NOT NULL DEFAULT now(),
-  created_by          uuid,
-  updated_by          uuid
+  id                      uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  -- Maps to Supabase auth.users.id after Auth pilot link (nullable until provisioned)
+  auth_user_id            uuid UNIQUE,
+  staff_id                uuid REFERENCES public.staff_members (id) ON DELETE SET NULL,
+  full_name               text,
+  email                   text UNIQUE,
+  phone                   text,
+  role_id                 uuid REFERENCES public.roles (id) ON DELETE SET NULL,
+  church_id               uuid REFERENCES public.churches (id) ON DELETE SET NULL,
+  department_id           uuid,
+  status                  text NOT NULL DEFAULT 'Active',
+  preferred_language      text DEFAULT 'pt',
+  last_login_at           timestamptz,
+  last_active_at          timestamptz,
+  failed_login_attempts   integer NOT NULL DEFAULT 0,
+  locked_until            timestamptz,
+  metadata                jsonb NOT NULL DEFAULT '{}'::jsonb,
+  created_at              timestamptz NOT NULL DEFAULT now(),
+  updated_at              timestamptz NOT NULL DEFAULT now(),
+  created_by              uuid,
+  updated_by              uuid
 );
+
+-- Phase 2: additive columns for older Docker volumes that already created users
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS last_active_at timestamptz;
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS failed_login_attempts integer NOT NULL DEFAULT 0;
+ALTER TABLE public.users ADD COLUMN IF NOT EXISTS locked_until timestamptz;
+
+CREATE INDEX IF NOT EXISTS idx_users_auth_user_id ON public.users (auth_user_id);
+CREATE INDEX IF NOT EXISTS idx_users_email ON public.users (email);
+CREATE INDEX IF NOT EXISTS idx_users_role_id ON public.users (role_id);
 
 DROP TRIGGER IF EXISTS trg_users_updated_at ON public.users;
 CREATE TRIGGER trg_users_updated_at
@@ -183,6 +196,7 @@ CREATE TABLE IF NOT EXISTS public.permissions (
 );
 
 CREATE INDEX IF NOT EXISTS idx_permissions_role_module ON public.permissions (role_id, module);
+CREATE INDEX IF NOT EXISTS idx_permissions_role_id ON public.permissions (role_id);
 
 DROP TRIGGER IF EXISTS trg_permissions_updated_at ON public.permissions;
 CREATE TRIGGER trg_permissions_updated_at

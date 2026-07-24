@@ -66,6 +66,7 @@ export function normalizeUser(input: Partial<User> & { id?: string }): User {
       ? input.department_permissions
       : [],
     can_view_all_churches: !!input.can_view_all_churches,
+    auth_user_id: input.auth_user_id || null,
     staff_id: input.staff_id || null,
     staff_name: input.staff_name || input.assigned_staff_name || "",
     assigned_staff_name: input.assigned_staff_name || input.staff_name || "",
@@ -210,6 +211,63 @@ export async function getUserByEmail(email: string): Promise<DataResult<User | n
   const e = statusKey(email);
   const found = list.data.find((u) => statusKey(u.email || "") === e) || null;
   return ok(found);
+}
+
+/** Resolve app user by Supabase Auth uuid (auth.users.id). */
+export async function getUserByAuthUserId(authUserId: string): Promise<DataResult<User | null>> {
+  const list = await listUsers();
+  if (!list.ok) return list as DataResult<User | null>;
+  const id = String(authUserId || "").trim();
+  if (!id) return ok(null);
+  const found =
+    list.data.find((u) => String(u.auth_user_id || "").trim() === id) || null;
+  return ok(found);
+}
+
+/** Link Supabase Auth user id to an existing app user (Phase 2 pilot). */
+export async function linkAuthUserToUser(
+  userId: EntityId,
+  authUserId: string,
+): Promise<DataResult<User>> {
+  const authId = String(authUserId || "").trim();
+  if (!authId) return fail("auth_user_id required", "VALIDATION");
+  const existing = await getUserByAuthUserId(authId);
+  if (existing.ok && existing.data && existing.data.id !== userId) {
+    return fail("auth_user_id already linked to another user", "AUTH_LINK_CONFLICT");
+  }
+  return updateUser(userId, { auth_user_id: authId });
+}
+
+export async function unlinkAuthUser(userId: EntityId): Promise<DataResult<User>> {
+  return updateUser(userId, { auth_user_id: null });
+}
+
+export async function markUserLastLogin(userId: EntityId): Promise<DataResult<User>> {
+  const now = nowIso();
+  return updateUser(userId, {
+    last_login_at: now,
+    last_active_at: now,
+    failed_login_attempts: 0,
+    locked_until: null,
+  });
+}
+
+export async function updateUserAuthStatus(
+  userId: EntityId,
+  payload: {
+    status?: string;
+    failed_login_attempts?: number;
+    locked_until?: string | null;
+    last_active_at?: string | null;
+    last_login_at?: string | null;
+    auth_user_id?: string | null;
+  },
+): Promise<DataResult<User>> {
+  const patch: Partial<User> = { ...payload };
+  if (payload.status) {
+    patch.isActive = /active|activo/i.test(payload.status);
+  }
+  return updateUser(userId, patch);
 }
 
 export async function createUser(payload: Partial<User>): Promise<DataResult<User>> {

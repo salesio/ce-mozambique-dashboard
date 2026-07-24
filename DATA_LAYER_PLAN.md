@@ -1401,3 +1401,44 @@ npm run test:data-layer-all
 
 See **[docs/backend/BACKEND_ARCHITECTURE_PLAN.md](docs/backend/BACKEND_ARCHITECTURE_PLAN.md)** and **[docs/backend/MIGRATION_ROADMAP.md](docs/backend/MIGRATION_ROADMAP.md)**.
 
+---
+
+## Backend Phase 2 — Auth + Users/Roles pilot
+
+**Status: optional pilot (demo login remains default)**
+
+### Flags
+
+| Flag | Default | Effect |
+|------|---------|--------|
+| `VITE_ENABLE_REAL_AUTH` | `false` | Demo login |
+| `VITE_ENABLE_SUPABASE` | `false` | Must be true with real auth |
+| `VITE_SUPABASE_URL` / `ANON_KEY` | empty | Required for real auth |
+
+### What was added
+
+| Piece | Role |
+|-------|------|
+| `supabaseAuthClient.ts` | signIn / signOut / session / reset (anon only) |
+| `authRepository.ts` | loginDemo, loginWithSupabase, link resolve, audit |
+| User link methods | `getUserByAuthUserId`, `linkAuthUserToUser`, … |
+| Login UI | Demo badge, errors, forgot password when real auth |
+| SQL | indexes + RLS helpers + migration `0002_auth_users_roles_pilot.sql` |
+| Docs | `docs/backend/SUPABASE_AUTH_PILOT_PLAN.md` |
+
+### What was **not** done
+
+- Churches / Members / Finance not migrated  
+- Real auth **not** required for GitHub Pages  
+- Service role never in frontend  
+- Strict RLS policies not forced on  
+
+### How to test auth foundation
+
+```bash
+npm run build
+npm run test:auth-foundation
+npm run test:backend-foundation
+npm run test:data-layer-all
+```
+

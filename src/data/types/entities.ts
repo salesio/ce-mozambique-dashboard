@@ -21,6 +21,12 @@ export type IsoDateTime = string;
 export interface User {
   id: EntityId;
   email: string | null;
+  /**
+   * Supabase Auth user id (auth.users.id).
+   * Linked when real auth pilot is enabled — never store passwords here.
+   */
+  auth_user_id?: string | null;
+
   /** Dashboard UI field */
   name?: string | null;
   fullName?: string | null;

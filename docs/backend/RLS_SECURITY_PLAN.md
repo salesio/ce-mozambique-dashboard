@@ -6,6 +6,28 @@
 - Policies largely **commented** / not forced on Docker dev
 - `VITE_ENABLE_RLS=false` (flag reserved for future app behaviour)
 
+## Phase 2 status (Auth pilot)
+
+Resolution chain for future policies:
+
+```
+auth.uid() / current_auth_uid()
+  → users.auth_user_id
+  → role_id
+  → permissions
+  → has_module_permission(module, action)
+```
+
+SQL helpers added (not fully enforcing table policies yet):
+
+- `current_auth_uid()`
+- `current_app_user_id()`
+- `current_app_role_id()`
+- `current_app_user_scope()`
+- `has_module_permission(module_name, action_name)`
+
+See migration `supabase/migrations/0002_auth_users_roles_pilot.sql`.
+
 ## Principles
 
 | Role / scope | Access idea |

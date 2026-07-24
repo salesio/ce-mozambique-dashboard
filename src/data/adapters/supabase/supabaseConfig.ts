@@ -51,7 +51,9 @@ export function getSupabaseEnvConfig(): SupabaseEnvConfig {
   const url = readEnv("VITE_SUPABASE_URL");
   const anonKey = readEnv("VITE_SUPABASE_ANON_KEY");
   const enableSupabase = flagTrue("VITE_ENABLE_SUPABASE");
-  const isConfigured = enableSupabase && isLikelySupabaseUrl(url) && anonKey.length > 20;
+  // isConfigured = env usable for a public client (URL+anon look valid).
+  // enableSupabase still gates initialization in foundation client.
+  const isConfigured = isLikelySupabaseUrl(url) && anonKey.length > 20;
   return {
     url,
     anonKey,
@@ -59,7 +61,7 @@ export function getSupabaseEnvConfig(): SupabaseEnvConfig {
     enableRealAuth: flagTrue("VITE_ENABLE_REAL_AUTH"),
     enableStorage: flagTrue("VITE_ENABLE_STORAGE"),
     enableRls: flagTrue("VITE_ENABLE_RLS"),
-    isConfigured,
+    isConfigured: enableSupabase && isConfigured,
   };
 }
 

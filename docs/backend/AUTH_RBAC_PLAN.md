@@ -1,22 +1,26 @@
 # Auth & RBAC Plan
 
-## Phase 1 status
+## Phase 1 status (foundation)
 
-- **Demo login** remains active (`dashboard.js` / access-control seeds)
-- **No** full Supabase Auth for all modules
-- Schema prepares `users.auth_user_id`, `roles`, `permissions`, `audit_logs`
+- Schema prepared: `users.auth_user_id`, `roles`, `permissions`, `audit_logs`
 
-## Target flow (future)
+## Phase 2 status (current pilot)
+
+- **Demo login** remains the **default** (`VITE_ENABLE_REAL_AUTH=false`)
+- Optional **Supabase Auth** when flags + env are set
+- App resolution:
 
 ```
-Supabase Auth user (auth.users)
-    → public.users.auth_user_id
+Supabase Auth user
+    → public.users.auth_user_id  (or email match → link)
     → role_id → public.roles
     → public.permissions (module + can_*)
-    → app canUser() / checkPermission()
-    → RLS policies (using JWT + helper functions)
-    → audit_logs on sensitive actions
+    → app canUser() / checkPermission() / activeUser
+    → audit logs (auth_* actions)
 ```
+
+- Domain modules (Churches, Finance, …) still use mock/local data layer
+- RLS helpers created; strict table policies **not** fully enabled
 
 ## Roles (seed baseline)
 
@@ -28,6 +32,8 @@ Supabase Auth user (auth.users)
 | hr_manager | HR Manager | staff/salaries |
 | staff_member | Staff Member | own |
 
+Frontend also keeps richer demo roles (`USERS_SEED` / `ROLES_SEED`).
+
 ## Permission model
 
 Columns on `permissions`:
@@ -37,19 +43,29 @@ Columns on `permissions`:
 - `can_export`, `can_manage_settings`
 - `scope`, `conditions` (jsonb), `is_sensitive`
 
-Frontend already has pilot RBAC via `accessControlRepository` + `CEAccessControl` (mock/local).
+SQL helpers (Phase 2):
 
-## Future Auth phase tasks
+- `current_auth_uid()`
+- `current_app_user_id()`
+- `current_app_role_id()`
+- `current_app_user_scope()`
+- `has_module_permission(module, action)`
 
-- [ ] Migrate demo users → Supabase Auth invites
-- [ ] Password reset / email invite
-- [ ] Locked / suspended user status
-- [ ] Session handling (`persistSession` when `VITE_ENABLE_REAL_AUTH=true`)
-- [ ] Role updates write audit logs
-- [ ] Map JWT claims → `current_app_user()` SQL helper
+## Future Auth tasks
+
+- [x] Optional Supabase Auth client + repository
+- [x] Link `auth_user_id` by email (pilot)
+- [x] Demo login coexistence
+- [ ] Migrate app users table fully to Supabase
+- [ ] Admin-only auth link (disable auto-link in production)
+- [ ] Password reset UX polish
+- [ ] Locked / suspended enforcement on every request
+- [ ] Session refresh + route guards
+- [ ] Enable RLS policies using helpers
 
 ## Explicit non-goals (this phase)
 
-- Do not force login through Supabase
+- Do not force login through Supabase by default
 - Do not break offline/demo GitHub Pages
 - Do not put service role in the client
+- Do not migrate Churches / Members / Finance yet

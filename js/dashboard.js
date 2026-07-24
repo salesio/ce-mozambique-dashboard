@@ -5333,6 +5333,10 @@ function showLoginView() {
   byId("appView")?.classList.add("d-none");
   byId("loginView")?.classList.remove("d-none");
   history.replaceState(null, "", "#login");
+  showLoginError("");
+  try {
+    applyAuthModeBadge();
+  } catch (_) {}
 }
 
 function collectPublicCellReport(form, proofMeta = null) {
@@ -19783,10 +19787,87 @@ byId("content")?.addEventListener("scroll", updateBackToTopVisibility, { passive
 
 byId("backToTopBtn")?.addEventListener("click", () => scrollContentTo("content"));
 
-function enterDashboard() {
-  const email = (byId("loginEmail")?.value || "").trim().toLowerCase();
-  const matchedUser = state.users.find((user) => String(user.email || "").trim().toLowerCase() === email);
-  if (matchedUser) activeUser = matchedUser;
+function showLoginError(message) {
+  const el = byId("loginError");
+  if (!el) {
+    if (message) console.warn("[CE Auth]", message);
+    return;
+  }
+  if (!message) {
+    el.classList.add("d-none");
+    el.textContent = "";
+    return;
+  }
+  el.textContent = message;
+  el.classList.remove("d-none");
+}
+
+function resolveAuthApi() {
+  if (window.CEAuth && typeof window.CEAuth.login === "function") return window.CEAuth;
+  if (window.CESupabase && typeof window.CESupabase.login === "function") return window.CESupabase;
+  if (window.CESupabase?.auth && typeof window.CESupabase.auth.login === "function") return window.CESupabase.auth;
+  return null;
+}
+
+function applyAuthModeBadge() {
+  const badgeWrap = byId("loginModeBadge");
+  const forgot = byId("loginForgotPassword");
+  const note = document.querySelector("[data-i18n='login.note']");
+  const auth = resolveAuthApi();
+  let real = false;
+  let info = null;
+  try {
+    if (auth?.isRealAuthEnabled) real = !!auth.isRealAuthEnabled();
+    if (auth?.getAuthInfo) info = auth.getAuthInfo();
+    else if (window.CESupabase?.getAuthInfo) info = window.CESupabase.getAuthInfo();
+  } catch (_) {}
+  if (badgeWrap) {
+    if (real) {
+      badgeWrap.innerHTML =
+        '<span class="badge text-bg-success">Supabase Auth</span> <span class="small text-white-50">Users/Roles pilot</span>';
+    } else if (info && info.realAuthEnabled === false && (info.supabaseEnabled || info.message?.includes?.("REAL_AUTH"))) {
+      badgeWrap.innerHTML =
+        '<span class="badge text-bg-warning text-dark">Auth flags on</span> <span class="small text-white-50">config incomplete</span>';
+    } else {
+      badgeWrap.innerHTML = '<span class="badge text-bg-secondary" data-i18n="login.demoMode">Demo Mode</span>';
+    }
+  }
+  if (forgot) {
+    if (real) forgot.classList.remove("d-none");
+    else forgot.classList.add("d-none");
+  }
+  if (note && !real) {
+    /* keep demo note */
+  }
+}
+
+function mapAccountToDashboardUser(account) {
+  if (!account) return null;
+  const email = String(account.email || "").trim().toLowerCase();
+  const fromState =
+    state.users.find((u) => String(u.email || "").trim().toLowerCase() === email) ||
+    state.users.find((u) => u.id === account.id);
+  return {
+    ...(fromState || {}),
+    ...account,
+    id: account.id || fromState?.id,
+    email: account.email || fromState?.email,
+    name: account.name || account.full_name || account.fullName || fromState?.name,
+    role: account.role || account.role_name || fromState?.role,
+    role_name: account.role_name || account.role || fromState?.role_name,
+    role_id: account.role_id || fromState?.role_id,
+    church_id: account.church_id || account.churchId || fromState?.church_id,
+    churchId: account.churchId || account.church_id || fromState?.churchId,
+    department_id: account.department_id || fromState?.department_id,
+    department_permissions: account.department_permissions || fromState?.department_permissions || [],
+    can_view_all_churches: account.can_view_all_churches ?? fromState?.can_view_all_churches,
+    staff_id: account.staff_id || fromState?.staff_id,
+    auth_user_id: account.auth_user_id || null,
+    permissions: account.permissions || fromState?.permissions || [],
+  };
+}
+
+function continueEnterDashboard() {
   byId("loginView")?.classList.add("d-none");
   byId("appView")?.classList.remove("d-none");
   renderShell();
@@ -21296,20 +21377,112 @@ function dualWriteRequisitionRecord(mode, record) {
   else if (mode === "update" && bridge.updateRequisition) void bridge.updateRequisition(record.id, record);
 }
 
+/**
+ * Login entry (Backend Phase 2).
+ * Demo mode (default): match email in state.users / authRepository.loginDemo.
+ * Real auth only when CEAuth reports isRealAuthEnabled().
+ */
+async function enterDashboard() {
+  showLoginError("");
+  const email = (byId("loginEmail")?.value || "").trim().toLowerCase();
+  const password = byId("loginPassword")?.value || "";
+  const auth = resolveAuthApi();
+  const submitBtn = document.querySelector("[data-login-enter]");
+  if (submitBtn) submitBtn.disabled = true;
+
+  try {
+    if (auth && typeof auth.login === "function") {
+      let result;
+      try {
+        result = await Promise.race([
+          auth.login(email, password),
+          new Promise((resolve) =>
+            setTimeout(
+              () => resolve({ ok: false, error: "Login timeout", code: "AUTH_TIMEOUT" }),
+              12000,
+            ),
+          ),
+        ]);
+      } catch (err) {
+        result = {
+          ok: false,
+          error: err instanceof Error ? err.message : "Login failed",
+          code: "AUTH_ERROR",
+        };
+      }
+
+      if (!result || !result.ok) {
+        const code = result?.code || "";
+        let msg = result?.error || "Login failed";
+        if (code === "AUTH_NOT_CONFIGURED") {
+          msg =
+            lang === "en"
+              ? "Real authentication is not configured. Check Supabase environment variables."
+              : "Autenticação real não está configurada. Verifique as variáveis Supabase.";
+        } else if (code === "AUTH_NOT_PROVISIONED") {
+          msg =
+            lang === "en"
+              ? "User account not provisioned. Ask an admin to link your Auth user."
+              : "Conta de utilizador não provisionada. Peça a um admin para ligar o utilizador Auth.";
+        }
+        // If real auth was not intended and demo path failed hard, fall back to legacy email match
+        const wantReal = !!(auth.isRealAuthEnabled && auth.isRealAuthEnabled());
+        if (!wantReal && code !== "AUTH_LOCKED") {
+          const matchedUser = state.users.find(
+            (user) => String(user.email || "").trim().toLowerCase() === email,
+          );
+          if (matchedUser) {
+            activeUser = matchedUser;
+            continueEnterDashboard();
+            return true;
+          }
+        }
+        showLoginError(msg);
+        return false;
+      }
+
+      const mapped = mapAccountToDashboardUser(result.data);
+      if (mapped) {
+        activeUser = mapped;
+        const idx = state.users.findIndex((u) => u.id === mapped.id || String(u.email || "").toLowerCase() === email);
+        if (idx >= 0) state.users[idx] = { ...state.users[idx], ...mapped };
+        else state.users.unshift(mapped);
+      }
+      continueEnterDashboard();
+      runOptionalSupabaseLoginSync(email, password);
+      return true;
+    }
+
+    // Legacy fallback (bundle without auth pilot)
+    const matchedUser = state.users.find(
+      (user) => String(user.email || "").trim().toLowerCase() === email,
+    );
+    if (matchedUser) activeUser = matchedUser;
+    continueEnterDashboard();
+    runOptionalSupabaseLoginSync(email, password);
+    return true;
+  } finally {
+    if (submitBtn) submitBtn.disabled = false;
+  }
+}
+
 window.enterDashboard = enterDashboard;
 
 function runOptionalSupabaseLoginSync(email, password) {
   (async () => {
     try {
-      if (window.CESupabaseBridge?.trySupabaseLogin) {
+      // Only legacy finance bridge when real auth pilot is NOT driving login
+      const auth = resolveAuthApi();
+      const real = !!(auth?.isRealAuthEnabled && auth.isRealAuthEnabled());
+      if (!real && window.CESupabaseBridge?.trySupabaseLogin) {
         await Promise.race([
           window.CESupabaseBridge.trySupabaseLogin(email, password),
-          new Promise((resolve) => setTimeout(() => resolve({ ok: false, timeout: true }), 4000))
+          new Promise((resolve) => setTimeout(() => resolve({ ok: false, timeout: true }), 4000)),
         ]);
       }
       await Promise.race([
         syncFinanceFromSupabaseIfEnabled(),
-        new Promise((resolve) => setTimeout(() => resolve(false), 4000))
+        new Promise((resolve) => setTimeout(() => resolve(false), 4000)),
       ]);
     } catch (error) {
       console.warn("[CE] Supabase login/sync skipped — using local data.", error);
@@ -21319,11 +21492,43 @@ function runOptionalSupabaseLoginSync(email, password) {
 
 byId("loginForm")?.addEventListener("submit", (event) => {
   event.preventDefault();
-  const email = byId("loginEmail")?.value || "";
-  const password = byId("loginPassword")?.value || "";
-  enterDashboard();
-  runOptionalSupabaseLoginSync(email, password);
+  void enterDashboard();
 });
+
+byId("loginForgotPassword")?.addEventListener("click", async () => {
+  const email = (byId("loginEmail")?.value || "").trim();
+  const auth = resolveAuthApi();
+  if (!auth?.requestPasswordReset) {
+    showLoginError(
+      lang === "en"
+        ? "Password reset requires Supabase Auth."
+        : "A redefinição de senha requer Supabase Auth.",
+    );
+    return;
+  }
+  const r = await auth.requestPasswordReset(email);
+  if (r && r.ok) {
+    showLoginError("");
+    alert(
+      lang === "en"
+        ? "If the email exists, a reset link was sent."
+        : "Se o email existir, foi enviado um link de redefinição.",
+    );
+  } else {
+    showLoginError(
+      r?.error ||
+        (lang === "en"
+          ? "Real authentication is not configured. Check Supabase environment variables."
+          : "Autenticação real não está configurada. Verifique as variáveis Supabase."),
+    );
+  }
+});
+
+// Auth mode badge on first paint
+try {
+  applyAuthModeBadge();
+  setTimeout(applyAuthModeBadge, 300);
+} catch (_) {}
 
 document.addEventListener("click", (event) => {
   if (event.target.closest("[data-public-cell-report]")) {

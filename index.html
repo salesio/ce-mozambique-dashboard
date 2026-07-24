@@ -28,16 +28,21 @@
       </div>
       <h1 data-i18n="login.title">Portal da Equipa</h1>
       <p class="login-lead" data-i18n="login.lead">Acesso interno para acompanhamento espiritual, igrejas, celulas, escola, financas e administracao.</p>
+      <div id="loginModeBadge" class="login-mode-badge mb-2" aria-live="polite">
+        <span class="badge text-bg-secondary" data-i18n="login.demoMode">Demo Mode</span>
+      </div>
       <form id="loginForm" class="d-grid gap-3 mt-4">
         <div>
           <label class="form-label fw-semibold" for="loginEmail">E-mail</label>
-          <input id="loginEmail" class="form-control" type="email" value="admin@ce-mozambique.org">
+          <input id="loginEmail" class="form-control" type="email" value="admin@ce-mozambique.org" autocomplete="username">
         </div>
         <div>
           <label class="form-label fw-semibold" for="loginPassword" data-i18n="login.password">Senha</label>
-          <input id="loginPassword" class="form-control" type="password" value="demo">
+          <input id="loginPassword" class="form-control" type="password" value="demo" autocomplete="current-password">
         </div>
-        <button class="btn btn-ce-gold btn-lg" type="submit" data-login-enter onclick="if (window.enterDashboard) { window.enterDashboard(); return false; }" data-i18n="login.submit">Entrar no Dashboard</button>
+        <div id="loginError" class="alert alert-danger d-none py-2 small mb-0" role="alert"></div>
+        <button class="btn btn-ce-gold btn-lg" type="submit" data-login-enter data-i18n="login.submit">Entrar no Dashboard</button>
+        <button id="loginForgotPassword" class="btn btn-link btn-sm text-white-50 p-0 d-none" type="button" data-i18n="login.forgot">Esqueci a senha</button>
       </form>
       <div class="login-public-action">
         <button class="btn btn-outline-cyan btn-lg w-100" type="button" data-public-cell-report>
@@ -45,7 +50,7 @@
           <span data-i18n="submitCellReport">Submeter Relatório de Célula</span>
         </button>
       </div>
-      <p class="small text-white-50 mt-3 mb-0" data-i18n="login.note">Prototipo frontend-first. Autenticacao real e base de dados entram na proxima fase.</p>
+      <p class="small text-white-50 mt-3 mb-0" data-i18n="login.note">Protótipo frontend-first. Demo login activo por omissão. Auth real opcional (flags Supabase).</p>
     </section>
   </main>
 
@@ -211,7 +216,7 @@
     // window.__CE_ENV__.VITE_DATA_SOURCE = 'local'; // test churches localStorage provider
   </script>
   <!-- Data layer bundle (churches … staff HR + access control + prison) -->
-  <script src="js/supabase-bundle.js?v=20260723-settings-notifications-v1"></script>
+  <script src="js/supabase-bundle.js?v=20260724-auth-pilot-v1"></script>
   <script src="js/churches-data-bridge.js?v=20260723-finance-data-v1"></script>
   <script src="js/members-data-bridge.js?v=20260723-finance-data-v1"></script>
   <script src="js/first-timers-data-bridge.js?v=20260723-finance-data-v1"></script>
@@ -232,7 +237,7 @@
   <script src="js/programs-data-bridge.js?v=20260723-programs-data-v1"></script>
   <script src="js/settings-data-bridge.js?v=20260723-settings-notifications-v1"></script>
   <script src="js/notifications-data-bridge.js?v=20260723-settings-notifications-v1"></script>
-  <script src="js/dashboard.js?v=20260723-settings-notifications-v1"></script>
+  <script src="js/dashboard.js?v=20260724-auth-pilot-v1"></script>
   <!-- UMD build (classic script) — ESM CDN breaks without type="module" -->
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script defer src="js/supabase-config.js?v=20260712-supabase"></script>

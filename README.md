@@ -77,9 +77,31 @@ docker compose up -d
 # → http://localhost:5173
 ```
 
-### Backend/Supabase Foundation (Phase 1)
+### Backend/Supabase Foundation (Phase 1) + Auth pilot (Phase 2)
 
-The **frontend still uses mock/local** data sources. Supabase and API are **prepared but disabled** by default.
+The **frontend still uses mock/local** data sources by default. Supabase and API are **prepared but disabled** unless flags are enabled.
+
+#### Demo mode (default)
+
+```env
+VITE_DATA_SOURCE=local
+VITE_ENABLE_SUPABASE=false
+VITE_ENABLE_REAL_AUTH=false
+```
+
+Login with demo emails (password hint `demo`), e.g. `admin@ce-mozambique.org`.
+
+#### Real auth pilot (optional — Users/Roles only)
+
+```env
+VITE_ENABLE_SUPABASE=true
+VITE_ENABLE_REAL_AUTH=true
+VITE_SUPABASE_URL=https://YOUR_REF.supabase.co
+VITE_SUPABASE_ANON_KEY=your_anon_key_only
+```
+
+Requires a provisioned app user (same email) so Auth can link `auth_user_id`.  
+See **[docs/backend/SUPABASE_AUTH_PILOT_PLAN.md](docs/backend/SUPABASE_AUTH_PILOT_PLAN.md)**.
 
 | Item | Location |
 |------|----------|

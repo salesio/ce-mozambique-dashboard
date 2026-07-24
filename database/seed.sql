@@ -1,6 +1,10 @@
 -- ============================================================================
 -- CE Mozambique — foundation seed (no real passwords / secrets)
 -- ============================================================================
+-- auth_user_id should be linked after Supabase Auth users are created.
+-- Do not store passwords in this seed.
+-- Demo app users live in the frontend data layer (USERS_SEED); SQL seed covers roles/settings.
+-- ============================================================================
 
 -- Roles
 INSERT INTO public.roles (id, name, display_name, level, default_scope, is_system_role, status)

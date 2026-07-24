@@ -20,6 +20,7 @@ Browser does **not** connect to PostgreSQL directly. Supabase/API = future phase
 | programs-events-flow-v1 | Programs & Events | Done |
 | settings-notifications-v1 | Settings + Notification Center | Done |
 | backend-foundation-v1 | Backend Phase 1 — schema, adapters, docs, env | Done |
+| auth-users-roles-v1 | Backend Phase 2 — optional Supabase Auth + Users/Roles | Done |
 
 ## Storage model
 

@@ -11,11 +11,16 @@ localStorage / mock remain valid for **dev and prototype** until each domain pil
 - [x] Smoke: `test:backend-foundation`
 - [ ] No domain auto-migration
 
-## Phase 2 — Auth real + Users/Roles pilot
+## Phase 2 — Auth real + Users/Roles pilot (current)
 
-- Supabase Auth + `users.auth_user_id`
-- Map roles/permissions to RLS helpers
-- Keep demo fallback until cutover
+- [x] Optional Supabase Auth client (`supabaseAuthClient`)
+- [x] `authRepository` (demo + real) + `CEAuth` global
+- [x] `users.auth_user_id` link helpers + indexes
+- [x] RLS SQL helpers (`current_app_user_id`, `has_module_permission`, …)
+- [x] Login UI: Demo badge / real auth messages / forgot password (when enabled)
+- [x] Audit: `auth_login_*`, `auth_logout`, `auth_user_linked`, …
+- [ ] Remote Users/Roles as default source (still mock/local for app data)
+- [ ] Production cutover (demo remains until explicit)
 
 ## Phase 3 — Churches + Members pilot
 

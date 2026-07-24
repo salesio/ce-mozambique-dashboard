@@ -32,6 +32,18 @@ export {
   supabaseUpdate,
   supabaseDelete,
 } from "./adapters/supabase/supabaseRepositoryBase";
+export {
+  getSupabaseAuthClient,
+  isSupabaseAuthEnabled,
+  signInWithEmailPassword,
+  signOut as supabaseAuthSignOut,
+  getCurrentAuthUser,
+  getSession as getSupabaseAuthSession,
+  onAuthStateChange,
+  resetPassword as supabaseResetPassword,
+  updatePassword as supabaseUpdatePassword,
+  getSupabaseAuthStatus,
+} from "./adapters/supabase/supabaseAuthClient";
 export { apiClient } from "./adapters/api/apiClient";
 export { getApiEnvConfig, getApiConnectionInfo } from "./adapters/api/apiConfig";
 export {
@@ -41,6 +53,23 @@ export {
   apiUpdate,
   apiDelete,
 } from "./adapters/api/apiRepositoryBase";
+
+/** Backend Phase 2 — Auth pilot */
+export {
+  login,
+  loginDemo,
+  loginWithSupabase,
+  logout,
+  getCurrentSession,
+  getCurrentUserAccount,
+  resolveUserAccountFromAuth,
+  refreshCurrentUserPermissions,
+  isRealAuthEnabled,
+  getAuthInfo,
+  getAuthDataSourceInfo,
+  requestPasswordReset,
+  ensureAuthSeeded,
+} from "./repositories/authRepository";
 
 export {
   listChurches,
@@ -925,6 +954,11 @@ export {
   listUsers,
   getUserById,
   getUserByEmail,
+  getUserByAuthUserId,
+  linkAuthUserToUser,
+  unlinkAuthUser,
+  markUserLastLogin,
+  updateUserAuthStatus,
   createUser,
   updateUser,
   deleteUser,

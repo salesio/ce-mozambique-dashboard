@@ -2,9 +2,13 @@ import type { User } from "../types/entities";
 
 const HQ = "church-hq";
 
-/** Demo users — match dashboard seed. No real passwords stored. */
+/**
+ * Demo users — match dashboard seed.
+ * No real passwords stored.
+ * auth_user_id is null until linked after Supabase Auth users are created.
+ */
 export const USERS_SEED: User[] = [
-  { id: "u-1", name: "Admin Principal", full_name: "Admin Principal", fullName: "Admin Principal", email: "admin@ce-mozambique.org", role: "Super Admin", role_name: "Super Admin", role_id: "role-super-admin", church_id: HQ, churchId: HQ, department_permissions: ["*"], can_view_all_churches: true, status: "Active", isActive: true, has_dashboard_access: true, preferred_language: "pt", demo_password_hint: "demo", created_at: "2024-01-01", updated_at: "2026-07-10" },
+  { id: "u-1", name: "Admin Principal", full_name: "Admin Principal", fullName: "Admin Principal", email: "admin@ce-mozambique.org", auth_user_id: null, role: "Super Admin", role_name: "Super Admin", role_id: "role-super-admin", church_id: HQ, churchId: HQ, department_permissions: ["*"], can_view_all_churches: true, status: "Active", isActive: true, has_dashboard_access: true, preferred_language: "pt", demo_password_hint: "demo", created_at: "2024-01-01", updated_at: "2026-07-10" },
   { id: "u-17", name: "Pastor Kene Ume", full_name: "Pastor Kene Ume", email: "pastor.kene@ce-mozambique.org", role: "Main Pastor", role_name: "Main Pastor", role_id: "role-main-pastor", church_id: HQ, churchId: HQ, department_permissions: ["reports", "requisitions", "staffHr", "finance"], can_view_all_churches: true, status: "Active", isActive: true, has_dashboard_access: true, staff_id: "staff-pastor-kene", preferred_language: "pt", demo_password_hint: "demo", created_at: "2024-01-01", updated_at: "2026-07-10" },
   { id: "u-18", name: "Pastora Responsável Requisições", full_name: "Pastora Responsável Requisições", email: "requisitions@ce-mozambique.org", role: "Requisition Officer", role_name: "Requisition Officer", role_id: "role-req-officer", church_id: HQ, department_id: "dept-requisitions", department_permissions: ["requisitions"], can_view_all_churches: true, status: "Active", isActive: true, has_dashboard_access: true, staff_id: "staff-7", staff_name: "Pastora Responsável Requisições", preferred_language: "pt", demo_password_hint: "demo", created_at: "2024-06-01", updated_at: "2026-07-10" },
   { id: "u-15", name: "Finance Head Demo", full_name: "Finance Head Demo", email: "finance.head@ce-mozambique.org", role: "Finance Head", role_name: "Finance Head", role_id: "role-finance-head", church_id: HQ, department_id: "dept-finance", department_name: "Finanças", department_permissions: ["finance", "financeHead", "financeVerify", "reports", "partnership"], can_view_all_churches: true, status: "Active", isActive: true, has_dashboard_access: true, staff_id: "staff-9", staff_name: "Finance Head Demo", preferred_language: "pt", demo_password_hint: "demo", created_at: "2023-01-01", updated_at: "2026-07-10" },

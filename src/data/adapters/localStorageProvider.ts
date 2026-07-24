@@ -48,6 +48,15 @@ import type {
   FevoTeam,
   FevoVisitationRecord,
   FevoWeeklyConfig,
+  PrisonFollowUp,
+  PrisonFoundationStudent,
+  PrisonLocation,
+  PrisonMaterialsRequest,
+  PrisonParticipant,
+  PrisonReport,
+  PrisonRepresentative,
+  PrisonService,
+  PrisonWeeklyAgenda,
   Member,
   Notification,
   Requisition,
@@ -137,6 +146,15 @@ function storageKeyFor(key: EntityCollectionName): string {
   if (key === "fevo_evangelism_records") return `${STORAGE_PREFIX}fevo-evangelism-records`;
   if (key === "fevo_visitation_records") return `${STORAGE_PREFIX}fevo-visitation-records`;
   if (key === "fevo_prayer_records") return `${STORAGE_PREFIX}fevo-prayer-records`;
+  if (key === "prison_locations") return `${STORAGE_PREFIX}prison-locations`;
+  if (key === "prison_representatives") return `${STORAGE_PREFIX}prison-representatives`;
+  if (key === "prison_services") return `${STORAGE_PREFIX}prison-services`;
+  if (key === "prison_participants") return `${STORAGE_PREFIX}prison-participants`;
+  if (key === "prison_foundation_students") return `${STORAGE_PREFIX}prison-foundation-students`;
+  if (key === "prison_weekly_agendas") return `${STORAGE_PREFIX}prison-weekly-agendas`;
+  if (key === "prison_follow_ups") return `${STORAGE_PREFIX}prison-follow-ups`;
+  if (key === "prison_reports") return `${STORAGE_PREFIX}prison-reports`;
+  if (key === "prison_materials_requests") return `${STORAGE_PREFIX}prison-materials-requests`;
   return STORAGE_PREFIX + key;
 }
 
@@ -274,6 +292,19 @@ export function createLocalStorageProvider(): DataProvider {
   const fevoVisitationRecords =
     createPersistedRepository<FevoVisitationRecord>("fevo_visitation_records");
   const fevoPrayerRecords = createPersistedRepository<FevoPrayerRecord>("fevo_prayer_records");
+  const prisonLocations = createPersistedRepository<PrisonLocation>("prison_locations");
+  const prisonRepresentatives =
+    createPersistedRepository<PrisonRepresentative>("prison_representatives");
+  const prisonServices = createPersistedRepository<PrisonService>("prison_services");
+  const prisonParticipants = createPersistedRepository<PrisonParticipant>("prison_participants");
+  const prisonFoundationStudents =
+    createPersistedRepository<PrisonFoundationStudent>("prison_foundation_students");
+  const prisonWeeklyAgendas =
+    createPersistedRepository<PrisonWeeklyAgenda>("prison_weekly_agendas");
+  const prisonFollowUps = createPersistedRepository<PrisonFollowUp>("prison_follow_ups");
+  const prisonReports = createPersistedRepository<PrisonReport>("prison_reports");
+  const prisonMaterialsRequests =
+    createPersistedRepository<PrisonMaterialsRequest>("prison_materials_requests");
   const inventoryItems = createPersistedRepository<InventoryItem>("inventory_items");
   const inventoryMovements = createPersistedRepository<InventoryMovement>("inventory_movements");
   const inventoryMaintenance =
@@ -342,6 +373,15 @@ export function createLocalStorageProvider(): DataProvider {
     fevo_evangelism_records: fevoEvangelismRecords as EntityRepository<unknown>,
     fevo_visitation_records: fevoVisitationRecords as EntityRepository<unknown>,
     fevo_prayer_records: fevoPrayerRecords as EntityRepository<unknown>,
+    prison_locations: prisonLocations as EntityRepository<unknown>,
+    prison_representatives: prisonRepresentatives as EntityRepository<unknown>,
+    prison_services: prisonServices as EntityRepository<unknown>,
+    prison_participants: prisonParticipants as EntityRepository<unknown>,
+    prison_foundation_students: prisonFoundationStudents as EntityRepository<unknown>,
+    prison_weekly_agendas: prisonWeeklyAgendas as EntityRepository<unknown>,
+    prison_follow_ups: prisonFollowUps as EntityRepository<unknown>,
+    prison_reports: prisonReports as EntityRepository<unknown>,
+    prison_materials_requests: prisonMaterialsRequests as EntityRepository<unknown>,
     inventory_items: inventoryItems as EntityRepository<unknown>,
     inventory_movements: inventoryMovements as EntityRepository<unknown>,
     inventory_maintenance: inventoryMaintenance as EntityRepository<unknown>,
@@ -414,6 +454,15 @@ export function createLocalStorageProvider(): DataProvider {
     fevoEvangelismRecords,
     fevoVisitationRecords,
     fevoPrayerRecords,
+    prisonLocations,
+    prisonRepresentatives,
+    prisonServices,
+    prisonParticipants,
+    prisonFoundationStudents,
+    prisonWeeklyAgendas,
+    prisonFollowUps,
+    prisonReports,
+    prisonMaterialsRequests,
     inventoryItems,
     inventoryMovements,
     inventoryMaintenance,

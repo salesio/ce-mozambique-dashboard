@@ -1,0 +1,30 @@
+import type { PrisonReport } from "../types/entities";
+
+export const PRISON_REPORTS_SEED: PrisonReport[] = [
+  {
+    id: "pr-1",
+    report_number: "PREP-2026-0001",
+    prison_id: "prison-1",
+    prison_name: "Cadeia Civil de Maputo",
+    service_id: "ps-1",
+    service_number: "PSV-2026-0001",
+    report_date: "2026-07-05",
+    period_start: "2026-06-22",
+    period_end: "2026-07-05",
+    name: "Relatório Prisional Semanal",
+    category: "22 Junho - 05 Julho 2026",
+    attendance_total: 46,
+    new_converts_count: 12,
+    foundation_interest_count: 9,
+    foundation_students_count: 1,
+    materials_distributed: 20,
+    status: "Submitted",
+    estado: "Relatório Submetido",
+    submitted_by_name: "Sister Janet Marquele",
+    submitted_at: "2026-07-05T16:00:00.000Z",
+    church_id: "church-hq",
+    notes: "Semana forte em novos convertidos.",
+    created_at: "2026-07-05",
+    updated_at: "2026-07-05",
+  },
+];

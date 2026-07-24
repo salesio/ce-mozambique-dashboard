@@ -2856,6 +2856,286 @@ export interface FevoMissingReport {
   updated_at?: IsoDate | IsoDateTime;
 }
 
+// ---------------------------------------------------------------------------
+// Prison Ministry — Sister Janet Marquele
+// Minimal inmate data only; no criminal details.
+// ---------------------------------------------------------------------------
+
+export interface PrisonLocation {
+  id: EntityId;
+  name?: string | null;
+  nome_da_prisao?: string | null;
+  official_name?: string | null;
+  type?: string | null;
+  province?: string | null;
+  provincia?: string | null;
+  city?: string | null;
+  cidade?: string | null;
+  district?: string | null;
+  address?: string | null;
+  contact_person?: string | null;
+  contact_phone?: string | null;
+  contact_email?: string | null;
+  representative_id?: EntityId | null;
+  representative_name?: string | null;
+  representante_da_prisao?: string | null;
+  contacto_do_representante?: string | null;
+  church_id?: EntityId | null;
+  igreja_responsavel?: string | null;
+  allowed_visit_days?: string[] | null;
+  allowed_visit_times?: string | null;
+  requires_authorization?: boolean | null;
+  authorization_notes?: string | null;
+  status?: string | null;
+  estado?: string | null;
+  notes?: string | null;
+  observacoes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface PrisonRepresentative {
+  id: EntityId;
+  prison_id?: EntityId | null;
+  prison_name?: string | null;
+  full_name?: string | null;
+  phone?: string | null;
+  whatsapp?: string | null;
+  email?: string | null;
+  role?: string | null;
+  organization?: string | null;
+  preferred_contact_method?: string | null;
+  status?: string | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface PrisonService {
+  id: EntityId;
+  service_number?: string | null;
+  prison_id?: EntityId | null;
+  prisao?: string | null;
+  prison_name?: string | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  igreja_responsavel?: string | null;
+  service_date?: IsoDate | null;
+  data?: IsoDate | null;
+  start_time?: string | null;
+  end_time?: string | null;
+  dia_da_semana?: string | null;
+  service_type?: string | null;
+  responsible_user_id?: EntityId | null;
+  responsible_name?: string | null;
+  lider_responsavel?: string | null;
+  preacher_id?: EntityId | null;
+  preacher_name?: string | null;
+  team_members?: Array<{ staff_id?: string; name?: string; role?: string }> | null;
+  membros_que_foram?: string | null;
+  attendance_total?: number | null;
+  numero_de_internos_presentes?: number | null;
+  first_timers_count?: number | null;
+  new_converts_count?: number | null;
+  novos_convertidos?: number | null;
+  foundation_interest_count?: number | null;
+  interessados_em_escola_de_fundacao?: number | null;
+  materials_distributed?: number | null;
+  prayer_requests_count?: number | null;
+  testimonies?: string | null;
+  tema_ou_mensagem?: string | null;
+  aula_de_fundacao_dada?: boolean | null;
+  status?: string | null;
+  estado?: string | null;
+  report_id?: EntityId | null;
+  notes?: string | null;
+  observacoes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface PrisonParticipant {
+  id: EntityId;
+  participant_code?: string | null;
+  prison_id?: EntityId | null;
+  prison_name?: string | null;
+  full_name?: string | null;
+  preferred_name?: string | null;
+  gender?: string | null;
+  age_range?: string | null;
+  contact_allowed?: boolean | null;
+  contact_reference?: string | null;
+  first_contact_date?: IsoDate | null;
+  source_service_id?: EntityId | null;
+  born_again?: boolean | null;
+  new_convert_date?: IsoDate | null;
+  foundation_interest?: boolean | null;
+  foundation_status?: string | null;
+  foundation_student_id?: EntityId | null;
+  follow_up_status?: string | null;
+  last_follow_up_date?: IsoDate | null;
+  next_follow_up_date?: IsoDate | null;
+  confidentiality_level?: string | null;
+  status?: string | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface PrisonFoundationStudent {
+  id: EntityId;
+  participant_id?: EntityId | null;
+  participant_name?: string | null;
+  nome_do_participante?: string | null;
+  prison_id?: EntityId | null;
+  prisao?: string | null;
+  prison_name?: string | null;
+  foundation_student_id?: EntityId | null;
+  class_id?: EntityId | null;
+  class_name?: string | null;
+  delivery_mode?: string | null;
+  current_lesson?: number | null;
+  lessons_completed?: number | null;
+  attendance_records?: Record<string, boolean> | null;
+  aula_1_presenca?: boolean | null;
+  aula_2_presenca?: boolean | null;
+  aula_3_presenca?: boolean | null;
+  aula_4_presenca?: boolean | null;
+  aula_5_presenca?: boolean | null;
+  aula_6_presenca?: boolean | null;
+  aula_7_presenca?: boolean | null;
+  test_scores?: number | null;
+  nota_exame?: number | null;
+  soul_winning_completed?: boolean | null;
+  pratica_evangelismo?: boolean | null;
+  final_exam_status?: string | null;
+  graduation_status?: string | null;
+  aprovado?: boolean | null;
+  graduado?: boolean | null;
+  certificado_emitido?: boolean | null;
+  assigned_teacher_id?: EntityId | null;
+  assigned_teacher_name?: string | null;
+  church_id?: EntityId | null;
+  igreja_responsavel?: string | null;
+  status?: string | null;
+  estado?: string | null;
+  notes?: string | null;
+  observacoes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface PrisonWeeklyAgenda {
+  id: EntityId;
+  week_label?: string | null;
+  week_start_date?: IsoDate | null;
+  week_end_date?: IsoDate | null;
+  semana_inicio?: IsoDate | null;
+  semana_fim?: IsoDate | null;
+  responsible_user_id?: EntityId | null;
+  responsible_name?: string | null;
+  responsavel?: string | null;
+  monday_reports_agenda?: boolean | null;
+  segunda_preparar_relatorios_e_agenda?: boolean | null;
+  tuesday_prayer_preparation?: boolean | null;
+  terca_reuniao_de_oracao?: boolean | null;
+  wednesday_representative_followup?: boolean | null;
+  quarta_followup_com_representante?: boolean | null;
+  thursday_service_plan?: boolean | null;
+  quinta_servico_prisional?: boolean | null;
+  friday_service_plan?: boolean | null;
+  sexta_servico_prisional?: boolean | null;
+  weekend_followup_plan?: boolean | null;
+  sabado_domingo_acompanhamento?: boolean | null;
+  status?: string | null;
+  estado?: string | null;
+  notes?: string | null;
+  observacoes?: string | null;
+  church_id?: EntityId | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface PrisonFollowUp {
+  id: EntityId;
+  participant_id?: EntityId | null;
+  participant_name?: string | null;
+  prison_id?: EntityId | null;
+  prison_name?: string | null;
+  representative_id?: EntityId | null;
+  representative_name?: string | null;
+  follow_up_date?: IsoDate | null;
+  method?: string | null;
+  status?: string | null;
+  result?: string | null;
+  next_action?: string | null;
+  next_follow_up_date?: IsoDate | null;
+  recorded_by_user_id?: EntityId | null;
+  recorded_by_name?: string | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface PrisonReport {
+  id: EntityId;
+  report_number?: string | null;
+  prison_id?: EntityId | null;
+  prison_name?: string | null;
+  service_id?: EntityId | null;
+  service_number?: string | null;
+  report_date?: IsoDate | null;
+  period_start?: IsoDate | null;
+  period_end?: IsoDate | null;
+  name?: string | null;
+  category?: string | null;
+  attendance_total?: number | null;
+  first_timers_count?: number | null;
+  new_converts_count?: number | null;
+  foundation_interest_count?: number | null;
+  foundation_students_count?: number | null;
+  prayer_requests_count?: number | null;
+  testimonies_count?: number | null;
+  materials_distributed?: number | null;
+  challenges?: string | null;
+  recommendations?: string | null;
+  status?: string | null;
+  estado?: string | null;
+  submitted_by_user_id?: EntityId | null;
+  submitted_by_name?: string | null;
+  submitted_at?: IsoDateTime | null;
+  validated_by_user_id?: EntityId | null;
+  validated_by_name?: string | null;
+  validated_at?: IsoDateTime | null;
+  rejected_by_user_id?: EntityId | null;
+  rejected_by_name?: string | null;
+  rejected_at?: IsoDateTime | null;
+  rejection_reason?: string | null;
+  notes?: string | null;
+  church_id?: EntityId | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface PrisonMaterialsRequest {
+  id: EntityId;
+  request_number?: string | null;
+  prison_id?: EntityId | null;
+  prison_name?: string | null;
+  requested_by_user_id?: EntityId | null;
+  requested_by_name?: string | null;
+  material_type?: string | null;
+  material_name?: string | null;
+  quantity_requested?: number | null;
+  quantity_fulfilled?: number | null;
+  needed_by_date?: IsoDate | null;
+  status?: string | null;
+  ministry_materials_request_id?: EntityId | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
 /** Map of collection names used by repositories / adapters. */
 export type EntityCollectionName =
   | "users"
@@ -2907,6 +3187,15 @@ export type EntityCollectionName =
   | "fevo_evangelism_records"
   | "fevo_visitation_records"
   | "fevo_prayer_records"
+  | "prison_locations"
+  | "prison_representatives"
+  | "prison_services"
+  | "prison_participants"
+  | "prison_foundation_students"
+  | "prison_weekly_agendas"
+  | "prison_follow_ups"
+  | "prison_reports"
+  | "prison_materials_requests"
   | "inventory_items"
   | "inventory_movements"
   | "inventory_maintenance"

@@ -1143,3 +1143,58 @@ npm run test:access-control-data
 # Manual: F.E.V.O → config semanal → relatório → grupos sem relatório
 # VITE_DATA_SOURCE=local + F5
 ```
+
+---
+
+## Pilot migration: Prison Ministry
+
+**Status: live (pilot)** — dual-write / hydrate; UI remains in `js/dashboard.js` (`renderPrisonMinistry`, `state.prisonMinistry`).
+
+See also **[PRISON_MINISTRY_MODULE_PLAN.md](PRISON_MINISTRY_MODULE_PLAN.md)**.
+
+### Local keys
+
+| Collection | Key |
+|------------|-----|
+| Locations | `ce-data-layer:prison-locations` |
+| Representatives | `ce-data-layer:prison-representatives` |
+| Services | `ce-data-layer:prison-services` |
+| Participants | `ce-data-layer:prison-participants` |
+| Foundation students | `ce-data-layer:prison-foundation-students` |
+| Weekly agendas | `ce-data-layer:prison-weekly-agendas` |
+| Follow-ups | `ce-data-layer:prison-follow-ups` |
+| Reports | `ce-data-layer:prison-reports` |
+| Materials requests | `ce-data-layer:prison-materials-requests` |
+
+### Domain rules
+
+- **Prison Ministry** uses the data layer (mock / local / api / supabase placeholders).
+- Internos/participants: **minimal** ministry fields only — **no criminal data**.
+- Foundation School in prisons is prepared (`prison_foundation_students`); no auto-enroll into main Foundation School.
+- Ministry Materials integration prepared via `prison_materials_requests` (next module).
+- Reports aggregated by default; sensitive detail gated by RBAC.
+- Soft audit when Access Control exists.
+- Does not break Foundation School, Follow-Up, F.E.V.O, or Access Control.
+- PostgreSQL direct is a future phase (not browser → Postgres).
+
+### Code
+
+| Piece | Role |
+|-------|------|
+| `src/data/repositories/prisonMinistryRepository.ts` | Aggregator |
+| Seeds | locations, reps, services, participants, foundation, agendas, follow-ups, reports, materials |
+| `js/prison-ministry-data-bridge.js` | Dual-write + pure-JS fallback (`CEPrisonMinistry`) |
+| Dashboard | dual-write prisonLocation/Service/Foundation/Agenda/Report + hydrate |
+
+Cache buster: `?v=20260723-prison-ministry-data-v1`
+
+### How to test Prison Ministry
+
+```bash
+npm run build
+npm run test:prison-ministry-data
+npm run test:fevo-data
+npm run test:access-control-data
+# Manual: Ministério Prisional → prisão → agenda → serviço → relatório → fundação
+# VITE_DATA_SOURCE=local + F5
+```

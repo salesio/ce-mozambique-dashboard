@@ -17719,6 +17719,13 @@ async function submitForm(form) {
     if (["fevoConfig", "fevoReport", "fevoNoReport", "fevoWeeklyReport"].includes(modalType)) {
       void dualWriteFevoRecord(modalType, "update", collection[index]);
     }
+    if (
+      ["prisonLocation", "prisonService", "prisonFoundation", "prisonAgenda", "prisonReport"].includes(
+        modalType,
+      )
+    ) {
+      void dualWritePrisonMinistryRecord(modalType, "update", collection[index]);
+    }
   } else {
     const idPrefix = modalType.slice(0, 3);
     const nowIso = new Date().toISOString();
@@ -18005,6 +18012,51 @@ async function submitForm(form) {
         }
       }
       void dualWriteFevoRecord(modalType, "create", record);
+    }
+    if (
+      ["prisonLocation", "prisonService", "prisonFoundation", "prisonAgenda", "prisonReport"].includes(
+        modalType,
+      )
+    ) {
+      if (modalType === "prisonLocation") {
+        record.name = record.name || record.nome_da_prisao || "";
+        record.nome_da_prisao = record.nome_da_prisao || record.name || "";
+        record.province = record.province || record.provincia || "";
+        record.provincia = record.provincia || record.province || "";
+        record.city = record.city || record.cidade || "";
+        record.cidade = record.cidade || record.city || "";
+        record.status = record.status || record.estado || "Active";
+        record.estado = record.estado || record.status || "Activo";
+      }
+      if (modalType === "prisonService") {
+        record.service_date = record.service_date || record.data || "";
+        record.data = record.data || record.service_date || "";
+        record.prison_id = record.prison_id || record.prisao || "";
+        record.prisao = record.prisao || record.prison_id || "";
+        record.status = record.status || record.estado || "Scheduled";
+        record.estado = record.estado || record.status || "Planeado";
+      }
+      if (modalType === "prisonFoundation") {
+        record.participant_name = record.participant_name || record.nome_do_participante || "";
+        record.nome_do_participante = record.nome_do_participante || record.participant_name || "";
+        record.prison_id = record.prison_id || record.prisao || "";
+        record.prisao = record.prisao || record.prison_id || "";
+        record.status = record.status || record.estado || "Enrolled";
+        record.estado = record.estado || record.status || "Em Curso";
+      }
+      if (modalType === "prisonAgenda") {
+        record.week_start_date = record.week_start_date || record.semana_inicio || "";
+        record.week_end_date = record.week_end_date || record.semana_fim || "";
+        record.semana_inicio = record.semana_inicio || record.week_start_date || "";
+        record.semana_fim = record.semana_fim || record.week_end_date || "";
+        record.status = record.status || record.estado || "Draft";
+        record.estado = record.estado || record.status || "Rascunho";
+      }
+      if (modalType === "prisonReport") {
+        record.status = record.status || record.estado || "Draft";
+        record.estado = record.estado || record.status || "Rascunho";
+      }
+      void dualWritePrisonMinistryRecord(modalType, "create", record);
     }
   }
   bootstrap.Modal.getOrCreateInstance(byId("entryModal")).hide();
@@ -19604,6 +19656,19 @@ function enterDashboard() {
       }
     })
     .catch((error) => console.warn("[CE FEVO] background hydrate skipped", error));
+
+  Promise.resolve()
+    .then(() => hydratePrisonMinistryFromRepository())
+    .then((hydrated) => {
+      if (
+        hydrated &&
+        (activeRoute === "prisonMinistry" || activeRoute === "cellPrison") &&
+        typeof renderPrisonMinistry === "function"
+      ) {
+        renderPrisonMinistry();
+      }
+    })
+    .catch((error) => console.warn("[CE Prison] background hydrate skipped", error));
 }
 
 function dualWriteFevoRecord(modalType, mode, record) {
@@ -19623,6 +19688,164 @@ function dualWriteFevoRecord(modalType, mode, record) {
   if (!pair) return;
   if (mode === "create" && bridge[pair[0]]) void bridge[pair[0]](record);
   else if (mode === "update" && bridge[pair[1]]) void bridge[pair[1]](record.id, record);
+}
+
+function dualWritePrisonMinistryRecord(modalType, mode, record) {
+  const bridge = window.CEPrisonMinistry || window.CEDataLayer?.prisonMinistry;
+  if (!bridge || !record) return;
+  if (typeof bridge.dualWriteRecord === "function") {
+    void bridge.dualWriteRecord(modalType, mode, record);
+    return;
+  }
+  const map = {
+    prisonLocation: ["createPrisonLocation", "updatePrisonLocation"],
+    prisonService: ["createPrisonService", "updatePrisonService"],
+    prisonFoundation: ["createPrisonFoundationStudent", "updatePrisonFoundationStudent"],
+    prisonAgenda: ["createPrisonWeeklyAgenda", "updatePrisonWeeklyAgenda"],
+    prisonReport: ["createPrisonReport", "updatePrisonReport"],
+  };
+  const pair = map[modalType];
+  if (!pair) return;
+  if (mode === "create" && bridge[pair[0]]) void bridge[pair[0]](record);
+  else if (mode === "update" && bridge[pair[1]]) void bridge[pair[1]](record.id, record);
+}
+
+async function hydratePrisonMinistryFromRepository() {
+  const repo = window.CEPrisonMinistry || window.CEDataLayer?.prisonMinistry;
+  if (!repo?.listPrisonLocations) return false;
+  try {
+    let hydrated = false;
+    state.prisonMinistry =
+      state.prisonMinistry && !Array.isArray(state.prisonMinistry)
+        ? state.prisonMinistry
+        : structuredClone(seedData.prisonMinistry || {});
+
+    async function merge(listFn, key, mapRow) {
+      if (typeof listFn !== "function") return;
+      const result = await listFn();
+      if (!result?.ok || !Array.isArray(result.data) || !result.data.length) return;
+      const prev = new Map((state.prisonMinistry[key] || []).map((r) => [r.id, r]));
+      const byId = new Map();
+      result.data.forEach((row) => {
+        const previous = prev.get(row.id) || {};
+        const mapped = mapRow ? mapRow(row) : row;
+        byId.set(row.id, { ...mapped, ...previous, id: row.id });
+      });
+      prev.forEach((localRow, id) => {
+        if (!byId.has(id)) byId.set(id, localRow);
+      });
+      state.prisonMinistry[key] = [...byId.values()];
+      hydrated = true;
+    }
+
+    await merge(repo.listPrisonLocations?.bind(repo), "prisons", (row) => ({
+      ...row,
+      nome_da_prisao: row.nome_da_prisao || row.name || "",
+      name: row.name || row.nome_da_prisao || "",
+      provincia: row.provincia || row.province || "",
+      province: row.province || row.provincia || "",
+      cidade: row.cidade || row.city || "",
+      city: row.city || row.cidade || "",
+      representante_da_prisao: row.representante_da_prisao || row.representative_name || "",
+      contacto_do_representante: row.contacto_do_representante || row.contact_phone || "",
+      igreja_responsavel: row.igreja_responsavel || row.church_id || "",
+      estado: row.estado || row.status || "Activo",
+      status: row.status || row.estado || "Active",
+      observacoes: row.observacoes || row.notes || "",
+    }));
+
+    await merge(repo.listPrisonServices?.bind(repo), "services", (row) => ({
+      ...row,
+      data: row.data || row.service_date || "",
+      service_date: row.service_date || row.data || "",
+      prisao: row.prisao || row.prison_id || "",
+      prison_id: row.prison_id || row.prisao || "",
+      lider_responsavel: row.lider_responsavel || row.responsible_name || "",
+      numero_de_internos_presentes:
+        row.numero_de_internos_presentes ?? row.attendance_total ?? 0,
+      novos_convertidos: row.novos_convertidos ?? row.new_converts_count ?? 0,
+      interessados_em_escola_de_fundacao:
+        row.interessados_em_escola_de_fundacao ?? row.foundation_interest_count ?? 0,
+      estado: row.estado || row.status || "Planeado",
+      status: row.status || row.estado || "Scheduled",
+    }));
+
+    await merge(repo.listPrisonFoundationStudents?.bind(repo), "foundationStudents", (row) => ({
+      ...row,
+      nome_do_participante: row.nome_do_participante || row.participant_name || "",
+      participant_name: row.participant_name || row.nome_do_participante || "",
+      prisao: row.prisao || row.prison_id || "",
+      prison_id: row.prison_id || row.prisao || "",
+      nota_exame: row.nota_exame ?? row.test_scores ?? 0,
+      estado: row.estado || row.status || "Em Curso",
+      status: row.status || row.estado || "In Progress",
+    }));
+
+    await merge(repo.listPrisonWeeklyAgendas?.bind(repo), "weeklyAgenda", (row) => ({
+      ...row,
+      semana_inicio: row.semana_inicio || row.week_start_date || "",
+      semana_fim: row.semana_fim || row.week_end_date || "",
+      week_start_date: row.week_start_date || row.semana_inicio || "",
+      week_end_date: row.week_end_date || row.semana_fim || "",
+      responsavel: row.responsavel || row.responsible_name || "",
+      estado: row.estado || row.status || "Rascunho",
+      status: row.status || row.estado || "Draft",
+    }));
+
+    await merge(repo.listPrisonReports?.bind(repo), "reports", (row) => ({
+      ...row,
+      name: row.name || row.report_number || "Relatório Prisional",
+      estado: row.estado || row.status || "Rascunho",
+      status: row.status || row.estado || "Draft",
+    }));
+
+    // Extended collections (not yet full UI tables)
+    if (typeof repo.listPrisonRepresentatives === "function") {
+      const reps = await repo.listPrisonRepresentatives();
+      if (reps?.ok && Array.isArray(reps.data)) {
+        state.prisonMinistry.representatives = reps.data;
+        hydrated = true;
+      }
+    }
+    if (typeof repo.listPrisonParticipants === "function") {
+      const parts = await repo.listPrisonParticipants();
+      if (parts?.ok && Array.isArray(parts.data)) {
+        state.prisonMinistry.participants = parts.data;
+        hydrated = true;
+      }
+    }
+    if (typeof repo.listPrisonFollowUps === "function") {
+      const fus = await repo.listPrisonFollowUps();
+      if (fus?.ok && Array.isArray(fus.data)) {
+        state.prisonMinistry.followUps = fus.data;
+        hydrated = true;
+      }
+    }
+    if (typeof repo.listPrisonMaterialsRequests === "function") {
+      const mats = await repo.listPrisonMaterialsRequests();
+      if (mats?.ok && Array.isArray(mats.data)) {
+        state.prisonMinistry.materialsRequests = mats.data;
+        hydrated = true;
+      }
+    }
+
+    if (hydrated) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (_) {}
+      console.info("[CE Prison] hydrated", {
+        prisons: (state.prisonMinistry.prisons || []).length,
+        services: (state.prisonMinistry.services || []).length,
+        foundation: (state.prisonMinistry.foundationStudents || []).length,
+        agendas: (state.prisonMinistry.weeklyAgenda || []).length,
+        reports: (state.prisonMinistry.reports || []).length,
+      });
+    }
+    return hydrated;
+  } catch (error) {
+    console.warn("[CE Prison] hydrate failed", error);
+    return false;
+  }
 }
 
 async function hydrateFevoFromRepository() {

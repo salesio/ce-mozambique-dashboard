@@ -47,6 +47,15 @@ import type {
   FevoTeam,
   FevoVisitationRecord,
   FevoWeeklyConfig,
+  PrisonFollowUp,
+  PrisonFoundationStudent,
+  PrisonLocation,
+  PrisonMaterialsRequest,
+  PrisonParticipant,
+  PrisonReport,
+  PrisonRepresentative,
+  PrisonService,
+  PrisonWeeklyAgenda,
   Member,
   Notification,
   Requisition,
@@ -124,6 +133,15 @@ import { FEVO_FOLLOW_UP_RECORDS_SEED } from "../seeds/fevoFollowUpRecordsSeed";
 import { FEVO_EVANGELISM_RECORDS_SEED } from "../seeds/fevoEvangelismRecordsSeed";
 import { FEVO_VISITATION_RECORDS_SEED } from "../seeds/fevoVisitationRecordsSeed";
 import { FEVO_PRAYER_RECORDS_SEED } from "../seeds/fevoPrayerRecordsSeed";
+import { PRISON_LOCATIONS_SEED } from "../seeds/prisonLocationsSeed";
+import { PRISON_REPRESENTATIVES_SEED } from "../seeds/prisonRepresentativesSeed";
+import { PRISON_SERVICES_SEED } from "../seeds/prisonServicesSeed";
+import { PRISON_PARTICIPANTS_SEED } from "../seeds/prisonParticipantsSeed";
+import { PRISON_FOUNDATION_STUDENTS_SEED } from "../seeds/prisonFoundationStudentsSeed";
+import { PRISON_WEEKLY_AGENDAS_SEED } from "../seeds/prisonWeeklyAgendasSeed";
+import { PRISON_FOLLOW_UPS_SEED } from "../seeds/prisonFollowUpsSeed";
+import { PRISON_REPORTS_SEED } from "../seeds/prisonReportsSeed";
+import { PRISON_MATERIALS_REQUESTS_SEED } from "../seeds/prisonMaterialsRequestsSeed";
 import type { AccessPermission, AccessRole, AuditLog, PermissionTemplate } from "../types/entities";
 
 /**
@@ -246,6 +264,33 @@ export function createMockProvider(): DataProvider {
   const fevoPrayerRecords = createMemoryRepository<FevoPrayerRecord>(
     FEVO_PRAYER_RECORDS_SEED.map((r) => ({ ...r })),
   );
+  const prisonLocations = createMemoryRepository<PrisonLocation>(
+    PRISON_LOCATIONS_SEED.map((r) => ({ ...r })),
+  );
+  const prisonRepresentatives = createMemoryRepository<PrisonRepresentative>(
+    PRISON_REPRESENTATIVES_SEED.map((r) => ({ ...r })),
+  );
+  const prisonServices = createMemoryRepository<PrisonService>(
+    PRISON_SERVICES_SEED.map((r) => ({ ...r })),
+  );
+  const prisonParticipants = createMemoryRepository<PrisonParticipant>(
+    PRISON_PARTICIPANTS_SEED.map((r) => ({ ...r })),
+  );
+  const prisonFoundationStudents = createMemoryRepository<PrisonFoundationStudent>(
+    PRISON_FOUNDATION_STUDENTS_SEED.map((r) => ({ ...r })),
+  );
+  const prisonWeeklyAgendas = createMemoryRepository<PrisonWeeklyAgenda>(
+    PRISON_WEEKLY_AGENDAS_SEED.map((r) => ({ ...r })),
+  );
+  const prisonFollowUps = createMemoryRepository<PrisonFollowUp>(
+    PRISON_FOLLOW_UPS_SEED.map((r) => ({ ...r })),
+  );
+  const prisonReports = createMemoryRepository<PrisonReport>(
+    PRISON_REPORTS_SEED.map((r) => ({ ...r })),
+  );
+  const prisonMaterialsRequests = createMemoryRepository<PrisonMaterialsRequest>(
+    PRISON_MATERIALS_REQUESTS_SEED.map((r) => ({ ...r })),
+  );
   const inventoryItems = createMemoryRepository<InventoryItem>(
     INVENTORY_ITEMS_SEED.map((r) => ({ ...r })),
   );
@@ -337,6 +382,15 @@ export function createMockProvider(): DataProvider {
     fevo_evangelism_records: fevoEvangelismRecords as EntityRepository<unknown>,
     fevo_visitation_records: fevoVisitationRecords as EntityRepository<unknown>,
     fevo_prayer_records: fevoPrayerRecords as EntityRepository<unknown>,
+    prison_locations: prisonLocations as EntityRepository<unknown>,
+    prison_representatives: prisonRepresentatives as EntityRepository<unknown>,
+    prison_services: prisonServices as EntityRepository<unknown>,
+    prison_participants: prisonParticipants as EntityRepository<unknown>,
+    prison_foundation_students: prisonFoundationStudents as EntityRepository<unknown>,
+    prison_weekly_agendas: prisonWeeklyAgendas as EntityRepository<unknown>,
+    prison_follow_ups: prisonFollowUps as EntityRepository<unknown>,
+    prison_reports: prisonReports as EntityRepository<unknown>,
+    prison_materials_requests: prisonMaterialsRequests as EntityRepository<unknown>,
     inventory_items: inventoryItems as EntityRepository<unknown>,
     inventory_movements: inventoryMovements as EntityRepository<unknown>,
     inventory_maintenance: inventoryMaintenance as EntityRepository<unknown>,
@@ -408,6 +462,15 @@ export function createMockProvider(): DataProvider {
     fevoEvangelismRecords,
     fevoVisitationRecords,
     fevoPrayerRecords,
+    prisonLocations,
+    prisonRepresentatives,
+    prisonServices,
+    prisonParticipants,
+    prisonFoundationStudents,
+    prisonWeeklyAgendas,
+    prisonFollowUps,
+    prisonReports,
+    prisonMaterialsRequests,
     inventoryItems,
     inventoryMovements,
     inventoryMaintenance,

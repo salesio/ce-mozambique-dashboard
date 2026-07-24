@@ -1,0 +1,35 @@
+import type { PrisonMaterialsRequest } from "../types/entities";
+
+export const PRISON_MATERIALS_REQUESTS_SEED: PrisonMaterialsRequest[] = [
+  {
+    id: "pmr-1",
+    request_number: "PMAT-2026-0001",
+    prison_id: "prison-2",
+    prison_name: "Centro de Reclusão Feminino",
+    requested_by_name: "Sister Janet Marquele",
+    material_type: "Foundation School Material",
+    material_name: "Manual da Escola de Fundação",
+    quantity_requested: 15,
+    quantity_fulfilled: 0,
+    needed_by_date: "2026-07-15",
+    status: "Pending",
+    notes: "Preparar para próximo serviço sexta.",
+    created_at: "2026-07-03",
+    updated_at: "2026-07-03",
+  },
+  {
+    id: "pmr-2",
+    request_number: "PMAT-2026-0002",
+    prison_id: "prison-1",
+    prison_name: "Cadeia Civil de Maputo",
+    requested_by_name: "Sister Janet Marquele",
+    material_type: "Rhapsody",
+    material_name: "Rapsódia de Realidades",
+    quantity_requested: 50,
+    quantity_fulfilled: 30,
+    status: "Partially Fulfilled",
+    notes: "Ligar a Ministry Materials futuramente.",
+    created_at: "2026-07-01",
+    updated_at: "2026-07-05",
+  },
+];

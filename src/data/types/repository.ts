@@ -48,6 +48,15 @@ import type {
   FevoTeam,
   FevoVisitationRecord,
   FevoWeeklyConfig,
+  PrisonFollowUp,
+  PrisonFoundationStudent,
+  PrisonLocation,
+  PrisonMaterialsRequest,
+  PrisonParticipant,
+  PrisonReport,
+  PrisonRepresentative,
+  PrisonService,
+  PrisonWeeklyAgenda,
   Member,
   Notification,
   Requisition,
@@ -151,6 +160,15 @@ export interface DataProvider {
   fevoEvangelismRecords: EntityRepository<FevoEvangelismRecord>;
   fevoVisitationRecords: EntityRepository<FevoVisitationRecord>;
   fevoPrayerRecords: EntityRepository<FevoPrayerRecord>;
+  prisonLocations: EntityRepository<PrisonLocation>;
+  prisonRepresentatives: EntityRepository<PrisonRepresentative>;
+  prisonServices: EntityRepository<PrisonService>;
+  prisonParticipants: EntityRepository<PrisonParticipant>;
+  prisonFoundationStudents: EntityRepository<PrisonFoundationStudent>;
+  prisonWeeklyAgendas: EntityRepository<PrisonWeeklyAgenda>;
+  prisonFollowUps: EntityRepository<PrisonFollowUp>;
+  prisonReports: EntityRepository<PrisonReport>;
+  prisonMaterialsRequests: EntityRepository<PrisonMaterialsRequest>;
   inventoryItems: EntityRepository<InventoryItem>;
   inventoryMovements: EntityRepository<InventoryMovement>;
   inventoryMaintenance: EntityRepository<InventoryMaintenanceRecord>;

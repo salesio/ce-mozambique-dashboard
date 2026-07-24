@@ -1,0 +1,33 @@
+import type { PrisonWeeklyAgenda } from "../types/entities";
+
+export const PRISON_WEEKLY_AGENDAS_SEED: PrisonWeeklyAgenda[] = [
+  {
+    id: "pwa-1",
+    week_label: "2026-07-06 / 2026-07-12",
+    week_start_date: "2026-07-06",
+    week_end_date: "2026-07-12",
+    semana_inicio: "2026-07-06",
+    semana_fim: "2026-07-12",
+    responsible_name: "Sister Janet Marquele",
+    responsavel: "Sister Janet Marquele",
+    monday_reports_agenda: true,
+    segunda_preparar_relatorios_e_agenda: true,
+    tuesday_prayer_preparation: true,
+    terca_reuniao_de_oracao: true,
+    wednesday_representative_followup: true,
+    quarta_followup_com_representante: true,
+    thursday_service_plan: true,
+    quinta_servico_prisional: true,
+    friday_service_plan: true,
+    sexta_servico_prisional: true,
+    weekend_followup_plan: true,
+    sabado_domingo_acompanhamento: true,
+    status: "Active",
+    estado: "Confirmado",
+    notes: "Equipa preparada para quinta e sexta.",
+    observacoes: "Equipa preparada para quinta e sexta.",
+    church_id: "church-hq",
+    created_at: "2026-07-06",
+    updated_at: "2026-07-06",
+  },
+];

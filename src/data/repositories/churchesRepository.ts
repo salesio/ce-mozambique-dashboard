@@ -1,8 +1,11 @@
 import { getDataProvider } from "../dataProvider";
-import { getDataSource } from "../config";
+import { getDataSource, getBackendFeatureFlags } from "../config";
 import type { Church, ChurchServiceTime, EntityId } from "../types/entities";
 import type { DataResult } from "../types/repository";
 import { CHURCHES_SEED } from "../seeds/churchesSeed";
+import { getSupabaseEnvConfig } from "../adapters/supabase/supabaseConfig";
+import * as churchesSb from "../adapters/supabase/churchesSupabaseAdapter";
+import * as churchesApi from "../adapters/api/churchesApiAdapter";
 
 function fail<T>(error: string, code = "CHURCHES_ERROR"): DataResult<T> {
   return { ok: false, error, code };
@@ -10,6 +13,18 @@ function fail<T>(error: string, code = "CHURCHES_ERROR"): DataResult<T> {
 
 function ok<T>(data: T): DataResult<T> {
   return { ok: true, data };
+}
+
+/** Phase 3: route to Supabase adapter when flags + source allow. */
+function useSupabaseChurches(): boolean {
+  if (getDataSource() !== "supabase") return false;
+  const cfg = getSupabaseEnvConfig();
+  const flags = getBackendFeatureFlags();
+  return flags.enableSupabase && cfg.isConfigured;
+}
+
+function useApiChurches(): boolean {
+  return getDataSource() === "api";
 }
 
 function normalizeChurch(input: Partial<Church> & { id?: string }): Church {
@@ -32,8 +47,10 @@ function normalizeChurch(input: Partial<Church> & { id?: string }): Church {
 /**
  * Seed empty providers with dashboard-compatible mock churches.
  * Safe to call repeatedly — only seeds when collection is empty.
+ * Skipped for supabase/api (remote seed via SQL).
  */
 export async function ensureChurchesSeeded(): Promise<void> {
+  if (useSupabaseChurches() || useApiChurches()) return;
   const provider = getDataProvider();
   const listed = await provider.churches.list();
   if (!listed.ok) return;
@@ -49,6 +66,16 @@ export async function ensureChurchesSeeded(): Promise<void> {
 
 export async function listChurches(): Promise<DataResult<Church[]>> {
   try {
+    if (useSupabaseChurches()) {
+      const result = await churchesSb.listChurches();
+      if (!result.ok) return result;
+      return ok((result.data || []).map((c) => normalizeChurch(c)));
+    }
+    if (useApiChurches()) {
+      const result = await churchesApi.listChurches();
+      if (!result.ok) return result;
+      return ok((result.data || []).map((c) => normalizeChurch(c)));
+    }
     await ensureChurchesSeeded();
     const provider = getDataProvider();
     const result = await provider.churches.list();
@@ -61,6 +88,16 @@ export async function listChurches(): Promise<DataResult<Church[]>> {
 
 export async function getChurchById(id: EntityId): Promise<DataResult<Church | null>> {
   try {
+    if (useSupabaseChurches()) {
+      const result = await churchesSb.getChurchById(id);
+      if (!result.ok) return result;
+      return ok(result.data ? normalizeChurch(result.data) : null);
+    }
+    if (useApiChurches()) {
+      const result = await churchesApi.getChurchById(id);
+      if (!result.ok) return result;
+      return ok(result.data ? normalizeChurch(result.data) : null);
+    }
     await ensureChurchesSeeded();
     const provider = getDataProvider();
     const result = await provider.churches.getById(id);
@@ -73,6 +110,16 @@ export async function getChurchById(id: EntityId): Promise<DataResult<Church | n
 
 export async function createChurch(payload: Partial<Church>): Promise<DataResult<Church>> {
   try {
+    if (useSupabaseChurches()) {
+      const result = await churchesSb.createChurch(payload);
+      if (!result.ok) return result;
+      return ok(normalizeChurch(result.data));
+    }
+    if (useApiChurches()) {
+      const result = await churchesApi.createChurch(payload);
+      if (!result.ok) return result;
+      return ok(normalizeChurch(result.data));
+    }
     await ensureChurchesSeeded();
     const provider = getDataProvider();
     if (!provider.churches.create) {
@@ -97,6 +144,16 @@ export async function updateChurch(
   payload: Partial<Church>,
 ): Promise<DataResult<Church>> {
   try {
+    if (useSupabaseChurches()) {
+      const result = await churchesSb.updateChurch(id, payload);
+      if (!result.ok) return result;
+      return ok(normalizeChurch(result.data));
+    }
+    if (useApiChurches()) {
+      const result = await churchesApi.updateChurch(id, payload);
+      if (!result.ok) return result;
+      return ok(normalizeChurch(result.data));
+    }
     const provider = getDataProvider();
     if (!provider.churches.update) {
       return fail("Actualizar igreja não suportado neste data source.", "NOT_SUPPORTED");
@@ -122,6 +179,8 @@ export async function updateChurch(
 
 export async function deleteChurch(id: EntityId): Promise<DataResult<boolean>> {
   try {
+    if (useSupabaseChurches()) return churchesSb.deleteChurch(id);
+    if (useApiChurches()) return churchesApi.deleteChurch(id);
     const provider = getDataProvider();
     if (!provider.churches.remove) {
       return fail("Eliminar igreja não suportado neste data source.", "NOT_SUPPORTED");
@@ -134,6 +193,16 @@ export async function deleteChurch(id: EntityId): Promise<DataResult<boolean>> {
 
 export async function searchChurches(query: string): Promise<DataResult<Church[]>> {
   try {
+    if (useSupabaseChurches()) {
+      const result = await churchesSb.searchChurches(query);
+      if (!result.ok) return result;
+      return ok((result.data || []).map((c) => normalizeChurch(c)));
+    }
+    if (useApiChurches()) {
+      const result = await churchesApi.searchChurches(query);
+      if (!result.ok) return result;
+      return ok((result.data || []).map((c) => normalizeChurch(c)));
+    }
     const listed = await listChurches();
     if (!listed.ok) return listed;
     const q = String(query || "")
@@ -175,10 +244,17 @@ export async function getChurchServiceTimes(
 /** Diagnostic helper for docs / console. */
 export function getChurchesDataSourceInfo() {
   const provider = getDataProvider();
+  const sb = useSupabaseChurches();
+  const api = useApiChurches();
   return {
     source: getDataSource(),
-    provider: provider.name,
-    ready: provider.isReady(),
-    description: provider.description,
+    provider: sb ? "supabase-churches-adapter" : api ? "api-churches-adapter" : provider.name,
+    ready: sb ? getSupabaseEnvConfig().isConfigured : api ? false : provider.isReady(),
+    description: sb
+      ? "Churches pilot via Supabase public.churches"
+      : api
+        ? "Churches API placeholder"
+        : provider.description,
+    pilot: sb ? "churches-members-supabase-v1" : undefined,
   };
 }

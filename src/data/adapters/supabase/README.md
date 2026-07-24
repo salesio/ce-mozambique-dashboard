@@ -10,18 +10,21 @@ Phase 1 foundation + Phase 2 optional Auth pilot.
 | `supabaseRepositoryBase.ts` | Generic list/get/create/update/delete |
 | `supabaseTypes.ts` | Base types |
 | `supabaseAuthClient.ts` | Optional Auth (signIn/out/session/reset) |
+| `churchesSupabaseAdapter.ts` | Phase 3 Churches pilot |
+| `membersSupabaseAdapter.ts` | Phase 3 Members pilot |
 
 ## Rules
 
 - `VITE_ENABLE_SUPABASE=true` required to initialize client
 - Real Auth also needs `VITE_ENABLE_REAL_AUTH=true`
+- Churches/Members remote when `VITE_DATA_SOURCE=supabase` + flags
 - Only `VITE_SUPABASE_URL` + `VITE_SUPABASE_ANON_KEY`
 - **Never** import service role
-- Domain modules stay on mock/local until explicit pilots
+- Other domain modules stay on mock/local until explicit pilots
 
 ## Related
 
 - Auth repository: `src/data/repositories/authRepository.ts`
 - Legacy finance client: `src/lib/supabaseClient.ts`
 - Provider surface: `src/data/adapters/supabaseProvider.ts`
-- Docs: `docs/backend/SUPABASE_AUTH_PILOT_PLAN.md`
+- Docs: `docs/backend/SUPABASE_AUTH_PILOT_PLAN.md`, `CHURCHES_MEMBERS_SUPABASE_PILOT.md`

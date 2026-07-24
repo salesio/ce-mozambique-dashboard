@@ -57,6 +57,8 @@ ok("schema has staff_members", /create table if not exists public\.staff_members
 ok("schema uuid default", /gen_random_uuid\(\)/i.test(schema));
 ok("schema has auth_user_id", /auth_user_id/i.test(schema));
 ok("schema has idx_users_auth_user_id", /idx_users_auth_user_id/i.test(schema));
+ok("schema has idx_churches_status", /idx_churches_status/i.test(schema));
+ok("schema has idx_members_church_id", /idx_members_church_id/i.test(schema));
 
 const seed = read("database/seed.sql");
 ok("seed has super_admin", /super_admin/i.test(seed));

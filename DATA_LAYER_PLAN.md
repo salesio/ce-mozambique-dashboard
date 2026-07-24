@@ -1442,3 +1442,37 @@ npm run test:backend-foundation
 npm run test:data-layer-all
 ```
 
+---
+
+## Backend Phase 3 — Churches + Members Supabase pilot
+
+**Status: optional pilot (`VITE_DATA_SOURCE=supabase` only)**
+
+### Routing
+
+| Source | Churches / Members |
+|--------|--------------------|
+| `mock` / `local` | Existing in-memory / localStorage (unchanged) |
+| `supabase` + flags | `churchesSupabaseAdapter` / `membersSupabaseAdapter` |
+| `api` | Placeholder API adapters (`NOT_CONFIGURED` if no base URL) |
+
+### Files
+
+- `src/data/adapters/supabase/churchesSupabaseAdapter.ts`
+- `src/data/adapters/supabase/membersSupabaseAdapter.ts`
+- `supabase/migrations/0003_churches_members_pilot.sql`
+- `supabase/seeds/churches_members_seed.sql`
+- Docs: `docs/backend/CHURCHES_MEMBERS_SUPABASE_PILOT.md`
+
+### Not migrated
+
+Finance, First Timers, Foundation, Staff, etc. remain mock/local.
+
+### How to test
+
+```bash
+npm run build
+npm run test:churches-members-supabase
+npm run test:data-layer-all
+```
+

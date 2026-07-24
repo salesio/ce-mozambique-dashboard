@@ -22,10 +22,17 @@ localStorage / mock remain valid for **dev and prototype** until each domain pil
 - [ ] Remote Users/Roles as default source (still mock/local for app data)
 - [ ] Production cutover (demo remains until explicit)
 
-## Phase 3 — Churches + Members pilot
+## Phase 3 — Churches + Members pilot (current)
 
-- First production-shaped tables over Supabase or API
-- Dual-read / dual-write period optional
+- [x] Schema + indexes + migration `0003_churches_members_pilot.sql`
+- [x] `churchesSupabaseAdapter` + `membersSupabaseAdapter`
+- [x] Repository routing (`VITE_DATA_SOURCE=supabase`)
+- [x] API placeholders for churches/members
+- [x] Optional SQL seed
+- [x] Settings data-source indicator
+- [x] Smoke: `test:churches-members-supabase`
+- [ ] Production RLS enforced
+- [ ] Auto localStorage → Supabase import
 
 ## Phase 4 — First Timers + Follow-Up
 

@@ -1,9 +1,12 @@
 import { getDataProvider } from "../dataProvider";
-import { getDataSource } from "../config";
+import { getDataSource, getBackendFeatureFlags } from "../config";
 import type { EntityId, Member } from "../types/entities";
 import type { DataResult } from "../types/repository";
 import { MEMBERS_SEED } from "../seeds/membersSeed";
 import { listChurches } from "./churchesRepository";
+import { getSupabaseEnvConfig } from "../adapters/supabase/supabaseConfig";
+import * as membersSb from "../adapters/supabase/membersSupabaseAdapter";
+import * as membersApi from "../adapters/api/membersApiAdapter";
 
 function fail<T>(error: string, code = "MEMBERS_ERROR"): DataResult<T> {
   return { ok: false, error, code };
@@ -11,6 +14,18 @@ function fail<T>(error: string, code = "MEMBERS_ERROR"): DataResult<T> {
 
 function ok<T>(data: T): DataResult<T> {
   return { ok: true, data };
+}
+
+/** Phase 3: route to Supabase adapter when flags + source allow. */
+function useSupabaseMembers(): boolean {
+  if (getDataSource() !== "supabase") return false;
+  const cfg = getSupabaseEnvConfig();
+  const flags = getBackendFeatureFlags();
+  return flags.enableSupabase && cfg.isConfigured;
+}
+
+function useApiMembers(): boolean {
+  return getDataSource() === "api";
 }
 
 function isActiveStatus(status: string | null | undefined): boolean {
@@ -118,8 +133,10 @@ async function attachChurchName(member: Member): Promise<Member> {
 /**
  * Seed empty providers with dashboard-compatible mock members.
  * Safe to call repeatedly — only seeds when collection is empty.
+ * Skipped for supabase/api (remote seed via SQL).
  */
 export async function ensureMembersSeeded(): Promise<void> {
+  if (useSupabaseMembers() || useApiMembers()) return;
   const provider = getDataProvider();
   const listed = await provider.members.list();
   if (!listed.ok) return;
@@ -134,6 +151,19 @@ export async function ensureMembersSeeded(): Promise<void> {
 
 export async function listMembers(): Promise<DataResult<Member[]>> {
   try {
+    if (useSupabaseMembers()) {
+      const result = await membersSb.listMembers();
+      if (!result.ok) return result;
+      const rows = await Promise.all(
+        (result.data || []).map(async (m) => attachChurchName(normalizeMember(m))),
+      );
+      return ok(rows);
+    }
+    if (useApiMembers()) {
+      const result = await membersApi.listMembers();
+      if (!result.ok) return result;
+      return ok((result.data || []).map((m) => normalizeMember(m)));
+    }
     await ensureMembersSeeded();
     const provider = getDataProvider();
     const result = await provider.members.list();
@@ -149,6 +179,17 @@ export async function listMembers(): Promise<DataResult<Member[]>> {
 
 export async function getMemberById(id: EntityId): Promise<DataResult<Member | null>> {
   try {
+    if (useSupabaseMembers()) {
+      const result = await membersSb.getMemberById(id);
+      if (!result.ok) return result;
+      if (!result.data) return ok(null);
+      return ok(await attachChurchName(normalizeMember(result.data)));
+    }
+    if (useApiMembers()) {
+      const result = await membersApi.getMemberById(id);
+      if (!result.ok) return result;
+      return ok(result.data ? normalizeMember(result.data) : null);
+    }
     await ensureMembersSeeded();
     const provider = getDataProvider();
     const result = await provider.members.getById(id);
@@ -162,6 +203,18 @@ export async function getMemberById(id: EntityId): Promise<DataResult<Member | n
 
 export async function createMember(payload: Partial<Member>): Promise<DataResult<Member>> {
   try {
+    if (useSupabaseMembers()) {
+      let member = normalizeMember(payload);
+      member = await attachChurchName(member);
+      const result = await membersSb.createMember(member);
+      if (!result.ok) return result;
+      return ok(normalizeMember(result.data));
+    }
+    if (useApiMembers()) {
+      const result = await membersApi.createMember(payload);
+      if (!result.ok) return result;
+      return ok(normalizeMember(result.data));
+    }
     await ensureMembersSeeded();
     const provider = getDataProvider();
     if (!provider.members.create) {
@@ -188,6 +241,21 @@ export async function updateMember(
   payload: Partial<Member>,
 ): Promise<DataResult<Member>> {
   try {
+    if (useSupabaseMembers()) {
+      const existing = await membersSb.getMemberById(id);
+      if (!existing.ok) return fail(existing.error, existing.code);
+      if (!existing.data) return fail("Membro não encontrado.", "NOT_FOUND");
+      let next = normalizeMember({ ...existing.data, ...payload, id });
+      next = await attachChurchName(next);
+      const result = await membersSb.updateMember(id, next);
+      if (!result.ok) return result;
+      return ok(normalizeMember(result.data));
+    }
+    if (useApiMembers()) {
+      const result = await membersApi.updateMember(id, payload);
+      if (!result.ok) return result;
+      return ok(normalizeMember(result.data));
+    }
     const provider = getDataProvider();
     if (!provider.members.update) {
       return fail("Actualizar membro não suportado neste data source.", "NOT_SUPPORTED");
@@ -213,6 +281,8 @@ export async function updateMember(
 
 export async function deleteMember(id: EntityId): Promise<DataResult<boolean>> {
   try {
+    if (useSupabaseMembers()) return membersSb.deleteMember(id);
+    if (useApiMembers()) return membersApi.deleteMember(id);
     const provider = getDataProvider();
     if (!provider.members.remove) {
       return fail("Eliminar membro não suportado neste data source.", "NOT_SUPPORTED");
@@ -225,6 +295,16 @@ export async function deleteMember(id: EntityId): Promise<DataResult<boolean>> {
 
 export async function searchMembers(query: string): Promise<DataResult<Member[]>> {
   try {
+    if (useSupabaseMembers()) {
+      const result = await membersSb.searchMembers(query);
+      if (!result.ok) return result;
+      return ok((result.data || []).map((m) => normalizeMember(m)));
+    }
+    if (useApiMembers()) {
+      const result = await membersApi.searchMembers(query);
+      if (!result.ok) return result;
+      return ok((result.data || []).map((m) => normalizeMember(m)));
+    }
     const listed = await listMembers();
     if (!listed.ok) return listed;
     const q = String(query || "")
@@ -338,10 +418,17 @@ export async function getInactiveMembers(): Promise<DataResult<Member[]>> {
 /** Diagnostic helper for docs / console. */
 export function getMembersDataSourceInfo() {
   const provider = getDataProvider();
+  const sb = useSupabaseMembers();
+  const api = useApiMembers();
   return {
     source: getDataSource(),
-    provider: provider.name,
-    ready: provider.isReady(),
-    description: provider.description,
+    provider: sb ? "supabase-members-adapter" : api ? "api-members-adapter" : provider.name,
+    ready: sb ? getSupabaseEnvConfig().isConfigured : api ? false : provider.isReady(),
+    description: sb
+      ? "Members pilot via Supabase public.members"
+      : api
+        ? "Members API placeholder"
+        : provider.description,
+    pilot: sb ? "churches-members-supabase-v1" : undefined,
   };
 }

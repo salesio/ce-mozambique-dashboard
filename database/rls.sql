@@ -145,3 +145,38 @@ $$;
 
 COMMENT ON FUNCTION public.has_module_permission(text, text) IS
   'Phase 2 helper: permissions for current JWT-linked app user. Not enforced until RLS enabled.';
+
+-- ---------------------------------------------------------------------------
+-- Phase 3: Churches / Members pilot — policy sketches (NOT enabled by default)
+-- ---------------------------------------------------------------------------
+/*
+Dev pilot note:
+- Without Auth, prefer testing with service role in SQL editor only (never in browser).
+- Temporary open policies for authenticated role may be used in a private project
+  during pilot; document and remove before production.
+
+Future policy intent:
+- Super Admin / Main Pastor (scope all): SELECT/INSERT/UPDATE churches + members
+- Church Pastor: church_id = users.church_id
+- Department Head: department_id match when set on members
+- Staff: limited own-linked records
+
+-- ALTER TABLE public.churches ENABLE ROW LEVEL SECURITY;
+-- ALTER TABLE public.members ENABLE ROW LEVEL SECURITY;
+
+-- CREATE POLICY churches_select_pilot ON public.churches
+--   FOR SELECT TO authenticated
+--   USING (
+--     public.current_app_user_scope() = 'all'
+--     OR public.has_module_permission('churches', 'view')
+--     OR id = (SELECT church_id FROM public.users WHERE id = public.current_app_user_id())
+--   );
+
+-- CREATE POLICY members_select_pilot ON public.members
+--   FOR SELECT TO authenticated
+--   USING (
+--     public.current_app_user_scope() = 'all'
+--     OR public.has_module_permission('members', 'view')
+--     OR church_id = (SELECT church_id FROM public.users WHERE id = public.current_app_user_id())
+--   );
+*/

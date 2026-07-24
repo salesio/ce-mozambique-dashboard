@@ -67,6 +67,8 @@ npm run test:backend-foundation
 npm run test:data-layer-all
 ```
 
-## Next
+## Next / Phase 3
 
-Auth pilot → wire `public.users.auth_user_id` → RLS helpers → first domain table pilot.
+- Auth pilot (Phase 2) optional  
+- **Churches + Members pilot (Phase 3):** set `VITE_DATA_SOURCE=supabase` + flags, apply migration `0003`, optional seed `supabase/seeds/churches_members_seed.sql`  
+- See `docs/backend/CHURCHES_MEMBERS_SUPABASE_PILOT.md`  

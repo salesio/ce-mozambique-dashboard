@@ -5,7 +5,6 @@ import type {
   EntityRepository,
   ListOptions,
 } from "../types/repository";
-import { getSupabaseClient, getSupabaseConfig } from "../../lib/supabaseClient";
 import {
   getSupabaseConnectionInfo,
   getSupabaseEnvConfig,
@@ -17,21 +16,70 @@ import {
   supabaseList,
   supabaseUpdate,
 } from "./supabase/supabaseRepositoryBase";
-import type {
-  SupabaseConnectionInfo,
-  SupabaseRow,
-  SupabaseTableName,
-} from "./supabase/supabaseTypes";
+import type { SupabaseConnectionInfo } from "./supabase/supabaseTypes";
+import * as churchesSb from "./supabase/churchesSupabaseAdapter";
+import * as membersSb from "./supabase/membersSupabaseAdapter";
+import type { Church, Member } from "../types/entities";
 
 /**
- * Placeholder Supabase provider for progressive migration (Backend Phase 1).
+ * Supabase provider — progressive migration.
  *
- * - Domain module repositories stay on mock/local until explicit pilots.
- * - Generic table helpers (list/get/create/update/delete) are prepared but
- *   do not auto-wire UI modules.
- * - Uses public anon key only (via foundation client when enabled).
- * - Legacy finance bridge remains separate (src/lib/*).
+ * Phase 3 pilots: churches + members (real adapters).
+ * Other collections remain NOT_IMPLEMENTED stubs.
+ * Uses public anon key only (via foundation client when enabled).
+ * Legacy finance bridge remains separate (src/lib/*).
  */
+
+function createChurchesRepository(): EntityRepository<Church> {
+  return {
+    async list(options?: ListOptions) {
+      const r = await churchesSb.listChurches();
+      if (!r.ok) return r as DataResult<Church[]>;
+      let data = r.data || [];
+      if (options?.limit) data = data.slice(options.offset || 0, (options.offset || 0) + options.limit);
+      return { ok: true, data };
+    },
+    async getById(id: EntityId) {
+      return churchesSb.getChurchById(id);
+    },
+    async create(input: Partial<Church>) {
+      return churchesSb.createChurch(input);
+    },
+    async update(id: EntityId, input: Partial<Church>) {
+      return churchesSb.updateChurch(id, input);
+    },
+    async remove(id: EntityId) {
+      return churchesSb.deleteChurch(id);
+    },
+  };
+}
+
+function createMembersRepository(): EntityRepository<Member> {
+  return {
+    async list(options?: ListOptions) {
+      if (options?.churchId) {
+        return membersSb.getMembersByChurch(options.churchId);
+      }
+      const r = await membersSb.listMembers();
+      if (!r.ok) return r as DataResult<Member[]>;
+      let data = r.data || [];
+      if (options?.limit) data = data.slice(options.offset || 0, (options.offset || 0) + options.limit);
+      return { ok: true, data };
+    },
+    async getById(id: EntityId) {
+      return membersSb.getMemberById(id);
+    },
+    async create(input: Partial<Member>) {
+      return membersSb.createMember(input);
+    },
+    async update(id: EntityId, input: Partial<Member>) {
+      return membersSb.updateMember(id, input);
+    },
+    async remove(id: EntityId) {
+      return membersSb.deleteMember(id);
+    },
+  };
+}
 function createStubRepository<T>(collection: EntityCollectionName): EntityRepository<T> {
   const notReady = <R>(): DataResult<R> => ({
     ok: false,
@@ -178,13 +226,16 @@ export function createSupabaseProvider(): DataProvider & SupabaseProviderExtras 
     COLLECTION_NAMES.map((n) => [n, createStubRepository(n)]),
   ) as Record<EntityCollectionName, EntityRepository<unknown>>;
 
+  // Phase 3 pilots
+  map.churches = createChurchesRepository() as EntityRepository<unknown>;
+  map.members = createMembersRepository() as EntityRepository<unknown>;
+
   const foundationInfo = getSupabaseConnectionInfo();
-  const legacyCfg = getSupabaseConfig();
   const envCfg = getSupabaseEnvConfig();
 
   const description =
     foundationInfo.status === "ready"
-      ? `Supabase foundation ready (${foundationInfo.urlHost || "configured"}) — domain repos still stubbed.`
+      ? `Supabase pilot ready (${foundationInfo.urlHost || "configured"}) — churches + members live; other modules stubbed.`
       : foundationInfo.status === "missing_env"
         ? `Supabase enabled but env incomplete — ${foundationInfo.message}`
         : "Supabase provider placeholder (disabled). Domain modules use mock/local.";
@@ -193,14 +244,8 @@ export function createSupabaseProvider(): DataProvider & SupabaseProviderExtras 
     name: "supabase",
     description,
     isReady: () => {
-      // Ready only when foundation flags + env OK AND legacy client can init.
-      // Domain collection methods still return NOT_IMPLEMENTED until pilots.
-      return (
-        foundationInfo.status === "ready" &&
-        envCfg.isConfigured &&
-        legacyCfg.isConfigured &&
-        !!getSupabaseClient()
-      );
+      // Ready when foundation flags + env OK (churches/members pilot).
+      return foundationInfo.status === "ready" && envCfg.isConfigured;
     },
     getInfo: getSupabaseProviderInfo,
     list: supabaseList,
@@ -209,8 +254,8 @@ export function createSupabaseProvider(): DataProvider & SupabaseProviderExtras 
     update: supabaseUpdate,
     delete: supabaseDelete,
     users: map.users as EntityRepository<never>,
-    churches: map.churches as EntityRepository<never>,
-    members: map.members as EntityRepository<never>,
+    churches: map.churches as EntityRepository<Church>,
+    members: map.members as EntityRepository<Member>,
     firstTimers: map.first_timers as EntityRepository<never>,
     followUps: map.follow_ups as EntityRepository<never>,
     foundationStudents: map.foundation_students as EntityRepository<never>,

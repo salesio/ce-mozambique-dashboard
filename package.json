@@ -30,6 +30,7 @@
     "backend:foundation:check": "node scripts/check-backend-foundation.mjs",
     "test:backend-foundation": "node scripts/check-backend-foundation.mjs",
     "test:auth-foundation": "node scripts/check-auth-foundation.mjs",
+    "test:churches-members-supabase": "node scripts/smoke-churches-members-supabase.mjs",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",

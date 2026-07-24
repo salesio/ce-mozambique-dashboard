@@ -16026,6 +16026,46 @@ function renderSettings() {
             <button type="button" class="btn btn-sm btn-outline-cyan" data-route="audit">${L("auditLogs")}</button>
             <p class="text-secondary small mb-0">${lang === "pt" ? "Data layer: mock/local/api/supabase via VITE_DATA_SOURCE. Sem PostgreSQL directo no browser." : "Data layer: mock/local/api/supabase via VITE_DATA_SOURCE. No direct browser PostgreSQL."}</p>
             <p class="text-secondary small mb-0">${settingsApi ? `provider: ${(settingsApi.getInfo && settingsApi.getInfo())?.source || "ready"}` : "bridge: pending"}</p>
+            ${(() => {
+              try {
+                const src =
+                  (window.CESupabase && typeof window.CESupabase.getDataSource === "function"
+                    ? window.CESupabase.getDataSource()
+                    : null) ||
+                  (window.__CE_ENV__ && window.__CE_ENV__.VITE_DATA_SOURCE) ||
+                  "mock";
+                const flags =
+                  window.CESupabase && typeof window.CESupabase.getBackendFeatureFlags === "function"
+                    ? window.CESupabase.getBackendFeatureFlags()
+                    : {};
+                const sbInfo =
+                  window.CESupabase && typeof window.CESupabase.getSupabaseInfo === "function"
+                    ? window.CESupabase.getSupabaseInfo()
+                    : window.CESupabase && typeof window.CESupabase.getAuthInfo === "function"
+                      ? null
+                      : null;
+                const chInfo =
+                  window.CEChurches && typeof window.CEChurches.getInfo === "function"
+                    ? window.CEChurches.getInfo()
+                    : null;
+                const mbInfo =
+                  window.CEMembers && typeof window.CEMembers.getInfo === "function"
+                    ? window.CEMembers.getInfo()
+                    : null;
+                const sbOn = !!(flags && flags.enableSupabase);
+                return `
+            <div class="border rounded p-2 mt-2 small bg-dark bg-opacity-25" id="dataSourceIndicator">
+              <div class="fw-semibold mb-1">${lang === "pt" ? "Data Source (dev)" : "Data Source (dev)"}</div>
+              <div>source: <code>${String(src)}</code></div>
+              <div>supabase flag: <code>${sbOn ? "true" : "false"}</code>${sbInfo && sbInfo.status ? ` · status: <code>${sbInfo.status}</code>` : ""}</div>
+              <div>churches: <code>${(chInfo && chInfo.provider) || "—"}</code></div>
+              <div>members: <code>${(mbInfo && mbInfo.provider) || "—"}</code></div>
+              <div class="text-white-50 mt-1">${lang === "pt" ? "Sem expor keys/secrets. Piloto Phase 3: Igrejas + Membros." : "No keys/secrets exposed. Phase 3 pilot: Churches + Members."}</div>
+            </div>`;
+              } catch (_) {
+                return "";
+              }
+            })()}
           </div>
         </article>
       </div>

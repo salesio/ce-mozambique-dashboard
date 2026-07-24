@@ -103,6 +103,23 @@ VITE_SUPABASE_ANON_KEY=your_anon_key_only
 Requires a provisioned app user (same email) so Auth can link `auth_user_id`.  
 See **[docs/backend/SUPABASE_AUTH_PILOT_PLAN.md](docs/backend/SUPABASE_AUTH_PILOT_PLAN.md)**.
 
+#### Churches + Members Supabase pilot (Phase 3)
+
+```env
+VITE_DATA_SOURCE=supabase
+VITE_ENABLE_SUPABASE=true
+VITE_SUPABASE_URL=https://YOUR_REF.supabase.co
+VITE_SUPABASE_ANON_KEY=your_anon_key_only
+```
+
+Only **Igrejas** and **Membros** use remote tables. All other modules stay mock/local.  
+Apply `supabase/migrations/0003_churches_members_pilot.sql` + optional `supabase/seeds/churches_members_seed.sql`.  
+See **[docs/backend/CHURCHES_MEMBERS_SUPABASE_PILOT.md](docs/backend/CHURCHES_MEMBERS_SUPABASE_PILOT.md)**.
+
+```bash
+npm run test:churches-members-supabase
+```
+
 | Item | Location |
 |------|----------|
 | Core SQL schema / seed / RLS / storage notes | `database/` |

@@ -64,23 +64,28 @@ CREATE TRIGGER trg_roles_updated_at
 -- CORE: churches
 -- ---------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.churches (
-  id                uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  church_name       text NOT NULL,
-  public_name       text,
-  type              text,
-  province          text,
-  city              text,
-  address           text,
-  pastor_in_charge  text,
-  phone_primary     text,
-  email             text,
-  service_times     jsonb NOT NULL DEFAULT '[]'::jsonb,
-  status            text NOT NULL DEFAULT 'Active',
-  metadata          jsonb NOT NULL DEFAULT '{}'::jsonb,
-  created_at        timestamptz NOT NULL DEFAULT now(),
-  updated_at        timestamptz NOT NULL DEFAULT now(),
-  created_by        uuid,
-  updated_by        uuid
+  id                  uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  church_name         text NOT NULL,
+  public_name         text,
+  type                text,
+  province            text,
+  city                text,
+  district_or_area    text,
+  address             text,
+  pastor_in_charge    text,
+  phone_primary       text,
+  phone_secondary     text,
+  email               text,
+  service_times       jsonb NOT NULL DEFAULT '[]'::jsonb,
+  parent_church_id    uuid,
+  status              text NOT NULL DEFAULT 'Active',
+  information_status  text,
+  notes               text,
+  metadata            jsonb NOT NULL DEFAULT '{}'::jsonb,
+  created_at          timestamptz NOT NULL DEFAULT now(),
+  updated_at          timestamptz NOT NULL DEFAULT now(),
+  created_by          uuid,
+  updated_by          uuid
 );
 
 -- Compatibility for older local schema that used "name"
@@ -98,6 +103,17 @@ BEGIN
 EXCEPTION WHEN OTHERS THEN
   NULL;
 END $$;
+
+-- Phase 3 additive columns (safe on existing volumes)
+ALTER TABLE public.churches ADD COLUMN IF NOT EXISTS district_or_area text;
+ALTER TABLE public.churches ADD COLUMN IF NOT EXISTS phone_secondary text;
+ALTER TABLE public.churches ADD COLUMN IF NOT EXISTS parent_church_id uuid;
+ALTER TABLE public.churches ADD COLUMN IF NOT EXISTS information_status text;
+ALTER TABLE public.churches ADD COLUMN IF NOT EXISTS notes text;
+
+CREATE INDEX IF NOT EXISTS idx_churches_status ON public.churches (status);
+CREATE INDEX IF NOT EXISTS idx_churches_province ON public.churches (province);
+CREATE INDEX IF NOT EXISTS idx_churches_city ON public.churches (city);
 
 DROP TRIGGER IF EXISTS trg_churches_updated_at ON public.churches;
 CREATE TRIGGER trg_churches_updated_at
@@ -207,21 +223,68 @@ CREATE TRIGGER trg_permissions_updated_at
 -- CORE: members
 -- ---------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.members (
-  id              uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  member_code     text,
-  full_name       text NOT NULL,
-  phone           text,
-  email           text,
-  church_id       uuid REFERENCES public.churches (id) ON DELETE SET NULL,
-  cell_group_id   uuid,
-  cell_id         uuid,
-  status          text NOT NULL DEFAULT 'Active',
-  metadata        jsonb NOT NULL DEFAULT '{}'::jsonb,
-  created_at      timestamptz NOT NULL DEFAULT now(),
-  updated_at      timestamptz NOT NULL DEFAULT now(),
-  created_by      uuid,
-  updated_by      uuid
+  id                uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  member_code       text,
+  full_name         text NOT NULL,
+  first_name        text,
+  last_name         text,
+  title             text,
+  gender            text,
+  date_of_birth     date,
+  phone             text,
+  whatsapp          text,
+  email             text,
+  address           text,
+  church_id         uuid REFERENCES public.churches (id) ON DELETE SET NULL,
+  church_name       text,
+  cell_group_id     text,
+  cell_group_name   text,
+  cell_id           text,
+  cell_name         text,
+  department_id     text,
+  department_name   text,
+  status            text NOT NULL DEFAULT 'Active',
+  entry_date        date,
+  source            text,
+  notes             text,
+  metadata          jsonb NOT NULL DEFAULT '{}'::jsonb,
+  created_at        timestamptz NOT NULL DEFAULT now(),
+  updated_at        timestamptz NOT NULL DEFAULT now(),
+  created_by        uuid,
+  updated_by        uuid
 );
+
+-- Phase 3 additive columns for older volumes
+ALTER TABLE public.members ADD COLUMN IF NOT EXISTS first_name text;
+ALTER TABLE public.members ADD COLUMN IF NOT EXISTS last_name text;
+ALTER TABLE public.members ADD COLUMN IF NOT EXISTS title text;
+ALTER TABLE public.members ADD COLUMN IF NOT EXISTS gender text;
+ALTER TABLE public.members ADD COLUMN IF NOT EXISTS date_of_birth date;
+ALTER TABLE public.members ADD COLUMN IF NOT EXISTS whatsapp text;
+ALTER TABLE public.members ADD COLUMN IF NOT EXISTS address text;
+ALTER TABLE public.members ADD COLUMN IF NOT EXISTS church_name text;
+ALTER TABLE public.members ADD COLUMN IF NOT EXISTS cell_group_name text;
+ALTER TABLE public.members ADD COLUMN IF NOT EXISTS cell_name text;
+ALTER TABLE public.members ADD COLUMN IF NOT EXISTS department_id text;
+ALTER TABLE public.members ADD COLUMN IF NOT EXISTS department_name text;
+ALTER TABLE public.members ADD COLUMN IF NOT EXISTS entry_date date;
+ALTER TABLE public.members ADD COLUMN IF NOT EXISTS source text;
+ALTER TABLE public.members ADD COLUMN IF NOT EXISTS notes text;
+
+-- cell_group_id / cell_id may have been uuid; widen to text for pilot flexibility
+DO $$
+BEGIN
+  ALTER TABLE public.members ALTER COLUMN cell_group_id TYPE text USING cell_group_id::text;
+  ALTER TABLE public.members ALTER COLUMN cell_id TYPE text USING cell_id::text;
+EXCEPTION WHEN OTHERS THEN
+  NULL;
+END $$;
+
+CREATE INDEX IF NOT EXISTS idx_members_church_id ON public.members (church_id);
+CREATE INDEX IF NOT EXISTS idx_members_status ON public.members (status);
+CREATE INDEX IF NOT EXISTS idx_members_phone ON public.members (phone);
+CREATE INDEX IF NOT EXISTS idx_members_email ON public.members (email);
+CREATE INDEX IF NOT EXISTS idx_members_full_name ON public.members (full_name);
 
 DROP TRIGGER IF EXISTS trg_members_updated_at ON public.members;
 CREATE TRIGGER trg_members_updated_at

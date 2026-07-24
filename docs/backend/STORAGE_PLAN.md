@@ -6,6 +6,14 @@
 - `VITE_ENABLE_STORAGE=false` by default
 - Metadata table `public.documents` prepared in schema
 
+## Phase 5 pilot
+
+- Client: `src/data/adapters/supabase/supabaseStorageClient.ts`
+- Documents metadata: `documentsSupabaseAdapter.ts`
+- Bucket **finance-proofs** = **private** only (signed URLs)
+- When `VITE_ENABLE_STORAGE=false` → mock paths `mock://…` in documents row
+- Never use public-assets for payment proofs
+
 ## Future buckets
 
 | Bucket | Public | Purpose |

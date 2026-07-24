@@ -444,36 +444,94 @@ CREATE INDEX IF NOT EXISTS idx_follow_up_timeline_event_date ON public.follow_up
 -- PILOT: finance_records
 -- ---------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.finance_records (
-  id                      uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  transaction_type        text,
-  contribution_group      text,
-  contribution_category   text,
-  partnership_arm_id      uuid,
-  partnership_arm_name    text,
-  contributor_name        text,
-  contributor_phone       text,
-  member_id               uuid REFERENCES public.members (id) ON DELETE SET NULL,
-  church_id               uuid REFERENCES public.churches (id) ON DELETE SET NULL,
-  cell_group_id           uuid,
-  cell_id                 uuid,
-  amount                  numeric(14, 2) DEFAULT 0,
-  currency                text DEFAULT 'MZN',
-  payment_method          text,
-  payment_reference       text,
-  payment_date            date,
-  status                  text NOT NULL DEFAULT 'Pending Verification',
-  source                  text,
-  verified_by             uuid,
-  verified_at             timestamptz,
-  metadata                jsonb NOT NULL DEFAULT '{}'::jsonb,
-  created_at              timestamptz NOT NULL DEFAULT now(),
-  updated_at              timestamptz NOT NULL DEFAULT now(),
-  created_by              uuid,
-  updated_by              uuid
+  id                        uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  transaction_type          text NOT NULL DEFAULT 'income',
+  contribution_group        text,
+  contribution_category     text,
+  partnership_arm_id        text,
+  partnership_arm_name      text,
+  contributor_type          text,
+  contributor_id            uuid,
+  contributor_name          text,
+  contributor_phone         text,
+  contributor_email         text,
+  member_id                 uuid REFERENCES public.members (id) ON DELETE SET NULL,
+  first_timer_id            uuid REFERENCES public.first_timers (id) ON DELETE SET NULL,
+  church_id                 uuid REFERENCES public.churches (id) ON DELETE SET NULL,
+  church_name               text,
+  cell_group_id             text,
+  cell_group_name           text,
+  cell_id                   text,
+  cell_name                 text,
+  amount                    numeric(14, 2) NOT NULL DEFAULT 0,
+  currency                  text DEFAULT 'MZN',
+  payment_method            text,
+  payment_reference         text,
+  payment_date              date,
+  source                    text,
+  source_module             text,
+  source_id                 uuid,
+  submission_group_id       text,
+  status                    text NOT NULL DEFAULT 'Pending Verification',
+  received_by               uuid,
+  received_by_name          text,
+  verified_by               uuid,
+  verified_by_name          text,
+  verified_at               timestamptz,
+  rejected_by               uuid,
+  rejected_by_name          text,
+  rejected_at               timestamptz,
+  rejection_reason          text,
+  proof_document_id         uuid,
+  proof_file_url            text,
+  notes                     text,
+  metadata                  jsonb NOT NULL DEFAULT '{}'::jsonb,
+  created_at                timestamptz NOT NULL DEFAULT now(),
+  updated_at                timestamptz NOT NULL DEFAULT now(),
+  created_by                uuid,
+  updated_by                uuid
 );
 
+-- Phase 5 additive columns
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS contributor_type text;
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS contributor_id uuid;
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS contributor_email text;
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS first_timer_id uuid;
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS church_name text;
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS cell_group_name text;
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS cell_name text;
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS source_module text;
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS source_id uuid;
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS submission_group_id text;
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS received_by uuid;
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS received_by_name text;
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS verified_by_name text;
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS rejected_by uuid;
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS rejected_by_name text;
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS rejected_at timestamptz;
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS rejection_reason text;
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS proof_document_id uuid;
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS proof_file_url text;
+ALTER TABLE public.finance_records ADD COLUMN IF NOT EXISTS notes text;
+DO $$ BEGIN
+  ALTER TABLE public.finance_records ALTER COLUMN partnership_arm_id TYPE text USING partnership_arm_id::text;
+EXCEPTION WHEN OTHERS THEN NULL;
+END $$;
+DO $$ BEGIN
+  ALTER TABLE public.finance_records ALTER COLUMN cell_group_id TYPE text USING cell_group_id::text;
+  ALTER TABLE public.finance_records ALTER COLUMN cell_id TYPE text USING cell_id::text;
+EXCEPTION WHEN OTHERS THEN NULL;
+END $$;
+
 CREATE INDEX IF NOT EXISTS idx_finance_records_church ON public.finance_records (church_id);
+CREATE INDEX IF NOT EXISTS idx_finance_records_church_id ON public.finance_records (church_id);
 CREATE INDEX IF NOT EXISTS idx_finance_records_status ON public.finance_records (status);
+CREATE INDEX IF NOT EXISTS idx_finance_records_transaction_type ON public.finance_records (transaction_type);
+CREATE INDEX IF NOT EXISTS idx_finance_records_contribution_group ON public.finance_records (contribution_group);
+CREATE INDEX IF NOT EXISTS idx_finance_records_partnership_arm_name ON public.finance_records (partnership_arm_name);
+CREATE INDEX IF NOT EXISTS idx_finance_records_payment_date ON public.finance_records (payment_date);
+CREATE INDEX IF NOT EXISTS idx_finance_records_source ON public.finance_records (source);
+CREATE INDEX IF NOT EXISTS idx_finance_records_submission_group_id ON public.finance_records (submission_group_id);
 
 DROP TRIGGER IF EXISTS trg_finance_records_updated_at ON public.finance_records;
 CREATE TRIGGER trg_finance_records_updated_at
@@ -486,21 +544,38 @@ CREATE TRIGGER trg_finance_records_updated_at
 CREATE TABLE IF NOT EXISTS public.public_giving_submissions (
   id                          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   submission_group_id         text,
-  full_name                   text,
+  full_name                   text NOT NULL,
   phone                       text,
   email                       text,
   church_id                   uuid REFERENCES public.churches (id) ON DELETE SET NULL,
-  cell_group_id               uuid,
-  cell_id                     uuid,
+  church_name                 text,
+  cell_group_id               text,
+  cell_group_name             text,
+  cell_id                     text,
+  cell_name                   text,
   contributions               jsonb NOT NULL DEFAULT '[]'::jsonb,
   total_amount                numeric(14, 2) DEFAULT 0,
   currency                    text DEFAULT 'MZN',
   payment_method              text,
   payment_reference           text,
   payment_date                date,
+  proof_document_id           uuid,
   proof_file_url              text,
+  proof_file_name             text,
   status                      text NOT NULL DEFAULT 'Pending Verification',
+  reviewed_by                 uuid,
+  reviewed_by_name            text,
+  reviewed_at                 timestamptz,
+  verified_by                 uuid,
+  verified_by_name            text,
+  verified_at                 timestamptz,
+  rejected_by                 uuid,
+  rejected_by_name            text,
+  rejected_at                 timestamptz,
+  rejection_reason            text,
   created_finance_record_ids  jsonb NOT NULL DEFAULT '[]'::jsonb,
+  source                      text DEFAULT 'public_website',
+  notes                       text,
   metadata                    jsonb NOT NULL DEFAULT '{}'::jsonb,
   created_at                  timestamptz NOT NULL DEFAULT now(),
   updated_at                  timestamptz NOT NULL DEFAULT now(),
@@ -508,32 +583,128 @@ CREATE TABLE IF NOT EXISTS public.public_giving_submissions (
   updated_by                  uuid
 );
 
+ALTER TABLE public.public_giving_submissions ADD COLUMN IF NOT EXISTS church_name text;
+ALTER TABLE public.public_giving_submissions ADD COLUMN IF NOT EXISTS cell_group_name text;
+ALTER TABLE public.public_giving_submissions ADD COLUMN IF NOT EXISTS cell_name text;
+ALTER TABLE public.public_giving_submissions ADD COLUMN IF NOT EXISTS proof_document_id uuid;
+ALTER TABLE public.public_giving_submissions ADD COLUMN IF NOT EXISTS proof_file_name text;
+ALTER TABLE public.public_giving_submissions ADD COLUMN IF NOT EXISTS reviewed_by uuid;
+ALTER TABLE public.public_giving_submissions ADD COLUMN IF NOT EXISTS reviewed_by_name text;
+ALTER TABLE public.public_giving_submissions ADD COLUMN IF NOT EXISTS reviewed_at timestamptz;
+ALTER TABLE public.public_giving_submissions ADD COLUMN IF NOT EXISTS verified_by uuid;
+ALTER TABLE public.public_giving_submissions ADD COLUMN IF NOT EXISTS verified_by_name text;
+ALTER TABLE public.public_giving_submissions ADD COLUMN IF NOT EXISTS verified_at timestamptz;
+ALTER TABLE public.public_giving_submissions ADD COLUMN IF NOT EXISTS rejected_by uuid;
+ALTER TABLE public.public_giving_submissions ADD COLUMN IF NOT EXISTS rejected_by_name text;
+ALTER TABLE public.public_giving_submissions ADD COLUMN IF NOT EXISTS rejected_at timestamptz;
+ALTER TABLE public.public_giving_submissions ADD COLUMN IF NOT EXISTS rejection_reason text;
+ALTER TABLE public.public_giving_submissions ADD COLUMN IF NOT EXISTS source text DEFAULT 'public_website';
+ALTER TABLE public.public_giving_submissions ADD COLUMN IF NOT EXISTS notes text;
+DO $$ BEGIN
+  ALTER TABLE public.public_giving_submissions ALTER COLUMN cell_group_id TYPE text USING cell_group_id::text;
+  ALTER TABLE public.public_giving_submissions ALTER COLUMN cell_id TYPE text USING cell_id::text;
+EXCEPTION WHEN OTHERS THEN NULL;
+END $$;
+
+CREATE INDEX IF NOT EXISTS idx_public_giving_status ON public.public_giving_submissions (status);
+CREATE INDEX IF NOT EXISTS idx_public_giving_church_id ON public.public_giving_submissions (church_id);
+CREATE INDEX IF NOT EXISTS idx_public_giving_submission_group_id ON public.public_giving_submissions (submission_group_id);
+CREATE INDEX IF NOT EXISTS idx_public_giving_payment_date ON public.public_giving_submissions (payment_date);
+
 DROP TRIGGER IF EXISTS trg_public_giving_updated_at ON public.public_giving_submissions;
 CREATE TRIGGER trg_public_giving_updated_at
   BEFORE UPDATE ON public.public_giving_submissions
   FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
 
 -- ---------------------------------------------------------------------------
+-- PILOT: finance_disbursements
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS public.finance_disbursements (
+  id                    uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  requisition_id        uuid,
+  request_number        text,
+  title                 text,
+  description           text,
+  department_id         text,
+  department_name       text,
+  church_id             uuid REFERENCES public.churches (id) ON DELETE SET NULL,
+  church_name           text,
+  requested_by          uuid,
+  requested_by_name     text,
+  approved_by           uuid,
+  approved_by_name      text,
+  approved_at           timestamptz,
+  approved_amount       numeric(14, 2) DEFAULT 0,
+  released_amount       numeric(14, 2) DEFAULT 0,
+  pending_amount        numeric(14, 2) DEFAULT 0,
+  currency              text DEFAULT 'MZN',
+  payment_method        text,
+  payment_reference     text,
+  release_date          date,
+  status                text NOT NULL DEFAULT 'Awaiting Release',
+  finance_record_id     uuid REFERENCES public.finance_records (id) ON DELETE SET NULL,
+  notes                 text,
+  metadata              jsonb NOT NULL DEFAULT '{}'::jsonb,
+  created_at            timestamptz NOT NULL DEFAULT now(),
+  updated_at            timestamptz NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_finance_disbursements_status ON public.finance_disbursements (status);
+CREATE INDEX IF NOT EXISTS idx_finance_disbursements_church_id ON public.finance_disbursements (church_id);
+CREATE INDEX IF NOT EXISTS idx_finance_disbursements_requisition_id ON public.finance_disbursements (requisition_id);
+
+DROP TRIGGER IF EXISTS trg_finance_disbursements_updated_at ON public.finance_disbursements;
+CREATE TRIGGER trg_finance_disbursements_updated_at
+  BEFORE UPDATE ON public.finance_disbursements
+  FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+
+-- ---------------------------------------------------------------------------
 -- PILOT: documents (storage metadata)
 -- ---------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.documents (
-  id                uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  module            text,
-  entity_type       text,
-  entity_id         uuid,
-  document_type     text,
-  file_url          text,
-  file_name         text,
-  storage_bucket    text,
-  storage_path      text,
-  status            text NOT NULL DEFAULT 'Uploaded',
-  uploaded_by       uuid,
-  verified_by       uuid,
-  verified_at       timestamptz,
-  metadata          jsonb NOT NULL DEFAULT '{}'::jsonb,
-  created_at        timestamptz NOT NULL DEFAULT now(),
-  updated_at        timestamptz NOT NULL DEFAULT now()
+  id                  uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  module              text NOT NULL,
+  entity_type         text,
+  entity_id           uuid,
+  document_type       text,
+  document_title      text,
+  file_url            text,
+  file_name           text,
+  file_size           bigint,
+  mime_type           text,
+  storage_bucket      text,
+  storage_path        text,
+  status              text NOT NULL DEFAULT 'Pending Review',
+  uploaded_by         uuid,
+  uploaded_by_name    text,
+  verified_by         uuid,
+  verified_by_name    text,
+  verified_at         timestamptz,
+  rejected_by         uuid,
+  rejected_by_name    text,
+  rejected_at         timestamptz,
+  rejection_reason    text,
+  is_sensitive        boolean DEFAULT false,
+  metadata            jsonb NOT NULL DEFAULT '{}'::jsonb,
+  created_at          timestamptz NOT NULL DEFAULT now(),
+  updated_at          timestamptz NOT NULL DEFAULT now()
 );
+
+ALTER TABLE public.documents ADD COLUMN IF NOT EXISTS document_title text;
+ALTER TABLE public.documents ADD COLUMN IF NOT EXISTS file_size bigint;
+ALTER TABLE public.documents ADD COLUMN IF NOT EXISTS mime_type text;
+ALTER TABLE public.documents ADD COLUMN IF NOT EXISTS uploaded_by_name text;
+ALTER TABLE public.documents ADD COLUMN IF NOT EXISTS verified_by_name text;
+ALTER TABLE public.documents ADD COLUMN IF NOT EXISTS rejected_by uuid;
+ALTER TABLE public.documents ADD COLUMN IF NOT EXISTS rejected_by_name text;
+ALTER TABLE public.documents ADD COLUMN IF NOT EXISTS rejected_at timestamptz;
+ALTER TABLE public.documents ADD COLUMN IF NOT EXISTS rejection_reason text;
+ALTER TABLE public.documents ADD COLUMN IF NOT EXISTS is_sensitive boolean DEFAULT false;
+
+CREATE INDEX IF NOT EXISTS idx_documents_module ON public.documents (module);
+CREATE INDEX IF NOT EXISTS idx_documents_entity ON public.documents (entity_type, entity_id);
+CREATE INDEX IF NOT EXISTS idx_documents_status ON public.documents (status);
+CREATE INDEX IF NOT EXISTS idx_documents_storage_path ON public.documents (storage_path);
 
 DROP TRIGGER IF EXISTS trg_documents_updated_at ON public.documents;
 CREATE TRIGGER trg_documents_updated_at

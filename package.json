@@ -32,6 +32,7 @@
     "test:auth-foundation": "node scripts/check-auth-foundation.mjs",
     "test:churches-members-supabase": "node scripts/smoke-churches-members-supabase.mjs",
     "test:first-timers-followups-supabase": "node scripts/smoke-first-timers-followups-supabase.mjs",
+    "test:finance-public-giving-supabase": "node scripts/smoke-finance-public-giving-storage-supabase.mjs",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",

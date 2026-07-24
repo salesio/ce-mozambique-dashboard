@@ -46,10 +46,16 @@ localStorage / mock remain valid for **dev and prototype** until each domain pil
 - [ ] Production RLS enforced
 - [ ] Auto conversion pipeline policies
 
-## Phase 5 — Finance + Public Giving + Storage proofs
+## Phase 5 — Finance + Public Giving + Storage proofs (current)
 
-- Align with existing finance bridge
-- Private bucket `finance-proofs` + signed URLs
+- [x] Schema + migration `0005_finance_public_giving_storage_pilot.sql`
+- [x] Finance / Public Giving / Disbursements / Documents adapters
+- [x] Storage client (private finance-proofs)
+- [x] Repository routing + idempotent verify
+- [x] Partnerships still on Verified income only
+- [x] Smoke: `test:finance-public-giving-supabase`
+- [ ] Production RLS + storage policies enforced
+- [ ] Full requisitions remote module
 
 ## Phase 6 — Foundation School
 

@@ -14,6 +14,11 @@ Phase 1 foundation + Phase 2 optional Auth pilot.
 | `membersSupabaseAdapter.ts` | Phase 3 Members pilot |
 | `firstTimersSupabaseAdapter.ts` | Phase 4 First Timers pilot |
 | `followUpsSupabaseAdapter.ts` | Phase 4 Follow-Up + timeline pilot |
+| `financeSupabaseAdapter.ts` | Phase 5 finance records |
+| `publicGivingSupabaseAdapter.ts` | Phase 5 public giving verify flow |
+| `financeDisbursementsSupabaseAdapter.ts` | Phase 5 expense disbursements |
+| `documentsSupabaseAdapter.ts` | Phase 5 proof metadata |
+| `supabaseStorageClient.ts` | Phase 5 private storage uploads |
 
 ## Rules
 

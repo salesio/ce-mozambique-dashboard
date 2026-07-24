@@ -44,6 +44,14 @@ export {
   updatePassword as supabaseUpdatePassword,
   getSupabaseAuthStatus,
 } from "./adapters/supabase/supabaseAuthClient";
+export {
+  isSupabaseStorageEnabled,
+  getStorageInfo,
+  uploadFile as supabaseUploadFile,
+  createSignedUrl,
+  FINANCE_PROOFS_BUCKET,
+} from "./adapters/supabase/supabaseStorageClient";
+export { uploadFinanceProof } from "./adapters/supabase/documentsSupabaseAdapter";
 export { apiClient } from "./adapters/api/apiClient";
 export { getApiEnvConfig, getApiConnectionInfo } from "./adapters/api/apiConfig";
 export {

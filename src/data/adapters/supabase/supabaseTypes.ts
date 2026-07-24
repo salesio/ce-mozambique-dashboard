@@ -15,6 +15,7 @@ export type SupabaseTableName =
   | "follow_up_timeline_events"
   | "finance_records"
   | "public_giving_submissions"
+  | "finance_disbursements"
   | "documents"
   | "notifications"
   | "audit_logs"

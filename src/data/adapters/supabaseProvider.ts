@@ -21,16 +21,27 @@ import * as churchesSb from "./supabase/churchesSupabaseAdapter";
 import * as membersSb from "./supabase/membersSupabaseAdapter";
 import * as firstTimersSb from "./supabase/firstTimersSupabaseAdapter";
 import * as followUpsSb from "./supabase/followUpsSupabaseAdapter";
-import type { Church, FirstTimer, FollowUp, Member } from "../types/entities";
+import * as financeSb from "./supabase/financeSupabaseAdapter";
+import * as publicGivingSb from "./supabase/publicGivingSupabaseAdapter";
+import * as disbursementsSb from "./supabase/financeDisbursementsSupabaseAdapter";
+import type {
+  Church,
+  FinanceDisbursement,
+  FinanceRecord,
+  FirstTimer,
+  FollowUp,
+  Member,
+  PublicGivingSubmission,
+} from "../types/entities";
 
 /**
  * Supabase provider — progressive migration.
  *
- * Phase 3 pilots: churches + members.
- * Phase 4 pilots: first_timers + follow_ups.
+ * Phase 3: churches + members
+ * Phase 4: first_timers + follow_ups
+ * Phase 5: finance_records + public_giving + disbursements
  * Other collections remain NOT_IMPLEMENTED stubs.
  * Uses public anon key only (via foundation client when enabled).
- * Legacy finance bridge remains separate (src/lib/*).
  */
 
 function createChurchesRepository(): EntityRepository<Church> {
@@ -134,6 +145,71 @@ function createFollowUpsRepository(): EntityRepository<FollowUp> {
     },
     async remove(id: EntityId) {
       return followUpsSb.deleteFollowUp(id);
+    },
+  };
+}
+
+function createFinanceRecordsRepository(): EntityRepository<FinanceRecord> {
+  return {
+    async list(options?: ListOptions) {
+      if (options?.churchId) return financeSb.getFinanceRecordsByChurch(options.churchId);
+      const r = await financeSb.listFinanceRecords();
+      if (!r.ok) return r as DataResult<FinanceRecord[]>;
+      let data = r.data || [];
+      if (options?.limit) data = data.slice(options.offset || 0, (options.offset || 0) + options.limit);
+      return { ok: true, data };
+    },
+    async getById(id: EntityId) {
+      return financeSb.getFinanceRecordById(id);
+    },
+    async create(input: Partial<FinanceRecord>) {
+      return financeSb.createFinanceRecord(input);
+    },
+    async update(id: EntityId, input: Partial<FinanceRecord>) {
+      return financeSb.updateFinanceRecord(id, input);
+    },
+    async remove(id: EntityId) {
+      return financeSb.deleteFinanceRecord(id);
+    },
+  };
+}
+
+function createPublicGivingRepository(): EntityRepository<PublicGivingSubmission> {
+  return {
+    async list() {
+      return publicGivingSb.listPublicGivingSubmissions();
+    },
+    async getById(id: EntityId) {
+      return publicGivingSb.getPublicGivingSubmissionById(id);
+    },
+    async create(input: Partial<PublicGivingSubmission>) {
+      return publicGivingSb.createPublicGivingSubmission(input);
+    },
+    async update(id: EntityId, input: Partial<PublicGivingSubmission>) {
+      return publicGivingSb.updatePublicGivingSubmission(id, input);
+    },
+    async remove(_id: EntityId) {
+      return { ok: false, error: "Delete public giving not exposed", code: "NOT_SUPPORTED" };
+    },
+  };
+}
+
+function createDisbursementsRepository(): EntityRepository<FinanceDisbursement> {
+  return {
+    async list() {
+      return disbursementsSb.listFinanceDisbursements();
+    },
+    async getById(id: EntityId) {
+      return disbursementsSb.getFinanceDisbursementById(id);
+    },
+    async create(input: Partial<FinanceDisbursement>) {
+      return disbursementsSb.createFinanceDisbursement(input);
+    },
+    async update(id: EntityId, input: Partial<FinanceDisbursement>) {
+      return disbursementsSb.updateFinanceDisbursement(id, input);
+    },
+    async remove(_id: EntityId) {
+      return { ok: false, error: "Delete disbursement not exposed", code: "NOT_SUPPORTED" };
     },
   };
 }
@@ -284,18 +360,21 @@ export function createSupabaseProvider(): DataProvider & SupabaseProviderExtras 
     COLLECTION_NAMES.map((n) => [n, createStubRepository(n)]),
   ) as Record<EntityCollectionName, EntityRepository<unknown>>;
 
-  // Phase 3 + 4 pilots
+  // Phase 3 + 4 + 5 pilots
   map.churches = createChurchesRepository() as EntityRepository<unknown>;
   map.members = createMembersRepository() as EntityRepository<unknown>;
   map.first_timers = createFirstTimersRepository() as EntityRepository<unknown>;
   map.follow_ups = createFollowUpsRepository() as EntityRepository<unknown>;
+  map.finance_records = createFinanceRecordsRepository() as EntityRepository<unknown>;
+  map.public_giving_submissions = createPublicGivingRepository() as EntityRepository<unknown>;
+  map.finance_disbursements = createDisbursementsRepository() as EntityRepository<unknown>;
 
   const foundationInfo = getSupabaseConnectionInfo();
   const envCfg = getSupabaseEnvConfig();
 
   const description =
     foundationInfo.status === "ready"
-      ? `Supabase pilot ready (${foundationInfo.urlHost || "configured"}) — churches/members/first_timers/follow_ups live; other modules stubbed.`
+      ? `Supabase pilot ready (${foundationInfo.urlHost || "configured"}) — churches/members/FT/FU/finance live; other modules stubbed.`
       : foundationInfo.status === "missing_env"
         ? `Supabase enabled but env incomplete — ${foundationInfo.message}`
         : "Supabase provider placeholder (disabled). Domain modules use mock/local.";
@@ -324,9 +403,9 @@ export function createSupabaseProvider(): DataProvider & SupabaseProviderExtras 
     foundationLessonSessions: map.foundation_lesson_sessions as EntityRepository<never>,
     foundationTestSubmissions: map.foundation_test_submissions as EntityRepository<never>,
     foundationFinalExams: map.foundation_final_exams as EntityRepository<never>,
-    financeRecords: map.finance_records as EntityRepository<never>,
-    publicGivingSubmissions: map.public_giving_submissions as EntityRepository<never>,
-    financeDisbursements: map.finance_disbursements as EntityRepository<never>,
+    financeRecords: map.finance_records as EntityRepository<FinanceRecord>,
+    publicGivingSubmissions: map.public_giving_submissions as EntityRepository<PublicGivingSubmission>,
+    financeDisbursements: map.finance_disbursements as EntityRepository<FinanceDisbursement>,
     requisitions: map.requisitions as EntityRepository<never>,
     requisitionTimeline: map.requisition_timeline as EntityRepository<never>,
     notifications: map.notifications as EntityRepository<never>,

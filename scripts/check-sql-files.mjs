@@ -62,6 +62,8 @@ ok("schema has idx_members_church_id", /idx_members_church_id/i.test(schema));
 ok("schema has follow_ups", /create table if not exists public\.follow_ups/i.test(schema));
 ok("schema has follow_up_timeline", /follow_up_timeline_events/i.test(schema));
 ok("schema has idx_first_timers_church_id", /idx_first_timers_church_id/i.test(schema));
+ok("schema has finance_disbursements", /create table if not exists public\.finance_disbursements/i.test(schema));
+ok("schema has idx_public_giving_status", /idx_public_giving_status/i.test(schema));
 
 const seed = read("database/seed.sql");
 ok("seed has super_admin", /super_admin/i.test(seed));

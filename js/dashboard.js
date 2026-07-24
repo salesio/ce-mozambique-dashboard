@@ -16060,7 +16060,12 @@ function renderSettings() {
                   window.CEFollowUps && typeof window.CEFollowUps.getInfo === "function"
                     ? window.CEFollowUps.getInfo()
                     : null;
+                const finInfo =
+                  window.CEFinance && typeof window.CEFinance.getInfo === "function"
+                    ? window.CEFinance.getInfo()
+                    : null;
                 const sbOn = !!(flags && flags.enableSupabase);
+                const storageOn = !!(flags && flags.enableStorage);
                 const readyLabel = (info) => {
                   if (!info || !info.provider) return "—";
                   if (String(info.provider).includes("supabase")) return "Supabase-ready";
@@ -16071,12 +16076,15 @@ function renderSettings() {
               <div class="fw-semibold mb-1">${lang === "pt" ? "Data Source (dev)" : "Data Source (dev)"}</div>
               <div>source: <code>${String(src)}</code></div>
               <div>supabase flag: <code>${sbOn ? "true" : "false"}</code>${sbInfo && sbInfo.status ? ` · status: <code>${sbInfo.status}</code>` : ""}</div>
+              <div>storage: <code>${storageOn ? "enabled" : "disabled"}</code></div>
               <div>churches: <code>${readyLabel(chInfo)}</code></div>
               <div>members: <code>${readyLabel(mbInfo)}</code></div>
               <div>first timers: <code>${readyLabel(ftInfo)}</code></div>
               <div>follow-up: <code>${readyLabel(fuInfo)}</code></div>
+              <div>finance: <code>${readyLabel(finInfo)}</code></div>
+              <div>public giving: <code>${readyLabel(finInfo)}</code></div>
               <div>others: <code>local/mock</code></div>
-              <div class="text-white-50 mt-1">${lang === "pt" ? "Sem expor keys/secrets. Pilotos: Igrejas, Membros, Primeira Vez, Acompanhamento." : "No keys/secrets exposed. Pilots: Churches, Members, First Timers, Follow-Up."}</div>
+              <div class="text-white-50 mt-1">${lang === "pt" ? "Sem expor keys/secrets. Pilotos: Igrejas, Membros, FT, Follow-Up, Finance." : "No keys/secrets exposed. Pilots: Churches, Members, FT, Follow-Up, Finance."}</div>
             </div>`;
               } catch (_) {
                 return "";

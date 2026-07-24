@@ -29,7 +29,14 @@ Rules:
 - Max file size and mime types configured per bucket in Supabase.
 - Virus scanning / retention policies = future ops task.
 
-Example Supabase JS (server or authenticated client later):
+Phase 5 pilot (finance-proofs):
+- Create PRIVATE bucket named: finance-proofs
+- Do NOT enable public access
+- Frontend uses anon key + signed URLs only
+- Enable with VITE_ENABLE_STORAGE=true
+- When storage disabled, app stores mock metadata only
+
+Example Supabase JS (authenticated client later):
 
   await supabase.storage.from('finance-proofs').upload(path, file)
   const { data } = await supabase.storage.from('finance-proofs').createSignedUrl(path, 3600)

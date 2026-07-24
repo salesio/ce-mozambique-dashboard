@@ -1513,3 +1513,36 @@ npm run test:data-layer-all
 
 See **[docs/backend/FIRST_TIMERS_FOLLOWUPS_SUPABASE_PILOT.md](docs/backend/FIRST_TIMERS_FOLLOWUPS_SUPABASE_PILOT.md)**.
 
+---
+
+## Backend Phase 5 — Finance + Public Giving + Storage pilot
+
+**Status: optional (`VITE_DATA_SOURCE=supabase`)**
+
+### Domain
+
+- `finance_records` (income/expense)
+- `public_giving_submissions` (verify → income only after explicit action)
+- `finance_disbursements` (expense release)
+- `documents` + private `finance-proofs` storage metadata
+
+### Rules
+
+- Public Giving does **not** create revenue until verification  
+- Re-verify is **idempotent** (no duplicate finance records)  
+- Pending/Rejected do not enter Partnerships / monthly verified giving  
+- Expense never enters Partnerships  
+- Storage private; `VITE_ENABLE_STORAGE=true` required for real uploads  
+
+### How to test
+
+```bash
+npm run build
+npm run test:finance-public-giving-supabase
+npm run test:finance-data
+npm run test:partnerships-data
+npm run test:data-layer-all
+```
+
+See **[docs/backend/FINANCE_PUBLIC_GIVING_STORAGE_SUPABASE_PILOT.md](docs/backend/FINANCE_PUBLIC_GIVING_STORAGE_SUPABASE_PILOT.md)**.
+

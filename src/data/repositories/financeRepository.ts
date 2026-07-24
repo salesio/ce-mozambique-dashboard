@@ -1,5 +1,5 @@
 import { getDataProvider } from "../dataProvider";
-import { getDataSource } from "../config";
+import { getDataSource, getBackendFeatureFlags } from "../config";
 import type {
   EntityId,
   FinanceDisbursement,
@@ -11,12 +11,31 @@ import type { DataResult } from "../types/repository";
 import { FINANCE_RECORDS_SEED } from "../seeds/financeRecordsSeed";
 import { PUBLIC_GIVING_SUBMISSIONS_SEED } from "../seeds/publicGivingSubmissionsSeed";
 import { FINANCE_DISBURSEMENTS_SEED } from "../seeds/financeDisbursementsSeed";
+import { getSupabaseEnvConfig } from "../adapters/supabase/supabaseConfig";
+import * as financeSb from "../adapters/supabase/financeSupabaseAdapter";
+import * as publicGivingSb from "../adapters/supabase/publicGivingSupabaseAdapter";
+import * as disbursementsSb from "../adapters/supabase/financeDisbursementsSupabaseAdapter";
+import * as financeApi from "../adapters/api/financeApiAdapter";
+import * as publicGivingApi from "../adapters/api/publicGivingApiAdapter";
+import { getStorageInfo } from "../adapters/supabase/supabaseStorageClient";
 
 function fail<T>(error: string, code = "FINANCE_ERROR"): DataResult<T> {
   return { ok: false, error, code };
 }
 function ok<T>(data: T): DataResult<T> {
   return { ok: true, data };
+}
+
+/** Phase 5: route finance domain to Supabase when flags + source allow. */
+function useSupabaseFinance(): boolean {
+  if (getDataSource() !== "supabase") return false;
+  const cfg = getSupabaseEnvConfig();
+  const flags = getBackendFeatureFlags();
+  return flags.enableSupabase && cfg.isConfigured;
+}
+
+function useApiFinance(): boolean {
+  return getDataSource() === "api";
 }
 function todayIso(): string {
   return new Date().toISOString().slice(0, 10);
@@ -339,6 +358,7 @@ export function normalizeFinanceDisbursement(
 // ---------------------------------------------------------------------------
 
 export async function ensureFinanceSeeded(): Promise<void> {
+  if (useSupabaseFinance() || useApiFinance()) return;
   const provider = getDataProvider();
   const rec = await provider.financeRecords.list();
   if (rec.ok && (rec.data || []).length === 0 && provider.financeRecords.create) {
@@ -362,11 +382,23 @@ export async function ensureFinanceSeeded(): Promise<void> {
 
 export function getFinanceDataSourceInfo() {
   const provider = getDataProvider();
+  const sb = useSupabaseFinance();
+  const api = useApiFinance();
+  const storage = getStorageInfo();
   return {
     source: getDataSource(),
-    provider: provider.name,
-    ready: provider.isReady(),
-    description: provider.description,
+    provider: sb ? "supabase-finance-adapter" : api ? "api-finance-adapter" : provider.name,
+    ready: sb ? getSupabaseEnvConfig().isConfigured : api ? false : provider.isReady(),
+    description: sb
+      ? "Finance + Public Giving pilot via Supabase"
+      : api
+        ? "Finance API placeholder"
+        : provider.description,
+    pilot: sb ? "finance-public-giving-storage-v1" : undefined,
+    storage: {
+      enabled: storage.enabled,
+      message: storage.message,
+    },
   };
 }
 
@@ -376,6 +408,16 @@ export function getFinanceDataSourceInfo() {
 
 export async function listFinanceRecords(): Promise<DataResult<FinanceRecord[]>> {
   try {
+    if (useSupabaseFinance()) {
+      const result = await financeSb.listFinanceRecords();
+      if (!result.ok) return result;
+      return ok((result.data || []).map((r) => normalizeFinanceRecord(r)));
+    }
+    if (useApiFinance()) {
+      const result = await financeApi.listFinanceRecords();
+      if (!result.ok) return result;
+      return ok((result.data || []).map((r) => normalizeFinanceRecord(r)));
+    }
     await ensureFinanceSeeded();
     const result = await getDataProvider().financeRecords.list();
     if (!result.ok) return result;
@@ -387,6 +429,16 @@ export async function listFinanceRecords(): Promise<DataResult<FinanceRecord[]>>
 
 export async function getFinanceRecordById(id: EntityId): Promise<DataResult<FinanceRecord | null>> {
   try {
+    if (useSupabaseFinance()) {
+      const result = await financeSb.getFinanceRecordById(id);
+      if (!result.ok) return result;
+      return ok(result.data ? normalizeFinanceRecord(result.data) : null);
+    }
+    if (useApiFinance()) {
+      const result = await financeApi.getFinanceRecordById(id);
+      if (!result.ok) return result;
+      return ok(result.data ? normalizeFinanceRecord(result.data) : null);
+    }
     await ensureFinanceSeeded();
     const result = await getDataProvider().financeRecords.getById(id);
     if (!result.ok) return result;
@@ -400,6 +452,22 @@ export async function createFinanceRecord(
   payload: Partial<FinanceRecord>,
 ): Promise<DataResult<FinanceRecord>> {
   try {
+    if (useSupabaseFinance()) {
+      const row = normalizeFinanceRecord({
+        ...payload,
+        status: payload.status || payload.estado || "Pending Verification",
+        source: payload.source || "Manual Entry",
+        transaction_type: payload.transaction_type || "income",
+      });
+      const result = await financeSb.createFinanceRecord(row);
+      if (!result.ok) return result;
+      return ok(normalizeFinanceRecord(result.data));
+    }
+    if (useApiFinance()) {
+      const result = await financeApi.createFinanceRecord(payload);
+      if (!result.ok) return result;
+      return ok(normalizeFinanceRecord(result.data));
+    }
     await ensureFinanceSeeded();
     const provider = getDataProvider();
     if (!provider.financeRecords.create) return fail("Criar lançamento não suportado.", "NOT_SUPPORTED");
@@ -425,6 +493,16 @@ export async function updateFinanceRecord(
   payload: Partial<FinanceRecord>,
 ): Promise<DataResult<FinanceRecord>> {
   try {
+    if (useSupabaseFinance()) {
+      const result = await financeSb.updateFinanceRecord(id, payload);
+      if (!result.ok) return result;
+      return ok(normalizeFinanceRecord(result.data));
+    }
+    if (useApiFinance()) {
+      const result = await financeApi.updateFinanceRecord(id, payload);
+      if (!result.ok) return result;
+      return ok(normalizeFinanceRecord(result.data));
+    }
     const provider = getDataProvider();
     if (!provider.financeRecords.update) return fail("Actualizar lançamento não suportado.", "NOT_SUPPORTED");
     const existing = await provider.financeRecords.getById(id);
@@ -445,6 +523,8 @@ export async function updateFinanceRecord(
 }
 
 export async function deleteFinanceRecord(id: EntityId): Promise<DataResult<boolean>> {
+  if (useSupabaseFinance()) return financeSb.deleteFinanceRecord(id);
+  if (useApiFinance()) return financeApi.deleteFinanceRecord(id);
   try {
     const provider = getDataProvider();
     if (!provider.financeRecords.remove) return fail("Eliminar lançamento não suportado.", "NOT_SUPPORTED");
@@ -597,6 +677,16 @@ export async function getTotalGivingByPeriod(
 
 export async function listPublicGivingSubmissions(): Promise<DataResult<PublicGivingSubmission[]>> {
   try {
+    if (useSupabaseFinance()) {
+      const result = await publicGivingSb.listPublicGivingSubmissions();
+      if (!result.ok) return result;
+      return ok((result.data || []).map((r) => normalizePublicGivingSubmission(r)));
+    }
+    if (useApiFinance()) {
+      const result = await publicGivingApi.listPublicGivingSubmissions();
+      if (!result.ok) return result;
+      return ok((result.data || []).map((r) => normalizePublicGivingSubmission(r)));
+    }
     await ensureFinanceSeeded();
     const result = await getDataProvider().publicGivingSubmissions.list();
     if (!result.ok) return result;
@@ -610,6 +700,16 @@ export async function getPublicGivingSubmissionById(
   id: EntityId,
 ): Promise<DataResult<PublicGivingSubmission | null>> {
   try {
+    if (useSupabaseFinance()) {
+      const result = await publicGivingSb.getPublicGivingSubmissionById(id);
+      if (!result.ok) return result;
+      return ok(result.data ? normalizePublicGivingSubmission(result.data) : null);
+    }
+    if (useApiFinance()) {
+      const result = await publicGivingApi.getPublicGivingSubmissionById(id);
+      if (!result.ok) return result;
+      return ok(result.data ? normalizePublicGivingSubmission(result.data) : null);
+    }
     await ensureFinanceSeeded();
     const result = await getDataProvider().publicGivingSubmissions.getById(id);
     if (!result.ok) return result;
@@ -623,6 +723,22 @@ export async function createPublicGivingSubmission(
   payload: Partial<PublicGivingSubmission>,
 ): Promise<DataResult<PublicGivingSubmission>> {
   try {
+    if (useSupabaseFinance()) {
+      const row = normalizePublicGivingSubmission({
+        ...payload,
+        status: payload.status || "Pending Verification",
+        source: payload.source || "Public Giving Form",
+        created_finance_record_ids: [],
+      });
+      const result = await publicGivingSb.createPublicGivingSubmission(row);
+      if (!result.ok) return result;
+      return ok(normalizePublicGivingSubmission(result.data));
+    }
+    if (useApiFinance()) {
+      const result = await publicGivingApi.createPublicGivingSubmission(payload);
+      if (!result.ok) return result;
+      return ok(normalizePublicGivingSubmission(result.data));
+    }
     await ensureFinanceSeeded();
     const provider = getDataProvider();
     if (!provider.publicGivingSubmissions.create) {
@@ -649,6 +765,16 @@ export async function updatePublicGivingSubmission(
   payload: Partial<PublicGivingSubmission>,
 ): Promise<DataResult<PublicGivingSubmission>> {
   try {
+    if (useSupabaseFinance()) {
+      const result = await publicGivingSb.updatePublicGivingSubmission(id, payload);
+      if (!result.ok) return result;
+      return ok(normalizePublicGivingSubmission(result.data));
+    }
+    if (useApiFinance()) {
+      const result = await publicGivingApi.updatePublicGivingSubmission(id, payload);
+      if (!result.ok) return result;
+      return ok(normalizePublicGivingSubmission(result.data));
+    }
     const provider = getDataProvider();
     if (!provider.publicGivingSubmissions.update) {
       return fail("Actualizar submissão não suportado.", "NOT_SUPPORTED");
@@ -699,16 +825,38 @@ export async function getPendingPublicGivingSubmissions(): Promise<DataResult<Pu
 
 /**
  * Verify public submission: create one Verified financeRecord per contribution with amount > 0.
+ * Does not re-create records if already Verified (idempotent).
  */
 export async function verifyPublicGivingSubmission(
   id: EntityId,
   payload: { verified_by?: string; notes?: string } = {},
 ): Promise<DataResult<{ submission: PublicGivingSubmission; financeRecords: FinanceRecord[] }>> {
   try {
+    if (useSupabaseFinance()) {
+      const result = await publicGivingSb.verifyPublicGivingSubmission(id, payload);
+      if (!result.ok) return result;
+      return ok({
+        submission: normalizePublicGivingSubmission(result.data.submission),
+        financeRecords: result.data.financeRecords.map((r) => normalizeFinanceRecord(r)),
+      });
+    }
     const existing = await getPublicGivingSubmissionById(id);
     if (!existing.ok) return existing as DataResult<{ submission: PublicGivingSubmission; financeRecords: FinanceRecord[] }>;
     if (!existing.data) return fail("Submissão não encontrada.", "NOT_FOUND");
     const sub = existing.data;
+    // Idempotent: already verified → return linked records, no duplicates
+    if (toEnglishFinanceStatus(sub.status) === "Verified") {
+      const ids = (sub.created_finance_record_ids || []).map(String);
+      const records: FinanceRecord[] = [];
+      for (const rid of ids) {
+        const r = await getFinanceRecordById(rid);
+        if (r.ok && r.data) records.push(r.data);
+      }
+      return ok({ submission: sub, financeRecords: records });
+    }
+    if (toEnglishFinanceStatus(sub.status) === "Rejected") {
+      return fail("Submissão rejeitada não pode ser verificada.", "INVALID_STATUS");
+    }
     const lines = (sub.contributions || []).filter((c) => Number(c.amount || 0) > 0);
     const created: FinanceRecord[] = [];
     const verifier = payload.verified_by || "Finance Head";
@@ -784,6 +932,11 @@ export async function rejectPublicGivingSubmission(
   if (!String(reason || "").trim()) {
     return fail("Motivo de rejeição é obrigatório.", "VALIDATION");
   }
+  if (useSupabaseFinance()) {
+    const result = await publicGivingSb.rejectPublicGivingSubmission(id, reason, rejectedBy);
+    if (!result.ok) return result;
+    return ok(normalizePublicGivingSubmission(result.data));
+  }
   return updatePublicGivingSubmission(id, {
     status: "Rejected",
     rejected_by: rejectedBy,
@@ -801,6 +954,11 @@ export async function rejectPublicGivingSubmission(
 
 export async function listFinanceDisbursements(): Promise<DataResult<FinanceDisbursement[]>> {
   try {
+    if (useSupabaseFinance()) {
+      const result = await disbursementsSb.listFinanceDisbursements();
+      if (!result.ok) return result;
+      return ok((result.data || []).map((r) => normalizeFinanceDisbursement(r)));
+    }
     await ensureFinanceSeeded();
     const result = await getDataProvider().financeDisbursements.list();
     if (!result.ok) return result;
@@ -814,6 +972,11 @@ export async function getFinanceDisbursementById(
   id: EntityId,
 ): Promise<DataResult<FinanceDisbursement | null>> {
   try {
+    if (useSupabaseFinance()) {
+      const result = await disbursementsSb.getFinanceDisbursementById(id);
+      if (!result.ok) return result;
+      return ok(result.data ? normalizeFinanceDisbursement(result.data) : null);
+    }
     await ensureFinanceSeeded();
     const result = await getDataProvider().financeDisbursements.getById(id);
     if (!result.ok) return result;
@@ -827,6 +990,11 @@ export async function createFinanceDisbursement(
   payload: Partial<FinanceDisbursement>,
 ): Promise<DataResult<FinanceDisbursement>> {
   try {
+    if (useSupabaseFinance()) {
+      const result = await disbursementsSb.createFinanceDisbursement(payload);
+      if (!result.ok) return result;
+      return ok(normalizeFinanceDisbursement(result.data));
+    }
     await ensureFinanceSeeded();
     const provider = getDataProvider();
     if (!provider.financeDisbursements.create) {
@@ -848,6 +1016,11 @@ export async function updateFinanceDisbursement(
   id: EntityId,
   payload: Partial<FinanceDisbursement>,
 ): Promise<DataResult<FinanceDisbursement>> {
+  if (useSupabaseFinance()) {
+    const result = await disbursementsSb.updateFinanceDisbursement(id, payload);
+    if (!result.ok) return result;
+    return ok(normalizeFinanceDisbursement(result.data));
+  }
   try {
     const provider = getDataProvider();
     if (!provider.financeDisbursements.update) {

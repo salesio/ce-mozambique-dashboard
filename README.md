@@ -132,6 +132,25 @@ No auto-convert to members. See **[docs/backend/FIRST_TIMERS_FOLLOWUPS_SUPABASE_
 npm run test:first-timers-followups-supabase
 ```
 
+#### Finance + Public Giving + Storage pilot (Phase 5)
+
+```env
+VITE_DATA_SOURCE=supabase
+VITE_ENABLE_SUPABASE=true
+VITE_ENABLE_STORAGE=false   # set true only with private finance-proofs bucket
+VITE_SUPABASE_URL=...
+VITE_SUPABASE_ANON_KEY=...
+```
+
+Apply migration `0005_finance_public_giving_storage_pilot.sql`.  
+Public Giving creates **Verified income only after explicit Finance verification** (no duplicates on re-verify).  
+Partnerships still analytics on Verified partnership income only.  
+See **[docs/backend/FINANCE_PUBLIC_GIVING_STORAGE_SUPABASE_PILOT.md](docs/backend/FINANCE_PUBLIC_GIVING_STORAGE_SUPABASE_PILOT.md)**.
+
+```bash
+npm run test:finance-public-giving-supabase
+```
+
 | Item | Location |
 |------|----------|
 | Core SQL schema / seed / RLS / storage notes | `database/` |

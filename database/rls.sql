@@ -212,3 +212,22 @@ Future intent:
 --     OR responsible_user_id = public.current_app_user_id()
 --   );
 */
+
+-- ---------------------------------------------------------------------------
+-- Phase 5: Finance / Public Giving / Documents — policy sketches (NOT enabled)
+-- ---------------------------------------------------------------------------
+/*
+Future intent:
+- Super Admin / Finance Head: full finance access
+- Finance Officer: view/verify if permitted
+- Main Pastor: summaries per permission
+- Church Pastor: own church summary only if allowed
+- Staff: no finance by default
+- Public giving: constrained insert later (Edge Function / form API)
+- documents (finance-proofs): private; signed URL after Auth
+
+-- ALTER TABLE public.finance_records ENABLE ROW LEVEL SECURITY;
+-- ALTER TABLE public.public_giving_submissions ENABLE ROW LEVEL SECURITY;
+-- ALTER TABLE public.finance_disbursements ENABLE ROW LEVEL SECURITY;
+-- ALTER TABLE public.documents ENABLE ROW LEVEL SECURITY;
+*/

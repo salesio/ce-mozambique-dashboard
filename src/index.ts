@@ -71,6 +71,10 @@ export {
   getSupabaseAuthStatus,
   getSupabaseAuthClient,
   signInWithEmailPassword,
+  isSupabaseStorageEnabled,
+  getStorageInfo,
+  uploadFinanceProof,
+  FINANCE_PROOFS_BUCKET,
   // Churches
   listChurches,
   getChurchById,
@@ -1777,6 +1781,10 @@ import {
   getSupabaseAuthStatus,
   getSupabaseAuthClient,
   signInWithEmailPassword,
+  isSupabaseStorageEnabled,
+  getStorageInfo,
+  uploadFinanceProof,
+  FINANCE_PROOFS_BUCKET,
 } from "./data";
 
 function installDataLayerGlobals(): void {
@@ -3105,6 +3113,10 @@ function installDataLayerGlobals(): void {
     getSupabaseAuthStatus,
     getSupabaseAuthClient,
     signInWithEmailPassword,
+    isSupabaseStorageEnabled,
+    getStorageInfo,
+    uploadFinanceProof,
+    FINANCE_PROOFS_BUCKET,
     auth: {
       login: authLogin,
       loginDemo,

@@ -27,6 +27,12 @@ import type {
   MediaSchedule,
   MediaService,
   MediaTechnician,
+  CounselingAppointment,
+  CounselingCase,
+  CounselingFeedback,
+  CounselingReferral,
+  CounselingRequest,
+  Counselor,
   Member,
   Notification,
   Requisition,
@@ -109,6 +115,12 @@ export interface DataProvider {
   mediaChannels: EntityRepository<MediaChannel>;
   mediaPerformance: EntityRepository<MediaPerformanceReview>;
   mediaAwards: EntityRepository<MediaAward>;
+  counselingRequests: EntityRepository<CounselingRequest>;
+  counselingCases: EntityRepository<CounselingCase>;
+  counselingAppointments: EntityRepository<CounselingAppointment>;
+  counselors: EntityRepository<Counselor>;
+  counselingFeedback: EntityRepository<CounselingFeedback>;
+  counselingReferrals: EntityRepository<CounselingReferral>;
   inventoryItems: EntityRepository<InventoryItem>;
   inventoryMovements: EntityRepository<InventoryMovement>;
   inventoryMaintenance: EntityRepository<InventoryMaintenanceRecord>;

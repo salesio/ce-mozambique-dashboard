@@ -22,7 +22,7 @@ npm run test:requisitions-data    # smoke: requisitions workflow + finance disbu
 
 The UI still uses **localStorage mock** for most modules. Typed adapters live under `src/data/`.
 
-**Pilots already on the data layer:** Churches, Members, First Timers, Follow-Up, Foundation School, Cell Ministry, Finance, Requisitions & Approvals, Venue & Inventory, Staff & HR, Users / Roles / Access Control / Audit, **Media Department**  
+**Pilots already on the data layer:** Churches, Members, First Timers, Follow-Up, Foundation School, Cell Ministry, Finance, Requisitions & Approvals, Venue & Inventory, Staff & HR, Users / Roles / Access Control / Audit, Media Department, **Counseling / Aconselhamento**  
 (`VITE_DATA_SOURCE=mock|local|api|supabase` — default `mock`).
 
 **Escola de Fundação (functional):** full tabs (overview → reports), 20+ teachers at HQ, delivery modes (in-person / online / home / prison), lesson sessions & attendance, online tests 1–7 (mock Forms; 20×6+10), soul winning (lesson 4), physical final exam + attachment prep, grading 40/60, audit log. No real Google API / scan app / Postgres yet.
@@ -42,6 +42,8 @@ The UI still uses **localStorage mock** for most modules. Typed adapters live un
 **Users, Roles & Access Control (pilot):** users, app roles, permissions, templates, and audit logs via data layer + `access-control-data-bridge` (merges with live `CEAccessControl` templates). No real passwords; login remains demo. Access denied writes audit `access_denied`. Real Supabase Auth = future.
 
 **Media Department (pilot):** technical team, roles, services/programs, schedules (confirm/check-in/out), streaming channels, performance reviews, and awards via data layer + `CEMedia` bridge. Optional `staff_id` from Staff & HR. Equipment soft-linked from Venue & Inventory. Live TV remains external embed/link; **no real stream keys** in localStorage. See **[MEDIA_MODULE_PLAN.md](MEDIA_MODULE_PLAN.md)**.
+
+**Counseling / Aconselhamento (pilot):** requests, cases, appointments, counselors, feedback, and referrals via data layer + `CECounseling` bridge. Confidential notes restricted by RBAC; reports aggregated by default; soft audit on sensitive actions; optional Follow-Up creation when `CEFollowUps` exists. See **[COUNSELING_MODULE_PLAN.md](COUNSELING_MODULE_PLAN.md)**.
 
 **Public Cell Report Form (leaders, no admin login):**
 - Button on the **login screen** only: *Submeter Relatório de Célula* → `#cell-report-submit`

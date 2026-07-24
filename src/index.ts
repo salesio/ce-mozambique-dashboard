@@ -520,6 +520,53 @@ export {
   MEDIA_CHANNELS_SEED,
   MEDIA_PERFORMANCE_SEED,
   MEDIA_AWARDS_SEED,
+  // Counseling
+  listCounselingRequests,
+  getCounselingRequestById,
+  createCounselingRequest,
+  updateCounselingRequest,
+  deleteCounselingRequest,
+  searchCounselingRequests,
+  getUrgentCounselingRequests,
+  getPendingReviewRequests,
+  listCounselingCases,
+  getCounselingCaseById,
+  createCounselingCase,
+  updateCounselingCase,
+  closeCounselingCase,
+  reopenCounselingCase,
+  getOpenCounselingCases,
+  getCasesNeedingFollowUp,
+  getCasesEscalatedToPastor,
+  getCasesByCounselor,
+  listCounselingAppointments,
+  createCounselingAppointment,
+  updateCounselingAppointment,
+  completeCounselingAppointment,
+  cancelCounselingAppointment,
+  getTodayCounselingAppointments,
+  getUpcomingCounselingAppointments,
+  listCounselors,
+  createCounselor,
+  updateCounselor,
+  getActiveCounselors,
+  listCounselingFeedback,
+  createCounselingFeedback,
+  listCounselingReferrals,
+  createCounselingReferral,
+  markReferralCompleted,
+  getPendingCounselingReferrals,
+  getCounselingOverviewStats,
+  getConfidentialCounselingReport,
+  ensureCounselingSeeded,
+  getCounselingDataSourceInfo,
+  COUNSELING_REQUESTS_SEED,
+  COUNSELING_CASES_SEED,
+  COUNSELING_APPOINTMENTS_SEED,
+  COUNSELORS_SEED,
+  COUNSELING_FEEDBACK_SEED,
+  COUNSELING_REFERRALS_SEED,
+  counselingRepository,
 } from "./data";
 
 export type {
@@ -1036,6 +1083,36 @@ import {
   MEDIA_CHANNELS_SEED,
   MEDIA_PERFORMANCE_SEED,
   MEDIA_AWARDS_SEED,
+  listCounselingRequests,
+  createCounselingRequest,
+  updateCounselingRequest,
+  listCounselingCases,
+  createCounselingCase,
+  updateCounselingCase,
+  closeCounselingCase,
+  reopenCounselingCase,
+  getOpenCounselingCases,
+  getCasesNeedingFollowUp,
+  listCounselingAppointments,
+  createCounselingAppointment,
+  updateCounselingAppointment,
+  completeCounselingAppointment,
+  cancelCounselingAppointment,
+  getTodayCounselingAppointments,
+  listCounselors,
+  createCounselor,
+  updateCounselor,
+  listCounselingFeedback,
+  createCounselingFeedback,
+  listCounselingReferrals,
+  createCounselingReferral,
+  markReferralCompleted,
+  getUrgentCounselingRequests,
+  getCounselingOverviewStats,
+  ensureCounselingSeeded,
+  getCounselingDataSourceInfo,
+  COUNSELING_REQUESTS_SEED,
+  COUNSELORS_SEED,
   getDataProvider,
   getDataSource,
   getActiveDataSource,
@@ -1060,6 +1137,7 @@ function installDataLayerGlobals(): void {
     CEStaffHR?: Record<string, unknown>;
     CEAccessControlData?: Record<string, unknown>;
     CEMedia?: Record<string, unknown>;
+    CECounseling?: Record<string, unknown>;
   };
 
   const churches = {
@@ -1483,6 +1561,38 @@ function installDataLayerGlobals(): void {
     getOpenChecklists,
   };
 
+  const counseling = {
+    listCounselingRequests,
+    createCounselingRequest,
+    updateCounselingRequest,
+    listCounselingCases,
+    createCounselingCase,
+    updateCounselingCase,
+    closeCounselingCase,
+    reopenCounselingCase,
+    getOpenCounselingCases,
+    getCasesNeedingFollowUp,
+    listCounselingAppointments,
+    createCounselingAppointment,
+    updateCounselingAppointment,
+    completeCounselingAppointment,
+    cancelCounselingAppointment,
+    getTodayCounselingAppointments,
+    listCounselors,
+    createCounselor,
+    updateCounselor,
+    listCounselingFeedback,
+    createCounselingFeedback,
+    listCounselingReferrals,
+    createCounselingReferral,
+    markReferralCompleted,
+    getUrgentCounselingRequests,
+    getCounselingOverviewStats,
+    ensureCounselingSeeded,
+    getCounselingDataSourceInfo,
+    getInfo: getCounselingDataSourceInfo,
+  };
+
   const media = {
     listMediaTeam,
     getMediaTeamMemberById,
@@ -1810,6 +1920,31 @@ function installDataLayerGlobals(): void {
       updateMediaPerformanceReview,
     },
     mediaAwards: { listMediaAwards, createMediaAward, updateMediaAward },
+    counseling,
+    counselingRequests: {
+      listCounselingRequests,
+      createCounselingRequest,
+      updateCounselingRequest,
+    },
+    counselingCases: {
+      listCounselingCases,
+      createCounselingCase,
+      updateCounselingCase,
+      closeCounselingCase,
+    },
+    counselingAppointments: {
+      listCounselingAppointments,
+      createCounselingAppointment,
+      updateCounselingAppointment,
+      completeCounselingAppointment,
+    },
+    counselors: { listCounselors, createCounselor, updateCounselor },
+    counselingFeedback: { listCounselingFeedback, createCounselingFeedback },
+    counselingReferrals: {
+      listCounselingReferrals,
+      createCounselingReferral,
+      markReferralCompleted,
+    },
     getDataProvider,
     getDataSource,
     getActiveDataSource,
@@ -1856,6 +1991,9 @@ function installDataLayerGlobals(): void {
   if (!root.CEMedia) {
     root.CEMedia = media;
   }
+  if (!root.CECounseling) {
+    root.CECounseling = counseling;
+  }
 
   try {
     const churchInfo = getChurchesDataSourceInfo();
@@ -1875,6 +2013,7 @@ function installDataLayerGlobals(): void {
       staffHR: Object.keys(staffHR),
       accessControl: Object.keys(accessControl),
       media: Object.keys(media),
+      counseling: Object.keys(counseling),
     });
   } catch (error) {
     console.warn("[CE DataLayer] installed with provider warning", error);

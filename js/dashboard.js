@@ -17701,6 +17701,18 @@ async function submitForm(form) {
     ) {
       void dualWriteMediaRecord(modalType, "update", collection[index]);
     }
+    if (
+      [
+        "counselingRequest",
+        "counselor",
+        "counselingAppointment",
+        "counselingFeedback",
+        "counselingReferral",
+        "counselingCase",
+      ].includes(modalType)
+    ) {
+      void dualWriteCounselingRecord(modalType, "update", collection[index]);
+    }
   } else {
     const idPrefix = modalType.slice(0, 3);
     const nowIso = new Date().toISOString();
@@ -17898,6 +17910,36 @@ async function submitForm(form) {
         if (!record.stream_key_status) record.stream_key_status = "Not Required";
       }
       void dualWriteMediaRecord(modalType, "create", record);
+    }
+    if (
+      [
+        "counselingRequest",
+        "counselor",
+        "counselingAppointment",
+        "counselingFeedback",
+        "counselingReferral",
+        "counselingCase",
+      ].includes(modalType)
+    ) {
+      if (modalType === "counselingRequest") {
+        record.person_name = record.person_name || record.full_name || "";
+        record.full_name = record.full_name || record.person_name || "";
+        record.category = record.category || record.counseling_category || "";
+        record.counseling_category = record.counseling_category || record.category || "";
+        record.subject = record.subject || record.counseling_subject || "";
+        record.summary = record.summary || record.issue_summary || "";
+        if (!record.request_number) {
+          record.request_number = `CON-${new Date().getFullYear()}-${String(Date.now()).slice(-4)}`;
+        }
+        if (!record.status || record.status === "Activo") record.status = "New";
+      }
+      if (modalType === "counselingAppointment") {
+        record.start_time = record.start_time || record.appointment_time || "";
+        record.appointment_time = record.appointment_time || record.start_time || "";
+        record.request_id = record.request_id || record.counseling_request_id || "";
+        record.counseling_request_id = record.counseling_request_id || record.request_id || "";
+      }
+      void dualWriteCounselingRecord(modalType, "create", record);
     }
   }
   bootstrap.Modal.getOrCreateInstance(byId("entryModal")).hide();
@@ -19473,6 +19515,126 @@ function enterDashboard() {
       }
     })
     .catch((error) => console.warn("[CE Media] background hydrate skipped", error));
+  Promise.resolve()
+    .then(() => hydrateCounselingFromRepository())
+    .then((hydrated) => {
+      if (hydrated && activeRoute === "counseling" && typeof renderCounseling === "function") {
+        renderCounseling();
+      }
+    })
+    .catch((error) => console.warn("[CE Counseling] background hydrate skipped", error));
+}
+
+function dualWriteCounselingRecord(modalType, mode, record) {
+  const bridge = window.CECounseling || window.CEDataLayer?.counseling;
+  if (!bridge || !record) return;
+  if (typeof bridge.dualWriteRecord === "function") {
+    void bridge.dualWriteRecord(modalType, mode, record);
+    return;
+  }
+  const map = {
+    counselingRequest: ["createCounselingRequest", "updateCounselingRequest"],
+    counselor: ["createCounselor", "updateCounselor"],
+    counselingAppointment: ["createCounselingAppointment", "updateCounselingAppointment"],
+    counselingFeedback: ["createCounselingFeedback", "updateCounselingFeedback"],
+    counselingReferral: ["createCounselingReferral", "updateCounselingReferral"],
+    counselingCase: ["createCounselingCase", "updateCounselingCase"],
+  };
+  const pair = map[modalType];
+  if (!pair) return;
+  if (mode === "create" && bridge[pair[0]]) void bridge[pair[0]](record);
+  else if (mode === "update" && bridge[pair[1]]) void bridge[pair[1]](record.id, record);
+}
+
+async function hydrateCounselingFromRepository() {
+  const repo = window.CECounseling || window.CEDataLayer?.counseling;
+  if (!repo?.listCounselingRequests) return false;
+  try {
+    let hydrated = false;
+    state.counseling =
+      state.counseling && !Array.isArray(state.counseling)
+        ? state.counseling
+        : structuredClone(seedData.counseling || {});
+
+    async function merge(listFn, key, mapRow) {
+      if (typeof listFn !== "function") return;
+      const result = await listFn();
+      if (!result?.ok || !Array.isArray(result.data) || !result.data.length) return;
+      const prev = new Map((state.counseling[key] || []).map((r) => [r.id, r]));
+      const byId = new Map();
+      result.data.forEach((row) => {
+        const previous = prev.get(row.id) || {};
+        const mapped = mapRow ? mapRow(row) : row;
+        byId.set(row.id, { ...mapped, ...previous, id: row.id });
+      });
+      prev.forEach((localRow, id) => {
+        if (!byId.has(id)) byId.set(id, localRow);
+      });
+      state.counseling[key] = [...byId.values()];
+      hydrated = true;
+    }
+
+    await merge(repo.listCounselingRequests?.bind(repo), "requests", (row) => ({
+      ...row,
+      full_name: row.full_name || row.person_name,
+      person_name: row.person_name || row.full_name,
+      counseling_category: row.counseling_category || row.category,
+      counseling_subject: row.counseling_subject || row.subject,
+      issue_summary: row.issue_summary || row.summary,
+      status: row.status || "New",
+    }));
+    await merge(repo.listCounselors?.bind(repo), "counselors", (row) => ({
+      ...row,
+      counseling_categories: row.counseling_categories || row.categories || [],
+      current_active_cases: row.current_active_cases ?? row.current_open_cases ?? 0,
+      status: /active/i.test(String(row.status || "")) ? "Activo" : row.status || "Activo",
+    }));
+    await merge(repo.listCounselingAppointments?.bind(repo), "appointments", (row) => ({
+      ...row,
+      counseling_request_id: row.counseling_request_id || row.request_id,
+      appointment_time: row.appointment_time || row.start_time,
+      location_type: row.location_type || row.appointment_type,
+      status: row.status || "Agendado",
+    }));
+    await merge(repo.listCounselingReferrals?.bind(repo), "referrals", (row) => ({
+      ...row,
+      counseling_request_id: row.counseling_request_id || row.request_id,
+      referred_to_type: row.referred_to_type || row.target_type,
+      reason: row.reason || row.referral_reason,
+      referred_by_name: row.referred_by_name || row.from_name,
+      status: row.status || "Pendente",
+    }));
+    await merge(repo.listCounselingFeedback?.bind(repo), "feedback", (row) => ({
+      ...row,
+      counseling_request_id: row.counseling_request_id || row.request_id,
+      feedback_summary: row.feedback_summary || row.summary,
+      follow_up_date: row.follow_up_date || row.next_contact_date,
+      status: row.status || "Pendente",
+    }));
+    // Keep cases for data layer consumers; UI active tab still uses requests
+    if (typeof repo.listCounselingCases === "function") {
+      const cases = await repo.listCounselingCases();
+      if (cases?.ok && Array.isArray(cases.data)) {
+        state.counseling.cases = cases.data;
+        hydrated = true;
+      }
+    }
+
+    if (hydrated) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (_) {}
+      console.info("[CE Counseling] hydrated", {
+        requests: (state.counseling.requests || []).length,
+        counselors: (state.counseling.counselors || []).length,
+        appointments: (state.counseling.appointments || []).length,
+      });
+    }
+    return hydrated;
+  } catch (error) {
+    console.warn("[CE Counseling] hydrate failed", error);
+    return false;
+  }
 }
 
 function dualWriteMediaRecord(modalType, mode, record) {

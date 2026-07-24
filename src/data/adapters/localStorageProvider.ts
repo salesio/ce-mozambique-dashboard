@@ -27,6 +27,12 @@ import type {
   MediaSchedule,
   MediaService,
   MediaTechnician,
+  CounselingAppointment,
+  CounselingCase,
+  CounselingFeedback,
+  CounselingReferral,
+  CounselingRequest,
+  Counselor,
   Member,
   Notification,
   Requisition,
@@ -95,6 +101,12 @@ function storageKeyFor(key: EntityCollectionName): string {
   if (key === "media_channels") return `${STORAGE_PREFIX}media-channels`;
   if (key === "media_performance") return `${STORAGE_PREFIX}media-performance`;
   if (key === "media_awards") return `${STORAGE_PREFIX}media-awards`;
+  if (key === "counseling_requests") return `${STORAGE_PREFIX}counseling-requests`;
+  if (key === "counseling_cases") return `${STORAGE_PREFIX}counseling-cases`;
+  if (key === "counseling_appointments") return `${STORAGE_PREFIX}counseling-appointments`;
+  if (key === "counselors") return `${STORAGE_PREFIX}counselors`;
+  if (key === "counseling_feedback") return `${STORAGE_PREFIX}counseling-feedback`;
+  if (key === "counseling_referrals") return `${STORAGE_PREFIX}counseling-referrals`;
   return STORAGE_PREFIX + key;
 }
 
@@ -204,6 +216,14 @@ export function createLocalStorageProvider(): DataProvider {
   const mediaChannels = createPersistedRepository<MediaChannel>("media_channels");
   const mediaPerformance = createPersistedRepository<MediaPerformanceReview>("media_performance");
   const mediaAwards = createPersistedRepository<MediaAward>("media_awards");
+  const counselingRequests = createPersistedRepository<CounselingRequest>("counseling_requests");
+  const counselingCases = createPersistedRepository<CounselingCase>("counseling_cases");
+  const counselingAppointments =
+    createPersistedRepository<CounselingAppointment>("counseling_appointments");
+  const counselors = createPersistedRepository<Counselor>("counselors");
+  const counselingFeedback = createPersistedRepository<CounselingFeedback>("counseling_feedback");
+  const counselingReferrals =
+    createPersistedRepository<CounselingReferral>("counseling_referrals");
   const inventoryItems = createPersistedRepository<InventoryItem>("inventory_items");
   const inventoryMovements = createPersistedRepository<InventoryMovement>("inventory_movements");
   const inventoryMaintenance =
@@ -251,6 +271,12 @@ export function createLocalStorageProvider(): DataProvider {
     media_channels: mediaChannels as EntityRepository<unknown>,
     media_performance: mediaPerformance as EntityRepository<unknown>,
     media_awards: mediaAwards as EntityRepository<unknown>,
+    counseling_requests: counselingRequests as EntityRepository<unknown>,
+    counseling_cases: counselingCases as EntityRepository<unknown>,
+    counseling_appointments: counselingAppointments as EntityRepository<unknown>,
+    counselors: counselors as EntityRepository<unknown>,
+    counseling_feedback: counselingFeedback as EntityRepository<unknown>,
+    counseling_referrals: counselingReferrals as EntityRepository<unknown>,
     inventory_items: inventoryItems as EntityRepository<unknown>,
     inventory_movements: inventoryMovements as EntityRepository<unknown>,
     inventory_maintenance: inventoryMaintenance as EntityRepository<unknown>,
@@ -302,8 +328,13 @@ export function createLocalStorageProvider(): DataProvider {
     mediaChannels,
     mediaPerformance,
     mediaAwards,
-    inventoryItems,
-    inventoryMovements,
+    counselingRequests,
+    counselingCases,
+    counselingAppointments,
+    counselors,
+    counselingFeedback,
+    counselingReferrals,
+    inventoryItems,    inventoryMovements,
     inventoryMaintenance,
     venueSpaces,
     serviceChecklists,

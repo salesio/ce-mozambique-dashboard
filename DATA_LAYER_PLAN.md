@@ -977,3 +977,62 @@ npm run test:venue-inventory-data
 # Media Team Member vê só o próprio âmbito (quando RBAC aplica)
 # VITE_DATA_SOURCE=local + F5
 ```
+
+---
+
+## Pilot migration: Counseling
+
+**Status: live (pilot)** — dual-write / hydrate; UI remains in `js/dashboard.js` (`renderCounseling`, `state.counseling`).
+
+See also **[COUNSELING_MODULE_PLAN.md](COUNSELING_MODULE_PLAN.md)**.
+
+### Local keys
+
+| Collection | Key |
+|------------|-----|
+| Requests | `ce-data-layer:counseling-requests` |
+| Cases | `ce-data-layer:counseling-cases` |
+| Appointments | `ce-data-layer:counseling-appointments` |
+| Counselors | `ce-data-layer:counselors` |
+| Feedback | `ce-data-layer:counseling-feedback` |
+| Referrals | `ce-data-layer:counseling-referrals` |
+
+### Domain rules
+
+- **Counseling** usa data layer; pedidos → casos → sessões → feedback → referrals  
+- **Dados confidenciais** protegidos por RBAC (notas confidenciais só roles permitidas na UI)  
+- **Audit log** soft-regista acessos/acções sensíveis (view case, close, referral, confidential report)  
+- Casos ligam a Members / First Timers; Follow-Up via bridge se `CEFollowUps` existir  
+- Conselheiros podem ter `staff_id`  
+- **Relatórios agregados por padrão** — sem `confidential_notes` no export  
+- PostgreSQL direct = fase futura  
+
+### Code
+
+| Piece | Role |
+|-------|------|
+| `src/data/repositories/counselingRepository.ts` | Aggregator |
+| Seeds | requests, cases, appointments, counselors, feedback, referrals |
+| `js/counseling-data-bridge.js` | Dual-write + pure-JS fallback (`CECounseling`) |
+| Dashboard | dual-write on counseling form save + hydrate |
+
+### Globals
+
+```js
+window.CECounseling = { listCounselingRequests, createCounselingCase, … getInfo }
+window.CEDataLayer.counseling / counselingRequests / counselingCases / …
+```
+
+Cache buster: `?v=20260723-counseling-data-v1`
+
+### How to test Counseling
+
+```bash
+npm run build
+npm run test:counseling-data
+npm run test:access-control-data
+npm run test:staff-hr-data
+npm run test:media-data
+# Manual: Aconselhamento → pedido → caso → agendar → feedback → referral
+# Staff Member bloqueado; VITE_DATA_SOURCE=local + F5
+```

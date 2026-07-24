@@ -26,6 +26,12 @@ import type {
   MediaSchedule,
   MediaService,
   MediaTechnician,
+  CounselingAppointment,
+  CounselingCase,
+  CounselingFeedback,
+  CounselingReferral,
+  CounselingRequest,
+  Counselor,
   Member,
   Notification,
   Requisition,
@@ -82,6 +88,12 @@ import { MEDIA_SCHEDULES_SEED } from "../seeds/mediaSchedulesSeed";
 import { MEDIA_CHANNELS_SEED } from "../seeds/mediaChannelsSeed";
 import { MEDIA_PERFORMANCE_SEED } from "../seeds/mediaPerformanceSeed";
 import { MEDIA_AWARDS_SEED } from "../seeds/mediaAwardsSeed";
+import { COUNSELING_REQUESTS_SEED } from "../seeds/counselingRequestsSeed";
+import { COUNSELING_CASES_SEED } from "../seeds/counselingCasesSeed";
+import { COUNSELING_APPOINTMENTS_SEED } from "../seeds/counselingAppointmentsSeed";
+import { COUNSELORS_SEED } from "../seeds/counselorsSeed";
+import { COUNSELING_FEEDBACK_SEED } from "../seeds/counselingFeedbackSeed";
+import { COUNSELING_REFERRALS_SEED } from "../seeds/counselingReferralsSeed";
 import type { AccessPermission, AccessRole, AuditLog, PermissionTemplate } from "../types/entities";
 
 /**
@@ -151,6 +163,22 @@ export function createMockProvider(): DataProvider {
     MEDIA_PERFORMANCE_SEED.map((r) => ({ ...r })),
   );
   const mediaAwards = createMemoryRepository<MediaAward>(MEDIA_AWARDS_SEED.map((r) => ({ ...r })));
+  const counselingRequests = createMemoryRepository<CounselingRequest>(
+    COUNSELING_REQUESTS_SEED.map((r) => ({ ...r })),
+  );
+  const counselingCases = createMemoryRepository<CounselingCase>(
+    COUNSELING_CASES_SEED.map((r) => ({ ...r })),
+  );
+  const counselingAppointments = createMemoryRepository<CounselingAppointment>(
+    COUNSELING_APPOINTMENTS_SEED.map((r) => ({ ...r })),
+  );
+  const counselors = createMemoryRepository<Counselor>(COUNSELORS_SEED.map((r) => ({ ...r })));
+  const counselingFeedback = createMemoryRepository<CounselingFeedback>(
+    COUNSELING_FEEDBACK_SEED.map((r) => ({ ...r })),
+  );
+  const counselingReferrals = createMemoryRepository<CounselingReferral>(
+    COUNSELING_REFERRALS_SEED.map((r) => ({ ...r })),
+  );
   const inventoryItems = createMemoryRepository<InventoryItem>(
     INVENTORY_ITEMS_SEED.map((r) => ({ ...r })),
   );
@@ -221,6 +249,12 @@ export function createMockProvider(): DataProvider {
     media_channels: mediaChannels as EntityRepository<unknown>,
     media_performance: mediaPerformance as EntityRepository<unknown>,
     media_awards: mediaAwards as EntityRepository<unknown>,
+    counseling_requests: counselingRequests as EntityRepository<unknown>,
+    counseling_cases: counselingCases as EntityRepository<unknown>,
+    counseling_appointments: counselingAppointments as EntityRepository<unknown>,
+    counselors: counselors as EntityRepository<unknown>,
+    counseling_feedback: counselingFeedback as EntityRepository<unknown>,
+    counseling_referrals: counselingReferrals as EntityRepository<unknown>,
     inventory_items: inventoryItems as EntityRepository<unknown>,
     inventory_movements: inventoryMovements as EntityRepository<unknown>,
     inventory_maintenance: inventoryMaintenance as EntityRepository<unknown>,
@@ -271,6 +305,12 @@ export function createMockProvider(): DataProvider {
     mediaChannels,
     mediaPerformance,
     mediaAwards,
+    counselingRequests,
+    counselingCases,
+    counselingAppointments,
+    counselors,
+    counselingFeedback,
+    counselingReferrals,
     inventoryItems,
     inventoryMovements,
     inventoryMaintenance,

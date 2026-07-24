@@ -1606,6 +1606,235 @@ export interface MediaAward {
 }
 
 // ---------------------------------------------------------------------------
+// Counseling / Aconselhamento
+// ---------------------------------------------------------------------------
+
+/** Counseling intake request — dual-map English + legacy UI fields. */
+export interface CounselingRequest {
+  id: EntityId;
+  request_number?: string | null;
+  person_type?: string | null;
+  person_id?: EntityId | null;
+  person_name?: string | null;
+  full_name?: string | null;
+  member_id?: EntityId | null;
+  first_timer_id?: EntityId | null;
+  phone?: string | null;
+  whatsapp?: string | null;
+  email?: string | null;
+  gender?: string | null;
+  age?: number | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  cell_group_id?: EntityId | null;
+  cell_group_name?: string | null;
+  cell_id?: EntityId | null;
+  cell_name?: string | null;
+  category?: string | null;
+  counseling_category?: string | null;
+  subject?: string | null;
+  counseling_subject?: string | null;
+  summary?: string | null;
+  issue_summary?: string | null;
+  urgency?: string | null;
+  confidentiality_level?: string | null;
+  preferred_contact_method?: string | null;
+  preferred_date?: IsoDate | null;
+  preferred_time?: string | null;
+  preferred_counselor_gender?: string | null;
+  preferred_language?: string | null;
+  status?: string | null;
+  assigned_case_id?: EntityId | null;
+  assigned_counselor_id?: EntityId | null;
+  assigned_counselor_name?: string | null;
+  assigned_by_user_id?: EntityId | null;
+  assigned_by_name?: string | null;
+  assigned_at?: IsoDateTime | null;
+  received_by_user_id?: EntityId | null;
+  received_by_name?: string | null;
+  requested_by_user_id?: EntityId | null;
+  requested_by_name?: string | null;
+  source?: string | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+/** Pastoral case — confidential notes restricted by RBAC in UI. */
+export interface CounselingCase {
+  id: EntityId;
+  case_number?: string | null;
+  request_id?: EntityId | null;
+  person_type?: string | null;
+  person_id?: EntityId | null;
+  person_name?: string | null;
+  member_id?: EntityId | null;
+  first_timer_id?: EntityId | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  category?: string | null;
+  subject?: string | null;
+  summary?: string | null;
+  confidential_notes?: string | null;
+  urgency?: string | null;
+  confidentiality_level?: string | null;
+  counselor_id?: EntityId | null;
+  counselor_name?: string | null;
+  counselor_staff_id?: EntityId | null;
+  assigned_by_user_id?: EntityId | null;
+  assigned_by_name?: string | null;
+  assigned_at?: IsoDateTime | null;
+  status?: string | null;
+  escalation_level?: string | null;
+  referred_to_user_id?: EntityId | null;
+  referred_to_name?: string | null;
+  referred_to_role?: string | null;
+  needs_follow_up?: boolean | null;
+  follow_up_id?: EntityId | null;
+  outcome?: string | null;
+  next_step?: string | null;
+  closed_by_user_id?: EntityId | null;
+  closed_by_name?: string | null;
+  closed_at?: IsoDateTime | null;
+  closure_notes?: string | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface CounselingAppointment {
+  id: EntityId;
+  case_id?: EntityId | null;
+  case_number?: string | null;
+  request_id?: EntityId | null;
+  counseling_request_id?: EntityId | null;
+  person_type?: string | null;
+  person_id?: EntityId | null;
+  person_name?: string | null;
+  counselor_id?: EntityId | null;
+  counselor_name?: string | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  appointment_date?: IsoDate | null;
+  start_time?: string | null;
+  appointment_time?: string | null;
+  end_time?: string | null;
+  duration_minutes?: number | null;
+  appointment_type?: string | null;
+  location_type?: string | null;
+  location?: string | null;
+  location_details?: string | null;
+  meeting_link?: string | null;
+  status?: string | null;
+  attendance_status?: string | null;
+  session_notes?: string | null;
+  confidential_session_notes?: string | null;
+  notes?: string | null;
+  next_appointment_date?: IsoDate | null;
+  next_step?: string | null;
+  reminder_sent?: boolean | null;
+  created_by_user_id?: EntityId | null;
+  created_by_name?: string | null;
+  completed_by_user_id?: EntityId | null;
+  completed_by_name?: string | null;
+  completed_at?: IsoDateTime | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface Counselor {
+  id: EntityId;
+  staff_id?: EntityId | null;
+  staff_name?: string | null;
+  user_id?: EntityId | null;
+  full_name?: string | null;
+  title?: string | null;
+  gender?: string | null;
+  phone?: string | null;
+  email?: string | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  categories?: string[] | null;
+  counseling_categories?: string[] | null;
+  languages?: string[] | null;
+  availability?: string | null;
+  max_cases_per_week?: number | null;
+  current_open_cases?: number | null;
+  current_active_cases?: number | null;
+  supervisor_id?: EntityId | null;
+  supervisor_name?: string | null;
+  status?: string | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface CounselingFeedback {
+  id: EntityId;
+  case_id?: EntityId | null;
+  appointment_id?: EntityId | null;
+  request_id?: EntityId | null;
+  counseling_request_id?: EntityId | null;
+  counselor_id?: EntityId | null;
+  counselor_name?: string | null;
+  person_type?: string | null;
+  person_id?: EntityId | null;
+  person_name?: string | null;
+  feedback_type?: string | null;
+  summary?: string | null;
+  feedback_summary?: string | null;
+  outcome?: string | null;
+  needs_follow_up?: boolean | null;
+  next_step?: string | null;
+  next_contact_date?: IsoDate | null;
+  follow_up_date?: IsoDate | null;
+  referral_needed?: boolean | null;
+  referral_target_type?: string | null;
+  needs_pastor_review?: boolean | null;
+  referred_to_pastor?: string | null;
+  confidentiality_note?: string | null;
+  visible_to_roles?: string[] | null;
+  church_id?: EntityId | null;
+  status?: string | null;
+  created_by_user_id?: EntityId | null;
+  created_by_name?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface CounselingReferral {
+  id: EntityId;
+  case_id?: EntityId | null;
+  case_number?: string | null;
+  request_id?: EntityId | null;
+  counseling_request_id?: EntityId | null;
+  from_user_id?: EntityId | null;
+  from_name?: string | null;
+  from_role?: string | null;
+  referred_by_user_id?: EntityId | null;
+  referred_by_name?: string | null;
+  target_type?: string | null;
+  referred_to_type?: string | null;
+  target_user_id?: EntityId | null;
+  referred_to_user_id?: EntityId | null;
+  target_name?: string | null;
+  target_role?: string | null;
+  referred_to_role?: string | null;
+  referred_to_department?: string | null;
+  referral_reason?: string | null;
+  reason?: string | null;
+  referral_notes?: string | null;
+  response_notes?: string | null;
+  urgency?: string | null;
+  status?: string | null;
+  referred_at?: IsoDateTime | null;
+  completed_at?: IsoDateTime | null;
+  church_id?: EntityId | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+// ---------------------------------------------------------------------------
 // Venue & Inventory Management
 // ---------------------------------------------------------------------------
 
@@ -2145,6 +2374,12 @@ export type EntityCollectionName =
   | "media_channels"
   | "media_performance"
   | "media_awards"
+  | "counseling_requests"
+  | "counseling_cases"
+  | "counseling_appointments"
+  | "counselors"
+  | "counseling_feedback"
+  | "counseling_referrals"
   | "inventory_items"
   | "inventory_movements"
   | "inventory_maintenance"

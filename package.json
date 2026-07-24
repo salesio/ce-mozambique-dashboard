@@ -20,6 +20,7 @@
     "test:media-data": "node scripts/smoke-media-data.mjs",
     "test:counseling-data": "node scripts/smoke-counseling-data.mjs",
     "test:sacraments-data": "node scripts/smoke-sacraments-data.mjs",
+    "test:fevo-data": "node scripts/smoke-fevo-data.mjs",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",

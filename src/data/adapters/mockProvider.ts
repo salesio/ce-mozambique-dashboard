@@ -38,6 +38,15 @@ import type {
   SacramentAppointment,
   SacramentCertificate,
   SacramentDocument,
+  FevoActivity,
+  FevoEvangelismRecord,
+  FevoFollowUpRecord,
+  FevoMissingReport,
+  FevoPrayerRecord,
+  FevoReport,
+  FevoTeam,
+  FevoVisitationRecord,
+  FevoWeeklyConfig,
   Member,
   Notification,
   Requisition,
@@ -106,6 +115,15 @@ import { BABY_DEDICATIONS_SEED } from "../seeds/babyDedicationsSeed";
 import { SACRAMENT_CERTIFICATES_SEED } from "../seeds/sacramentCertificatesSeed";
 import { SACRAMENT_DOCUMENTS_SEED } from "../seeds/sacramentDocumentsSeed";
 import { SACRAMENT_APPOINTMENTS_SEED } from "../seeds/sacramentAppointmentsSeed";
+import { FEVO_WEEKLY_CONFIGS_SEED } from "../seeds/fevoWeeklyConfigsSeed";
+import { FEVO_TEAMS_SEED } from "../seeds/fevoTeamsSeed";
+import { FEVO_ACTIVITIES_SEED } from "../seeds/fevoActivitiesSeed";
+import { FEVO_REPORTS_SEED } from "../seeds/fevoReportsSeed";
+import { FEVO_MISSING_REPORTS_SEED } from "../seeds/fevoMissingReportsSeed";
+import { FEVO_FOLLOW_UP_RECORDS_SEED } from "../seeds/fevoFollowUpRecordsSeed";
+import { FEVO_EVANGELISM_RECORDS_SEED } from "../seeds/fevoEvangelismRecordsSeed";
+import { FEVO_VISITATION_RECORDS_SEED } from "../seeds/fevoVisitationRecordsSeed";
+import { FEVO_PRAYER_RECORDS_SEED } from "../seeds/fevoPrayerRecordsSeed";
 import type { AccessPermission, AccessRole, AuditLog, PermissionTemplate } from "../types/entities";
 
 /**
@@ -205,6 +223,29 @@ export function createMockProvider(): DataProvider {
   const sacramentAppointments = createMemoryRepository<SacramentAppointment>(
     SACRAMENT_APPOINTMENTS_SEED.map((r) => ({ ...r })),
   );
+  const fevoWeeklyConfigs = createMemoryRepository<FevoWeeklyConfig>(
+    FEVO_WEEKLY_CONFIGS_SEED.map((r) => ({ ...r })),
+  );
+  const fevoTeams = createMemoryRepository<FevoTeam>(FEVO_TEAMS_SEED.map((r) => ({ ...r })));
+  const fevoActivities = createMemoryRepository<FevoActivity>(
+    FEVO_ACTIVITIES_SEED.map((r) => ({ ...r })),
+  );
+  const fevoReports = createMemoryRepository<FevoReport>(FEVO_REPORTS_SEED.map((r) => ({ ...r })));
+  const fevoMissingReports = createMemoryRepository<FevoMissingReport>(
+    FEVO_MISSING_REPORTS_SEED.map((r) => ({ ...r })),
+  );
+  const fevoFollowUpRecords = createMemoryRepository<FevoFollowUpRecord>(
+    FEVO_FOLLOW_UP_RECORDS_SEED.map((r) => ({ ...r })),
+  );
+  const fevoEvangelismRecords = createMemoryRepository<FevoEvangelismRecord>(
+    FEVO_EVANGELISM_RECORDS_SEED.map((r) => ({ ...r })),
+  );
+  const fevoVisitationRecords = createMemoryRepository<FevoVisitationRecord>(
+    FEVO_VISITATION_RECORDS_SEED.map((r) => ({ ...r })),
+  );
+  const fevoPrayerRecords = createMemoryRepository<FevoPrayerRecord>(
+    FEVO_PRAYER_RECORDS_SEED.map((r) => ({ ...r })),
+  );
   const inventoryItems = createMemoryRepository<InventoryItem>(
     INVENTORY_ITEMS_SEED.map((r) => ({ ...r })),
   );
@@ -287,6 +328,15 @@ export function createMockProvider(): DataProvider {
     sacrament_certificates: sacramentCertificates as EntityRepository<unknown>,
     sacrament_documents: sacramentDocuments as EntityRepository<unknown>,
     sacrament_appointments: sacramentAppointments as EntityRepository<unknown>,
+    fevo_weekly_configs: fevoWeeklyConfigs as EntityRepository<unknown>,
+    fevo_teams: fevoTeams as EntityRepository<unknown>,
+    fevo_activities: fevoActivities as EntityRepository<unknown>,
+    fevo_reports: fevoReports as EntityRepository<unknown>,
+    fevo_missing_reports: fevoMissingReports as EntityRepository<unknown>,
+    fevo_follow_up_records: fevoFollowUpRecords as EntityRepository<unknown>,
+    fevo_evangelism_records: fevoEvangelismRecords as EntityRepository<unknown>,
+    fevo_visitation_records: fevoVisitationRecords as EntityRepository<unknown>,
+    fevo_prayer_records: fevoPrayerRecords as EntityRepository<unknown>,
     inventory_items: inventoryItems as EntityRepository<unknown>,
     inventory_movements: inventoryMovements as EntityRepository<unknown>,
     inventory_maintenance: inventoryMaintenance as EntityRepository<unknown>,
@@ -349,6 +399,15 @@ export function createMockProvider(): DataProvider {
     sacramentCertificates,
     sacramentDocuments,
     sacramentAppointments,
+    fevoWeeklyConfigs,
+    fevoTeams,
+    fevoActivities,
+    fevoReports,
+    fevoMissingReports,
+    fevoFollowUpRecords,
+    fevoEvangelismRecords,
+    fevoVisitationRecords,
+    fevoPrayerRecords,
     inventoryItems,
     inventoryMovements,
     inventoryMaintenance,

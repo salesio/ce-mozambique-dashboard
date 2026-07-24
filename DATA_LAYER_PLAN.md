@@ -1087,3 +1087,59 @@ npm run test:staff-hr-data
 # Manual: Sacramentos → baptismo → casamento → dedicação → certificado (sem finance)
 # VITE_DATA_SOURCE=local + F5
 ```
+
+---
+
+## Pilot migration: F.E.V.O
+
+**Status: live (pilot)** — dual-write / hydrate; UI remains in `js/dashboard.js` (`renderFevo`, `state.fevo`).
+
+See also **[FEVO_MODULE_PLAN.md](FEVO_MODULE_PLAN.md)**.
+
+### Local keys
+
+| Collection | Key |
+|------------|-----|
+| Weekly configs | `ce-data-layer:fevo-weekly-configs` |
+| Teams | `ce-data-layer:fevo-teams` |
+| Activities | `ce-data-layer:fevo-activities` |
+| Reports | `ce-data-layer:fevo-reports` |
+| Missing reports | `ce-data-layer:fevo-missing-reports` |
+| Follow-Up records | `ce-data-layer:fevo-follow-up-records` |
+| Evangelism records | `ce-data-layer:fevo-evangelism-records` |
+| Visitation records | `ce-data-layer:fevo-visitation-records` |
+| Prayer records | `ce-data-layer:fevo-prayer-records` |
+
+### Domain rules
+
+- **F.E.V.O** = Follow-Up, Evangelização, Visitação, Oração  
+- Configuração semanal + equipas A/B/C/D + relatórios + grupos sem relatório  
+- Registos tipados (follow-up / evangelism / visitation / prayer) em colecções próprias, ligados por `report_id`  
+- Soft-link a **Follow-Up** ao criar registo com `referred_to_follow_up_department` (se bridge existir)  
+- Analytics: overview, weekly report, team performance, missing stats, evangelism/prayer stats  
+- Não duplica Members / Cells — só referências  
+- Audit soft em activate/close, submit/validate/reject, resolve missing  
+- PostgreSQL direct = fase futura  
+
+### Code
+
+| Piece | Role |
+|-------|------|
+| `src/data/repositories/fevoRepository.ts` | Aggregator |
+| Seeds | configs, teams, activities, reports, missing |
+| `js/fevo-data-bridge.js` | Dual-write + pure-JS fallback (`CEFevo`) |
+| Dashboard | dual-write fevoConfig/Report/NoReport + hydrate |
+
+Cache buster: `?v=20260723-fevo-data-v1`
+
+### How to test F.E.V.O
+
+```bash
+npm run build
+npm run test:fevo-data
+npm run test:sacraments-data
+npm run test:counseling-data
+npm run test:access-control-data
+# Manual: F.E.V.O → config semanal → relatório → grupos sem relatório
+# VITE_DATA_SOURCE=local + F5
+```

@@ -39,6 +39,15 @@ import type {
   SacramentAppointment,
   SacramentCertificate,
   SacramentDocument,
+  FevoActivity,
+  FevoEvangelismRecord,
+  FevoFollowUpRecord,
+  FevoMissingReport,
+  FevoPrayerRecord,
+  FevoReport,
+  FevoTeam,
+  FevoVisitationRecord,
+  FevoWeeklyConfig,
   Member,
   Notification,
   Requisition,
@@ -119,6 +128,15 @@ function storageKeyFor(key: EntityCollectionName): string {
   if (key === "sacrament_certificates") return `${STORAGE_PREFIX}sacrament-certificates`;
   if (key === "sacrament_documents") return `${STORAGE_PREFIX}sacrament-documents`;
   if (key === "sacrament_appointments") return `${STORAGE_PREFIX}sacrament-appointments`;
+  if (key === "fevo_weekly_configs") return `${STORAGE_PREFIX}fevo-weekly-configs`;
+  if (key === "fevo_teams") return `${STORAGE_PREFIX}fevo-teams`;
+  if (key === "fevo_activities") return `${STORAGE_PREFIX}fevo-activities`;
+  if (key === "fevo_reports") return `${STORAGE_PREFIX}fevo-reports`;
+  if (key === "fevo_missing_reports") return `${STORAGE_PREFIX}fevo-missing-reports`;
+  if (key === "fevo_follow_up_records") return `${STORAGE_PREFIX}fevo-follow-up-records`;
+  if (key === "fevo_evangelism_records") return `${STORAGE_PREFIX}fevo-evangelism-records`;
+  if (key === "fevo_visitation_records") return `${STORAGE_PREFIX}fevo-visitation-records`;
+  if (key === "fevo_prayer_records") return `${STORAGE_PREFIX}fevo-prayer-records`;
   return STORAGE_PREFIX + key;
 }
 
@@ -244,6 +262,18 @@ export function createLocalStorageProvider(): DataProvider {
   const sacramentDocuments = createPersistedRepository<SacramentDocument>("sacrament_documents");
   const sacramentAppointments =
     createPersistedRepository<SacramentAppointment>("sacrament_appointments");
+  const fevoWeeklyConfigs = createPersistedRepository<FevoWeeklyConfig>("fevo_weekly_configs");
+  const fevoTeams = createPersistedRepository<FevoTeam>("fevo_teams");
+  const fevoActivities = createPersistedRepository<FevoActivity>("fevo_activities");
+  const fevoReports = createPersistedRepository<FevoReport>("fevo_reports");
+  const fevoMissingReports = createPersistedRepository<FevoMissingReport>("fevo_missing_reports");
+  const fevoFollowUpRecords =
+    createPersistedRepository<FevoFollowUpRecord>("fevo_follow_up_records");
+  const fevoEvangelismRecords =
+    createPersistedRepository<FevoEvangelismRecord>("fevo_evangelism_records");
+  const fevoVisitationRecords =
+    createPersistedRepository<FevoVisitationRecord>("fevo_visitation_records");
+  const fevoPrayerRecords = createPersistedRepository<FevoPrayerRecord>("fevo_prayer_records");
   const inventoryItems = createPersistedRepository<InventoryItem>("inventory_items");
   const inventoryMovements = createPersistedRepository<InventoryMovement>("inventory_movements");
   const inventoryMaintenance =
@@ -303,6 +333,15 @@ export function createLocalStorageProvider(): DataProvider {
     sacrament_certificates: sacramentCertificates as EntityRepository<unknown>,
     sacrament_documents: sacramentDocuments as EntityRepository<unknown>,
     sacrament_appointments: sacramentAppointments as EntityRepository<unknown>,
+    fevo_weekly_configs: fevoWeeklyConfigs as EntityRepository<unknown>,
+    fevo_teams: fevoTeams as EntityRepository<unknown>,
+    fevo_activities: fevoActivities as EntityRepository<unknown>,
+    fevo_reports: fevoReports as EntityRepository<unknown>,
+    fevo_missing_reports: fevoMissingReports as EntityRepository<unknown>,
+    fevo_follow_up_records: fevoFollowUpRecords as EntityRepository<unknown>,
+    fevo_evangelism_records: fevoEvangelismRecords as EntityRepository<unknown>,
+    fevo_visitation_records: fevoVisitationRecords as EntityRepository<unknown>,
+    fevo_prayer_records: fevoPrayerRecords as EntityRepository<unknown>,
     inventory_items: inventoryItems as EntityRepository<unknown>,
     inventory_movements: inventoryMovements as EntityRepository<unknown>,
     inventory_maintenance: inventoryMaintenance as EntityRepository<unknown>,
@@ -366,6 +405,15 @@ export function createLocalStorageProvider(): DataProvider {
     sacramentCertificates,
     sacramentDocuments,
     sacramentAppointments,
+    fevoWeeklyConfigs,
+    fevoTeams,
+    fevoActivities,
+    fevoReports,
+    fevoMissingReports,
+    fevoFollowUpRecords,
+    fevoEvangelismRecords,
+    fevoVisitationRecords,
+    fevoPrayerRecords,
     inventoryItems,
     inventoryMovements,
     inventoryMaintenance,

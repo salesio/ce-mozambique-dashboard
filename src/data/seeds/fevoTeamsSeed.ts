@@ -1,0 +1,62 @@
+import type { FevoTeam } from "../types/entities";
+
+const HQ = "church-hq";
+const HQ_NAME = "E.C. Maputo Central - Sede";
+
+export const FEVO_TEAMS_SEED: FevoTeam[] = [
+  {
+    id: "fevo-team-a",
+    name: "Team A",
+    code: "A",
+    church_id: HQ,
+    church_name: HQ_NAME,
+    leader_id: "u-10",
+    leader_name: "F.E.V.O Team Leader",
+    members: ["Mateus Nhantumbo", "Celeste"],
+    activity_types: ["Acompanhamento", "Visitação", "Evangelização", "Oração"],
+    status: "Active",
+    notes: "Equipa rotativa A.",
+    created_at: "2026-05-01",
+    updated_at: "2026-07-15",
+  },
+  {
+    id: "fevo-team-b",
+    name: "Team B",
+    code: "B",
+    church_id: HQ,
+    church_name: HQ_NAME,
+    leader_name: "Aminata Chivinda",
+    members: ["Aminata Chivinda", "Paulo"],
+    activity_types: ["Acompanhamento", "Visitação", "Evangelização", "Oração"],
+    status: "Active",
+    created_at: "2026-05-01",
+    updated_at: "2026-07-15",
+  },
+  {
+    id: "fevo-team-c",
+    name: "Team C",
+    code: "C",
+    church_id: HQ,
+    church_name: HQ_NAME,
+    leader_name: "Sister Cassandra",
+    members: ["Sister Cassandra"],
+    activity_types: ["Oração", "Acompanhamento"],
+    status: "Active",
+    notes: "Coordenação e oração.",
+    created_at: "2026-05-01",
+    updated_at: "2026-07-15",
+  },
+  {
+    id: "fevo-team-d",
+    name: "Team D",
+    code: "D",
+    church_id: HQ,
+    church_name: HQ_NAME,
+    leader_name: "Mateus Nhantumbo",
+    members: ["Mateus Nhantumbo"],
+    activity_types: ["Evangelização", "Visitação"],
+    status: "Active",
+    created_at: "2026-05-01",
+    updated_at: "2026-07-15",
+  },
+];

@@ -22,7 +22,7 @@ npm run test:requisitions-data    # smoke: requisitions workflow + finance disbu
 
 The UI still uses **localStorage mock** for most modules. Typed adapters live under `src/data/`.
 
-**Pilots already on the data layer:** Churches, Members, First Timers, Follow-Up, Foundation School, Cell Ministry, Finance, Requisitions & Approvals, Venue & Inventory, Staff & HR, Users / Roles / Access Control / Audit, Media Department, Counseling / Aconselhamento, **Sacraments / Sacramentos**  
+**Pilots already on the data layer:** Churches, Members, First Timers, Follow-Up, Foundation School, Cell Ministry, Finance, Requisitions & Approvals, Venue & Inventory, Staff & HR, Users / Roles / Access Control / Audit, Media Department, Counseling / Aconselhamento, Sacraments / Sacramentos, **F.E.V.O**  
 (`VITE_DATA_SOURCE=mock|local|api|supabase` — default `mock`).
 
 **Escola de Fundação (functional):** full tabs (overview → reports), 20+ teachers at HQ, delivery modes (in-person / online / home / prison), lesson sessions & attendance, online tests 1–7 (mock Forms; 20×6+10), soul winning (lesson 4), physical final exam + attachment prep, grading 40/60, audit log. No real Google API / scan app / Postgres yet.
@@ -46,6 +46,8 @@ The UI still uses **localStorage mock** for most modules. Typed adapters live un
 **Counseling / Aconselhamento (pilot):** requests, cases, appointments, counselors, feedback, and referrals via data layer + `CECounseling` bridge. Confidential notes restricted by RBAC; reports aggregated by default; soft audit on sensitive actions; optional Follow-Up creation when `CEFollowUps` exists. See **[COUNSELING_MODULE_PLAN.md](COUNSELING_MODULE_PLAN.md)**.
 
 **Sacraments / Sacramentos (pilot):** baptisms, marriages, baby dedications, certificates, documents, and appointments via data layer + `CESacraments` bridge. Certificate payment status is internal only (no auto financeRecord). Dual-map PT UI fields preserved. See **[SACRAMENTS_MODULE_PLAN.md](SACRAMENTS_MODULE_PLAN.md)**.
+
+**F.E.V.O (pilot):** weekly configuration, teams A–D, activities, reports, missing-report tracking, and typed detail records (Follow-Up / Evangelism / Visitation / Prayer) via data layer + `CEFevo` bridge. Soft-link to Follow-Up when referral flag set. Analytics: overview, weekly, team performance, evangelism/prayer stats. See **[FEVO_MODULE_PLAN.md](FEVO_MODULE_PLAN.md)**.
 
 **Public Cell Report Form (leaders, no admin login):**
 - Button on the **login screen** only: *Submeter Relatório de Célula* → `#cell-report-submit`

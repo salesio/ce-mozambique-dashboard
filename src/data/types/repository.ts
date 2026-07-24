@@ -39,6 +39,15 @@ import type {
   SacramentAppointment,
   SacramentCertificate,
   SacramentDocument,
+  FevoActivity,
+  FevoEvangelismRecord,
+  FevoFollowUpRecord,
+  FevoMissingReport,
+  FevoPrayerRecord,
+  FevoReport,
+  FevoTeam,
+  FevoVisitationRecord,
+  FevoWeeklyConfig,
   Member,
   Notification,
   Requisition,
@@ -133,6 +142,15 @@ export interface DataProvider {
   sacramentCertificates: EntityRepository<SacramentCertificate>;
   sacramentDocuments: EntityRepository<SacramentDocument>;
   sacramentAppointments: EntityRepository<SacramentAppointment>;
+  fevoWeeklyConfigs: EntityRepository<FevoWeeklyConfig>;
+  fevoTeams: EntityRepository<FevoTeam>;
+  fevoActivities: EntityRepository<FevoActivity>;
+  fevoReports: EntityRepository<FevoReport>;
+  fevoMissingReports: EntityRepository<FevoMissingReport>;
+  fevoFollowUpRecords: EntityRepository<FevoFollowUpRecord>;
+  fevoEvangelismRecords: EntityRepository<FevoEvangelismRecord>;
+  fevoVisitationRecords: EntityRepository<FevoVisitationRecord>;
+  fevoPrayerRecords: EntityRepository<FevoPrayerRecord>;
   inventoryItems: EntityRepository<InventoryItem>;
   inventoryMovements: EntityRepository<InventoryMovement>;
   inventoryMaintenance: EntityRepository<InventoryMaintenanceRecord>;

@@ -17716,6 +17716,9 @@ async function submitForm(form) {
     if (["baptism", "marriage", "baby"].includes(modalType)) {
       void dualWriteSacramentsRecord(modalType, "update", collection[index]);
     }
+    if (["fevoConfig", "fevoReport", "fevoNoReport", "fevoWeeklyReport"].includes(modalType)) {
+      void dualWriteFevoRecord(modalType, "update", collection[index]);
+    }
   } else {
     const idPrefix = modalType.slice(0, 3);
     const nowIso = new Date().toISOString();
@@ -17982,6 +17985,26 @@ async function submitForm(form) {
         delete record.transaction_type;
       }
       void dualWriteSacramentsRecord(modalType, "create", record);
+    }
+    if (["fevoConfig", "fevoReport", "fevoNoReport", "fevoWeeklyReport"].includes(modalType)) {
+      if (modalType === "fevoConfig") {
+        record.week_start_date = record.week_start_date || record.semana_inicio || "";
+        record.week_end_date = record.week_end_date || record.semana_fim || "";
+        record.semana_inicio = record.semana_inicio || record.week_start_date || "";
+        record.semana_fim = record.semana_fim || record.week_end_date || "";
+        record.status = record.status || record.estado || "Draft";
+        record.estado = record.estado || record.status || "Rascunho";
+        record.preparado_por = record.preparado_por || record.prepared_by || "";
+      }
+      if (modalType === "fevoReport" || modalType === "fevoWeeklyReport") {
+        record.week_start_date = record.week_start_date || record.semana_inicio || "";
+        record.week_end_date = record.week_end_date || record.semana_fim || "";
+        if (modalType === "fevoWeeklyReport") {
+          record.report_kind = "weekly_summary";
+          record.title = record.title || "RELATÓRIO F.E.V.O";
+        }
+      }
+      void dualWriteFevoRecord(modalType, "create", record);
     }
   }
   bootstrap.Modal.getOrCreateInstance(byId("entryModal")).hide();
@@ -19573,6 +19596,135 @@ function enterDashboard() {
       }
     })
     .catch((error) => console.warn("[CE Sacraments] background hydrate skipped", error));
+  Promise.resolve()
+    .then(() => hydrateFevoFromRepository())
+    .then((hydrated) => {
+      if (hydrated && String(activeRoute || "").startsWith("fevo") && typeof renderFevo === "function") {
+        renderFevo();
+      }
+    })
+    .catch((error) => console.warn("[CE FEVO] background hydrate skipped", error));
+}
+
+function dualWriteFevoRecord(modalType, mode, record) {
+  const bridge = window.CEFevo || window.CEDataLayer?.fevo;
+  if (!bridge || !record) return;
+  if (typeof bridge.dualWriteRecord === "function") {
+    void bridge.dualWriteRecord(modalType, mode, record);
+    return;
+  }
+  const map = {
+    fevoConfig: ["createFevoWeeklyConfig", "updateFevoWeeklyConfig"],
+    fevoReport: ["createFevoReport", "updateFevoReport"],
+    fevoNoReport: ["createFevoMissingReport", "updateFevoMissingReport"],
+    fevoWeeklyReport: ["createFevoReport", "updateFevoReport"],
+  };
+  const pair = map[modalType];
+  if (!pair) return;
+  if (mode === "create" && bridge[pair[0]]) void bridge[pair[0]](record);
+  else if (mode === "update" && bridge[pair[1]]) void bridge[pair[1]](record.id, record);
+}
+
+async function hydrateFevoFromRepository() {
+  const repo = window.CEFevo || window.CEDataLayer?.fevo;
+  if (!repo?.listFevoWeeklyConfigs) return false;
+  try {
+    let hydrated = false;
+    state.fevo =
+      state.fevo && !Array.isArray(state.fevo)
+        ? state.fevo
+        : structuredClone(seedData.fevo || {});
+
+    async function merge(listFn, key, mapRow, filterFn) {
+      if (typeof listFn !== "function") return;
+      const result = await listFn();
+      if (!result?.ok || !Array.isArray(result.data) || !result.data.length) return;
+      let rows = result.data;
+      if (filterFn) rows = rows.filter(filterFn);
+      if (!rows.length) return;
+      const prev = new Map((state.fevo[key] || []).map((r) => [r.id, r]));
+      const byId = new Map();
+      rows.forEach((row) => {
+        const previous = prev.get(row.id) || {};
+        const mapped = mapRow ? mapRow(row) : row;
+        byId.set(row.id, { ...mapped, ...previous, id: row.id });
+      });
+      prev.forEach((localRow, id) => {
+        if (!byId.has(id)) byId.set(id, localRow);
+      });
+      state.fevo[key] = [...byId.values()];
+      hydrated = true;
+    }
+
+    await merge(repo.listFevoWeeklyConfigs?.bind(repo), "weeklyConfigurations", (row) => ({
+      ...row,
+      semana_inicio: row.semana_inicio || row.week_start_date || "",
+      semana_fim: row.semana_fim || row.week_end_date || "",
+      preparado_por: row.preparado_por || row.prepared_by || "",
+      observacoes: row.observacoes || row.notes || "",
+      estado: row.estado || row.status || "Rascunho",
+      status: row.status || row.estado || "Draft",
+    }));
+    await merge(
+      repo.listFevoReports?.bind(repo),
+      "reports",
+      (row) => ({
+        ...row,
+        semana_inicio: row.semana_inicio || row.week_start_date || "",
+        semana_fim: row.semana_fim || row.week_end_date || "",
+        status: row.status || "Rascunho",
+      }),
+      (row) => row.report_kind !== "weekly_summary",
+    );
+    await merge(
+      repo.listFevoReports?.bind(repo),
+      "weeklyReports",
+      (row) => ({
+        ...row,
+        semana_inicio: row.semana_inicio || row.week_start_date || "",
+        semana_fim: row.semana_fim || row.week_end_date || "",
+        title: row.title || "RELATÓRIO F.E.V.O",
+        status: row.status || "Submetido",
+      }),
+      (row) => row.report_kind === "weekly_summary",
+    );
+    await merge(repo.listFevoMissingReports?.bind(repo), "noReports", (row) => ({
+      ...row,
+      semana_inicio: row.semana_inicio || row.week_start_date || "",
+      semana_fim: row.semana_fim || row.week_end_date || "",
+      status: row.status || "Pendente",
+    }));
+    // Optional extended collections for future UI
+    if (typeof repo.listFevoTeams === "function") {
+      const teams = await repo.listFevoTeams();
+      if (teams?.ok && Array.isArray(teams.data)) {
+        state.fevo.teams = teams.data;
+        hydrated = true;
+      }
+    }
+    if (typeof repo.listFevoActivities === "function") {
+      const acts = await repo.listFevoActivities();
+      if (acts?.ok && Array.isArray(acts.data)) {
+        state.fevo.activities = acts.data;
+        hydrated = true;
+      }
+    }
+
+    if (hydrated) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (_) {}
+      console.info("[CE FEVO] hydrated", {
+        configs: (state.fevo.weeklyConfigurations || []).length,
+        reports: (state.fevo.reports || []).length,
+        noReports: (state.fevo.noReports || []).length,
+      });
+    }
+    return hydrated;
+  } catch (error) {
+    console.warn("[CE FEVO] hydrate failed", error);
+    return false;
+  }
 }
 
 function dualWriteSacramentsRecord(modalType, mode, record) {

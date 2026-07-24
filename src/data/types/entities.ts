@@ -2579,6 +2579,283 @@ export interface StaffAttendance {
   updated_at?: IsoDate | IsoDateTime;
 }
 
+// ---------------------------------------------------------------------------
+// F.E.V.O — Follow-Up, Evangelism, Visitation, Prayer
+// ---------------------------------------------------------------------------
+
+export interface FevoWeeklyConfig {
+  id: EntityId;
+  week_label?: string | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  week_start_date?: IsoDate | null;
+  week_end_date?: IsoDate | null;
+  /** PT UI */
+  semana_inicio?: IsoDate | null;
+  semana_fim?: IsoDate | null;
+  team_a_activity?: string | null;
+  team_b_activity?: string | null;
+  team_c_activity?: string | null;
+  team_d_activity?: string | null;
+  prepared_by?: string | null;
+  prepared_by_user_id?: EntityId | null;
+  prepared_by_name?: string | null;
+  preparado_por?: string | null;
+  approved_by_user_id?: EntityId | null;
+  approved_by_name?: string | null;
+  approved_at?: IsoDateTime | null;
+  notes?: string | null;
+  observacoes?: string | null;
+  status?: string | null;
+  estado?: string | null;
+  created_by?: string | null;
+  updated_by?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface FevoTeam {
+  id: EntityId;
+  name?: string | null;
+  code?: string | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  leader_id?: EntityId | null;
+  leader_name?: string | null;
+  leader_phone?: string | null;
+  assistant_leader_id?: EntityId | null;
+  assistant_leader_name?: string | null;
+  cell_group_id?: EntityId | null;
+  cell_group_name?: string | null;
+  cell_ids?: string[] | null;
+  member_count?: number | null;
+  members?: string[] | null;
+  activity_types?: string[] | null;
+  status?: string | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface FevoActivity {
+  id: EntityId;
+  weekly_config_id?: EntityId | null;
+  config_id?: EntityId | null;
+  week_label?: string | null;
+  week_start_date?: IsoDate | null;
+  week_end_date?: IsoDate | null;
+  team_id?: EntityId | null;
+  team_name?: string | null;
+  team_code?: string | null;
+  activity_type?: string | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  assigned_date?: IsoDate | null;
+  due_date?: IsoDate | null;
+  scheduled_date?: IsoDate | null;
+  leader_id?: EntityId | null;
+  leader_name?: string | null;
+  assigned_leader_name?: string | null;
+  status?: string | null;
+  report_id?: EntityId | null;
+  notes?: string | null;
+  completed_at?: IsoDateTime | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface FevoReport {
+  id: EntityId;
+  report_number?: string | null;
+  weekly_config_id?: EntityId | null;
+  config_id?: EntityId | null;
+  week_label?: string | null;
+  report_kind?: string | null;
+  activity_id?: EntityId | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  week_start_date?: IsoDate | null;
+  week_end_date?: IsoDate | null;
+  semana_inicio?: IsoDate | null;
+  semana_fim?: IsoDate | null;
+  team?: string | null;
+  team_id?: EntityId | null;
+  team_name?: string | null;
+  team_code?: string | null;
+  activity_type?: string | null;
+  group_id?: EntityId | null;
+  cell_group_id?: EntityId | null;
+  cell_group_name?: string | null;
+  cell_id?: EntityId | null;
+  cell_name?: string | null;
+  leader_id?: EntityId | null;
+  group_name?: string | null;
+  leader_name?: string | null;
+  leader_phone?: string | null;
+  report_date?: IsoDate | null;
+  number_of_cells?: number | null;
+  number_of_members?: number | null;
+  leaders_present?: number | null;
+  members_present?: number | null;
+  ft_in_church?: number | null;
+  submitted_report?: boolean | null;
+  submitted_by?: string | null;
+  submitted_by_user_id?: EntityId | null;
+  submitted_by_name?: string | null;
+  submitted_at?: IsoDate | null;
+  status?: string | null;
+  summary?: string | null;
+  notes?: string | null;
+  /** Follow-up metrics (denormalized for UI reports) */
+  souls_contacted?: number | null;
+  feedback_count?: number | null;
+  followup_result?: string | null;
+  next_action?: string | null;
+  /** Evangelism */
+  souls_evangelized?: number | null;
+  new_converts?: number | null;
+  evangelism_location?: string | null;
+  materials_distributed?: number | null;
+  /** Visitation */
+  souls_visited?: number | null;
+  family_members_reached?: number | null;
+  visit_location?: string | null;
+  visit_result?: string | null;
+  /** Prayer */
+  average_members_present?: number | null;
+  days_of_prayer?: number | null;
+  prayer_focus?: string | null;
+  prayer_testimonies?: string | null;
+  title?: string | null;
+  created_by?: string | null;
+  updated_by?: string | null;
+  validated_by?: string | null;
+  validated_by_user_id?: EntityId | null;
+  validated_by_name?: string | null;
+  validated_at?: IsoDateTime | null;
+  rejected_by_user_id?: EntityId | null;
+  rejected_by_name?: string | null;
+  rejected_at?: IsoDateTime | null;
+  rejection_reason?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+/** Typed detail rows linked to a FevoReport */
+export interface FevoFollowUpRecord {
+  id: EntityId;
+  report_id?: EntityId | null;
+  activity_id?: EntityId | null;
+  souls_contacted?: number | null;
+  feedback_count?: number | null;
+  successful_contacts?: number | null;
+  no_answer_count?: number | null;
+  followup_result?: string | null;
+  next_action?: string | null;
+  referred_to_follow_up_department?: boolean | null;
+  created_follow_up_ids?: string[] | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface FevoEvangelismRecord {
+  id: EntityId;
+  report_id?: EntityId | null;
+  activity_id?: EntityId | null;
+  location?: string | null;
+  souls_evangelized?: number | null;
+  new_converts?: number | null;
+  first_timers_invited?: number | null;
+  first_timers_attended?: number | null;
+  invitations_given?: number | null;
+  evangelism_location?: string | null;
+  materials_distributed?: number | null;
+  testimonies?: string | null;
+  created_first_timer_ids?: string[] | null;
+  follow_up_needed?: boolean | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface FevoVisitationRecord {
+  id: EntityId;
+  report_id?: EntityId | null;
+  activity_id?: EntityId | null;
+  location?: string | null;
+  souls_visited?: number | null;
+  families_visited?: number | null;
+  family_members_reached?: number | null;
+  homes_visited?: number | null;
+  new_converts?: number | null;
+  prayer_requests?: string | null;
+  visit_location?: string | null;
+  visit_result?: string | null;
+  referred_to_counseling?: boolean | null;
+  referred_to_follow_up?: boolean | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface FevoPrayerRecord {
+  id: EntityId;
+  report_id?: EntityId | null;
+  activity_id?: EntityId | null;
+  prayer_focus?: string | null;
+  average_members_present?: number | null;
+  total_attendance?: number | null;
+  days_of_prayer?: number | null;
+  testimonies?: string | null;
+  prayer_testimonies?: string | null;
+  prayer_requests_count?: number | null;
+  special_requests_count?: number | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface FevoMissingReport {
+  id: EntityId;
+  weekly_config_id?: EntityId | null;
+  config_id?: EntityId | null;
+  week_label?: string | null;
+  activity_id?: EntityId | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  week_start_date?: IsoDate | null;
+  week_end_date?: IsoDate | null;
+  semana_inicio?: IsoDate | null;
+  semana_fim?: IsoDate | null;
+  team?: string | null;
+  team_id?: EntityId | null;
+  team_name?: string | null;
+  team_code?: string | null;
+  activity_type?: string | null;
+  expected_report_date?: IsoDate | null;
+  group_id?: EntityId | null;
+  group_name?: string | null;
+  leader_name?: string | null;
+  reason_not_submitted?: string | null;
+  followup_action?: string | null;
+  resolution_notes?: string | null;
+  contacted?: boolean | null;
+  contacted_by?: string | null;
+  contacted_by_user_id?: EntityId | null;
+  contacted_by_name?: string | null;
+  contacted_at?: IsoDateTime | null;
+  status?: string | null;
+  resolved_at?: IsoDateTime | null;
+  resolved_by?: string | null;
+  resolved_by_user_id?: EntityId | null;
+  resolved_by_name?: string | null;
+  created_by?: string | null;
+  updated_by?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
 /** Map of collection names used by repositories / adapters. */
 export type EntityCollectionName =
   | "users"
@@ -2621,6 +2898,15 @@ export type EntityCollectionName =
   | "sacrament_certificates"
   | "sacrament_documents"
   | "sacrament_appointments"
+  | "fevo_weekly_configs"
+  | "fevo_teams"
+  | "fevo_activities"
+  | "fevo_reports"
+  | "fevo_missing_reports"
+  | "fevo_follow_up_records"
+  | "fevo_evangelism_records"
+  | "fevo_visitation_records"
+  | "fevo_prayer_records"
   | "inventory_items"
   | "inventory_movements"
   | "inventory_maintenance"

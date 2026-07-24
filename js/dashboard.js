@@ -16052,15 +16052,31 @@ function renderSettings() {
                   window.CEMembers && typeof window.CEMembers.getInfo === "function"
                     ? window.CEMembers.getInfo()
                     : null;
+                const ftInfo =
+                  window.CEFirstTimers && typeof window.CEFirstTimers.getInfo === "function"
+                    ? window.CEFirstTimers.getInfo()
+                    : null;
+                const fuInfo =
+                  window.CEFollowUps && typeof window.CEFollowUps.getInfo === "function"
+                    ? window.CEFollowUps.getInfo()
+                    : null;
                 const sbOn = !!(flags && flags.enableSupabase);
+                const readyLabel = (info) => {
+                  if (!info || !info.provider) return "—";
+                  if (String(info.provider).includes("supabase")) return "Supabase-ready";
+                  return String(info.provider);
+                };
                 return `
             <div class="border rounded p-2 mt-2 small bg-dark bg-opacity-25" id="dataSourceIndicator">
               <div class="fw-semibold mb-1">${lang === "pt" ? "Data Source (dev)" : "Data Source (dev)"}</div>
               <div>source: <code>${String(src)}</code></div>
               <div>supabase flag: <code>${sbOn ? "true" : "false"}</code>${sbInfo && sbInfo.status ? ` · status: <code>${sbInfo.status}</code>` : ""}</div>
-              <div>churches: <code>${(chInfo && chInfo.provider) || "—"}</code></div>
-              <div>members: <code>${(mbInfo && mbInfo.provider) || "—"}</code></div>
-              <div class="text-white-50 mt-1">${lang === "pt" ? "Sem expor keys/secrets. Piloto Phase 3: Igrejas + Membros." : "No keys/secrets exposed. Phase 3 pilot: Churches + Members."}</div>
+              <div>churches: <code>${readyLabel(chInfo)}</code></div>
+              <div>members: <code>${readyLabel(mbInfo)}</code></div>
+              <div>first timers: <code>${readyLabel(ftInfo)}</code></div>
+              <div>follow-up: <code>${readyLabel(fuInfo)}</code></div>
+              <div>others: <code>local/mock</code></div>
+              <div class="text-white-50 mt-1">${lang === "pt" ? "Sem expor keys/secrets. Pilotos: Igrejas, Membros, Primeira Vez, Acompanhamento." : "No keys/secrets exposed. Pilots: Churches, Members, First Timers, Follow-Up."}</div>
             </div>`;
               } catch (_) {
                 return "";

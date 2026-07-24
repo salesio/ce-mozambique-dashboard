@@ -120,6 +120,18 @@ See **[docs/backend/CHURCHES_MEMBERS_SUPABASE_PILOT.md](docs/backend/CHURCHES_ME
 npm run test:churches-members-supabase
 ```
 
+#### First Timers + Follow-Up Supabase pilot (Phase 4)
+
+Same Supabase env as Phase 3. Apply migration `0004_first_timers_followups_pilot.sql`  
+and optional seed `supabase/seeds/first_timers_followups_seed.sql`.
+
+Only **Primeira Vez** + **Acompanhamento** join the remote pilot (plus churches/members).  
+No auto-convert to members. See **[docs/backend/FIRST_TIMERS_FOLLOWUPS_SUPABASE_PILOT.md](docs/backend/FIRST_TIMERS_FOLLOWUPS_SUPABASE_PILOT.md)**.
+
+```bash
+npm run test:first-timers-followups-supabase
+```
+
 | Item | Location |
 |------|----------|
 | Core SQL schema / seed / RLS / storage notes | `database/` |

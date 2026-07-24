@@ -1,10 +1,13 @@
 import { getDataProvider } from "../dataProvider";
-import { getDataSource } from "../config";
+import { getDataSource, getBackendFeatureFlags } from "../config";
 import type { EntityId, FirstTimer, Member } from "../types/entities";
 import type { DataResult } from "../types/repository";
 import { FIRST_TIMERS_SEED } from "../seeds/firstTimersSeed";
 import { listChurches } from "./churchesRepository";
 import { createMember } from "./membersRepository";
+import { getSupabaseEnvConfig } from "../adapters/supabase/supabaseConfig";
+import * as firstTimersSb from "../adapters/supabase/firstTimersSupabaseAdapter";
+import * as firstTimersApi from "../adapters/api/firstTimersApiAdapter";
 
 function fail<T>(error: string, code = "FIRST_TIMERS_ERROR"): DataResult<T> {
   return { ok: false, error, code };
@@ -12,6 +15,18 @@ function fail<T>(error: string, code = "FIRST_TIMERS_ERROR"): DataResult<T> {
 
 function ok<T>(data: T): DataResult<T> {
   return { ok: true, data };
+}
+
+/** Phase 4: route to Supabase adapter when flags + source allow. */
+function useSupabaseFirstTimers(): boolean {
+  if (getDataSource() !== "supabase") return false;
+  const cfg = getSupabaseEnvConfig();
+  const flags = getBackendFeatureFlags();
+  return flags.enableSupabase && cfg.isConfigured;
+}
+
+function useApiFirstTimers(): boolean {
+  return getDataSource() === "api";
 }
 
 function asBool(value: unknown): boolean {
@@ -192,6 +207,7 @@ async function attachChurchName(person: FirstTimer): Promise<FirstTimer> {
 }
 
 export async function ensureFirstTimersSeeded(): Promise<void> {
+  if (useSupabaseFirstTimers() || useApiFirstTimers()) return;
   const provider = getDataProvider();
   const listed = await provider.firstTimers.list();
   if (!listed.ok) return;
@@ -206,6 +222,19 @@ export async function ensureFirstTimersSeeded(): Promise<void> {
 
 export async function listFirstTimers(): Promise<DataResult<FirstTimer[]>> {
   try {
+    if (useSupabaseFirstTimers()) {
+      const result = await firstTimersSb.listFirstTimers();
+      if (!result.ok) return result;
+      const rows = await Promise.all(
+        (result.data || []).map(async (row) => attachChurchName(normalizeFirstTimer(row))),
+      );
+      return ok(rows);
+    }
+    if (useApiFirstTimers()) {
+      const result = await firstTimersApi.listFirstTimers();
+      if (!result.ok) return result;
+      return ok((result.data || []).map((row) => normalizeFirstTimer(row)));
+    }
     await ensureFirstTimersSeeded();
     const provider = getDataProvider();
     const result = await provider.firstTimers.list();
@@ -223,6 +252,17 @@ export async function getFirstTimerById(
   id: EntityId,
 ): Promise<DataResult<FirstTimer | null>> {
   try {
+    if (useSupabaseFirstTimers()) {
+      const result = await firstTimersSb.getFirstTimerById(id);
+      if (!result.ok) return result;
+      if (!result.data) return ok(null);
+      return ok(await attachChurchName(normalizeFirstTimer(result.data)));
+    }
+    if (useApiFirstTimers()) {
+      const result = await firstTimersApi.getFirstTimerById(id);
+      if (!result.ok) return result;
+      return ok(result.data ? normalizeFirstTimer(result.data) : null);
+    }
     await ensureFirstTimersSeeded();
     const provider = getDataProvider();
     const result = await provider.firstTimers.getById(id);
@@ -238,6 +278,18 @@ export async function createFirstTimer(
   payload: Partial<FirstTimer>,
 ): Promise<DataResult<FirstTimer>> {
   try {
+    if (useSupabaseFirstTimers()) {
+      let person = normalizeFirstTimer(payload);
+      person = await attachChurchName(person);
+      const result = await firstTimersSb.createFirstTimer(person);
+      if (!result.ok) return result;
+      return ok(normalizeFirstTimer(result.data));
+    }
+    if (useApiFirstTimers()) {
+      const result = await firstTimersApi.createFirstTimer(payload);
+      if (!result.ok) return result;
+      return ok(normalizeFirstTimer(result.data));
+    }
     await ensureFirstTimersSeeded();
     const provider = getDataProvider();
     if (!provider.firstTimers.create) {
@@ -264,6 +316,21 @@ export async function updateFirstTimer(
   payload: Partial<FirstTimer>,
 ): Promise<DataResult<FirstTimer>> {
   try {
+    if (useSupabaseFirstTimers()) {
+      const existing = await firstTimersSb.getFirstTimerById(id);
+      if (!existing.ok) return fail(existing.error, existing.code);
+      if (!existing.data) return fail("Registo de primeira vez não encontrado.", "NOT_FOUND");
+      let next = normalizeFirstTimer({ ...existing.data, ...payload, id });
+      next = await attachChurchName(next);
+      const result = await firstTimersSb.updateFirstTimer(id, next);
+      if (!result.ok) return result;
+      return ok(normalizeFirstTimer(result.data));
+    }
+    if (useApiFirstTimers()) {
+      const result = await firstTimersApi.updateFirstTimer(id, payload);
+      if (!result.ok) return result;
+      return ok(normalizeFirstTimer(result.data));
+    }
     const provider = getDataProvider();
     if (!provider.firstTimers.update) {
       return fail("Actualizar primeira vez não suportado neste data source.", "NOT_SUPPORTED");
@@ -289,6 +356,8 @@ export async function updateFirstTimer(
 
 export async function deleteFirstTimer(id: EntityId): Promise<DataResult<boolean>> {
   try {
+    if (useSupabaseFirstTimers()) return firstTimersSb.deleteFirstTimer(id);
+    if (useApiFirstTimers()) return firstTimersApi.deleteFirstTimer(id);
     const provider = getDataProvider();
     if (!provider.firstTimers.remove) {
       return fail("Eliminar primeira vez não suportado neste data source.", "NOT_SUPPORTED");
@@ -301,6 +370,16 @@ export async function deleteFirstTimer(id: EntityId): Promise<DataResult<boolean
 
 export async function searchFirstTimers(query: string): Promise<DataResult<FirstTimer[]>> {
   try {
+    if (useSupabaseFirstTimers()) {
+      const result = await firstTimersSb.searchFirstTimers(query);
+      if (!result.ok) return result;
+      return ok((result.data || []).map((p) => normalizeFirstTimer(p)));
+    }
+    if (useApiFirstTimers()) {
+      const result = await firstTimersApi.searchFirstTimers(query);
+      if (!result.ok) return result;
+      return ok((result.data || []).map((p) => normalizeFirstTimer(p)));
+    }
     const listed = await listFirstTimers();
     if (!listed.ok) return listed;
     const q = String(query || "")
@@ -533,10 +612,21 @@ export async function convertFirstTimerToMember(
 
 export function getFirstTimersDataSourceInfo() {
   const provider = getDataProvider();
+  const sb = useSupabaseFirstTimers();
+  const api = useApiFirstTimers();
   return {
     source: getDataSource(),
-    provider: provider.name,
-    ready: provider.isReady(),
-    description: provider.description,
+    provider: sb
+      ? "supabase-first-timers-adapter"
+      : api
+        ? "api-first-timers-adapter"
+        : provider.name,
+    ready: sb ? getSupabaseEnvConfig().isConfigured : api ? false : provider.isReady(),
+    description: sb
+      ? "First Timers pilot via Supabase public.first_timers"
+      : api
+        ? "First Timers API placeholder"
+        : provider.description,
+    pilot: sb ? "first-timers-followups-supabase-v1" : undefined,
   };
 }

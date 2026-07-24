@@ -22,6 +22,7 @@ Browser does **not** connect to PostgreSQL directly. Supabase/API = future phase
 | backend-foundation-v1 | Backend Phase 1 — schema, adapters, docs, env | Done |
 | auth-users-roles-v1 | Backend Phase 2 — optional Supabase Auth + Users/Roles | Done |
 | churches-members-supabase-v1 | Backend Phase 3 — Churches + Members Supabase pilot | Done |
+| first-timers-followups-supabase-v1 | Backend Phase 4 — First Timers + Follow-Up Supabase pilot | Done |
 
 ## Storage model
 

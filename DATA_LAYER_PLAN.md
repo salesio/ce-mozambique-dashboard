@@ -1476,3 +1476,40 @@ npm run test:churches-members-supabase
 npm run test:data-layer-all
 ```
 
+---
+
+## Backend Phase 4 — First Timers + Follow-Up Supabase pilot
+
+**Status: optional (`VITE_DATA_SOURCE=supabase` only)**
+
+### Routing
+
+| Source | First Timers / Follow-Up |
+|--------|--------------------------|
+| `mock` / `local` | Existing seed / localStorage |
+| `supabase` + flags | `firstTimersSupabaseAdapter` / `followUpsSupabaseAdapter` |
+| `api` | Placeholder adapters |
+
+### Tables
+
+- `public.first_timers`
+- `public.follow_ups`
+- `public.follow_up_timeline_events`
+
+### Rules
+
+- No automatic First Timer → Member conversion  
+- Timeline events on create/status change  
+- Soft sync of `first_timers.follow_up_status` when linked  
+
+### How to test
+
+```bash
+npm run build
+npm run test:first-timers-followups-supabase
+npm run test:churches-members-supabase
+npm run test:data-layer-all
+```
+
+See **[docs/backend/FIRST_TIMERS_FOLLOWUPS_SUPABASE_PILOT.md](docs/backend/FIRST_TIMERS_FOLLOWUPS_SUPABASE_PILOT.md)**.
+

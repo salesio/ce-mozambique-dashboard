@@ -67,8 +67,9 @@ npm run test:backend-foundation
 npm run test:data-layer-all
 ```
 
-## Next / Phase 3
+## Next / Phase 3–4 pilots
 
 - Auth pilot (Phase 2) optional  
-- **Churches + Members pilot (Phase 3):** set `VITE_DATA_SOURCE=supabase` + flags, apply migration `0003`, optional seed `supabase/seeds/churches_members_seed.sql`  
-- See `docs/backend/CHURCHES_MEMBERS_SUPABASE_PILOT.md`  
+- **Churches + Members (Phase 3):** migration `0003` + seed `churches_members_seed.sql`  
+- **First Timers + Follow-Up (Phase 4):** migration `0004` + seed `first_timers_followups_seed.sql`  
+- Docs: `CHURCHES_MEMBERS_SUPABASE_PILOT.md`, `FIRST_TIMERS_FOLLOWUPS_SUPABASE_PILOT.md`  

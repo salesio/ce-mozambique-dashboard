@@ -12,6 +12,8 @@ Phase 1 foundation + Phase 2 optional Auth pilot.
 | `supabaseAuthClient.ts` | Optional Auth (signIn/out/session/reset) |
 | `churchesSupabaseAdapter.ts` | Phase 3 Churches pilot |
 | `membersSupabaseAdapter.ts` | Phase 3 Members pilot |
+| `firstTimersSupabaseAdapter.ts` | Phase 4 First Timers pilot |
+| `followUpsSupabaseAdapter.ts` | Phase 4 Follow-Up + timeline pilot |
 
 ## Rules
 

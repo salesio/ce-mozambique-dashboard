@@ -11,6 +11,8 @@ export type SupabaseTableName =
   | "staff_members"
   | "members"
   | "first_timers"
+  | "follow_ups"
+  | "follow_up_timeline_events"
   | "finance_records"
   | "public_giving_submissions"
   | "documents"

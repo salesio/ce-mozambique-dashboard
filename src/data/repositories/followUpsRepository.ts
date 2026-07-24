@@ -1,5 +1,5 @@
 import { getDataProvider } from "../dataProvider";
-import { getDataSource } from "../config";
+import { getDataSource, getBackendFeatureFlags } from "../config";
 import type {
   EntityId,
   FollowUp,
@@ -11,6 +11,9 @@ import { FOLLOW_UPS_SEED } from "../seeds/followUpsSeed";
 import { listChurches } from "./churchesRepository";
 import { getFirstTimerById, updateFirstTimer } from "./firstTimersRepository";
 import { createMember, listMembers } from "./membersRepository";
+import { getSupabaseEnvConfig } from "../adapters/supabase/supabaseConfig";
+import * as followUpsSb from "../adapters/supabase/followUpsSupabaseAdapter";
+import * as followUpsApi from "../adapters/api/followUpsApiAdapter";
 
 function fail<T>(error: string, code = "FOLLOW_UPS_ERROR"): DataResult<T> {
   return { ok: false, error, code };
@@ -18,6 +21,18 @@ function fail<T>(error: string, code = "FOLLOW_UPS_ERROR"): DataResult<T> {
 
 function ok<T>(data: T): DataResult<T> {
   return { ok: true, data };
+}
+
+/** Phase 4: route to Supabase adapter when flags + source allow. */
+function useSupabaseFollowUps(): boolean {
+  if (getDataSource() !== "supabase") return false;
+  const cfg = getSupabaseEnvConfig();
+  const flags = getBackendFeatureFlags();
+  return flags.enableSupabase && cfg.isConfigured;
+}
+
+function useApiFollowUps(): boolean {
+  return getDataSource() === "api";
 }
 
 function asBool(value: unknown): boolean {
@@ -163,6 +178,7 @@ async function attachChurchName(record: FollowUp): Promise<FollowUp> {
 }
 
 export async function ensureFollowUpsSeeded(): Promise<void> {
+  if (useSupabaseFollowUps() || useApiFollowUps()) return;
   const provider = getDataProvider();
   const listed = await provider.followUps.list();
   if (!listed.ok) return;
@@ -176,6 +192,19 @@ export async function ensureFollowUpsSeeded(): Promise<void> {
 
 export async function listFollowUps(): Promise<DataResult<FollowUp[]>> {
   try {
+    if (useSupabaseFollowUps()) {
+      const result = await followUpsSb.listFollowUps();
+      if (!result.ok) return result;
+      const rows = await Promise.all(
+        (result.data || []).map(async (row) => attachChurchName(normalizeFollowUp(row))),
+      );
+      return ok(rows);
+    }
+    if (useApiFollowUps()) {
+      const result = await followUpsApi.listFollowUps();
+      if (!result.ok) return result;
+      return ok((result.data || []).map((row) => normalizeFollowUp(row)));
+    }
     await ensureFollowUpsSeeded();
     const provider = getDataProvider();
     const result = await provider.followUps.list();
@@ -193,6 +222,17 @@ export async function getFollowUpById(
   id: EntityId,
 ): Promise<DataResult<FollowUp | null>> {
   try {
+    if (useSupabaseFollowUps()) {
+      const result = await followUpsSb.getFollowUpById(id);
+      if (!result.ok) return result;
+      if (!result.data) return ok(null);
+      return ok(await attachChurchName(normalizeFollowUp(result.data)));
+    }
+    if (useApiFollowUps()) {
+      const result = await followUpsApi.getFollowUpById(id);
+      if (!result.ok) return result;
+      return ok(result.data ? normalizeFollowUp(result.data) : null);
+    }
     await ensureFollowUpsSeeded();
     const provider = getDataProvider();
     const result = await provider.followUps.getById(id);
@@ -208,6 +248,18 @@ export async function createFollowUp(
   payload: Partial<FollowUp>,
 ): Promise<DataResult<FollowUp>> {
   try {
+    if (useSupabaseFollowUps()) {
+      let record = normalizeFollowUp(payload);
+      record = await attachChurchName(record);
+      const result = await followUpsSb.createFollowUp(record);
+      if (!result.ok) return result;
+      return ok(normalizeFollowUp(result.data));
+    }
+    if (useApiFollowUps()) {
+      const result = await followUpsApi.createFollowUp(payload);
+      if (!result.ok) return result;
+      return ok(normalizeFollowUp(result.data));
+    }
     await ensureFollowUpsSeeded();
     const provider = getDataProvider();
     if (!provider.followUps.create) {
@@ -250,6 +302,16 @@ export async function updateFollowUp(
   payload: Partial<FollowUp>,
 ): Promise<DataResult<FollowUp>> {
   try {
+    if (useSupabaseFollowUps()) {
+      const result = await followUpsSb.updateFollowUp(id, payload);
+      if (!result.ok) return result;
+      return ok(normalizeFollowUp(result.data));
+    }
+    if (useApiFollowUps()) {
+      const result = await followUpsApi.updateFollowUp(id, payload);
+      if (!result.ok) return result;
+      return ok(normalizeFollowUp(result.data));
+    }
     const provider = getDataProvider();
     if (!provider.followUps.update) {
       return fail("Actualizar acompanhamento não suportado neste data source.", "NOT_SUPPORTED");
@@ -295,6 +357,8 @@ export async function updateFollowUp(
 
 export async function deleteFollowUp(id: EntityId): Promise<DataResult<boolean>> {
   try {
+    if (useSupabaseFollowUps()) return followUpsSb.deleteFollowUp(id);
+    if (useApiFollowUps()) return followUpsApi.deleteFollowUp(id);
     const provider = getDataProvider();
     if (!provider.followUps.remove) {
       return fail("Eliminar acompanhamento não suportado neste data source.", "NOT_SUPPORTED");
@@ -307,6 +371,16 @@ export async function deleteFollowUp(id: EntityId): Promise<DataResult<boolean>>
 
 export async function searchFollowUps(query: string): Promise<DataResult<FollowUp[]>> {
   try {
+    if (useSupabaseFollowUps()) {
+      const result = await followUpsSb.searchFollowUps(query);
+      if (!result.ok) return result;
+      return ok((result.data || []).map((r) => normalizeFollowUp(r)));
+    }
+    if (useApiFollowUps()) {
+      const result = await followUpsApi.searchFollowUps(query);
+      if (!result.ok) return result;
+      return ok((result.data || []).map((r) => normalizeFollowUp(r)));
+    }
     const listed = await listFollowUps();
     if (!listed.ok) return listed;
     const q = String(query || "")
@@ -670,10 +744,21 @@ export async function markFollowUpBecameMember(
 
 export function getFollowUpsDataSourceInfo() {
   const provider = getDataProvider();
+  const sb = useSupabaseFollowUps();
+  const api = useApiFollowUps();
   return {
     source: getDataSource(),
-    provider: provider.name,
-    ready: provider.isReady(),
-    description: provider.description,
+    provider: sb
+      ? "supabase-follow-ups-adapter"
+      : api
+        ? "api-follow-ups-adapter"
+        : provider.name,
+    ready: sb ? getSupabaseEnvConfig().isConfigured : api ? false : provider.isReady(),
+    description: sb
+      ? "Follow-Up pilot via Supabase public.follow_ups"
+      : api
+        ? "Follow-Up API placeholder"
+        : provider.description,
+    pilot: sb ? "first-timers-followups-supabase-v1" : undefined,
   };
 }

@@ -34,9 +34,17 @@ localStorage / mock remain valid for **dev and prototype** until each domain pil
 - [ ] Production RLS enforced
 - [ ] Auto localStorage → Supabase import
 
-## Phase 4 — First Timers + Follow-Up
+## Phase 4 — First Timers + Follow-Up (current)
 
-- Visit conversion pipeline on remote store
+- [x] Schema + indexes + migration `0004_first_timers_followups_pilot.sql`
+- [x] `firstTimersSupabaseAdapter` + `followUpsSupabaseAdapter` (+ timeline)
+- [x] Repository routing
+- [x] API placeholders
+- [x] Optional seed
+- [x] Settings indicator update
+- [x] Smoke: `test:first-timers-followups-supabase`
+- [ ] Production RLS enforced
+- [ ] Auto conversion pipeline policies
 
 ## Phase 5 — Finance + Public Giving + Storage proofs
 

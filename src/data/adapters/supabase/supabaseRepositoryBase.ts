@@ -41,9 +41,12 @@ export function mapSupabaseError(raw: string, fallbackCode = "SUPABASE_ERROR"): 
     /relation .* does not exist|could not find the table|schema cache|PGRST205/i.test(msg) ||
     lower.includes("does not exist")
   ) {
+    const tableHint = /first_timers|follow_ups|follow_up_timeline/i.test(msg)
+      ? "first_timers/follow_ups "
+      : "";
     return {
       error:
-        "Tabela Supabase ainda não foi criada ou migration não foi aplicada. / Supabase table is missing or migration not applied.",
+        `Tabela ${tableHint}ainda não foi criada ou a migration não foi aplicada. / ${tableHint || ""}table has not been created or migration has not been applied.`,
       code: "SUPABASE_TABLE_MISSING",
     };
   }

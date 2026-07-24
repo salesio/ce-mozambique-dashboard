@@ -180,3 +180,35 @@ Future policy intent:
 --     OR church_id = (SELECT church_id FROM public.users WHERE id = public.current_app_user_id())
 --   );
 */
+
+-- ---------------------------------------------------------------------------
+-- Phase 4: First Timers / Follow-Ups pilot — policy sketches (NOT enabled)
+-- ---------------------------------------------------------------------------
+/*
+Future intent:
+- Super Admin / Main Pastor: all first_timers + follow_ups
+- Church Pastor: church_id match
+- Follow-Up staff: responsible_user_id = current user OR department scope
+- Staff: own assignments only when permitted
+
+-- ALTER TABLE public.first_timers ENABLE ROW LEVEL SECURITY;
+-- ALTER TABLE public.follow_ups ENABLE ROW LEVEL SECURITY;
+-- ALTER TABLE public.follow_up_timeline_events ENABLE ROW LEVEL SECURITY;
+
+-- CREATE POLICY first_timers_select_pilot ON public.first_timers
+--   FOR SELECT TO authenticated
+--   USING (
+--     public.current_app_user_scope() = 'all'
+--     OR public.has_module_permission('firstTimers', 'view')
+--     OR church_id = (SELECT church_id FROM public.users WHERE id = public.current_app_user_id())
+--   );
+
+-- CREATE POLICY follow_ups_select_pilot ON public.follow_ups
+--   FOR SELECT TO authenticated
+--   USING (
+--     public.current_app_user_scope() = 'all'
+--     OR public.has_module_permission('followUp', 'view')
+--     OR church_id = (SELECT church_id FROM public.users WHERE id = public.current_app_user_id())
+--     OR responsible_user_id = public.current_app_user_id()
+--   );
+*/

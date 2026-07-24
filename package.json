@@ -24,6 +24,8 @@
     "test:prison-ministry-data": "node scripts/smoke-prison-ministry-data.mjs",
     "test:ministry-materials-data": "node scripts/smoke-ministry-materials-data.mjs",
     "test:programs-data": "node scripts/smoke-programs-data.mjs",
+    "test:settings-notifications-data": "node scripts/smoke-settings-notifications-data.mjs",
+    "test:data-layer-all": "node scripts/smoke-data-layer-all.mjs",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",

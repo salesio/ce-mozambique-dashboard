@@ -75,6 +75,13 @@ import type {
   ProgramTeam,
   Member,
   Notification,
+  NotificationSetting,
+  NotificationTemplate,
+  SystemSetting,
+  GlobalCategory,
+  StatusDefinition,
+  LanguageSetting,
+  UiPreference,
   Requisition,
   RequisitionTimelineEvent,
   ServiceChecklist,
@@ -175,6 +182,14 @@ import { PROGRAM_RESOURCES_SEED } from "../seeds/programResourcesSeed";
 import { PROGRAM_BUDGETS_SEED } from "../seeds/programBudgetsSeed";
 import { PROGRAM_CHECKLISTS_SEED } from "../seeds/programChecklistsSeed";
 import { PROGRAM_REPORTS_SEED } from "../seeds/programReportsSeed";
+import { SYSTEM_SETTINGS_SEED } from "../seeds/systemSettingsSeed";
+import { GLOBAL_CATEGORIES_SEED } from "../seeds/globalCategoriesSeed";
+import { STATUS_DEFINITIONS_SEED } from "../seeds/statusDefinitionsSeed";
+import { LANGUAGE_SETTINGS_SEED } from "../seeds/languageSettingsSeed";
+import { NOTIFICATION_SETTINGS_SEED } from "../seeds/notificationSettingsSeed";
+import { UI_PREFERENCES_SEED } from "../seeds/uiPreferencesSeed";
+import { NOTIFICATIONS_SEED } from "../seeds/notificationsSeed";
+import { NOTIFICATION_TEMPLATES_SEED } from "../seeds/notificationTemplatesSeed";
 import type { AccessPermission, AccessRole, AuditLog, PermissionTemplate } from "../types/entities";
 
 /**
@@ -218,7 +233,30 @@ export function createMockProvider(): DataProvider {
   const requisitionTimeline = createMemoryRepository<RequisitionTimelineEvent>(
     REQUISITION_TIMELINE_SEED.map((e) => ({ ...e })),
   );
-  const notifications = createMemoryRepository<Notification>([]);
+  const notifications = createMemoryRepository<Notification>(
+    NOTIFICATIONS_SEED.map((r) => ({ ...r })),
+  );
+  const notificationTemplates = createMemoryRepository<NotificationTemplate>(
+    NOTIFICATION_TEMPLATES_SEED.map((r) => ({ ...r })),
+  );
+  const systemSettings = createMemoryRepository<SystemSetting>(
+    SYSTEM_SETTINGS_SEED.map((r) => ({ ...r })),
+  );
+  const globalCategories = createMemoryRepository<GlobalCategory>(
+    GLOBAL_CATEGORIES_SEED.map((r) => ({ ...r })),
+  );
+  const statusDefinitions = createMemoryRepository<StatusDefinition>(
+    STATUS_DEFINITIONS_SEED.map((r) => ({ ...r })),
+  );
+  const languageSettings = createMemoryRepository<LanguageSetting>(
+    LANGUAGE_SETTINGS_SEED.map((r) => ({ ...r })),
+  );
+  const notificationSettings = createMemoryRepository<NotificationSetting>(
+    NOTIFICATION_SETTINGS_SEED.map((r) => ({ ...r })),
+  );
+  const uiPreferences = createMemoryRepository<UiPreference>(
+    UI_PREFERENCES_SEED.map((r) => ({ ...r })),
+  );
   const cellGroups = createMemoryRepository<CellGroup>(CELL_GROUPS_SEED.map((g) => ({ ...g })));
   const cells = createMemoryRepository<Cell>(CELLS_SEED.map((c) => ({ ...c })));
   const cellLeaders = createMemoryRepository<CellLeader>(
@@ -430,6 +468,13 @@ export function createMockProvider(): DataProvider {
     requisitions: requisitions as EntityRepository<unknown>,
     requisition_timeline: requisitionTimeline as EntityRepository<unknown>,
     notifications: notifications as EntityRepository<unknown>,
+    notification_templates: notificationTemplates as EntityRepository<unknown>,
+    system_settings: systemSettings as EntityRepository<unknown>,
+    global_categories: globalCategories as EntityRepository<unknown>,
+    status_definitions: statusDefinitions as EntityRepository<unknown>,
+    language_settings: languageSettings as EntityRepository<unknown>,
+    notification_settings: notificationSettings as EntityRepository<unknown>,
+    ui_preferences: uiPreferences as EntityRepository<unknown>,
     cell_groups: cellGroups as EntityRepository<unknown>,
     cells: cells as EntityRepository<unknown>,
     cell_leaders: cellLeaders as EntityRepository<unknown>,
@@ -527,6 +572,13 @@ export function createMockProvider(): DataProvider {
     requisitions,
     requisitionTimeline,
     notifications,
+    notificationTemplates,
+    systemSettings,
+    globalCategories,
+    statusDefinitions,
+    languageSettings,
+    notificationSettings,
+    uiPreferences,
     cellGroups,
     cells,
     cellLeaders,

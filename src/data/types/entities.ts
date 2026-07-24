@@ -1182,13 +1182,147 @@ export interface RequisitionTimelineEvent {
   metadata?: Record<string, unknown> | null;
 }
 
+/** In-app notification (dashboard dual-map). */
 export interface Notification {
   id: EntityId;
-  userId: EntityId | null;
-  title: string | null;
-  body: string | null;
-  readAt: IsoDateTime | null;
-  createdAt: IsoDateTime;
+  /** Legacy camelCase */
+  userId?: EntityId | null;
+  title?: string | null;
+  body?: string | null;
+  message?: string | null;
+  type?: string | null;
+  module?: string | null;
+  entity_type?: string | null;
+  entity_id?: EntityId | null;
+  entity_label?: string | null;
+  priority?: string | null;
+  recipient_user_id?: EntityId | null;
+  recipient_role_id?: EntityId | null;
+  recipient_role?: string | null;
+  recipient_role_name?: string | null;
+  recipient_department_id?: EntityId | null;
+  recipient_church_id?: EntityId | null;
+  scope?: string | null;
+  action_url?: string | null;
+  action_label?: string | null;
+  is_read?: boolean | null;
+  read_at?: IsoDateTime | null;
+  readAt?: IsoDateTime | null;
+  is_archived?: boolean | null;
+  archived_at?: IsoDateTime | null;
+  expires_at?: IsoDateTime | null;
+  created_by_user_id?: EntityId | null;
+  created_by_name?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  createdAt?: IsoDateTime;
+  metadata?: Record<string, unknown> | null;
+}
+
+export interface SystemSetting {
+  id: EntityId;
+  key?: string | null;
+  value?: string | null;
+  value_type?: string | null;
+  module?: string | null;
+  label_pt?: string | null;
+  label_en?: string | null;
+  label_fr?: string | null;
+  description?: string | null;
+  is_sensitive?: boolean | null;
+  is_system?: boolean | null;
+  editable_by_roles?: string[] | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface GlobalCategory {
+  id: EntityId;
+  module?: string | null;
+  category_group?: string | null;
+  name?: string | null;
+  name_pt?: string | null;
+  name_en?: string | null;
+  name_fr?: string | null;
+  description?: string | null;
+  color?: string | null;
+  icon?: string | null;
+  sort_order?: number | null;
+  status?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface StatusDefinition {
+  id: EntityId;
+  module?: string | null;
+  status_key?: string | null;
+  label_pt?: string | null;
+  label_en?: string | null;
+  label_fr?: string | null;
+  color?: string | null;
+  icon?: string | null;
+  severity?: string | null;
+  is_final?: boolean | null;
+  is_positive?: boolean | null;
+  is_negative?: boolean | null;
+  sort_order?: number | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface LanguageSetting {
+  id: EntityId;
+  code?: string | null;
+  name?: string | null;
+  name_native?: string | null;
+  is_active?: boolean | null;
+  is_default?: boolean | null;
+  sort_order?: number | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface NotificationSetting {
+  id: EntityId;
+  module?: string | null;
+  event_type?: string | null;
+  role_id?: EntityId | null;
+  role_name?: string | null;
+  enabled?: boolean | null;
+  channels?: string[] | null;
+  priority_default?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface UiPreference {
+  id: EntityId;
+  user_id?: EntityId | null;
+  key?: string | null;
+  value?: string | null;
+  theme?: string | null;
+  density?: string | null;
+  sidebar_collapsed?: boolean | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface NotificationTemplate {
+  id: EntityId;
+  event_type?: string | null;
+  module?: string | null;
+  title_template_pt?: string | null;
+  title_template_en?: string | null;
+  title_template_fr?: string | null;
+  message_template_pt?: string | null;
+  message_template_en?: string | null;
+  message_template_fr?: string | null;
+  default_type?: string | null;
+  default_priority?: string | null;
+  recipient_strategy?: string | null;
+  is_active?: boolean | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
 }
 
 // ---------------------------------------------------------------------------
@@ -3694,6 +3828,13 @@ export type EntityCollectionName =
   | "requisitions"
   | "requisition_timeline"
   | "notifications"
+  | "notification_templates"
+  | "system_settings"
+  | "global_categories"
+  | "status_definitions"
+  | "language_settings"
+  | "notification_settings"
+  | "ui_preferences"
   | "cell_groups"
   | "cells"
   | "cell_leaders"

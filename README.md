@@ -22,7 +22,7 @@ npm run test:requisitions-data    # smoke: requisitions workflow + finance disbu
 
 The UI still uses **localStorage mock** for most modules. Typed adapters live under `src/data/`.
 
-**Pilots already on the data layer:** Churches, Members, First Timers, Follow-Up, Foundation School, Cell Ministry, Finance, Requisitions & Approvals, Venue & Inventory, Staff & HR, Users / Roles / Access Control / Audit, Media Department, Counseling / Aconselhamento, Sacraments / Sacramentos, F.E.V.O, Prison Ministry, Ministry Materials, **Programs & Events / Programas**  
+**Pilots already on the data layer:** Churches, Members, First Timers, Follow-Up, Foundation School, Cell Ministry, Finance, Requisitions & Approvals, Venue & Inventory, Staff & HR, Users / Roles / Access Control / Audit, Media Department, Counseling / Aconselhamento, Sacraments / Sacramentos, F.E.V.O, Prison Ministry, Ministry Materials, Programs & Events, **Settings + Notification Center**  
 (`VITE_DATA_SOURCE=mock|local|api|supabase` — default `mock`).
 
 **Escola de Fundação (functional):** full tabs (overview → reports), 20+ teachers at HQ, delivery modes (in-person / online / home / prison), lesson sessions & attendance, online tests 1–7 (mock Forms; 20×6+10), soul winning (lesson 4), physical final exam + attachment prep, grading 40/60, audit log. No real Google API / scan app / Postgres yet.
@@ -54,6 +54,8 @@ The UI still uses **localStorage mock** for most modules. Typed adapters live un
 **Ministry Materials (pilot):** catalogue, stock, sales, distributions, material requests (including Prison Ministry via `source_id`), and **internal funds** via data layer + `CEMinistryMaterials` bridge. Sales/funds **do not** create `financeRecord` automatically. Stock is own collection (not Venue Inventory). See **[MINISTRY_MATERIALS_MODULE_PLAN.md](MINISTRY_MATERIALS_MODULE_PLAN.md)**.
 
 **Programs & Events (pilot):** programs, sessions, teams, registrations, participants, resources, budgets, checklists, and reports via data layer + `CEPrograms` bridge. Coordinator module with soft links to Media / Requisitions / Materials / Venue. **No automatic `financeRecord`**; budget is planning only. See **[PROGRAMS_MODULE_PLAN.md](PROGRAMS_MODULE_PLAN.md)**.
+
+**Settings + Notifications (pilot):** system settings, languages (pt default), categories, status definitions, UI preferences, in-app notification center + templates via `CESettings` / `CENotifications`. Helpers: `notify`, `createSystemNotification`, `recordAuditLog`. No push. See **[SETTINGS_MODULE_PLAN.md](SETTINGS_MODULE_PLAN.md)**, **[NOTIFICATION_CENTER_PLAN.md](NOTIFICATION_CENTER_PLAN.md)**, **[MILESTONES.md](MILESTONES.md)**.
 
 **Public Cell Report Form (leaders, no admin login):**
 - Button on the **login screen** only: *Submeter Relatório de Célula* → `#cell-report-submit`

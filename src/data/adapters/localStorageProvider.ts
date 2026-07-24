@@ -76,6 +76,13 @@ import type {
   ProgramTeam,
   Member,
   Notification,
+  NotificationSetting,
+  NotificationTemplate,
+  SystemSetting,
+  GlobalCategory,
+  StatusDefinition,
+  LanguageSetting,
+  UiPreference,
   Requisition,
   RequisitionTimelineEvent,
   ServiceChecklist,
@@ -191,6 +198,14 @@ function storageKeyFor(key: EntityCollectionName): string {
   if (key === "program_budgets") return `${STORAGE_PREFIX}program-budgets`;
   if (key === "program_checklists") return `${STORAGE_PREFIX}program-checklists`;
   if (key === "program_reports") return `${STORAGE_PREFIX}program-reports`;
+  if (key === "notifications") return `${STORAGE_PREFIX}notifications`;
+  if (key === "notification_templates") return `${STORAGE_PREFIX}notification-templates`;
+  if (key === "system_settings") return `${STORAGE_PREFIX}system-settings`;
+  if (key === "global_categories") return `${STORAGE_PREFIX}global-categories`;
+  if (key === "status_definitions") return `${STORAGE_PREFIX}status-definitions`;
+  if (key === "language_settings") return `${STORAGE_PREFIX}language-settings`;
+  if (key === "notification_settings") return `${STORAGE_PREFIX}notification-settings`;
+  if (key === "ui_preferences") return `${STORAGE_PREFIX}ui-preferences`;
   return STORAGE_PREFIX + key;
 }
 
@@ -287,6 +302,15 @@ export function createLocalStorageProvider(): DataProvider {
     "requisition_timeline",
   );
   const notifications = createPersistedRepository<Notification>("notifications");
+  const notificationTemplates =
+    createPersistedRepository<NotificationTemplate>("notification_templates");
+  const systemSettings = createPersistedRepository<SystemSetting>("system_settings");
+  const globalCategories = createPersistedRepository<GlobalCategory>("global_categories");
+  const statusDefinitions = createPersistedRepository<StatusDefinition>("status_definitions");
+  const languageSettings = createPersistedRepository<LanguageSetting>("language_settings");
+  const notificationSettings =
+    createPersistedRepository<NotificationSetting>("notification_settings");
+  const uiPreferences = createPersistedRepository<UiPreference>("ui_preferences");
   const cellGroups = createPersistedRepository<CellGroup>("cell_groups");
   const cells = createPersistedRepository<Cell>("cells");
   const cellLeaders = createPersistedRepository<CellLeader>("cell_leaders");
@@ -404,6 +428,13 @@ export function createLocalStorageProvider(): DataProvider {
     requisitions: requisitions as EntityRepository<unknown>,
     requisition_timeline: requisitionTimeline as EntityRepository<unknown>,
     notifications: notifications as EntityRepository<unknown>,
+    notification_templates: notificationTemplates as EntityRepository<unknown>,
+    system_settings: systemSettings as EntityRepository<unknown>,
+    global_categories: globalCategories as EntityRepository<unknown>,
+    status_definitions: statusDefinitions as EntityRepository<unknown>,
+    language_settings: languageSettings as EntityRepository<unknown>,
+    notification_settings: notificationSettings as EntityRepository<unknown>,
+    ui_preferences: uiPreferences as EntityRepository<unknown>,
     cell_groups: cellGroups as EntityRepository<unknown>,
     cells: cells as EntityRepository<unknown>,
     cell_leaders: cellLeaders as EntityRepository<unknown>,
@@ -502,6 +533,13 @@ export function createLocalStorageProvider(): DataProvider {
     requisitions,
     requisitionTimeline,
     notifications,
+    notificationTemplates,
+    systemSettings,
+    globalCategories,
+    statusDefinitions,
+    languageSettings,
+    notificationSettings,
+    uiPreferences,
     cellGroups,
     cells,
     cellLeaders,

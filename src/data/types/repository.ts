@@ -76,6 +76,13 @@ import type {
   ProgramTeam,
   Member,
   Notification,
+  NotificationSetting,
+  NotificationTemplate,
+  SystemSetting,
+  GlobalCategory,
+  StatusDefinition,
+  LanguageSetting,
+  UiPreference,
   Requisition,
   RequisitionTimelineEvent,
   ServiceChecklist,
@@ -145,6 +152,13 @@ export interface DataProvider {
   requisitions: EntityRepository<Requisition>;
   requisitionTimeline: EntityRepository<RequisitionTimelineEvent>;
   notifications: EntityRepository<Notification>;
+  notificationTemplates: EntityRepository<NotificationTemplate>;
+  systemSettings: EntityRepository<SystemSetting>;
+  globalCategories: EntityRepository<GlobalCategory>;
+  statusDefinitions: EntityRepository<StatusDefinition>;
+  languageSettings: EntityRepository<LanguageSetting>;
+  notificationSettings: EntityRepository<NotificationSetting>;
+  uiPreferences: EntityRepository<UiPreference>;
   cellGroups: EntityRepository<CellGroup>;
   cells: EntityRepository<Cell>;
   cellLeaders: EntityRepository<CellLeader>;

@@ -832,6 +832,47 @@ export {
   PROGRAM_REGISTRATIONS_SEED,
   PROGRAM_REPORTS_SEED,
   programsEventsRepository,
+  // Settings + Notifications
+  listSystemSettings,
+  getSystemSettingByKey,
+  setSystemSetting,
+  updateSystemSetting,
+  listGlobalCategories,
+  createGlobalCategory,
+  updateGlobalCategory,
+  listStatusDefinitions,
+  createStatusDefinition,
+  updateStatusDefinition,
+  listLanguageSettings,
+  setDefaultLanguage,
+  getActiveLanguages,
+  listNotificationSettings,
+  updateNotificationSetting,
+  listUiPreferences,
+  updateUiPreference,
+  ensureSettingsSeeded,
+  getSettingsDataSourceInfo,
+  listNotifications,
+  createNotification,
+  updateNotification,
+  getNotificationsByUser,
+  getUnreadNotifications,
+  markNotificationAsRead,
+  markAllNotificationsAsRead,
+  archiveNotification,
+  listNotificationTemplates,
+  createNotificationTemplate,
+  notify,
+  getNotificationOverviewStats,
+  getUnreadCountForUser,
+  ensureNotificationsSeeded,
+  getNotificationsDataSourceInfo,
+  SYSTEM_SETTINGS_SEED,
+  LANGUAGE_SETTINGS_SEED,
+  NOTIFICATIONS_SEED,
+  NOTIFICATION_TEMPLATES_SEED,
+  settingsRepository,
+  notificationsRepository,
 } from "./data";
 
 export type {
@@ -1617,6 +1658,44 @@ import {
   PROGRAM_TEAMS_SEED,
   PROGRAM_REGISTRATIONS_SEED,
   PROGRAM_REPORTS_SEED,
+  listSystemSettings,
+  getSystemSettingByKey,
+  setSystemSetting,
+  updateSystemSetting,
+  listGlobalCategories,
+  createGlobalCategory,
+  updateGlobalCategory,
+  listStatusDefinitions,
+  createStatusDefinition,
+  updateStatusDefinition,
+  listLanguageSettings,
+  setDefaultLanguage,
+  getActiveLanguages,
+  listNotificationSettings,
+  updateNotificationSetting,
+  listUiPreferences,
+  updateUiPreference,
+  ensureSettingsSeeded,
+  getSettingsDataSourceInfo,
+  listNotifications,
+  createNotification,
+  updateNotification,
+  getNotificationsByUser,
+  getUnreadNotifications,
+  markNotificationAsRead,
+  markAllNotificationsAsRead,
+  archiveNotification,
+  listNotificationTemplates,
+  createNotificationTemplate,
+  notify,
+  getNotificationOverviewStats,
+  getUnreadCountForUser,
+  ensureNotificationsSeeded,
+  getNotificationsDataSourceInfo,
+  SYSTEM_SETTINGS_SEED,
+  LANGUAGE_SETTINGS_SEED,
+  NOTIFICATIONS_SEED,
+  NOTIFICATION_TEMPLATES_SEED,
   getDataProvider,
   getDataSource,
   getActiveDataSource,
@@ -1647,6 +1726,9 @@ function installDataLayerGlobals(): void {
     CEPrisonMinistry?: Record<string, unknown>;
     CEMinistryMaterials?: Record<string, unknown>;
     CEPrograms?: Record<string, unknown>;
+    CESettings?: Record<string, unknown>;
+    CENotifications?: Record<string, unknown>;
+    recordAuditLog?: (action: string, payload?: Record<string, unknown>) => void;
   };
 
   const churches = {
@@ -2334,6 +2416,48 @@ function installDataLayerGlobals(): void {
     getInfo: getProgramsDataSourceInfo,
   };
 
+  const settings = {
+    listSystemSettings,
+    getSystemSettingByKey,
+    setSystemSetting,
+    updateSystemSetting,
+    listGlobalCategories,
+    createGlobalCategory,
+    updateGlobalCategory,
+    listStatusDefinitions,
+    createStatusDefinition,
+    updateStatusDefinition,
+    listLanguageSettings,
+    setDefaultLanguage,
+    getActiveLanguages,
+    listNotificationSettings,
+    updateNotificationSetting,
+    listUiPreferences,
+    updateUiPreference,
+    ensureSettingsSeeded,
+    getSettingsDataSourceInfo,
+    getInfo: getSettingsDataSourceInfo,
+  };
+
+  const notificationsApi = {
+    listNotifications,
+    createNotification,
+    updateNotification,
+    getNotificationsByUser,
+    getUnreadNotifications,
+    markNotificationAsRead,
+    markAllNotificationsAsRead,
+    archiveNotification,
+    listNotificationTemplates,
+    createNotificationTemplate,
+    notify,
+    getNotificationOverviewStats,
+    getUnreadCountForUser,
+    ensureNotificationsSeeded,
+    getNotificationsDataSourceInfo,
+    getInfo: getNotificationsDataSourceInfo,
+  };
+
   const media = {
     listMediaTeam,
     getMediaTeamMemberById,
@@ -2572,6 +2696,12 @@ function installDataLayerGlobals(): void {
     ...prisonMinistry,
     ...ministryMaterials,
     ...programsEvents,
+    ...settings,
+    ...notificationsApi,
+    SYSTEM_SETTINGS_SEED,
+    LANGUAGE_SETTINGS_SEED,
+    NOTIFICATIONS_SEED,
+    NOTIFICATION_TEMPLATES_SEED,
     getDataProvider,
     getDataSource,
     getActiveDataSource,
@@ -2843,6 +2973,18 @@ function installDataLayerGlobals(): void {
       submitProgramReport,
       validateProgramReport,
     },
+    settings,
+    systemSettings: {
+      listSystemSettings,
+      getSystemSettingByKey,
+      setSystemSetting,
+      updateSystemSetting,
+    },
+    notifications: notificationsApi,
+    notificationTemplates: {
+      listNotificationTemplates,
+      createNotificationTemplate,
+    },
     getDataProvider,
     getDataSource,
     getActiveDataSource,
@@ -2907,6 +3049,34 @@ function installDataLayerGlobals(): void {
   if (!root.CEPrograms) {
     root.CEPrograms = programsEvents;
   }
+  if (!root.CESettings) {
+    root.CESettings = settings;
+  }
+  if (!root.CENotifications) {
+    root.CENotifications = notificationsApi;
+  }
+  if (!root.recordAuditLog) {
+    root.recordAuditLog = (action: string, payload: Record<string, unknown> = {}) => {
+      try {
+        const ac = root.CEAccessControlData as
+          | { createAuditLog?: (p: Record<string, unknown>) => Promise<unknown> }
+          | undefined;
+        if (ac?.createAuditLog) {
+          void ac.createAuditLog({
+            action,
+            module: String(payload.module || "system"),
+            entity_type: String(payload.entity_type || ""),
+            entity_id: String(payload.entity_id || ""),
+            details: String(payload.details || ""),
+            severity: String(payload.severity || "info"),
+            ...payload,
+          });
+        }
+      } catch {
+        /* soft */
+      }
+    };
+  }
 
   try {
     const churchInfo = getChurchesDataSourceInfo();
@@ -2932,6 +3102,8 @@ function installDataLayerGlobals(): void {
       prisonMinistry: Object.keys(prisonMinistry),
       ministryMaterials: Object.keys(ministryMaterials),
       programs: Object.keys(programsEvents),
+      settings: Object.keys(settings),
+      notifications: Object.keys(notificationsApi),
     });
   } catch (error) {
     console.warn("[CE DataLayer] installed with provider warning", error);

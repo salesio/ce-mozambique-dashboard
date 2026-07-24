@@ -1307,3 +1307,45 @@ npm run test:requisitions-data
 npm run test:access-control-data
 # Manual: Programas → criar → listar → VITE_DATA_SOURCE=local + F5
 ```
+
+---
+
+## Pilot migration: Settings + Notification Center
+
+**Status: live (pilot)** — settings system + in-app notifications on data layer.
+
+See **[SETTINGS_MODULE_PLAN.md](SETTINGS_MODULE_PLAN.md)**, **[NOTIFICATION_CENTER_PLAN.md](NOTIFICATION_CENTER_PLAN.md)**, **[MILESTONES.md](MILESTONES.md)**.
+
+### Local keys
+
+| Collection | Key |
+|------------|-----|
+| System settings | `ce-data-layer:system-settings` |
+| Global categories | `ce-data-layer:global-categories` |
+| Status definitions | `ce-data-layer:status-definitions` |
+| Languages | `ce-data-layer:language-settings` |
+| Notification settings | `ce-data-layer:notification-settings` |
+| UI preferences | `ce-data-layer:ui-preferences` |
+| Notifications | `ce-data-layer:notifications` |
+| Templates | `ce-data-layer:notification-templates` |
+
+### Domain rules
+
+- Settings + Notifications use data layer (mock/local).
+- No real push notifications.
+- No browser → PostgreSQL.
+- `CENotifications.notify` uses templates with safe fallback.
+- `recordAuditLog` central soft helper.
+- Public site flags prepared in system settings.
+- Does not break Access Control, Finance, Programs, Materials, Prison, etc.
+
+Cache buster: `?v=20260723-settings-notifications-v1`
+
+### How to test
+
+```bash
+npm run build
+npm run test:settings-notifications-data
+npm run test:data-layer-all
+```
+

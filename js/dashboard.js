@@ -3159,6 +3159,7 @@ const NAV_GROUPS = [
   { key: "main", items: [["dashboard", "bi-speedometer2", "dashboard"], ["churches", "bi-building", "churches"], ["members", "bi-people", "members"], ["reports", "bi-bar-chart-line", "reports"]] },
   { key: "pastoralCare", items: [["firstTimers", "bi-person-heart", "firstTimers"], ["followUp", "bi-telephone-outbound", "followUp"], ["foundation", "bi-mortarboard", "foundationSchool"], ["sacraments", "bi-droplet", "sacraments"], ["counseling", "bi-chat-heart", "counseling"]] },
   // Order: Finanças → Parcerias → … (Loveworld SAT is a partnership arm, not a department)
+  // Order: Células (parent nav separate) → F.E.V.O → Finanças → Parcerias → Programas → Mídia → …
   { key: "departments", items: [["fevo", "bi-compass", "fevo"], ["finance", "bi-cash-coin", "finance"], ["partnership", "bi-stars", "partnership"], ["programs", "bi-calendar-event", "programs"], ["media", "bi-camera-reels", "media"], ["requisitions", "bi-clipboard-check", "requisitions"], ["venueInventory", "bi-box-seam", "venueInventoryShort"], ["cellPrison", "bi-shield-lock", "prisonMinistry"], ["cellMaterials", "bi-journal-richtext", "ministryMaterials"]] },
   { key: "admin", items: [["staffHr", "bi-people-fill", "staffHr"], ["users", "bi-person-lock", "usersRoles"], ["access", "bi-shield-lock", "accessControl"], ["settings", "bi-gear", "settings"], ["audit", "bi-journal-check", "auditLogs"]] }
 ];
@@ -15959,7 +15960,95 @@ function renderAccess() {
 }
 
 function renderSettings() {
-  setPageContent(`${sectionHeader(L("settings"), lang === "pt" ? "Defini��es futuras para backend, autentica��o, notifica��es e API mobile." : "Backend, authentication, notifications and mobile API settings will live here.", null, "bi-gear")}<div class="module-grid">${["Supabase/Firebase/PostgreSQL", "Authentication", "Mobile API", "Notifications"].map((item) => `<article class="record-card data-card"><span class="eyebrow">${L("settings")}</span><h3>${item}</h3><p class="text-secondary mb-0">${lang === "pt" ? "Espa�o reservado do prot�tipo." : "Frontend placeholder."}</p></article>`).join("")}</div>`);
+  if (!canEnterRoute("settings")) return renderAccessDenied();
+  const settingsApi = window.CESettings || window.CEDataLayer?.settings;
+  const rows = state.systemSettings || [];
+  const langs = state.languageSettings || [];
+  const cats = state.globalCategories || [];
+  const notifOn = rows.find((s) => s.key === "enable_notifications")?.value !== "false";
+  const auditOn = rows.find((s) => s.key === "enable_audit_log")?.value !== "false";
+  const currency = rows.find((s) => s.key === "default_currency")?.value || "MZN";
+  const theme = rows.find((s) => s.key === "dashboard_theme")?.value || "dark";
+  const defaultLang = langs.find((l) => l.is_default)?.code || "pt";
+  setPageContent(`
+    ${sectionHeader(L("settings"), lang === "pt" ? "Configurações globais, idiomas, categorias e preferências (data layer)." : "Global settings, languages, categories and preferences (data layer).", null, "bi-gear")}
+    <div class="row g-3 mb-3">
+      ${metric("bi-gear", lang === "pt" ? "Configurações" : "Settings", rows.length || "—", lang === "pt" ? "Sistema" : "System")}
+      ${metric("bi-translate", lang === "pt" ? "Idiomas activos" : "Active languages", langs.filter((l) => l.is_active !== false).length || 3, `default: ${defaultLang}`)}
+      ${metric("bi-tags", lang === "pt" ? "Categorias" : "Categories", cats.length || "—", lang === "pt" ? "Globais" : "Global")}
+      ${metric("bi-bell", lang === "pt" ? "Notificações" : "Notifications", notifOn ? L("yes") : L("no"), lang === "pt" ? "Centro activo" : "Center on")}
+      ${metric("bi-shield-check", "Audit Log", auditOn ? L("yes") : L("no"), lang === "pt" ? "Activo" : "Enabled")}
+      ${metric("bi-currency-exchange", lang === "pt" ? "Moeda" : "Currency", currency, theme)}
+    </div>
+    <div class="row g-3 mb-3">
+      <div class="col-lg-7">
+        <article class="panel glass-panel">
+          <div class="panel-head"><h3 class="panel-title">${lang === "pt" ? "Configurações do sistema" : "System settings"}</h3>
+            <button type="button" class="btn btn-sm btn-ce-gold" id="btnRefreshSettings">${lang === "pt" ? "Actualizar" : "Refresh"}</button>
+          </div>
+          ${dataTable(
+            [lang === "pt" ? "Chave" : "Key", lang === "pt" ? "Valor" : "Value", "Módulo", L("status")],
+            (rows.length ? rows : [{ key: "default_currency", value: currency, module: "finance", is_system: true }]).map((s) => [
+              s.label_pt && lang === "pt" ? s.label_pt : s.key,
+              s.value,
+              s.module || "global",
+              s.is_system ? "system" : "editable",
+            ]),
+          )}
+        </article>
+      </div>
+      <div class="col-lg-5">
+        <article class="panel glass-panel mb-3">
+          <div class="panel-head"><h3 class="panel-title">${lang === "pt" ? "Idiomas" : "Languages"}</h3></div>
+          ${dataTable(
+            ["Code", L("name"), "Default"],
+            (langs.length ? langs : [{ code: "pt", name_native: "Português", is_default: true }, { code: "en", name: "English" }, { code: "fr", name: "Français" }]).map((l) => [
+              l.code,
+              l.name_native || l.name || l.code,
+              l.is_default ? L("yes") : L("no"),
+            ]),
+          )}
+          <div class="p-3 d-flex gap-2 flex-wrap">
+            <button type="button" class="btn btn-sm btn-outline-cyan" data-set-lang="pt">PT</button>
+            <button type="button" class="btn btn-sm btn-outline-cyan" data-set-lang="en">EN</button>
+            <button type="button" class="btn btn-sm btn-outline-cyan" data-set-lang="fr">FR</button>
+          </div>
+        </article>
+        <article class="panel glass-panel">
+          <div class="panel-head"><h3 class="panel-title">${lang === "pt" ? "Preferências rápidas" : "Quick preferences"}</h3></div>
+          <div class="p-3 d-grid gap-2">
+            <button type="button" class="btn btn-sm btn-ce-gold" id="btnToggleNotif">${lang === "pt" ? "Alternar notificações" : "Toggle notifications"}</button>
+            <button type="button" class="btn btn-sm btn-outline-cyan" data-route="notifications">${lang === "pt" ? "Abrir centro de notificações" : "Open notification center"}</button>
+            <button type="button" class="btn btn-sm btn-outline-cyan" data-route="audit">${L("auditLogs")}</button>
+            <p class="text-secondary small mb-0">${lang === "pt" ? "Data layer: mock/local/api/supabase via VITE_DATA_SOURCE. Sem PostgreSQL directo no browser." : "Data layer: mock/local/api/supabase via VITE_DATA_SOURCE. No direct browser PostgreSQL."}</p>
+            <p class="text-secondary small mb-0">${settingsApi ? `provider: ${(settingsApi.getInfo && settingsApi.getInfo())?.source || "ready"}` : "bridge: pending"}</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  `);
+  byId("btnRefreshSettings")?.addEventListener("click", () => {
+    void hydrateSettingsFromRepository().then(() => renderSettings());
+  });
+  byId("btnToggleNotif")?.addEventListener("click", async () => {
+    const api = window.CESettings || window.CEDataLayer?.settings;
+    if (!api?.setSystemSetting) return;
+    const next = notifOn ? "false" : "true";
+    await api.setSystemSetting("enable_notifications", next);
+    await hydrateSettingsFromRepository();
+    renderSettings();
+  });
+  document.querySelectorAll("[data-set-lang]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const code = btn.getAttribute("data-set-lang");
+      const api = window.CESettings || window.CEDataLayer?.settings;
+      if (api?.setDefaultLanguage) await api.setDefaultLanguage(code);
+      if (typeof setLang === "function") setLang(code);
+      else if (typeof applyLanguage === "function") applyLanguage(code);
+      await hydrateSettingsFromRepository();
+      renderSettings();
+    });
+  });
 }
 
 function renderAudit() {
@@ -16877,7 +16966,95 @@ function createNotification(payload = {}) {
   state.notifications = [...created, ...(state.notifications || [])];
   saveState("Created notification");
   updateNotificationCenter();
+  // Dual-write to data layer (soft)
+  try {
+    const bridge = window.CENotifications || window.CEDataLayer?.notifications;
+    created.forEach((row) => {
+      if (bridge?.createNotification) void bridge.createNotification(row);
+    });
+  } catch (_) {}
   return created;
+}
+
+async function hydrateSettingsFromRepository() {
+  const api = window.CESettings || window.CEDataLayer?.settings;
+  if (!api?.listSystemSettings) return false;
+  try {
+    let hydrated = false;
+    const settings = await api.listSystemSettings();
+    if (settings?.ok && Array.isArray(settings.data) && settings.data.length) {
+      state.systemSettings = settings.data;
+      hydrated = true;
+    }
+    if (api.listLanguageSettings) {
+      const langs = await api.listLanguageSettings();
+      if (langs?.ok && Array.isArray(langs.data)) {
+        state.languageSettings = langs.data;
+        hydrated = true;
+      }
+    }
+    if (api.listGlobalCategories) {
+      const cats = await api.listGlobalCategories();
+      if (cats?.ok && Array.isArray(cats.data)) {
+        state.globalCategories = cats.data;
+        hydrated = true;
+      }
+    }
+    if (api.listStatusDefinitions) {
+      const sts = await api.listStatusDefinitions();
+      if (sts?.ok && Array.isArray(sts.data)) {
+        state.statusDefinitions = sts.data;
+        hydrated = true;
+      }
+    }
+    if (hydrated) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (_) {}
+      console.info("[CE Settings] hydrated", {
+        settings: (state.systemSettings || []).length,
+        languages: (state.languageSettings || []).length,
+      });
+    }
+    return hydrated;
+  } catch (e) {
+    console.warn("[CE Settings] hydrate failed", e);
+    return false;
+  }
+}
+
+async function hydrateNotificationsFromRepository() {
+  const api = window.CENotifications || window.CEDataLayer?.notifications;
+  if (!api?.listNotifications) return false;
+  try {
+    const result = await api.listNotifications();
+    if (!result?.ok || !Array.isArray(result.data) || !result.data.length) return false;
+    const prev = new Map((state.notifications || []).map((n) => [n.id, n]));
+    const byId = new Map();
+    result.data.forEach((row) => {
+      const previous = prev.get(row.id) || {};
+      byId.set(row.id, {
+        ...row,
+        ...previous,
+        id: row.id,
+        message: row.message || row.body || previous.message || "",
+        is_read: row.is_read ?? previous.is_read ?? false,
+      });
+    });
+    prev.forEach((local, id) => {
+      if (!byId.has(id)) byId.set(id, local);
+    });
+    state.notifications = [...byId.values()];
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (_) {}
+    if (typeof updateNotificationCenter === "function") updateNotificationCenter();
+    console.info("[CE Notifications] hydrated", state.notifications.length);
+    return true;
+  } catch (e) {
+    console.warn("[CE Notifications] hydrate failed", e);
+    return false;
+  }
 }
 
 function notifyRole(role, payload) {
@@ -19782,6 +19959,22 @@ function enterDashboard() {
       }
     })
     .catch((error) => console.warn("[CE Programs] background hydrate skipped", error));
+
+  Promise.resolve()
+    .then(() => hydrateSettingsFromRepository())
+    .then((hydrated) => {
+      if (hydrated && activeRoute === "settings" && typeof renderSettings === "function") {
+        renderSettings();
+      }
+    })
+    .catch((error) => console.warn("[CE Settings] background hydrate skipped", error));
+
+  Promise.resolve()
+    .then(() => hydrateNotificationsFromRepository())
+    .then(() => {
+      if (typeof updateNotificationCenter === "function") updateNotificationCenter();
+    })
+    .catch((error) => console.warn("[CE Notifications] background hydrate skipped", error));
 }
 
 function dualWriteFevoRecord(modalType, mode, record) {

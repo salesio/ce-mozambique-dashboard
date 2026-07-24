@@ -65,6 +65,15 @@ import type {
   MaterialStock,
   MaterialStockMovement,
   MinistryMaterial,
+  Program,
+  ProgramBudget,
+  ProgramChecklist,
+  ProgramParticipant,
+  ProgramRegistration,
+  ProgramReport,
+  ProgramResource,
+  ProgramSession,
+  ProgramTeam,
   Member,
   Notification,
   Requisition,
@@ -185,6 +194,15 @@ export interface DataProvider {
   ministryMaterialsRequests: EntityRepository<MaterialRequest>;
   ministryMaterialsFunds: EntityRepository<MaterialFund>;
   ministryMaterialsReports: EntityRepository<MaterialReport>;
+  programs: EntityRepository<Program>;
+  programSessions: EntityRepository<ProgramSession>;
+  programTeams: EntityRepository<ProgramTeam>;
+  programParticipants: EntityRepository<ProgramParticipant>;
+  programRegistrations: EntityRepository<ProgramRegistration>;
+  programResources: EntityRepository<ProgramResource>;
+  programBudgets: EntityRepository<ProgramBudget>;
+  programChecklists: EntityRepository<ProgramChecklist>;
+  programReports: EntityRepository<ProgramReport>;
   inventoryItems: EntityRepository<InventoryItem>;
   inventoryMovements: EntityRepository<InventoryMovement>;
   inventoryMaintenance: EntityRepository<InventoryMaintenanceRecord>;

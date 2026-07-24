@@ -3637,7 +3637,14 @@ const seedData = {
     marriages: [{ id: "mar-1", church_id: "church-hq", nome_do_noivo: "Paulo M.", telefone_do_noivo: "860000001", nome_da_noiva: "Helena C.", telefone_da_noiva: "860000002", aconselhamento_concluido: false, data_do_casamento: "2026-08-24", pastor_responsavel: "Pastor Kene Ume", documentos_entregues: true, estado: "In Progress", observacoes: "" }],
     babies: [{ id: "baby-1", church_id: "church-hq", nome_da_crianca: "Grace Ana", data_de_nascimento: "2026-03-14", nome_do_pai: "Tomas", nome_da_mae: "Ana", telefone_dos_pais: "874520011", data_da_dedicacao: "2026-07-26", pastor_responsavel: "Pastor Kene Ume", certificado_emitido: false, estado: "Scheduled", observacoes: "" }]
   },
-  programs: [{ id: "prog-1", church_id: "church-hq", name: "Sunday Service", owner: "Programs Team", status: "Scheduled" }],
+  programs: [
+    { id: "prog-1", church_id: "church-hq", name: "Sunday Service", owner: "Programs Team", category: "Local Church", status: "Scheduled", program_type: "Service", start_date: "2026-07-20" },
+    { id: "prog-2", church_id: "church-hq", name: "Pray-a-thon", owner: "Sister Janet Marquele", category: "National", status: "Planning", program_type: "Prayer Program", start_date: "2026-07-25" },
+    { id: "prog-3", church_id: "church-hq", name: "Healing Streams Live", owner: "Pastor Kene Ume", category: "Global Event", status: "Approved", program_type: "Healing Program", start_date: "2026-08-01" },
+    { id: "prog-4", church_id: "church-hq", name: "Graduation Foundation School", owner: "Foundation Rector", category: "Departmental", status: "Report Pending", program_type: "Graduation", start_date: "2026-07-12" },
+    { id: "prog-5", church_id: "church-beira", name: "Conferência de Liderança Beira", owner: "Sister Janet Marquele", category: "National", status: "In Progress", program_type: "Conference", start_date: "2026-07-22" },
+    { id: "prog-7", church_id: "church-hq", name: "Evangelism Campaign Maputo", owner: "Sister Cassandra", category: "Local Church", status: "Completed", program_type: "Evangelism Campaign", start_date: "2026-06-15" }
+  ],
   partnership: [{ id: "part-1", church_id: "church-virtual", nome: "Carlos", apelido: "Muianga", name: "Loveworld SAT Partner", telefone: "866877389", whatsapp: "866877389", email: "carlos@example.com", endereco: "Online", celula: "Virtual", category: "Loveworld SAT", status: "Active" }],
   // Catalog of partnership arms (analytics layer; financeRecords remain the source of truth)
   partnershipArms: typeof PARTNERSHIP_ARMS_SEED !== "undefined" ? structuredClone(PARTNERSHIP_ARMS_SEED) : [],
@@ -17738,6 +17745,9 @@ async function submitForm(form) {
     ) {
       void dualWriteMinistryMaterialsRecord(modalType, "update", collection[index]);
     }
+    if (modalType === "programs" || modalType === "program") {
+      void dualWriteProgramsRecord(modalType, "update", collection[index]);
+    }
   } else {
     const idPrefix = modalType.slice(0, 3);
     const nowIso = new Date().toISOString();
@@ -18128,6 +18138,16 @@ async function submitForm(form) {
         record.estado = record.estado || record.status || "Activa";
       }
       void dualWriteMinistryMaterialsRecord(modalType, "create", record);
+    }
+    if (modalType === "programs" || modalType === "program") {
+      record.name = record.name || "";
+      record.owner = record.owner || record.responsible_name || activeUser.name || "";
+      record.responsible_name = record.responsible_name || record.owner || "";
+      record.status = record.status || record.estado || "Draft";
+      record.estado = record.estado || record.status || "Rascunho";
+      record.category = record.category || "Local Church";
+      record.program_type = record.program_type || "Other";
+      void dualWriteProgramsRecord(modalType, "create", record);
     }
   }
   bootstrap.Modal.getOrCreateInstance(byId("entryModal")).hide();
@@ -19753,6 +19773,15 @@ function enterDashboard() {
       }
     })
     .catch((error) => console.warn("[CE Materials] background hydrate skipped", error));
+
+  Promise.resolve()
+    .then(() => hydrateProgramsFromRepository())
+    .then((hydrated) => {
+      if (hydrated && activeRoute === "programs") {
+        setRoute(activeRoute);
+      }
+    })
+    .catch((error) => console.warn("[CE Programs] background hydrate skipped", error));
 }
 
 function dualWriteFevoRecord(modalType, mode, record) {
@@ -19813,6 +19842,85 @@ function dualWriteMinistryMaterialsRecord(modalType, mode, record) {
   if (!pair) return;
   if (mode === "create" && bridge[pair[0]]) void bridge[pair[0]](record);
   else if (mode === "update" && bridge[pair[1]]) void bridge[pair[1]](record.id, record);
+}
+
+function dualWriteProgramsRecord(modalType, mode, record) {
+  const bridge = window.CEPrograms || window.CEDataLayer?.programs;
+  if (!bridge || !record) return;
+  if (typeof bridge.dualWriteRecord === "function") {
+    void bridge.dualWriteRecord(modalType || "programs", mode, record);
+    return;
+  }
+  if (mode === "create" && bridge.createProgram) void bridge.createProgram(record);
+  else if (mode === "update" && bridge.updateProgram) void bridge.updateProgram(record.id, record);
+}
+
+async function hydrateProgramsFromRepository() {
+  const repo = window.CEPrograms || window.CEDataLayer?.programs;
+  if (!repo?.listPrograms) return false;
+  try {
+    let hydrated = false;
+    const result = await repo.listPrograms();
+    if (result?.ok && Array.isArray(result.data) && result.data.length) {
+      const prev = new Map((state.programs || []).map((r) => [r.id, r]));
+      const byId = new Map();
+      result.data.forEach((row) => {
+        const previous = prev.get(row.id) || {};
+        byId.set(row.id, {
+          ...row,
+          ...previous,
+          id: row.id,
+          name: row.name || previous.name || "",
+          owner: row.owner || row.responsible_name || previous.owner || "",
+          responsible_name: row.responsible_name || row.owner || previous.responsible_name || "",
+          category: row.category || previous.category || "",
+          status: row.status || row.estado || previous.status || "Draft",
+          church_id: row.church_id || previous.church_id || "",
+          program_type: row.program_type || previous.program_type || "",
+          start_date: row.start_date || previous.start_date || "",
+        });
+      });
+      prev.forEach((localRow, id) => {
+        if (!byId.has(id)) byId.set(id, localRow);
+      });
+      state.programs = [...byId.values()];
+      hydrated = true;
+    }
+
+    // Extended collections for future UI tabs
+    state.programEvents = state.programEvents || {};
+    async function loadExt(fn, key) {
+      if (typeof fn !== "function") return;
+      const res = await fn();
+      if (res?.ok && Array.isArray(res.data)) {
+        state.programEvents[key] = res.data;
+        hydrated = true;
+      }
+    }
+    await loadExt(repo.listProgramSessions?.bind(repo), "sessions");
+    await loadExt(repo.listProgramTeams?.bind(repo), "teams");
+    await loadExt(repo.listProgramParticipants?.bind(repo), "participants");
+    await loadExt(repo.listProgramRegistrations?.bind(repo), "registrations");
+    await loadExt(repo.listProgramResources?.bind(repo), "resources");
+    await loadExt(repo.listProgramBudgets?.bind(repo), "budgets");
+    await loadExt(repo.listProgramChecklists?.bind(repo), "checklists");
+    await loadExt(repo.listProgramReports?.bind(repo), "reports");
+
+    if (hydrated) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (_) {}
+      console.info("[CE Programs] hydrated", {
+        programs: (state.programs || []).length,
+        sessions: (state.programEvents?.sessions || []).length,
+        reports: (state.programEvents?.reports || []).length,
+      });
+    }
+    return hydrated;
+  } catch (error) {
+    console.warn("[CE Programs] hydrate failed", error);
+    return false;
+  }
 }
 
 async function hydrateMinistryMaterialsFromRepository() {

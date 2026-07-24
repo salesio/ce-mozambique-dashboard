@@ -1253,3 +1253,57 @@ npm run test:access-control-data
 # Manual: Materiais → catálogo → venda → fundo interno (sem finance) → distribuição → pedido prisional
 # VITE_DATA_SOURCE=local + F5
 ```
+
+---
+
+## Pilot migration: Programs & Events
+
+**Status: live (pilot)** — dual-write / hydrate; UI list remains `renderSimple("programs")` + extended `state.programEvents`.
+
+See also **[PROGRAMS_MODULE_PLAN.md](PROGRAMS_MODULE_PLAN.md)**.
+
+### Local keys
+
+| Collection | Key |
+|------------|-----|
+| Programs | `ce-data-layer:programs` |
+| Sessions | `ce-data-layer:program-sessions` |
+| Teams | `ce-data-layer:program-teams` |
+| Participants | `ce-data-layer:program-participants` |
+| Registrations | `ce-data-layer:program-registrations` |
+| Resources | `ce-data-layer:program-resources` |
+| Budgets | `ce-data-layer:program-budgets` |
+| Checklists | `ce-data-layer:program-checklists` |
+| Reports | `ce-data-layer:program-reports` |
+
+### Domain rules
+
+- Programas uses the data layer as a **coordinator** (sessions, teams, registrations, resources, budgets, checklists, reports).
+- Soft integrations prepared for Media, Requisitions, Ministry Materials, Venue, Finance.
+- **No automatic `financeRecord`.**
+- Budget is not verified expense.
+- Does not break Media, Requisitions, Ministry Materials, Venue, Finance, or Access Control.
+- PostgreSQL direct is a future phase.
+
+### Code
+
+| Piece | Role |
+|-------|------|
+| `src/data/repositories/programsEventsRepository.ts` | Aggregator |
+| Seeds | programs + 8 related collections |
+| `js/programs-data-bridge.js` | Dual-write + fallback (`CEPrograms`) |
+| Dashboard | dual-write programs + hydrate list + `programEvents` |
+
+Cache buster: `?v=20260723-programs-data-v1`
+
+### How to test Programs
+
+```bash
+npm run build
+npm run test:programs-data
+npm run test:ministry-materials-data
+npm run test:media-data
+npm run test:requisitions-data
+npm run test:access-control-data
+# Manual: Programas → criar → listar → VITE_DATA_SOURCE=local + F5
+```

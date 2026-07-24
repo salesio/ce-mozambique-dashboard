@@ -65,6 +65,15 @@ import type {
   MaterialStock,
   MaterialStockMovement,
   MinistryMaterial,
+  Program,
+  ProgramBudget,
+  ProgramChecklist,
+  ProgramParticipant,
+  ProgramRegistration,
+  ProgramReport,
+  ProgramResource,
+  ProgramSession,
+  ProgramTeam,
   Member,
   Notification,
   Requisition,
@@ -173,6 +182,15 @@ function storageKeyFor(key: EntityCollectionName): string {
   if (key === "ministry_materials_requests") return `${STORAGE_PREFIX}ministry-materials-requests`;
   if (key === "ministry_materials_funds") return `${STORAGE_PREFIX}ministry-materials-funds`;
   if (key === "ministry_materials_reports") return `${STORAGE_PREFIX}ministry-materials-reports`;
+  if (key === "programs") return `${STORAGE_PREFIX}programs`;
+  if (key === "program_sessions") return `${STORAGE_PREFIX}program-sessions`;
+  if (key === "program_teams") return `${STORAGE_PREFIX}program-teams`;
+  if (key === "program_participants") return `${STORAGE_PREFIX}program-participants`;
+  if (key === "program_registrations") return `${STORAGE_PREFIX}program-registrations`;
+  if (key === "program_resources") return `${STORAGE_PREFIX}program-resources`;
+  if (key === "program_budgets") return `${STORAGE_PREFIX}program-budgets`;
+  if (key === "program_checklists") return `${STORAGE_PREFIX}program-checklists`;
+  if (key === "program_reports") return `${STORAGE_PREFIX}program-reports`;
   return STORAGE_PREFIX + key;
 }
 
@@ -339,6 +357,17 @@ export function createLocalStorageProvider(): DataProvider {
     createPersistedRepository<MaterialFund>("ministry_materials_funds");
   const ministryMaterialsReports =
     createPersistedRepository<MaterialReport>("ministry_materials_reports");
+  const programs = createPersistedRepository<Program>("programs");
+  const programSessions = createPersistedRepository<ProgramSession>("program_sessions");
+  const programTeams = createPersistedRepository<ProgramTeam>("program_teams");
+  const programParticipants =
+    createPersistedRepository<ProgramParticipant>("program_participants");
+  const programRegistrations =
+    createPersistedRepository<ProgramRegistration>("program_registrations");
+  const programResources = createPersistedRepository<ProgramResource>("program_resources");
+  const programBudgets = createPersistedRepository<ProgramBudget>("program_budgets");
+  const programChecklists = createPersistedRepository<ProgramChecklist>("program_checklists");
+  const programReports = createPersistedRepository<ProgramReport>("program_reports");
   const inventoryItems = createPersistedRepository<InventoryItem>("inventory_items");
   const inventoryMovements = createPersistedRepository<InventoryMovement>("inventory_movements");
   const inventoryMaintenance =
@@ -424,6 +453,15 @@ export function createLocalStorageProvider(): DataProvider {
     ministry_materials_requests: ministryMaterialsRequests as EntityRepository<unknown>,
     ministry_materials_funds: ministryMaterialsFunds as EntityRepository<unknown>,
     ministry_materials_reports: ministryMaterialsReports as EntityRepository<unknown>,
+    programs: programs as EntityRepository<unknown>,
+    program_sessions: programSessions as EntityRepository<unknown>,
+    program_teams: programTeams as EntityRepository<unknown>,
+    program_participants: programParticipants as EntityRepository<unknown>,
+    program_registrations: programRegistrations as EntityRepository<unknown>,
+    program_resources: programResources as EntityRepository<unknown>,
+    program_budgets: programBudgets as EntityRepository<unknown>,
+    program_checklists: programChecklists as EntityRepository<unknown>,
+    program_reports: programReports as EntityRepository<unknown>,
     inventory_items: inventoryItems as EntityRepository<unknown>,
     inventory_movements: inventoryMovements as EntityRepository<unknown>,
     inventory_maintenance: inventoryMaintenance as EntityRepository<unknown>,
@@ -513,6 +551,15 @@ export function createLocalStorageProvider(): DataProvider {
     ministryMaterialsRequests,
     ministryMaterialsFunds,
     ministryMaterialsReports,
+    programs,
+    programSessions,
+    programTeams,
+    programParticipants,
+    programRegistrations,
+    programResources,
+    programBudgets,
+    programChecklists,
+    programReports,
     inventoryItems,
     inventoryMovements,
     inventoryMaintenance,

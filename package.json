@@ -23,6 +23,7 @@
     "test:fevo-data": "node scripts/smoke-fevo-data.mjs",
     "test:prison-ministry-data": "node scripts/smoke-prison-ministry-data.mjs",
     "test:ministry-materials-data": "node scripts/smoke-ministry-materials-data.mjs",
+    "test:programs-data": "node scripts/smoke-programs-data.mjs",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",

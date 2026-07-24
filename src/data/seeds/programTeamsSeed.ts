@@ -1,0 +1,51 @@
+import type { ProgramTeam } from "../types/entities";
+
+export const PROGRAM_TEAMS_SEED: ProgramTeam[] = [
+  {
+    id: "pteam-1",
+    program_id: "prog-2",
+    program_name: "Pray-a-thon",
+    department_id: "dept-programs",
+    department_name: "Programas",
+    team_name: "Equipa de Coordenação",
+    leader_staff_id: "staff-6",
+    leader_name: "Janet Baptista Ngoca",
+    members: [
+      { staff_id: "staff-6", name: "Janet Baptista Ngoca", role: "Coordinator", status: "Active" },
+      { staff_id: "staff-4", name: "Marcelo Panguene", role: "Media Lead", status: "Active" },
+    ],
+    responsibilities: "Agenda, oração, mídia e logística.",
+    status: "Active",
+    created_at: "2026-07-02",
+    updated_at: "2026-07-10",
+  },
+  {
+    id: "pteam-2",
+    program_id: "prog-5",
+    program_name: "Conferência de Liderança Beira",
+    department_id: "dept-programs",
+    department_name: "Programas",
+    team_name: "Logística Beira",
+    leader_name: "Sister Janet Marquele",
+    members: [
+      { name: "Sister Janet Marquele", role: "Coordinator", status: "Active" },
+      { name: "Equipa Beira", role: "Local Support", status: "Active" },
+    ],
+    responsibilities: "Transporte, venue e acolhimento.",
+    status: "Active",
+    created_at: "2026-07-05",
+    updated_at: "2026-07-15",
+  },
+  {
+    id: "pteam-3",
+    program_id: "prog-4",
+    program_name: "Graduation Foundation School",
+    department_name: "Escola de Fundação",
+    team_name: "Cerimonial",
+    leader_name: "Foundation Rector",
+    members: [{ name: "Foundation Team", role: "Ceremony", status: "Completed" }],
+    status: "Completed",
+    created_at: "2026-07-01",
+    updated_at: "2026-07-12",
+  },
+];

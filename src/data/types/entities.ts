@@ -3406,6 +3406,275 @@ export interface MaterialReport {
   updated_at?: IsoDate | IsoDateTime;
 }
 
+// ---------------------------------------------------------------------------
+// Programs & Events / Programas
+// ---------------------------------------------------------------------------
+
+export interface Program {
+  id: EntityId;
+  program_code?: string | null;
+  name?: string | null;
+  description?: string | null;
+  program_type?: string | null;
+  category?: string | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  department_id?: EntityId | null;
+  department_name?: string | null;
+  start_date?: IsoDate | null;
+  end_date?: IsoDate | null;
+  start_time?: string | null;
+  end_time?: string | null;
+  recurrence?: string | null;
+  location_type?: string | null;
+  location?: string | null;
+  venue_space_id?: EntityId | null;
+  venue_space_name?: string | null;
+  online_link?: string | null;
+  streaming_required?: boolean | null;
+  expected_attendance?: number | null;
+  actual_attendance?: number | null;
+  responsible_user_id?: EntityId | null;
+  responsible_name?: string | null;
+  /** UI dual-map */
+  owner?: string | null;
+  main_speaker_id?: EntityId | null;
+  main_speaker_name?: string | null;
+  status?: string | null;
+  estado?: string | null;
+  priority?: string | null;
+  budget_required?: number | null;
+  approved_budget?: number | null;
+  currency?: string | null;
+  requisition_ids?: EntityId[] | null;
+  finance_disbursement_ids?: EntityId[] | null;
+  media_schedule_ids?: EntityId[] | null;
+  ministry_material_request_ids?: EntityId[] | null;
+  venue_checklist_ids?: EntityId[] | null;
+  registration_required?: boolean | null;
+  registration_status?: string | null;
+  report_id?: EntityId | null;
+  notes?: string | null;
+  created_by_user_id?: EntityId | null;
+  created_by_name?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface ProgramSession {
+  id: EntityId;
+  program_id?: EntityId | null;
+  program_name?: string | null;
+  title?: string | null;
+  description?: string | null;
+  session_date?: IsoDate | null;
+  start_time?: string | null;
+  end_time?: string | null;
+  speaker_id?: EntityId | null;
+  speaker_name?: string | null;
+  session_type?: string | null;
+  location?: string | null;
+  online_link?: string | null;
+  status?: string | null;
+  attendance_count?: number | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface ProgramTeamMember {
+  staff_id?: EntityId | null;
+  name?: string | null;
+  role?: string | null;
+  phone?: string | null;
+  status?: string | null;
+}
+
+export interface ProgramTeam {
+  id: EntityId;
+  program_id?: EntityId | null;
+  program_name?: string | null;
+  department_id?: EntityId | null;
+  department_name?: string | null;
+  team_name?: string | null;
+  leader_staff_id?: EntityId | null;
+  leader_name?: string | null;
+  members?: ProgramTeamMember[] | null;
+  responsibilities?: string | null;
+  status?: string | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface ProgramParticipant {
+  id: EntityId;
+  program_id?: EntityId | null;
+  program_name?: string | null;
+  participant_type?: string | null;
+  person_id?: EntityId | null;
+  member_id?: EntityId | null;
+  first_timer_id?: EntityId | null;
+  staff_id?: EntityId | null;
+  full_name?: string | null;
+  phone?: string | null;
+  email?: string | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  registration_id?: EntityId | null;
+  attendance_status?: string | null;
+  check_in_time?: IsoDateTime | null;
+  born_again?: boolean | null;
+  new_convert?: boolean | null;
+  foundation_interest?: boolean | null;
+  counseling_interest?: boolean | null;
+  cell_interest?: boolean | null;
+  status?: string | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface ProgramRegistration {
+  id: EntityId;
+  registration_number?: string | null;
+  program_id?: EntityId | null;
+  program_name?: string | null;
+  participant_type?: string | null;
+  person_id?: EntityId | null;
+  member_id?: EntityId | null;
+  first_timer_id?: EntityId | null;
+  full_name?: string | null;
+  phone?: string | null;
+  whatsapp?: string | null;
+  email?: string | null;
+  church_id?: EntityId | null;
+  church_name?: string | null;
+  cell_group_id?: EntityId | null;
+  cell_group_name?: string | null;
+  cell_id?: EntityId | null;
+  cell_name?: string | null;
+  registration_date?: IsoDate | null;
+  status?: string | null;
+  payment_required?: boolean | null;
+  payment_status?: string | null;
+  amount?: number | null;
+  currency?: string | null;
+  /** Future Finance — never auto-created */
+  finance_record_id?: EntityId | null;
+  checked_in?: boolean | null;
+  check_in_time?: IsoDateTime | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface ProgramResource {
+  id: EntityId;
+  program_id?: EntityId | null;
+  program_name?: string | null;
+  resource_type?: string | null;
+  resource_name?: string | null;
+  description?: string | null;
+  quantity_required?: number | null;
+  quantity_available?: number | null;
+  source_module?: string | null;
+  source_id?: EntityId | null;
+  status?: string | null;
+  responsible_user_id?: EntityId | null;
+  responsible_name?: string | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface ProgramBudget {
+  id: EntityId;
+  program_id?: EntityId | null;
+  program_name?: string | null;
+  budget_item?: string | null;
+  category?: string | null;
+  estimated_amount?: number | null;
+  approved_amount?: number | null;
+  spent_amount?: number | null;
+  currency?: string | null;
+  requisition_id?: EntityId | null;
+  finance_disbursement_id?: EntityId | null;
+  status?: string | null;
+  approved_by_user_id?: EntityId | null;
+  approved_by_name?: string | null;
+  approved_at?: IsoDateTime | null;
+  notes?: string | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface ProgramChecklist {
+  id: EntityId;
+  program_id?: EntityId | null;
+  program_name?: string | null;
+  checklist_type?: string | null;
+  responsible_user_id?: EntityId | null;
+  responsible_name?: string | null;
+  venue_ready?: boolean | null;
+  media_ready?: boolean | null;
+  sound_ready?: boolean | null;
+  streaming_ready?: boolean | null;
+  materials_ready?: boolean | null;
+  staff_ready?: boolean | null;
+  security_ready?: boolean | null;
+  decoration_ready?: boolean | null;
+  registration_ready?: boolean | null;
+  transport_ready?: boolean | null;
+  finance_ready?: boolean | null;
+  issues_found?: string | null;
+  actions_taken?: string | null;
+  status?: string | null;
+  completed_by_user_id?: EntityId | null;
+  completed_by_name?: string | null;
+  completed_at?: IsoDateTime | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
+export interface ProgramReport {
+  id: EntityId;
+  report_number?: string | null;
+  program_id?: EntityId | null;
+  program_name?: string | null;
+  report_date?: IsoDate | null;
+  attendance_total?: number | null;
+  first_timers_count?: number | null;
+  new_converts_count?: number | null;
+  foundation_interest_count?: number | null;
+  counseling_interest_count?: number | null;
+  cell_interest_count?: number | null;
+  sessions_completed?: number | null;
+  teams_involved?: number | null;
+  materials_distributed?: number | null;
+  media_coverage_done?: boolean | null;
+  budget_approved?: number | null;
+  budget_spent?: number | null;
+  currency?: string | null;
+  challenges?: string | null;
+  recommendations?: string | null;
+  status?: string | null;
+  submitted_by_user_id?: EntityId | null;
+  submitted_by_name?: string | null;
+  submitted_at?: IsoDateTime | null;
+  validated_by_user_id?: EntityId | null;
+  validated_by_name?: string | null;
+  validated_at?: IsoDateTime | null;
+  rejected_by_user_id?: EntityId | null;
+  rejected_by_name?: string | null;
+  rejected_at?: IsoDateTime | null;
+  rejection_reason?: string | null;
+  notes?: string | null;
+  church_id?: EntityId | null;
+  created_at?: IsoDate | IsoDateTime;
+  updated_at?: IsoDate | IsoDateTime;
+}
+
 /** Map of collection names used by repositories / adapters. */
 export type EntityCollectionName =
   | "users"
@@ -3474,6 +3743,15 @@ export type EntityCollectionName =
   | "ministry_materials_requests"
   | "ministry_materials_funds"
   | "ministry_materials_reports"
+  | "programs"
+  | "program_sessions"
+  | "program_teams"
+  | "program_participants"
+  | "program_registrations"
+  | "program_resources"
+  | "program_budgets"
+  | "program_checklists"
+  | "program_reports"
   | "inventory_items"
   | "inventory_movements"
   | "inventory_maintenance"

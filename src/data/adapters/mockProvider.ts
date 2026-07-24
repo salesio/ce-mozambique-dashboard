@@ -64,6 +64,15 @@ import type {
   MaterialStock,
   MaterialStockMovement,
   MinistryMaterial,
+  Program,
+  ProgramBudget,
+  ProgramChecklist,
+  ProgramParticipant,
+  ProgramRegistration,
+  ProgramReport,
+  ProgramResource,
+  ProgramSession,
+  ProgramTeam,
   Member,
   Notification,
   Requisition,
@@ -157,6 +166,15 @@ import { MINISTRY_MATERIALS_DISTRIBUTIONS_SEED } from "../seeds/ministryMaterial
 import { MINISTRY_MATERIALS_REQUESTS_SEED } from "../seeds/ministryMaterialsRequestsSeed";
 import { MINISTRY_MATERIALS_FUNDS_SEED } from "../seeds/ministryMaterialsFundsSeed";
 import { MINISTRY_MATERIALS_REPORTS_SEED } from "../seeds/ministryMaterialsReportsSeed";
+import { PROGRAMS_SEED } from "../seeds/programsSeed";
+import { PROGRAM_SESSIONS_SEED } from "../seeds/programSessionsSeed";
+import { PROGRAM_TEAMS_SEED } from "../seeds/programTeamsSeed";
+import { PROGRAM_PARTICIPANTS_SEED } from "../seeds/programParticipantsSeed";
+import { PROGRAM_REGISTRATIONS_SEED } from "../seeds/programRegistrationsSeed";
+import { PROGRAM_RESOURCES_SEED } from "../seeds/programResourcesSeed";
+import { PROGRAM_BUDGETS_SEED } from "../seeds/programBudgetsSeed";
+import { PROGRAM_CHECKLISTS_SEED } from "../seeds/programChecklistsSeed";
+import { PROGRAM_REPORTS_SEED } from "../seeds/programReportsSeed";
 import type { AccessPermission, AccessRole, AuditLog, PermissionTemplate } from "../types/entities";
 
 /**
@@ -328,6 +346,31 @@ export function createMockProvider(): DataProvider {
   const ministryMaterialsReports = createMemoryRepository<MaterialReport>(
     MINISTRY_MATERIALS_REPORTS_SEED.map((r) => ({ ...r })),
   );
+  const programs = createMemoryRepository<Program>(PROGRAMS_SEED.map((r) => ({ ...r })));
+  const programSessions = createMemoryRepository<ProgramSession>(
+    PROGRAM_SESSIONS_SEED.map((r) => ({ ...r })),
+  );
+  const programTeams = createMemoryRepository<ProgramTeam>(
+    PROGRAM_TEAMS_SEED.map((r) => ({ ...r })),
+  );
+  const programParticipants = createMemoryRepository<ProgramParticipant>(
+    PROGRAM_PARTICIPANTS_SEED.map((r) => ({ ...r })),
+  );
+  const programRegistrations = createMemoryRepository<ProgramRegistration>(
+    PROGRAM_REGISTRATIONS_SEED.map((r) => ({ ...r })),
+  );
+  const programResources = createMemoryRepository<ProgramResource>(
+    PROGRAM_RESOURCES_SEED.map((r) => ({ ...r })),
+  );
+  const programBudgets = createMemoryRepository<ProgramBudget>(
+    PROGRAM_BUDGETS_SEED.map((r) => ({ ...r })),
+  );
+  const programChecklists = createMemoryRepository<ProgramChecklist>(
+    PROGRAM_CHECKLISTS_SEED.map((r) => ({ ...r })),
+  );
+  const programReports = createMemoryRepository<ProgramReport>(
+    PROGRAM_REPORTS_SEED.map((r) => ({ ...r })),
+  );
   const inventoryItems = createMemoryRepository<InventoryItem>(
     INVENTORY_ITEMS_SEED.map((r) => ({ ...r })),
   );
@@ -436,6 +479,15 @@ export function createMockProvider(): DataProvider {
     ministry_materials_requests: ministryMaterialsRequests as EntityRepository<unknown>,
     ministry_materials_funds: ministryMaterialsFunds as EntityRepository<unknown>,
     ministry_materials_reports: ministryMaterialsReports as EntityRepository<unknown>,
+    programs: programs as EntityRepository<unknown>,
+    program_sessions: programSessions as EntityRepository<unknown>,
+    program_teams: programTeams as EntityRepository<unknown>,
+    program_participants: programParticipants as EntityRepository<unknown>,
+    program_registrations: programRegistrations as EntityRepository<unknown>,
+    program_resources: programResources as EntityRepository<unknown>,
+    program_budgets: programBudgets as EntityRepository<unknown>,
+    program_checklists: programChecklists as EntityRepository<unknown>,
+    program_reports: programReports as EntityRepository<unknown>,
     inventory_items: inventoryItems as EntityRepository<unknown>,
     inventory_movements: inventoryMovements as EntityRepository<unknown>,
     inventory_maintenance: inventoryMaintenance as EntityRepository<unknown>,
@@ -524,6 +576,15 @@ export function createMockProvider(): DataProvider {
     ministryMaterialsRequests,
     ministryMaterialsFunds,
     ministryMaterialsReports,
+    programs,
+    programSessions,
+    programTeams,
+    programParticipants,
+    programRegistrations,
+    programResources,
+    programBudgets,
+    programChecklists,
+    programReports,
     inventoryItems,
     inventoryMovements,
     inventoryMaintenance,
